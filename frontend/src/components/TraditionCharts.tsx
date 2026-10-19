@@ -64,7 +64,7 @@ export const TraditionCharts: React.FC<Props> = ({ data }) => {
                 Lagna (Ascendant): {jyotisha.lagna.sign} ({jyotisha.lagna.degree.toFixed(2)}°)
               </h4>
               <p className="text-xs text-slate-400 font-mono mt-0.5">
-                Nakshatra: {jyotisha.lagna.nakshatra?.name} Pada {jyotisha.lagna.nakshatra?.pada} (Lord: {jyotisha.lagna.nakshatra?.lord}) | D9 Navamsha: {jyotisha.lagna.navamsha_sign}
+                Nakshatra: {jyotisha.lagna.nakshatra?.name} Pada {jyotisha.lagna.nakshatra?.pada} (Lord: {jyotisha.lagna.nakshatra?.lord}) | D9: {jyotisha.lagna.navamsha_sign} | D3: {jyotisha.lagna.drekkana_sign}
               </p>
             </div>
             <div className="flex items-center gap-2">
@@ -74,7 +74,7 @@ export const TraditionCharts: React.FC<Props> = ({ data }) => {
             </div>
           </div>
 
-          {/* Grahas Table */}
+          {/* Grahas Table with Complete Divisional Subdivisions */}
           <div className="overflow-x-auto rounded border border-[#1b2331]">
             <table className="w-full text-left text-xs border-collapse">
               <thead>
@@ -85,17 +85,25 @@ export const TraditionCharts: React.FC<Props> = ({ data }) => {
                   <th className="py-2 px-3">House</th>
                   <th className="py-2 px-3">Dignity</th>
                   <th className="py-2 px-3">Nakshatra & Pada</th>
-                  <th className="py-2 px-3">D9 Navamsha</th>
-                  <th className="py-2 px-3">D10 Dashamsha</th>
+                  <th className="py-2 px-3">D9 Nav</th>
+                  <th className="py-2 px-3">D10 Dash</th>
+                  <th className="py-2 px-3">D3 Drek</th>
+                  <th className="py-2 px-3">D7 Sapt</th>
+                  <th className="py-2 px-3">D12 Dwad</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-[#1b2331] bg-[#0d1118] font-mono text-[11px] tabular-nums">
                 {Object.entries(jyotisha.grahas).map(([name, g]: [string, any]) => (
                   <tr key={name} className="hover:bg-[#121721] transition-colors">
-                    <td className="py-2 px-3 font-sans font-medium text-slate-200 flex items-center gap-1.5">
+                    <td className="py-2 px-3 font-sans font-medium text-slate-200 flex items-center gap-1.5 whitespace-nowrap">
                       {name}
-                      {g.is_retrograde && <span className="text-[10px] text-amber-400 font-mono">(R)</span>}
-                      {g.is_combust && <span className="text-[10px] text-rose-400 font-mono">(C)</span>}
+                      {g.is_retrograde && <span className="text-[10px] text-amber-400 font-mono" title="Retrograde">(R)</span>}
+                      {g.is_combust && <span className="text-[10px] text-rose-400 font-mono" title="Combust">(C)</span>}
+                      {g.is_gandanta && (
+                        <span className="text-[10px] text-rose-400 font-mono bg-rose-950/60 px-1 rounded border border-rose-900" title={g.gandanta_zone}>
+                          GD
+                        </span>
+                      )}
                     </td>
                     <td className="py-2 px-3 text-slate-300">{g.sign}</td>
                     <td className="py-2 px-3 text-cyan-300">{g.degree_in_sign.toFixed(2)}°</td>
@@ -110,22 +118,44 @@ export const TraditionCharts: React.FC<Props> = ({ data }) => {
                         {g.dignity}
                       </span>
                     </td>
-                    <td className="py-2 px-3 text-slate-300">
+                    <td className="py-2 px-3 text-slate-300 whitespace-nowrap">
                       {g.nakshatra?.name} P{g.nakshatra?.pada} ({g.nakshatra?.lord})
                     </td>
                     <td className="py-2 px-3 text-amber-300">{g.navamsha_sign}</td>
                     <td className="py-2 px-3 text-purple-300">{g.dashamsha_sign}</td>
+                    <td className="py-2 px-3 text-slate-300">{g.drekkana_sign || '-'}</td>
+                    <td className="py-2 px-3 text-slate-400">{g.saptamsha_sign || '-'}</td>
+                    <td className="py-2 px-3 text-slate-400">{g.dwadashamsha_sign || '-'}</td>
                   </tr>
                 ))}
               </tbody>
             </table>
           </div>
 
+          {/* Planetary War Alert if Occurring */}
+          {jyotisha.graha_yuddha && jyotisha.graha_yuddha.length > 0 && (
+            <div className="bg-[#191013] p-3 rounded-md border border-rose-900/80">
+              <span className="text-[10px] font-mono font-semibold text-rose-400 uppercase tracking-wider block mb-1">
+                Graha Yuddha (Planetary War within 1.0° Longitude)
+              </span>
+              <div className="space-y-1.5 text-xs font-mono">
+                {jyotisha.graha_yuddha.map((war: any, idx: number) => (
+                  <div key={idx} className="flex flex-col sm:flex-row sm:justify-between text-slate-300">
+                    <div>
+                      <strong className="text-rose-300">{war.planet_1} vs {war.planet_2}</strong> (Separation: {war.separation_deg}°)
+                    </div>
+                    <span className="text-emerald-400">{war.rule}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
           {/* Classical Yogas Whitelist */}
           {jyotisha.yogas && jyotisha.yogas.length > 0 && (
             <div className="bg-[#080a0f] p-3.5 rounded-md border border-[#1b2331]">
               <span className="text-[10px] font-mono font-semibold text-slate-400 uppercase tracking-wider block mb-2">
-                Declared Classical Yogas Whitelist
+                Classical Yogas Whitelist ({jyotisha.yogas.length} Formed)
               </span>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-2.5">
                 {jyotisha.yogas.map((y: any, idx: number) => (
@@ -138,6 +168,24 @@ export const TraditionCharts: React.FC<Props> = ({ data }) => {
                     </div>
                     <p className="text-slate-400 text-[11px] font-mono">{y.rule}</p>
                     <span className="text-[10px] text-slate-500 font-mono block mt-1">Involves: {y.involved_planets.join(', ')}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Graha Drishti (Aspects) Collapsible / Compact Grid */}
+          {jyotisha.graha_drishti && jyotisha.graha_drishti.length > 0 && (
+            <div className="bg-[#080a0f] p-3.5 rounded-md border border-[#1b2331]">
+              <span className="text-[10px] font-mono font-semibold text-slate-400 uppercase tracking-wider block mb-2">
+                Parashari Graha Drishti (Full-Strength Aspects)
+              </span>
+              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2 text-xs font-mono">
+                {jyotisha.graha_drishti.slice(0, 12).map((asp: any, idx: number) => (
+                  <div key={idx} className="p-2 rounded bg-[#0d1118] border border-[#1b2331]">
+                    <span className="text-amber-400 font-medium block">{asp.graha} (H{asp.source_house})</span>
+                    <span className="text-slate-300 text-[11px] block">→ H{asp.target_house} ({asp.target_sign.slice(0, 3)})</span>
+                    <span className="text-[9px] text-slate-500 block truncate">{asp.aspect_type.split(' ')[0]}</span>
                   </div>
                 ))}
               </div>
@@ -191,6 +239,11 @@ export const TraditionCharts: React.FC<Props> = ({ data }) => {
                   <div className="mt-1.5 text-[10px] text-cyan-300 font-mono py-0.5 px-1.5 rounded bg-[#121721] border border-[#1b2331]">
                     {p.ten_god_stem}
                   </div>
+                  {bazi.all_nayin && bazi.all_nayin[pKey] && (
+                    <div className="mt-1 text-[9px] text-slate-400 font-mono">
+                      Na Yin: <span className="text-amber-300">{bazi.all_nayin[pKey]}</span>
+                    </div>
+                  )}
                   <div className="mt-2 text-[10px] text-slate-400 space-y-0.5 text-left font-mono">
                     <span className="text-slate-500 block">Hidden:</span>
                     {p.hidden_stems.map((hs: any, hIdx: number) => (
@@ -231,7 +284,7 @@ export const TraditionCharts: React.FC<Props> = ({ data }) => {
               <div className="mt-3 text-xs text-slate-400 font-mono space-y-1">
                 <div>Rooting: {bazi.day_master.rooting.join(', ') || 'No direct root'}</div>
                 <div>Support: {bazi.day_master.support_score} vs Drain: {bazi.day_master.drain_score}</div>
-                <div>Na Yin: {bazi.year_nayin}</div>
+                <div>Year Na Yin: {bazi.year_nayin}</div>
               </div>
             </div>
 
@@ -262,6 +315,105 @@ export const TraditionCharts: React.FC<Props> = ({ data }) => {
               </div>
             </div>
           </div>
+
+          {/* Branch & Stem Interactions (Combinations, Clashes, Harms, Punishments) */}
+          {bazi.branch_interactions && (
+            <div className="bg-[#080a0f] p-3.5 rounded-md border border-[#1b2331]">
+              <span className="text-[10px] font-mono text-slate-400 uppercase tracking-wider block mb-2">
+                Pillar Interactions & Combinations (He / Chong / Xing / Hai)
+              </span>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-2.5 text-xs font-mono">
+                {/* Harmonies & Combinations */}
+                <div className="p-2.5 rounded bg-[#0d1118] border border-[#1b2331]">
+                  <span className="text-emerald-400 font-semibold block mb-1">Harmonies & Transformations:</span>
+                  {bazi.branch_interactions.six_harmonies.length === 0 &&
+                   bazi.branch_interactions.three_harmonies.length === 0 &&
+                   bazi.branch_interactions.stem_combinations.length === 0 ? (
+                    <span className="text-slate-500 text-[11px]">No direct major harmonies active</span>
+                  ) : (
+                    <div className="space-y-1">
+                      {bazi.branch_interactions.stem_combinations.map((sc: any, idx: number) => (
+                        <div key={idx} className="text-slate-300 text-[11px]">
+                          • {sc.type} ({sc.pillars.join(' + ')})
+                        </div>
+                      ))}
+                      {bazi.branch_interactions.six_harmonies.map((sh: any, idx: number) => (
+                        <div key={idx} className="text-slate-300 text-[11px]">
+                          • {sh.type} ({sh.pillars.join(' + ')})
+                        </div>
+                      ))}
+                      {bazi.branch_interactions.three_harmonies.map((th: any, idx: number) => (
+                        <div key={idx} className="text-slate-300 text-[11px]">
+                          • {th.type} ({th.pillars.join(', ')})
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+
+                {/* Clashes, Punishments & Harms */}
+                <div className="p-2.5 rounded bg-[#0d1118] border border-[#1b2331]">
+                  <span className="text-rose-400 font-semibold block mb-1">Clashes, Harms & Punishments:</span>
+                  {bazi.branch_interactions.six_clashes.length === 0 &&
+                   bazi.branch_interactions.punishments.length === 0 &&
+                   bazi.branch_interactions.six_harms.length === 0 ? (
+                    <span className="text-slate-500 text-[11px]">No structural clashes or punishments active</span>
+                  ) : (
+                    <div className="space-y-1">
+                      {bazi.branch_interactions.six_clashes.map((c: any, idx: number) => (
+                        <div key={idx} className="text-slate-300 text-[11px]">
+                          • {c.type} ({c.pillars.join(' vs ')})
+                        </div>
+                      ))}
+                      {bazi.branch_interactions.punishments.map((p: any, idx: number) => (
+                        <div key={idx} className="text-slate-300 text-[11px]">
+                          • {p.type} ({p.pillars.join(', ')})
+                        </div>
+                      ))}
+                      {bazi.branch_interactions.six_harms.map((h: any, idx: number) => (
+                        <div key={idx} className="text-slate-300 text-[11px]">
+                          • {h.type} ({h.pillars.join(' vs ')})
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Shen Sha (Symbolic Stars) */}
+          {bazi.shen_sha && bazi.shen_sha.length > 0 && (
+            <div className="bg-[#080a0f] p-3.5 rounded-md border border-[#1b2331]">
+              <span className="text-[10px] font-mono text-slate-400 uppercase tracking-wider block mb-2">
+                Shen Sha (Symbolic & Auxiliary Spirits)
+              </span>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 text-xs font-mono">
+                {bazi.shen_sha.map((star: any, idx: number) => (
+                  <div key={idx} className={`p-2.5 rounded border ${
+                    star.present ? 'bg-[#0d1118] border-cyan-900/60' : 'bg-[#080a0f] border-[#1b2331] opacity-60'
+                  }`}>
+                    <div className="flex justify-between items-center mb-1">
+                      <span className={`font-semibold ${star.present ? 'text-cyan-300' : 'text-slate-500'}`}>
+                        {star.name}
+                      </span>
+                      <span className={`px-1.5 py-0.2 rounded text-[9px] ${
+                        star.present ? 'bg-cyan-950 text-cyan-300 border border-cyan-800' : 'text-slate-600'
+                      }`}>
+                        {star.present ? 'ACTIVE' : 'INACTIVE'}
+                      </span>
+                    </div>
+                    {star.present && (
+                      <span className="text-[10px] text-amber-300 block mb-0.5">
+                        Found in: {star.locations.join(', ')}
+                      </span>
+                    )}
+                    <p className="text-[10px] text-slate-400 font-sans mt-0.5">{star.description}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
 
           {/* Da Yun Decades */}
           <div className="bg-[#080a0f] p-3.5 rounded-md border border-[#1b2331]">
@@ -348,23 +500,87 @@ export const TraditionCharts: React.FC<Props> = ({ data }) => {
             </table>
           </div>
 
-          {/* Aspects Grid */}
+          {/* Mutual Reception Banner if Present */}
+          {western.mutual_receptions && western.mutual_receptions.length > 0 && (
+            <div className="bg-[#0f1715] p-3 rounded-md border border-emerald-800/80">
+              <span className="text-[10px] font-mono font-semibold text-emerald-400 uppercase tracking-wider block mb-1">
+                Mutual Reception by Domicile
+              </span>
+              <div className="space-y-1 text-xs font-mono text-slate-300">
+                {western.mutual_receptions.map((mr: any, idx: number) => (
+                  <div key={idx}>
+                    • <strong className="text-emerald-300">{mr.planet_1}</strong> (in {mr.sign_1}) ↔ <strong className="text-emerald-300">{mr.planet_2}</strong> (in {mr.sign_2}) — mutual empowerment and shared agency
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Major Ptolemaic Aspects Grid */}
           <div className="bg-[#080a0f] p-3.5 rounded-md border border-[#1b2331]">
             <span className="text-[10px] font-mono font-semibold text-slate-400 uppercase tracking-wider block mb-2">
-              Major Ptolemaic Aspects (With Exact Orbs)
+              Major Ptolemaic Aspects ({western.aspects.length} Active • Dynamic Motion)
             </span>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 text-xs font-mono">
               {western.aspects.map((asp: any, idx: number) => (
                 <div key={idx} className="p-2.5 rounded bg-[#0d1118] border border-[#1b2331] flex justify-between items-center">
                   <div>
                     <span className="text-slate-200">{asp.planet_1} {asp.aspect} {asp.planet_2}</span>
-                    <span className="text-[10px] text-slate-500 block">{asp.status}</span>
+                    <span className={`text-[10px] block ${
+                      asp.status === 'Applying' ? 'text-cyan-400' : 'text-slate-500'
+                    }`}>{asp.status}</span>
                   </div>
                   <span className="text-cyan-400 font-medium tabular-nums">{asp.exact_orb_deg}°</span>
                 </div>
               ))}
             </div>
           </div>
+
+          {/* Minor Aspects Grid */}
+          {western.minor_aspects && western.minor_aspects.length > 0 && (
+            <div className="bg-[#080a0f] p-3.5 rounded-md border border-[#1b2331]">
+              <span className="text-[10px] font-mono font-semibold text-slate-400 uppercase tracking-wider block mb-2">
+                Minor Harmonics & Keplarian Aspects (Quincunx, Semi-Sextile, Semi-Square, Sesquiquadrate)
+              </span>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 text-xs font-mono">
+                {western.minor_aspects.map((asp: any, idx: number) => (
+                  <div key={idx} className="p-2.5 rounded bg-[#0d1118] border border-[#1b2331] flex justify-between items-center">
+                    <div>
+                      <span className="text-slate-300">{asp.planet_1} {asp.aspect} {asp.planet_2}</span>
+                      <span className={`text-[10px] block ${
+                        asp.status === 'Applying' ? 'text-amber-400' : 'text-slate-500'
+                      }`}>{asp.status}</span>
+                    </div>
+                    <span className="text-amber-400 font-medium tabular-nums">{asp.exact_orb_deg}°</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Antiscia and Contra-Antiscia Reflections */}
+          {((western.antiscia_pairs && western.antiscia_pairs.length > 0) ||
+            (western.contra_antiscia_pairs && western.contra_antiscia_pairs.length > 0)) && (
+            <div className="bg-[#080a0f] p-3.5 rounded-md border border-[#1b2331]">
+              <span className="text-[10px] font-mono font-semibold text-slate-400 uppercase tracking-wider block mb-2">
+                Solstitial & Equinoctial Reflections (Antiscia & Contra-Antiscia)
+              </span>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs font-mono">
+                {western.antiscia_pairs?.map((p: any, idx: number) => (
+                  <div key={`ant-${idx}`} className="p-2 rounded bg-[#0d1118] border border-[#1b2331] flex justify-between items-center">
+                    <span className="text-slate-200">{p.planet_1} ☌ {p.planet_2} (Antiscia)</span>
+                    <span className="text-cyan-400 text-[11px] tabular-nums">{p.orb_deg}° orb</span>
+                  </div>
+                ))}
+                {western.contra_antiscia_pairs?.map((p: any, idx: number) => (
+                  <div key={`contra-${idx}`} className="p-2 rounded bg-[#0d1118] border border-[#1b2331] flex justify-between items-center">
+                    <span className="text-slate-200">{p.planet_1} ☍ {p.planet_2} (Contra-Antiscia)</span>
+                    <span className="text-amber-400 text-[11px] tabular-nums">{p.orb_deg}° orb</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
       )}
 
@@ -390,7 +606,35 @@ export const TraditionCharts: React.FC<Props> = ({ data }) => {
             </div>
           </div>
 
-          {/* 12 Palaces Grid */}
+          {/* Ming Palace Star Quality Assessment */}
+          {ziwei.ming_star_quality && (
+            <div className="bg-[#080a0f] p-3.5 rounded-md border border-[#1b2331] flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+              <div>
+                <span className="text-[10px] font-mono uppercase tracking-wider text-purple-400 font-semibold block">
+                  Ming Palace Star Dynamics
+                </span>
+                <span className="text-sm font-semibold text-slate-200 mt-0.5 block">
+                  Configuration: {ziwei.ming_star_quality.assessment}
+                </span>
+                <span className="text-xs text-slate-400 font-mono mt-0.5 block">
+                  Major: {ziwei.ming_star_quality.major_auspicious_count} Auspicious / {ziwei.ming_star_quality.major_dynamic_count} Dynamic • Auxiliary: {ziwei.ming_star_quality.auxiliary_auspicious_count} Auspicious / {ziwei.ming_star_quality.auxiliary_malefic_count} Malefic
+                </span>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className={`px-2.5 py-1 text-xs font-mono rounded border ${
+                  ziwei.ming_star_quality.assessment.includes('Fortified')
+                    ? 'bg-emerald-950 text-emerald-300 border-emerald-800'
+                    : ziwei.ming_star_quality.assessment.includes('Frictional')
+                    ? 'bg-rose-950 text-rose-300 border-rose-800'
+                    : 'bg-purple-950 text-purple-300 border-purple-800'
+                }`}>
+                  {ziwei.ming_star_quality.assessment}
+                </span>
+              </div>
+            </div>
+          )}
+
+          {/* 12 Palaces Grid with Auxiliary Stars */}
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2.5">
             {ziwei.palaces.map((p: any) => (
               <div
@@ -413,14 +657,21 @@ export const TraditionCharts: React.FC<Props> = ({ data }) => {
                 </div>
                 <div className="min-h-[44px] space-y-1">
                   {p.stars.length > 0 ? (
-                    p.stars.map((s: string, sIdx: number) => (
-                      <span
-                        key={sIdx}
-                        className="inline-block text-[10px] font-mono font-medium bg-[#121721] border border-[#1b2331] px-1.5 py-0.5 rounded text-amber-300 mr-1 mb-1"
-                      >
-                        {s}
-                      </span>
-                    ))
+                    p.stars.map((s: string, sIdx: number) => {
+                      const isAux = s.startsWith('[A]');
+                      return (
+                        <span
+                          key={sIdx}
+                          className={`inline-block text-[10px] font-mono font-medium px-1.5 py-0.5 rounded mr-1 mb-1 border ${
+                            isAux
+                              ? 'bg-[#0b1622] border-cyan-900/60 text-cyan-300'
+                              : 'bg-[#121721] border-[#1b2331] text-amber-300'
+                          }`}
+                        >
+                          {s}
+                        </span>
+                      );
+                    })
                   ) : (
                     <span className="text-slate-600 text-[10px] font-mono italic">Borrowing Stars</span>
                   )}

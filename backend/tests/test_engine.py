@@ -50,33 +50,61 @@ def test_six_culture_pipeline():
             assert d["difference_deg"] <= 0.01, f"Planetary diff exceeded tolerance: {d}"
     print(f"    [PASS] Dual-engine diffs verified within <=0.01 deg ({len(diffs)} celestial bodies).")
 
-    print(">>> 3. Testing Jyotisha Engine...")
+    print(">>> 3. Testing Jyotisha Engine (Divisional Charts, Gandanta, Drishti, Yugas)...")
     dt = datetime(1985, 10, 24, 15, 30)
     jyotisha = compute_jyotisha_chart(astro, dt, has_birth_time=True)
     assert jyotisha["invariants"]["vimshottari_full_cycle_years"] == 120
     assert len(jyotisha["houses"]) == 12
-    print("    [PASS] Jyotisha D1, Nakshatras, and 120-year Vimshottari cycle verified.")
+    assert "drekkana_sign" in jyotisha["grahas"]["Sun"]
+    assert "saptamsha_sign" in jyotisha["grahas"]["Sun"]
+    assert "dwadashamsha_sign" in jyotisha["grahas"]["Sun"]
+    assert "is_gandanta" in jyotisha["grahas"]["Sun"]
+    assert len(jyotisha["graha_drishti"]) > 0, "Graha Drishti aspects must be computed"
+    assert isinstance(jyotisha["graha_yuddha"], list)
+    assert len(jyotisha["yogas"]) > 0, "Classical yogas whitelist must be evaluated"
+    print(f"    [PASS] Jyotisha D1, D3/D7/D9/D10/D12, Gandanta, {len(jyotisha['graha_drishti'])} Drishti aspects, and {len(jyotisha['yogas'])} yogas verified.")
 
-    print(">>> 4. Testing BaZi Engine...")
+    print(">>> 4. Testing BaZi Engine (Branch Interactions, Shen Sha, 4-Pillar Na Yin)...")
     bazi = compute_bazi_chart(1985, 10, 24, 15, 30, 0, gender="male", has_birth_time=True)
     assert bazi["day_master"]["stem"] == "丙"
     assert bazi["day_master"]["element"] == "Fire"
     assert len(bazi["da_yun_luck_pillars"]) > 0
-    print("    [PASS] BaZi Four Pillars, Ten Gods, and Da Yun verified.")
+    assert "branch_interactions" in bazi
+    assert "six_clashes" in bazi["branch_interactions"]
+    assert "six_harmonies" in bazi["branch_interactions"]
+    assert "three_harmonies" in bazi["branch_interactions"]
+    assert "punishments" in bazi["branch_interactions"]
+    assert len(bazi["shen_sha"]) >= 5, "Must compute at least 5 Shen Sha stars"
+    assert bazi["all_nayin"]["year"] is not None
+    assert bazi["all_nayin"]["day"] is not None
+    print(f"    [PASS] BaZi Branch Interactions ({len(bazi['branch_interactions']['six_harmonies'])} harmonies, {len(bazi['branch_interactions']['six_clashes'])} clashes), {len(bazi['shen_sha'])} Shen Sha stars, and 4-Pillar Na Yin verified.")
 
-    print(">>> 5. Testing Western / Hellenistic Engine...")
+    print(">>> 5. Testing Western / Hellenistic Engine (Major & Minor Aspects, Antiscia, Mutual Reception)...")
     western = compute_western_chart(astro, current_age=39, has_birth_time=True)
     assert western["sect"]["label"] in ["Day Chart", "Night Chart"]
     assert len(western["houses"]) == 12
     assert "lot_of_fortune" in western["lots"]
-    print("    [PASS] Western Whole-Sign, Sect, Egyptian bounds, and Lots verified.")
+    assert "minor_aspects" in western
+    assert "antiscia_pairs" in western
+    assert "contra_antiscia_pairs" in western
+    assert "mutual_receptions" in western
+    # Verify status in aspects is applying or separating
+    for asp in western["aspects"] + western["minor_aspects"]:
+        assert asp["status"] in ["Applying", "Separating", "Stationary / Exact"]
+    print(f"    [PASS] Western {len(western['aspects'])} major aspects, {len(western['minor_aspects'])} minor aspects, {len(western['antiscia_pairs'])} antiscia, and dynamic applying/separating verified.")
 
-    print(">>> 6. Testing Zi Wei Dou Shu Engine...")
+    print(">>> 6. Testing Zi Wei Dou Shu Engine (Auxiliary Stars & Star Quality)...")
     ziwei = compute_ziwei_chart(1985, 10, 24, 15, 30, 0, gender="male", has_birth_time=True)
     assert ziwei["invariants"]["is_valid_12_palaces"] is True
     assert len(ziwei["palaces"]) == 12
     assert "Lu" in ziwei["si_hua_transformations"]
-    print("    [PASS] Zi Wei Dou Shu 12 unique palaces and Si Hua verified.")
+    assert "ming_star_quality" in ziwei
+    assert "assessment" in ziwei["ming_star_quality"]
+    # Check that auxiliary stars are present in palaces
+    all_stars = [s for p in ziwei["palaces"] for s in p["stars"]]
+    has_aux = any("[A]" in s for s in all_stars)
+    assert has_aux, "Auxiliary stars must be placed in palaces"
+    print(f"    [PASS] Zi Wei Dou Shu 14 Major + Auxiliary stars placed across 12 palaces ({ziwei['ming_star_quality']['assessment']}) verified.")
 
     print(">>> 7. Testing Maya Calendar Engine...")
     mayan = compute_mayan_chart(1985, 10, 24)

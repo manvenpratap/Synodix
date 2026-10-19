@@ -90,6 +90,13 @@ MAJOR_ASPECTS = [
     ("Opposition", 180, 8.0),
 ]
 
+MINOR_ASPECTS = [
+    ("Semi-Sextile", 30, 2.0),
+    ("Quincunx", 150, 3.0),
+    ("Semi-Square", 45, 2.0),
+    ("Sesquiquadrate", 135, 2.0),
+]
+
 def get_bound_ruler(sign: str, deg_in_sign: float) -> str:
     bounds = EGYPTIAN_BOUNDS.get(sign, [])
     for limit, planet in bounds:
@@ -151,40 +158,121 @@ def compute_essential_dignity(planet: str, sign: str, deg_in_sign: float, is_day
         "decan_ruler": decan_r,
     }
 
-def compute_aspects(planets_tropical: Dict[str, Any]) -> List[Dict[str, Any]]:
-    traditional_7 = ["Sun", "Moon", "Mercury", "Venus", "Mars", "Jupiter", "Saturn"]
-    aspects = []
+def angular_diff(lon1: float, lon2: float) -> float:
+    diff = abs(lon1 - lon2) % 360.0
+    return 360.0 - diff if diff > 180.0 else diff
+
+def compute_aspect_list(planets_tropical: Dict[str, Any], bodies: List[str], aspect_definitions: List[Tuple[str, int, float]], category: str) -> List[Dict[str, Any]]:
+    results = []
+    dt = 0.01  # 0.01 day projection for dynamic applying/separating determination
     
-    for i in range(len(traditional_7)):
-        for j in range(i + 1, len(traditional_7)):
-            p1 = traditional_7[i]
-            p2 = traditional_7[j]
+    for i in range(len(bodies)):
+        for j in range(i + 1, len(bodies)):
+            p1 = bodies[i]
+            p2 = bodies[j]
+            if p1 not in planets_tropical or p2 not in planets_tropical:
+                continue
+                
             lon1 = planets_tropical[p1]["longitude"]
             lon2 = planets_tropical[p2]["longitude"]
-            speed1 = planets_tropical[p1].get("speed", 0)
-            speed2 = planets_tropical[p2].get("speed", 0)
+            speed1 = planets_tropical[p1].get("speed", 0.0)
+            speed2 = planets_tropical[p2].get("speed", 0.0)
             
-            diff = abs(lon1 - lon2)
-            if diff > 180: diff = 360 - diff
+            curr_diff = angular_diff(lon1, lon2)
             
-            for asp_name, asp_deg, max_orb in MAJOR_ASPECTS:
-                orb = abs(diff - asp_deg)
-                if orb <= max_orb:
-                    # Check applying vs separating
-                    # Faster planet moving towards exact angle
-                    faster = p1 if abs(speed1) > abs(speed2) else p2
-                    slower = p2 if faster == p1 else p1
-                    is_applying = orb < max_orb * 0.7  # standard heuristic
+            for asp_name, asp_deg, max_orb in aspect_definitions:
+                curr_orb = abs(curr_diff - asp_deg)
+                if curr_orb <= max_orb:
+                    # Precise applying/separating calculation:
+                    # Project positions forward by dt days using actual daily motion
+                    fut_lon1 = (lon1 + speed1 * dt) % 360.0
+                    fut_lon2 = (lon2 + speed2 * dt) % 360.0
+                    fut_diff = angular_diff(fut_lon1, fut_lon2)
+                    fut_orb = abs(fut_diff - asp_deg)
                     
-                    aspects.append({
+                    if abs(fut_orb - curr_orb) < 1e-6:
+                        status = "Stationary / Exact"
+                    elif fut_orb < curr_orb:
+                        status = "Applying"
+                    else:
+                        status = "Separating"
+                    
+                    results.append({
                         "planet_1": p1,
                         "planet_2": p2,
                         "aspect": asp_name,
+                        "category": category,
                         "angle_deg": asp_deg,
-                        "exact_orb_deg": round(orb, 3),
-                        "status": "Applying" if is_applying else "Separating"
+                        "exact_orb_deg": round(curr_orb, 3),
+                        "status": status
                     })
-    return aspects
+    return results
+
+def compute_aspects(planets_tropical: Dict[str, Any]) -> Tuple[List[Dict[str, Any]], List[Dict[str, Any]]]:
+    # Include traditional 7 and modern outer planets
+    all_bodies = ["Sun", "Moon", "Mercury", "Venus", "Mars", "Jupiter", "Saturn", "Uranus", "Neptune", "Pluto"]
+    major = compute_aspect_list(planets_tropical, all_bodies, MAJOR_ASPECTS, "major")
+    minor = compute_aspect_list(planets_tropical, all_bodies, MINOR_ASPECTS, "minor")
+    return major, minor
+
+def compute_antiscia(planets_tropical: Dict[str, Any], orb_limit: float = 2.0) -> Tuple[List[Dict[str, Any]], List[Dict[str, Any]]]:
+    bodies = ["Sun", "Moon", "Mercury", "Venus", "Mars", "Jupiter", "Saturn", "Uranus", "Neptune", "Pluto"]
+    antiscia_pairs = []
+    contra_pairs = []
+    
+    for i in range(len(bodies)):
+        for j in range(i + 1, len(bodies)):
+            p1, p2 = bodies[i], bodies[j]
+            if p1 not in planets_tropical or p2 not in planets_tropical:
+                continue
+            lon1 = planets_tropical[p1]["longitude"]
+            lon2 = planets_tropical[p2]["longitude"]
+            
+            # Antiscia: reflection across Cancer/Capricorn axis (180 - lon) % 360
+            p1_ant = (180.0 - lon1) % 360.0
+            diff_ant = angular_diff(p1_ant, lon2)
+            if diff_ant <= orb_limit:
+                antiscia_pairs.append({
+                    "planet_1": p1,
+                    "planet_2": p2,
+                    "orb_deg": round(diff_ant, 3),
+                    "type": "Antiscia (Solstitial Reflection)"
+                })
+                
+            # Contra-antiscia: reflection across Aries/Libra axis (360 - lon) % 360
+            p1_contra = (360.0 - lon1) % 360.0
+            diff_contra = angular_diff(p1_contra, lon2)
+            if diff_contra <= orb_limit:
+                contra_pairs.append({
+                    "planet_1": p1,
+                    "planet_2": p2,
+                    "orb_deg": round(diff_contra, 3),
+                    "type": "Contra-Antiscia (Equinoctial Reflection)"
+                })
+                
+    return antiscia_pairs, contra_pairs
+
+def compute_mutual_receptions(planets_tropical: Dict[str, Any]) -> List[Dict[str, Any]]:
+    traditional_7 = ["Sun", "Moon", "Mercury", "Venus", "Mars", "Jupiter", "Saturn"]
+    receptions = []
+    for i in range(len(traditional_7)):
+        for j in range(i + 1, len(traditional_7)):
+            p1, p2 = traditional_7[i], traditional_7[j]
+            if p1 not in planets_tropical or p2 not in planets_tropical:
+                continue
+            sign1 = planets_tropical[p1]["sign"]
+            sign2 = planets_tropical[p2]["sign"]
+            ruler1 = DOMICILE.get(sign1)
+            ruler2 = DOMICILE.get(sign2)
+            if ruler1 == p2 and ruler2 == p1:
+                receptions.append({
+                    "planet_1": p1,
+                    "sign_1": sign1,
+                    "planet_2": p2,
+                    "sign_2": sign2,
+                    "type": "Mutual Reception by Domicile"
+                })
+    return receptions
 
 def compute_western_chart(
     astronomical_base: Dict[str, Any],
@@ -266,8 +354,10 @@ def compute_western_chart(
     profection_sign = SIGNS[profection_sign_idx]
     lord_of_year = DOMICILE[profection_sign]
 
-    # Aspects
-    aspects = compute_aspects(planets_trop)
+    # Aspects (Major & Minor)
+    major_aspects, minor_aspects = compute_aspects(planets_trop)
+    antiscia_pairs, contra_antiscia_pairs = compute_antiscia(planets_trop)
+    mutual_receptions = compute_mutual_receptions(planets_trop)
 
     # Whole sign houses
     houses = []
@@ -299,7 +389,11 @@ def compute_western_chart(
             "longitude": round(asc_deg, 4) if has_birth_time else 0.0,
         },
         "planets": decorated_planets,
-        "aspects": aspects,
+        "aspects": major_aspects,
+        "minor_aspects": minor_aspects,
+        "antiscia_pairs": antiscia_pairs,
+        "contra_antiscia_pairs": contra_antiscia_pairs,
+        "mutual_receptions": mutual_receptions,
         "lots": {
             "lot_of_fortune": lot_of_fortune,
             "lot_of_spirit": lot_of_spirit,

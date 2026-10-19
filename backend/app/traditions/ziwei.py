@@ -174,10 +174,103 @@ def compute_ziwei_chart(
         if b in palace_branch_map:
             palace_branch_map[b]["stars"].append(s_name)
 
-    # 5. Si Hua (Four Transformations) for Year Stem
+    # 5. Auxiliary Stars Placements (6 Auspicious + 4 Malefic + Lu Cun)
+    auxiliary_placements = []
+    
+    # (a) Wen Chang & Wen Qu (derived from hour branch)
+    # Wen Chang: starts at Xu (index 10), counts counter-clockwise by hour branch
+    # Wen Qu: starts at Chen (index 4), counts clockwise by hour branch
+    wc_branch = ALL_12_BRANCHES[(10 - h_idx_all) % 12]
+    wq_branch = ALL_12_BRANCHES[(4 + h_idx_all) % 12]
+    auxiliary_placements.append(("[A] 文昌 (Wen Chang)", wc_branch, "Auspicious"))
+    auxiliary_placements.append(("[A] 文曲 (Wen Qu)", wq_branch, "Auspicious"))
+
+    # (b) Zuo Fu & You Bi (derived from lunar month)
+    # Zuo Fu: starts at Chen (4), counts clockwise by (month - 1)
+    # You Bi: starts at Xu (10), counts counter-clockwise by (month - 1)
+    zf_branch = ALL_12_BRANCHES[(4 + (lunar_m - 1)) % 12]
+    yb_branch = ALL_12_BRANCHES[(10 - (lunar_m - 1)) % 12]
+    auxiliary_placements.append(("[A] 左辅 (Zuo Fu)", zf_branch, "Auspicious"))
+    auxiliary_placements.append(("[A] 右弼 (You Bi)", yb_branch, "Auspicious"))
+
+    # (c) Tian Kui & Tian Yue (Noble helpers derived from Year Stem)
+    kui_yue_map = {
+        "甲": ("丑", "未"), "戊": ("丑", "未"), "庚": ("丑", "未"),
+        "乙": ("子", "申"), "己": ("子", "申"),
+        "丙": ("亥", "酉"), "丁": ("亥", "酉"),
+        "辛": ("午", "寅"),
+        "壬": ("卯", "巳"), "癸": ("卯", "巳"),
+    }
+    tk_b, ty_b = kui_yue_map.get(y_stem, ("丑", "未"))
+    auxiliary_placements.append(("[A] 天魁 (Tian Kui)", tk_b, "Auspicious"))
+    auxiliary_placements.append(("[A] 天钺 (Tian Yue)", ty_b, "Auspicious"))
+
+    # (d) Lu Cun, Qing Yang & Tuo Luo (derived from Year Stem)
+    lu_cun_map = {
+        "甲": 2, "乙": 3, "丙": 5, "丁": 6, "戊": 5,
+        "己": 6, "庚": 8, "辛": 9, "壬": 11, "癸": 0
+    }
+    lc_idx = lu_cun_map.get(y_stem, 2)
+    lc_branch = ALL_12_BRANCHES[lc_idx]
+    qy_branch = ALL_12_BRANCHES[(lc_idx + 1) % 12]  # Ahead of Lu Cun
+    tl_branch = ALL_12_BRANCHES[(lc_idx - 1) % 12]  # Behind Lu Cun
+    auxiliary_placements.append(("[A] 禄存 (Lu Cun)", lc_branch, "Auspicious"))
+    auxiliary_placements.append(("[A] 擎羊 (Qing Yang)", qy_branch, "Malefic"))
+    auxiliary_placements.append(("[A] 陀罗 (Tuo Luo)", tl_branch, "Malefic"))
+
+    # (e) Huo Xing & Ling Xing (derived from Year Branch + Hour Branch)
+    y_branch_idx = ALL_12_BRANCHES.index(y_branch)
+    if y_branch in ["寅", "午", "戌"]:
+        huo_base, ling_base = 1, 3  # Chou, Mao
+    elif y_branch in ["申", "子", "辰"]:
+        huo_base, ling_base = 2, 10  # Yin, Xu
+    elif y_branch in ["巳", "酉", "丑"]:
+        huo_base, ling_base = 3, 10  # Mao, Xu
+    else:  # 亥, 卯, 未
+        huo_base, ling_base = 9, 10  # You, Xu
+
+    huo_branch = ALL_12_BRANCHES[(huo_base + h_idx_all) % 12]
+    ling_branch = ALL_12_BRANCHES[(ling_base + h_idx_all) % 12]
+    auxiliary_placements.append(("[A] 火星 (Huo Xing)", huo_branch, "Malefic"))
+    auxiliary_placements.append(("[A] 铃星 (Ling Xing)", ling_branch, "Malefic"))
+
+    # Add auxiliary stars to palace stars
+    for s_name, b, _ in auxiliary_placements:
+        if b in palace_branch_map:
+            palace_branch_map[b]["stars"].append(s_name)
+
+    # 6. Star Quality Analysis for Ming Palace
+    ming_palace = palace_branch_map[ming_branch]
+    ming_stars = ming_palace["stars"]
+    
+    major_auspicious = ["紫微", "天府", "太阳", "太阴", "天机", "天同", "天梁", "天相", "武曲"]
+    major_dynamic = ["贪狼", "七杀", "破军", "廉贞", "巨门"]
+    
+    maj_ausp_count = sum(1 for s in ming_stars if any(a in s for a in major_auspicious))
+    maj_dyn_count = sum(1 for s in ming_stars if any(d in s for d in major_dynamic))
+    aux_ausp_count = sum(1 for s in ming_stars if "[A]" in s and any(a in s for a in ["文昌", "文曲", "左辅", "右弼", "天魁", "天钺", "禄存"]))
+    aux_mal_count = sum(1 for s in ming_stars if "[A]" in s and any(m in s for m in ["擎羊", "陀罗", "火星", "铃星"]))
+
+    if (maj_ausp_count + aux_ausp_count) > (maj_dyn_count + aux_mal_count):
+        assessment = "Fortified / Auspicious Alignment"
+    elif aux_mal_count >= 2:
+        assessment = "Frictional / High-Resistance Drive"
+    else:
+        assessment = "Balanced Dynamic Equilibrium"
+
+    star_quality = {
+        "ming_palace_branch": ming_branch,
+        "major_auspicious_count": maj_ausp_count,
+        "major_dynamic_count": maj_dyn_count,
+        "auxiliary_auspicious_count": aux_ausp_count,
+        "auxiliary_malefic_count": aux_mal_count,
+        "assessment": assessment,
+    }
+
+    # 7. Si Hua (Four Transformations) for Year Stem
     si_hua_result = SI_HUA.get(y_stem, {})
 
-    # 6. Decadal Periods (Da Xian)
+    # 8. Decadal Periods (Da Xian)
     # Clockwise for Yang Male & Yin Female; Counter-clockwise for Yin Male & Yang Female
     year_is_yang = STEMS.index(y_stem) % 2 == 0
     is_clockwise = (year_is_yang and gender.lower() == "male") or ((not year_is_yang) and gender.lower() == "female")
@@ -212,6 +305,7 @@ def compute_ziwei_chart(
             "name": bureau_name,
         },
         "si_hua_transformations": si_hua_result,
+        "ming_star_quality": star_quality,
         "palaces": palaces,
         "da_xian_decades": da_xian_list,
         "invariants": {

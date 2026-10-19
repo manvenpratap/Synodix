@@ -56,6 +56,11 @@ def evaluate_jyotisha_domain(domain_id: str, jyotisha_chart: Dict[str, Any]) -> 
     basis = f"Houses {target_h_nums} occupied by: {', '.join(occupants) or 'None (ruled by ' + ', '.join(lords) + ')'}"
     if yogas:
         basis += f" | Yogas: {', '.join(yogas[:2])}"
+    
+    # Mention gandanta if occupant afflicted
+    gandantas = [f"{o} (Gandanta)" for o in occupants if jyotisha_chart["grahas"].get(o, {}).get("is_gandanta")]
+    if gandantas:
+        basis += f" | {', '.join(gandantas)}"
 
     return {
         "cluster": "Jyotisha",
@@ -104,6 +109,11 @@ def evaluate_western_domain(domain_id: str, western_chart: Dict[str, Any]) -> Di
         lot_note = f" (Lot of Spirit in House {s_h})"
 
     basis = f"Houses {target_h_nums} occupied by: {', '.join(occupants) or 'None (ruled by ' + ', '.join(rulers) + ')'}{lot_note}"
+    
+    # Mention mutual receptions
+    mr_notes = [f"{mr['planet_1']}↔{mr['planet_2']} Reception" for mr in western_chart.get("mutual_receptions", []) if mr["planet_1"] in occupants or mr["planet_2"] in occupants]
+    if mr_notes:
+        basis += f" | {', '.join(mr_notes)}"
 
     return {
         "cluster": "Western / Hellenistic",
@@ -152,6 +162,11 @@ def evaluate_sinic_domain(domain_id: str, bazi_chart: Dict[str, Any], ziwei_char
         polarity = "Mixed"
 
     basis = f"Zi Wei {palace_name}: {', '.join(stars) or 'Empty Palace'} | BaZi Day Master: {dm['element']} {dm['polarity']} ({dm['strength']})"
+    
+    # Add Shen Sha notes for core domains
+    active_ss = [s["name"].split(" ")[0] for s in bazi_chart.get("shen_sha", []) if s.get("present")]
+    if active_ss and domain_id in ["D1", "D2", "D3"]:
+        basis += f" | Stars: {', '.join(active_ss[:2])}"
 
     return {
         "cluster": "Sinic (BaZi + Zi Wei Dou Shu)",
