@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { BirthInput, ChartResponse, Preset } from './types';
+import type { BirthInput, ChartResponse, Preset } from './types';
 import { BirthDataForm } from './components/BirthDataForm';
 import { InputAuditCard } from './components/InputAuditCard';
 import { VerificationCard } from './components/VerificationCard';
 import { TraditionCharts } from './components/TraditionCharts';
 import { SynthesisMatrix } from './components/SynthesisMatrix';
 import { ReadingView } from './components/ReadingView';
-import { Compass, ShieldCheck, Cpu, GitCompare, Layers, Sparkles, FileText } from 'lucide-react';
 
 const FALLBACK_PRESETS: Preset[] = [
   {
@@ -95,7 +94,6 @@ export function App() {
 
   useEffect(() => {
     fetchPresets();
-    // Run initial computation for Steve Jobs preset
     handleCompute({
       birth_date: '1955-02-24',
       birth_time: '19:15',
@@ -109,44 +107,44 @@ export function App() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-[#07090e] text-slate-200">
+    <div className="min-h-screen bg-[#080a0f] text-slate-200">
       {/* Top Navbar */}
-      <header className="sticky top-0 z-50 border-b border-slate-800/80 bg-slate-950/80 backdrop-blur-xl">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <header className="sticky top-0 z-50 border-b border-[#1b2331] bg-[#0b0e14]/95">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-14 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-cyan-600 to-blue-600 flex items-center justify-center shadow-lg shadow-cyan-500/20 border border-cyan-400/30">
-              <Compass className="w-5 h-5 text-white" />
+            <div className="w-7 h-7 rounded border border-cyan-800 bg-[#121721] flex items-center justify-center font-mono text-cyan-300 font-bold text-xs">
+              6C
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <h1 className="text-base font-bold text-white tracking-tight">
+                <h1 className="text-sm font-semibold text-slate-100 tracking-tight">
                   SIX-CULTURE VERIFIED CHART & READING
                 </h1>
-                <span className="px-1.5 py-0.5 text-[10px] font-mono font-bold rounded bg-cyan-950 text-cyan-300 border border-cyan-800">
+                <span className="px-1.5 py-0.2 text-[10px] font-mono rounded bg-[#121721] text-cyan-400 border border-[#1b2331]">
                   v2.0
                 </span>
               </div>
-              <p className="text-[11px] text-slate-400 hidden sm:block">
+              <p className="text-[10px] text-slate-500 font-mono hidden sm:block">
                 Jyotisha • BaZi • Western • Zi Wei • Maya • Tibetan
               </p>
             </div>
           </div>
 
           {/* Engine Status Indicators */}
-          <div className="flex items-center gap-2">
-            <span className="hidden md:inline-flex items-center gap-1.5 px-2.5 py-1 text-xs font-mono rounded-lg bg-slate-900 border border-slate-800 text-slate-300">
-              <span className="w-2 h-2 rounded-full bg-emerald-400"></span>
-              SwissEph + JPL DE421
+          <div className="flex items-center gap-2 font-mono text-xs">
+            <span className="hidden md:inline-flex items-center gap-1.5 px-2 py-0.5 text-[11px] rounded bg-[#121721] border border-[#1b2331] text-slate-300">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+              SwissEph + NASA JPL DE421
             </span>
-            <span className="inline-flex items-center gap-1 px-2.5 py-1 text-xs font-medium rounded-lg bg-cyan-950/60 border border-cyan-800 text-cyan-300">
-              <ShieldCheck className="w-3.5 h-3.5" /> Zero Rectification
+            <span className="inline-flex items-center gap-1 px-2 py-0.5 text-[11px] rounded bg-[#121721] border border-[#1b2331] text-cyan-300">
+              Zero Rectification
             </span>
           </div>
         </div>
       </header>
 
       {/* Main Container */}
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6">
         {/* Step 1: Input Form */}
         <section id="step-1">
           <BirthDataForm
@@ -158,7 +156,7 @@ export function App() {
 
         {/* Error Alert */}
         {error && (
-          <div className="p-4 rounded-xl bg-rose-950/50 border border-rose-800 text-rose-300 text-sm">
+          <div className="p-3.5 rounded bg-rose-950/60 border border-rose-800 text-rose-300 text-xs font-mono">
             <strong>Calculation Error:</strong> {error}
           </div>
         )}
@@ -166,39 +164,37 @@ export function App() {
         {/* Calculated Results */}
         {chartData && (
           <>
-            {/* Quick Filter Navigation Bar */}
-            <div className="sticky top-20 z-40 bg-slate-950/90 backdrop-blur-md p-1.5 rounded-xl border border-slate-800 flex items-center justify-between overflow-x-auto gap-2">
-              <div className="flex items-center gap-1">
+            {/* Clean Section Navigation Bar */}
+            <div className="sticky top-16 z-40 bg-[#0d1118] p-1.5 rounded-md border border-[#1b2331] flex items-center justify-between overflow-x-auto gap-2">
+              <div className="flex items-center gap-1 font-mono text-xs">
                 {[
-                  { id: 'all', label: 'Complete View', icon: Layers },
-                  { id: 'audit', label: 'Step 2: Audit & Ensemble', icon: Cpu },
-                  { id: 'verification', label: 'Step 5: JPL Verification', icon: ShieldCheck },
-                  { id: 'traditions', label: 'Step 4: 6 Cultures', icon: Sparkles },
-                  { id: 'synthesis', label: 'Step 7: 9-Domain Synthesis', icon: GitCompare },
-                  { id: 'reading', label: 'Step 8: Final Reading', icon: FileText },
+                  { id: 'all', label: 'Complete View' },
+                  { id: 'audit', label: '02 / Time Audit' },
+                  { id: 'verification', label: '03 / JPL Verification' },
+                  { id: 'traditions', label: '04 / 6 Cultures' },
+                  { id: 'synthesis', label: '05 / 9 Domains' },
+                  { id: 'reading', label: '06 / Reading' },
                 ].map((sec) => {
-                  const Icon = sec.icon;
                   const isActive = activeSection === sec.id;
                   return (
                     <button
                       key={sec.id}
                       type="button"
                       onClick={() => setActiveSection(sec.id)}
-                      className={`flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold rounded-lg whitespace-nowrap transition-colors cursor-pointer ${
+                      className={`px-3 py-1 text-xs rounded transition-colors whitespace-nowrap cursor-pointer ${
                         isActive
-                          ? 'bg-cyan-500/20 text-cyan-300 border border-cyan-500/40'
-                          : 'text-slate-400 hover:text-slate-200 hover:bg-slate-900'
+                          ? 'bg-[#182232] text-cyan-300 border border-cyan-800'
+                          : 'text-slate-400 hover:text-slate-200 hover:bg-[#121721] border border-transparent'
                       }`}
                     >
-                      <Icon className="w-3.5 h-3.5" />
-                      <span>{sec.label}</span>
+                      {sec.label}
                     </button>
                   );
                 })}
               </div>
 
               <div className="hidden lg:flex items-center gap-2 text-xs font-mono text-slate-400 px-3">
-                Divergence: <span className="text-rose-400 font-bold">{chartData.synthesis.divergence_metrics.divergence_rate_percent}%</span>
+                Divergence: <span className="text-rose-400 font-bold tabular-nums">{chartData.synthesis.divergence_metrics.divergence_rate_percent}%</span>
               </div>
             </div>
 
@@ -241,20 +237,20 @@ export function App() {
       </main>
 
       {/* Footer */}
-      <footer className="mt-16 border-t border-slate-800/80 bg-slate-950 py-8 text-xs text-slate-500">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-4">
+      <footer className="mt-12 border-t border-[#1b2331] bg-[#0b0e14] py-6 text-xs text-slate-500 font-mono">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-3">
           <div>
-            <span className="font-semibold text-slate-400">Six-Culture Verified Chart & Reading v2</span>
-            <p className="mt-0.5">
+            <span className="text-slate-400 font-semibold">Six-Culture Verified Chart & Reading v2</span>
+            <p className="mt-0.5 text-[11px] text-slate-500">
               Deterministic astronomical calculation, honest uncertainty testing, and cross-cultural corroboration.
             </p>
           </div>
-          <div className="flex items-center gap-4 text-[11px] font-mono">
+          <div className="flex items-center gap-3 text-[11px] text-slate-500">
             <span>Swiss Ephemeris 2.10</span>
             <span>•</span>
             <span>Skyfield JPL DE421</span>
             <span>•</span>
-            <span>IANA Time Zone Database</span>
+            <span>IANA Timezone</span>
           </div>
         </div>
       </footer>
