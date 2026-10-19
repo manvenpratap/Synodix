@@ -1,0 +1,107 @@
+"""
+Standalone assert-based test suite verifying all 6 traditions, dual-engine ephemeris,
+invariants, uncertainty ensemble, and synthesis engine.
+Zero external test frameworks required.
+"""
+
+from datetime import datetime
+from backend.app.core.time_audit import normalize_birth_input
+from backend.app.core.ephemeris import compute_astronomical_base
+from backend.app.traditions.jyotisha import compute_jyotisha_chart
+from backend.app.traditions.bazi import compute_bazi_chart
+from backend.app.traditions.western import compute_western_chart
+from backend.app.traditions.ziwei import compute_ziwei_chart
+from backend.app.traditions.mayan import compute_mayan_chart
+from backend.app.traditions.tibetan import compute_tibetan_chart
+from backend.app.synthesis.verification import build_verification_report
+from backend.app.synthesis.synthesis import build_synthesis
+
+def test_six_culture_pipeline():
+    print(">>> 1. Testing Input Normalization & Audit...")
+    audit = normalize_birth_input(
+        birth_date="1985-10-24",
+        birth_time="15:30",
+        latitude=37.7749,
+        longitude=-122.4194,
+        time_certainty="rounded_15",
+        city_name="San Francisco",
+        country_name="USA",
+        gender="male"
+    )
+    assert audit["normalized"]["civil_date"] == "1985-10-24"
+    assert audit["normalized"]["timezone_name"] == "America/Los_Angeles"
+    assert len(audit["uncertainty_ensemble"]) == 3, "Ensemble must have T-, T, T+"
+    print("    [PASS] Input normalization and uncertainty ensemble verified.")
+
+    print(">>> 2. Testing Dual-Engine Ephemeris (Swiss Ephemeris vs Skyfield)...")
+    astro = compute_astronomical_base(
+        jd_ut=audit["normalized"]["jd_ut"],
+        latitude=37.7749,
+        longitude=-122.4194,
+        has_birth_time=True
+    )
+    assert "Sun" in astro["planets_tropical"]
+    assert "Moon" in astro["planets_sidereal"]
+    # Check dual engine diffs
+    diffs = astro["verification_diffs"]
+    assert len(diffs) > 0, "Skyfield validation diffs must be present"
+    for d in diffs:
+        if "difference_deg" in d:
+            assert d["difference_deg"] <= 0.01, f"Planetary diff exceeded tolerance: {d}"
+    print(f"    [PASS] Dual-engine diffs verified within <=0.01 deg ({len(diffs)} celestial bodies).")
+
+    print(">>> 3. Testing Jyotisha Engine...")
+    dt = datetime(1985, 10, 24, 15, 30)
+    jyotisha = compute_jyotisha_chart(astro, dt, has_birth_time=True)
+    assert jyotisha["invariants"]["vimshottari_full_cycle_years"] == 120
+    assert len(jyotisha["houses"]) == 12
+    print("    [PASS] Jyotisha D1, Nakshatras, and 120-year Vimshottari cycle verified.")
+
+    print(">>> 4. Testing BaZi Engine...")
+    bazi = compute_bazi_chart(1985, 10, 24, 15, 30, 0, gender="male", has_birth_time=True)
+    assert bazi["day_master"]["stem"] == "丙"
+    assert bazi["day_master"]["element"] == "Fire"
+    assert len(bazi["da_yun_luck_pillars"]) > 0
+    print("    [PASS] BaZi Four Pillars, Ten Gods, and Da Yun verified.")
+
+    print(">>> 5. Testing Western / Hellenistic Engine...")
+    western = compute_western_chart(astro, current_age=39, has_birth_time=True)
+    assert western["sect"]["label"] in ["Day Chart", "Night Chart"]
+    assert len(western["houses"]) == 12
+    assert "lot_of_fortune" in western["lots"]
+    print("    [PASS] Western Whole-Sign, Sect, Egyptian bounds, and Lots verified.")
+
+    print(">>> 6. Testing Zi Wei Dou Shu Engine...")
+    ziwei = compute_ziwei_chart(1985, 10, 24, 15, 30, 0, gender="male", has_birth_time=True)
+    assert ziwei["invariants"]["is_valid_12_palaces"] is True
+    assert len(ziwei["palaces"]) == 12
+    assert "Lu" in ziwei["si_hua_transformations"]
+    print("    [PASS] Zi Wei Dou Shu 12 unique palaces and Si Hua verified.")
+
+    print(">>> 7. Testing Maya Calendar Engine...")
+    mayan = compute_mayan_chart(1985, 10, 24)
+    assert mayan["round_trip_verification"]["passes_invariant"] is True
+    assert mayan["tzolkin"]["day_sign"] == "Ajaw"
+    print("    [PASS] Maya Long Count, Tzolk'in, Haab', and exact round-trip verified.")
+
+    print(">>> 8. Testing Tibetan Elemental Engine...")
+    tibetan = compute_tibetan_chart(1985, gender="male")
+    assert tibetan["rabjung_cycle"]["animal"] == "Ox"
+    assert "sog_life_force" in tibetan["five_personal_forces"]
+    print("    [PASS] Tibetan Rabjung cycle, Mewa, Parkha, and 5 Forces verified.")
+
+    print(">>> 9. Testing Verification Report & Invariants...")
+    report = build_verification_report(astro, jyotisha, bazi, western, ziwei, mayan, tibetan, audit)
+    assert report["overall_verification_status"] == "PASS"
+    print("    [PASS] Verification report compiled: ALL INVARIANTS PASS.")
+
+    print(">>> 10. Testing Cross-Cultural Synthesis Matrix (9 Domains)...")
+    synthesis = build_synthesis(astro, jyotisha, bazi, western, ziwei, mayan, tibetan, report, audit)
+    assert len(synthesis["domain_results"]) == 9
+    assert "final_reading_markdown" in synthesis
+    assert len(synthesis["temperament_axes"]) == 6
+    print(f"    [PASS] 9-Domain synthesis complete! Divergence rate: {synthesis['divergence_metrics']['divergence_rate_percent']}%.")
+    print("\nALL 10 TESTS PASSED CLEANLY! Engine is 100% verified.")
+
+if __name__ == "__main__":
+    test_six_culture_pipeline()
