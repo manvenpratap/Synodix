@@ -13,6 +13,7 @@ export interface BirthInput {
 export interface Preset {
   id: string;
   name: string;
+  category?: string;
   birth_date: string;
   birth_time: string;
   time_certainty: 'exact' | 'rounded_15' | 'approx_30' | 'unknown';
@@ -22,6 +23,8 @@ export interface Preset {
   country_name: string;
   gender: 'male' | 'female' | 'neutral';
   note: string;
+  rodden_rating?: string;
+  tag?: string;
 }
 
 export interface DualEngineDiff {
@@ -144,6 +147,9 @@ export interface ChartResponse {
     ziwei: any;
     mayan: any;
     tibetan: any;
+    persian?: any;
+    egyptian?: any;
+    maramataka?: any;
   };
   verification_report: VerificationReport;
   synthesis: Synthesis;

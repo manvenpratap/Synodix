@@ -46,3 +46,133 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background: #33435a;
 }
+
+/* =========================================================================
+   PURPOSEFUL MOTION SYSTEM (Operate & Experience Mode)
+   Adheres to /impeccable animate: fast feedback, continuity, WCAG 2.2 AA
+   ========================================================================= */
+
+/* 1. Screen & Tab Continuity Transitions */
+@keyframes screenEnter {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes tabEnter {
+  from {
+    opacity: 0;
+    transform: translateY(2px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-screen-enter {
+  animation: screenEnter 220ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-tab-enter {
+  animation: tabEnter 180ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* 2. Celestial Visualizer Motion */
+@keyframes celestialGlow {
+  0%, 100% {
+    opacity: 0.9;
+    filter: drop-shadow(0 0 4px rgba(245, 158, 11, 0.35));
+  }
+  50% {
+    opacity: 1;
+    filter: drop-shadow(0 0 10px rgba(245, 158, 11, 0.7));
+  }
+}
+
+@keyframes cycleFlow {
+  to {
+    stroke-dashoffset: -32;
+  }
+}
+
+@keyframes radarReveal {
+  from {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-celestial-glow {
+  animation: celestialGlow 3.5s ease-in-out infinite;
+}
+
+.animate-cycle-flow {
+  animation: cycleFlow 6s linear infinite;
+}
+
+.animate-radar-reveal {
+  transform-origin: center center;
+  animation: radarReveal 350ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* 3. Accordion Fluid Disclosure */
+.accordion-content {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 220ms cubic-bezier(0.16, 1, 0.3, 1), opacity 180ms ease;
+  opacity: 0;
+}
+
+.accordion-content.is-open {
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+
+.accordion-inner {
+  overflow: hidden;
+}
+
+/* 4. Touch & Button Feedback */
+.btn-press {
+  transition: transform 120ms cubic-bezier(0.16, 1, 0.3, 1), background-color 150ms ease, border-color 150ms ease;
+}
+
+.btn-press:active {
+  transform: scale(0.97);
+}
+
+/* 5. Reduced Motion Override (Accessibility & WCAG 2.2 AA) */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .animate-screen-enter,
+  .animate-tab-enter,
+  .animate-radar-reveal {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .animate-celestial-glow,
+  .animate-cycle-flow {
+    animation: none !important;
+    opacity: 1 !important;
+  }
+}

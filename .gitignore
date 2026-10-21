@@ -5,3 +5,8 @@ node_modules/
 dist/
 .DS_Store
 de421.bsp
+
+# Universal Pipeline local resources
+tests/screenshots/
+e2e-tests/screenshots/
+.pytest_cache/

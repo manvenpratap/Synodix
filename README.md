@@ -1,6 +1,6 @@
-# Six-Culture Verified Chart & Reading v2
+# Synodix: Astrometric Triangulation Engine & Observatory
 
-A computational, independently verified, uncertainty-tested, and synthesized birth chart engine across six major historical traditions: **Jyotisha**, **BaZi**, **Western / Hellenistic**, **Zi Wei Dou Shu**, **Maya Calendar**, and **Tibetan Elemental** astrology.
+A computational, independently verified, uncertainty-tested, and synthesized astrological observatory across classical world traditions: **Jyotisha**, **BaZi**, **Western / Hellenistic**, **Zi Wei Dou Shu**, **Maya Calendar**, **Tibetan Elemental**, **Persian / Medieval Arabic**, **Egyptian Decans**, and **Polynesian Maramataka**.
 
 Built with **FastAPI** (Python 3.12), **Swiss Ephemeris** (`pyswisseph`), **JPL DE421** (`skyfield`), and a modern decoupled **React 19 + TypeScript + Vite + Tailwind CSS** frontend.
 

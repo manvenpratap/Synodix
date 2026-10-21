@@ -347,11 +347,11 @@ def build_synthesis(
     temperament_axes = compute_temperament_axes(jyotisha_chart, western_chart, bazi_chart, mayan_chart, tibetan_chart)
 
     # 4. Synthesized Reading Markdown Document
-    reading_md = f"""# SIX-CULTURE VERIFIED SYNTHESIS & READING v2
+    reading_md = f"""# SYNODIX VERIFIED SYNTHESIS & READING v2
 
 **Generated**: {datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S UTC')}  
 **Verification Status**: {verification_report['overall_verification_status']} (Confidence: {verification_report['overall_confidence']})  
-**Divergence Rate**: {divergence_rate_total}% ({divergent_count} of 9 domains divergent)
+**Divergence Rate**: {divergence_rate_total}% ({divergent_count} of {len(domain_results)} domains divergent)
 
 ---
 
@@ -378,7 +378,7 @@ def build_synthesis(
 
 ---
 
-### 3. Cross-Cultural Convergence & Divergence Matrix (9 Domains)
+### 3. Cross-Cultural Convergence & Divergence Matrix
 
 | Domain | Agreement Grade | Jyotisha Polarity | Western Polarity | Sinic Polarity | Consensus / Divergence Summary |
 | :--- | :---: | :---: | :---: | :---: | :--- |
@@ -414,7 +414,7 @@ def build_synthesis(
             reading_md += f"- **Sinic**: {syn['evaluations']['sinic']['polarity']} ({syn['evaluations']['sinic']['basis']})\n\n"
 
     if not divergent_found:
-        reading_md += "No sharp polar contradictions found among primary clusters across the 9 domains.\n\n"
+        reading_md += "No sharp polar contradictions found among primary clusters across evaluated life domains.\n\n"
 
     reading_md += """---
 

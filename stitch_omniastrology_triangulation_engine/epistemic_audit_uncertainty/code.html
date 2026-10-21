@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><meta content="mobile_tab" name="shell-type"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500;700&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "outline-variant": "#4e4538", "on-background": "#dae3f8", "on-error": "#690005", "secondary-container": "#00a6e0", "secondary": "#7bd0ff", "surface-container-lowest": "#050e1d", "surface-variant": "#2c3545", "tertiary-fixed-dim": "#4edea3", "on-error-container": "#ffdad6", "on-primary-fixed": "#271900", "surface-container": "#17202f", "outline": "#9b8f7f", "error-container": "#93000a", "on-primary-fixed-variant": "#5f4100", "background": "#0a1422", "primary-fixed-dim": "#edbf70", "primary-container": "#e5b869", "surface-tint": "#edbf70", "surface-bright": "#31394a", "surface": "#0a1422", "on-secondary-fixed-variant": "#004c69", "surface-dim": "#0a1422", "on-secondary-fixed": "#001e2c", "on-tertiary-fixed-variant": "#005236", "tertiary-container": "#44d69b", "on-surface": "#dae3f8", "on-surface-variant": "#d2c5b3", "secondary-fixed-dim": "#7bd0ff", "surface-container-highest": "#2c3545", "on-tertiary-container": "#00593b", "on-primary": "#422c00", "on-tertiary": "#003824", "on-tertiary-fixed": "#002113", "inverse-surface": "#dae3f8", "tertiary-fixed": "#6ffbbe", "on-secondary": "#00354a", "inverse-primary": "#7b5811", "surface-container-high": "#212a3a", "primary-fixed": "#ffdea9", "tertiary": "#66f3b6", "primary": "#ffd58d", "inverse-on-surface": "#283140", "surface-container-low": "#131c2b", "secondary-fixed": "#c4e7ff", "error": "#ffb4ab", "on-primary-container": "#674800", "on-secondary-container": "#00374d" }, "borderRadius": { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" }, "spacing": { "gutter-desktop": "1.5rem", "space-xs": "0.25rem", "space-lg": "1.5rem", "space-md": "1rem", "space-sm": "0.5rem", "space-xl": "2.5rem", "gutter": "1rem", "margin": "1rem", "margin-desktop": "2rem" }, "fontFamily": { "body-lg": ["Inter"], "headline-lg": ["Space Grotesk"], "display-lg-mobile": ["Space Grotesk"], "display-lg": ["Space Grotesk"], "label-caps": ["JetBrains Mono"], "body-sm": ["Inter"], "body-md": ["Inter"], "telemetry-sm": ["JetBrains Mono"], "headline-lg-mobile": ["Space Grotesk"], "headline-sm": ["Space Grotesk"], "telemetry-lg": ["JetBrains Mono"], "telemetry-md": ["JetBrains Mono"], "headline-md": ["Space Grotesk"] }, "fontSize": { "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}], "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.015em", "fontWeight": "600"}], "display-lg-mobile": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}], "display-lg": ["44px", {"lineHeight": "52px", "letterSpacing": "-0.02em", "fontWeight": "700"}], "label-caps": ["10px", {"lineHeight": "14px", "letterSpacing": "0.08em", "fontWeight": "700"}], "body-sm": ["12px", {"lineHeight": "18px", "fontWeight": "400"}], "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}], "telemetry-sm": ["11px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}], "headline-lg-mobile": ["26px", {"lineHeight": "34px", "letterSpacing": "-0.01em", "fontWeight": "600"}], "headline-sm": ["18px", {"lineHeight": "26px", "fontWeight": "500"}], "telemetry-lg": ["16px", {"lineHeight": "22px", "letterSpacing": "0.02em", "fontWeight": "500"}], "telemetry-md": ["13px", {"lineHeight": "18px", "letterSpacing": "0.03em", "fontWeight": "400"}], "headline-md": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}] } } } }</script><style>@layer base{html,body{width:100vw;margin:0;padding:0;background-color:#0a1422;}body{overscroll-behavior:none;-webkit-tap-highlight-color:transparent;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style></head><body class="bg-surface font-body-md text-on-surface antialiased flex flex-col min-h-screen"><header class="fixed top-0 inset-x-0 z-50 bg-surface/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.45)] pt-safe"><div class="h-20 px-gutter flex flex-col justify-center gap-space-xs"><div class="flex items-center justify-between"><div class="flex items-center gap-space-sm"><div class="w-8 h-8 rounded-lg bg-surface-container-high flex items-center justify-center text-primary shadow-[0_0_12px_rgba(229,184,105,0.2)]"><span class="material-symbols-outlined text-[20px]">radar</span></div><div class="flex flex-col"><div class="flex items-center gap-space-xs"><span class="font-headline-sm text-headline-sm tracking-tight text-on-surface uppercase">HEXA-ASTROMETRY</span><span class="font-label-caps text-label-caps text-primary px-1.5 py-0.5 bg-surface-container rounded-sm uppercase tracking-wider">v2.1</span></div><span class="font-label-caps text-label-caps text-secondary uppercase tracking-widest">EPISTEMIC ENGINE · JPL DE421</span></div></div><div class="flex items-center gap-space-sm"><div class="flex items-center gap-1.5 px-2 py-1 rounded bg-surface-container-low shadow-[0_0_8px_rgba(102,243,182,0.1)]"><span class="w-2 h-2 rounded-full bg-tertiary animate-pulse"></span><span class="font-label-caps text-label-caps text-tertiary uppercase">ONLINE · SE 2.10</span></div><img alt="Profile" class="w-8 h-8 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida/AEtjO1V1YmCeGnKWqPDEeBjbQ1R3A5c-QWJSMrXSmhIA61PiMUFnapRoPOeKtj3LMcgKAxrhlIWFtSy0FCQQE_u7-Z_lpwjZvzkhF_E_S54IcZGwXV1M5GaRVeCAt7Q6XR6Drb_9n6Ez_8FI3ZIBvemVy3jOeGZGcVDazhjuJBbDENQKrZEjhyylTlT30h5-w8jnvclFfbm_Z7B9WAEoEet0pc-_7D7rzFAGMQfNtbabO1XNK4xfzWa4AqzK4QNk"/></div></div><div class="flex items-center justify-between pt-0.5"><div class="flex items-center gap-1.5 text-on-surface-variant"><span class="material-symbols-outlined text-[16px] text-primary">account_circle</span><span class="font-telemetry-sm text-telemetry-sm text-on-surface truncate max-w-[200px]">J. R. Oppenheimer</span><span class="font-label-caps text-label-caps px-1 py-0.2 bg-surface-container-highest text-primary-container rounded uppercase">Rodden AA</span></div><div class="flex items-center gap-1 text-on-surface-variant"><span class="font-label-caps text-label-caps text-on-surface-variant uppercase">TARGET:</span><span class="font-telemetry-sm text-telemetry-sm text-secondary uppercase tracking-wider">Audit</span></div></div></div></header><main class="flex flex-col relative w-full px-gutter pt-20 pb-24 bg-surface min-h-screen"><div class="flex flex-col w-full gap-space-md">
+<!-- 1. SUBJECT PROFILE & GEOMETRIC TELEMETRY CARD -->
+<section class="bg-surface-container-low rounded-xl p-space-md shadow-lg flex flex-col gap-space-sm">
+<div class="flex items-start justify-between gap-space-sm">
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-space-xs">
+<span class="font-headline-sm text-headline-sm text-on-surface truncate">J. Robert Oppenheimer</span>
+<span class="material-symbols-outlined text-primary text-[18px]">verified</span>
+</div>
+<span class="font-label-caps text-label-caps text-primary-container tracking-wider uppercase mt-0.5">Rodden Rating: AA · Direct Birth Certificate Ingestion</span>
+</div>
+<div class="flex flex-col items-end shrink-0">
+<span class="px-2 py-0.5 rounded bg-tertiary-container/20 text-tertiary font-label-caps text-label-caps uppercase tracking-wider flex items-center gap-1 shadow-sm">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary animate-ping"></span>
+          PASS · Δ ≤ 0.003°
+        </span>
+<span class="font-telemetry-sm text-telemetry-sm text-on-surface-variant mt-1">JPL DE421 v8.4</span>
+</div>
+</div>
+<!-- Telemetry Strip Grid -->
+<div class="grid grid-cols-2 gap-space-xs mt-1">
+<div class="bg-surface-container p-space-sm rounded flex flex-col justify-between">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-secondary">schedule</span> Temporal Epoch
+        </span>
+<span class="font-telemetry-sm text-telemetry-sm text-on-surface mt-1 truncate">1904-04-22 08:15:00 EST</span>
+<span class="font-label-caps text-label-caps text-secondary-fixed-dim">JD 2416593.05208 (UTC-5)</span>
+</div>
+<div class="bg-surface-container p-space-sm rounded flex flex-col justify-between">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-primary">pin_drop</span> Geodetic Fix
+        </span>
+<span class="font-telemetry-sm text-telemetry-sm text-on-surface mt-1 truncate">40°42'46"N 74°00'22"W</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant">New York, NY · 10m ASL</span>
+</div>
+</div>
+<!-- Ephemeris Vector Metric Pill -->
+<div class="bg-surface-container-high px-space-sm py-1.5 rounded flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px] text-secondary">satellite_alt</span>
+<span class="font-telemetry-sm text-telemetry-sm text-on-surface-variant">Orbital Divergence Vector:</span>
+</div>
+<span class="font-telemetry-md text-telemetry-md text-secondary font-medium">Δ = 0.0018° <span class="font-label-caps text-label-caps text-tertiary">(TOL: ±0.0030°)</span></span>
+</div>
+</section>
+<!-- 2. BOUNDARY SENSITIVITY ENSEMBLE (INTERVAL MODELER) -->
+<section class="bg-surface-container-low rounded-xl p-space-md shadow-lg flex flex-col gap-space-md">
+<!-- Title & Envelope Status -->
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded bg-primary-container/20 text-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-[16px]">history_toggle_off</span>
+</div>
+<div>
+<span class="font-headline-sm text-headline-sm text-on-surface block leading-tight">Temporal Sensitivity</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Hospital Log Offset Analysis</span>
+</div>
+</div>
+<span class="font-label-caps text-label-caps px-2 py-1 bg-surface-container-highest text-primary-fixed rounded">±15m Envelope</span>
+</div>
+<!-- Segmented Interval Controller -->
+<div class="flex flex-col gap-1.5">
+<div class="grid grid-cols-5 gap-1 bg-surface-container-lowest p-1 rounded-lg" id="delta-selector">
+<button class="delta-btn py-2 flex flex-col items-center justify-center rounded text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all" data-delta="-30m" onclick="updateDelta('-30m', this)" type="button">
+<span class="font-telemetry-sm text-telemetry-sm">-30m</span>
+<span class="font-label-caps text-[9px] text-on-surface-variant/70">07:45</span>
+</button>
+<button class="delta-btn py-2 flex flex-col items-center justify-center rounded text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all" data-delta="-15m" onclick="updateDelta('-15m', this)" type="button">
+<span class="font-telemetry-sm text-telemetry-sm">-15m</span>
+<span class="font-label-caps text-[9px] text-on-surface-variant/70">08:00</span>
+</button>
+<button class="delta-btn py-2 flex flex-col items-center justify-center rounded bg-surface-container-high text-primary shadow-sm" data-delta="t0" onclick="updateDelta('t0', this)" type="button">
+<span class="font-telemetry-sm text-telemetry-sm font-bold">t₀ (Exact)</span>
+<span class="font-label-caps text-[9px] text-primary/80">08:15</span>
+</button>
+<button class="delta-btn py-2 flex flex-col items-center justify-center rounded text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all" data-delta="+15m" onclick="updateDelta('+15m', this)" type="button">
+<span class="font-telemetry-sm text-telemetry-sm">+15m</span>
+<span class="font-label-caps text-[9px] text-on-surface-variant/70">08:30</span>
+</button>
+<button class="delta-btn py-2 flex flex-col items-center justify-center rounded text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all" data-delta="+30m" onclick="updateDelta('+30m', this)" type="button">
+<span class="font-telemetry-sm text-telemetry-sm">+30m</span>
+<span class="font-label-caps text-[9px] text-on-surface-variant/70">08:45</span>
+</button>
+</div>
+<div class="flex items-center justify-between px-1">
+<span class="font-label-caps text-[9px] text-on-surface-variant tracking-wider uppercase">Variance Range [t-30m → t+30m]</span>
+<span class="font-label-caps text-[9px] text-secondary tracking-wider uppercase" id="current-delta-label">Active: Baseline t₀</span>
+</div>
+</div>
+<!-- Hexagonal Astrometric Radar & Stability Readout -->
+<div class="bg-surface-container p-space-md rounded-xl flex flex-col gap-space-sm relative overflow-hidden">
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Astrometric Ingestion Hex-Matrix</span>
+<span class="font-telemetry-sm text-telemetry-sm text-secondary bg-surface-container-lowest px-2 py-0.5 rounded">6-Tradition Axis</span>
+</div>
+<div class="flex items-center justify-center py-2 relative">
+<!-- SVG Hexagonal Telemetry Radar Visualizer matching inspiration -->
+<svg class="w-44 h-44 drop-shadow-[0_0_12px_rgba(229,184,105,0.15)]" fill="none" viewbox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+<!-- Background Outer Hexagon -->
+<polygon fill="#0A1422" points="100,10 180,55 180,145 100,190 20,145 20,55" stroke="#E5B869" stroke-width="2.5"></polygon>
+<!-- Mid Hexagon Reference Grid -->
+<polygon points="100,32 160,67 160,133 100,168 40,133 40,67" stroke="#2C3545" stroke-dasharray="4 3" stroke-width="1.5"></polygon>
+<!-- Inner Core Hexagon -->
+<polygon points="100,55 140,78 140,122 100,145 60,122 60,78" stroke="#17202F" stroke-width="1"></polygon>
+<!-- Radial Coordinate Spokes -->
+<line stroke="#7BD0FF" stroke-opacity="0.7" stroke-width="1" x1="100" x2="100" y1="10" y2="190"></line>
+<line stroke="#E5B869" stroke-opacity="0.4" stroke-width="1" x1="20" x2="180" y1="55" y2="145"></line>
+<line stroke="#E5B869" stroke-opacity="0.4" stroke-width="1" x1="20" x2="180" y1="145" y2="55"></line>
+<!-- Dynamic Stability Target Rings -->
+<circle cx="100" cy="100" r="54" stroke="#00A6E0" stroke-width="2.5"></circle>
+<circle cx="100" cy="100" r="28" stroke="#2C3545" stroke-width="1"></circle>
+<!-- Center Sensor Origin Pill -->
+<circle cx="100" cy="100" fill="#E5B869" r="9"></circle>
+<circle cx="100" cy="100" fill="#FFFFFF" r="4"></circle>
+<!-- Hexagon Vertex Anchors -->
+<circle cx="100" cy="10" fill="#EDBF70" r="4.5"></circle>
+<circle cx="180" cy="55" fill="#7BD0FF" r="4.5"></circle>
+<circle cx="180" cy="145" fill="#EDBF70" r="4.5"></circle>
+<circle cx="100" cy="190" fill="#7BD0FF" r="4.5"></circle>
+<circle cx="20" cy="145" fill="#EDBF70" r="4.5"></circle>
+<circle cx="20" cy="55" fill="#7BD0FF" r="4.5"></circle>
+</svg>
+<!-- Dynamic Overlay Micro-Badges -->
+<div class="absolute top-1 left-2 flex flex-col">
+<span class="font-label-caps text-[9px] text-secondary">HELLENISTIC</span>
+<span class="font-telemetry-sm text-[10px] text-on-surface">Gemini 12°04'</span>
+</div>
+<div class="absolute top-1 right-2 flex flex-col items-end">
+<span class="font-label-caps text-[9px] text-primary">JYOTISHA</span>
+<span class="font-telemetry-sm text-[10px] text-on-surface">Mithuna 18°22'</span>
+</div>
+<div class="absolute bottom-1 left-2 flex flex-col">
+<span class="font-label-caps text-[9px] text-primary">MAYA CHOLQ'IJ</span>
+<span class="font-telemetry-sm text-[10px] text-on-surface">11 Ajpu (Sun)</span>
+</div>
+<div class="absolute bottom-1 right-2 flex flex-col items-end">
+<span class="font-label-caps text-[9px] text-secondary">BAZI</span>
+<span class="font-telemetry-sm text-[10px] text-on-surface">Yang Earth Dragon</span>
+</div>
+</div>
+<!-- Ingestion Verification Stability Readouts -->
+<div class="flex flex-col gap-2 pt-1">
+<!-- Ascendant Stability Card -->
+<div class="bg-surface-container-low p-2.5 rounded flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px] text-tertiary">check_circle</span>
+<div class="flex flex-col">
+<span class="font-telemetry-sm text-telemetry-sm text-on-surface font-semibold">Ascendant / Lagna Stability</span>
+<span class="font-label-caps text-[9px] text-on-surface-variant">Gemini / Mithuna holds throughout ±15m (Next sign at +23m)</span>
+</div>
+</div>
+<span class="font-telemetry-sm text-telemetry-sm font-semibold text-tertiary bg-surface-container px-2 py-0.5 rounded">98.4% STABLE</span>
+</div>
+<!-- Moon Cusp Alert Card -->
+<div class="bg-surface-container-low p-2.5 rounded flex items-center justify-between shadow-sm">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px] text-primary">warning</span>
+<div class="flex flex-col">
+<span class="font-telemetry-sm text-telemetry-sm text-on-surface font-semibold">Chandra / Moon Nakshatra</span>
+<span class="font-label-caps text-[9px] text-primary-container">Pushya P4 → Ashlesha P1 at -7m threshold (Lord shifts Sa → Me)</span>
+</div>
+</div>
+<span class="font-label-caps text-[9px] font-bold text-on-primary-fixed bg-primary-container px-2 py-1 rounded uppercase tracking-wider">CUSP ALERT</span>
+</div>
+</div>
+<!-- Cusp Distance Micro-Slider / Envelope Visualizer -->
+<div class="flex flex-col gap-1 mt-1">
+<div class="flex justify-between items-center text-on-surface-variant font-label-caps text-[9px]">
+<span>-15m Cusp Border</span>
+<span class="text-primary font-bold">t₀ Distance: +7m to Boundary</span>
+<span>+15m Cusp Border</span>
+</div>
+<div class="w-full h-2 rounded bg-surface-container-lowest relative overflow-hidden flex">
+<div class="w-[25%] bg-tertiary-container/40 h-full"></div>
+<div class="w-[20%] bg-primary-container h-full"></div>
+<div class="w-[55%] bg-tertiary-container/40 h-full"></div>
+<!-- Current Indicator Needle -->
+<div class="absolute left-[38%] top-0 bottom-0 w-1 bg-on-surface shadow-sm"></div>
+</div>
+</div>
+</div>
+</section>
+<!-- 3. DUAL-ENGINE EPHEMERIS CROSS-VERIFICATION MATRIX -->
+<section class="bg-surface-container-low rounded-xl p-space-md shadow-lg flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded bg-secondary/15 text-secondary flex items-center justify-center">
+<span class="material-symbols-outlined text-[16px]">compare_arrows</span>
+</div>
+<div>
+<span class="font-headline-sm text-headline-sm text-on-surface block leading-tight">Engine Cross-Verification</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Swiss Eph 2.10 vs. NASA JPL DE421</span>
+</div>
+</div>
+<span class="font-label-caps text-label-caps text-secondary-fixed-dim bg-surface-container-high px-2 py-0.5 rounded">IAU 2000B</span>
+</div>
+<!-- Telemetry Table -->
+<div class="overflow-x-auto -mx-1">
+<table class="w-full text-left">
+<thead>
+<tr class="bg-surface-container text-on-surface-variant font-label-caps text-[9px] uppercase tracking-wider">
+<th class="py-1.5 px-2 rounded-l">Target Body</th>
+<th class="py-1.5 px-2">Swiss Eph 2.10</th>
+<th class="py-1.5 px-2">JPL DE421</th>
+<th class="py-1.5 px-2 text-right rounded-r">Δ Angle (Diff)</th>
+</tr>
+</thead>
+<tbody class="divide-y-0 font-telemetry-sm text-telemetry-sm">
+<tr class="hover:bg-surface-container/50 transition-colors">
+<td class="py-2 px-2 text-on-surface font-medium flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-primary"></span> Sun (Surya)
+            </td>
+<td class="py-2 px-2 text-on-surface-variant">01° Taurus 58' 22"</td>
+<td class="py-2 px-2 text-on-surface-variant">01° Taurus 58' 20"</td>
+<td class="py-2 px-2 text-right text-tertiary font-semibold flex items-center justify-end gap-1">
+              0.0005° <span class="material-symbols-outlined text-[13px]">check</span>
+</td>
+</tr>
+<tr class="bg-surface-container/30 hover:bg-surface-container/60 transition-colors">
+<td class="py-2 px-2 text-on-surface font-medium flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-secondary"></span> Moon (Chandra)
+            </td>
+<td class="py-2 px-2 text-on-surface-variant">29° Cancer 42' 11"</td>
+<td class="py-2 px-2 text-on-surface-variant">29° Cancer 42' 16"</td>
+<td class="py-2 px-2 text-right text-tertiary font-semibold flex items-center justify-end gap-1">
+              0.0013° <span class="material-symbols-outlined text-[13px]">check</span>
+</td>
+</tr>
+<tr class="hover:bg-surface-container/50 transition-colors">
+<td class="py-2 px-2 text-on-surface font-medium flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-on-surface"></span> Ascendant (Lagna)
+            </td>
+<td class="py-2 px-2 text-on-surface-variant">12° Gemini 04' 48"</td>
+<td class="py-2 px-2 text-on-surface-variant">12° Gemini 04' 50"</td>
+<td class="py-2 px-2 text-right text-tertiary font-semibold flex items-center justify-end gap-1">
+              0.0006° <span class="material-symbols-outlined text-[13px]">check</span>
+</td>
+</tr>
+<tr class="bg-surface-container/30 hover:bg-surface-container/60 transition-colors">
+<td class="py-2 px-2 text-on-surface font-medium flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-error"></span> Mars (Mangala)
+            </td>
+<td class="py-2 px-2 text-on-surface-variant">13° Taurus 19' 04"</td>
+<td class="py-2 px-2 text-on-surface-variant">13° Taurus 19' 01"</td>
+<td class="py-2 px-2 text-right text-tertiary font-semibold flex items-center justify-end gap-1">
+              0.0008° <span class="material-symbols-outlined text-[13px]">check</span>
+</td>
+</tr>
+<tr class="hover:bg-surface-container/50 transition-colors">
+<td class="py-2 px-2 text-on-surface font-medium flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-secondary-fixed-dim"></span> Saturn (Shani)
+            </td>
+<td class="py-2 px-2 text-on-surface-variant">18° Aquar 02' 55"</td>
+<td class="py-2 px-2 text-on-surface-variant">18° Aquar 02' 59"</td>
+<td class="py-2 px-2 text-right text-tertiary font-semibold flex items-center justify-end gap-1">
+              0.0011° <span class="material-symbols-outlined text-[13px]">check</span>
+</td>
+</tr>
+<tr class="bg-surface-container/30 hover:bg-surface-container/60 transition-colors">
+<td class="py-2 px-2 text-on-surface font-medium flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-primary-fixed-dim"></span> Jupiter (Guru)
+            </td>
+<td class="py-2 px-2 text-on-surface-variant">25° Aries 31' 14"</td>
+<td class="py-2 px-2 text-on-surface-variant">25° Aries 31' 12"</td>
+<td class="py-2 px-2 text-right text-tertiary font-semibold flex items-center justify-end gap-1">
+              0.0005° <span class="material-symbols-outlined text-[13px]">check</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Precision Footer Note -->
+<div class="flex items-center justify-between text-on-surface-variant pt-1">
+<span class="font-label-caps text-[9px] flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px] text-tertiary">lock</span>
+        Topocentric Parallax &amp; Atmospheric Refraction Applied
+      </span>
+<span class="font-telemetry-sm text-[10px] text-primary">All Δ &lt; 0.002°</span>
+</div>
+</section>
+<!-- 4. EPISTEMIC CONFIDENCE SUMMARY & ACTION CARD -->
+<section class="bg-surface-container-high rounded-xl p-space-md shadow-xl flex flex-col gap-space-sm mb-2">
+<div class="flex items-center justify-between">
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps text-primary uppercase tracking-widest">Epistemic Verdict</span>
+<span class="font-headline-md text-headline-md text-on-surface font-bold">94.2 <span class="font-headline-sm text-headline-sm font-normal text-on-surface-variant">/ 100</span></span>
+</div>
+<div class="text-right flex flex-col items-end">
+<span class="px-2.5 py-1 rounded bg-tertiary text-on-tertiary font-telemetry-sm text-telemetry-sm font-bold tracking-wider uppercase shadow-md">
+          ROBUST ENSEMBLE
+        </span>
+<span class="font-label-caps text-[9px] text-on-surface-variant mt-1">Bayesian Prior: p &lt; 0.0001</span>
+</div>
+</div>
+<!-- Texas Sharpshooter Filter Micro-Callout -->
+<div class="bg-surface-container-lowest p-2.5 rounded-lg flex items-start gap-2.5">
+<span class="material-symbols-outlined text-[18px] text-secondary mt-0.5 shrink-0">filter_alt</span>
+<div class="flex flex-col min-w-0">
+<span class="font-telemetry-sm text-telemetry-sm text-on-surface font-medium">Texas Sharpshooter Filter: PASSED</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">
+          Zero retro-fitted planetary anomalies detected in baseline orbital distribution. Null hypothesis holds against false-positive clustering.
+        </span>
+</div>
+</div>
+<!-- Action CTA Button -->
+<button class="w-full py-3.5 px-space-md rounded bg-primary-container hover:bg-primary-fixed text-on-primary-fixed font-headline-sm text-headline-sm font-semibold uppercase tracking-wider flex items-center justify-center gap-2 shadow-[0_0_16px_rgba(229,184,105,0.25)] active:scale-[0.99] transition-all" onclick="runTriangulation()" type="button">
+<span>Run Hexa-Tradition Triangulation</span>
+<span class="material-symbols-outlined text-[20px]">arrow_forward</span>
+</button>
+</section>
+</div>
+<script>
+  function updateDelta(step, btn) {
+    const buttons = document.querySelectorAll('.delta-btn');
+    buttons.forEach(b => {
+      b.classList.remove('bg-surface-container-high', 'text-primary', 'shadow-sm');
+      b.classList.add('text-on-surface-variant');
+    });
+    btn.classList.add('bg-surface-container-high', 'text-primary', 'shadow-sm');
+    btn.classList.remove('text-on-surface-variant');
+    
+    const label = document.getElementById('current-delta-label');
+    if (label) {
+      label.innerText = 'Active Offset: ' + step;
+    }
+  }
+
+  function runTriangulation() {
+    const targetLink = document.querySelector('nav a[data-path="traditions"]');
+    if (targetLink) {
+      targetLink.click();
+    }
+  }
+</script></main><nav class="fixed bottom-0 inset-x-0 z-50 pb-safe bg-surface/95 backdrop-blur-xl shadow-[0_-4px_20px_rgba(0,0,0,0.6)]" data-active-classes="text-primary border-t-2 border-primary bg-surface-container-low/60 shadow-[0_0_12px_rgba(229,184,105,0.15)]"><div class="grid grid-cols-4 h-16"><a aria-current="page" class="flex flex-col items-center justify-center gap-1 transition-colors min-h-[44px] min-w-[44px] text-primary border-t-2 border-primary bg-surface-container-low/60 shadow-[0_0_12px_rgba(229,184,105,0.15)]" data-path="audit" href="#"><span class="material-symbols-outlined text-[20px]">tune</span><span class="font-label-caps text-label-caps uppercase tracking-wider">Audit</span></a><a class="flex flex-col items-center justify-center gap-1 text-on-surface-variant hover:text-on-surface transition-colors min-h-[44px] min-w-[44px]" data-path="traditions" href="#"><span class="material-symbols-outlined text-[20px]">hexagon</span><span class="font-label-caps text-label-caps uppercase tracking-wider">Traditions</span></a><a class="flex flex-col items-center justify-center gap-1 text-on-surface-variant hover:text-on-surface transition-colors min-h-[44px] min-w-[44px]" data-path="synthesis" href="#"><span class="material-symbols-outlined text-[20px]">hub</span><span class="font-label-caps text-label-caps uppercase tracking-wider">Synthesis</span></a><a class="flex flex-col items-center justify-center gap-1 text-on-surface-variant hover:text-on-surface transition-colors min-h-[44px] min-w-[44px]" data-path="evidence" href="#"><span class="material-symbols-outlined text-[20px]">query_stats</span><span class="font-label-caps text-label-caps uppercase tracking-wider">Evidence</span></a></div></nav></body></html>

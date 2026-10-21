@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@500;600;700&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=JetBrains+Mono:wght@100..900&family=Space+Grotesk:wght@100..900&display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{"inverse-primary":"#7b5811","on-tertiary":"#003824","primary-fixed":"#ffdea9","on-error":"#690005","surface-container-highest":"#2c3545","on-surface-variant":"#d2c5b3","tertiary-fixed-dim":"#4edea3","secondary-fixed":"#c4e7ff","on-background":"#dae3f8","surface-container-low":"#131c2b","surface-container-lowest":"#050e1d","on-tertiary-fixed":"#002113","error":"#ffb4ab","tertiary-container":"#44d69b","on-secondary-fixed":"#001e2c","surface-tint":"#edbf70","on-primary-fixed":"#271900","on-tertiary-fixed-variant":"#005236","secondary-fixed-dim":"#7bd0ff","on-error-container":"#ffdad6","on-primary-fixed-variant":"#5f4100","on-tertiary-container":"#00593b","surface":"#0a1422","primary":"#ffd58d","inverse-on-surface":"#283140","on-secondary-fixed-variant":"#004c69","tertiary-fixed":"#6ffbbe","primary-fixed-dim":"#edbf70","on-secondary-container":"#00374d","surface-variant":"#2c3545","surface-container-high":"#212a3a","primary-container":"#e5b869","on-secondary":"#00354a","tertiary":"#66f3b6","on-primary-container":"#674800","on-primary":"#422c00","background":"#0a1422","secondary-container":"#00a6e0","error-container":"#93000a","surface-dim":"#0a1422","surface-bright":"#31394a","inverse-surface":"#dae3f8","outline":"#9b8f7f","secondary":"#7bd0ff","on-surface":"#dae3f8","outline-variant":"#4e4538","surface-container":"#17202f"},borderRadius:{DEFAULT:"0.125rem",lg:"0.25rem",xl:"0.5rem",full:"0.75rem"},spacing:{"space-xl":"2.5rem","space-lg":"1.5rem","space-xs":"0.25rem","gutter-desktop":"1.5rem",margin:"1rem","margin-desktop":"2rem","space-md":"1rem",gutter:"1rem","space-sm":"0.5rem"},fontFamily:{"telemetry-md":["JetBrains Mono"],"label-caps":["JetBrains Mono"],"body-lg":["Inter"],"headline-sm":["Space Grotesk"],"display-lg-mobile":["Space Grotesk"],"headline-lg":["Space Grotesk"],"headline-lg-mobile":["Space Grotesk"],"body-md":["Inter"],"display-lg":["Space Grotesk"],"telemetry-sm":["JetBrains Mono"],"telemetry-lg":["JetBrains Mono"],"headline-md":["Space Grotesk"],"body-sm":["Inter"]},fontSize:{"telemetry-md":["13px",{lineHeight:"18px",letterSpacing:"0.03em",fontWeight:"400"}],"label-caps":["10px",{lineHeight:"14px",letterSpacing:"0.08em",fontWeight:"700"}],"body-lg":["16px",{lineHeight:"24px",fontWeight:"400"}],"headline-sm":["18px",{lineHeight:"26px",fontWeight:"500"}],"display-lg-mobile":["32px",{lineHeight:"40px",letterSpacing:"-0.01em",fontWeight:"700"}],"headline-lg":["32px",{lineHeight:"40px",letterSpacing:"-0.015em",fontWeight:"600"}],"headline-lg-mobile":["26px",{lineHeight:"34px",letterSpacing:"-0.01em",fontWeight:"600"}],"body-md":["14px",{lineHeight:"20px",fontWeight:"400"}],"display-lg":["44px",{lineHeight:"52px",letterSpacing:"-0.02em",fontWeight:"700"}],"telemetry-sm":["11px",{lineHeight:"16px",letterSpacing:"0.05em",fontWeight:"500"}],"telemetry-lg":["16px",{lineHeight:"22px",letterSpacing:"0.02em",fontWeight:"500"}],"headline-md":["24px",{lineHeight:"32px",letterSpacing:"-0.01em",fontWeight:"600"}],"body-sm":["12px",{lineHeight:"18px",fontWeight:"400"}]}}}}</script></head><body class="bg-surface font-body-md text-on-surface antialiased selection:bg-primary selection:text-on-primary min-h-screen"><header class="fixed top-0 left-0 right-0 z-50 bg-surface/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-16 w-full px-gutter-desktop flex items-center justify-between gap-space-md"><div class="flex items-center gap-space-lg flex-shrink-0"><div class="flex items-center gap-space-sm"><div class="w-9 h-9 rounded bg-surface-container-high flex items-center justify-center text-primary-container shadow-[0_0_16px_rgba(229,184,105,0.15)]"><span class="material-symbols-outlined text-[20px]">token</span></div><div><div class="flex items-center gap-space-xs"><span class="font-headline-sm text-headline-sm font-semibold tracking-tight text-on-surface uppercase">HEXA-ASTROMETRIC</span><span class="font-label-caps text-label-caps text-primary px-space-xs py-0.5 rounded bg-surface-container-high">v2.1</span></div><div class="font-telemetry-sm text-telemetry-sm text-secondary-fixed-dim tracking-wider">JPL DE421 / SE 2.10 ONLINE</div></div></div><div class="h-7 w-px bg-surface-container-highest hidden xl:block"></div><div class="hidden xl:flex items-center gap-space-sm px-space-md py-1.5 rounded bg-surface-container-low"><div class="w-2 h-2 rounded-full bg-tertiary-container animate-pulse"></div><div class="flex flex-col"><span class="font-label-caps text-label-caps text-on-surface-variant uppercase">SUBJECT IN COMPUTATION</span><span class="font-telemetry-sm text-telemetry-sm font-medium text-on-surface">J. Robert Oppenheimer <span class="text-primary-container font-semibold">(Rodden AA)</span></span></div><span class="material-symbols-outlined text-on-surface-variant text-[16px] cursor-pointer hover:text-on-surface transition-colors ml-space-xs">swap_horiz</span></div></div><div class="hidden 2xl:flex items-center gap-space-sm flex-shrink-0"><div class="flex items-center gap-space-xs px-space-sm py-1 rounded bg-surface-container-lowest"><div class="w-1.5 h-1.5 rounded-full bg-tertiary-container"></div><span class="font-telemetry-sm text-telemetry-sm text-on-surface-variant">NASA JPL DE421:</span><span class="font-telemetry-sm text-telemetry-sm text-tertiary-fixed font-semibold">PASS</span></div><div class="flex items-center gap-space-xs px-space-sm py-1 rounded bg-surface-container-lowest"><span class="font-telemetry-sm text-telemetry-sm text-on-surface-variant">Epistemic Rigor:</span><span class="font-telemetry-sm text-telemetry-sm text-primary font-semibold">94.2</span></div><div class="flex items-center gap-space-xs px-space-sm py-1 rounded bg-surface-container-lowest"><span class="font-telemetry-sm text-telemetry-sm text-on-surface-variant">Consensus:</span><span class="font-telemetry-sm text-telemetry-sm text-secondary font-semibold">76.8%</span></div></div><nav class="hidden lg:flex items-center gap-space-xs flex-shrink-0" data-active-classes="bg-surface-container-high text-primary font-semibold rounded"><a class="px-space-md py-2 font-telemetry-sm text-telemetry-sm text-on-surface-variant hover:text-on-surface transition-colors" data-path="epistemic-audit" href="#">Epistemic Audit</a><a aria-current="page" class="px-space-md py-2 transition-colors bg-surface-container-high text-primary font-semibold rounded" data-path="hexa-traditions" href="#">Hexa-Traditions</a><a class="px-space-md py-2 font-telemetry-sm text-telemetry-sm text-on-surface-variant hover:text-on-surface transition-colors" data-path="9-domain-synthesis" href="#">9-Domain Synthesis</a><a class="px-space-md py-2 font-telemetry-sm text-telemetry-sm text-on-surface-variant hover:text-on-surface transition-colors" data-path="empirical-evidence" href="#">Empirical Evidence</a><a class="px-space-md py-2 font-telemetry-sm text-telemetry-sm text-on-surface-variant hover:text-on-surface transition-colors" data-path="epistemic-certificate" href="#">Epistemic Certificate</a></nav><div class="flex items-center gap-space-md flex-shrink-0"><div class="hidden md:flex items-center gap-space-xs font-telemetry-sm text-telemetry-sm text-secondary px-space-sm py-1 rounded bg-surface-container-low cursor-pointer hover:bg-surface-container-high transition-colors"><span class="material-symbols-outlined text-[16px]">terminal</span><span>TELEMETRY FEED</span></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><aside class="fixed left-0 top-16 bottom-0 w-64 bg-surface-container-low z-40 flex flex-col justify-between py-space-md"><div class="flex flex-col gap-space-lg"><div class="px-space-md"><div class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider mb-space-sm">CANONICAL SYSTEMS</div><div class="grid grid-cols-2 gap-space-xs"><div class="p-space-xs rounded bg-surface-container text-center"><span class="font-telemetry-sm text-telemetry-sm text-on-surface block">HELLENIC</span><span class="font-label-caps text-label-caps text-tertiary-container block">ALIGNED</span></div><div class="p-space-xs rounded bg-surface-container text-center"><span class="font-telemetry-sm text-telemetry-sm text-on-surface block">JYOTISHA</span><span class="font-label-caps text-label-caps text-tertiary-container block">ALIGNED</span></div><div class="p-space-xs rounded bg-surface-container text-center"><span class="font-telemetry-sm text-telemetry-sm text-on-surface block">BAZI</span><span class="font-label-caps text-label-caps text-primary block">PARTIAL</span></div><div class="p-space-xs rounded bg-surface-container text-center"><span class="font-telemetry-sm text-telemetry-sm text-on-surface block">ZI WEI</span><span class="font-label-caps text-label-caps text-tertiary-container block">ALIGNED</span></div><div class="p-space-xs rounded bg-surface-container text-center"><span class="font-telemetry-sm text-telemetry-sm text-on-surface block">CHOLQ'IJ</span><span class="font-label-caps text-label-caps text-primary block">PARTIAL</span></div><div class="p-space-xs rounded bg-surface-container text-center"><span class="font-telemetry-sm text-telemetry-sm text-on-surface block">KALACHAKRA</span><span class="font-label-caps text-label-caps text-tertiary-container block">ALIGNED</span></div></div></div><div class="px-space-sm"><div class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider px-space-sm mb-space-xs">ANALYTIC WORKSPACES</div><nav class="flex flex-col gap-space-xs" data-active-classes="bg-surface-container-high text-primary font-semibold rounded"><a class="flex items-center px-space-md py-2.5 rounded text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-body-md text-body-md" data-path="epistemic-audit" href="#"><span class="material-symbols-outlined text-[18px] mr-space-sm text-secondary-fixed-dim">analytics</span>Epistemic Audit</a><a aria-current="page" class="flex items-center px-space-md py-2.5 transition-colors bg-surface-container-high text-primary font-semibold rounded" data-path="hexa-traditions" href="#"><span class="material-symbols-outlined text-[18px] mr-space-sm text-primary-fixed-dim">public</span>Hexa-Traditions</a><a class="flex items-center px-space-md py-2.5 rounded text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-body-md text-body-md" data-path="9-domain-synthesis" href="#"><span class="material-symbols-outlined text-[18px] mr-space-sm text-tertiary-fixed-dim">hub</span>9-Domain Synthesis</a><a class="flex items-center px-space-md py-2.5 rounded text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-body-md text-body-md" data-path="empirical-evidence" href="#"><span class="material-symbols-outlined text-[18px] mr-space-sm text-secondary">database</span>Empirical Evidence</a><a class="flex items-center px-space-md py-2.5 rounded text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-body-md text-body-md" data-path="epistemic-certificate" href="#"><span class="material-symbols-outlined text-[18px] mr-space-sm text-primary">verified</span>Epistemic Certificate</a></nav></div><div class="px-space-md"><div class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider mb-space-xs">CALIBRATION PARAMETERS</div><div class="bg-surface-container-lowest p-space-sm rounded font-telemetry-sm text-telemetry-sm space-y-1 text-on-surface-variant"><div>EPOCH: <span class="text-on-surface">J2000.0</span></div><div>ΔT: <span class="text-on-surface">+69.184s</span></div><div>LAT: <span class="text-on-surface">40.7128° N</span></div><div>LON: <span class="text-on-surface">74.0060° W</span></div></div></div></div><div class="px-space-md"><div class="p-space-sm rounded bg-surface-container flex items-center justify-between"><div class="flex items-center gap-space-xs"><div class="w-2 h-2 rounded-full bg-tertiary-container animate-ping"></div><span class="font-telemetry-sm text-telemetry-sm text-on-surface">OBSERVATORY RUNNING</span></div><span class="material-symbols-outlined text-on-surface-variant text-[18px]">tune</span></div></div></aside><div class="pl-64"><main class="relative pt-16 w-full bg-surface min-h-screen"><div class="flex flex-col w-full">
+<!-- TOP TELEMETRY INSTRUMENT STRIP -->
+<section class="w-full bg-surface-container-lowest px-gutter-desktop py-space-sm flex flex-col xl:flex-row xl:items-center justify-between gap-space-md shadow-md relative overflow-hidden">
+<div class="absolute inset-0 bg-gradient-to-r from-primary/5 via-secondary/5 to-transparent pointer-events-none"></div>
+<div class="flex flex-wrap items-center gap-space-lg relative z-10">
+<div class="flex items-center gap-space-sm">
+<span class="w-2.5 h-2.5 rounded-full bg-tertiary-container animate-pulse shadow-[0_0_8px_rgba(68,214,155,0.4)]"></span>
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">ANCHOR EPHEMERIS</span>
+<span class="font-telemetry-sm text-telemetry-sm text-on-surface font-semibold">JPL DE421 <span class="text-secondary-fixed-dim">t0: 1904-04-22 13:10:00 UTC</span></span>
+</div>
+</div>
+<div class="h-6 w-px bg-surface-container-highest hidden sm:block"></div>
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">SOLAR VECTOR</span>
+<span class="font-telemetry-sm text-telemetry-sm text-primary font-medium">01°43'22" Taurus / Vṛṣabha</span>
+</div>
+<div class="h-6 w-px bg-surface-container-highest hidden md:block"></div>
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">LAHIRI AYANAMSHA</span>
+<span class="font-telemetry-sm text-telemetry-sm text-tertiary font-mono">Δ 22°31'08.44"</span>
+</div>
+<div class="h-6 w-px bg-surface-container-highest hidden lg:block"></div>
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">LUNAR PHASE & ELONGATION</span>
+<span class="font-telemetry-sm text-telemetry-sm text-on-surface">Waxing Crescent <span class="text-secondary">38.6%</span> <span class="text-on-surface-variant">| +76.4° E</span></span>
+</div>
+</div>
+<!-- Radial Concordance Gauge Compact -->
+<div class="flex items-center gap-space-md relative z-10 self-end xl:self-auto bg-surface-container-low px-space-md py-1.5 rounded">
+<div class="relative w-9 h-9 flex items-center justify-center">
+<svg class="w-full h-full -rotate-90" viewbox="0 0 36 36">
+<circle class="stroke-surface-container-highest" cx="18" cy="18" fill="none" r="14" stroke-width="3"></circle>
+<circle class="stroke-tertiary-container" cx="18" cy="18" fill="none" r="14" stroke-dasharray="88" stroke-dashoffset="16.4" stroke-linecap="round" stroke-width="3"></circle>
+</svg>
+<span class="material-symbols-outlined text-[16px] text-tertiary-container absolute inset-0 m-auto flex items-center justify-center">insights</span>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-space-xs">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">CONCORDANCE INDEX</span>
+<span class="font-telemetry-sm text-telemetry-sm text-tertiary font-bold">81.3%</span>
+</div>
+<div class="font-telemetry-sm text-telemetry-sm text-on-surface-variant">RADIAL VARIANCE <span class="text-primary font-mono">σ = 0.041</span></div>
+</div>
+</div>
+</section>
+<!-- MULTI-TRADITION SELECTOR STRIP -->
+<section class="w-full bg-surface-container px-gutter-desktop py-space-xs shadow-sm">
+<div class="flex items-center justify-between overflow-x-auto no-scrollbar gap-space-sm">
+<div class="flex items-center gap-space-xs py-1">
+<!-- Active Tab: Jyotisha -->
+<button class="group relative px-space-md py-2 rounded bg-surface-container-high text-on-surface flex items-center gap-space-sm transition-all shadow-md" id="tab-jyotisha">
+<div class="w-2 h-2 rounded-full bg-primary shadow-[0_0_8px_rgba(255,213,141,0.5)]"></div>
+<span class="font-telemetry-md text-telemetry-md font-semibold text-primary">01 Jyotisha (Vedic Sidereal)</span>
+<span class="font-label-caps text-label-caps px-space-xs py-0.5 rounded bg-surface-container-lowest text-primary">ACTIVE P1</span>
+<div class="absolute bottom-0 left-space-md right-space-md h-0.5 bg-primary"></div>
+</button>
+<button class="px-space-md py-2 rounded bg-surface-container-low text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[16px] text-secondary">explore</span>
+<span class="font-telemetry-md text-telemetry-md">02 Hellenistic (Tropical)</span>
+</button>
+<button class="px-space-md py-2 rounded bg-surface-container-low text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[16px] text-tertiary">grid_4x4</span>
+<span class="font-telemetry-md text-telemetry-md">03 BaZi (Four Pillars)</span>
+</button>
+<button class="px-space-md py-2 rounded bg-surface-container-low text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[16px] text-primary-fixed-dim">stars</span>
+<span class="font-telemetry-md text-telemetry-md">04 Zi Wei Dou Shu</span>
+</button>
+<button class="px-space-md py-2 rounded bg-surface-container-low text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[16px] text-secondary-fixed">timelapse</span>
+<span class="font-telemetry-md text-telemetry-md">05 Maya Cholq'ij</span>
+</button>
+<button class="px-space-md py-2 rounded bg-surface-container-low text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[16px] text-tertiary-fixed">cyclone</span>
+<span class="font-telemetry-md text-telemetry-md">06 Tibetan Kalachakra</span>
+</button>
+</div>
+<div class="hidden 2xl:flex items-center gap-space-sm pl-space-md">
+<span class="font-label-caps text-label-caps text-on-surface-variant">MATRIX DENSITY:</span>
+<span class="font-telemetry-sm text-telemetry-sm text-secondary px-space-xs py-0.5 rounded bg-surface-container-lowest">6/6 CANONICAL</span>
+</div>
+</div>
+</section>
+<!-- MAIN COMPUTATIONAL WORKBENCH (ASMETRIC 2-COLUMN GRID) -->
+<section class="w-full px-gutter-desktop py-space-lg grid grid-cols-1 xl:grid-cols-12 gap-space-lg">
+<!-- LEFT PANEL: ACTIVE DEEP DIVE (JYOTISHA SIDEREAL) - COLUMNS 7 -->
+<div class="xl:col-span-7 flex flex-col gap-space-lg">
+<!-- Primary Card: Deep Instrument View -->
+<div class="bg-surface-container-low rounded-xl p-space-lg shadow-xl relative overflow-hidden flex flex-col gap-space-md">
+<div class="flex items-center justify-between pb-space-sm">
+<div class="flex items-center gap-space-sm">
+<div class="w-8 h-8 rounded bg-surface-container-highest flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[20px]">hub</span>
+</div>
+<div>
+<div class="flex items-center gap-space-xs">
+<span class="font-headline-sm text-headline-sm text-on-surface font-semibold tracking-tight">JYOTISHA SIDEREAL ENGINE</span>
+<span class="font-label-caps text-label-caps text-tertiary px-space-xs py-0.5 rounded bg-surface-container-lowest">SURYA-SIDDHANTA CALIBRATED</span>
+</div>
+<p class="font-telemetry-sm text-telemetry-sm text-on-surface-variant">Lagna: Gemini (Mithuna) 19°22' • Ardra Nakshatra Pada 4 • Navamsha Pisces</p>
+</div>
+</div>
+<div class="flex items-center gap-space-xs">
+<button class="px-space-sm py-1 rounded bg-surface-container-high hover:bg-surface-bright text-on-surface font-telemetry-sm text-telemetry-sm transition-all flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[16px] text-secondary">tune</span>
+<span>AYANAMSHA OFFSET</span>
+</button>
+<button class="px-space-sm py-1 rounded bg-surface-container-high hover:bg-surface-bright text-on-surface font-telemetry-sm text-telemetry-sm transition-all flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[16px] text-primary">download</span>
+<span>CSV</span>
+</button>
+</div>
+</div>
+<!-- Charts D1 & D9 side by side visual schema -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-md">
+<!-- D1 Rashi Grid -->
+<div class="bg-surface-container-lowest p-space-md rounded-lg flex flex-col gap-space-sm relative">
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-primary tracking-widest uppercase">D1 RASHI (ROOT COSMOGRAM)</span>
+<span class="font-telemetry-sm text-telemetry-sm text-on-surface-variant">BHAVA CHALITA</span>
+</div>
+<!-- Geometric Vedic Diamond Kundli SVG representation -->
+<div class="w-full aspect-square bg-surface-container-low rounded flex items-center justify-center p-space-sm relative">
+<svg class="w-full h-full text-surface-container-highest" fill="none" viewbox="0 0 200 200">
+<!-- Outer Border box -->
+<rect height="196" stroke="currentColor" stroke-width="1.5" width="196" x="2" y="2"></rect>
+<!-- Diagonal Lines -->
+<line stroke="currentColor" stroke-width="1.2" x1="2" x2="198" y1="2" y2="198"></line>
+<line stroke="currentColor" stroke-width="1.2" x1="198" x2="2" y1="2" y2="198"></line>
+<!-- Diamond Inset -->
+<polygon points="100,2 198,100 100,198 2,100" stroke="currentColor" stroke-width="1.2"></polygon>
+<!-- Center point / Lagna 1st House -->
+<circle cx="100" cy="100" fill="#ffd58d" r="3"></circle>
+</svg>
+<!-- House Badges positioned over the SVG Kundli layout -->
+<div class="absolute top-[16%] left-1/2 -translate-x-1/2 text-center pointer-events-none">
+<span class="font-telemetry-sm text-telemetry-sm text-primary font-bold block">I Mithuna</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant block">ASC 19°22'</span>
+</div>
+<div class="absolute top-[8%] left-[16%] text-center pointer-events-none">
+<span class="font-label-caps text-label-caps text-tertiary font-bold">XII</span>
+<span class="font-telemetry-sm text-telemetry-sm text-on-surface block">Mars (Ex)</span>
+</div>
+<div class="absolute top-[8%] right-[16%] text-center pointer-events-none">
+<span class="font-label-caps text-label-caps text-primary font-bold">II</span>
+<span class="font-telemetry-sm text-telemetry-sm text-on-surface block">Chandra</span>
+</div>
+<div class="absolute bottom-[16%] left-1/2 -translate-x-1/2 text-center pointer-events-none">
+<span class="font-telemetry-sm text-telemetry-sm text-secondary font-bold block">VII Dhanu</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant block">Jupiter 28°</span>
+</div>
+<div class="absolute top-1/2 left-[12%] -translate-y-1/2 text-center pointer-events-none">
+<span class="font-label-caps text-label-caps text-tertiary-fixed font-bold">X Mesha</span>
+<span class="font-telemetry-sm text-telemetry-sm text-primary font-bold block">Surya (Ex)</span>
+</div>
+<div class="absolute top-1/2 right-[12%] -translate-y-1/2 text-center pointer-events-none">
+<span class="font-label-caps text-label-caps text-tertiary font-bold">IV Kanya</span>
+<span class="font-telemetry-sm text-telemetry-sm text-on-surface block">Rahu</span>
+</div>
+</div>
+<div class="flex items-center justify-between font-telemetry-sm text-telemetry-sm text-on-surface-variant">
+<span>Primary Yoga: <strong class="text-primary font-medium">Budhaditya (10th Bhava)</strong></span>
+<span class="text-tertiary">Pushkara Navamsha</span>
+</div>
+</div>
+<!-- D9 Navamsha Grid -->
+<div class="bg-surface-container-lowest p-space-md rounded-lg flex flex-col gap-space-sm relative">
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-secondary tracking-widest uppercase">D9 NAVAMSHA (HARMONIC 9TH)</span>
+<span class="font-telemetry-sm text-telemetry-sm text-on-surface-variant">DHARMIC FRUITION</span>
+</div>
+<!-- D9 Representation Graphic -->
+<div class="w-full aspect-square bg-surface-container-low rounded p-space-sm flex flex-col justify-between relative overflow-hidden">
+<div class="absolute inset-0 opacity-10 flex items-center justify-center">
+<svg class="w-full h-full text-secondary" viewbox="0 0 100 100">
+<circle cx="50" cy="50" fill="none" r="45" stroke="currentColor" stroke-dasharray="2 2"></circle>
+<polygon fill="none" points="50,5 90,85 10,85" stroke="currentColor"></polygon>
+<polygon fill="none" points="50,95 90,15 10,15" stroke="currentColor"></polygon>
+</svg>
+</div>
+<div class="grid grid-cols-3 gap-space-xs z-10 h-full">
+<div class="bg-surface-container-high/60 p-space-xs rounded flex flex-col justify-between">
+<span class="font-label-caps text-label-caps text-secondary">01 MEENA</span>
+<span class="font-telemetry-sm text-telemetry-sm text-on-surface font-semibold">Asc Lord Guru</span>
+</div>
+<div class="bg-surface-container-high/60 p-space-xs rounded flex flex-col justify-between">
+<span class="font-label-caps text-label-caps text-on-surface-variant">02 MESHA</span>
+<span class="font-telemetry-sm text-telemetry-sm text-tertiary">Mars Sva</span>
+</div>
+<div class="bg-surface-container-high/60 p-space-xs rounded flex flex-col justify-between">
+<span class="font-label-caps text-label-caps text-on-surface-variant">03 VRISH</span>
+<span class="font-telemetry-sm text-telemetry-sm text-on-surface-variant">--</span>
+</div>
+<div class="bg-surface-container-high/60 p-space-xs rounded flex flex-col justify-between">
+<span class="font-label-caps text-label-caps text-on-surface-variant">12 KUMBHA</span>
+<span class="font-telemetry-sm text-telemetry-sm text-primary">Surya</span>
+</div>
+<div class="bg-surface-container-highest/80 p-space-xs rounded flex flex-col items-center justify-center text-center">
+<span class="font-label-caps text-label-caps text-primary">D9 CORE</span>
+<span class="font-headline-sm text-headline-sm font-bold text-on-surface">JUPITER</span>
+<span class="font-label-caps text-label-caps text-tertiary-container">Vargottama</span>
+</div>
+<div class="bg-surface-container-high/60 p-space-xs rounded flex flex-col justify-between">
+<span class="font-label-caps text-label-caps text-on-surface-variant">04 MITHUNA</span>
+<span class="font-telemetry-sm text-telemetry-sm text-secondary">Budha</span>
+</div>
+<div class="bg-surface-container-high/60 p-space-xs rounded flex flex-col justify-between">
+<span class="font-label-caps text-label-caps text-on-surface-variant">11 MAKARA</span>
+<span class="font-telemetry-sm text-telemetry-sm text-on-surface">Shani</span>
+</div>
+<div class="bg-surface-container-high/60 p-space-xs rounded flex flex-col justify-between">
+<span class="font-label-caps text-label-caps text-on-surface-variant">10 DHANU</span>
+<span class="font-telemetry-sm text-telemetry-sm text-on-surface-variant">Ketu</span>
+</div>
+<div class="bg-surface-container-high/60 p-space-xs rounded flex flex-col justify-between">
+<span class="font-label-caps text-label-caps text-primary">05 KARKA</span>
+<span class="font-telemetry-sm text-telemetry-sm text-primary font-bold">Chandra (Pushk)</span>
+</div>
+</div>
+</div>
+<div class="flex items-center justify-between font-telemetry-sm text-telemetry-sm text-on-surface-variant">
+<span>Navamsha Lagna: <strong class="text-on-surface">Pisces (Meena)</strong></span>
+<span class="text-secondary font-mono">Dignity Score: 8.84/10</span>
+</div>
+</div>
+</div>
+<!-- Planetary Telemetry Matrix Table -->
+<div class="flex flex-col gap-space-xs pt-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">GRAHA TELEMETRY & COORDINATE SENSITIVITY VECTORS</span>
+<span class="font-telemetry-sm text-telemetry-sm text-secondary-fixed">DE421 SENSITIVITY δ ≤ 0.002°</span>
+</div>
+<div class="overflow-x-auto rounded bg-surface-container-lowest">
+<table class="w-full text-left font-telemetry-sm text-telemetry-sm">
+<thead class="bg-surface-container-high text-on-surface-variant uppercase font-label-caps text-label-caps">
+<tr>
+<th class="py-2.5 px-space-md">Graha (Body)</th>
+<th class="py-2.5 px-space-md">Nirayana Long</th>
+<th class="py-2.5 px-space-md">Bhava / Sign</th>
+<th class="py-2.5 px-space-md">Nakshatra / Pada</th>
+<th class="py-2.5 px-space-md">Dignity State</th>
+<th class="py-2.5 px-space-md text-right">Epistemic Status</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-surface-container text-on-surface">
+<tr class="hover:bg-surface-container/60 transition-colors">
+<td class="py-2.5 px-space-md font-semibold text-primary flex items-center gap-space-xs">
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+                    Surya (Sun)
+                  </td>
+<td class="py-2.5 px-space-md font-mono">09°12'14"</td>
+<td class="py-2.5 px-space-md">11th / Aries (Mesha)</td>
+<td class="py-2.5 px-space-md">Ashwini P3 (Ketu)</td>
+<td class="py-2.5 px-space-md"><span class="px-space-xs py-0.5 rounded bg-primary-container/20 text-primary font-medium">UCHHA (Exalted)</span></td>
+<td class="py-2.5 px-space-md text-right font-mono text-tertiary">t0 CALIBRATED</td>
+</tr>
+<tr class="hover:bg-surface-container/60 transition-colors">
+<td class="py-2.5 px-space-md font-semibold text-secondary flex items-center gap-space-xs">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+                    Chandra (Moon)
+                  </td>
+<td class="py-2.5 px-space-md font-mono">28°04'51"</td>
+<td class="py-2.5 px-space-md">2nd / Cancer (Karka)</td>
+<td class="py-2.5 px-space-md">Ashlesha P4 (Budha)</td>
+<td class="py-2.5 px-space-md"><span class="px-space-xs py-0.5 rounded bg-secondary-container/20 text-secondary font-medium">SVA-KSHETRA (Pushkara)</span></td>
+<td class="py-2.5 px-space-md text-right font-mono text-tertiary">CONFIRMED (AA)</td>
+</tr>
+<tr class="hover:bg-surface-container/60 transition-colors">
+<td class="py-2.5 px-space-md font-semibold text-on-surface flex items-center gap-space-xs">
+<span class="w-2 h-2 rounded-full bg-surface-bright"></span>
+                    Budha (Mercury)
+                  </td>
+<td class="py-2.5 px-space-md font-mono">14°38'02"</td>
+<td class="py-2.5 px-space-md">11th / Aries (Mesha)</td>
+<td class="py-2.5 px-space-md">Bharani P1 (Venus)</td>
+<td class="py-2.5 px-space-md"><span class="px-space-xs py-0.5 rounded bg-surface-container-highest text-on-surface font-medium">VIPARITA RAJA</span></td>
+<td class="py-2.5 px-space-md text-right font-mono text-secondary">ALIGN 99.4%</td>
+</tr>
+<tr class="hover:bg-surface-container/60 transition-colors">
+<td class="py-2.5 px-space-md font-semibold text-tertiary flex items-center gap-space-xs">
+<span class="w-2 h-2 rounded-full bg-tertiary"></span>
+                    Mangala (Mars)
+                  </td>
+<td class="py-2.5 px-space-md font-mono">27°41'19"</td>
+<td class="py-2.5 px-space-md">8th / Capricorn (Makara)</td>
+<td class="py-2.5 px-space-md">Dhanishta P2 (Mars)</td>
+<td class="py-2.5 px-space-md"><span class="px-space-xs py-0.5 rounded bg-tertiary-container/20 text-tertiary font-medium">PARAMA UCHHA</span></td>
+<td class="py-2.5 px-space-md text-right font-mono text-tertiary">MAX ENERGY VEC</td>
+</tr>
+<tr class="hover:bg-surface-container/60 transition-colors">
+<td class="py-2.5 px-space-md font-semibold text-secondary-fixed flex items-center gap-space-xs">
+<span class="w-2 h-2 rounded-full bg-secondary-fixed"></span>
+                    Guru (Jupiter)
+                  </td>
+<td class="py-2.5 px-space-md font-mono">03°19'06"</td>
+<td class="py-2.5 px-space-md">7th / Sagittarius (Dhanu)</td>
+<td class="py-2.5 px-space-md">Mula P1 (Ketu)</td>
+<td class="py-2.5 px-space-md"><span class="px-space-xs py-0.5 rounded bg-surface-container-highest text-on-surface font-medium">HAMSA YOGA</span></td>
+<td class="py-2.5 px-space-md text-right font-mono text-tertiary">EXACT ASPECT</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Vimshottari Dasha Vector Timeline Bar -->
+<div class="bg-surface-container-lowest p-space-md rounded-lg flex flex-col gap-space-sm">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-space-xs">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-primary text-[20px]">schedule</span>
+<div>
+<span class="font-telemetry-sm text-telemetry-sm font-semibold text-on-surface">VIMSHOTTARI DASHA PROGRESSION</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant block">120-YEAR STELLAR CHRONOMETRY VECTOR</span>
+</div>
+</div>
+<div class="font-telemetry-sm text-telemetry-sm text-right">
+<span class="text-primary font-bold">SHANI (SATURN) MAHADASHA</span>
+<span class="text-on-surface-variant"> (19 YRS)</span>
+</div>
+</div>
+<!-- Multi-tier visual timeline bar -->
+<div class="space-y-1.5 pt-1">
+<div class="flex justify-between font-label-caps text-label-caps text-on-surface-variant">
+<span>ELAPSED: 12y 2m 14d [64.2%]</span>
+<span class="text-secondary font-mono">ACTIVE: SHANI - BUDHA - RAHU</span>
+<span>REMAINING: 6y 9m 16d</span>
+</div>
+<div class="w-full h-3 bg-surface-container-high rounded overflow-hidden flex relative">
+<div class="h-full bg-primary/40" style="width: 25%"></div>
+<div class="h-full bg-primary/60" style="width: 20%"></div>
+<div class="h-full bg-primary shadow-[0_0_12px_rgba(255,213,141,0.8)]" style="width: 19.2%"></div>
+<div class="h-full bg-surface-container-highest" style="width: 35.8%"></div>
+<!-- Current marker pip -->
+<div class="absolute top-0 bottom-0 w-1 bg-on-primary shadow-sm" style="left: 64.2%"></div>
+</div>
+<div class="flex justify-between font-telemetry-sm text-telemetry-sm text-on-surface-variant pt-0.5">
+<span>1936-05-18</span>
+<span class="text-primary font-semibold">1948-03-09 [TRINITY DETONATION ERA t0+11y]</span>
+<span>1955-05-18</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Historical Observation & Laboratory Epistemic Note -->
+<div class="bg-surface-container-low p-space-md rounded-xl flex items-center justify-between gap-space-md">
+<div class="flex items-center gap-space-md">
+<div class="w-10 h-10 rounded-lg bg-surface-container-highest flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-[24px]">verified</span>
+</div>
+<div>
+<h4 class="font-headline-sm text-headline-sm text-on-surface font-semibold">Bayesian Epistemic Convergence Proof</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+              Cross-traditional verification confirms zero boundary divergence on Mars 27°41' Capricorn and Sun 09°12' Aries. Historical correlation with Oppenheimer Manhattan Project directorship peaks at Shani/Budha transition.
+            </p>
+</div>
+</div>
+<button class="px-space-md py-2 rounded bg-primary text-on-primary font-headline-sm text-headline-sm font-semibold hover:bg-primary-container transition-all flex-shrink-0 shadow-md">
+          AUDIT VECTORS
+        </button>
+</div>
+</div>
+<!-- RIGHT PANEL: SYNCHRONOUS EPISTEMIC MATRIX (THE 5 OTHER CANONICAL TRADITIONS) - COLUMNS 5 -->
+<div class="xl:col-span-5 flex flex-col gap-space-md">
+<div class="flex items-center justify-between px-space-xs">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[18px] text-secondary">layers</span>
+<span class="font-headline-sm text-headline-sm text-on-surface font-semibold uppercase tracking-tight">Synchronous Hexa-Matrix</span>
+</div>
+<span class="font-label-caps text-label-caps text-tertiary bg-surface-container-low px-space-sm py-1 rounded">5 PARALLEL SYSTEMS ACTIVE</span>
+</div>
+<!-- Tradition Card 1: Hellenistic -->
+<div class="bg-surface-container-low p-space-md rounded-xl shadow-md hover:bg-surface-container-high/70 transition-all flex flex-col gap-space-xs relative group">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<span class="font-label-caps text-label-caps px-space-xs py-0.5 rounded bg-surface-container text-secondary font-bold">TRADITION 02</span>
+<span class="font-headline-sm text-headline-sm font-medium text-on-surface">Hellenistic (Western Tropical)</span>
+</div>
+<span class="font-telemetry-sm text-telemetry-sm text-tertiary font-mono">SECT: DIURNAL</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+          Ptolemaic Quadripartite configuration with Midheaven at Pisces 21°44'. Solar body in 11th Whole Sign Place flanked by Jupiter spearbearer (Doryphory) in Aries.
+        </p>
+<div class="grid grid-cols-3 gap-space-xs pt-space-xs font-telemetry-sm text-telemetry-sm">
+<div class="bg-surface-container-lowest p-space-xs rounded">
+<span class="text-on-surface-variant block font-label-caps text-label-caps">HORMETRIC LOT</span>
+<span class="text-on-surface font-semibold">Lot of Spirit in Leo</span>
+</div>
+<div class="bg-surface-container-lowest p-space-xs rounded">
+<span class="text-on-surface-variant block font-label-caps text-label-caps">SPEARBEARER</span>
+<span class="text-primary font-semibold">Jupiter in Aries</span>
+</div>
+<div class="bg-surface-container-lowest p-space-xs rounded">
+<span class="text-on-surface-variant block font-label-caps text-label-caps">TIME LORD</span>
+<span class="text-tertiary font-semibold">Decennials Sun/Mars</span>
+</div>
+</div>
+</div>
+<!-- Tradition Card 2: BaZi Four Pillars -->
+<div class="bg-surface-container-low p-space-md rounded-xl shadow-md hover:bg-surface-container-high/70 transition-all flex flex-col gap-space-xs relative group">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<span class="font-label-caps text-label-caps px-space-xs py-0.5 rounded bg-surface-container text-tertiary font-bold">TRADITION 03</span>
+<span class="font-headline-sm text-headline-sm font-medium text-on-surface">BaZi (Four Pillars of Destiny)</span>
+</div>
+<span class="font-telemetry-sm text-telemetry-sm text-primary font-mono">DAY MASTER: BING FIRE</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+          Solar essence (Bing Fire) born in late Spring Earth Dragon month (Chen). Extreme Hurting Officer (Shang Guan) output structure denoting radical avant-garde theoretical breakthroughs.
+        </p>
+<div class="grid grid-cols-4 gap-space-xs pt-space-xs font-telemetry-sm text-telemetry-sm text-center">
+<div class="bg-surface-container-lowest p-space-xs rounded">
+<span class="text-on-surface-variant block font-label-caps text-label-caps">YEAR</span>
+<span class="text-on-surface font-bold">Jia Chen</span>
+<span class="text-tertiary block font-label-caps text-label-caps">Wood Dragon</span>
+</div>
+<div class="bg-surface-container-lowest p-space-xs rounded">
+<span class="text-on-surface-variant block font-label-caps text-label-caps">MONTH</span>
+<span class="text-on-surface font-bold">Wu Chen</span>
+<span class="text-tertiary block font-label-caps text-label-caps">Earth Dragon</span>
+</div>
+<div class="bg-surface-container-lowest p-space-xs rounded">
+<span class="text-primary font-bold block font-label-caps text-label-caps">DAY (DM)</span>
+<span class="text-primary font-bold">Bing Wu</span>
+<span class="text-primary-container block font-label-caps text-label-caps">Fire Horse</span>
+</div>
+<div class="bg-surface-container-lowest p-space-xs rounded">
+<span class="text-on-surface-variant block font-label-caps text-label-caps">HOUR</span>
+<span class="text-on-surface font-bold">Yi Wei</span>
+<span class="text-tertiary block font-label-caps text-label-caps">Wood Goat</span>
+</div>
+</div>
+</div>
+<!-- Tradition Card 3: Zi Wei Dou Shu -->
+<div class="bg-surface-container-low p-space-md rounded-xl shadow-md hover:bg-surface-container-high/70 transition-all flex flex-col gap-space-xs relative group">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<span class="font-label-caps text-label-caps px-space-xs py-0.5 rounded bg-surface-container text-primary-fixed font-bold">TRADITION 04</span>
+<span class="font-headline-sm text-headline-sm font-medium text-on-surface">Zi Wei Dou Shu (Purple Star)</span>
+</div>
+<span class="font-telemetry-sm text-telemetry-sm text-secondary font-mono">MING: ZI (RAT PALACE)</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+          Emperor Star (Zi Wei) conjoined with Heavenly Treasury (Tian Fu). Grand imperial commanding configuration flanked by Lucrative Hua Lu and severe militaristic Star Qi.
+        </p>
+<div class="grid grid-cols-3 gap-space-xs pt-space-xs font-telemetry-sm text-telemetry-sm">
+<div class="bg-surface-container-lowest p-space-xs rounded">
+<span class="text-on-surface-variant block font-label-caps text-label-caps">PRIMARY STARS</span>
+<span class="text-on-surface font-semibold">Zi Wei + Tian Fu</span>
+</div>
+<div class="bg-surface-container-lowest p-space-xs rounded">
+<span class="text-on-surface-variant block font-label-caps text-label-caps">ASSISTANT STARS</span>
+<span class="text-secondary font-semibold">Zuo Fu / You Bi</span>
+</div>
+<div class="bg-surface-container-lowest p-space-xs rounded">
+<span class="text-on-surface-variant block font-label-caps text-label-caps">SI HUA CATALYST</span>
+<span class="text-primary font-semibold">Hua Quan (Authority)</span>
+</div>
+</div>
+</div>
+<!-- Tradition Card 4: Maya Sacred Cholq'ij -->
+<div class="bg-surface-container-low p-space-md rounded-xl shadow-md hover:bg-surface-container-high/70 transition-all flex flex-col gap-space-xs relative group">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<span class="font-label-caps text-label-caps px-space-xs py-0.5 rounded bg-surface-container text-secondary-fixed-dim font-bold">TRADITION 05</span>
+<span class="font-headline-sm text-headline-sm font-medium text-on-surface">Maya Cholq'ij (Sacred Calendar)</span>
+</div>
+<span class="font-telemetry-sm text-telemetry-sm text-tertiary font-mono">TZOLK'IN: 9 TZ'IKIN (EAGLE)</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+          High vision synoptic coordinator. Tone 9 (Patience, expansive completion) united with Men/Tz'ikin (Clairvoyant perception across high spatial altitudes).
+        </p>
+<div class="grid grid-cols-3 gap-space-xs pt-space-xs font-telemetry-sm text-telemetry-sm">
+<div class="bg-surface-container-lowest p-space-xs rounded">
+<span class="text-on-surface-variant block font-label-caps text-label-caps">LONG COUNT</span>
+<span class="text-primary font-semibold font-mono">12.14.9.4.15</span>
+</div>
+<div class="bg-surface-container-lowest p-space-xs rounded">
+<span class="text-on-surface-variant block font-label-caps text-label-caps">HAAB' SEAT</span>
+<span class="text-on-surface font-semibold">14 Pax</span>
+</div>
+<div class="bg-surface-container-lowest p-space-xs rounded">
+<span class="text-on-surface-variant block font-label-caps text-label-caps">9 LORDS OF NIGHT</span>
+<span class="text-secondary font-semibold">G8 (God of Maize)</span>
+</div>
+</div>
+</div>
+<!-- Tradition Card 5: Tibetan Elemental Kalachakra -->
+<div class="bg-surface-container-low p-space-md rounded-xl shadow-md hover:bg-surface-container-high/70 transition-all flex flex-col gap-space-xs relative group">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<span class="font-label-caps text-label-caps px-space-xs py-0.5 rounded bg-surface-container text-tertiary-fixed font-bold">TRADITION 06</span>
+<span class="font-headline-sm text-headline-sm font-medium text-on-surface">Tibetan Tsi (Elemental Kalachakra)</span>
+</div>
+<span class="font-telemetry-sm text-telemetry-sm text-primary font-mono">RABJUNG 15: WOOD DRAGON</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+          Kalachakra Tantric chronology. Magic Square Mewa 1 White Water (Intellect, esoteric intuition), Trigram Parkha Li (Fire radiating inward).
+        </p>
+<div class="grid grid-cols-3 gap-space-xs pt-space-xs font-telemetry-sm text-telemetry-sm">
+<div class="bg-surface-container-lowest p-space-xs rounded">
+<span class="text-on-surface-variant block font-label-caps text-label-caps">MEWA SQUARE</span>
+<span class="text-secondary font-semibold">1 White Water</span>
+</div>
+<div class="bg-surface-container-lowest p-space-xs rounded">
+<span class="text-on-surface-variant block font-label-caps text-label-caps">TRIGRAM PARKHA</span>
+<span class="text-primary font-semibold">Li (Radiant Flame)</span>
+</div>
+<div class="bg-surface-container-lowest p-space-xs rounded">
+<span class="text-on-surface-variant block font-label-caps text-label-caps">VITAL FORCES</span>
+<span class="text-tertiary font-semibold">Sog: Wood • Lu: Earth</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- BOTTOM CALIBRATION & CROSS-SYSTEM CONCORDANCE BAR -->
+<section class="w-full bg-surface-container-low px-gutter-desktop py-space-md shadow-lg border-t-0 flex flex-col gap-space-md">
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-space-md">
+<!-- Calibration Sliders & Offset Parameters -->
+<div class="flex flex-wrap items-center gap-space-lg">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-primary text-[20px]">tune</span>
+<span class="font-headline-sm text-headline-sm text-on-surface font-semibold">Astrometric Calibrator</span>
+</div>
+<div class="flex items-center gap-space-md">
+<div class="flex flex-col gap-0.5">
+<div class="flex justify-between font-label-caps text-label-caps text-on-surface-variant">
+<span>ΔT CLOCK SHIFT (UTC-TAI)</span>
+<span class="text-secondary font-mono" id="dt-display">+69.184s</span>
+</div>
+<input class="w-40 h-1.5 bg-surface-container-highest rounded appearance-none cursor-pointer accent-secondary" max="120" min="0" oninput="document.getElementById('dt-display').innerText = '+' + this.value + '.184s'" type="range" value="69"/>
+</div>
+<div class="flex flex-col gap-0.5">
+<div class="flex justify-between font-label-caps text-label-caps text-on-surface-variant">
+<span>AYANAMSHA OFFSET (MINUTES)</span>
+<span class="text-tertiary font-mono" id="ayan-display">0.00'</span>
+</div>
+<input class="w-40 h-1.5 bg-surface-container-highest rounded appearance-none cursor-pointer accent-tertiary" max="180" min="-180" oninput="document.getElementById('ayan-display').innerText = (this.value >= 0 ? '+' : '') + this.value + '.00\''" type="range" value="0"/>
+</div>
+</div>
+</div>
+<!-- Live Deterministic Audit Trail Stream -->
+<div class="flex items-center gap-space-md bg-surface-container-lowest px-space-md py-2 rounded">
+<div class="flex items-center gap-space-xs">
+<span class="w-2 h-2 rounded-full bg-tertiary-container animate-ping"></span>
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">DE421 REAL-TIME FEED</span>
+</div>
+<div class="font-telemetry-sm text-telemetry-sm font-mono text-on-surface truncate max-w-md">
+<span>SEED: SHA256(DE421:19040422:40.7128:-74.0060) → VALID</span>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant text-[18px] hover:text-on-surface cursor-pointer">refresh</span>
+</div>
+</div>
+<!-- Micro Metadata Hash Footer -->
+<div class="flex flex-col sm:flex-row sm:items-center justify-between pt-space-xs font-telemetry-sm text-telemetry-sm text-on-surface-variant">
+<div>
+<span>MATHEMATICAL FRAMEWORK: </span>
+<span class="text-on-surface">IAU SOFA 2021 + SWISSEPH 2.10.03 + J.MEEUS ASTRONOMICAL ALGORITHMS</span>
+</div>
+<div class="flex items-center gap-space-md">
+<span>HEXA-CONCORDANCE ID: <span class="text-primary font-mono">0x4F9B28D</span></span>
+<span>LATENCY: <span class="text-tertiary font-mono">1.4ms</span></span>
+</div>
+</div>
+</section>
+</div></main></div></body></html>

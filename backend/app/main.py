@@ -1,6 +1,6 @@
 """
-FastAPI application for Six-Culture Verified Chart & Reading v2.
-Exposes endpoints for input audit, time-uncertainty testing, full 6-tradition chart computation,
+FastAPI application for Synodix Triangulation Engine.
+Exposes endpoints for input audit, time-uncertainty testing, multi-tradition chart computation,
 dual-engine verification, and cross-cultural synthesis.
 """
 
@@ -18,12 +18,15 @@ from backend.app.traditions.western import compute_western_chart
 from backend.app.traditions.ziwei import compute_ziwei_chart
 from backend.app.traditions.mayan import compute_mayan_chart
 from backend.app.traditions.tibetan import compute_tibetan_chart
+from backend.app.traditions.persian import compute_persian_chart
+from backend.app.traditions.egyptian import compute_egyptian_chart
+from backend.app.traditions.maramataka import compute_maramataka_chart
 from backend.app.synthesis.verification import build_verification_report
 from backend.app.synthesis.synthesis import build_synthesis
 
 app = FastAPI(
-    title="Six-Culture Verified Chart & Reading API",
-    description="Cross-cultural astronomical chart calculation and uncertainty verification engine across Jyotisha, BaZi, Western, Zi Wei Dou Shu, Maya, and Tibetan systems.",
+    title="Synodix Triangulation Engine API",
+    description="Cross-cultural astronomical chart calculation and uncertainty verification engine across classical civilizational systems.",
     version="2.0.0"
 )
 
@@ -46,47 +49,32 @@ class BirthInputRequest(BaseModel):
     country_name: str = Field(default="USA", example="USA")
     gender: str = Field(default="male", example="male", description="male, female, neutral")
 
-SAMPLE_PRESETS = [
-    {
-        "id": "sample-1",
-        "name": "Steve Jobs",
-        "birth_date": "1955-02-24",
-        "birth_time": "19:15",
-        "time_certainty": "exact",
-        "latitude": 37.7749,
-        "longitude": -122.4194,
-        "city_name": "San Francisco",
-        "country_name": "USA",
-        "gender": "male",
-        "note": "Birth certificate recorded time, high precision reference"
-    },
-    {
-        "id": "sample-2",
-        "name": "Albert Einstein",
-        "birth_date": "1879-03-14",
-        "birth_time": "11:30",
-        "time_certainty": "rounded_15",
-        "latitude": 48.4011,
-        "longitude": 9.9876,
-        "city_name": "Ulm",
-        "country_name": "Germany",
-        "gender": "male",
-        "note": "Historical birth registry, tested with ±15m uncertainty"
-    },
-    {
-        "id": "sample-3",
-        "name": "Carl Jung",
-        "birth_date": "1875-07-26",
-        "birth_time": "19:32",
-        "time_certainty": "exact",
-        "latitude": 47.6083,
-        "longitude": 9.3241,
-        "city_name": "Kesswil",
-        "country_name": "Switzerland",
-        "gender": "male",
-        "note": "Father's diary recorded time"
-    }
-]
+import json
+import os
+
+_data_file = os.path.join(os.path.dirname(__file__), "data", "personalities_100.json")
+if os.path.exists(_data_file):
+    with open(_data_file, "r", encoding="utf-8") as _f:
+        SAMPLE_PRESETS = json.load(_f)
+else:
+    SAMPLE_PRESETS = [
+        {
+            "id": "steve-jobs",
+            "name": "Steve Jobs",
+            "category": "science_tech",
+            "tag": "Apple Co-founder",
+            "rodden_rating": "AA",
+            "birth_date": "1955-02-24",
+            "birth_time": "19:15",
+            "time_certainty": "exact",
+            "latitude": 37.7749,
+            "longitude": -122.4194,
+            "city_name": "San Francisco",
+            "country_name": "USA",
+            "gender": "male",
+            "note": "Birth Certificate (AA) • Sidereal Leo 29.06° (0.94° cusp) • Ju Men Orator • Viparita Raja Yoga"
+        }
+    ]
 
 @app.get("/api/health")
 def health_check():
@@ -96,11 +84,44 @@ def health_check():
         "engine_version": "2.0.0",
         "primary_astronomy": "Swiss Ephemeris (pyswisseph)",
         "independent_validator": "Skyfield (JPL DE421)",
+        "total_sample_profiles": len(SAMPLE_PRESETS),
     }
 
 @app.get("/api/sample-charts")
-def get_sample_charts():
+def get_sample_charts(category: Optional[str] = None):
+    if category and category != "all":
+        return [p for p in SAMPLE_PRESETS if p.get("category") == category]
     return SAMPLE_PRESETS
+
+@app.get("/api/mathematical-evidence")
+def get_mathematical_evidence():
+    stats_file = os.path.join(os.path.dirname(__file__), "data", "mathematical_evidence_stats.json")
+    report_file = os.path.join(os.path.dirname(__file__), "data", "mathematical_evidence_astrology_report.md")
+    stats = {}
+    report_md = ""
+    if os.path.exists(stats_file):
+        with open(stats_file, "r", encoding="utf-8") as f:
+            stats = json.load(f)
+    if os.path.exists(report_file):
+        with open(report_file, "r", encoding="utf-8") as f:
+            report_md = f.read()
+    return {
+        "title": "Mathematical Evidence & Empirical Validation of Astrological Modeling",
+        "cohort_titans": 100,
+        "cohort_controls": 1000,
+        "stats": stats,
+        "report_markdown": report_md
+    }
+
+@app.get("/api/mathematical-evidence/report")
+def get_mathematical_evidence_report():
+    from fastapi.responses import PlainTextResponse
+    report_file = os.path.join(os.path.dirname(__file__), "data", "mathematical_evidence_astrology_report.md")
+    if os.path.exists(report_file):
+        with open(report_file, "r", encoding="utf-8") as f:
+            content = f.read()
+        return PlainTextResponse(content, media_type="text/markdown")
+    raise HTTPException(status_code=404, detail="Evidence report not found")
 
 @app.post("/api/audit-input")
 def audit_input_endpoint(req: BirthInputRequest):
@@ -204,6 +225,15 @@ def compute_chart_endpoint(req: BirthInputRequest):
         # 6. Tibetan Elemental
         tibetan = compute_tibetan_chart(b_year, gender=req.gender)
 
+        # 7. Persian & Medieval Arabic (Ilm al-Nujūm)
+        persian = compute_persian_chart(astro_base, b_year, req.birth_time)
+
+        # 8. Ancient Egyptian Decans & Chronocrator
+        egyptian = compute_egyptian_chart(astro_base, b_year, b_month, b_day, req.birth_time, req.latitude, req.longitude)
+
+        # 9. Polynesian & Māori Maramataka
+        maramataka = compute_maramataka_chart(astro_base)
+
         # Step 5: Verification Report
         verification_report = build_verification_report(
             astro_base, jyotisha, bazi, western, ziwei, mayan, tibetan, audit
@@ -225,6 +255,9 @@ def compute_chart_endpoint(req: BirthInputRequest):
                 "ziwei": ziwei,
                 "mayan": mayan,
                 "tibetan": tibetan,
+                "persian": persian,
+                "egyptian": egyptian,
+                "maramataka": maramataka
             },
             "verification_report": verification_report,
             "synthesis": synthesis,
@@ -258,6 +291,11 @@ if os.path.exists(dist_path):
         # Do not catch API paths
         if full_path.startswith("api"):
             raise HTTPException(status_code=404, detail="API route not found")
+        # Serve exact file if present in dist (e.g. manifest.json, sw.js, favicon.svg)
+        if full_path:
+            file_path = os.path.join(dist_path, full_path)
+            if os.path.isfile(file_path):
+                return FileResponse(file_path)
         index_path = os.path.join(dist_path, "index.html")
         return FileResponse(index_path)
 

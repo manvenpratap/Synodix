@@ -1,0 +1,19 @@
+{
+  "name": "Synodix Triangulation Engine",
+  "short_name": "Synodix",
+  "description": "Deterministic cross-cultural astronomical chart calculation, dual-engine ephemeris validation, and synthesis observatory across classical world traditions.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#080a0f",
+  "theme_color": "#080a0f",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["education", "reference", "lifestyle"]
+}

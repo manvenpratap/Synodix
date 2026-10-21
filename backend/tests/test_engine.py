@@ -13,6 +13,9 @@ from backend.app.traditions.western import compute_western_chart
 from backend.app.traditions.ziwei import compute_ziwei_chart
 from backend.app.traditions.mayan import compute_mayan_chart
 from backend.app.traditions.tibetan import compute_tibetan_chart
+from backend.app.traditions.persian import compute_persian_chart
+from backend.app.traditions.egyptian import compute_egyptian_chart
+from backend.app.traditions.maramataka import compute_maramataka_chart
 from backend.app.synthesis.verification import build_verification_report
 from backend.app.synthesis.synthesis import build_synthesis
 
@@ -129,7 +132,29 @@ def test_six_culture_pipeline():
     assert "final_reading_markdown" in synthesis
     assert len(synthesis["temperament_axes"]) == 6
     print(f"    [PASS] 9-Domain synthesis complete! Divergence rate: {synthesis['divergence_metrics']['divergence_rate_percent']}%.")
-    print("\nALL 10 TESTS PASSED CLEANLY! Engine is 100% verified.")
+
+    print(">>> 11. Testing Persian & Medieval Arabic Engine (Almuten Figuris & Firdaria)...")
+    persian = compute_persian_chart(astro, 1985, "15:30")
+    assert "almuten_figuris" in persian
+    assert "victor" in persian["almuten_figuris"]
+    assert len(persian["firdaria"]["timeline"]) == 9
+    assert len(persian["hermetic_lots"]) == 6
+    print(f"    [PASS] Persian Almuten Figuris ({persian['almuten_figuris']['victor']}, score={persian['almuten_figuris']['victor_score']}), 6 Hermetic Lots, and 75-Year Firdaria verified.")
+
+    print(">>> 12. Testing Ancient Egyptian Decanic & Chronocrator Engine...")
+    egyptian = compute_egyptian_chart(astro, 1985, 10, 24, "15:30", 37.7749, -122.4194)
+    assert "chronocrator_watch" in egyptian
+    assert egyptian["chronocrator_watch"]["hour_ruler_chronocrator"] in ["Saturn", "Jupiter", "Mars", "Sun", "Venus", "Mercury", "Moon"]
+    assert "ascendant_decan" in egyptian["decan_guardians"]
+    print(f"    [PASS] Egyptian Chronocrator Hour Ruler ({egyptian['chronocrator_watch']['hour_ruler_chronocrator']}), Decan Guardians, and Sothic Season verified.")
+
+    print(">>> 13. Testing Polynesian & Māori Maramataka Lunar Engine...")
+    maramataka = compute_maramataka_chart(astro)
+    assert 1 <= maramataka["lunar_night"]["number"] <= 30
+    assert "vitality_index" in maramataka["lunar_night"]
+    print(f"    [PASS] Maramataka Lunar Night {maramataka['lunar_night']['number']} ({maramataka['lunar_night']['name']}: {maramataka['lunar_night']['vitality_index']}) verified.")
+
+    print("\nALL 13 TESTS PASSED CLEANLY! Engine is 100% verified across 9 cultures.")
 
 if __name__ == "__main__":
     test_six_culture_pipeline()

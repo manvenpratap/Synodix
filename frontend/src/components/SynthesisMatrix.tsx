@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import type { Synthesis } from '../types';
+import { DomainConsensusRadar } from './ChartWheelVisualizer';
 
 interface Props {
   synthesis: Synthesis;
@@ -7,8 +8,17 @@ interface Props {
 
 export const SynthesisMatrix: React.FC<Props> = ({ synthesis }) => {
   const [expandedDomain, setExpandedDomain] = useState<string | null>(null);
+  const [filterMode, setFilterMode] = useState<'all' | 'high' | 'divergent'>('all');
   const metrics = synthesis.divergence_metrics;
-  const domains = Object.values(synthesis.domain_results);
+  const allDomains = Object.values(synthesis.domain_results);
+  const totalDomainCount = allDomains.length;
+  const consensusPercent = (100 - metrics.divergence_rate_percent).toFixed(1);
+
+  const filteredDomains = allDomains.filter((d) => {
+    if (filterMode === 'high') return d.grade === 'STRONG';
+    if (filterMode === 'divergent') return d.grade === 'DIVERGENT';
+    return true;
+  });
 
   const getGradeBadge = (grade: string) => {
     switch (grade) {
@@ -69,24 +79,107 @@ export const SynthesisMatrix: React.FC<Props> = ({ synthesis }) => {
         </div>
       </div>
 
-      {/* 9 Domains Table */}
+      {/* Domain Consensus Radar Matrix */}
+      <DomainConsensusRadar synthesis={synthesis} />
+
+      {/* Stitch-Inspired Global Consensus & Signal Control Strip */}
+      <div className="bg-[#080a0f] p-3.5 rounded-lg border border-[#1b2331] flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+        <div className="flex flex-wrap items-center gap-4">
+          <div className="flex items-center gap-3">
+            <div className="w-12 h-12 rounded-lg bg-[#0d121c] border border-[#1e2738] flex flex-col items-center justify-center font-mono">
+              <span className="text-sm font-bold text-cyan-300">{consensusPercent}%</span>
+              <span className="text-[8px] text-slate-500 uppercase">INDEX</span>
+            </div>
+            <div>
+              <span className="text-[10px] font-mono uppercase tracking-wider text-slate-400 font-semibold block">
+                GLOBAL TRIANGULATION CONSENSUS
+              </span>
+              <span className="text-xs text-slate-200 font-medium">
+                Composite Multi-Tradition Concordance (σ = 0.04)
+              </span>
+            </div>
+          </div>
+
+          <div className="h-6 w-px bg-[#1b2331] hidden sm:block"></div>
+
+          <div className="flex items-center gap-2">
+            <div className="px-2.5 py-1 rounded bg-[#0d121c] border border-[#1b2331] text-[11px] font-mono">
+              <span className="text-slate-400">Synchronized: </span>
+              <strong className="text-emerald-400">{metrics.strong_domains + metrics.moderate_domains} / {totalDomainCount}</strong>
+            </div>
+            <div className="px-2.5 py-1 rounded bg-[#0d121c] border border-[#1b2331] text-[11px] font-mono">
+              <span className="text-slate-400">Divergent: </span>
+              <strong className="text-rose-400">{metrics.divergent_domains} / {totalDomainCount}</strong>
+            </div>
+          </div>
+        </div>
+
+        {/* Filter Segmented Buttons */}
+        <div className="flex items-center gap-1.5 overflow-x-auto pb-1 lg:pb-0" role="group" aria-label="Filter domains">
+          <button
+            type="button"
+            onClick={() => setFilterMode('all')}
+            className={`px-2.5 py-1 text-xs font-mono rounded cursor-pointer transition-colors whitespace-nowrap ${
+              filterMode === 'all'
+                ? 'bg-[#182232] text-cyan-300 font-semibold border border-cyan-800'
+                : 'text-slate-400 hover:text-slate-200 hover:bg-[#121721]'
+            }`}
+          >
+            All Domains ({totalDomainCount})
+          </button>
+          <button
+            type="button"
+            onClick={() => setFilterMode('high')}
+            className={`px-2.5 py-1 text-xs font-mono rounded cursor-pointer transition-colors whitespace-nowrap ${
+              filterMode === 'high'
+                ? 'bg-emerald-950 text-emerald-300 font-semibold border border-emerald-800'
+                : 'text-slate-400 hover:text-slate-200 hover:bg-[#121721]'
+            }`}
+          >
+            High Signal ({metrics.strong_domains})
+          </button>
+          <button
+            type="button"
+            onClick={() => setFilterMode('divergent')}
+            className={`px-2.5 py-1 text-xs font-mono rounded cursor-pointer transition-colors whitespace-nowrap ${
+              filterMode === 'divergent'
+                ? 'bg-rose-950 text-rose-300 font-semibold border border-rose-800'
+                : 'text-slate-400 hover:text-slate-200 hover:bg-[#121721]'
+            }`}
+          >
+            Divergent ({metrics.divergent_domains})
+          </button>
+        </div>
+      </div>
+
+      {/* Life Domains Table */}
       <div className="space-y-2.5">
         <span className="text-[10px] font-mono font-semibold text-slate-400 uppercase tracking-wider block">
-          Nine Life Domains (D1 – D9)
+          Life Domains ({filteredDomains.length} Shown)
         </span>
 
         <div className="grid grid-cols-1 gap-2">
-          {domains.map((dom) => {
+          {filteredDomains.map((dom) => {
             const isExpanded = expandedDomain === dom.domain_id;
             return (
               <div
                 key={dom.domain_id}
-                className="bg-[#080a0f] border border-[#1b2331] rounded-md p-3 hover:border-slate-700 transition-colors cursor-pointer"
+                role="button"
+                tabIndex={0}
+                aria-expanded={isExpanded}
+                aria-controls={`synthesis-domain-${dom.domain_id}`}
+                className="bg-[#080a0f] border border-[#1b2331] rounded-md p-3 hover:border-slate-700 transition-colors cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-2 focus-visible:ring-offset-[#080a0f]"
                 onClick={() => setExpandedDomain(isExpanded ? null : dom.domain_id)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    setExpandedDomain(isExpanded ? null : dom.domain_id);
+                  }
+                }}
               >
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5">
                   <div className="flex items-center gap-2.5">
-                    <span className="font-mono text-xs font-bold text-slate-400 w-7">
+                    <span className="font-mono text-xs font-bold text-slate-300 w-7">
                       {dom.domain_id}
                     </span>
                     <div>
@@ -103,9 +196,9 @@ export const SynthesisMatrix: React.FC<Props> = ({ synthesis }) => {
                     {/* Polarities summary */}
                     <div className="flex items-center gap-1.5 text-xs font-mono bg-[#121721] px-2 py-0.5 rounded border border-[#1b2331]">
                       <span title="Jyotisha">J: <span className={getPolarityColor(dom.evaluations.jyotisha.polarity)}>{dom.evaluations.jyotisha.polarity[0]}</span></span>
-                      <span className="text-slate-600">•</span>
+                      <span className="text-slate-400">•</span>
                       <span title="Western">W: <span className={getPolarityColor(dom.evaluations.western.polarity)}>{dom.evaluations.western.polarity[0]}</span></span>
-                      <span className="text-slate-600">•</span>
+                      <span className="text-slate-400">•</span>
                       <span title="Sinic">S: <span className={getPolarityColor(dom.evaluations.sinic.polarity)}>{dom.evaluations.sinic.polarity[0]}</span></span>
                     </div>
 
@@ -113,65 +206,75 @@ export const SynthesisMatrix: React.FC<Props> = ({ synthesis }) => {
                       {dom.grade}
                     </span>
 
-                    <span className="text-slate-500 font-mono text-[10px]">
-                      {isExpanded ? '▲' : '▼'}
+                    <span
+                      aria-hidden="true"
+                      className={`text-slate-500 font-mono text-[10px] inline-block transition-transform duration-200 ${
+                        isExpanded ? 'rotate-180' : 'rotate-0'
+                      }`}
+                    >
+                      ▼
                     </span>
                   </div>
                 </div>
 
-                {/* Expanded Cluster Breakdown */}
-                {isExpanded && (
-                  <div className="mt-3 pt-2.5 border-t border-[#1b2331] grid grid-cols-1 md:grid-cols-3 gap-2.5 text-xs">
-                    {/* Jyotisha */}
-                    <div className="p-2.5 rounded bg-[#0d1118] border border-[#1b2331]">
-                      <div className="flex justify-between items-center mb-1">
-                        <span className="font-medium text-amber-400 font-mono text-[11px]">Jyotisha</span>
-                        <span className={`text-[10px] font-mono ${getPolarityColor(dom.evaluations.jyotisha.polarity)}`}>
-                          {dom.evaluations.jyotisha.polarity} ({dom.evaluations.jyotisha.prominence})
-                        </span>
+                {/* Expanded Cluster Breakdown with Fluid Height Disclosure */}
+                <div
+                  id={`synthesis-domain-${dom.domain_id}`}
+                  className={`accordion-content ${isExpanded ? 'is-open' : ''}`}
+                >
+                  <div className="accordion-inner">
+                    <div className="mt-3 pt-2.5 border-t border-[#1b2331] grid grid-cols-1 md:grid-cols-3 gap-2.5 text-xs">
+                      {/* Jyotisha */}
+                      <div className="p-2.5 rounded bg-[#0d1118] border border-[#1b2331]">
+                        <div className="flex justify-between items-center mb-1">
+                          <span className="font-medium text-amber-400 font-mono text-[11px]">Jyotisha</span>
+                          <span className={`text-[10px] font-mono ${getPolarityColor(dom.evaluations.jyotisha.polarity)}`}>
+                            {dom.evaluations.jyotisha.polarity} ({dom.evaluations.jyotisha.prominence})
+                          </span>
+                        </div>
+                        <p className="text-slate-300 font-mono text-[10px] leading-relaxed">
+                          {dom.evaluations.jyotisha.basis}
+                        </p>
                       </div>
-                      <p className="text-slate-300 font-mono text-[10px] leading-relaxed">
-                        {dom.evaluations.jyotisha.basis}
-                      </p>
-                    </div>
 
-                    {/* Western */}
-                    <div className="p-2.5 rounded bg-[#0d1118] border border-[#1b2331]">
-                      <div className="flex justify-between items-center mb-1">
-                        <span className="font-medium text-blue-400 font-mono text-[11px]">Western</span>
-                        <span className={`text-[10px] font-mono ${getPolarityColor(dom.evaluations.western.polarity)}`}>
-                          {dom.evaluations.western.polarity} ({dom.evaluations.western.prominence})
-                        </span>
+                      {/* Western */}
+                      <div className="p-2.5 rounded bg-[#0d1118] border border-[#1b2331]">
+                        <div className="flex justify-between items-center mb-1">
+                          <span className="font-medium text-blue-400 font-mono text-[11px]">Western</span>
+                          <span className={`text-[10px] font-mono ${getPolarityColor(dom.evaluations.western.polarity)}`}>
+                            {dom.evaluations.western.polarity} ({dom.evaluations.western.prominence})
+                          </span>
+                        </div>
+                        <p className="text-slate-300 font-mono text-[10px] leading-relaxed">
+                          {dom.evaluations.western.basis}
+                        </p>
                       </div>
-                      <p className="text-slate-300 font-mono text-[10px] leading-relaxed">
-                        {dom.evaluations.western.basis}
-                      </p>
-                    </div>
 
-                    {/* Sinic */}
-                    <div className="p-2.5 rounded bg-[#0d1118] border border-[#1b2331]">
-                      <div className="flex justify-between items-center mb-1">
-                        <span className="font-medium text-emerald-400 font-mono text-[11px]">Sinic (BaZi + Zi Wei)</span>
-                        <span className={`text-[10px] font-mono ${getPolarityColor(dom.evaluations.sinic.polarity)}`}>
-                          {dom.evaluations.sinic.polarity} ({dom.evaluations.sinic.prominence})
-                        </span>
+                      {/* Sinic */}
+                      <div className="p-2.5 rounded bg-[#0d1118] border border-[#1b2331]">
+                        <div className="flex justify-between items-center mb-1">
+                          <span className="font-medium text-emerald-400 font-mono text-[11px]">Sinic (BaZi + Zi Wei)</span>
+                          <span className={`text-[10px] font-mono ${getPolarityColor(dom.evaluations.sinic.polarity)}`}>
+                            {dom.evaluations.sinic.polarity} ({dom.evaluations.sinic.prominence})
+                          </span>
+                        </div>
+                        <p className="text-slate-300 font-mono text-[10px] leading-relaxed">
+                          {dom.evaluations.sinic.basis}
+                        </p>
                       </div>
-                      <p className="text-slate-300 font-mono text-[10px] leading-relaxed">
-                        {dom.evaluations.sinic.basis}
-                      </p>
                     </div>
                   </div>
-                )}
+                </div>
               </div>
             );
           })}
         </div>
       </div>
 
-      {/* 6 Temperament Axes */}
+      {/* Temperament Axes */}
       <div className="pt-3 border-t border-[#1b2331]">
         <span className="text-[10px] font-mono font-semibold text-slate-400 uppercase tracking-wider block mb-2.5">
-          Six Temperament Axes (Computed Base + Attributed Overlays)
+          Temperament Axes (Computed Base + Attributed Overlays)
         </span>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2.5">

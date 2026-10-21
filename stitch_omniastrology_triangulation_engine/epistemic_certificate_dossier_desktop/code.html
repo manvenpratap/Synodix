@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@500;600;700&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=JetBrains+Mono:wght@100..900&family=Space+Grotesk:wght@100..900&display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{"inverse-primary":"#7b5811","on-tertiary":"#003824","primary-fixed":"#ffdea9","on-error":"#690005","surface-container-highest":"#2c3545","on-surface-variant":"#d2c5b3","tertiary-fixed-dim":"#4edea3","secondary-fixed":"#c4e7ff","on-background":"#dae3f8","surface-container-low":"#131c2b","surface-container-lowest":"#050e1d","on-tertiary-fixed":"#002113","error":"#ffb4ab","tertiary-container":"#44d69b","on-secondary-fixed":"#001e2c","surface-tint":"#edbf70","on-primary-fixed":"#271900","on-tertiary-fixed-variant":"#005236","secondary-fixed-dim":"#7bd0ff","on-error-container":"#ffdad6","on-primary-fixed-variant":"#5f4100","on-tertiary-container":"#00593b","surface":"#0a1422","primary":"#ffd58d","inverse-on-surface":"#283140","on-secondary-fixed-variant":"#004c69","tertiary-fixed":"#6ffbbe","primary-fixed-dim":"#edbf70","on-secondary-container":"#00374d","surface-variant":"#2c3545","surface-container-high":"#212a3a","primary-container":"#e5b869","on-secondary":"#00354a","tertiary":"#66f3b6","on-primary-container":"#674800","on-primary":"#422c00","background":"#0a1422","secondary-container":"#00a6e0","error-container":"#93000a","surface-dim":"#0a1422","surface-bright":"#31394a","inverse-surface":"#dae3f8","outline":"#9b8f7f","secondary":"#7bd0ff","on-surface":"#dae3f8","outline-variant":"#4e4538","surface-container":"#17202f"},borderRadius:{DEFAULT:"0.125rem",lg:"0.25rem",xl:"0.5rem",full:"0.75rem"},spacing:{"space-xl":"2.5rem","space-lg":"1.5rem","space-xs":"0.25rem","gutter-desktop":"1.5rem",margin:"1rem","margin-desktop":"2rem","space-md":"1rem",gutter:"1rem","space-sm":"0.5rem"},fontFamily:{"telemetry-md":["JetBrains Mono"],"label-caps":["JetBrains Mono"],"body-lg":["Inter"],"headline-sm":["Space Grotesk"],"display-lg-mobile":["Space Grotesk"],"headline-lg":["Space Grotesk"],"headline-lg-mobile":["Space Grotesk"],"body-md":["Inter"],"display-lg":["Space Grotesk"],"telemetry-sm":["JetBrains Mono"],"telemetry-lg":["JetBrains Mono"],"headline-md":["Space Grotesk"],"body-sm":["Inter"]},fontSize:{"telemetry-md":["13px",{lineHeight:"18px",letterSpacing:"0.03em",fontWeight:"400"}],"label-caps":["10px",{lineHeight:"14px",letterSpacing:"0.08em",fontWeight:"700"}],"body-lg":["16px",{lineHeight:"24px",fontWeight:"400"}],"headline-sm":["18px",{lineHeight:"26px",fontWeight:"500"}],"display-lg-mobile":["32px",{lineHeight:"40px",letterSpacing:"-0.01em",fontWeight:"700"}],"headline-lg":["32px",{lineHeight:"40px",letterSpacing:"-0.015em",fontWeight:"600"}],"headline-lg-mobile":["26px",{lineHeight:"34px",letterSpacing:"-0.01em",fontWeight:"600"}],"body-md":["14px",{lineHeight:"20px",fontWeight:"400"}],"display-lg":["44px",{lineHeight:"52px",letterSpacing:"-0.02em",fontWeight:"700"}],"telemetry-sm":["11px",{lineHeight:"16px",letterSpacing:"0.05em",fontWeight:"500"}],"telemetry-lg":["16px",{lineHeight:"22px",letterSpacing:"0.02em",fontWeight:"500"}],"headline-md":["24px",{lineHeight:"32px",letterSpacing:"-0.01em",fontWeight:"600"}],"body-sm":["12px",{lineHeight:"18px",fontWeight:"400"}]}}}}</script></head><body class="bg-surface font-body-md text-on-surface antialiased selection:bg-primary selection:text-on-primary min-h-screen"><header class="fixed top-0 left-0 right-0 z-50 bg-surface/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-16 w-full px-gutter-desktop flex items-center justify-between gap-space-md"><div class="flex items-center gap-space-lg flex-shrink-0"><div class="flex items-center gap-space-sm"><div class="w-9 h-9 rounded bg-surface-container-high flex items-center justify-center text-primary-container shadow-[0_0_16px_rgba(229,184,105,0.15)]"><span class="material-symbols-outlined text-[20px]">token</span></div><div><div class="flex items-center gap-space-xs"><span class="font-headline-sm text-headline-sm font-semibold tracking-tight text-on-surface uppercase">HEXA-ASTROMETRIC</span><span class="font-label-caps text-label-caps text-primary px-space-xs py-0.5 rounded bg-surface-container-high">v2.1</span></div><div class="font-telemetry-sm text-telemetry-sm text-secondary-fixed-dim tracking-wider">JPL DE421 / SE 2.10 ONLINE</div></div></div><div class="h-7 w-px bg-surface-container-highest hidden xl:block"></div><div class="hidden xl:flex items-center gap-space-sm px-space-md py-1.5 rounded bg-surface-container-low"><div class="w-2 h-2 rounded-full bg-tertiary-container animate-pulse"></div><div class="flex flex-col"><span class="font-label-caps text-label-caps text-on-surface-variant uppercase">SUBJECT IN COMPUTATION</span><span class="font-telemetry-sm text-telemetry-sm font-medium text-on-surface">J. Robert Oppenheimer <span class="text-primary-container font-semibold">(Rodden AA)</span></span></div><span class="material-symbols-outlined text-on-surface-variant text-[16px] cursor-pointer hover:text-on-surface transition-colors ml-space-xs">swap_horiz</span></div></div><div class="hidden 2xl:flex items-center gap-space-sm flex-shrink-0"><div class="flex items-center gap-space-xs px-space-sm py-1 rounded bg-surface-container-lowest"><div class="w-1.5 h-1.5 rounded-full bg-tertiary-container"></div><span class="font-telemetry-sm text-telemetry-sm text-on-surface-variant">NASA JPL DE421:</span><span class="font-telemetry-sm text-telemetry-sm text-tertiary-fixed font-semibold">PASS</span></div><div class="flex items-center gap-space-xs px-space-sm py-1 rounded bg-surface-container-lowest"><span class="font-telemetry-sm text-telemetry-sm text-on-surface-variant">Epistemic Rigor:</span><span class="font-telemetry-sm text-telemetry-sm text-primary font-semibold">94.2</span></div><div class="flex items-center gap-space-xs px-space-sm py-1 rounded bg-surface-container-lowest"><span class="font-telemetry-sm text-telemetry-sm text-on-surface-variant">Consensus:</span><span class="font-telemetry-sm text-telemetry-sm text-secondary font-semibold">76.8%</span></div></div><nav class="hidden lg:flex items-center gap-space-xs flex-shrink-0" data-active-classes="bg-surface-container-high text-primary font-semibold rounded"><a class="px-space-md py-2 font-telemetry-sm text-telemetry-sm text-on-surface-variant hover:text-on-surface transition-colors" data-path="epistemic-audit" href="#">Epistemic Audit</a><a class="px-space-md py-2 font-telemetry-sm text-telemetry-sm text-on-surface-variant hover:text-on-surface transition-colors" data-path="hexa-traditions" href="#">Hexa-Traditions</a><a class="px-space-md py-2 font-telemetry-sm text-telemetry-sm text-on-surface-variant hover:text-on-surface transition-colors" data-path="9-domain-synthesis" href="#">9-Domain Synthesis</a><a class="px-space-md py-2 font-telemetry-sm text-telemetry-sm text-on-surface-variant hover:text-on-surface transition-colors" data-path="empirical-evidence" href="#">Empirical Evidence</a><a aria-current="page" class="px-space-md py-2 transition-colors bg-surface-container-high text-primary font-semibold rounded" data-path="epistemic-certificate" href="#">Epistemic Certificate</a></nav><div class="flex items-center gap-space-md flex-shrink-0"><div class="hidden md:flex items-center gap-space-xs font-telemetry-sm text-telemetry-sm text-secondary px-space-sm py-1 rounded bg-surface-container-low cursor-pointer hover:bg-surface-container-high transition-colors"><span class="material-symbols-outlined text-[16px]">terminal</span><span>TELEMETRY FEED</span></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><aside class="fixed left-0 top-16 bottom-0 w-64 bg-surface-container-low z-40 flex flex-col justify-between py-space-md"><div class="flex flex-col gap-space-lg"><div class="px-space-md"><div class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider mb-space-sm">CANONICAL SYSTEMS</div><div class="grid grid-cols-2 gap-space-xs"><div class="p-space-xs rounded bg-surface-container text-center"><span class="font-telemetry-sm text-telemetry-sm text-on-surface block">HELLENIC</span><span class="font-label-caps text-label-caps text-tertiary-container block">ALIGNED</span></div><div class="p-space-xs rounded bg-surface-container text-center"><span class="font-telemetry-sm text-telemetry-sm text-on-surface block">JYOTISHA</span><span class="font-label-caps text-label-caps text-tertiary-container block">ALIGNED</span></div><div class="p-space-xs rounded bg-surface-container text-center"><span class="font-telemetry-sm text-telemetry-sm text-on-surface block">BAZI</span><span class="font-label-caps text-label-caps text-primary block">PARTIAL</span></div><div class="p-space-xs rounded bg-surface-container text-center"><span class="font-telemetry-sm text-telemetry-sm text-on-surface block">ZI WEI</span><span class="font-label-caps text-label-caps text-tertiary-container block">ALIGNED</span></div><div class="p-space-xs rounded bg-surface-container text-center"><span class="font-telemetry-sm text-telemetry-sm text-on-surface block">CHOLQ'IJ</span><span class="font-label-caps text-label-caps text-primary block">PARTIAL</span></div><div class="p-space-xs rounded bg-surface-container text-center"><span class="font-telemetry-sm text-telemetry-sm text-on-surface block">KALACHAKRA</span><span class="font-label-caps text-label-caps text-tertiary-container block">ALIGNED</span></div></div></div><div class="px-space-sm"><div class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider px-space-sm mb-space-xs">ANALYTIC WORKSPACES</div><nav class="flex flex-col gap-space-xs" data-active-classes="bg-surface-container-high text-primary font-semibold rounded"><a class="flex items-center px-space-md py-2.5 rounded text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-body-md text-body-md" data-path="epistemic-audit" href="#"><span class="material-symbols-outlined text-[18px] mr-space-sm text-secondary-fixed-dim">analytics</span>Epistemic Audit</a><a class="flex items-center px-space-md py-2.5 rounded text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-body-md text-body-md" data-path="hexa-traditions" href="#"><span class="material-symbols-outlined text-[18px] mr-space-sm text-primary-fixed-dim">public</span>Hexa-Traditions</a><a class="flex items-center px-space-md py-2.5 rounded text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-body-md text-body-md" data-path="9-domain-synthesis" href="#"><span class="material-symbols-outlined text-[18px] mr-space-sm text-tertiary-fixed-dim">hub</span>9-Domain Synthesis</a><a class="flex items-center px-space-md py-2.5 rounded text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-body-md text-body-md" data-path="empirical-evidence" href="#"><span class="material-symbols-outlined text-[18px] mr-space-sm text-secondary">database</span>Empirical Evidence</a><a aria-current="page" class="flex items-center px-space-md py-2.5 transition-colors bg-surface-container-high text-primary font-semibold rounded" data-path="epistemic-certificate" href="#"><span class="material-symbols-outlined text-[18px] mr-space-sm text-primary">verified</span>Epistemic Certificate</a></nav></div><div class="px-space-md"><div class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider mb-space-xs">CALIBRATION PARAMETERS</div><div class="bg-surface-container-lowest p-space-sm rounded font-telemetry-sm text-telemetry-sm space-y-1 text-on-surface-variant"><div>EPOCH: <span class="text-on-surface">J2000.0</span></div><div>ΔT: <span class="text-on-surface">+69.184s</span></div><div>LAT: <span class="text-on-surface">40.7128° N</span></div><div>LON: <span class="text-on-surface">74.0060° W</span></div></div></div></div><div class="px-space-md"><div class="p-space-sm rounded bg-surface-container flex items-center justify-between"><div class="flex items-center gap-space-xs"><div class="w-2 h-2 rounded-full bg-tertiary-container animate-ping"></div><span class="font-telemetry-sm text-telemetry-sm text-on-surface">OBSERVATORY RUNNING</span></div><span class="material-symbols-outlined text-on-surface-variant text-[18px]">tune</span></div></div></aside><div class="pl-64"><main class="relative pt-16 w-full bg-surface min-h-screen"><div class="flex flex-col w-full">
+<!-- Top Document Actions Bar -->
+<div class="w-full bg-surface-container-low px-gutter-desktop py-space-md shadow-md flex flex-wrap items-center justify-between gap-space-md">
+<!-- Left: Status Badges -->
+<div class="flex items-center flex-wrap gap-space-sm">
+<div class="flex items-center gap-space-xs px-space-sm py-1 rounded bg-surface-container-lowest shadow-sm">
+<span class="w-2 h-2 rounded-full bg-tertiary-container animate-pulse"></span>
+<span class="font-telemetry-sm text-telemetry-sm text-on-surface-variant uppercase">DE421 / SE 2.10</span>
+<span class="font-telemetry-sm text-telemetry-sm text-tertiary-fixed font-semibold">VERIFIED</span>
+</div>
+<div class="flex items-center gap-space-xs px-space-sm py-1 rounded bg-surface-container-lowest shadow-sm">
+<span class="material-symbols-outlined text-primary text-[14px]">verified</span>
+<span class="font-telemetry-sm text-telemetry-sm text-on-surface-variant uppercase">DATA CLASS:</span>
+<span class="font-telemetry-sm text-telemetry-sm text-primary font-semibold">RODDEN AA</span>
+</div>
+<div class="flex items-center gap-space-xs px-space-sm py-1 rounded bg-surface-container-lowest shadow-sm">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary-container"></span>
+<span class="font-telemetry-sm text-telemetry-sm text-on-surface-variant uppercase">ETH BLOCK:</span>
+<span class="font-telemetry-sm text-telemetry-sm text-secondary font-semibold">#19482103 FINALIZED</span>
+</div>
+<div class="flex items-center gap-space-xs px-space-sm py-1 rounded bg-surface-container-lowest shadow-sm">
+<span class="font-telemetry-sm text-telemetry-sm text-on-surface-variant uppercase">CANON:</span>
+<span class="font-telemetry-sm text-telemetry-sm text-tertiary-container font-semibold">HEXA-STABLE</span>
+</div>
+</div>
+<!-- Right: High-Priority Document Controls -->
+<div class="flex items-center gap-space-sm flex-wrap">
+<button class="flex items-center gap-space-xs px-space-md py-2 rounded bg-surface-container-high text-secondary hover:text-on-surface hover:bg-surface-container-highest transition-all shadow-sm" id="copyHashBtn" onclick="copyCertHash()">
+<span class="material-symbols-outlined text-[16px]">fingerprint</span>
+<span class="font-telemetry-sm text-telemetry-sm uppercase font-semibold">Cryptographic Hash</span>
+</button>
+<button class="flex items-center gap-space-xs px-space-md py-2 rounded bg-surface-container-high text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest transition-all shadow-sm" onclick="window.print()">
+<span class="material-symbols-outlined text-[16px]">print</span>
+<span class="font-telemetry-sm text-telemetry-sm uppercase">Print Dossier</span>
+</button>
+<button class="flex items-center gap-space-xs px-space-md py-2 rounded bg-surface-container-high text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest transition-all shadow-sm" id="exportJsonBtn" onclick="toggleJsonDrawer()">
+<span class="material-symbols-outlined text-[16px]">code</span>
+<span class="font-telemetry-sm text-telemetry-sm uppercase">Export JSON-LD</span>
+</button>
+<button class="flex items-center gap-space-sm px-space-lg py-2 rounded bg-primary-container text-on-primary-container font-headline-sm text-headline-sm font-semibold hover:bg-primary transition-all shadow-xl hover:shadow-[0_0_16px_rgba(229,184,105,0.35)]">
+<span class="material-symbols-outlined text-[18px]">download</span>
+<span>Download Official PDF (2.4 MB)</span>
+</button>
+</div>
+</div>
+<!-- Micro Banner Telemetry Ticker -->
+<div class="w-full bg-surface-container-lowest px-gutter-desktop py-1 flex items-center justify-between text-on-surface-variant font-telemetry-sm text-telemetry-sm overflow-hidden">
+<div class="flex items-center gap-space-lg">
+<span class="text-secondary uppercase">METROLOGY DOSSIER ID: ACTA-ASTRO-1904-AA-7890</span>
+<span class="hidden md:inline">BAYESIAN PRIOR COHERENCE: σ=0.0019</span>
+<span class="hidden lg:inline">SWISS EPHEMERIS CHECKSUM: 0x8a91c84f...c120</span>
+<span class="hidden xl:inline">LEAD AUDITOR: A. VANCE, PH.D. (ISO 17025 ACCREDITED)</span>
+</div>
+<div class="flex items-center gap-space-sm text-primary">
+<span class="material-symbols-outlined text-[14px]">lock</span>
+<span>ED25519-AUTHENTICATED RECORD</span>
+</div>
+</div>
+<!-- Main 2-Column Split Workspace -->
+<div class="w-full px-gutter-desktop py-space-lg grid grid-cols-1 xl:grid-cols-12 gap-space-lg items-start">
+<!-- LEFT COLUMN: The Official Certificate of Hexa-Astrometric Consensus (Simulated A4 / Document Canvas) -->
+<div class="xl:col-span-7 flex flex-col gap-space-md">
+<!-- Document Outer Presentation Slate -->
+<div class="relative bg-surface-container-low rounded-xl shadow-2xl p-space-lg overflow-hidden">
+<!-- Subtle Astrometric Radial Watermark SVG Overlay -->
+<svg class="absolute -right-20 -bottom-20 w-96 h-96 opacity-[0.03] text-primary pointer-events-none select-none" fill="none" stroke="currentColor" viewbox="0 0 400 400">
+<circle cx="200" cy="200" r="180" stroke-dasharray="4 6" stroke-width="2"></circle>
+<circle cx="200" cy="200" r="140" stroke-width="1.5"></circle>
+<circle cx="200" cy="200" r="90" stroke-width="1"></circle>
+<polygon points="200,30 250,150 370,200 250,250 200,370 150,250 30,200 150,150" stroke-width="1.5"></polygon>
+<line stroke-width="1" x1="20" x2="380" y1="200" y2="200"></line>
+<line stroke-width="1" x1="200" x2="200" y1="20" y2="380"></line>
+</svg>
+<!-- A4 Header Block -->
+<div class="flex items-start justify-between pb-space-md">
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[22px]">workspace_premium</span>
+<span class="font-label-caps text-label-caps text-primary uppercase tracking-widest">CONCILIUM EPISTEMICUM UNIVERSALE</span>
+</div>
+<h1 class="font-headline-lg text-headline-lg font-bold text-on-surface tracking-tight">ACTA ASTRONOMICA</h1>
+<div class="font-telemetry-sm text-telemetry-sm text-on-surface-variant flex items-center gap-space-md">
+<span>VOL. XXIV</span>
+<span>•</span>
+<span>FOLIO #1904-AA</span>
+<span>•</span>
+<span>SERIES: HEXA-ASTROMETRIC CONSENSUS</span>
+</div>
+</div>
+<!-- Official Gold Embossed Wax / Metallic Seal -->
+<div class="flex flex-col items-center flex-shrink-0">
+<div class="w-20 h-20 rounded-full bg-surface-container-high shadow-lg flex items-center justify-center relative p-1">
+<div class="w-full h-full rounded-full bg-surface-container-lowest flex flex-col items-center justify-center text-center p-1">
+<span class="material-symbols-outlined text-primary text-[26px]">stars</span>
+<span class="font-label-caps text-[8px] text-primary font-bold uppercase leading-tight">ORDO HEXA</span>
+<span class="font-telemetry-sm text-[8px] text-on-surface-variant">SEAL OF RIGOR</span>
+</div>
+<div class="absolute inset-0 rounded-full bg-gradient-to-tr from-primary/10 via-transparent to-secondary/20 pointer-events-none"></div>
+</div>
+<span class="font-label-caps text-[9px] text-tertiary-fixed font-bold mt-1 tracking-wider">CANONICAL PASS</span>
+</div>
+</div>
+<!-- Subject Dossier Primary Registry Box -->
+<div class="bg-surface-container rounded-lg p-space-md shadow-sm mb-space-md">
+<div class="flex items-center justify-between mb-space-xs">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">EVALUATED CELESTIAL OBSERVE-TARGET</span>
+<span class="font-telemetry-sm text-telemetry-sm px-2 py-0.5 rounded bg-surface-container-lowest text-primary font-semibold">RODDEN AA • BIRTH CERTIFICATE IN FILE</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-md mt-space-sm">
+<div>
+<span class="font-label-caps text-[10px] text-on-surface-variant block uppercase">SUBJECT IDENTITY</span>
+<span class="font-headline-md text-headline-md text-on-surface font-semibold block">Dr. Julius Robert Oppenheimer</span>
+<span class="font-body-sm text-body-sm text-secondary-fixed-dim">Theoretical Physicist • Director, Los Alamos Laboratory</span>
+</div>
+<div class="bg-surface-container-lowest p-space-sm rounded font-telemetry-sm text-telemetry-sm flex flex-col justify-center space-y-1">
+<div class="flex justify-between">
+<span class="text-on-surface-variant">LOCAL SOLAR EPOCH:</span>
+<span class="text-on-surface font-medium">1904-04-22 08:15:00 EST</span>
+</div>
+<div class="flex justify-between">
+<span class="text-on-surface-variant">JULIAN DAY (UT):</span>
+<span class="text-on-surface font-medium">JD 2416592.052083</span>
+</div>
+<div class="flex justify-between">
+<span class="text-on-surface-variant">GEODETIC FIX:</span>
+<span class="text-on-surface font-medium">40°42'46" N, 74°00'21" W</span>
+</div>
+<div class="flex justify-between">
+<span class="text-on-surface-variant">TERRESTRIAL DYNAMICAL ΔT:</span>
+<span class="text-primary font-medium">+4.821s (Morrison & Stephenson)</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Audited Epistemic Metrics Bento Core -->
+<div class="mb-space-md">
+<div class="flex items-center justify-between mb-space-xs">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">CERTIFIED METRIC ACCORDANCE MATRIX</span>
+<span class="font-telemetry-sm text-telemetry-sm text-secondary">BAYESIAN CREDIBILITY: 99.4%</span>
+</div>
+<div class="grid grid-cols-2 lg:grid-cols-4 gap-space-sm">
+<!-- Metric 1: Epistemic Rigor -->
+<div class="p-space-sm rounded bg-surface-container flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">EPISTEMIC RIGOR</span>
+<span class="material-symbols-outlined text-[16px] text-primary">verified</span>
+</div>
+<div class="my-space-xs flex items-baseline gap-1">
+<span class="font-display-lg text-display-lg font-bold text-primary">94.2</span>
+<span class="font-telemetry-sm text-telemetry-sm text-on-surface-variant">/ 100</span>
+</div>
+<div class="w-full bg-surface-container-lowest h-1.5 rounded-full overflow-hidden">
+<div class="bg-primary h-full w-[94.2%]"></div>
+</div>
+<span class="font-telemetry-sm text-[10px] text-tertiary-fixed mt-1">Tier-1 Exemplar Rigor</span>
+</div>
+<!-- Metric 2: Cross-Tradition Concordance -->
+<div class="p-space-sm rounded bg-surface-container flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">CONCORDANCE</span>
+<span class="material-symbols-outlined text-[16px] text-tertiary">hub</span>
+</div>
+<div class="my-space-xs flex items-baseline gap-1">
+<span class="font-display-lg text-display-lg font-bold text-tertiary">76.8%</span>
+</div>
+<div class="w-full bg-surface-container-lowest h-1.5 rounded-full overflow-hidden">
+<div class="bg-tertiary h-full w-[76.8%]"></div>
+</div>
+<span class="font-telemetry-sm text-[10px] text-on-surface-variant mt-1">5 of 9 Domains Invariant</span>
+</div>
+<!-- Metric 3: Temporal Stability -->
+<div class="p-space-sm rounded bg-surface-container flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">±15M RESILIENCE</span>
+<span class="material-symbols-outlined text-[16px] text-secondary">hourglass_top</span>
+</div>
+<div class="my-space-xs flex items-baseline gap-1">
+<span class="font-display-lg text-display-lg font-bold text-secondary">98.4%</span>
+</div>
+<div class="w-full bg-surface-container-lowest h-1.5 rounded-full overflow-hidden">
+<div class="bg-secondary h-full w-[98.4%]"></div>
+</div>
+<span class="font-telemetry-sm text-[10px] text-on-surface-variant mt-1">Drift Prob. < 1.6%</span>
+</div>
+<!-- Metric 4: Vector Delta Integration -->
+<div class="p-space-sm rounded bg-surface-container flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">VECTOR Δ RES.</span>
+<span class="material-symbols-outlined text-[16px] text-tertiary-container">tune</span>
+</div>
+<div class="my-space-xs flex items-baseline gap-1">
+<span class="font-headline-md text-headline-md font-bold text-tertiary-fixed">0.0018°</span>
+</div>
+<div class="w-full bg-surface-container-lowest h-1.5 rounded-full overflow-hidden">
+<div class="bg-tertiary-container h-full w-[99.2%]"></div>
+</div>
+<span class="font-telemetry-sm text-[10px] text-tertiary-fixed mt-1">JPL DE421 Parity (PASS)</span>
+</div>
+</div>
+</div>
+<!-- Promethean Synthesis Axiom Statement -->
+<div class="bg-surface-container-high rounded-lg p-space-md shadow-inner mb-space-md relative overflow-hidden">
+<div class="absolute top-0 left-0 w-1 h-full bg-primary-container"></div>
+<div class="flex items-center gap-space-xs mb-space-xs">
+<span class="material-symbols-outlined text-primary text-[18px]">lightbulb</span>
+<span class="font-label-caps text-label-caps text-primary uppercase font-bold tracking-wider">CANONICAL SYNTHESIS AXIOM: PROMETHEAN FLUX & DESTRUCTION-CREATION COUPLING</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface leading-relaxed italic">
+            "Across the six canonical epistemological frameworks, the evaluated epoch exhibits an unprecedented confluence of martial-mercurial vectors with transformative subterranean transits. Specifically, the Hellenic Midheaven Algol alignment directly echoes the Jyotisha Krittika-Rahu conjunction in the 10th Bhava, simultaneously corroborated by BaZi's Yang Wood Jia Dragon clash with seasonal fire pillars. This multi-system consensus certifies an irreversible Promethean capacity to harness elemental cataclysms under stringent theoretical rigor."
+          </p>
+<div class="mt-space-sm flex items-center justify-between text-on-surface-variant font-telemetry-sm text-telemetry-sm">
+<span>SYNTHESIS INDEX: 9.882 / 10.000</span>
+<span>INDEPENDENT TEST CONCORDANCE: p < 0.00004</span>
+</div>
+</div>
+<!-- Cryptographic Checksum & QR Seal Section -->
+<div class="bg-surface-container-lowest p-space-md rounded-lg flex flex-col md:flex-row items-center justify-between gap-space-md">
+<!-- QR Block Simulation -->
+<div class="flex items-center gap-space-md flex-shrink-0">
+<div class="w-20 h-20 bg-on-surface p-1.5 rounded flex flex-col justify-between shadow-md">
+<!-- Geometric SVG simulating verifiable tamper-proof QR/Aztec code -->
+<svg class="w-full h-full text-surface" fill="currentColor" viewbox="0 0 100 100">
+<rect height="30" width="30" x="0" y="0"></rect>
+<rect fill="#dae3f8" height="20" width="20" x="5" y="5"></rect>
+<rect height="10" width="10" x="10" y="10"></rect>
+<rect height="30" width="30" x="70" y="0"></rect>
+<rect fill="#dae3f8" height="20" width="20" x="75" y="5"></rect>
+<rect height="10" width="10" x="80" y="10"></rect>
+<rect height="30" width="30" x="0" y="70"></rect>
+<rect fill="#dae3f8" height="20" width="20" x="5" y="75"></rect>
+<rect height="10" width="10" x="10" y="80"></rect>
+<rect height="8" width="8" x="40" y="10"></rect>
+<rect height="6" width="12" x="50" y="25"></rect>
+<rect height="10" width="30" x="35" y="45"></rect>
+<rect height="15" width="15" x="75" y="45"></rect>
+<rect height="20" width="10" x="45" y="70"></rect>
+<rect height="12" width="25" x="65" y="75"></rect>
+<rect height="8" width="8" x="25" y="85"></rect>
+</svg>
+</div>
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">CRYPTOGRAPHIC SHA-256 CHECK-INTEGRITY</span>
+<span class="font-telemetry-sm text-telemetry-sm text-secondary font-bold break-all select-all" id="shaHashDisplay">
+                e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+              </span>
+<div class="flex items-center gap-space-xs mt-1">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary-container"></span>
+<span class="font-telemetry-sm text-[10px] text-tertiary-fixed">BLOCKCHAIN TIMESTAMP: 2024-10-24T18:42:01.402Z</span>
+</div>
+</div>
+</div>
+<!-- Interactive Copy Action -->
+<button class="flex items-center gap-space-xs px-space-md py-2 rounded bg-surface-container-high text-primary hover:bg-surface-container-highest transition-all flex-shrink-0" onclick="copyCertHash()">
+<span class="material-symbols-outlined text-[16px]">content_copy</span>
+<span class="font-telemetry-sm text-telemetry-sm font-semibold uppercase">Copy Hash</span>
+</button>
+</div>
+<!-- Certificate Footer Signature Summary -->
+<div class="mt-space-md pt-space-sm flex flex-wrap items-center justify-between text-on-surface-variant font-telemetry-sm text-telemetry-sm gap-space-sm">
+<div>ISSUING REGISTRAR: OBSERVATORIUM ASTRONOMICUM INTERNATIONALE</div>
+<div>ECDSA REGISTRATION P-256 / SHA3-512 SECURED</div>
+<div>FOLIO 1904-AA / SEC-A</div>
+</div>
+</div>
+<!-- JSON-LD Export Drawer Container (Toggled via JS) -->
+<div class="hidden bg-surface-container-lowest p-space-md rounded-lg shadow-xl" id="jsonLdDrawer">
+<div class="flex items-center justify-between mb-space-xs">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-secondary text-[16px]">data_object</span>
+<span class="font-label-caps text-label-caps text-secondary uppercase font-bold">EMBEDDED W3C JSON-LD LINKED DATA DOSSIER</span>
+</div>
+<button class="text-on-surface-variant hover:text-on-surface" onclick="toggleJsonDrawer()">
+<span class="material-symbols-outlined text-[16px]">close</span>
+</button>
+</div>
+<pre class="bg-surface p-space-sm rounded font-telemetry-sm text-telemetry-sm text-on-surface-variant overflow-x-auto leading-relaxed"><code>{
+  "@context": "https://astrometric.episteme.org/schema/v2.1",
+  "@type": "EpistemicAstrometricCertificate",
+  "dossierNumber": "ACTA-1904-AA",
+  "evaluatedSubject": {
+    "name": "Dr. Julius Robert Oppenheimer",
+    "temporalCoordinates": {
+      "nominalEpochUtc": "1904-04-22T13:15:00Z",
+      "julianDate": 2416592.052083,
+      "deltaTSeconds": 4.821
+    },
+    "spatialCoordinates": {
+      "latitude": "+40.712778",
+      "longitude": "-74.005833",
+      "datum": "WGS84"
+    }
+  },
+  "epistemicMetrics": {
+    "compositeRigorIndex": 94.2,
+    "crossTraditionConcordance": 0.768,
+    "temporalSensitivitySigma": 0.016,
+    "jplEphemerisParity": "PASS_DE421"
+  },
+  "cryptographicAttestation": {
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "ecdsaSignature": "0x89F4B3C0898AA1023EFBC99182390141BCDFE99182C00184A",
+    "ledgerAnchor": "Ethereum:19482103"
+  }
+}</code></pre>
+</div>
+</div>
+<!-- RIGHT COLUMN: Interactive Audit Inspector & Formal Methodology Annex -->
+<div class="xl:col-span-5 flex flex-col gap-space-md">
+<!-- Section Title & Meta -->
+<div class="flex items-center justify-between">
+<div>
+<span class="font-label-caps text-label-caps text-primary uppercase font-bold tracking-wider block">INSPECTOR & METROLOGY ANNEX</span>
+<h2 class="font-headline-md text-headline-md font-semibold text-on-surface">Hexa-Tradition Breakdown</h2>
+</div>
+<div class="flex items-center gap-1 font-telemetry-sm text-telemetry-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px] text-tertiary-container">tune</span>
+<span>6 OF 6 ACCREDITED</span>
+</div>
+</div>
+<!-- Granular 6-Tradition Expandable Stack -->
+<div class="flex flex-col gap-space-xs" id="traditionsAccordion">
+<!-- Tradition 1: Jyotisha (Vedic) -->
+<div class="bg-surface-container-low rounded-lg p-space-sm shadow-sm transition-all hover:bg-surface-container">
+<div class="flex items-center justify-between cursor-pointer" onclick="toggleTraditionDetails('trad-jyotisha')">
+<div class="flex items-center gap-space-sm">
+<span class="w-2.5 h-2.5 rounded-full bg-tertiary-container flex-shrink-0"></span>
+<div class="flex flex-col">
+<div class="flex items-center gap-space-xs">
+<span class="font-headline-sm text-headline-sm font-semibold text-on-surface">Jyotisha</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant">SIDEREAL LAHIRI</span>
+</div>
+<span class="font-telemetry-sm text-telemetry-sm text-secondary">Mithuna Lagna (27°41') • Krittika Rahu 10th</span>
+</div>
+</div>
+<div class="flex items-center gap-space-sm">
+<span class="font-telemetry-sm text-telemetry-sm px-2 py-0.5 rounded bg-surface-container-lowest text-tertiary-fixed font-semibold">96.8% FIT</span>
+<span class="material-symbols-outlined text-on-surface-variant text-[18px] transition-transform" id="icon-trad-jyotisha">expand_more</span>
+</div>
+</div>
+<!-- Detailed Tray -->
+<div class="hidden mt-space-sm pt-space-xs bg-surface-container-lowest p-space-sm rounded font-telemetry-sm text-telemetry-sm text-on-surface-variant space-y-1.5" id="trad-jyotisha">
+<div class="flex justify-between">
+<span>Ayanamsha Calculation:</span>
+<span class="text-on-surface">Chitrapaksha / Lahiri 22°31'04"</span>
+</div>
+<div class="flex justify-between">
+<span>Dasha Vector at Epoch:</span>
+<span class="text-on-surface">Rahu Mahadasha / Shani Antardasha</span>
+</div>
+<div class="flex justify-between">
+<span>Critical Station:</span>
+<span class="text-primary">Krittika Nakshatra Pada 1 (Agni Domain)</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface mt-1">Concurrence: Unyielding mental concentration with extreme nuclear physics aptitude through Rahu in 10th solar apex.</p>
+</div>
+</div>
+<!-- Tradition 2: Hellenistic (Tropical) -->
+<div class="bg-surface-container-low rounded-lg p-space-sm shadow-sm transition-all hover:bg-surface-container">
+<div class="flex items-center justify-between cursor-pointer" onclick="toggleTraditionDetails('trad-hellenic')">
+<div class="flex items-center gap-space-sm">
+<span class="w-2.5 h-2.5 rounded-full bg-tertiary-container flex-shrink-0"></span>
+<div class="flex flex-col">
+<div class="flex items-center gap-space-xs">
+<span class="font-headline-sm text-headline-sm font-semibold text-on-surface">Hellenistic</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant">TROPICAL PTOLEMAIC</span>
+</div>
+<span class="font-telemetry-sm text-telemetry-sm text-secondary">Cancer Rising (22°08') • MC Algol Conjunction</span>
+</div>
+</div>
+<div class="flex items-center gap-space-sm">
+<span class="font-telemetry-sm text-telemetry-sm px-2 py-0.5 rounded bg-surface-container-lowest text-tertiary-fixed font-semibold">98.1% FIT</span>
+<span class="material-symbols-outlined text-on-surface-variant text-[18px] transition-transform" id="icon-trad-hellenic">expand_more</span>
+</div>
+</div>
+<div class="hidden mt-space-sm pt-space-xs bg-surface-container-lowest p-space-sm rounded font-telemetry-sm text-telemetry-sm text-on-surface-variant space-y-1.5" id="trad-hellenic">
+<div class="flex justify-between">
+<span>House System:</span>
+<span class="text-on-surface">Porphyry & Whole Sign Equivalence</span>
+</div>
+<div class="flex justify-between">
+<span>Sect / Luminary:</span>
+<span class="text-on-surface">Diurnal Chart; Sun Taurus 01°48' (11th)</span>
+</div>
+<div class="flex justify-between">
+<span>Fixed Star Marker:</span>
+<span class="text-primary">Caput Algol (β Persei) at MC within 0°14'</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface mt-1">Concurrence: Peak civic responsibility married to existential destructive fire; supreme prominence accompanied by public trial.</p>
+</div>
+</div>
+<!-- Tradition 3: BaZi (Four Pillars of Destiny) -->
+<div class="bg-surface-container-low rounded-lg p-space-sm shadow-sm transition-all hover:bg-surface-container">
+<div class="flex items-center justify-between cursor-pointer" onclick="toggleTraditionDetails('trad-bazi')">
+<div class="flex items-center gap-space-sm">
+<span class="w-2.5 h-2.5 rounded-full bg-primary-container flex-shrink-0"></span>
+<div class="flex flex-col">
+<div class="flex items-center gap-space-xs">
+<span class="font-headline-sm text-headline-sm font-semibold text-on-surface">BaZi</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant">SOLAR LI CHUN</span>
+</div>
+<span class="font-telemetry-sm text-telemetry-sm text-secondary">Day Master: Ding Fire (丁火) • Dragon-Dog Clash</span>
+</div>
+</div>
+<div class="flex items-center gap-space-sm">
+<span class="font-telemetry-sm text-telemetry-sm px-2 py-0.5 rounded bg-surface-container-lowest text-primary font-semibold">82.4% FIT</span>
+<span class="material-symbols-outlined text-on-surface-variant text-[18px] transition-transform" id="icon-trad-bazi">expand_more</span>
+</div>
+</div>
+<div class="hidden mt-space-sm pt-space-xs bg-surface-container-lowest p-space-sm rounded font-telemetry-sm text-telemetry-sm text-on-surface-variant space-y-1.5" id="trad-bazi">
+<div class="flex justify-between">
+<span>Four Pillars:</span>
+<span class="text-on-surface">Jia Chen (Yr) • Wu Chen (Mo) • Ding Si (Day) • Bing Wu (Hr)</span>
+</div>
+<div class="flex justify-between">
+<span>Special Structure:</span>
+<span class="text-on-surface">Special Yang Fire Flame Transmission</span>
+</div>
+<div class="flex justify-between">
+<span>Divergence Factor:</span>
+<span class="text-primary-fixed">Extreme thermal energy; boundary delicate</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface mt-1">Concurrence: Candle fire evolving into blinding atomic furnace; wood and earth elements provide structured theoretical ignition.</p>
+</div>
+</div>
+<!-- Tradition 4: Zi Wei Dou Shu (Purple Star) -->
+<div class="bg-surface-container-low rounded-lg p-space-sm shadow-sm transition-all hover:bg-surface-container">
+<div class="flex items-center justify-between cursor-pointer" onclick="toggleTraditionDetails('trad-ziwei')">
+<div class="flex items-center gap-space-sm">
+<span class="w-2.5 h-2.5 rounded-full bg-tertiary-container flex-shrink-0"></span>
+<div class="flex flex-col">
+<div class="flex items-center gap-space-xs">
+<span class="font-headline-sm text-headline-sm font-semibold text-on-surface">Zi Wei Dou Shu</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant">LUNAR EMPEROR</span>
+</div>
+<span class="font-telemetry-sm text-telemetry-sm text-secondary">Ming Palace in Si (巳) • Lian Zhen / Qi Sha</span>
+</div>
+</div>
+<div class="flex items-center gap-space-sm">
+<span class="font-telemetry-sm text-telemetry-sm px-2 py-0.5 rounded bg-surface-container-lowest text-tertiary-fixed font-semibold">91.7% FIT</span>
+<span class="material-symbols-outlined text-on-surface-variant text-[18px] transition-transform" id="icon-trad-ziwei">expand_more</span>
+</div>
+</div>
+<div class="hidden mt-space-sm pt-space-xs bg-surface-container-lowest p-space-sm rounded font-telemetry-sm text-telemetry-sm text-on-surface-variant space-y-1.5" id="trad-ziwei">
+<div class="flex justify-between">
+<span>Palace Commander:</span>
+<span class="text-on-surface">Qi Sha (The General) + Huo Xing (Mars Flame)</span>
+</div>
+<div class="flex justify-between">
+<span>Career Palace (Guan Lu):</span>
+<span class="text-on-surface">Wu Qu (Military Treasure) + Hua Ji transformation</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface mt-1">Concurrence: Commanding weapons development under political suspicion; relentless intellectual strategy.</p>
+</div>
+</div>
+<!-- Tradition 5: Maya Cholq'ij (Tzolk'in 260-Day) -->
+<div class="bg-surface-container-low rounded-lg p-space-sm shadow-sm transition-all hover:bg-surface-container">
+<div class="flex items-center justify-between cursor-pointer" onclick="toggleTraditionDetails('trad-maya')">
+<div class="flex items-center gap-space-sm">
+<span class="w-2.5 h-2.5 rounded-full bg-primary-container flex-shrink-0"></span>
+<div class="flex flex-col">
+<div class="flex items-center gap-space-xs">
+<span class="font-headline-sm text-headline-sm font-semibold text-on-surface">Maya Cholq'ij</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant">GMT 584283</span>
+</div>
+<span class="font-telemetry-sm text-telemetry-sm text-secondary">Nawal: 4 Kawaq (Storm / Lightning Transformation)</span>
+</div>
+</div>
+<div class="flex items-center gap-space-sm">
+<span class="font-telemetry-sm text-telemetry-sm px-2 py-0.5 rounded bg-surface-container-lowest text-primary font-semibold">84.5% FIT</span>
+<span class="material-symbols-outlined text-on-surface-variant text-[18px] transition-transform" id="icon-trad-maya">expand_more</span>
+</div>
+</div>
+<div class="hidden mt-space-sm pt-space-xs bg-surface-container-lowest p-space-sm rounded font-telemetry-sm text-telemetry-sm text-on-surface-variant space-y-1.5" id="trad-maya">
+<div class="flex justify-between">
+<span>Day Glyph Sign:</span>
+<span class="text-on-surface">Kawaq (Thunderstorm, Crucible, Midwife of Fire)</span>
+</div>
+<div class="flex justify-between">
+<span>Tone / Number:</span>
+<span class="text-on-surface">Tone 4 (Foundation, Four Cardinal Pillars)</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface mt-1">Concurrence: Catalyst of community crises; breaking atmospheric skies open to manifest collective catharsis.</p>
+</div>
+</div>
+<!-- Tradition 6: Tibetan Kalachakra (Tsi) -->
+<div class="bg-surface-container-low rounded-lg p-space-sm shadow-sm transition-all hover:bg-surface-container">
+<div class="flex items-center justify-between cursor-pointer" onclick="toggleTraditionDetails('trad-tibetan')">
+<div class="flex items-center gap-space-sm">
+<span class="w-2.5 h-2.5 rounded-full bg-tertiary-container flex-shrink-0"></span>
+<div class="flex flex-col">
+<div class="flex items-center gap-space-xs">
+<span class="font-headline-sm text-headline-sm font-semibold text-on-surface">Tibetan Kalachakra</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant">TSI-RTSIS LUNAR</span>
+</div>
+<span class="font-telemetry-sm text-telemetry-sm text-secondary">Wood Dragon Year • Iron Bird Mansion (Karma Peak)</span>
+</div>
+</div>
+<div class="flex items-center gap-space-sm">
+<span class="font-telemetry-sm text-telemetry-sm px-2 py-0.5 rounded bg-surface-container-lowest text-tertiary-fixed font-semibold">89.9% FIT</span>
+<span class="material-symbols-outlined text-on-surface-variant text-[18px] transition-transform" id="icon-trad-tibetan">expand_more</span>
+</div>
+</div>
+<div class="hidden mt-space-sm pt-space-xs bg-surface-container-lowest p-space-sm rounded font-telemetry-sm text-telemetry-sm text-on-surface-variant space-y-1.5" id="trad-tibetan">
+<div class="flex justify-between">
+<span>Cosmic Breath (Prana Matrix):</span>
+<span class="text-on-surface">Wind-Fire (rlung-me) Dominant</span>
+</div>
+<div class="flex justify-between">
+<span>Element Concordance:</span>
+<span class="text-on-surface">Wood Dragon yielding instantaneous metallic condensation</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface mt-1">Concurrence: The Wheel of Time epoch indicating profound karmic crucible intersecting world governance.</p>
+</div>
+</div>
+</div>
+<!-- Formal Metrology & Mathematical Protocol Documentation -->
+<div class="bg-surface-container rounded-lg p-space-md shadow-md">
+<div class="flex items-center gap-space-xs mb-space-sm">
+<span class="material-symbols-outlined text-secondary text-[20px]">science</span>
+<h3 class="font-headline-sm text-headline-sm font-bold text-on-surface">Metrology & Epistemic Protocol Rigor</h3>
+</div>
+<div class="space-y-space-sm text-on-surface-variant font-body-sm text-body-sm">
+<div class="p-space-sm rounded bg-surface-container-lowest">
+<div class="flex items-center justify-between font-telemetry-sm text-telemetry-sm text-on-surface mb-1">
+<span class="font-semibold text-primary">1. SWISS EPHEMERIS 2.10 CORE ENGINE</span>
+<span class="text-tertiary-fixed">JPL DE421 COMPILED</span>
+</div>
+<p class="text-on-surface-variant">
+              Ephemerides are calculated using double-precision Chebyshev polynomials derived directly from the Jet Propulsion Laboratory DE421 integration. Planetary aberration, solar deflection, and light-time corrected to within 0.0001 arcseconds.
+            </p>
+</div>
+<div class="p-space-sm rounded bg-surface-container-lowest">
+<div class="flex items-center justify-between font-telemetry-sm text-telemetry-sm text-on-surface mb-1">
+<span class="font-semibold text-secondary">2. IERS POLYNOMIALS & ΔT EQUATION</span>
+<span class="text-secondary-fixed">MORRISON-STEPHENSON 2004</span>
+</div>
+<p class="text-on-surface-variant">
+              Historical Earth rotation deceleration (ΔT = TT - UT1) computed dynamically via lunar occultations and eclipse observations. For 1904.31, ΔT is locked at +4.821s, neutralizing retrospective leap divergence.
+            </p>
+</div>
+<div class="p-space-sm rounded bg-surface-container-lowest">
+<div class="flex items-center justify-between font-telemetry-sm text-telemetry-sm text-on-surface mb-1">
+<span class="font-semibold text-tertiary">3. TEXAS SHARPSHOOTER BIAS RESISTANCE</span>
+<span class="text-tertiary-fixed">MONTE CARLO N=100,000</span>
+</div>
+<p class="text-on-surface-variant">
+              Synthetic permutations generated against 100,000 randomized temporal birth epochs demonstrate that the observed 6-tradition concordance produces an extreme tail distribution (p = 0.000038), eliminating retroactive confirmation fallacies.
+            </p>
+</div>
+</div>
+</div>
+<!-- Lead Computational Auditor Signature Block -->
+<div class="bg-surface-container-low rounded-lg p-space-md shadow-md">
+<div class="flex items-center justify-between pb-space-xs mb-space-sm">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[18px]">gavel</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase font-bold">CERTIFYING METROLOGIST & AUDITOR</span>
+</div>
+<span class="font-label-caps text-label-caps px-2 py-0.5 rounded bg-surface-container-highest text-tertiary-container uppercase">ISO 17025 ACCREDITED LAB</span>
+</div>
+<div class="flex items-start gap-space-md">
+<!-- Lead Auditor Avatar / Monogram -->
+<div class="w-12 h-12 rounded bg-surface-container-high flex flex-col items-center justify-center text-primary font-headline-md font-bold flex-shrink-0 shadow-sm">
+<span>AV</span>
+</div>
+<div class="flex flex-col flex-1">
+<div class="flex items-center justify-between">
+<span class="font-headline-sm text-headline-sm font-semibold text-on-surface">Dr. Aurelius Vance, Ph.D.</span>
+<span class="font-telemetry-sm text-telemetry-sm text-tertiary font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">check_circle</span> SIGNATURE VALID
+              </span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Principal Astrodynamicist • Chair, Epistemic Rigor Working Group</span>
+<div class="mt-space-sm p-space-xs bg-surface-container-lowest rounded font-telemetry-sm text-telemetry-sm space-y-1">
+<div class="flex justify-between items-center text-on-surface-variant">
+<span>ECDSA VERIFICATION KEY:</span>
+<span class="text-secondary font-mono">0x89F4...7CB2</span>
+</div>
+<div class="flex justify-between items-center text-on-surface-variant">
+<span>CONSENSUS DEPOSITED AT:</span>
+<span class="text-on-surface">BLOCK DEPTH #19,482,103 (+128 CONFIRMS)</span>
+</div>
+<div class="flex justify-between items-center text-on-surface-variant">
+<span>ATTESTATION EXPIRY:</span>
+<span class="text-tertiary-fixed">PERPETUAL CANONICAL ARCHIVE</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Verification Seal Strip -->
+<div class="mt-space-md pt-space-xs flex items-center justify-between">
+<div class="flex items-center gap-space-xs text-on-surface-variant font-telemetry-sm text-telemetry-sm">
+<span class="material-symbols-outlined text-primary text-[14px]">security</span>
+<span>HARDWARE SECURE ENCLAVE SIGNED (YUBIKEY HSM FIPS-140-2)</span>
+</div>
+<span class="font-label-caps text-[10px] text-on-surface-variant tracking-wider">DOC-UUID: 422E-09F1-A899</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Micro Inline Script for UI Interactivity -->
+<script>
+    // Copy hash functionality
+    function copyCertHash() {
+      const hashText = document.getElementById('shaHashDisplay').innerText.trim();
+      navigator.clipboard.writeText(hashText).then(() => {
+        const btn = document.getElementById('copyHashBtn');
+        const origHTML = btn.innerHTML;
+        btn.innerHTML = '<span class="material-symbols-outlined text-[16px] text-tertiary">done</span><span class="font-telemetry-sm text-telemetry-sm uppercase font-semibold text-tertiary">Hash Copied!</span>';
+        setTimeout(() => {
+          btn.innerHTML = origHTML;
+        }, 2200);
+      });
+    }
+
+    // Toggle tradition details accordion
+    function toggleTraditionDetails(id) {
+      const el = document.getElementById(id);
+      const icon = document.getElementById('icon-' + id);
+      if (el.classList.contains('hidden')) {
+        el.classList.remove('hidden');
+        if (icon) icon.innerText = 'expand_less';
+      } else {
+        el.classList.add('hidden');
+        if (icon) icon.innerText = 'expand_more';
+      }
+    }
+
+    // Toggle JSON-LD export tray
+    function toggleJsonDrawer() {
+      const drawer = document.getElementById('jsonLdDrawer');
+      if (drawer.classList.contains('hidden')) {
+        drawer.classList.remove('hidden');
+        drawer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      } else {
+        drawer.classList.add('hidden');
+      }
+    }
+  </script>
+</div></main></div></body></html>
