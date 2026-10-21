@@ -137,25 +137,38 @@ def test_six_culture_pipeline():
     assert "sog_life_force" in tibetan["five_personal_forces"]
     print("    [PASS] Tibetan Rabjung cycle, Mewa, Parkha, and 5 Forces verified.")
 
-    print(">>> 9. Testing Verification Report & Invariants...")
-    report = build_verification_report(astro, jyotisha, bazi, western, ziwei, mayan, tibetan, audit)
-    assert report["overall_verification_status"] == "PASS"
-    print("    [PASS] Verification report compiled: ALL INVARIANTS PASS.")
-
-    print(">>> 10. Testing Cross-Cultural Synthesis Matrix (9 Domains)...")
-    synthesis = build_synthesis(astro, jyotisha, bazi, western, ziwei, mayan, tibetan, report, audit)
-    assert len(synthesis["domain_results"]) == 9
-    assert "final_reading_markdown" in synthesis
-    assert len(synthesis["temperament_axes"]) == 6
-    print(f"    [PASS] 9-Domain synthesis complete! Divergence rate: {synthesis['divergence_metrics']['divergence_rate_percent']}%.")
-
-    print(">>> 11. Testing Persian & Medieval Arabic Engine (Almuten Figuris & Firdaria)...")
+    print(">>> 9. Testing Persian & Medieval Arabic Engine (Almuten Figuris & Firdaria)...")
     persian = compute_persian_chart(astro, 1985, "15:30")
     assert "almuten_figuris" in persian
     assert "victor" in persian["almuten_figuris"]
     assert len(persian["firdaria"]["timeline"]) == 9
     assert len(persian["hermetic_lots"]) == 6
     print(f"    [PASS] Persian Almuten Figuris ({persian['almuten_figuris']['victor']}, score={persian['almuten_figuris']['victor_score']}), 6 Hermetic Lots, and 75-Year Firdaria verified.")
+
+    print(">>> 10. Testing Verification Report & Invariants...")
+    report = build_verification_report(astro, jyotisha, bazi, western, ziwei, mayan, tibetan, audit)
+    assert report["overall_verification_status"] == "PASS"
+    print("    [PASS] Verification report compiled: ALL INVARIANTS PASS.")
+
+    print(">>> 11. Testing Cross-Cultural Synthesis & Chronocrator Timeline...")
+    synthesis = build_synthesis(astro, jyotisha, bazi, western, ziwei, mayan, tibetan, report, audit, persian_chart=persian)
+    assert len(synthesis["domain_results"]) == 9
+    assert "final_reading_markdown" in synthesis
+    assert len(synthesis["temperament_axes"]) == 6
+    
+    # Chronocrator timeline assertions
+    chrono = synthesis["chronology"]
+    assert chrono["current_age"] >= 38
+    assert chrono["jyotisha_vimshottari"]["active_mahadasha"] in ["Ketu", "Venus", "Sun", "Moon", "Mars", "Rahu", "Jupiter", "Saturn", "Mercury"]
+    assert chrono["jyotisha_vimshottari"]["active_antardasha"] is not None
+    assert chrono["bazi_da_yun"]["active_pillar"] is not None
+    assert chrono["bazi_da_yun"]["current_liu_nian"]["year"] == 2026
+    assert 1 <= chrono["western_profection"]["activated_house"] <= 12
+    assert chrono["ziwei_da_xian"]["active_palace"] is not None
+    assert chrono["persian_firdaria"]["active_ruler"] in ["Sun", "Venus", "Mercury", "Moon", "Saturn", "Jupiter", "Mars", "North Node", "South Node"]
+    assert len(chrono["convergence_status"]) > 10
+    assert "7. Chronological Overlap & Unified Predictive Timeline" in synthesis["final_reading_markdown"]
+    print(f"    [PASS] 9-Domain synthesis & predictive chronocrator timeline verified! Active Mahadasha: {chrono['jyotisha_vimshottari']['active_mahadasha']}/{chrono['jyotisha_vimshottari']['active_antardasha']}, Profection: House {chrono['western_profection']['activated_house']}.")
 
     print(">>> 12. Testing Ancient Egyptian Decanic & Chronocrator Engine...")
     egyptian = compute_egyptian_chart(astro, 1985, 10, 24, "15:30", 37.7749, -122.4194)
