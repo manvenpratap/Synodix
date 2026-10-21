@@ -7,6 +7,8 @@ Follows Step 4D of Six-Culture Verified Chart specification.
 """
 
 from typing import Dict, Any, List, Tuple
+from datetime import datetime
+import swisseph as swe
 
 SIGNS = [
     "Aries", "Taurus", "Gemini", "Cancer",
@@ -274,6 +276,54 @@ def compute_mutual_receptions(planets_tropical: Dict[str, Any]) -> List[Dict[str
                 })
     return receptions
 
+def compute_active_transits(
+    natal_planets: Dict[str, Any],
+    transit_jd_ut: float
+) -> List[Dict[str, Any]]:
+    """Calculates active planetary transits to natal chart positions within tight orbs"""
+    TRANSIT_ASPECTS = [
+        ("Conjunction", 0, 2.0),
+        ("Opposition", 180, 2.0),
+        ("Trine", 120, 2.0),
+        ("Square", 90, 2.0),
+        ("Sextile", 60, 1.5),
+    ]
+    TRANSIT_BODIES = {
+        "Sun": swe.SUN, "Moon": swe.MOON, "Mercury": swe.MERCURY, "Venus": swe.VENUS,
+        "Mars": swe.MARS, "Jupiter": swe.JUPITER, "Saturn": swe.SATURN,
+        "Uranus": swe.URANUS, "Neptune": swe.NEPTUNE, "Pluto": swe.PLUTO
+    }
+    transits = []
+    for t_name, pid in TRANSIT_BODIES.items():
+        try:
+            res, _ = swe.calc_ut(transit_jd_ut, pid, swe.FLG_SWIEPH | swe.FLG_SPEED)
+            t_lon = res[0] % 360.0
+            t_speed = res[3]
+            for n_name, n_data in natal_planets.items():
+                if not isinstance(n_data, dict) or "longitude" not in n_data:
+                    continue
+                n_lon = n_data["longitude"]
+                diff = abs(t_lon - n_lon)
+                if diff > 180.0:
+                    diff = 360.0 - diff
+                for asp_name, asp_angle, max_orb in TRANSIT_ASPECTS:
+                    orb = abs(diff - asp_angle)
+                    if orb <= max_orb:
+                        is_applying = (diff < asp_angle and t_speed > 0) or (diff > asp_angle and t_speed < 0)
+                        transits.append({
+                            "transiting_body": t_name,
+                            "aspect": asp_name,
+                            "natal_target": n_name,
+                            "orb_deg": round(orb, 3),
+                            "is_applying": is_applying,
+                            "transit_longitude": round(t_lon, 3),
+                            "natal_longitude": round(n_lon, 3),
+                            "interpretation": f"Transiting {t_name} {asp_name} natal {n_name} (orb {orb:.2f}°)"
+                        })
+        except Exception:
+            pass
+    return transits
+
 def compute_western_chart(
     astronomical_base: Dict[str, Any],
     current_age: int = 35,
@@ -359,6 +409,11 @@ def compute_western_chart(
     antiscia_pairs, contra_antiscia_pairs = compute_antiscia(planets_trop)
     mutual_receptions = compute_mutual_receptions(planets_trop)
 
+    # Active transits to natal positions for current UTC date
+    now_dt = datetime.now()
+    now_jd = swe.julday(now_dt.year, now_dt.month, now_dt.day, now_dt.hour + now_dt.minute / 60.0)
+    active_transits = compute_active_transits(planets_trop, now_jd)
+
     # Whole sign houses
     houses = []
     for h in range(1, 13):
@@ -391,6 +446,7 @@ def compute_western_chart(
         "planets": decorated_planets,
         "aspects": major_aspects,
         "minor_aspects": minor_aspects,
+        "active_transits": active_transits,
         "antiscia_pairs": antiscia_pairs,
         "contra_antiscia_pairs": contra_antiscia_pairs,
         "mutual_receptions": mutual_receptions,

@@ -69,6 +69,10 @@ def test_six_culture_pipeline():
     assert "dwadashamsha_sign" in jyotisha["grahas"]["Sun"]
     assert "is_gandanta" in jyotisha["grahas"]["Sun"]
     assert len(jyotisha["graha_drishti"]) > 0, "Graha Drishti aspects must be computed"
+    assert "ashtakavarga" in jyotisha, "Ashtakavarga must be computed"
+    assert jyotisha["ashtakavarga"]["total_sarvashtakavarga_points"] == 337, "SAV total points must equal 337"
+    assert len(jyotisha["chara_karakas"]) == 7, "7 Jaimini Chara Karakas must be computed"
+    assert jyotisha["chara_karakas"][0]["code"] == "AK", "First Chara Karaka must be Atmakaraka (AK)"
     assert isinstance(jyotisha["graha_yuddha"], list)
     assert len(jyotisha["yogas"]) > 0, "Classical yogas whitelist must be evaluated"
     print(f"    [PASS] Jyotisha D1, D3/D7/D9/D10/D12, Gandanta, {len(jyotisha['graha_drishti'])} Drishti aspects, and {len(jyotisha['yogas'])} yogas verified.")
@@ -84,6 +88,10 @@ def test_six_culture_pipeline():
     assert "three_harmonies" in bazi["branch_interactions"]
     assert "punishments" in bazi["branch_interactions"]
     assert len(bazi["shen_sha"]) >= 5, "Must compute at least 5 Shen Sha stars"
+    assert "yong_shen" in bazi, "Yong Shen diagnosis must be present"
+    assert "useful_god_element" in bazi["yong_shen"]
+    assert "current_liu_nian" in bazi, "Current annual pillar (Liu Nian) must be computed"
+    assert bazi["current_liu_nian"]["year"] >= 2024
     assert bazi["all_nayin"]["year"] is not None
     assert bazi["all_nayin"]["day"] is not None
     print(f"    [PASS] BaZi Branch Interactions ({len(bazi['branch_interactions']['six_harmonies'])} harmonies, {len(bazi['branch_interactions']['six_clashes'])} clashes), {len(bazi['shen_sha'])} Shen Sha stars, and 4-Pillar Na Yin verified.")
@@ -97,6 +105,7 @@ def test_six_culture_pipeline():
     assert "antiscia_pairs" in western
     assert "contra_antiscia_pairs" in western
     assert "mutual_receptions" in western
+    assert "active_transits" in western, "Active transits must be computed for western chart"
     # Verify status in aspects is applying or separating
     for asp in western["aspects"] + western["minor_aspects"]:
         assert asp["status"] in ["Applying", "Separating", "Stationary / Exact"]
@@ -113,6 +122,7 @@ def test_six_culture_pipeline():
     all_stars = [s for p in ziwei["palaces"] for s in p["stars"]]
     has_aux = any("[A]" in s for s in all_stars)
     assert has_aux, "Auxiliary stars must be placed in palaces"
+    assert "star_details" in ziwei["palaces"][0], "Star details with radiance ratings must be present"
     print(f"    [PASS] Zi Wei Dou Shu 14 Major + Auxiliary stars placed across 12 palaces ({ziwei['ming_star_quality']['assessment']}) verified.")
 
     print(">>> 7. Testing Maya Calendar Engine...")

@@ -42,6 +42,32 @@ BUREAU_NAMES = {
     6: "Fire 6th Bureau (火六局)",
 }
 
+# 14 Major Stars Brightness / Radiance matrix across 12 Earthly Branches
+# 庙 (Miao = Peak), 旺 (Wang = Flourishing), 得 (De = Favorable), 利 (Li = Beneficial), 平 (Ping = Neutral), 陷 (Xian = Trapped)
+STAR_BRIGHTNESS = {
+    "紫微": {"子": "平", "丑": "庙", "寅": "庙", "卯": "旺", "辰": "得", "巳": "旺", "午": "庙", "未": "庙", "申": "旺", "酉": "旺", "戌": "得", "亥": "旺"},
+    "天机": {"子": "庙", "丑": "陷", "寅": "得", "卯": "旺", "辰": "利", "巳": "平", "午": "庙", "未": "陷", "申": "得", "酉": "旺", "戌": "利", "亥": "平"},
+    "太阳": {"子": "陷", "丑": "得", "寅": "旺", "卯": "庙", "辰": "庙", "巳": "庙", "午": "庙", "未": "得", "申": "得", "酉": "平", "戌": "陷", "亥": "陷"},
+    "武曲": {"子": "旺", "丑": "庙", "寅": "得", "卯": "利", "辰": "庙", "巳": "平", "午": "旺", "未": "庙", "申": "得", "酉": "利", "戌": "庙", "亥": "平"},
+    "天同": {"子": "旺", "丑": "陷", "寅": "利", "卯": "利", "辰": "平", "巳": "庙", "午": "陷", "未": "陷", "申": "旺", "酉": "平", "戌": "平", "亥": "庙"},
+    "廉贞": {"子": "平", "丑": "利", "寅": "庙", "卯": "平", "辰": "旺", "巳": "陷", "午": "平", "未": "利", "申": "庙", "酉": "平", "戌": "旺", "亥": "陷"},
+    "天府": {"子": "庙", "丑": "庙", "寅": "庙", "卯": "得", "辰": "庙", "巳": "得", "午": "旺", "未": "庙", "申": "得", "酉": "旺", "戌": "庙", "亥": "得"},
+    "太阴": {"子": "庙", "丑": "庙", "寅": "平", "卯": "陷", "辰": "陷", "巳": "陷", "午": "陷", "未": "平", "申": "利", "酉": "旺", "戌": "旺", "亥": "庙"},
+    "贪狼": {"子": "旺", "丑": "庙", "寅": "平", "卯": "利", "辰": "庙", "巳": "陷", "午": "旺", "未": "庙", "申": "平", "酉": "利", "戌": "庙", "亥": "陷"},
+    "巨门": {"子": "旺", "丑": "平", "寅": "庙", "卯": "庙", "辰": "陷", "巳": "平", "午": "旺", "未": "平", "申": "庙", "酉": "庙", "戌": "陷", "亥": "旺"},
+    "天相": {"子": "庙", "丑": "庙", "寅": "庙", "卯": "陷", "辰": "得", "巳": "得", "午": "旺", "未": "得", "申": "庙", "酉": "陷", "戌": "得", "亥": "得"},
+    "天梁": {"子": "庙", "丑": "旺", "寅": "庙", "卯": "庙", "辰": "旺", "巳": "陷", "午": "庙", "未": "旺", "申": "陷", "酉": "得", "戌": "旺", "亥": "陷"},
+    "七杀": {"子": "旺", "丑": "庙", "寅": "庙", "卯": "平", "辰": "得", "巳": "平", "午": "旺", "未": "庙", "申": "庙", "酉": "平", "戌": "得", "亥": "平"},
+    "破军": {"子": "庙", "丑": "旺", "寅": "得", "卯": "陷", "辰": "旺", "巳": "得", "午": "庙", "未": "旺", "申": "得", "酉": "陷", "戌": "旺", "亥": "得"},
+}
+
+def get_star_radiance(s_name: str, branch: str) -> str:
+    """Returns brightness tier: 庙 (Miao), 旺 (Wang), 得 (De), 利 (Li), 平 (Ping), 陷 (Xian)"""
+    for prefix, table in STAR_BRIGHTNESS.items():
+        if prefix in s_name:
+            return table.get(branch, "平")
+    return "平"
+
 def get_bureau(year_stem: str, ming_branch: str) -> int:
     """Calculates Five Elements Bureau (2..6)"""
     # Stem index (0..4 based on 5 pairs)
@@ -130,12 +156,13 @@ def compute_ziwei_chart(
             "name": p_name,
             "branch": b,
             "stars": [],
+            "star_details": [],
             "is_ming": (i == 0),
             "is_shen": (b == shen_branch)
         })
         palace_branch_map[b] = palaces[-1]
 
-    # 4. Star Placements (14 Major Stars)
+    # 4. Star Placements (14 Major Stars) with Radiance Rating
     zw_branch = get_ziwei_branch(bureau_num, lunar_d)
     zw_idx = ALL_12_BRANCHES.index(zw_branch)
     
@@ -152,7 +179,13 @@ def compute_ziwei_chart(
     for s_name, step in zw_group:
         b = ALL_12_BRANCHES[(zw_idx + step) % 12]
         if b in palace_branch_map:
-            palace_branch_map[b]["stars"].append(s_name)
+            rad = get_star_radiance(s_name, b)
+            palace_branch_map[b]["stars"].append(f"{s_name} [{rad}]")
+            palace_branch_map[b]["star_details"].append({
+                "name": s_name,
+                "radiance": rad,
+                "category": "major"
+            })
 
     # Tian Fu group (symmetrical to Zi Wei across Yin-Shen axis)
     # Tian Fu branch = (4 - zw_idx) % 12 in ALL_12_BRANCHES
@@ -172,7 +205,13 @@ def compute_ziwei_chart(
     for s_name, step in tf_group:
         b = ALL_12_BRANCHES[(tf_idx + step) % 12]
         if b in palace_branch_map:
-            palace_branch_map[b]["stars"].append(s_name)
+            rad = get_star_radiance(s_name, b)
+            palace_branch_map[b]["stars"].append(f"{s_name} [{rad}]")
+            palace_branch_map[b]["star_details"].append({
+                "name": s_name,
+                "radiance": rad,
+                "category": "major"
+            })
 
     # 5. Auxiliary Stars Placements (6 Auspicious + 4 Malefic + Lu Cun)
     auxiliary_placements = []
@@ -235,9 +274,14 @@ def compute_ziwei_chart(
     auxiliary_placements.append(("[A] 铃星 (Ling Xing)", ling_branch, "Malefic"))
 
     # Add auxiliary stars to palace stars
-    for s_name, b, _ in auxiliary_placements:
+    for s_name, b, aux_type in auxiliary_placements:
         if b in palace_branch_map:
             palace_branch_map[b]["stars"].append(s_name)
+            palace_branch_map[b]["star_details"].append({
+                "name": s_name,
+                "radiance": "得",
+                "category": f"auxiliary_{aux_type.lower()}"
+            })
 
     # 6. Star Quality Analysis for Ming Palace
     ming_palace = palace_branch_map[ming_branch]

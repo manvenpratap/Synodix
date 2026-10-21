@@ -6,6 +6,7 @@ Follows Step 4C of Six-Culture Verified Chart specification.
 """
 
 from typing import Dict, Any, List
+from datetime import datetime
 from lunar_python import Solar, Lunar
 
 STEMS = ["甲", "乙", "丙", "丁", "戊", "己", "庚", "辛", "壬", "癸"]
@@ -333,6 +334,96 @@ def get_ten_god(day_master: str, target_stem: str) -> str:
         return "Indirect Resource (偏印)" if same_pol else "Direct Resource (正印)"
     return "Unknown"
 
+def compute_yong_shen(
+    dm_elem: str,
+    dm_strength: str,
+    month_branch: str,
+    element_counts: Dict[str, float]
+) -> Dict[str, Any]:
+    """Calculates Yong Shen (Useful God), Xi Shen (Favorable), and Ji Shen (Unfavorable) elements"""
+    cycle = ELEMENT_CYCLE[dm_elem]
+    is_strong = "Strong" in dm_strength
+
+    # 1. Climate adjustment (Tiao Hou) for extreme seasons
+    winter_branches = ["亥", "子", "丑"]
+    summer_branches = ["巳", "午", "未"]
+    tiao_hou_element = None
+    if month_branch in winter_branches and element_counts.get("Fire", 0) < 2.0:
+        tiao_hou_element = "Fire"
+    elif month_branch in summer_branches and element_counts.get("Water", 0) < 2.0:
+        tiao_hou_element = "Water"
+
+    # 2. Suppressing/Supporting Yong Shen
+    if is_strong:
+        primary_yong_shen = tiao_hou_element or cycle["output"]
+        favorable_elements = [cycle["output"], cycle["wealth"], cycle["officer"]]
+        unfavorable_elements = [dm_elem, cycle["resource"]]
+        strategy = "Drain and channel strong self-energy into creative output, wealth acquisition, and disciplined leadership."
+    else:
+        primary_yong_shen = tiao_hou_element or cycle["resource"]
+        favorable_elements = [cycle["resource"], dm_elem]
+        unfavorable_elements = [cycle["officer"], cycle["wealth"], cycle["output"]]
+        strategy = "Nourish self-energy through mentorship, scholarly learning, alliances, and steady health preservation."
+
+    return {
+        "useful_god_element": primary_yong_shen,
+        "climate_adjustment": tiao_hou_element,
+        "favorable_elements": favorable_elements,
+        "unfavorable_elements": unfavorable_elements,
+        "strategy": strategy,
+        "strengthening_recommendation": f"Engage with {primary_yong_shen} element activities, industries, and life patterns."
+    }
+
+def compute_liu_nian(
+    target_year: int,
+    day_master: str,
+    pillars: List[Dict[str, Any]]
+) -> Dict[str, Any]:
+    """Evaluates the annual luck pillar (Liu Nian) and its interactions with the natal chart"""
+    cycle_offset = (target_year - 4) % 60
+    s_idx = cycle_offset % 10
+    b_idx = cycle_offset % 12
+    year_stem = STEMS[s_idx]
+    year_branch = BRANCHES[b_idx]
+    year_stem_elem, year_stem_polar = STEM_ELEMENTS[year_stem]
+    year_branch_elem = BRANCH_ELEMENTS[year_branch]
+    
+    ten_god = get_ten_god(day_master, year_stem)
+
+    interactions = []
+    for p in pillars:
+        if not p.get("available"):
+            continue
+        p_name = p["name"]
+        p_branch = p["branch"]
+        p_stem = p["stem"]
+
+        # Stem combination
+        if (p_stem, year_stem) in STEM_COMBINATIONS or (year_stem, p_stem) in STEM_COMBINATIONS:
+            trans = STEM_COMBINATIONS.get((p_stem, year_stem)) or STEM_COMBINATIONS.get((year_stem, p_stem))
+            interactions.append(f"Stem Harmony with {p_name} Pillar ({p_stem}+{year_stem} transforms to {trans})")
+
+        # Branch clash
+        if (p_branch, year_branch) in SIX_CLASHES or (year_branch, p_branch) in SIX_CLASHES:
+            desc = SIX_CLASHES.get((p_branch, year_branch)) or SIX_CLASHES.get((year_branch, p_branch))
+            interactions.append(f"Clash with {p_name} Pillar ({p_branch} vs {year_branch}: {desc})")
+
+        # Branch harmony
+        if (p_branch, year_branch) in SIX_HARMONIES or (year_branch, p_branch) in SIX_HARMONIES:
+            desc = SIX_HARMONIES.get((p_branch, year_branch)) or SIX_HARMONIES.get((year_branch, p_branch))
+            interactions.append(f"Six Harmony with {p_name} Pillar ({p_branch}+{year_branch} transforms to {desc})")
+
+    return {
+        "year": target_year,
+        "pillar": f"{year_stem}{year_branch}",
+        "stem": year_stem,
+        "branch": year_branch,
+        "stem_element": year_stem_elem,
+        "branch_element": year_branch_elem,
+        "ten_god_to_day_master": ten_god,
+        "interactions_with_natal": interactions if interactions else ["Smooth transit, no major direct clashes with natal branches."]
+    }
+
 def compute_bazi_chart(
     year: int, month: int, day: int,
     hour: int, minute: int, second: int = 0,
@@ -474,6 +565,11 @@ def compute_bazi_chart(
     branch_interactions = analyze_branch_interactions(pillars)
     shen_sha = compute_shen_sha(day_master, d_zhi, y_zhi, pillars)
 
+    # Yong Shen (Useful God) & Current Liu Nian (Annual Pillar)
+    yong_shen = compute_yong_shen(dm_elem, dm_strength, m_zhi, element_counts)
+    current_year = datetime.now().year
+    current_liu_nian = compute_liu_nian(current_year, day_master, pillars)
+
     # 4-Pillar Na Yin
     all_nayin = {
         "year": eight_char.getYearNaYin(),
@@ -509,6 +605,8 @@ def compute_bazi_chart(
         "da_yun_luck_pillars": da_yun_pillars,
         "branch_interactions": branch_interactions,
         "shen_sha": shen_sha,
+        "yong_shen": yong_shen,
+        "current_liu_nian": current_liu_nian,
         "solar_terms": {
             "prev_term": prev_jie.getName() if prev_jie else None,
             "next_term": next_jie.getName() if next_jie else None,

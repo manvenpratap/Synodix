@@ -259,6 +259,123 @@ def compute_graha_drishti(lagna_sign_idx: int, planets: Dict[str, Any]) -> List[
             })
     return aspects
 
+# Parashara Ashtakavarga Rules (Benefic bindus per BPHS)
+BAV_RULES = {
+    "Sun": {
+        "Sun": [1, 2, 4, 7, 8, 9, 10, 11], "Moon": [3, 6, 10, 11],
+        "Mars": [1, 2, 4, 7, 8, 9, 10, 11], "Mercury": [3, 5, 6, 9, 10, 11, 12],
+        "Jupiter": [5, 6, 9, 11], "Venus": [6, 7, 12],
+        "Saturn": [1, 2, 4, 7, 8, 9, 10, 11], "Lagna": [3, 4, 6, 10, 11, 12]
+    },
+    "Moon": {
+        "Sun": [3, 6, 7, 8, 10, 11], "Moon": [1, 3, 6, 7, 10, 11],
+        "Mars": [2, 3, 5, 6, 9, 10, 11], "Mercury": [1, 3, 4, 5, 7, 8, 10, 11],
+        "Jupiter": [1, 4, 7, 8, 10, 11, 12], "Venus": [3, 4, 5, 7, 9, 10, 11],
+        "Saturn": [3, 5, 6, 11], "Lagna": [3, 6, 10, 11]
+    },
+    "Mars": {
+        "Sun": [3, 5, 6, 10, 11], "Moon": [3, 6, 11],
+        "Mars": [1, 2, 4, 7, 8, 10, 11], "Mercury": [3, 5, 6, 11],
+        "Jupiter": [6, 10, 11, 12], "Venus": [6, 8, 11, 12],
+        "Saturn": [1, 4, 7, 8, 9, 10, 11], "Lagna": [1, 3, 6, 10, 11]
+    },
+    "Mercury": {
+        "Sun": [5, 6, 9, 11, 12], "Moon": [2, 4, 6, 8, 10, 11],
+        "Mars": [1, 2, 4, 7, 8, 9, 10, 11], "Mercury": [1, 3, 5, 6, 9, 10, 11, 12],
+        "Jupiter": [6, 8, 11, 12], "Venus": [1, 2, 3, 4, 5, 8, 9, 11],
+        "Saturn": [1, 2, 4, 7, 8, 9, 10, 11], "Lagna": [1, 2, 4, 6, 8, 10, 11]
+    },
+    "Jupiter": {
+        "Sun": [1, 2, 3, 4, 7, 8, 9, 10, 11], "Moon": [2, 5, 7, 9, 11],
+        "Mars": [1, 2, 4, 7, 8, 10, 11], "Mercury": [1, 2, 4, 5, 6, 9, 10, 11],
+        "Jupiter": [1, 2, 3, 4, 7, 8, 10, 11], "Venus": [2, 5, 6, 9, 10, 11],
+        "Saturn": [3, 5, 6, 12], "Lagna": [1, 2, 4, 5, 6, 7, 9, 10, 11]
+    },
+    "Venus": {
+        "Sun": [8, 11, 12], "Moon": [1, 2, 3, 4, 5, 8, 9, 11, 12],
+        "Mars": [3, 5, 6, 9, 11, 12], "Mercury": [3, 5, 6, 9, 11],
+        "Jupiter": [5, 8, 9, 10, 11], "Venus": [1, 2, 3, 4, 5, 8, 9, 10, 11],
+        "Saturn": [3, 4, 5, 8, 9, 10, 11], "Lagna": [1, 2, 3, 4, 5, 8, 9, 11]
+    },
+    "Saturn": {
+        "Sun": [1, 2, 4, 7, 8, 10, 11], "Moon": [3, 6, 11],
+        "Mars": [3, 5, 6, 10, 11, 12], "Mercury": [6, 8, 9, 10, 11, 12],
+        "Jupiter": [5, 6, 11, 12], "Venus": [6, 11, 12],
+        "Saturn": [3, 5, 6, 11], "Lagna": [1, 3, 4, 6, 10, 11]
+    }
+}
+
+def compute_ashtakavarga(lagna_sign_idx: int, planets: Dict[str, Any]) -> Dict[str, Any]:
+    """Calculates Parashara Sarvashtakavarga (SAV) and Bhinnashtakavarga (BAV)"""
+    sav_by_sign = [0] * 12
+    bav_tables = {}
+    positions = {"Lagna": lagna_sign_idx}
+    for g in ["Sun", "Moon", "Mars", "Mercury", "Jupiter", "Venus", "Saturn"]:
+        positions[g] = planets[g]["sign_index"] if g in planets else 0
+
+    for graha, rules in BAV_RULES.items():
+        bav = [0] * 12
+        for donor, houses in rules.items():
+            donor_sign = positions.get(donor, 0)
+            for h in houses:
+                target_sign = (donor_sign + h - 1) % 12
+                bav[target_sign] += 1
+                sav_by_sign[target_sign] += 1
+        bav_tables[graha] = {SIGNS[i]: bav[i] for i in range(12)}
+
+    sav_houses = []
+    for h in range(1, 13):
+        s_idx = (lagna_sign_idx + h - 1) % 12
+        pts = sav_by_sign[s_idx]
+        rating = "Strong" if pts >= 30 else ("Average" if pts >= 25 else "Vulnerable")
+        sav_houses.append({
+            "house_number": h,
+            "sign": SIGNS[s_idx],
+            "sarvashtakavarga_points": pts,
+            "strength_rating": rating
+        })
+
+    return {
+        "total_sarvashtakavarga_points": sum(sav_by_sign),
+        "average_house_points": round(sum(sav_by_sign) / 12.0, 2),
+        "house_scores": sav_houses,
+        "bhinnashtakavarga": bav_tables
+    }
+
+def compute_chara_karakas(planets: Dict[str, Any]) -> List[Dict[str, Any]]:
+    """Calculates 7 Jaimini Chara Karakas (AK to DK) ranked by degree within sign"""
+    traditional_7 = ["Sun", "Moon", "Mars", "Mercury", "Jupiter", "Venus", "Saturn"]
+    candidates = [
+        (g, planets[g]["degree_in_sign"], planets[g]["sign"], planets[g].get("house"))
+        for g in traditional_7 if g in planets and "degree_in_sign" in planets[g]
+    ]
+    candidates.sort(key=lambda x: x[1], reverse=True)
+
+    karaka_roles = [
+        ("Atmakaraka", "AK", "Soul Indicator / Core Spiritual Drive"),
+        ("Amatyakaraka", "AmK", "Mind, Career, Intellect, Chief Minister"),
+        ("Bhratrukaraka", "BK", "Siblings, Gurus, Courage, Guidance"),
+        ("Matrukaraka", "MK", "Mother, Emotional Root, Inner Peace"),
+        ("Putrakaraka", "PK", "Children, Creative Intelligence, Merit"),
+        ("Gnatikaraka", "GK", "Obstacles, Rivals, Karmic Friction"),
+        ("Darakaraka", "DK", "Spouse, Intimate Other, Life Partner")
+    ]
+
+    karakas = []
+    for i, (g, deg, sign, h) in enumerate(candidates):
+        if i < len(karaka_roles):
+            role_name, code, desc = karaka_roles[i]
+            karakas.append({
+                "karaka": role_name,
+                "code": code,
+                "graha": g,
+                "degree_in_sign": round(deg, 4),
+                "sign": sign,
+                "house": h,
+                "description": desc
+            })
+    return karakas
+
 def compute_vimshottari_dasha(moon_nakshatra_info: Dict[str, Any], birth_dt: datetime) -> List[Dict[str, Any]]:
     """Computes Vimshottari Mahadashas for 120-year cycle starting from birth"""
     start_nak_idx = moon_nakshatra_info["index"] - 1
@@ -519,6 +636,10 @@ def compute_jyotisha_chart(
     graha_yuddha = compute_graha_yuddha(decorated_grahas)
     graha_drishti = compute_graha_drishti(lagna_sign_idx, decorated_grahas) if has_birth_time else []
 
+    # Parashara Ashtakavarga & Jaimini Chara Karakas
+    ashtakavarga = compute_ashtakavarga(lagna_sign_idx, decorated_grahas) if has_birth_time else None
+    chara_karakas = compute_chara_karakas(decorated_grahas)
+
     # 12 Whole-sign houses
     houses_data = []
     for h in range(1, 13):
@@ -552,6 +673,8 @@ def compute_jyotisha_chart(
         "yogas": yogas,
         "graha_yuddha": graha_yuddha,
         "graha_drishti": graha_drishti,
+        "ashtakavarga": ashtakavarga,
+        "chara_karakas": chara_karakas,
         "invariants": {
             "vimshottari_full_cycle_years": 120,
             "rahu_ketu_separation_deg": round(abs(decorated_grahas["Rahu"]["longitude"] - decorated_grahas["Ketu"]["longitude"]), 4)
