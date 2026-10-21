@@ -5,7 +5,7 @@ Separates prominence from polarity, calculates divergence rate across 9 domains,
 maps 6 temperament axes with Maya/Tibetan overlays, and builds chronological convergence.
 """
 
-from typing import Dict, Any, List
+from typing import Dict, Any, List, Optional
 from datetime import datetime
 
 DOMAIN_META = {
