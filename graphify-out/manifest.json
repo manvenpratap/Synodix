@@ -1,0 +1,358 @@
+{
+  "/Volumes/Study/Projects/Astrology/frontend/vite.config.ts": {
+    "mtime": 1792380448.6111774,
+    "hash": "d449d1b8bcdda7ae915d25f5ab51b666"
+  },
+  "/Volumes/Study/Projects/Astrology/frontend/capacitor.config.ts": {
+    "mtime": 1792543634.5196764,
+    "hash": "dd41191ee99b07fe66ffcec1a6c4201e"
+  },
+  "/Volumes/Study/Projects/Astrology/frontend/public/sw.js": {
+    "mtime": 1792474737.2249198,
+    "hash": "a0ce99c83a426bf3fc6b4ae0f0aca671"
+  },
+  "/Volumes/Study/Projects/Astrology/frontend/src/App.tsx": {
+    "mtime": 1792543653.2321246,
+    "hash": "33831c4c9af9b8f2cb94ec7046730938"
+  },
+  "/Volumes/Study/Projects/Astrology/frontend/src/main.tsx": {
+    "mtime": 1792475554.5200436,
+    "hash": "43ec7e18704b3483a0664fe60306b015"
+  },
+  "/Volumes/Study/Projects/Astrology/frontend/src/types.ts": {
+    "mtime": 1792538273.8509033,
+    "hash": "6d9cc33da619b7f7ee609ac8d2e35fb2"
+  },
+  "/Volumes/Study/Projects/Astrology/frontend/src/utils/vault.ts": {
+    "mtime": 1792538532.2087414,
+    "hash": "8ca94f2837dd2add65f3e31e9f44809e"
+  },
+  "/Volumes/Study/Projects/Astrology/frontend/src/components/ReadingView.tsx": {
+    "mtime": 1792543658.0608773,
+    "hash": "ad80112820ff78f6c588e8ee14124b27"
+  },
+  "/Volumes/Study/Projects/Astrology/frontend/src/components/TraditionCharts.tsx": {
+    "mtime": 1792542737.1778088,
+    "hash": "51160fb7c98bfed1b8b665e338738974"
+  },
+  "/Volumes/Study/Projects/Astrology/frontend/src/components/InputAuditCard.tsx": {
+    "mtime": 1792382354.8906565,
+    "hash": "ffe27d847a954b72fd3f1a3eab853768"
+  },
+  "/Volumes/Study/Projects/Astrology/frontend/src/components/MathematicalEvidenceCard.tsx": {
+    "mtime": 1792511933.048392,
+    "hash": "7bf9b70991c657d189003ced5700bb57"
+  },
+  "/Volumes/Study/Projects/Astrology/frontend/src/components/SynthesisMatrix.tsx": {
+    "mtime": 1792542832.002206,
+    "hash": "20cbf14fe43f2c2507dbb1861ab74e9f"
+  },
+  "/Volumes/Study/Projects/Astrology/frontend/src/components/VerificationCard.tsx": {
+    "mtime": 1792382369.4004133,
+    "hash": "635afa24de30d1a6259a17736ebfa7d3"
+  },
+  "/Volumes/Study/Projects/Astrology/frontend/src/components/BirthDataForm.tsx": {
+    "mtime": 1792538941.1178532,
+    "hash": "e98cc51d4e28dbfd649c96527f1b76fe"
+  },
+  "/Volumes/Study/Projects/Astrology/frontend/src/components/ChartWheelVisualizer.tsx": {
+    "mtime": 1792540094.1772754,
+    "hash": "a1964fae9cbb8b5c655c84229711db09"
+  },
+  "/Volumes/Study/Projects/Astrology/frontend/src/data/mathematicalEvidenceData.ts": {
+    "mtime": 1792464170.8802814,
+    "hash": "ef34e7296e57a8276360a526077aeccf"
+  },
+  "/Volumes/Study/Projects/Astrology/tests/conftest.py": {
+    "mtime": 1792542324.1222544,
+    "hash": "cfa928b4e7085fbbab3af0eac8ad9fc2"
+  },
+  "/Volumes/Study/Projects/Astrology/tests/test_api_integration.py": {
+    "mtime": 1792543681.3632927,
+    "hash": "7e3c996cd75e78702d4ac60b53c19009"
+  },
+  "/Volumes/Study/Projects/Astrology/tests/helpers.py": {
+    "mtime": 1792542200.230127,
+    "hash": "2d97c56a644ba00ae6e1861cbbdc8711"
+  },
+  "/Volumes/Study/Projects/Astrology/tests/test_engine_suite.py": {
+    "mtime": 1792542363.3347127,
+    "hash": "0c652a6e084ace247b6564d046184d8d"
+  },
+  "/Volumes/Study/Projects/Astrology/backend/app/main.py": {
+    "mtime": 1792543665.213159,
+    "hash": "8486706c744ef2d58b57770f2dd36e65"
+  },
+  "/Volumes/Study/Projects/Astrology/backend/app/core/ephemeris.py": {
+    "mtime": 1792358084.9279768,
+    "hash": "7e349e01e024bff9c7ff6b2c1c645902"
+  },
+  "/Volumes/Study/Projects/Astrology/backend/app/core/time_audit.py": {
+    "mtime": 1792374550.3584528,
+    "hash": "f34794e67640f76dc2d0bf5c2b225a81"
+  },
+  "/Volumes/Study/Projects/Astrology/backend/app/synthesis/verification.py": {
+    "mtime": 1792358686.5661721,
+    "hash": "1ff235827b12f2519edb4b0a35147ea8"
+  },
+  "/Volumes/Study/Projects/Astrology/backend/app/synthesis/synthesis.py": {
+    "mtime": 1792543668.9392607,
+    "hash": "a07c4403a1128cba04dfb393efe4f2d8"
+  },
+  "/Volumes/Study/Projects/Astrology/backend/app/traditions/western.py": {
+    "mtime": 1792384529.0352564,
+    "hash": "62d4ea16b6ff23517bb2135481cab652"
+  },
+  "/Volumes/Study/Projects/Astrology/backend/app/traditions/mayan.py": {
+    "mtime": 1792358484.9967759,
+    "hash": "f031bd7f70263a78b60428aa077d7198"
+  },
+  "/Volumes/Study/Projects/Astrology/backend/app/traditions/maramataka.py": {
+    "mtime": 1792538180.1976914,
+    "hash": "521764d2c117022016cdcddc14a48ecf"
+  },
+  "/Volumes/Study/Projects/Astrology/backend/app/traditions/egyptian.py": {
+    "mtime": 1792538112.9623592,
+    "hash": "e52df77f68f9124886ce39b680f84466"
+  },
+  "/Volumes/Study/Projects/Astrology/backend/app/traditions/ziwei.py": {
+    "mtime": 1792385113.404882,
+    "hash": "c97cff362c258ab45747d8e194c71fb5"
+  },
+  "/Volumes/Study/Projects/Astrology/backend/app/traditions/persian.py": {
+    "mtime": 1792538075.3998494,
+    "hash": "547ab6dd49906213766505aab856519e"
+  },
+  "/Volumes/Study/Projects/Astrology/backend/app/traditions/bazi.py": {
+    "mtime": 1792384900.0997994,
+    "hash": "60bb10fb9dd3bf7d416fa018ca6dd6fc"
+  },
+  "/Volumes/Study/Projects/Astrology/backend/app/traditions/jyotisha.py": {
+    "mtime": 1792385168.6468928,
+    "hash": "287bd7e14100a4c3507816ebd9d1f35d"
+  },
+  "/Volumes/Study/Projects/Astrology/backend/app/traditions/tibetan.py": {
+    "mtime": 1792358646.46666,
+    "hash": "945dfefe244ddf900749e1aeb3001ee5"
+  },
+  "/Volumes/Study/Projects/Astrology/backend/tests/test_engine.py": {
+    "mtime": 1792538257.1633663,
+    "hash": "1ddd71c2d787f78ca5b756242dd7986c"
+  },
+  "/Volumes/Study/Projects/Astrology/backend/tests/test_simulation_personalities.py": {
+    "mtime": 1792463210.4930446,
+    "hash": "7ddff8efa1cc2a51936493dc894502b2"
+  },
+  "/Volumes/Study/Projects/Astrology/PROJECT_CONTEXT.md": {
+    "mtime": 1792544824.627955,
+    "hash": "ceb6d8cce06db5c6b20166bf31ac51c2"
+  },
+  "/Volumes/Study/Projects/Astrology/PRODUCT.md": {
+    "mtime": 1792543710.5977297,
+    "hash": "bc458170eab7063c61c2f35fb1f39ade"
+  },
+  "/Volumes/Study/Projects/Astrology/README.md": {
+    "mtime": 1792544812.9085312,
+    "hash": "e5db9a40321eefab5f71ba7a63e408ab"
+  },
+  "/Volumes/Study/Projects/Astrology/DESIGN.md": {
+    "mtime": 1792473085.695944,
+    "hash": "caa49f89ba23673d3e17464fddec6001"
+  },
+  "/Volumes/Study/Projects/Astrology/AGENTS.md": {
+    "mtime": 1792542200.2305927,
+    "hash": "8353033de7a2236f42274802196b838d"
+  },
+  "/Volumes/Study/Projects/Astrology/frontend/index.html": {
+    "mtime": 1792543621.8026989,
+    "hash": "1c01c0e34c57b0e156e27047f16a1421"
+  },
+  "/Volumes/Study/Projects/Astrology/frontend/README.md": {
+    "mtime": 1792380231.9064624,
+    "hash": "10495bfcc6c568eca4dab6dd5df795d3"
+  },
+  "/Volumes/Study/Projects/Astrology/tests/README.md": {
+    "mtime": 1792543686.6687367,
+    "hash": "0fa46d3f6f12c14d918a01bc040e5c46"
+  },
+  "/Volumes/Study/Projects/Astrology/wiki/Architecture.md": {
+    "mtime": 1792544653.8437917,
+    "hash": "6ced8a9083be134e5e79295a027185b0"
+  },
+  "/Volumes/Study/Projects/Astrology/wiki/Astrometric-Dual-Engine.md": {
+    "mtime": 1792544674.5005798,
+    "hash": "cace9df3011a43381a07668f855f5cd8"
+  },
+  "/Volumes/Study/Projects/Astrology/wiki/Home.md": {
+    "mtime": 1792544625.8135476,
+    "hash": "07ce3b5e1aa4a5a2675f9168fb7ed552"
+  },
+  "/Volumes/Study/Projects/Astrology/wiki/Nine-Traditions-Engine.md": {
+    "mtime": 1792544705.2525795,
+    "hash": "8c271d1e12ce2f29a748d2064abca4b1"
+  },
+  "/Volumes/Study/Projects/Astrology/wiki/_Sidebar.md": {
+    "mtime": 1792544631.0222673,
+    "hash": "3cf230a39e1c04038262fe9d47290300"
+  },
+  "/Volumes/Study/Projects/Astrology/wiki/State-Lifecycle.md": {
+    "mtime": 1792544765.2318983,
+    "hash": "714d4b02d7c90afdf5dd4c6b29a8a789"
+  },
+  "/Volumes/Study/Projects/Astrology/wiki/Data-Pipelines.md": {
+    "mtime": 1792544754.0358326,
+    "hash": "2d5e004d7d11332defce51198aa725c5"
+  },
+  "/Volumes/Study/Projects/Astrology/wiki/Runbooks.md": {
+    "mtime": 1792544778.90136,
+    "hash": "381f4f782bcf6cd1f1ac10a1f4b339b1"
+  },
+  "/Volumes/Study/Projects/Astrology/wiki/API-Reference.md": {
+    "mtime": 1792544740.3948762,
+    "hash": "7a76c1f3a120efafcd6ce25cf9e5133c"
+  },
+  "/Volumes/Study/Projects/Astrology/wiki/_Footer.md": {
+    "mtime": 1792544634.6465442,
+    "hash": "808020d228a8aff62dea6c4dd5c402f6"
+  },
+  "/Volumes/Study/Projects/Astrology/wiki/Consensus-Matrix.md": {
+    "mtime": 1792544722.7074842,
+    "hash": "bd15103676ffba74e1a469fcffc6328d"
+  },
+  "/Volumes/Study/Projects/Astrology/backend/requirements.txt": {
+    "mtime": 1792510788.275797,
+    "hash": "a2852c26c611d235d8552ae165d692bc"
+  },
+  "/Volumes/Study/Projects/Astrology/backend/app/data/mathematical_evidence_astrology_report.md": {
+    "mtime": 1792464115.81248,
+    "hash": "98e7f88b11d50d433f4b413ecd302b04"
+  },
+  "/Volumes/Study/Projects/Astrology/docs/diagrams/sequence.html": {
+    "mtime": 1792544358.48481,
+    "hash": "298372a26c29d3eb18b570ffc0e7aa17"
+  },
+  "/Volumes/Study/Projects/Astrology/docs/diagrams/dataflow.html": {
+    "mtime": 1792544486.4104385,
+    "hash": "23658641f1a07dcd16c31d63350bd68a"
+  },
+  "/Volumes/Study/Projects/Astrology/docs/diagrams/architecture.html": {
+    "mtime": 1792544168.7321794,
+    "hash": "e96ba63f6ceb1bd510ab89e5cc43b254"
+  },
+  "/Volumes/Study/Projects/Astrology/docs/diagrams/lifecycle.html": {
+    "mtime": 1792544588.6383324,
+    "hash": "be37574dd1f1bb9519a5629337ee9599"
+  },
+  "/Volumes/Study/Projects/Astrology/docs/diagrams/workflow.html": {
+    "mtime": 1792544253.960588,
+    "hash": "16f6c83f8f18c3b6c539c365b9a5ddcf"
+  },
+  "/Volumes/Study/Projects/Astrology/stitch_omniastrology_triangulation_engine/9_domain_synthesis_matrix/code.html": {
+    "mtime": 1792519060.0,
+    "hash": "18437d6f31cc1b8913e408aa7cb4ec10"
+  },
+  "/Volumes/Study/Projects/Astrology/stitch_omniastrology_triangulation_engine/hexa_tradition_computation_desktop/code.html": {
+    "mtime": 1792519610.0,
+    "hash": "69bda6fec7d6f7401d594362da2a6b85"
+  },
+  "/Volumes/Study/Projects/Astrology/stitch_omniastrology_triangulation_engine/empirical_evidence_lab/code.html": {
+    "mtime": 1792519060.0,
+    "hash": "b362c7cd7303f2e82577db6b4f239734"
+  },
+  "/Volumes/Study/Projects/Astrology/stitch_omniastrology_triangulation_engine/epistemic_audit_uncertainty/code.html": {
+    "mtime": 1792519060.0,
+    "hash": "e7eebe26c8ea1bf0719a976292e271f1"
+  },
+  "/Volumes/Study/Projects/Astrology/stitch_omniastrology_triangulation_engine/hexa_tradition_computation/code.html": {
+    "mtime": 1792519060.0,
+    "hash": "617a74184034d21e3160931f20faeee6"
+  },
+  "/Volumes/Study/Projects/Astrology/stitch_omniastrology_triangulation_engine/hexa_astrometric_epistemic_engine/DESIGN_Desktop.md": {
+    "mtime": 1792519610.0,
+    "hash": "be824ee67ab4754ade6e4648d25bc600"
+  },
+  "/Volumes/Study/Projects/Astrology/stitch_omniastrology_triangulation_engine/hexa_astrometric_epistemic_engine/DESIGN.md": {
+    "mtime": 1792519060.0,
+    "hash": "be824ee67ab4754ade6e4648d25bc600"
+  },
+  "/Volumes/Study/Projects/Astrology/stitch_omniastrology_triangulation_engine/empirical_evidence_lab_desktop/code.html": {
+    "mtime": 1792519610.0,
+    "hash": "0c592dde5d80920671b99977a5d93214"
+  },
+  "/Volumes/Study/Projects/Astrology/stitch_omniastrology_triangulation_engine/9_domain_synthesis_matrix_desktop/code.html": {
+    "mtime": 1792519610.0,
+    "hash": "d03f59ec71b4d49b2e66a59048e6dd2b"
+  },
+  "/Volumes/Study/Projects/Astrology/stitch_omniastrology_triangulation_engine/epistemic_audit_uncertainty_desktop/code.html": {
+    "mtime": 1792519610.0,
+    "hash": "c70eea9fa0836ed2814f126c0fcec304"
+  },
+  "/Volumes/Study/Projects/Astrology/stitch_omniastrology_triangulation_engine/epistemic_certificate_dossier_desktop/code.html": {
+    "mtime": 1792519610.0,
+    "hash": "607e394a3a8dc91ae51e3b953e75574b"
+  },
+  "/Volumes/Study/Projects/Astrology/stitch_omniastrology_triangulation_engine/epistemic_certificate_methodology_dossier/code.html": {
+    "mtime": 1792519060.0,
+    "hash": "f3f8667b080dce38033461455547297d"
+  },
+  "/Volumes/Study/Projects/Astrology/frontend/public/icons.svg": {
+    "mtime": 1792380231.9082265,
+    "hash": "3b4fcfcf393eca4d264dca4a4663bc37"
+  },
+  "/Volumes/Study/Projects/Astrology/frontend/public/favicon.svg": {
+    "mtime": 1792380231.9079616,
+    "hash": "7e840862161341271697daa99a40d76b"
+  },
+  "/Volumes/Study/Projects/Astrology/frontend/src/assets/hero.png": {
+    "mtime": 1792380231.9093297,
+    "hash": "aead493361b27e7510691c5d7072dfc1"
+  },
+  "/Volumes/Study/Projects/Astrology/frontend/src/assets/vite.svg": {
+    "mtime": 1792380231.9098535,
+    "hash": "9960a24288958394ac50e57ff638b036"
+  },
+  "/Volumes/Study/Projects/Astrology/frontend/src/assets/react.svg": {
+    "mtime": 1792380231.9095328,
+    "hash": "f0402b67b6ce880f65666bb49e841696"
+  },
+  "/Volumes/Study/Projects/Astrology/stitch_omniastrology_triangulation_engine/9_domain_synthesis_matrix/screen.png": {
+    "mtime": 1792519060.0,
+    "hash": "fd187d5bff0d914eaf9d78947432fb44"
+  },
+  "/Volumes/Study/Projects/Astrology/stitch_omniastrology_triangulation_engine/hexa_tradition_computation_desktop/screen.png": {
+    "mtime": 1792519610.0,
+    "hash": "a4c82ec4393211b56f5b3b4233fc28e7"
+  },
+  "/Volumes/Study/Projects/Astrology/stitch_omniastrology_triangulation_engine/empirical_evidence_lab/screen.png": {
+    "mtime": 1792519060.0,
+    "hash": "61ea02f58d8e6044ecca808a6a947a45"
+  },
+  "/Volumes/Study/Projects/Astrology/stitch_omniastrology_triangulation_engine/epistemic_audit_uncertainty/screen.png": {
+    "mtime": 1792519060.0,
+    "hash": "a804a20e58b547c22049471972bd717d"
+  },
+  "/Volumes/Study/Projects/Astrology/stitch_omniastrology_triangulation_engine/hexa_tradition_computation/screen.png": {
+    "mtime": 1792519060.0,
+    "hash": "9c391f85b7bb2c5893abc99873c14d4c"
+  },
+  "/Volumes/Study/Projects/Astrology/stitch_omniastrology_triangulation_engine/empirical_evidence_lab_desktop/screen.png": {
+    "mtime": 1792519610.0,
+    "hash": "45ee9720b2f8eebba33ed081b671f306"
+  },
+  "/Volumes/Study/Projects/Astrology/stitch_omniastrology_triangulation_engine/9_domain_synthesis_matrix_desktop/screen.png": {
+    "mtime": 1792519610.0,
+    "hash": "1d390989770ad24f6dd953408740fc43"
+  },
+  "/Volumes/Study/Projects/Astrology/stitch_omniastrology_triangulation_engine/epistemic_audit_uncertainty_desktop/screen.png": {
+    "mtime": 1792519610.0,
+    "hash": "bb7da830dc3f361f166b0a7f40b9135a"
+  },
+  "/Volumes/Study/Projects/Astrology/stitch_omniastrology_triangulation_engine/epistemic_certificate_dossier_desktop/screen.png": {
+    "mtime": 1792519610.0,
+    "hash": "25ce5c2d0e3facb32d21b683b6ec3e19"
+  },
+  "/Volumes/Study/Projects/Astrology/stitch_omniastrology_triangulation_engine/epistemic_certificate_methodology_dossier/screen.png": {
+    "mtime": 1792519060.0,
+    "hash": "b85894d2c771fa40f0801f574af3ab88"
+  }
+}

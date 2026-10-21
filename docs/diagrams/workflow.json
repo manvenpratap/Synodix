@@ -1,0 +1,51 @@
+{
+  "schema_version": 2,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "Synodix Astrometric Triangulation & Verification Workflow",
+    "animation": "trace",
+    "visual_preset": "signal-flow",
+    "quality_profile": "showcase",
+    "output": "docs/diagrams/workflow.html"
+  },
+  "lanes": [
+    { "id": "client", "label": "Client Observatory UI" },
+    { "id": "audit", "label": "Normalization & Audit" },
+    { "id": "engine", "label": "Astrometric & Tradition Engines" },
+    { "id": "synthesis", "label": "Triangulation & Consensus" }
+  ],
+  "phases": [
+    { "id": "p_intake", "label": "Intake & Audit", "fromCol": 0, "toCol": 2 },
+    { "id": "p_compute", "label": "Dual Ephemeris & Traditions", "fromCol": 3, "toCol": 4, "variant": "emphasis" },
+    { "id": "p_consensus", "label": "Synthesis & Dossier", "fromCol": 5, "toCol": 5, "variant": "emphasis" }
+  ],
+  "groups": [
+    { "id": "g_uncertainty", "label": "Time Uncertainty Gate", "lane": "audit", "fromCol": 1, "toCol": 2, "variant": "security" },
+    { "id": "g_ephemeris", "label": "Astrometric Core", "lane": "engine", "fromCol": 3, "toCol": 4, "variant": "emphasis" }
+  ],
+  "mainPath": ["input_form", "time_norm", "cusp_audit", "swisseph_calc", "traditions_calc", "domain_eval", "dossier_render"],
+  "nodes": [
+    { "id": "input_form", "lane": "client", "col": 0, "type": "frontend", "label": "Birth Data Form", "sublabel": "Date, Time, Location", "width": 132 },
+    { "id": "time_norm", "lane": "audit", "col": 1, "type": "backend", "label": "Time Normalizer", "sublabel": "LMST / LAST / UTC", "width": 132 },
+    { "id": "cusp_audit", "lane": "audit", "col": 2, "type": "security", "label": "Cusp Proximity Audit", "sublabel": "Δ < 1.5° sensitivity check", "tag": "T-, T, T+ ensemble", "width": 132 },
+    { "id": "swisseph_calc", "lane": "engine", "col": 3, "type": "backend", "label": "Swiss Ephemeris", "sublabel": "Planetary coordinates", "width": 132 },
+    { "id": "skyfield_check", "lane": "audit", "col": 3, "type": "security", "label": "JPL DE421 Validator", "sublabel": "Δλ < 0.01° check", "tag": "Independent pass", "width": 132 },
+    { "id": "traditions_calc", "lane": "engine", "col": 4, "type": "backend", "label": "9 Tradition Engines", "sublabel": "Kundali, BaZi, ZiWei...", "width": 132 },
+    { "id": "domain_eval", "lane": "synthesis", "col": 4, "type": "backend", "label": "Domain Synthesis", "sublabel": "3 primary cluster votes", "width": 132 },
+    { "id": "dossier_render", "lane": "client", "col": 5, "type": "frontend", "label": "Observatory Dossier", "sublabel": "10 SVG wheels + radar", "width": 132 }
+  ],
+  "edges": [
+    { "id": "e_input_norm", "from": "input_form", "to": "time_norm", "variant": "emphasis" },
+    { "id": "e_norm_cusp", "from": "time_norm", "to": "cusp_audit", "variant": "default" },
+    { "id": "e_cusp_swisseph", "from": "cusp_audit", "to": "swisseph_calc", "variant": "emphasis" },
+    { "id": "e_swisseph_skyfield", "from": "swisseph_calc", "to": "skyfield_check", "label": "validate", "variant": "security" },
+    { "id": "e_swisseph_traditions", "from": "swisseph_calc", "to": "traditions_calc", "label": "coordinates", "variant": "emphasis" },
+    { "id": "e_traditions_domain", "from": "traditions_calc", "to": "domain_eval", "label": "polarities", "variant": "emphasis" },
+    { "id": "e_domain_dossier", "from": "domain_eval", "to": "dossier_render", "label": "consensus payload", "variant": "emphasis" }
+  ],
+  "cards": [
+    { "dot": "cyan", "title": "Astrometric Normalization", "items": ["Geodetic coordinates resolve IANA timezone history", "Equation of Time computes true solar time (LAST/LMST)", "Cusp proximity warns of boundary-sensitive Ascendants"] },
+    { "dot": "emerald", "title": "Dual-Engine Independent Gate", "items": ["Swiss Ephemeris 2.10 provides sub-arcsecond accuracy", "NASA JPL DE421 provides independent ephemeris verification", "Discrepancies >0.01° trigger calculation warnings"] },
+    { "dot": "rose", "title": "Cross-Cultural Consensus", "items": ["Separation of prominence from polarity across life domains", "Triangulation among Vedic, Western, and Sinic clusters", "Empirical divergence rate quantification without double-counting"] }
+  ]
+}

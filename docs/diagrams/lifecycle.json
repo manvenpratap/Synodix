@@ -1,0 +1,71 @@
+{
+  "schema_version": 2,
+  "diagram_type": "lifecycle",
+  "meta": {
+    "title": "Synodix Astrometric Verification Lifecycle",
+    "output": "docs/diagrams/lifecycle.html",
+    "animation": "trace",
+    "visual_preset": "signal-flow",
+    "quality_profile": "showcase"
+  },
+  "lanes": [
+    { "id": "main", "label": "Astrometric Pipeline" },
+    { "id": "waiting", "label": "Boundary & Invariant Gates" },
+    { "id": "recovery", "label": "Sensitivity & Cusp Sweep" },
+    { "id": "terminal", "label": "Terminal Verification" }
+  ],
+  "states": [
+    { "id": "queued", "type": "start", "label": "Telemetry Ingest", "sublabel": "birth instant & coordinates", "lane": "main", "col": 0, "step": "01", "tag": "entry" },
+    { "id": "normalizing", "type": "active", "label": "Solar Normalizing", "sublabel": "UTC, LMST, LAST solved", "lane": "main", "col": 1, "step": "02", "tag": "solar" },
+    { "id": "ephemeris", "type": "active", "label": "Dual Ephemeris", "sublabel": "SwissEph & JPL DE421", "lane": "main", "col": 2, "step": "03", "tag": "astrometry" },
+    { "id": "traditions", "type": "active", "label": "Traditions Engine", "sublabel": "9 systems calculated", "lane": "main", "col": 3, "step": "04", "tag": "traditions" },
+    { "id": "synthesizing", "type": "active", "label": "Consensus Synthesis", "sublabel": "3 clusters & radar", "lane": "main", "col": 4, "step": "05", "tag": "synthesis" },
+    { "id": "parity_gate", "type": "decision", "label": "Parity Gate", "sublabel": "SwissEph vs JPL check", "lane": "waiting", "col": 2, "tag": "parity" },
+    { "id": "cusp_detect", "type": "decision", "label": "Cusp Audit", "sublabel": "border orb proximity", "lane": "waiting", "col": 3, "tag": "boundary" },
+    { "id": "drift_sweep", "type": "waiting", "label": "Drift Sweep", "sublabel": "±15m confidence scan", "lane": "recovery", "col": 3, "tag": "sweep" },
+    { "id": "parity_failed", "type": "failure", "label": "Ephemeris Reject", "sublabel": "diff >= 0.01°", "lane": "terminal", "col": 2, "tag": "terminal" },
+    { "id": "cusp_flagged", "type": "waiting", "label": "Cusp Flagged", "sublabel": "dual sign confidence", "lane": "terminal", "col": 3, "tag": "terminal" },
+    { "id": "verified", "type": "success", "label": "Chart Verified", "sublabel": "dossier & wheels ready", "lane": "terminal", "col": 4, "tag": "terminal" }
+  ],
+  "transitions": [
+    { "from": "queued", "to": "normalizing" },
+    { "from": "normalizing", "to": "ephemeris" },
+    { "from": "ephemeris", "to": "parity_gate", "variant": "security", "label": "cross-validate" },
+    { "from": "parity_gate", "to": "traditions", "label": "parity pass" },
+    { "from": "parity_gate", "to": "parity_failed", "variant": "security", "label": "diff >= 0.01°" },
+    { "from": "traditions", "to": "cusp_detect", "variant": "security", "label": "audit cusps" },
+    { "from": "cusp_detect", "to": "drift_sweep", "variant": "dashed", "label": "orb < 1.0°" },
+    { "from": "drift_sweep", "to": "cusp_flagged", "variant": "security" },
+    { "from": "cusp_detect", "to": "synthesizing", "label": "cusp safe" },
+    { "from": "synthesizing", "to": "verified", "variant": "emphasis", "label": "consensus pass" }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "Deterministic Hot Path",
+      "items": [
+        "Sequential transition from raw birth telemetry through solar normalization to dual ephemeris",
+        "9 tradition engines execute deterministically before consensus matrix synthesis",
+        "Final verified state unlocks all 10 interactive observatory charts and executive dossier"
+      ]
+    },
+    {
+      "dot": "rose",
+      "title": "Dual-Engine Parity Gate",
+      "items": [
+        "Planetary positions cross-checked between Swiss Ephemeris 2.10 and NASA JPL DE421",
+        "Discrepancies greater than 0.01° trigger an astrometric reject",
+        "Rahu/Ketu mathematical opposition (180.000°) validated prior to Jyotisha chart generation"
+      ]
+    },
+    {
+      "dot": "amber",
+      "title": "Cusp & Drift Sensitivity Loop",
+      "items": [
+        "Positions within 1.0° of house/sign cusps are flagged to prevent overconfident interpretations",
+        "Uncertainty windows trigger sensitivity sweeps across birth instant boundaries",
+        "Confidence tags and alternative readings propagate transparently to the user"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "Synodix Astrometric Triangulation Engine Architecture",
+    "output": "docs/diagrams/architecture.html",
+    "quality_profile": "showcase"
+  },
+  "components": [
+    { "id": "client_ui", "type": "frontend", "label": "Observatory Web UI", "sublabel": "React 19 / Vite / Tailwind", "pos": [40, 220], "size": [140, 60], "tag": "PWA / Capacitor" },
+    { "id": "vault", "type": "database", "label": "Client Vault", "sublabel": "Offline IndexedDB / Local", "pos": [40, 360], "size": [140, 60], "tag": "Zero-Cloud / Private" },
+    { "id": "gateway", "type": "cloud", "label": "API Gateway", "sublabel": "CORS / Uvicorn Proxy", "pos": [340, 220], "size": [130, 60] },
+    { "id": "svg_visualizers", "type": "frontend", "label": "10 Classical SVG Wheels", "sublabel": "Pure Vector Visualizers", "pos": [340, 360], "size": [150, 60] },
+    { "id": "fastapi_core", "type": "backend", "label": "FastAPI Core", "sublabel": "REST Endpoints :8000", "pos": [590, 220], "size": [140, 64], "tag": "Python 3.12" },
+    { "id": "time_audit", "type": "backend", "label": "Time & Boundary Audit", "sublabel": "LAST / LMST / Cusps", "pos": [590, 80], "size": [140, 60] },
+    { "id": "swisseph", "type": "backend", "label": "Swiss Ephemeris 2.10", "sublabel": "Primary Astro Engine", "pos": [840, 140], "size": [150, 64], "tag": "pyswisseph" },
+    { "id": "skyfield", "type": "backend", "label": "NASA JPL DE421", "sublabel": "Independent Validator", "pos": [840, 300], "size": [150, 64], "tag": "skyfield" },
+    { "id": "traditions_engine", "type": "backend", "label": "9 Tradition Engines", "sublabel": "Vedic, BaZi, Western, etc.", "pos": [1140, 140], "size": [160, 64], "tag": "Deterministic Math" },
+    { "id": "synthesis_matrix", "type": "backend", "label": "Triangulation Matrix", "sublabel": "Domain Consensus Engine", "pos": [1140, 300], "size": [160, 64], "tag": "Divergence Metric" }
+  ],
+  "boundaries": [
+    { "kind": "region", "label": "Client Tier (Local Browser / Mobile Device)", "wraps": ["client_ui", "vault", "svg_visualizers"] },
+    { "kind": "security-group", "label": "Synodix Astrometric Calculation Daemon", "wraps": ["fastapi_core", "time_audit", "swisseph", "skyfield", "traditions_engine", "synthesis_matrix"] }
+  ],
+  "connections": [
+    { "id": "ui-to-vault", "from": "client_ui", "to": "vault", "label": "persist profiles", "variant": "dashed" },
+    { "id": "ui-to-gateway", "from": "client_ui", "to": "gateway", "label": "POST /api/compute-chart", "variant": "emphasis" },
+    { "id": "gateway-to-api", "from": "gateway", "to": "fastapi_core", "label": "dispatch request" },
+    { "id": "api-to-audit", "from": "fastapi_core", "to": "time_audit", "label": "normalize time & coords", "fromSide": "top", "toSide": "bottom" },
+    { "id": "api-to-swisseph", "from": "fastapi_core", "to": "swisseph", "label": "compute positions", "fromSide": "right", "toSide": "left" },
+    { "id": "api-to-skyfield", "from": "fastapi_core", "to": "skyfield", "label": "cross-validate", "fromSide": "right", "toSide": "left" },
+    { "id": "swisseph-to-traditions", "from": "swisseph", "to": "traditions_engine", "label": "celestial coordinates", "fromSide": "right", "toSide": "left" },
+    { "id": "traditions-to-synthesis", "from": "traditions_engine", "to": "synthesis_matrix", "label": "domain polarities", "fromSide": "bottom", "toSide": "top" },
+    { "id": "skyfield-to-synthesis", "from": "skyfield", "to": "synthesis_matrix", "label": "invariants report", "fromSide": "right", "toSide": "left" },
+    { "id": "ui-to-visualizers", "from": "client_ui", "to": "svg_visualizers", "label": "render wheels", "fromSide": "bottom", "toSide": "left" }
+  ],
+  "cards": [
+    { "dot": "cyan", "title": "Client Observatory", "items": ["React 19 + Tailwind CSS v4 spatial UI", "10 pure native vector SVG astrological visualizers", "Zero-cloud private local vault for 100+ profiles"] },
+    { "dot": "emerald", "title": "Astrometric Dual-Engine", "items": ["Swiss Ephemeris 2.10 high-precision ephemeris", "Independent validation via NASA JPL DE421 ephemeris kernel", "Continuous discrepancy checks with <0.01° tolerance"] },
+    { "dot": "rose", "title": "Consensus & Divergence", "items": ["Triangulation across 9 historically isolated traditions", "3 primary voting clusters with non-voting symbolic overlays", "Mathematical divergence rate quantification without double-counting"] }
+  ]
+}

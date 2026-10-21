@@ -1,7 +1,7 @@
 # Synodix: Project Context & Working Memory
 
-**Last Updated:** 2026-10-21 00:48:00 UTC  
-**Version:** 2.2.0  
+**Last Updated:** 2026-10-21 01:10:00 UTC  
+**Version:** 2.3.0  
 **Stack:** Python 3.12 (FastAPI, Swiss Ephemeris 2.10, Skyfield DE421) + TypeScript / React 19 / Vite / Tailwind CSS v4  
 **Workspace:** `/Volumes/Study/Projects/Astrology` (symlinked as `/Volumes/Study/Astrology`)  
 **Git Remote:** `https://github.com/manvenpratap/Synodix.git`  
@@ -9,7 +9,10 @@
 ---
 
 ## 1. Current Status & Milestone
-- **Active Phase**: Synodix Astrometric Triangulation Engine & Observatory
+- **Active Phase**: Archify Core Diagrams & Authoritative Wiki Catalogue (Completed)
+- **Archify Invariant**: 5/5 core Archify diagrams compiled into standalone HTML in `docs/diagrams/` (`architecture.html`, `workflow.html`, `sequence.html`, `dataflow.html`, `lifecycle.html`) with zero validation errors.
+- **Wiki Invariant**: Comprehensive 11-file wiki catalogue created in `wiki/` with embedded native vector Mermaid diagrams and zero dead links.
+- **README Invariant**: Root `README.md` fully synchronized with latest system architecture, compiled diagram links, and quickstart runbooks.
 - **Decoupled Architecture**: All fixed culture and domain counts removed across UI, headers, and metadata, allowing dynamic expansion to any number of traditions or life domains.
 - **Workflow Health**: 100% CLEAN (Verified via `./pipeline.sh doctor`)
 - **Test Invariants**: 8/8 regression suites passing in ~0.5s via `./pipeline.sh test --summary`
@@ -33,10 +36,12 @@
 ---
 
 ## 3. Mathematical Verification & Simulation
-- [x] **Dual-Engine Ephemeris Validation**: Real-time cross-validation between Swiss Ephemeris (Moshier/DE431) and Skyfield JPL DE421; $\Delta\lambda < 0.01^\circ$ tolerance.
+- [x] **Dual-Engine Ephemeris Validation**: Real-time cross-validation between Swiss Ephemeris 2.10 and Skyfield JPL DE421; $\Delta\lambda < 0.01^\circ$ tolerance.
 - [x] **Rodden-Rated Benchmark Dataset**: 100 verified historical titans indexed with AA/A birth certificate records.
 - [x] **Global Consensus Matrix**: Cross-cultural synthesis across evaluated life domains with divergence rates ($\bar{d} \approx 31.8\%$, $\sigma \approx 0.04$).
 - [x] **WCAG 2.2 AA & Motion Preferences**: System-level support for `@media (prefers-reduced-motion: reduce)` and contrast accessibility.
+- [x] **Archify 5-Diagram Suite**: Compiled standalone HTML interactive diagrams (`architecture`, `workflow`, `sequence`, `dataflow`, `lifecycle`).
+- [x] **Authoritative Wiki Suite**: 11 markdown documentation files in `wiki/` with vector Mermaid charts.
 
 ---
 
@@ -45,3 +50,4 @@
 - `./pipeline.sh heal`: Automated self-healing for distribution drift, missing test harness, or git exclusions.
 - `./pipeline.sh test --summary`: Low-token compact test verification (95%+ token reduction).
 - `./pipeline.sh test --smoke`: Fast critical-path smoke tests (health & sample catalog).
+- `./pipeline.sh ship "<message>"`: Automated verified release gate.

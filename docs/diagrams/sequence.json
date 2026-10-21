@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "diagram_type": "sequence",
+  "meta": {
+    "title": "Synodix Astrometric Triangulation API Sequence",
+    "output": "docs/diagrams/sequence.html",
+    "viewBox": [1120, 780],
+    "column_fit": "spread",
+    "animation": "trace",
+    "quality_profile": "showcase"
+  },
+  "participants": [
+    { "id": "user", "type": "external", "label": "User / Researcher", "sublabel": "Astrological seeker" },
+    { "id": "ui", "type": "frontend", "label": "Observatory UI", "sublabel": "React 19 Frontend" },
+    { "id": "api", "type": "backend", "label": "FastAPI Core", "sublabel": "POST /api/compute-chart" },
+    { "id": "audit", "type": "backend", "label": "Time & Boundary", "sublabel": "Solar & Cusp audit" },
+    { "id": "swisseph", "type": "backend", "label": "Swiss Ephemeris", "sublabel": "Planetary positions" },
+    { "id": "skyfield", "type": "backend", "label": "NASA JPL DE421", "sublabel": "Independent validator" },
+    { "id": "synthesis", "type": "backend", "label": "Synthesis Matrix", "sublabel": "Consensus & Divergence" }
+  ],
+  "segments": [
+    { "from": 150, "to": 285, "label": "Ingestion & Audit" },
+    { "from": 295, "to": 430, "label": "Dual Ephemeris & Traditions" },
+    { "from": 440, "to": 580, "label": "Consensus & Reactive Render" }
+  ],
+  "messages": [
+    { "id": "m1", "from": "user", "to": "ui", "y": 160, "label": "Enter birth instant & location", "variant": "default" },
+    { "id": "m2", "from": "ui", "to": "api", "y": 195, "label": "POST /api/compute-chart", "variant": "emphasis" },
+    { "id": "m3", "from": "api", "to": "audit", "y": 230, "label": "normalize_birth_input()", "variant": "default" },
+    { "id": "m4", "from": "audit", "to": "api", "y": 265, "label": "audit results (LMST, LAST, cusp proximity)", "variant": "return" },
+    { "id": "m5", "from": "api", "to": "swisseph", "y": 305, "label": "calc_ut() positions & traditions", "variant": "emphasis" },
+    { "id": "m6", "from": "swisseph", "to": "skyfield", "y": 340, "label": "cross-validate (SwissEph vs JPL DE421)", "variant": "security" },
+    { "id": "m7", "from": "skyfield", "to": "api", "y": 375, "label": "validation diffs (<0.01°) & invariants PASS", "variant": "return" },
+    { "id": "m8", "from": "swisseph", "to": "api", "y": 410, "label": "astronomical base & 9 tradition payloads", "variant": "return" },
+    { "id": "m9", "from": "api", "to": "synthesis", "y": 450, "label": "build_synthesis()", "variant": "emphasis" },
+    { "id": "m10", "from": "synthesis", "to": "api", "y": 485, "label": "consensus matrix & markdown reading", "variant": "return" },
+    { "id": "m11", "from": "api", "to": "ui", "y": 520, "label": "200 OK (verified chart JSON)", "variant": "return" },
+    { "id": "m12", "from": "ui", "to": "user", "y": 555, "label": "Render 10 SVG wheels, radar, & dossier", "variant": "return" }
+  ],
+  "activations": [
+    { "participant": "ui", "from": 160, "to": 565, "type": "frontend" },
+    { "participant": "api", "from": 195, "to": 530, "type": "backend" },
+    { "participant": "audit", "from": 230, "to": 270, "type": "backend" },
+    { "participant": "swisseph", "from": 305, "to": 415, "type": "backend" },
+    { "participant": "skyfield", "from": 340, "to": 380, "type": "backend" },
+    { "participant": "synthesis", "from": 450, "to": 490, "type": "backend" }
+  ],
+  "cards": [
+    { "dot": "cyan", "title": "Client Ingestion", "items": ["Birth data includes explicit time certainty and coordinates", "Synchronous REST call with sub-second execution", "Reactive state updates across all 5 observatory screens"] },
+    { "dot": "emerald", "title": "Dual-Engine Gate", "items": ["Swiss Ephemeris calculates tropical and sidereal longitudes", "Skyfield independently evaluates JPL DE421 ephemeris kernel", "Invariant checks enforce Rahu/Ketu 180° and Maya round-trip"] },
+    { "dot": "rose", "title": "Synthesis & Output", "items": ["9 Life Domains evaluated across 3 primary clusters", "Non-causal symbolic overlays project temperament axes", "Complete markdown reading and SVG visualizers rendered"] }
+  ]
+}

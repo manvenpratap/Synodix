@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "diagram_type": "dataflow",
+  "meta": {
+    "title": "Synodix Astrometric Data Pipeline",
+    "output": "docs/diagrams/dataflow.html",
+    "viewBox": [1080, 560],
+    "animation": "trace",
+    "quality_profile": "showcase"
+  },
+  "stages": [
+    { "label": "Sources" },
+    { "label": "Ingest & Audit" },
+    { "label": "Astrometric Core" },
+    { "label": "Tradition Synthesis" },
+    { "label": "Observatory" }
+  ],
+  "nodes": [
+    { "id": "birth_input", "type": "frontend", "label": "Birth Telemetry", "sublabel": "Date, UTC, Lat/Lon", "stage": 0, "row": 0, "tag": "raw input" },
+    { "id": "geo_tz", "type": "cloud", "label": "Geo & Ephemeris DB", "sublabel": "Olson TZ & Delta-T", "stage": 0, "row": 2, "tag": "reference" },
+    { "id": "time_audit", "type": "backend", "label": "Solar Auditor", "sublabel": "LMST, LAST, Eq of Time", "stage": 1, "row": 0, "tag": "normalized" },
+    { "id": "cusp_guard", "type": "security", "label": "Cusp Boundary Guard", "sublabel": "Orb & sensitivity check", "stage": 1, "row": 2, "tag": "safety" },
+    { "id": "swisseph", "type": "database", "label": "SwissEph 2.10", "sublabel": "calc_ut() high-precision", "stage": 2, "row": 0, "tag": "primary", "width": 128 },
+    { "id": "skyfield", "type": "database", "label": "NASA JPL DE421", "sublabel": "Skyfield cross-validator", "stage": 2, "row": 2, "tag": "invariant", "width": 128 },
+    { "id": "traditions", "type": "backend", "label": "9 Tradition Engines", "sublabel": "Western, Vedic, BaZi...", "stage": 3, "row": 0, "tag": "engines" },
+    { "id": "consensus", "type": "backend", "label": "Consensus Engine", "sublabel": "3-cluster voting & radar", "stage": 3, "row": 2, "tag": "consensus" },
+    { "id": "dossier", "type": "frontend", "label": "Observatory Dossier", "sublabel": "Executive synthesis doc", "stage": 4, "row": 0, "tag": "UI" },
+    { "id": "wheels", "type": "frontend", "label": "Astrometric Wheels", "sublabel": "10 interactive SVG wheels", "stage": 4, "row": 2, "tag": "UI" }
+  ],
+  "flows": [
+    { "id": "f1", "from": "birth_input", "to": "time_audit", "label": "raw birth instant", "variant": "emphasis" },
+    { "id": "f2", "from": "geo_tz", "to": "cusp_guard", "label": "offsets & timezones", "variant": "default" },
+    { "id": "f3", "from": "time_audit", "to": "cusp_guard", "label": "sidereal times", "variant": "security", "fromSide": "bottom", "toSide": "top", "route": "straight", "labelAt": [363, 201] },
+    { "id": "f4", "from": "time_audit", "to": "swisseph", "label": "UTC Julian date", "variant": "emphasis", "route": "straight" },
+    { "id": "f5", "from": "swisseph", "to": "skyfield", "label": "diff check (<0.01°)", "variant": "security", "fromSide": "bottom", "toSide": "top", "route": "straight", "labelAt": [586, 201] },
+    { "id": "f6", "from": "swisseph", "to": "traditions", "label": "planetary positions", "variant": "emphasis", "route": "straight", "labelAt": [642, 119] },
+    { "id": "f7", "from": "traditions", "to": "consensus", "label": "tradition vectors", "variant": "emphasis", "fromSide": "bottom", "toSide": "top", "route": "straight", "labelAt": [795, 201] },
+    { "id": "f8", "from": "consensus", "to": "dossier", "label": "synthesis dossier", "variant": "emphasis" },
+    { "id": "f9", "from": "consensus", "to": "wheels", "label": "polar coordinates", "variant": "default", "labelAt": [880, 429] },
+    { "id": "f10", "from": "skyfield", "to": "consensus", "label": "invariant parity PASS", "variant": "security", "route": "straight", "labelAt": [642, 429] }
+  ],
+  "cards": [
+    {
+      "dot": "emerald",
+      "title": "Dual-Engine Astrometric Hot Path",
+      "items": [
+        "Raw coordinates and epoch are normalized to UTC Julian Day and LMST/LAST",
+        "Swiss Ephemeris calculates tropical and Lahiri sidereal planetary positions",
+        "Skyfield JPL DE421 provides independent cross-validation for precision verification"
+      ]
+    },
+    {
+      "dot": "rose",
+      "title": "Cusp & Invariant Safety Boundary",
+      "items": [
+        "Planetary positions within 1.0° of house/sign borders generate sensitivity flags",
+        "Rahu/Ketu 180° opposition and Maya Tzolk'in-Haab round-trip mathematically audited",
+        "Time uncertainty spans propagate dynamic confidence intervals into dossier"
+      ]
+    },
+    {
+      "dot": "orange",
+      "title": "Cross-Tradition Triangulation",
+      "items": [
+        "9 distinct cultural traditions compute independent celestial structures",
+        "Consensus engine groups traditions into 3 primary clusters (Western, Eastern, Mesoamerican)",
+        "Divergence index quantified alongside prominence and polarity metrics"
+      ]
+    }
+  ]
+}
