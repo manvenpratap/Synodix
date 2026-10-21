@@ -1,7 +1,7 @@
 # Synodix: Project Context & Working Memory
 
-**Last Updated:** 2026-10-21 01:45:00 UTC  
-**Version:** 2.4.0  
+**Last Updated:** 2026-10-21 04:15:00 UTC  
+**Version:** 2.5.0  
 **Stack:** Python 3.12 (FastAPI, Swiss Ephemeris 2.10, Skyfield DE421) + TypeScript / React 19 / Vite / Tailwind CSS v4  
 **Workspace:** `/Volumes/Study/Projects/Astrology` (symlinked as `/Volumes/Study/Astrology`)  
 **Git Remote:** `https://github.com/manvenpratap/Synodix.git`  
@@ -9,21 +9,15 @@
 ---
 
 ## 1. Current Status & Milestone
-- **Active Phase**: Three-Tier Astrological Calculation Engine & Unified Chronocrator Timeline (Completed)
-- **Tier 1 (Astrometric Core)**:
-  - Six selectable house systems: Placidus (`P`), Whole Sign (`W`), Regiomontanus (`R`), Koch (`K`), Equal (`E`), Campanus (`C`).
-  - Minor celestial bodies & asteroids: Chiron, Mean Lilith, True Lilith, Ceres, Pallas, Juno, Vesta in both Tropical and Sidereal zodiacs.
-  - 17 Royal and Behenian Fixed Stars (Sirius, Canopus, Arcturus, Vega, Capella, Rigel, Procyon, Betelgeuse, Aldebaran, Spica, Antares, Fomalhaut, Deneb, Regulus, Algol, Altair, Alcyone) with tight conjunction detection ($<1.5^\circ$).
-- **Tier 2 (Tradition Depth)**:
-  - **Jyotisha**: Parashari Ashtakavarga (Sarvashtakavarga 337-bindu invariant grid + Bhinnashtakavarga for 7 grahas) and 7 Jaimini Chara Karakas (AK, AmK, BK, MK, PK, GK, DK).
-  - **BaZi**: Yong Shen (Useful God & Element Recommendation engine) and Liu Nian (Annual Pillar interactions, clashes, harmonies, and Ten Gods relations).
-  - **Zi Wei Dou Shu**: Canonical 14 Major Star Radiance/Brightness ratings (庙 Miao, 旺 Wang, 得 De, 利 Li, 平 Ping, 陷 Xian) across 12 earthly branches.
-  - **Western**: Real-time Active Transits Engine calculating current transiting celestial positions against natal chart with applying/separating orbs.
-- **Tier 3 (Unified Predictive Chronocrator Timeline)**:
-  - Dynamically resolved multi-tradition chronocrator timeline unifying active Vimshottari Mahadasha/Antardasha, active BaZi Da Yun luck pillar + Liu Nian annual pillar, Western Annual Profections + active transits, Zi Wei decadal palace, and Persian Firdaria master of period.
-  - Multi-system convergent domain analysis identifying corroborated life inflection points.
+- **Active Phase**: Solar Day Light Theme & Dual-Theme Observatory Engine (Completed)
+- **Solar Day Light Theme**:
+  - High-contrast alabaster (`#f8fafc`) and crisp pure-white surface palette with slate borders (`#e2e8f0`).
+  - Calibrated spectral telemetry accents adhering to WCAG 2.2 AA contrast standards on light backgrounds (Sky-700, Emerald-700, Amber-700, Rose-700, Purple-700).
+  - SVG visualizer dynamic adaptation: automatic remapping of fills, strokes, and text for North Indian Kundali, 360° aspect wheels, Wu Xing pentagrams, and 9-domain radar matrices.
+  - Persistent theme toggle with `localStorage` memory and OS system `prefers-color-scheme` auto-detection.
+  - Multi-location accessibility: header bar, desktop sidebar footer, and mobile drawer.
 - **Workflow Health**: 100% CLEAN (Verified via `./pipeline.sh doctor`)
-- **Test Invariants**: 8/8 regression suites passing in ~0.6s via `./pipeline.sh test --summary`
+- **Test Invariants**: 10/10 regression suites passing via `./pipeline.sh test --summary`
 - **Active Daemons**:
   - Backend API: `http://127.0.0.1:8000` (FastAPI daemon)
   - Frontend Observatory: `http://127.0.0.1:5173` (Vite HMR dev server)

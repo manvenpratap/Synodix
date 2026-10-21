@@ -9,7 +9,13 @@ from playwright.async_api import async_playwright, Page, Browser, BrowserContext
 
 # Default target URL (can point to local single-file HTML or local dev server)
 LOCAL_INDEX = pathlib.Path("index.html").resolve()
-APP_URL = LOCAL_INDEX.as_uri() if LOCAL_INDEX.exists() else "http://localhost:3000"
+APP_URL = "http://127.0.0.1:5173" if not LOCAL_INDEX.exists() else LOCAL_INDEX.as_uri()
+
+def _get_launch_args():
+    mac_chrome = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
+    if pathlib.Path(mac_chrome).exists():
+        return {"headless": True, "executable_path": mac_chrome}
+    return {"headless": True}
 
 
 # Event loop policy handled automatically by modern pytest-asyncio
@@ -23,7 +29,7 @@ async def page_with_data():
     """
     console_errors = []
     async with async_playwright() as pw:
-        browser: Browser = await pw.chromium.launch(headless=True)
+        browser: Browser = await pw.chromium.launch(**_get_launch_args())
         ctx: BrowserContext = await browser.new_context(
             viewport={"width": 1400, "height": 900}
         )
@@ -50,7 +56,7 @@ async def blank_page():
     """
     console_errors = []
     async with async_playwright() as pw:
-        browser: Browser = await pw.chromium.launch(headless=True)
+        browser: Browser = await pw.chromium.launch(**_get_launch_args())
         ctx: BrowserContext = await browser.new_context(
             viewport={"width": 1400, "height": 900}
         )
