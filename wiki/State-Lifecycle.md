@@ -4,11 +4,7 @@ The Synodix calculation lifecycle is modeled as a deterministic state machine th
 
 ---
 
-## 🧬 Interactive Lifecycle Diagram & Spec
-
----
-
-## 🔁 Vector State Diagram
+## ⏱️ Astrometric Calculation & Invariant State Lifecycle
 
 ```mermaid
 stateDiagram-v2
@@ -23,55 +19,31 @@ stateDiagram-v2
 
     state "Boundary & Invariant Gates" as InvariantGates {
         Ephemeris --> ParityGate: Cross-validate with JPL DE421
-        ParityGate --> Traditions: Diff < 0.01° (PASS)
-        ParityGate --> EphemerisReject: Diff >= 0.01° (FAIL)
-        Traditions --> CuspAudit: Audit boundary proximity
-        CuspAudit --> Synthesizing: Proximity >= 1.0° (CUSP_SAFE)
-        CuspAudit --> DriftSweep: Proximity < 1.0° (NEAR_CUSP)
+        ParityGate --> Ephemeris: Difference < 0.01°
+        ParityGate --> Parity_Failure: Difference >= 0.01°
+
+        Ephemeris --> CuspSweep: Scan sign/house cusps
+        CuspSweep --> Traditions: Distance >= 1.0° (Clean)
+        CuspSweep --> CuspAlert: Distance < 1.0° (Near Cusp)
+        CuspAlert --> Traditions: Attach sensitivity flag
     }
 
-    state "Sensitivity & Recovery" as Sensitivity {
-        DriftSweep --> CuspFlagged: ±15m sweep completed
-        CuspFlagged --> Synthesizing: Propagate uncertainty
+    state "Consensus & Delivery" as Delivery {
+        Synthesizing --> Voting: 3-Cluster Aggregation
+        Voting --> Dossier_Compiled: Metrics Calculated
+        Dossier_Compiled --> Active_Observatory: Render 10 SVG Wheels
     }
 
-    state "Terminal Verification Exits" as Terminal {
-        Synthesizing --> ChartVerified: All Invariants Validated
-        EphemerisReject --> [*]: Log Telemetry & Abort
-        ChartVerified --> [*]: Render 10 Wheels & Dossier
-    }
+    Parity_Failure --> Error_Terminal: Abort computation
+    Active_Observatory --> [*]
+    Error_Terminal --> [*]
 ```
 
----
-
-## 📋 State Definitions & Transition Criteria
-
-### 1. Hot Path States
-| State ID | Type | Step | Description |
-| :--- | :--- | :--- | :--- |
-| `queued` | Start | `01` | Birth input accepted by API; format and coordinates validated |
-| `normalizing` | Active | `02` | Universal Time, Julian Day, LMST, and Equation of Time calculated |
-| `ephemeris` | Active | `03` | Swiss Ephemeris 2.10 calculates planetary longitudes and Placidus houses |
-| `traditions` | Active | `04` | 9 independent cultural modules execute concurrently |
-| `synthesizing`| Active | `05` | 3-cluster voting, prominence, polarity, and divergence metric derived |
-
-### 2. Invariant & Boundary Gates
-| State ID | Gate Type | Verification Target | Action on Pass | Action on Fail |
-| :--- | :--- | :--- | :--- | :--- |
-| `parity_gate` | Security Gate | SwissEph vs JPL DE421 difference | Proceed to `traditions` if $|\Delta\lambda| < 0.01^\circ$ | Route to `ephemeris_reject` |
-| `cusp_audit` | Decision Gate | Distance to sign/house border | Proceed to `synthesizing` if $\text{dist} \ge 1.0^\circ$ | Trigger `drift_sweep` if $\text{dist} < 1.0^\circ$ |
-
-### 3. Sensitivity & Recovery Loop
-| State ID | Loop Action | Outcome |
-| :--- | :--- | :--- |
-| `drift_sweep` | Executes $\pm 15$ minute time sweep across birth instant | Produces confidence envelopes for Ascendant and fast-moving planets |
-| `cusp_flagged` | Tags chart with `CUSP_SENSITIVITY_ACTIVE` | Embeds alternate sign readings and confidence flags into executive dossier |
-
-### 4. Terminal Exits
-| State ID | Exit Type | Final Action |
-| :--- | :--- | :--- |
-| `ephemeris_reject` | Terminal Failure | Aborts chart generation; logs discrepancy coordinates to diagnostic log |
-| `chart_verified` | Terminal Success | Emits HTTP 200 with full verified chart payload; unlocks all 10 observatory SVG wheels |
-
----
-*Next: [Runbooks & Operations](Runbooks.md) • [Home Overview](Home.md)*
+### Lifecycle State Machine Transitions
+* **`Queued`**: Receives raw request payload; validates geographical bounds and calendar integrity.
+* **`Normalizing`**: Resolves local daylight saving anomalies, converts to UTC, and calculates sidereal hour angles.
+* **`ParityGate`**: Cross-validates Swiss Ephemeris against NASA JPL DE421 numerical coordinates. Discrepancies $\ge 0.01^\circ$ trigger `Parity_Failure`.
+* **`CuspSweep`**: Evaluates cusp proximity. When bodies are within $1.0^\circ$ of a boundary, `CuspAlert` attaches sensitivity tags to prevent overconfident interpretations.
+* **`Traditions`**: Concurrently evaluates the nine independent tradition models.
+* **`Voting & Dossier_Compiled`**: Triangulates cross-tradition domain scores and compiles the markdown executive dossier.
+* **`Active_Observatory`**: Terminal successful state where all 10 interactive SVG wheels render in the client browser.

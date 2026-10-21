@@ -10,14 +10,14 @@ Synodix unifies high-precision modern astrometry (Swiss Ephemeris 2.10 and NASA 
 
 | Document | Description | Key Focus |
 | :--- | :--- | :--- |
-| **[Architecture](Architecture.md)** | Full-stack system topology & architecture | Client, API Gateway, Dual-Engine Core, Synthesis |
-| **[Astrometric Dual-Engine](Astrometric-Dual-Engine.md)** | High-precision ephemeris computation & time normalization | SwissEph 2.10, JPL DE421, LMST/LAST, Cusp Audit |
-| **[Nine Traditions Engine](Nine-Traditions-Engine.md)** | Mathematical models for 9 astrological cultures | Western, Vedic, BaZi, Zi Wei, Maya, Tibetan, Persian, Egyptian, Māori |
-| **[Consensus Matrix](Consensus-Matrix.md)** | Cross-tradition triangulation mathematics | 9 Life Domains, 3 Clusters, Prominence, Polarity, Divergence |
-| **[API Reference](API-Reference.md)** | REST API endpoints, schemas, and sequence flow | `POST /api/compute-chart`, Invariant guarantees |
-| **[Data Pipelines](Data-Pipelines.md)** | Ingestion, transformation, and distribution pipeline | Ingest $\rightarrow$ Audit $\rightarrow$ Core $\rightarrow$ Synthesis $\rightarrow$ UI |
-| **[State Lifecycle](State-Lifecycle.md)** | Verification state transitions and failure modes | Telemetry $\rightarrow$ Ephemeris $\rightarrow$ Cusp Sweep $\rightarrow$ Verified |
-| **[Runbooks & Operations](Runbooks.md)** | Developer quickstart, pipeline automation, deployment | `./pipeline.sh`, Docker, Testing, Release gates |
+| **[Architecture](Architecture)** | Full-stack system topology & architecture | Client, API Gateway, Dual-Engine Core, Synthesis |
+| **[Astrometric Dual-Engine](Astrometric-Dual-Engine)** | High-precision ephemeris computation & time normalization | SwissEph 2.10, JPL DE421, LMST/LAST, Cusp Audit |
+| **[Nine Traditions Engine](Nine-Traditions-Engine)** | Mathematical models for 9 astrological cultures | Western, Vedic, BaZi, Zi Wei, Maya, Tibetan, Persian, Egyptian, Māori |
+| **[Consensus Matrix](Consensus-Matrix)** | Cross-tradition triangulation mathematics | 9 Life Domains, 3 Clusters, Prominence, Polarity, Divergence |
+| **[API Reference](API-Reference)** | REST API endpoints, schemas, and sequence flow | `POST /api/compute-chart`, Invariant guarantees |
+| **[Data Pipelines](Data-Pipelines)** | Ingestion, transformation, and distribution pipeline | Ingest $ightarrow$ Audit $ightarrow$ Core $ightarrow$ Synthesis $ightarrow$ UI |
+| **[State Lifecycle](State-Lifecycle)** | Verification state transitions and failure modes | Telemetry $ightarrow$ Ephemeris $ightarrow$ Cusp Sweep $ightarrow$ Verified |
+| **[Runbooks & Operations](Runbooks)** | Developer quickstart, pipeline automation, deployment | `./pipeline.sh`, Docker, Testing, Release gates |
 
 ---
 
@@ -25,7 +25,7 @@ Synodix unifies high-precision modern astrometry (Swiss Ephemeris 2.10 and NASA 
 
 1. **Astrometric Rigor**: No fuzzy approximations. All planetary and luminary coordinates are calculated using Swiss Ephemeris 2.10 down to arcseconds and cross-checked against NASA JPL DE421 kernel ephemerides.
 2. **Cultural Fidelity**: Each tradition's internal logic is preserved authentically without westernizing or homogenizing formulas (e.g., BaZi true solar time, Maya Tzolk'in-Haab cycles, Vedic Lahiri ayanamsha, Tibetan Phugpa solar/lunar years).
-3. **Mathematical Triangulation**: Traditions are grouped into three primary clusters to compute corroboration without false unanimity. Agreement amplifies signal; disagreement is surfaced transparently as an inherent divergence metric ($\bar{d} \approx 31.8\%$).
+3. **Mathematical Triangulation**: Traditions are grouped into three primary clusters to compute corroboration without false unanimity. Agreement amplifies signal; disagreement is surfaced transparently as an inherent divergence metric ($ar{d} pprox 31.8\%$).
 4. **Radical Epistemological Humility**: Synodix treats astrology as a structured symbolic language and non-causal synchronicity framework rather than literal physical gravitational determinism. Cusp proximities ($< 1.0^\circ$) trigger explicit sensitivity warnings.
 
 ---
@@ -95,10 +95,14 @@ graph TD
 
 ---
 
-## 📂 Archify Interactive Diagram Artifacts
+## 🏛️ Comprehensive Architecture & Embedded Diagrams
 
-All core architectural diagrams are maintained and compiled into standalone interactive HTML documents with animated trace motion:
-
+All five core system diagrams are embedded natively as vector Mermaid charts across this wiki:
+- **[System Architecture & Dual-Ephemeris Core](Architecture)**: End-to-end component topology, C-bindings, and thread boundaries.
+- **[Multi-Tradition Calculation Workflow](Nine-Traditions-Engine)**: 6-stage operational pipeline from telemetry to consensus.
+- **[Astrometric Request & Verification Sequence](API-Reference)**: Step-by-step actor interactions and parity validation checks.
+- **[Invariant Data Flow Pipeline](Data-Pipelines)**: 5-stage transformation pipeline from birth telemetry to 10 SVG wheels.
+- **[Verification Machine State Lifecycle](State-Lifecycle)**: State machine model, invariant checkpoints, and error boundaries.
 
 ---
-*Synodix Documentation Suite • Maintained with Archify & Graphify Invariants*
+*Synodix Documentation Suite • 100% Native Mermaid Vector Charts*

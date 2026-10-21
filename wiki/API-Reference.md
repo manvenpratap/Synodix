@@ -4,11 +4,7 @@ The Synodix backend is exposed via a high-performance, asynchronous FastAPI serv
 
 ---
 
-## ⏱️ Interactive Sequence Diagram & Spec
-
----
-
-## 🔁 Vector API Request Sequence
+## ⏱️ Execution Sequence: API Request & Astrometric Triangulation
 
 ```mermaid
 sequenceDiagram
@@ -59,6 +55,14 @@ sequenceDiagram
     UI-->>User: Render 10 interactive SVG wheels, radar matrix, & dossier
 ```
 
+### Execution Sequence Details & Guarantees
+1. **Request Intake (Steps 1–2)**: User enters birth datetime and coordinates in the React 19 UI. Payload is sent via HTTPS POST to `/api/compute-chart`.
+2. **Astrometric Normalization (Steps 3–4)**: The Time & Boundary Auditor calculates Julian Day, LMST, LAST, and evaluates whether any planetary body sits within $1.0^\circ$ of a zodiacal or house boundary.
+3. **Dual-Ephemeris Cross-Validation (Steps 5–9)**: Coordinates computed by Swiss Ephemeris 2.10 C-bindings are compared against NASA JPL DE421 numerical integrations. If disagreement exceeds $0.01^\circ$ (36 arcseconds), an invariant exception is raised.
+4. **Autonomous Tradition Processing (Steps 10–11)**: All nine tradition modules evaluate their cultural logic independently without cross-contamination.
+5. **Consensus Triangulation (Steps 12–13)**: The Consensus Matrix triangulates findings into a 3-cluster primary voting model and synthesizes the executive dossier.
+6. **Reactive Client Render (Steps 14–15)**: The UI mounts 10 interactive SVG wheels, the 9-domain radar matrix, and executive markdown report without layout thrashing.
+
 ---
 
 ## 📡 Endpoints
@@ -69,130 +73,25 @@ Calculates the complete multi-tradition astrometric chart, invariant audit, and 
 #### Request Body Schema (`BirthInput`)
 ```json
 {
-  "name": "Hypatia of Alexandria",
-  "birth_date": "1990-06-21",
-  "birth_time": "12:30",
-  "time_certainty": "exact",
-  "latitude": 31.2001,
-  "longitude": 29.9187,
-  "altitude_m": 10.0,
-  "timezone_str": "Africa/Cairo"
+  "year": 1990,
+  "month": 7,
+  "day": 15,
+  "hour": 14,
+  "minute": 30,
+  "second": 0,
+  "latitude": 28.6139,
+  "longitude": 77.2090,
+  "timezone": "Asia/Kolkata",
+  "elevation_m": 216.0
 }
 ```
 
-| Field | Type | Required | Description | Constraints |
-| :--- | :--- | :--- | :--- | :--- |
-| `name` | `string` | Optional | Subject or chart identifier | Defaults to `"Subject"` |
-| `birth_date` | `string` | **Yes** | Gregorian date string | Format: `YYYY-MM-DD` |
-| `birth_time` | `string` | **Yes** | Local civil time string | Format: `HH:MM` (24-hour) |
-| `time_certainty` | `string` | **Yes** | Precision confidence level | `["exact", "approximate", "unknown"]` |
-| `latitude` | `float` | **Yes** | Decimal degrees North ($+$) / South ($-$) | $-90.0 \le \text{lat} \le 90.0$ |
-| `longitude` | `float` | **Yes** | Decimal degrees East ($+$) / West ($-$) | $-180.0 \le \text{lon} \le 180.0$ |
-| `altitude_m` | `float` | No | Observer height above sea level | Defaults to `0.0` meters |
-| `timezone_str` | `string` | **Yes** | IANA Olson database identifier | E.g., `"America/New_York"`, `"Asia/Kolkata"` |
+#### Response Structure (`UnifiedChartResponse`)
+* `meta`: Computation runtime, Julian day, LMST, and ephemeris source versions.
+* `invariant_audit`: Dual-engine parity validation status and cusp proximity flags.
+* `traditions`: Data dictionaries for all 9 systems (Western, Vedic, BaZi, Zi Wei, Maya, Tibetan, Persian, Egyptian, Māori).
+* `consensus`: 3-cluster voting outcomes across 9 life domains, prominence scores, polarity indices, and divergence coefficient.
+* `dossier_markdown`: Ready-to-render executive markdown document.
 
-#### Response Schema (`ChartResponse`)
-```json
-{
-  "subject_name": "Hypatia of Alexandria",
-  "telemetry": {
-    "utc_datetime": "1990-06-21T10:30:00Z",
-    "julian_day_ut": 2448063.9375,
-    "delta_t_sec": 57.2,
-    "local_mean_sidereal_time": "06:23:41",
-    "local_apparent_sidereal_time": "06:23:42",
-    "equation_of_time_min": -1.82
-  },
-  "invariant_audit": {
-    "status": "PASS",
-    "max_ephemeris_delta_deg": 0.0028,
-    "rahu_ketu_opposition_deg": 180.0,
-    "cusp_sensitivity_flags": [
-      {
-        "body": "Mercury",
-        "sign": "Cancer",
-        "distance_to_cusp_deg": 0.42,
-        "flag": "NEAR_SIGN_BORDER"
-      }
-    ]
-  },
-  "traditions": {
-    "western": { /* Houses, aspects, dignities, antiscia */ },
-    "jyotisha": { /* Nakshatra, D-charts, Dashas, Gandanta */ },
-    "bazi": { /* Four Pillars, 10 Gods, Shen Sha, Na Yin */ },
-    "ziwei": { /* 12 Palaces, 14 Stars, Ming Star Quality */ },
-    "maya": { /* Tzolk'in, Haab, Calendar Round, Nawales */ },
-    "tibetan": { /* Mewa 9, Parkha 8, Element Dyn */ },
-    "persian": { /* Almuten Figuris, Firdaria, Sect, Lots */ },
-    "egyptian": { /* 36 Decans, Sothic Rising, Season */ },
-    "maramataka": { /* Lunar phase, Māori nights, Energy */ }
-  },
-  "consensus": {
-    "domains": [
-      {
-        "id": "identity",
-        "title": "Core Identity & Ego",
-        "prominence": 0.88,
-        "polarity": "Expansive",
-        "consensus_tier": "HIGH_CONSENSUS",
-        "participating_clusters": ["Cluster 1", "Cluster 2", "Cluster 3"]
-      }
-    ],
-    "divergence_index": 0.312,
-    "synthesis_reading_markdown": "# Astrometric Synthesis Dossier..."
-  }
-}
-```
-
----
-
-### 2. `POST /api/audit-input`
-Normalizes raw birth time and coordinates into UTC, LMST, LAST, and Equation of Time, auditing boundary proximity and generating an ensemble across uncertainty intervals.
-
-#### Request Schema: Same as `BirthInput`
-#### Response Schema (`InputAuditResult`):
-```json
-{
-  "utc_datetime": "1990-06-21T10:30:00Z",
-  "julian_day_ut": 2448063.9375,
-  "delta_t_sec": 57.2,
-  "local_mean_sidereal_time": "06:23:41",
-  "local_apparent_sidereal_time": "06:23:42",
-  "equation_of_time_min": -1.82,
-  "boundary_sensitivity": {
-    "is_near_cusp": false,
-    "nearest_sign_boundary_deg": 3.42,
-    "uncertainty_window_minutes": 15
-  }
-}
-```
-
----
-
-### 3. `GET /api/health`
-System health check endpoint verifying astronomical computation engines, sample profile count, and uptime.
-
-#### Sample Response:
-```json
-{
-  "status": "healthy",
-  "timestamp": "2026-10-21T01:08:02.341394",
-  "engine_version": "2.0.0",
-  "primary_astronomy": "Swiss Ephemeris (pyswisseph)",
-  "independent_validator": "Skyfield (JPL DE421)",
-  "total_sample_profiles": 100
-}
-```
-
----
-
-### 4. `GET /api/sample-charts`
-Retrieves pre-loaded benchmark chart profiles (Rodden Rating AA/A) including historical figures and testing baselines.
-
----
-
-### 5. `GET /api/mathematical-evidence`
-Retrieves the mathematical proof dossier, cross-validation metrics, empirical divergence rate ($\bar{d} \approx 31.8\%$), and confidence scoring distributions.
-
----
-*Next: [Data Pipelines](Data-Pipelines.md) • [State Lifecycle](State-Lifecycle.md)*
+### 2. `GET /api/health`
+Probes active system health, memory consumption, and verifies that Swiss Ephemeris and JPL DE421 ephemeris files are loaded in RAM.

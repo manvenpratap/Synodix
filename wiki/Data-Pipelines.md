@@ -4,11 +4,7 @@ The Synodix data pipeline processes raw human birth telemetry into verified astr
 
 ---
 
-## 🌊 Interactive Dataflow Diagram & Spec
-
----
-
-## 🔁 Vector Data Pipeline Flow
+## 🌊 Invariant Data Flow Pipeline
 
 ```mermaid
 flowchart LR
@@ -48,56 +44,32 @@ flowchart LR
     SolarNorm -->|sidereal times| CuspGuard
     SolarNorm -->|UTC Julian date| SwissEph
     SwissEph -->|diff check <0.01°| Skyfield
-    SwissEph -->|planetary positions| Traditions
-    Traditions -->|tradition vectors| Consensus
-    Skyfield -->|invariant parity PASS| Consensus
-    Consensus -->|synthesis dossier| Dossier
-    Consensus -->|polar coordinates| Wheels
+    SwissEph -->|verified planetary states| Traditions
+    Traditions -->|9 autonomous models| Consensus
+    Consensus -->|radar & metrics| Wheels
+    Consensus -->|compiled report| Dossier
 ```
 
 ---
 
-## ⚙️ Stage-by-Stage Processing Protocol
+## 🔄 Detailed Pipeline Stages
 
-### Stage 0: Telemetry Sources
-1. **User Client Input**: The researcher supplies subject identifier, calendar date, civil clock time, latitude, longitude, and elevation.
-2. **Geographical & Ephemeris Database**: Resolves Olson timezone boundaries, daylight savings rules, and historic $\Delta T$ tables.
+### Stage 0: Telemetry Ingest & Validation
+- **Input Sanitization**: Parses birth coordinates (latitude $\in [-90, +90]$, longitude $\in [-180, +180]$) and checks ISO-8601 calendar validity.
+- **Timezone Resolution**: Maps IANA Olson timezone strings to compute exact historical UTC offsets, accounting for wartime daylight saving time shifts.
 
-### Stage 1: Ingestion & Boundary Audit
-1. **Time Normalization**:
-   - Converts local civil time to Universal Time ($UTC$).
-   - Calculates Julian Day ($JD_{\text{ut}}$).
-   - Computes Greenwich Mean Sidereal Time ($GMST$), Local Mean Sidereal Time ($LMST$), and Local Apparent Sidereal Time ($LAST$).
-   - Solves the Equation of Time ($EOT$) to establish True Solar Time.
-2. **Cusp & Boundary Audit**:
-   - Checks every celestial body against sign boundaries ($30^\circ$ multiples) and house cusps.
-   - Any separation $< 1.0^\circ$ generates a `NEAR_CUSP` alert and registers alternative sign probabilities.
+### Stage 1: Solar & Boundary Normalization
+- **Equation of Time**: Solves Earth's orbital eccentricity and obliquity to calculate Greenwich Mean Sidereal Time ($GMST$), Local Mean Sidereal Time ($LMST$), and Local Apparent Sidereal Time ($LAST$).
+- **Cusp Proximity Auditor**: Scans planetary bodies against sign and house boundaries; bodies within $1.0^\circ$ are tagged with sensitive boundary alerts.
 
-### Stage 2: Dual Astrometric Evaluation
-1. **Primary Evaluation (Swiss Ephemeris 2.10)**:
-   - High-precision calculation of apparent geocentric planetary longitudes, latitudes, distances, and daily velocities ($d\lambda/dt$).
-   - Calculates Placidus house cusps, Ascendant, Midheaven, Vertex, and Equatorial Ascendant.
-   - Derives Lahiri sidereal longitudes via Chitra Paksha ayanamsha.
-2. **Parity Cross-Validation (Skyfield / JPL DE421)**:
-   - Queries the NASA JPL DE421 barycentric kernel for geocentric ecliptic coordinates of the Sun, Moon, and planets.
-   - Enforces $|\lambda_{\text{SE}} - \lambda_{\text{JPL}}| < 0.01^\circ$. Discrepancies trigger validation warnings.
+### Stage 2: Dual Astrometric Core
+- **Swiss Ephemeris 2.10**: Computes geocentric and topocentric longitudes, latitudes, distances, and daily velocities ($d\lambda/dt$).
+- **NASA JPL DE421 Parity Check**: Independent verification checking $|\lambda_{\text{SE}} - \lambda_{\text{JPL}}| < 0.01^\circ$.
 
-### Stage 3: Tradition Engines & Synthesis
-1. **Independent Tradition Execution**:
-   - 9 pure-functional tradition modules execute concurrently.
-   - Each tradition produces its specific symbolic structures (e.g. Navamsha vargas, BaZi hidden stems, Zi Wei star qualities, Tzolk'in nawales).
-2. **Consensus Engine**:
-   - Groups results into the 3 primary cultural clusters.
-   - Runs primary voting across 9 life domains.
-   - Computes domain prominence, polarity vector, and cross-tradition divergence index ($\bar{d} \approx 31.8\%$).
+### Stage 3: Multi-Tradition Evaluation & Consensus
+- **9 Autonomous Engines**: Computes Western, Vedic, BaZi, Zi Wei, Maya, Tibetan, Persian, Egyptian, and Māori systems.
+- **Consensus Triangulation**: 3-cluster voting identifies high-confidence convergent life themes and isolates cultural divergence metrics ($ar{d} pprox 31.8\%$).
 
-### Stage 4: Reactive Observatory Consumption
-1. **Observatory Dossier**:
-   - Formatted Markdown report synthesizing consensus agreements, key archetypes, and cultural divergences.
-2. **10 Interactive SVG Wheels**:
-   - Renders vector celestial visualizers (Western Tropical, Vedic Sidereal, BaZi Four Pillars, Zi Wei Palaces, Maya Day Count, Tibetan Mewa, Persian Sect, Egyptian Decans, Māori Moon, and Multi-Ring Concentric Triangulation).
-3. **Consensus Radar**:
-   - 9-axis vector polygon charting life domain balance and cluster alignment.
-
----
-*Next: [State Lifecycle](State-Lifecycle.md) • [Runbooks & Operations](Runbooks.md)*
+### Stage 4: Reactive Observatory
+- **10 SVG Wheels**: Interactive vector wheels render in React 19 with zoom, pan, and hover telemetry.
+- **Executive Dossier**: Formatted markdown narrative summarizing convergent archetypes.
