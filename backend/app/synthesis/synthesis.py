@@ -414,7 +414,7 @@ def compute_chronocrator_timeline(
     western_activated_domain = f"{prof_domain_code} ({prof_domain_desc})"
 
     transits = western_chart.get("active_transits", [])
-    key_transits = [t for t in transits if t.get("orb", 99) <= 2.5]
+    key_transits = [t for t in transits if t.get("orb_deg", t.get("orb", 99.0)) <= 2.5]
     if not key_transits:
         key_transits = transits[:3]
 
@@ -515,7 +515,7 @@ def compute_chronocrator_timeline(
             "lord_of_year": prof_lord,
             "activated_domain": western_activated_domain,
             "active_transits_summary": [
-                f"{t['transiting_planet']} {t['aspect']} natal {t['natal_planet']} ({t['orb']}°)"
+                f"{t.get('transiting_body', t.get('transiting_planet', ''))} {t.get('aspect', '')} natal {t.get('natal_target', t.get('natal_planet', ''))} ({t.get('orb_deg', t.get('orb', 0.0))}°)"
                 for t in key_transits[:3]
             ]
         },
@@ -526,7 +526,7 @@ def compute_chronocrator_timeline(
         },
         "persian_firdaria": {
             "active_ruler": active_firdaria.get("planet") if active_firdaria else None,
-            "age_span": f"{active_firdaria.get('start_age')} - {active_firdaria.get('end_age']}" if active_firdaria else None,
+            "age_span": f"{active_firdaria.get('start_age')} - {active_firdaria.get('end_age')}" if active_firdaria else None,
             "years_span": f"{active_firdaria.get('start_year')} - {active_firdaria.get('end_year')}" if active_firdaria else None,
             "duration_years": active_firdaria.get("duration_years") if active_firdaria else None
         } if active_firdaria else None,

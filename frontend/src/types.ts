@@ -90,25 +90,54 @@ export interface TemperamentAxis {
 }
 
 export interface Chronology {
+  target_date?: string;
+  current_age?: number;
   jyotisha_vimshottari: {
     active_mahadasha: string;
+    active_antardasha?: string;
     span: string;
+    antardasha_span?: string;
     activated_domain: string;
+    house?: number;
+    sign?: string;
+    dignity?: string;
   };
   bazi_da_yun: {
     active_pillar: string;
     ten_god: string;
     start_age: number;
+    element?: string;
+    cycle_status?: string;
+    current_liu_nian?: {
+      year?: number;
+      pillar?: string;
+      element?: string;
+      ten_god?: string;
+      interactions?: any[];
+    };
   };
   western_profection: {
     activated_house: number;
     lord_of_year: string;
     activated_domain: string;
+    active_transits_summary?: string[];
   };
   ziwei_da_xian: {
     active_palace: string;
     age_span: string;
+    branch?: string;
   };
+  persian_firdaria?: {
+    active_ruler: string;
+    age_span: string;
+    years_span: string;
+    duration_years: number;
+  };
+  convergent_domains?: Array<{
+    domain_id: string;
+    domain_name: string;
+    corroborating_systems: string[];
+  }>;
   convergence_status: string;
 }
 

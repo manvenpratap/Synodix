@@ -10,3 +10,5 @@ de421.bsp
 tests/screenshots/
 e2e-tests/screenshots/
 .pytest_cache/
+graphify-out/cache/
+graphify-out/.rebuild.lock

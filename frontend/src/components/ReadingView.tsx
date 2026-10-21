@@ -534,6 +534,9 @@ export const ReadingView: React.FC<Props> = ({ data }) => {
                 <span className="text-slate-500 text-[10px] block uppercase">Vimshottari Dasha</span>
                 <span className="text-sm font-bold text-cyan-300 block mt-1">
                   {chronology.jyotisha_vimshottari.active_mahadasha || 'Active Period'}
+                  {chronology.jyotisha_vimshottari.active_antardasha && (
+                    <span className="text-amber-300/80 font-normal text-xs"> / {chronology.jyotisha_vimshottari.active_antardasha}</span>
+                  )}
                 </span>
                 <span className="text-[11px] text-slate-400 block mt-0.5">
                   Span: {chronology.jyotisha_vimshottari.span || 'Current'}
@@ -551,9 +554,15 @@ export const ReadingView: React.FC<Props> = ({ data }) => {
                 <span className="text-[11px] text-slate-400 block mt-0.5">
                   Ten God: {chronology.bazi_da_yun.ten_god || 'Direct Officer'}
                 </span>
-                <span className="text-[10px] text-slate-500 block mt-1">
-                  Start Age: {chronology.bazi_da_yun.start_age || 'Active'}
-                </span>
+                {chronology.bazi_da_yun.current_liu_nian ? (
+                  <span className="text-[10px] text-emerald-400/90 block mt-1">
+                    Annual: {chronology.bazi_da_yun.current_liu_nian.year} {chronology.bazi_da_yun.current_liu_nian.pillar} ({chronology.bazi_da_yun.current_liu_nian.ten_god})
+                  </span>
+                ) : (
+                  <span className="text-[10px] text-slate-500 block mt-1">
+                    Start Age: {chronology.bazi_da_yun.start_age || 'Active'}
+                  </span>
+                )}
               </div>
 
               <div className="bg-[#090c12] p-3 rounded border border-[#1b2331]">
@@ -564,22 +573,36 @@ export const ReadingView: React.FC<Props> = ({ data }) => {
                 <span className="text-[11px] text-slate-400 block mt-0.5">
                   Lord of Year: {chronology.western_profection.lord_of_year}
                 </span>
-                <span className="text-[10px] text-slate-500 block mt-1">
-                  Domain: {chronology.western_profection.activated_domain}
-                </span>
+                {chronology.western_profection.active_transits_summary && chronology.western_profection.active_transits_summary.length > 0 ? (
+                  <span className="text-[10px] text-blue-300/80 block mt-1 truncate" title={chronology.western_profection.active_transits_summary[0]}>
+                    Transit: {chronology.western_profection.active_transits_summary[0]}
+                  </span>
+                ) : (
+                  <span className="text-[10px] text-slate-500 block mt-1">
+                    Domain: {chronology.western_profection.activated_domain}
+                  </span>
+                )}
               </div>
 
               <div className="bg-[#090c12] p-3 rounded border border-[#1b2331]">
-                <span className="text-slate-500 text-[10px] block uppercase">Zi Wei Da Xian (Decade)</span>
+                <span className="text-slate-500 text-[10px] block uppercase">
+                  {chronology.persian_firdaria ? "Zi Wei & Firdaria" : "Zi Wei Da Xian (Decade)"}
+                </span>
                 <span className="text-sm font-bold text-cyan-300 block mt-1">
                   {chronology.ziwei_da_xian.active_palace || 'Palace'}
                 </span>
                 <span className="text-[11px] text-slate-400 block mt-0.5">
                   Decadal Span: {chronology.ziwei_da_xian.age_span || 'Active'}
                 </span>
-                <span className="text-[10px] text-slate-500 block mt-1">
-                  10-Year Major Palace Shift
-                </span>
+                {chronology.persian_firdaria ? (
+                  <span className="text-[10px] text-purple-300/80 block mt-1">
+                    Firdaria: {chronology.persian_firdaria.active_ruler} ({chronology.persian_firdaria.years_span})
+                  </span>
+                ) : (
+                  <span className="text-[10px] text-slate-500 block mt-1">
+                    10-Year Major Palace Shift
+                  </span>
+                )}
               </div>
             </div>
 

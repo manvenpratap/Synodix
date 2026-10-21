@@ -306,10 +306,16 @@ export const SynthesisMatrix: React.FC<Props> = ({ synthesis }) => {
             <div className="p-2.5 rounded bg-[#0d1118] border border-[#1b2331]">
               <span className="text-[10px] font-mono uppercase text-amber-400 font-semibold block">Vimshottari Dasha</span>
               <p className="font-semibold text-slate-200 mt-0.5">
-                Lord: {synthesis.chronology.jyotisha_vimshottari.active_mahadasha}
+                {synthesis.chronology.jyotisha_vimshottari.active_mahadasha}
+                {synthesis.chronology.jyotisha_vimshottari.active_antardasha && (
+                  <span className="text-amber-300/80 font-normal"> / {synthesis.chronology.jyotisha_vimshottari.active_antardasha}</span>
+                )}
               </p>
-              <span className="text-[10px] text-slate-400 font-mono">
+              <span className="text-[10px] text-slate-400 font-mono block">
                 {synthesis.chronology.jyotisha_vimshottari.span}
+              </span>
+              <span className="text-[10px] text-slate-500 font-mono block mt-1">
+                Focus: {synthesis.chronology.jyotisha_vimshottari.activated_domain}
               </span>
             </div>
 
@@ -318,29 +324,46 @@ export const SynthesisMatrix: React.FC<Props> = ({ synthesis }) => {
               <p className="font-semibold text-slate-200 mt-0.5 font-serif">
                 {synthesis.chronology.bazi_da_yun.active_pillar}
               </p>
-              <span className="text-[10px] text-slate-400 font-mono">
+              <span className="text-[10px] text-slate-400 font-mono block">
                 {synthesis.chronology.bazi_da_yun.ten_god} (From age {synthesis.chronology.bazi_da_yun.start_age})
               </span>
+              {synthesis.chronology.bazi_da_yun.current_liu_nian && (
+                <span className="text-[10px] text-emerald-400/80 font-mono block mt-1">
+                  Annual: {synthesis.chronology.bazi_da_yun.current_liu_nian.year} {synthesis.chronology.bazi_da_yun.current_liu_nian.pillar} ({synthesis.chronology.bazi_da_yun.current_liu_nian.ten_god})
+                </span>
+              )}
             </div>
 
             <div className="p-2.5 rounded bg-[#0d1118] border border-[#1b2331]">
               <span className="text-[10px] font-mono uppercase text-blue-400 font-semibold block">Annual Profection</span>
               <p className="font-semibold text-slate-200 mt-0.5">
-                House: {synthesis.chronology.western_profection.activated_house}
+                House {synthesis.chronology.western_profection.activated_house}
               </p>
-              <span className="text-[10px] text-slate-400 font-mono">
+              <span className="text-[10px] text-slate-400 font-mono block">
                 Lord of Year: {synthesis.chronology.western_profection.lord_of_year}
               </span>
+              {synthesis.chronology.western_profection.active_transits_summary && synthesis.chronology.western_profection.active_transits_summary.length > 0 && (
+                <span className="text-[10px] text-blue-300/80 font-mono block mt-1 truncate" title={synthesis.chronology.western_profection.active_transits_summary[0]}>
+                  Transit: {synthesis.chronology.western_profection.active_transits_summary[0]}
+                </span>
+              )}
             </div>
 
             <div className="p-2.5 rounded bg-[#0d1118] border border-[#1b2331]">
-              <span className="text-[10px] font-mono uppercase text-purple-400 font-semibold block">Zi Wei Decadal</span>
+              <span className="text-[10px] font-mono uppercase text-purple-400 font-semibold block">
+                {synthesis.chronology.persian_firdaria ? "Zi Wei & Firdaria" : "Zi Wei Decadal"}
+              </span>
               <p className="font-semibold text-slate-200 mt-0.5">
                 {synthesis.chronology.ziwei_da_xian.active_palace}
               </p>
-              <span className="text-[10px] text-slate-400 font-mono">
+              <span className="text-[10px] text-slate-400 font-mono block">
                 Age: {synthesis.chronology.ziwei_da_xian.age_span}
               </span>
+              {synthesis.chronology.persian_firdaria && (
+                <span className="text-[10px] text-purple-300/80 font-mono block mt-1">
+                  Firdaria: {synthesis.chronology.persian_firdaria.active_ruler} ({synthesis.chronology.persian_firdaria.years_span})
+                </span>
+              )}
             </div>
           </div>
 
