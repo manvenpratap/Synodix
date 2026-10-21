@@ -5,8 +5,6 @@ The Synodix calculation lifecycle is modeled as a deterministic state machine th
 ---
 
 ## 🧬 Interactive Lifecycle Diagram & Spec
-- 🔗 **[Explore Standalone Interactive State Lifecycle (Archify HTML)](../docs/diagrams/lifecycle.html)**
-- 📄 **[View Archify JSON Specification](../docs/diagrams/lifecycle.json)**
 
 ---
 

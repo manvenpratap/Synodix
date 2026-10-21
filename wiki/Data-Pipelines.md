@@ -5,8 +5,6 @@ The Synodix data pipeline processes raw human birth telemetry into verified astr
 ---
 
 ## 🌊 Interactive Dataflow Diagram & Spec
-- 🔗 **[Explore Standalone Interactive Dataflow Pipeline (Archify HTML)](../docs/diagrams/dataflow.html)**
-- 📄 **[View Archify JSON Specification](../docs/diagrams/dataflow.json)**
 
 ---
 

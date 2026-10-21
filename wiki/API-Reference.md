@@ -5,8 +5,6 @@ The Synodix backend is exposed via a high-performance, asynchronous FastAPI serv
 ---
 
 ## ⏱️ Interactive Sequence Diagram & Spec
-- 🔗 **[Explore Standalone Interactive Sequence Diagram (Archify HTML)](../docs/diagrams/sequence.html)**
-- 📄 **[View Archify JSON Specification](../docs/diagrams/sequence.json)**
 
 ---
 

@@ -99,11 +99,6 @@ graph TD
 
 All core architectural diagrams are maintained and compiled into standalone interactive HTML documents with animated trace motion:
 
-- 🏛️ **[Interactive Architecture Diagram](../docs/diagrams/architecture.html)** | [JSON Spec](../docs/diagrams/architecture.json)
-- 🔄 **[Interactive Workflow Diagram](../docs/diagrams/workflow.html)** | [JSON Spec](../docs/diagrams/workflow.json)
-- ⏱️ **[Interactive Sequence Diagram](../docs/diagrams/sequence.html)** | [JSON Spec](../docs/diagrams/sequence.json)
-- 🌊 **[Interactive Dataflow Pipeline](../docs/diagrams/dataflow.html)** | [JSON Spec](../docs/diagrams/dataflow.json)
-- 🧬 **[Interactive State Lifecycle](../docs/diagrams/lifecycle.html)** | [JSON Spec](../docs/diagrams/lifecycle.json)
 
 ---
 *Synodix Documentation Suite • Maintained with Archify & Graphify Invariants*

@@ -5,8 +5,6 @@ Synodix computes nine autonomous astrological systems from the normalized base e
 ---
 
 ## 🔄 Interactive Workflow Diagram & Spec
-- 🔗 **[Explore Standalone Interactive Workflow Diagram (Archify HTML)](../docs/diagrams/workflow.html)**
-- 📄 **[View Archify JSON Specification](../docs/diagrams/workflow.json)**
 
 ---
 
