@@ -243,7 +243,8 @@ def compute_chart_endpoint(req: BirthInputRequest):
 
         # Step 7: Synthesis Engine without double-counting
         synthesis = build_synthesis(
-            astro_base, jyotisha, bazi, western, ziwei, mayan, tibetan, verification_report, audit
+            astro_base, jyotisha, bazi, western, ziwei, mayan, tibetan, verification_report, audit,
+            persian_chart=persian
         )
 
         return {

@@ -279,6 +279,261 @@ def compute_temperament_axes(
     ]
     return axes
 
+def compute_chronocrator_timeline(
+    time_audit: Dict[str, Any],
+    jyotisha_chart: Dict[str, Any],
+    bazi_chart: Dict[str, Any],
+    western_chart: Dict[str, Any],
+    ziwei_chart: Dict[str, Any],
+    persian_chart: Optional[Dict[str, Any]] = None,
+    target_date: Optional[str] = None
+) -> Dict[str, Any]:
+    """
+    Unifies multi-tradition predictive chronocrators into an aligned timeline for a target date:
+    - Jyotisha: Active Vimshottari Mahadasha & Antardasha (exact calendar match)
+    - BaZi: Active 10-Year Da Yun luck pillar + Current Liu Nian annual pillar & interactions
+    - Western: Active Annual Profection house/lord + tight active transits
+    - Zi Wei Dou Shu: Active Da Xian decadal palace
+    - Persian: Active Firdaria period planetary ruler
+    - Cross-tradition convergent domain analysis
+    """
+    now_utc = datetime.utcnow()
+    if target_date:
+        try:
+            target_dt = datetime.strptime(target_date, "%Y-%m-%d")
+        except Exception:
+            target_dt = now_utc
+    else:
+        target_dt = now_utc
+
+    target_date_str = target_dt.strftime("%Y-%m-%d")
+
+    # Resolve birth date and current age
+    birth_date_str = time_audit["normalized"]["civil_date"]
+    try:
+        by, bm, bd = map(int, birth_date_str.split("-"))
+        b_dt = datetime(by, bm, bd)
+        current_age = target_dt.year - b_dt.year - ((target_dt.month, target_dt.day) < (b_dt.month, b_dt.day))
+        if current_age < 0:
+            current_age = 0
+    except Exception:
+        current_age = western_chart.get("annual_profection", {}).get("current_age", 0)
+
+    # 1. Jyotisha Vimshottari: Find active Mahadasha & Antardasha
+    dashas = jyotisha_chart.get("vimshottari_dashas", [])
+    active_v_dasha = None
+    active_antardasha = None
+
+    for d in dashas:
+        s_date = d.get("start_date", "")
+        e_date = d.get("end_date", "")
+        if s_date <= target_date_str <= e_date:
+            active_v_dasha = d
+            for ad in d.get("antardashas", []):
+                if ad.get("start_date", "") <= target_date_str <= ad.get("end_date", ""):
+                    active_antardasha = ad
+                    break
+            break
+
+    if not active_v_dasha and dashas:
+        if target_date_str < dashas[0].get("start_date", ""):
+            active_v_dasha = dashas[0]
+        else:
+            active_v_dasha = dashas[-1]
+        if active_v_dasha.get("antardashas"):
+            active_antardasha = active_v_dasha["antardashas"][0]
+
+    maha_lord = active_v_dasha["lord"] if active_v_dasha else "Unknown"
+    antar_lord = active_antardasha["sub_lord"] if active_antardasha else "Unknown"
+    maha_graha = jyotisha_chart.get("grahas", {}).get(maha_lord, {})
+    maha_house = maha_graha.get("house", 1)
+    maha_sign = maha_graha.get("sign", "")
+    maha_dignity = maha_graha.get("dignity", "Neutral")
+
+    house_domain_map = {
+        1: ("D1", "Self & Physical Vitality"),
+        2: ("D3", "Wealth & Financial Assets"),
+        3: ("D8", "Effort, Siblings & Craft"),
+        4: ("D5", "Home, Property & Emotional Foundation"),
+        5: ("D6", "Creative Intellect & Children"),
+        6: ("D7", "Service, Work Routine & Overcoming Friction"),
+        7: ("D4", "Partnership, Union & Public Relations"),
+        8: ("D8", "Transformation, Research & Longevity"),
+        9: ("D9", "Dharma, Higher Wisdom & Fortune"),
+        10: ("D2", "Career, Public Authority & Status"),
+        11: ("D3", "Gains, Aspirations & Social Networks"),
+        12: ("D9", "Spiritual Liberation, Solitude & Transcendent Rest")
+    }
+
+    jyotisha_domain_code, jyotisha_domain_desc = house_domain_map.get(maha_house, ("D1", "Core Growth"))
+    jyotisha_activated_domain = f"{jyotisha_domain_code} ({jyotisha_domain_desc})"
+
+    # 2. BaZi Da Yun & Liu Nian
+    da_yun_list = bazi_chart.get("da_yun_luck_pillars", [])
+    active_da_yun = None
+    for i, dy in enumerate(da_yun_list):
+        next_age = da_yun_list[i + 1]["start_age"] if i + 1 < len(da_yun_list) else 999
+        if dy["start_age"] <= current_age < next_age:
+            active_da_yun = dy
+            break
+
+    if not active_da_yun and da_yun_list:
+        active_da_yun = da_yun_list[0] if current_age < da_yun_list[0]["start_age"] else da_yun_list[-1]
+
+    liu_nian = bazi_chart.get("current_liu_nian", {})
+    yong_shen = bazi_chart.get("yong_shen", {})
+    dy_elem = active_da_yun.get("element", "") if active_da_yun else ""
+    fav_elems = yong_shen.get("favorable_elements", [])
+    unfav_elems = yong_shen.get("unfavorable_elements", [])
+
+    if dy_elem in fav_elems:
+        bazi_cycle_status = f"Favorable Da Yun ({dy_elem} reinforces Useful God {yong_shen.get('useful_god', '')})"
+    elif dy_elem in unfav_elems:
+        bazi_cycle_status = f"Refining / Testing Da Yun ({dy_elem} challenges Useful God {yong_shen.get('useful_god', '')})"
+    else:
+        bazi_cycle_status = f"Neutral / Balancing Da Yun ({dy_elem})"
+
+    ten_god_name = active_da_yun.get("ten_god", "") if active_da_yun else ""
+    bazi_domain_code = "D1"
+    if any(k in ten_god_name for k in ["Officer", "Seven Killings", "官", "杀"]):
+        bazi_domain_code = "D2"
+    elif any(k in ten_god_name for k in ["Wealth", "财"]):
+        bazi_domain_code = "D3"
+    elif any(k in ten_god_name for k in ["Eating", "Hurting", "食", "伤"]):
+        bazi_domain_code = "D6"
+    elif any(k in ten_god_name for k in ["Resource", "印"]):
+        bazi_domain_code = "D5"
+    elif any(k in ten_god_name for k in ["Friend", "Rob", "比", "劫"]):
+        bazi_domain_code = "D1"
+
+    # 3. Western Annual Profection & Active Transits
+    active_profection = western_chart.get("annual_profection", {})
+    prof_house = active_profection.get("activated_house", 1)
+    prof_lord = active_profection.get("lord_of_year", "Unknown")
+    prof_domain_code, prof_domain_desc = house_domain_map.get(prof_house, (f"H{prof_house}", f"House {prof_house}"))
+    western_activated_domain = f"{prof_domain_code} ({prof_domain_desc})"
+
+    transits = western_chart.get("active_transits", [])
+    key_transits = [t for t in transits if t.get("orb", 99) <= 2.5]
+    if not key_transits:
+        key_transits = transits[:3]
+
+    # 4. Zi Wei Da Xian
+    da_xian_list = ziwei_chart.get("da_xian_decades", [])
+    active_da_xian = None
+    for dx in da_xian_list:
+        if dx.get("start_age", 0) <= current_age <= dx.get("end_age", 999):
+            active_da_xian = dx
+            break
+    if not active_da_xian and da_xian_list:
+        active_da_xian = da_xian_list[0] if current_age < da_xian_list[0]["start_age"] else da_xian_list[-1]
+
+    palace_name = active_da_xian.get("palace", "") if active_da_xian else ""
+    ziwei_domain_code = "D1"
+    if "Career" in palace_name or "官禄" in palace_name:
+        ziwei_domain_code = "D2"
+    elif "Wealth" in palace_name or "财帛" in palace_name:
+        ziwei_domain_code = "D3"
+    elif "Spouse" in palace_name or "夫妻" in palace_name:
+        ziwei_domain_code = "D4"
+    elif "Property" in palace_name or "田宅" in palace_name:
+        ziwei_domain_code = "D5"
+    elif "Children" in palace_name or "子女" in palace_name:
+        ziwei_domain_code = "D6"
+    elif "Health" in palace_name or "疾厄" in palace_name:
+        ziwei_domain_code = "D7"
+    elif "Karma" in palace_name or "福德" in palace_name:
+        ziwei_domain_code = "D9"
+    elif "Travel" in palace_name or "迁移" in palace_name:
+        ziwei_domain_code = "D8"
+
+    # 5. Persian Firdaria
+    active_firdaria = None
+    if persian_chart and "firdaria" in persian_chart:
+        for f_period in persian_chart["firdaria"].get("timeline", []):
+            if f_period.get("start_age", 0) <= current_age < f_period.get("end_age", 999):
+                active_firdaria = f_period
+                break
+
+    # 6. Convergence Analysis across the 4 primary timing systems
+    domain_tallies: Dict[str, List[str]] = {}
+    for code, sys_name in [
+        (jyotisha_domain_code, "Jyotisha Vimshottari"),
+        (bazi_domain_code, "BaZi Da Yun"),
+        (prof_domain_code, "Western Profection"),
+        (ziwei_domain_code, "Zi Wei Da Xian")
+    ]:
+        domain_tallies.setdefault(code, []).append(sys_name)
+
+    convergent_domains = [
+        {"domain_id": d, "domain_name": DOMAIN_META.get(d, {}).get("name", d), "corroborating_systems": sys_list}
+        for d, sys_list in domain_tallies.items()
+        if len(sys_list) >= 2
+    ]
+
+    if convergent_domains:
+        top_c = convergent_domains[0]
+        convergence_summary_text = (
+            f"High Convergence ({top_c['domain_name']}): Corroborated by {', '.join(top_c['corroborating_systems'])} "
+            f"as the primary life domain under active inflection."
+        )
+    else:
+        convergence_summary_text = (
+            f"Distributed Focus: Western Profection emphasizes {western_activated_domain}, "
+            f"Vimshottari Mahadasha activates {jyotisha_activated_domain}, and BaZi Da Yun highlights {bazi_cycle_status}."
+        )
+
+    return {
+        "target_date": target_date_str,
+        "current_age": current_age,
+        "jyotisha_vimshottari": {
+            "active_mahadasha": maha_lord,
+            "active_antardasha": antar_lord,
+            "span": f"{active_v_dasha['start_date']} to {active_v_dasha['end_date']}" if active_v_dasha else None,
+            "antardasha_span": f"{active_antardasha['start_date']} to {active_antardasha['end_date']}" if active_antardasha else None,
+            "activated_domain": jyotisha_activated_domain,
+            "house": maha_house,
+            "sign": maha_sign,
+            "dignity": maha_dignity,
+        },
+        "bazi_da_yun": {
+            "active_pillar": f"{active_da_yun['stem']}{active_da_yun['branch']} ({active_da_yun['element']})" if active_da_yun else None,
+            "ten_god": active_da_yun["ten_god"] if active_da_yun else None,
+            "start_age": active_da_yun["start_age"] if active_da_yun else None,
+            "element": active_da_yun.get("element") if active_da_yun else None,
+            "cycle_status": bazi_cycle_status,
+            "current_liu_nian": {
+                "year": liu_nian.get("year"),
+                "pillar": f"{liu_nian.get('stem', '')}{liu_nian.get('branch', '')}",
+                "element": liu_nian.get("element"),
+                "ten_god": liu_nian.get("ten_god"),
+                "interactions": liu_nian.get("interactions", [])
+            } if liu_nian else None
+        },
+        "western_profection": {
+            "activated_house": prof_house,
+            "lord_of_year": prof_lord,
+            "activated_domain": western_activated_domain,
+            "active_transits_summary": [
+                f"{t['transiting_planet']} {t['aspect']} natal {t['natal_planet']} ({t['orb']}°)"
+                for t in key_transits[:3]
+            ]
+        },
+        "ziwei_da_xian": {
+            "active_palace": active_da_xian["palace"] if active_da_xian else None,
+            "age_span": f"{active_da_xian['start_age']} - {active_da_xian['end_age']}" if active_da_xian else None,
+            "branch": active_da_xian.get("branch") if active_da_xian else None
+        },
+        "persian_firdaria": {
+            "active_ruler": active_firdaria.get("planet") if active_firdaria else None,
+            "age_span": f"{active_firdaria.get('start_age')} - {active_firdaria.get('end_age']}" if active_firdaria else None,
+            "years_span": f"{active_firdaria.get('start_year')} - {active_firdaria.get('end_year')}" if active_firdaria else None,
+            "duration_years": active_firdaria.get("duration_years") if active_firdaria else None
+        } if active_firdaria else None,
+        "convergent_domains": convergent_domains,
+        "convergence_status": convergence_summary_text
+    }
+
 def build_synthesis(
     astro_base: Dict[str, Any],
     jyotisha_chart: Dict[str, Any],
@@ -288,7 +543,9 @@ def build_synthesis(
     mayan_chart: Dict[str, Any],
     tibetan_chart: Dict[str, Any],
     verification_report: Dict[str, Any],
-    time_audit: Dict[str, Any]
+    time_audit: Dict[str, Any],
+    persian_chart: Optional[Dict[str, Any]] = None,
+    target_date: Optional[str] = None
 ) -> Dict[str, Any]:
     # 1. Evaluate 9 Domains across 3 primary clusters
     domain_results = {}
@@ -314,34 +571,16 @@ def build_synthesis(
 
     divergence_rate_total = round((divergent_count / 9.0) * 100, 1)
 
-    # 2. Chronological Timeline Alignment
-    active_v_dasha = jyotisha_chart["vimshottari_dashas"][0] if jyotisha_chart.get("vimshottari_dashas") else None
-    active_da_yun = bazi_chart["da_yun_luck_pillars"][0] if bazi_chart.get("da_yun_luck_pillars") else None
-    active_profection = western_chart["annual_profection"]
-    active_da_xian = ziwei_chart["da_xian_decades"][0] if ziwei_chart.get("da_xian_decades") else None
-
-    chronology = {
-        "jyotisha_vimshottari": {
-            "active_mahadasha": active_v_dasha["lord"] if active_v_dasha else None,
-            "span": f"{active_v_dasha['start_date']} to {active_v_dasha['end_date']}" if active_v_dasha else None,
-            "activated_domain": "D1 / Core Growth",
-        },
-        "bazi_da_yun": {
-            "active_pillar": f"{active_da_yun['stem']}{active_da_yun['branch']} ({active_da_yun['element']})" if active_da_yun else None,
-            "ten_god": active_da_yun["ten_god"] if active_da_yun else None,
-            "start_age": active_da_yun["start_age"] if active_da_yun else None,
-        },
-        "western_profection": {
-            "activated_house": active_profection["activated_house"],
-            "lord_of_year": active_profection["lord_of_year"],
-            "activated_domain": f"House {active_profection['activated_house']}",
-        },
-        "ziwei_da_xian": {
-            "active_palace": active_da_xian["palace"] if active_da_xian else None,
-            "age_span": f"{active_da_xian['start_age']} - {active_da_xian['end_age']}" if active_da_xian else None,
-        },
-        "convergence_status": "Moderate Convergence: Jyotisha and Sinic decadal periods simultaneously emphasize foundational self-development and career positioning."
-    }
+    # 2. Unified Chronological Timeline Alignment
+    chronology = compute_chronocrator_timeline(
+        time_audit=time_audit,
+        jyotisha_chart=jyotisha_chart,
+        bazi_chart=bazi_chart,
+        western_chart=western_chart,
+        ziwei_chart=ziwei_chart,
+        persian_chart=persian_chart,
+        target_date=target_date
+    )
 
     # 3. Temperament Axes
     temperament_axes = compute_temperament_axes(jyotisha_chart, western_chart, bazi_chart, mayan_chart, tibetan_chart)
@@ -427,14 +666,27 @@ def build_synthesis(
         reading_md += f"  - *Computed Base*: {ax['computed_base']}\n"
         reading_md += f"  - *Symbolic Overlay*: {ax['symbolic_overlay']}\n\n"
 
+    firdaria_line = ""
+    if chronology.get("persian_firdaria") and chronology["persian_firdaria"].get("active_ruler"):
+        firdaria_line = f"- **Persian Firdaria**: Master of Period `{chronology['persian_firdaria']['active_ruler']}` ({chronology['persian_firdaria']['years_span']}, Age {chronology['persian_firdaria']['age_span']})\n"
+
+    liu_nian_line = ""
+    if chronology.get("bazi_da_yun", {}).get("current_liu_nian"):
+        ln = chronology["bazi_da_yun"]["current_liu_nian"]
+        liu_nian_line = f"- **BaZi Liu Nian (Annual)**: `{ln.get('year')} {ln.get('pillar')} ({ln.get('element')})` - Ten God: `{ln.get('ten_god')}`\n"
+
+    transits_line = ""
+    if chronology.get("western_profection", {}).get("active_transits_summary"):
+        transits_line = f"- **Active Western Transits**: {', '.join(chronology['western_profection']['active_transits_summary'])}\n"
+
     reading_md += f"""---
 
-### 7. Chronological Overlap & Timing
-- **Vimshottari Dasha**: Active Mahadasha `{chronology['jyotisha_vimshottari']['active_mahadasha']}` ({chronology['jyotisha_vimshottari']['span']})
-- **BaZi Da Yun**: Luck Pillar `{chronology['bazi_da_yun']['active_pillar']}` ({chronology['bazi_da_yun']['ten_god']})
-- **Western Annual Profection**: Age {active_profection['current_age']} activates House `{active_profection['activated_house']}` (Lord: `{active_profection['lord_of_year']}`)
-- **Zi Wei Decadal**: Active Palace `{chronology['ziwei_da_xian']['active_palace']}` (Age {chronology['ziwei_da_xian']['age_span']})
-- **Convergence Assessment**: {chronology['convergence_status']}
+### 7. Chronological Overlap & Unified Predictive Timeline
+- **Vimshottari Dasha**: Active Mahadasha `{chronology['jyotisha_vimshottari']['active_mahadasha']}` / Antardasha `{chronology['jyotisha_vimshottari']['active_antardasha']}` ({chronology['jyotisha_vimshottari']['span']}) | Focus: {chronology['jyotisha_vimshottari']['activated_domain']}
+- **BaZi Da Yun**: Luck Pillar `{chronology['bazi_da_yun']['active_pillar']}` ({chronology['bazi_da_yun']['ten_god']}) | {chronology['bazi_da_yun']['cycle_status']}
+{liu_nian_line}- **Western Annual Profection**: Age {chronology['current_age']} activates House `{chronology['western_profection']['activated_house']}` (Lord: `{chronology['western_profection']['lord_of_year']}`) | Focus: {chronology['western_profection']['activated_domain']}
+{transits_line}- **Zi Wei Decadal**: Active Palace `{chronology['ziwei_da_xian']['active_palace']}` (Age {chronology['ziwei_da_xian']['age_span']})
+{firdaria_line}- **Convergence Assessment**: {chronology['convergence_status']}
 
 ---
 
