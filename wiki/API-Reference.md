@@ -148,36 +148,53 @@ Calculates the complete multi-tradition astrometric chart, invariant audit, and 
 
 ---
 
-### 2. `GET /api/ephemeris-test`
-Executes an immediate self-test of the dual-ephemeris engine, comparing SwissEph 2.10 and Skyfield JPL DE421 for the current UTC epoch.
+### 2. `POST /api/audit-input`
+Normalizes raw birth time and coordinates into UTC, LMST, LAST, and Equation of Time, auditing boundary proximity and generating an ensemble across uncertainty intervals.
 
-#### Sample Response:
+#### Request Schema: Same as `BirthInput`
+#### Response Schema (`InputAuditResult`):
 ```json
 {
-  "status": "HEALTHY",
-  "timestamp": "2026-10-21T06:30:00Z",
-  "engines": {
-    "swiss_ephemeris_version": "2.10.03",
-    "skyfield_version": "1.49",
-    "jpl_kernel": "de421.bsp"
-  },
-  "deltas": {
-    "Sun": 0.00041,
-    "Moon": 0.00215,
-    "Mars": 0.00083,
-    "Jupiter": 0.00012,
-    "Saturn": 0.00034
-  },
-  "max_delta_deg": 0.00215,
-  "threshold_deg": 0.01,
-  "parity_pass": true
+  "utc_datetime": "1990-06-21T10:30:00Z",
+  "julian_day_ut": 2448063.9375,
+  "delta_t_sec": 57.2,
+  "local_mean_sidereal_time": "06:23:41",
+  "local_apparent_sidereal_time": "06:23:42",
+  "equation_of_time_min": -1.82,
+  "boundary_sensitivity": {
+    "is_near_cusp": false,
+    "nearest_sign_boundary_deg": 3.42,
+    "uncertainty_window_minutes": 15
+  }
 }
 ```
 
 ---
 
-### 3. `GET /health`
-System health check endpoint verifying uptime, database status, memory utilization, and background worker state.
+### 3. `GET /api/health`
+System health check endpoint verifying astronomical computation engines, sample profile count, and uptime.
+
+#### Sample Response:
+```json
+{
+  "status": "healthy",
+  "timestamp": "2026-10-21T01:08:02.341394",
+  "engine_version": "2.0.0",
+  "primary_astronomy": "Swiss Ephemeris (pyswisseph)",
+  "independent_validator": "Skyfield (JPL DE421)",
+  "total_sample_profiles": 100
+}
+```
+
+---
+
+### 4. `GET /api/sample-charts`
+Retrieves pre-loaded benchmark chart profiles (Rodden Rating AA/A) including historical figures and testing baselines.
+
+---
+
+### 5. `GET /api/mathematical-evidence`
+Retrieves the mathematical proof dossier, cross-validation metrics, empirical divergence rate ($\bar{d} \approx 31.8\%$), and confidence scoring distributions.
 
 ---
 *Next: [Data Pipelines](Data-Pipelines.md) • [State Lifecycle](State-Lifecycle.md)*
