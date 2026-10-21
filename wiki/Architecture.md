@@ -66,7 +66,7 @@ graph TD
 ```
 
 ### Architectural Breakdown & Component Responsibilities
-* **Client Observatory (React 19 SPA)**: Modern reactive frontend built on React 19, Tailwind CSS, and Lucide icons. Renders 10 SVG astrometric projection wheels (Tropical, Sidereal, BaZi Solar, Zi Wei 12-Palace grid, Maya Tzolkin/Haab gears, Hellenistic bounds, Uranian 90° dial, Kabbalistic Sephirot tree, and Tibetan elemental matrix) with sub-pixel SVG precision.
+* **Client Observatory (React 19 SPA & Capacitor Native Mobile)**: Modern reactive frontend built on React 19, Tailwind CSS, and Lucide icons, packaged for web and native iOS/Android via Capacitor 8. Renders 10 SVG astrometric projection wheels (Tropical, Sidereal, BaZi Solar, Zi Wei 12-Palace grid, Maya Tzolkin/Haab gears, Hellenistic bounds, Uranian 90° dial, Kabbalistic Sephirot tree, and Tibetan elemental matrix) with sub-pixel SVG precision. Fully compliant with iOS HIG and Android Material touch target standards ($\ge 44\times 44\text{px}$) and safe-area insets.
 * **FastAPI Edge Gateway**: High-throughput Python ASGI gateway validating incoming telemetry payloads (ISO-8601 UTC timestamp, geographic latitude/longitude, elevation).
 * **Astrometric Normalization Layer**:
   * **Solar Normalizer**: Converts civil UTC time to Local Mean Sidereal Time (LMST) and Local Apparent Solar Time (LAST) to account for Earth's equation of time.

@@ -1,15 +1,24 @@
 # Synodix: Project Context & Working Memory
 
-**Last Updated:** 2026-10-21 04:15:00 UTC  
-**Version:** 2.5.0  
-**Stack:** Python 3.12 (FastAPI, Swiss Ephemeris 2.10, Skyfield DE421) + TypeScript / React 19 / Vite / Tailwind CSS v4  
+**Last Updated:** 2026-10-21 17:15:00 UTC  
+**Version:** 2.6.0  
+**Stack:** Python 3.12 (FastAPI, Swiss Ephemeris 2.10, Skyfield DE421) + TypeScript / React 19 / Vite / Tailwind CSS v4 / Capacitor 8 (iOS & Android)  
 **Workspace:** `/Volumes/Study/Projects/Astrology` (symlinked as `/Volumes/Study/Astrology`)  
 **Git Remote:** `https://github.com/manvenpratap/Synodix.git`  
 
 ---
 
 ## 1. Current Status & Milestone
-- **Active Phase**: Solar Day Light Theme & Dual-Theme Observatory Engine (Completed)
+- **Active Phase**: Native Mobile Apps (iOS & Android) & Mobile-First Touch Ergonomics (Completed)
+- **Native Mobile Containers (Capacitor 8)**:
+  - iOS Workspace: `frontend/ios/App/App.xcworkspace` configured with Swift Package Manager (SPM) and app ID `org.antigravity.synodix`.
+  - Android Studio Project: `frontend/android/` configured with Gradle wrapper, AndroidManifest, splash configuration, and app ID `org.antigravity.synodix`.
+  - Real-time asset synchronization: `npm run build && cd frontend && npx cap sync` pushes built web assets directly into iOS and Android bundles.
+- **Mobile-First Ergonomics (`mobile-design`)**:
+  - Touch target compliance: all primary interactive elements, hamburger buttons, and bottom tab navigation meet or exceed $\ge 44\times 44\text{px}$ (iOS HIG) and $\ge 48\times 48\text{dp}$ (Android Material).
+  - Safe-area insets: full support for notch, Dynamic Island, and gesture bars via `env(safe-area-inset-top)` and `env(safe-area-inset-bottom)`.
+  - Microinteraction refinements: elimination of 300ms double-tap delay and tap gray flashes via `touch-action: manipulation` and `-webkit-tap-highlight-color: transparent`.
+  - Viewport bounds: zero horizontal overflow verified on standard mobile viewports ($390\times 844$).
 - **Solar Day Light Theme**:
   - High-contrast alabaster (`#f8fafc`) and crisp pure-white surface palette with slate borders (`#e2e8f0`).
   - Calibrated spectral telemetry accents adhering to WCAG 2.2 AA contrast standards on light backgrounds (Sky-700, Emerald-700, Amber-700, Rose-700, Purple-700).
@@ -17,7 +26,7 @@
   - Persistent theme toggle with `localStorage` memory and OS system `prefers-color-scheme` auto-detection.
   - Multi-location accessibility: header bar, desktop sidebar footer, and mobile drawer.
 - **Workflow Health**: 100% CLEAN (Verified via `./pipeline.sh doctor`)
-- **Test Invariants**: 10/10 regression suites passing via `./pipeline.sh test --summary`
+- **Test Invariants**: 11/11 regression suites passing via `./pipeline.sh test --summary` (including mobile viewport suite `test_04_mobile_viewport.py`)
 - **Active Daemons**:
   - Backend API: `http://127.0.0.1:8000` (FastAPI daemon)
   - Frontend Observatory: `http://127.0.0.1:5173` (Vite HMR dev server)

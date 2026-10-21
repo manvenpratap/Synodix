@@ -10,7 +10,10 @@ Validates:
 import os
 from pathlib import Path
 from playwright.sync_api import sync_playwright
-from tests.helpers import check_no_horizontal_overflow
+try:
+    from tests.helpers import check_no_horizontal_overflow
+except ImportError:
+    from helpers import check_no_horizontal_overflow
 
 MAC_CHROME = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
 

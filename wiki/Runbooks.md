@@ -90,6 +90,38 @@ All tests must be executed using the **Minimal Tokens Protocol** to prevent dump
 
 ---
 
+## 📱 Native Mobile Applications (iOS & Android)
+
+Synodix incorporates first-class native iOS and Android application containers powered by Capacitor 8:
+
+### Directory Structure
+- `frontend/ios/`: Native Xcode workspace (`App.xcworkspace`) with Swift Package Manager (SPM) dependency management.
+- `frontend/android/`: Native Android Studio project with Gradle build files and AndroidManifest configuration.
+
+### Synchronization & Building
+```bash
+# 1. Build web distribution
+npm run build --prefix frontend
+
+# 2. Sync web assets into native iOS and Android projects
+cd frontend && npx cap sync
+
+# 3. Open in IDEs
+npx cap open ios      # Opens in Xcode
+npx cap open android  # Opens in Android Studio
+
+# 4. Run on connected device or simulator
+npx cap run ios
+npx cap run android
+```
+
+### Mobile Ergonomics Invariants
+1. **Touch Targets**: All primary interactive controls, bottom tabs, and drawer buttons maintain $\ge 44\times 44\text{px}$ (iOS HIG) / $\ge 48\times 48\text{dp}$ (Android Material) dimensions.
+2. **Safe-Area Insets**: Notch, Dynamic Island, and navigation bar insets are respected with `env(safe-area-inset-top)` and `env(safe-area-inset-bottom)`.
+3. **Touch Feedback**: 300ms double-tap delay and tap gray flashes are suppressed via `touch-action: manipulation` and `-webkit-tap-highlight-color: transparent`.
+
+---
+
 ## 🐳 Docker Containerization
 
 ### Build & Run via Docker Compose

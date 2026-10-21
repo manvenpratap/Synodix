@@ -131,9 +131,17 @@ PYTHONPATH=. .venv/bin/python -m uvicorn backend.app.main:app --host 127.0.0.1 -
 
 # 5. Start frontend dev server (Terminal 2)
 npm run dev --prefix frontend -- --host 127.0.0.1 --port 5173
+
+# 6. Native Mobile App Sync & Launch (iOS & Android)
+npm run build --prefix frontend
+cd frontend && npx cap sync
+
+# Open in Xcode or Android Studio:
+npx cap open ios      # Opens frontend/ios/App/App.xcworkspace
+npx cap open android  # Opens frontend/android in Android Studio
 ```
 
-Visit the Observatory UI at `http://localhost:5173` and Swagger API Docs at `http://localhost:8000/docs`.
+Visit the Observatory UI at `http://localhost:5173`, Swagger API Docs at `http://localhost:8000/docs`, or run natively on an iOS Simulator / Android device via Capacitor.
 
 ---
 

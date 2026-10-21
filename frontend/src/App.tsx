@@ -456,7 +456,7 @@ export default function App() {
       {/* 2. Mobile Drawer Navigation Overlay (<md) */}
       {isMobileSidebarOpen && (
         <div className="fixed inset-0 z-50 md:hidden bg-black/80 backdrop-blur-sm flex">
-          <div className="w-72 bg-[#0b0e14] h-full flex flex-col border-r border-[#1b2331] p-4 shadow-2xl">
+          <div className="w-72 bg-[#0b0e14] h-full flex flex-col border-r border-[#1b2331] p-4 shadow-2xl pt-[max(1rem,env(safe-area-inset-top,0px))] pb-[max(1rem,env(safe-area-inset-bottom,0px))]">
             <div className="flex items-center justify-between pb-3 border-b border-[#1b2331]">
               <div className="flex items-center gap-2">
                 <div className="w-7 h-7 rounded bg-cyan-950 border border-cyan-800 flex items-center justify-center font-bold text-xs text-cyan-300 font-mono">
@@ -467,8 +467,9 @@ export default function App() {
               <button
                 type="button"
                 onClick={() => setIsMobileSidebarOpen(false)}
-                className="p-1 text-slate-400 hover:text-slate-100 cursor-pointer"
+                className="min-w-[44px] min-h-[44px] flex items-center justify-center -mr-2 text-slate-400 hover:text-slate-100 cursor-pointer"
                 aria-label="Close navigation"
+                data-tooltip="Close navigation drawer"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -538,14 +539,15 @@ export default function App() {
       {/* 3. Main Workspace Area */}
       <div className="flex-1 flex flex-col min-w-0">
         {/* Top Header Bar */}
-        <header className="h-14 border-b border-[#1b2331] bg-[#0b0e14]/90 backdrop-blur-md px-4 sm:px-6 flex items-center justify-between sticky top-0 z-30">
+        <header className="h-[calc(3.5rem+env(safe-area-inset-top,0px))] pt-[env(safe-area-inset-top,0px)] border-b border-[#1b2331] bg-[#0b0e14]/90 backdrop-blur-md px-4 sm:px-6 flex items-center justify-between sticky top-0 z-30">
           <div className="flex items-center gap-3">
             {/* Mobile Hamburger Menu Toggle (<md) */}
             <button
               type="button"
               onClick={() => setIsMobileSidebarOpen(true)}
-              className="md:hidden p-1.5 rounded-md text-slate-400 hover:text-slate-100 hover:bg-[#121721] cursor-pointer"
+              className="md:hidden min-w-[44px] min-h-[44px] flex items-center justify-center -ml-2 rounded-md text-slate-400 hover:text-slate-100 hover:bg-[#121721] cursor-pointer"
               aria-label="Open sidebar menu"
+              data-tooltip="Open navigation drawer"
             >
               <Menu className="w-5 h-5" />
             </button>
@@ -611,6 +613,8 @@ export default function App() {
                 type="button"
                 onClick={() => navigateTo('workbench')}
                 className="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-1 text-xs rounded border border-[#1b2331] bg-[#10151f] hover:bg-[#151c2a] text-slate-300 hover:text-cyan-300 transition-colors cursor-pointer"
+                data-tooltip="Return to Workbench to switch or calculate a profile"
+                aria-label="Switch Profile"
               >
                 <Bookmark className="w-3.5 h-3.5 text-cyan-400" />
                 <span>Switch Profile</span>
@@ -625,6 +629,8 @@ export default function App() {
                   ? 'bg-cyan-950 text-cyan-300 border-cyan-700'
                   : 'bg-[#10151f] hover:bg-[#161d2a] text-cyan-400 border-cyan-800/60'
               }`}
+              data-tooltip="View Mathematical & Empirical Evidence Whitepaper"
+              aria-label="View Mathematical & Empirical Evidence Whitepaper"
             >
               <FlaskConical className="w-3.5 h-3.5 text-cyan-400" />
               <span className="hidden sm:inline">Whitepaper</span>
@@ -634,7 +640,7 @@ export default function App() {
         </header>
 
         {/* Main Content Viewport */}
-        <main className="flex-1 p-4 sm:p-6 lg:p-8 max-w-7xl w-full mx-auto pb-24 md:pb-8">
+        <main className="flex-1 p-4 sm:p-6 lg:p-8 max-w-7xl w-full mx-auto pb-[calc(5rem+env(safe-area-inset-bottom,0px))] md:pb-8">
           {/* Error Banner */}
           {error && (
             <div className="mb-4 p-3.5 rounded bg-rose-950/60 border border-rose-800 text-rose-300 text-xs font-mono">
@@ -727,7 +733,7 @@ export default function App() {
       {/* 4. Mobile Bottom Navigation Bar (<md) */}
       <nav
         aria-label="Mobile Navigation"
-        className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-[#0b0e14]/95 backdrop-blur-md border-t border-[#1b2331] px-2 py-1 pb-[max(0.5rem,env(safe-area-inset-bottom))] flex items-center justify-around text-[10px] font-mono shadow-2xl"
+        className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-[#0b0e14]/95 backdrop-blur-md border-t border-[#1b2331] px-2 py-1 pb-[max(0.75rem,env(safe-area-inset-bottom,0px))] flex items-center justify-around text-[10px] font-mono shadow-2xl"
       >
         {[
           { id: 'workbench', label: 'Workbench', icon: Sliders },
@@ -743,6 +749,8 @@ export default function App() {
               key={item.id}
               type="button"
               onClick={() => navigateTo(item.id as AppScreen)}
+              data-tooltip={`Navigate to ${item.label}`}
+              aria-label={item.label}
               className={`flex flex-col items-center justify-center p-1 min-w-[56px] min-h-[44px] rounded-md transition-all cursor-pointer active:scale-[0.94] ${
                 isActive
                   ? 'text-cyan-300 font-bold bg-[#141c28]'
