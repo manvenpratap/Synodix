@@ -48,6 +48,7 @@ class BirthInputRequest(BaseModel):
     city_name: str = Field(default="San Francisco", example="San Francisco")
     country_name: str = Field(default="USA", example="USA")
     gender: str = Field(default="male", example="male", description="male, female, neutral")
+    house_system: Optional[str] = Field(default="Placidus", description="House system: Placidus, WholeSign, Regiomontanus, Koch, Equal, Campanus")
 
 import json
 import os
@@ -165,7 +166,8 @@ def compute_chart_endpoint(req: BirthInputRequest):
             jd_ut=jd_ut,
             latitude=req.latitude,
             longitude=req.longitude,
-            has_birth_time=has_time
+            has_birth_time=has_time,
+            house_system=req.house_system or "Placidus"
         )
 
         # Step 2 Time Uncertainty Ensemble Testing:

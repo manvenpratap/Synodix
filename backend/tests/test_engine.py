@@ -45,6 +45,12 @@ def test_six_culture_pipeline():
     )
     assert "Sun" in astro["planets_tropical"]
     assert "Moon" in astro["planets_sidereal"]
+    assert "Chiron" in astro["minor_bodies_tropical"], "Chiron must be present in minor bodies"
+    assert "Lilith_Mean" in astro["minor_bodies_tropical"], "Lilith must be present in minor bodies"
+    assert "Ceres" in astro["minor_bodies_tropical"], "Ceres must be present in minor bodies"
+    assert len(astro["fixed_stars"]) >= 15, "Major fixed stars catalog must be computed"
+    assert len(astro["houses_cusps"]) == 12, "12 house cusps must be computed"
+    assert astro["house_system"] == "Placidus", "Default house system should be Placidus"
     # Check dual engine diffs
     diffs = astro["verification_diffs"]
     assert len(diffs) > 0, "Skyfield validation diffs must be present"

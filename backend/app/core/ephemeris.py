@@ -1,7 +1,10 @@
 """
 Dual-engine astronomical calculation and independent verification module.
 Uses Swiss Ephemeris (pyswisseph) as primary engine and Skyfield (JPL DE421) as independent validator.
-Follows Step 4A and Step 5 of Six-Culture Verified Chart specification.
+Supports configurable house systems (Placidus, Whole Sign, Regiomontanus, Koch, Equal, Campanus),
+minor bodies & asteroids (Chiron, Lilith, Ceres, Pallas, Juno, Vesta),
+and 17 Major Royal and Behenian Fixed Stars.
+Follows Step 4A and Step 5 of Synodix Verified Chart specification.
 """
 
 from typing import Dict, Any, List, Tuple
@@ -25,6 +28,55 @@ PLANET_IDS = {
     "Pluto": swe.PLUTO,
 }
 
+# Minor bodies and asteroids
+MINOR_BODY_IDS = {
+    "Chiron": (swe.CHIRON, "centaur"),
+    "Lilith_Mean": (swe.MEAN_APOG, "lunar_apogee"),
+    "Lilith_True": (swe.OSCU_APOG, "lunar_apogee"),
+    "Ceres": (swe.AST_OFFSET + 1, "asteroid"),
+    "Pallas": (swe.AST_OFFSET + 2, "asteroid"),
+    "Juno": (swe.AST_OFFSET + 3, "asteroid"),
+    "Vesta": (swe.AST_OFFSET + 4, "asteroid"),
+}
+
+# 17 Major Royal and Behenian Fixed Stars
+FIXED_STARS_CATALOG = [
+    ("Sirius", "Alpha Canis Majoris", "Spiritual illumination, prominent leadership, supreme vitality"),
+    ("Canopus", "Alpha Carinae", "Navigation, cosmic wisdom, pathfinding"),
+    ("Arcturus", "Alpha Boötis", "Guardian of the bear, righteous leadership, wealth through exploration"),
+    ("Vega", "Alpha Lyrae", "Artistic refinement, musical genius, charismatic authority"),
+    ("Capella", "Alpha Aurigae", "Civic honor, martial agility, love of learning"),
+    ("Rigel", "Beta Orionis", "Inventor mind, educational and technological prowess"),
+    ("Procyon", "Alpha Canis Minoris", "Rapid ascent, sudden activity, resourcefulness"),
+    ("Betelgeuse", "Alpha Orionis", "Martial success, brilliance, lightning fame"),
+    ("Aldebaran", "Alpha Tauri (Royal Star)", "Archangel Michael, integrity, military and commercial greatness"),
+    ("Spica", "Alpha Virginis", "Unmerited grace, artistic brilliance, scholarly honors"),
+    ("Antares", "Alpha Scorpii (Royal Star)", "Archangel Uriel, strategic intensity, relentless courage"),
+    ("Fomalhaut", "Alpha Piscis Austrini (Royal Star)", "Archangel Gabriel, mystical vision, visionary synthesis"),
+    ("Deneb", "Alpha Cygni", "Sharp intellect, scientific acumen, transcendent flight"),
+    ("Regulus", "Alpha Leonis (Royal Star)", "Archangel Raphael, kingly nobility, supreme public acclaim"),
+    ("Algol", "Beta Persei", "Gorgon head, intense chthonic power, crisis transmutation"),
+    ("Altair", "Alpha Aquilae", "Indomitable boldness, swift execution, soaring ambition"),
+    ("Alcyone", "Eta Tauri (Central Pleiad)", "Mystic sight, collective unconscious memory, profound feeling"),
+]
+
+# House systems mapping
+HOUSE_SYSTEMS = {
+    "P": ("Placidus", b'P'),
+    "PLACIDUS": ("Placidus", b'P'),
+    "W": ("Whole Sign", b'W'),
+    "WHOLE_SIGN": ("Whole Sign", b'W'),
+    "WHOLESIGN": ("Whole Sign", b'W'),
+    "R": ("Regiomontanus", b'R'),
+    "REGIOMONTANUS": ("Regiomontanus", b'R'),
+    "K": ("Koch", b'K'),
+    "KOCH": ("Koch", b'K'),
+    "E": ("Equal", b'E'),
+    "EQUAL": ("Equal", b'E'),
+    "C": ("Campanus", b'C'),
+    "CAMPANUS": ("Campanus", b'C'),
+}
+
 SKYFIELD_TARGETS = {
     "Sun": "sun",
     "Moon": "moon",
@@ -46,10 +98,8 @@ def get_skyfield_objects():
     global _ts, _eph
     if _ts is None or _eph is None:
         _ts = load.timescale()
-        # Look for de421.bsp in current dir or download path
         bsp_path = "de421.bsp"
         if not os.path.exists(bsp_path):
-            # check root or study dir
             alt_path = os.path.join(os.path.dirname(__file__), "..", "..", "..", "de421.bsp")
             if os.path.exists(alt_path):
                 bsp_path = alt_path
@@ -73,33 +123,53 @@ def compute_astronomical_base(
     jd_ut: float,
     latitude: float,
     longitude: float,
-    has_birth_time: bool = True
+    has_birth_time: bool = True,
+    house_system: str = "Placidus"
 ) -> Dict[str, Any]:
-    swe.set_ephe_path("")
+    # Configure Swiss Ephemeris data path
+    ephe_path = os.path.join(os.path.dirname(__file__), "..", "..", "ephe")
+    if os.path.exists(ephe_path):
+        swe.set_ephe_path(ephe_path)
+    else:
+        swe.set_ephe_path("")
     
     # 1. Angles and Cusps (Swiss Ephemeris)
-    # Whole sign system 'W', or Placidus 'P'
+    hsys_key = house_system.strip().upper() if house_system else "PLACIDUS"
+    hsys_name, hsys_code = HOUSE_SYSTEMS.get(hsys_key, ("Placidus", b'P'))
+
     asc_deg = 0.0
     mc_deg = 0.0
-    houses_tropical = []
+    vertex_deg = 0.0
+    eq_asc_deg = 0.0
+    houses_cusps = []
+    houses_whole_sign = []
     
     if has_birth_time:
-        # Whole sign houses
-        cusps, ascmc = swe.houses(jd_ut, latitude, longitude, b'W')
+        # Selected house system (default Placidus)
+        cusps, ascmc = swe.houses(jd_ut, latitude, longitude, hsys_code)
         asc_deg = ascmc[0] % 360.0
         mc_deg = ascmc[1] % 360.0
-        houses_tropical = [c % 360.0 for c in cusps]
+        vertex_deg = ascmc[3] % 360.0
+        eq_asc_deg = ascmc[4] % 360.0
+        houses_cusps = [c % 360.0 for c in cusps]
+
+        # Whole-sign houses for traditions requiring whole sign (Vedic/Hellenistic)
+        cusps_ws, _ = swe.houses(jd_ut, latitude, longitude, b'W')
+        houses_whole_sign = [c % 360.0 for c in cusps_ws]
     else:
         # Default zeroed when time unavailable
         asc_deg = 0.0
         mc_deg = 0.0
-        houses_tropical = [i * 30.0 for i in range(12)]
+        houses_cusps = [i * 30.0 for i in range(12)]
+        houses_whole_sign = [i * 30.0 for i in range(12)]
+
+    houses_tropical = houses_cusps
 
     # 2. Lahiri Ayanamsha for Sidereal positions
     swe.set_sid_mode(swe.SIDM_LAHIRI)
     ayanamsha_deg = swe.get_ayanamsa_ut(jd_ut)
 
-    # Sidereal Ascendant
+    # Sidereal Ascendant and MC
     asc_sidereal = (asc_deg - ayanamsha_deg) % 360.0
     mc_sidereal = (mc_deg - ayanamsha_deg) % 360.0
 
@@ -124,7 +194,8 @@ def compute_astronomical_base(
             "is_retrograde": speed_trop < 0,
             "sign": sign_t,
             "sign_index": s_idx_t,
-            "degree_in_sign": deg_t
+            "degree_in_sign": deg_t,
+            "category": "planet"
         }
 
         # Sidereal
@@ -143,11 +214,11 @@ def compute_astronomical_base(
             "is_retrograde": speed_sid < 0,
             "sign": sign_s,
             "sign_index": s_idx_s,
-            "degree_in_sign": deg_s
+            "degree_in_sign": deg_s,
+            "category": "planet"
         }
 
     # 4. Lunar Nodes: True Node (Rahu) and Ketu = Rahu + 180°
-    # Tropical Nodes
     res_node_trop, _ = swe.calc_ut(jd_ut, swe.TRUE_NODE, swe.FLG_SWIEPH | swe.FLG_SPEED)
     rahu_lon_trop = res_node_trop[0] % 360.0
     ketu_lon_trop = (rahu_lon_trop + 180.0) % 360.0
@@ -162,7 +233,8 @@ def compute_astronomical_base(
         "is_retrograde": True,
         "sign": r_sign_t,
         "sign_index": r_idx_t,
-        "degree_in_sign": r_deg_t
+        "degree_in_sign": r_deg_t,
+        "category": "lunar_node"
     }
     planets_tropical["Ketu"] = {
         "longitude": ketu_lon_trop,
@@ -172,7 +244,8 @@ def compute_astronomical_base(
         "is_retrograde": True,
         "sign": k_sign_t,
         "sign_index": k_idx_t,
-        "degree_in_sign": k_deg_t
+        "degree_in_sign": k_deg_t,
+        "category": "lunar_node"
     }
 
     # Sidereal Nodes
@@ -189,7 +262,8 @@ def compute_astronomical_base(
         "is_retrograde": True,
         "sign": r_sign_s,
         "sign_index": r_idx_s,
-        "degree_in_sign": r_deg_s
+        "degree_in_sign": r_deg_s,
+        "category": "lunar_node"
     }
     planets_sidereal["Ketu"] = {
         "longitude": ketu_lon_sid,
@@ -199,11 +273,104 @@ def compute_astronomical_base(
         "is_retrograde": True,
         "sign": k_sign_s,
         "sign_index": k_idx_s,
-        "degree_in_sign": k_deg_s
+        "degree_in_sign": k_deg_s,
+        "category": "lunar_node"
     }
 
-    # 5. Independent Validator: Skyfield (JPL DE421)
-    # Compare planetary longitudes
+    # 5. Minor Bodies & Asteroids (Chiron, Lilith, Ceres, Pallas, Juno, Vesta)
+    minor_bodies_tropical = {}
+    minor_bodies_sidereal = {}
+    for mb_name, (mb_id, mb_category) in MINOR_BODY_IDS.items():
+        try:
+            res_t, _ = swe.calc_ut(jd_ut, mb_id, swe.FLG_SWIEPH | swe.FLG_SPEED)
+            lon_t = res_t[0] % 360.0
+            sign_t, deg_t, s_idx_t = deg_to_sign_degree(lon_t)
+            minor_bodies_tropical[mb_name] = {
+                "name": mb_name,
+                "category": mb_category,
+                "longitude": lon_t,
+                "latitude": res_t[1],
+                "distance_au": res_t[2],
+                "speed": res_t[3],
+                "is_retrograde": res_t[3] < 0,
+                "sign": sign_t,
+                "sign_index": s_idx_t,
+                "degree_in_sign": deg_t
+            }
+
+            res_s, _ = swe.calc_ut(jd_ut, mb_id, swe.FLG_SWIEPH | swe.FLG_SIDEREAL | swe.FLG_SPEED)
+            lon_s = res_s[0] % 360.0
+            sign_s, deg_s, s_idx_s = deg_to_sign_degree(lon_s)
+            minor_bodies_sidereal[mb_name] = {
+                "name": mb_name,
+                "category": mb_category,
+                "longitude": lon_s,
+                "latitude": res_s[1],
+                "distance_au": res_s[2],
+                "speed": res_s[3],
+                "is_retrograde": res_s[3] < 0,
+                "sign": sign_s,
+                "sign_index": s_idx_s,
+                "degree_in_sign": deg_s
+            }
+        except Exception:
+            pass
+
+    # 6. Major Royal and Behenian Fixed Stars
+    fixed_stars = []
+    fixed_star_conjunctions = []
+    
+    check_targets = {
+        "Sun": planets_tropical.get("Sun", {}).get("longitude"),
+        "Moon": planets_tropical.get("Moon", {}).get("longitude"),
+        "Ascendant": asc_deg if has_birth_time else None,
+        "Midheaven": mc_deg if has_birth_time else None,
+        "Mercury": planets_tropical.get("Mercury", {}).get("longitude"),
+        "Venus": planets_tropical.get("Venus", {}).get("longitude"),
+        "Mars": planets_tropical.get("Mars", {}).get("longitude"),
+        "Jupiter": planets_tropical.get("Jupiter", {}).get("longitude"),
+        "Saturn": planets_tropical.get("Saturn", {}).get("longitude"),
+    }
+
+    for s_name, s_nom, s_theme in FIXED_STARS_CATALOG:
+        try:
+            star_res = swe.fixstar_ut(s_name, jd_ut)[0]
+            s_lon_t = star_res[0] % 360.0
+            s_sign_t, s_deg_t, s_idx_t = deg_to_sign_degree(s_lon_t)
+            s_lon_s = (s_lon_t - ayanamsha_deg) % 360.0
+            s_sign_s, s_deg_s, s_idx_s = deg_to_sign_degree(s_lon_s)
+
+            star_record = {
+                "name": s_name,
+                "nomenclature": s_nom,
+                "theme": s_theme,
+                "longitude_tropical": round(s_lon_t, 4),
+                "sign_tropical": s_sign_t,
+                "degree_tropical": round(s_deg_t, 2),
+                "longitude_sidereal": round(s_lon_s, 4),
+                "sign_sidereal": s_sign_s,
+                "degree_sidereal": round(s_deg_s, 2),
+            }
+            fixed_stars.append(star_record)
+
+            for target_name, target_lon in check_targets.items():
+                if target_lon is None:
+                    continue
+                diff = abs(target_lon - s_lon_t)
+                if diff > 180.0:
+                    diff = 360.0 - diff
+                if diff <= 1.5:  # 1.5° conjunction orb
+                    fixed_star_conjunctions.append({
+                        "star": s_name,
+                        "planet_or_angle": target_name,
+                        "separation_deg": round(diff, 3),
+                        "orb_type": "Tight Conjunction (<1.5°)",
+                        "interpretation": f"{target_name} conjunct {s_name} ({s_nom}): {s_theme}"
+                    })
+        except Exception:
+            pass
+
+    # 7. Independent Validator: Skyfield (JPL DE421)
     verification_diffs = []
     has_validator_alert = False
     
@@ -246,7 +413,7 @@ def compute_astronomical_base(
             "status": "unavailable"
         })
 
-    # 6. Boundary Distances (Ascendant and Cusps)
+    # 8. Boundary Distances (Ascendant and Cusps)
     asc_sign_t, asc_deg_in_sign, asc_idx_t = deg_to_sign_degree(asc_deg)
     dist_to_asc_cusp = min(asc_deg_in_sign, 30.0 - asc_deg_in_sign)
     
@@ -264,23 +431,33 @@ def compute_astronomical_base(
             "name": "Lahiri (Chitra Paksha)",
             "degrees": ayanamsha_deg
         },
+        "house_system": hsys_name,
         "angles": {
             "tropical": {
                 "ascendant": asc_deg,
                 "ascendant_sign": asc_sign_t,
                 "ascendant_degree": asc_deg_in_sign,
                 "mc": mc_deg,
+                "vertex": vertex_deg,
+                "equatorial_ascendant": eq_asc_deg,
             },
             "sidereal": {
                 "ascendant": asc_sidereal,
                 "ascendant_sign": asc_sign_s,
                 "ascendant_degree": asc_sid_deg_in_sign,
                 "mc": mc_sidereal,
+                "vertex": (vertex_deg - ayanamsha_deg) % 360.0 if has_birth_time else 0.0,
             }
         },
+        "houses_cusps": houses_cusps,
+        "houses_whole_sign": houses_whole_sign,
         "houses_tropical": houses_tropical,
         "planets_tropical": planets_tropical,
         "planets_sidereal": planets_sidereal,
+        "minor_bodies_tropical": minor_bodies_tropical,
+        "minor_bodies_sidereal": minor_bodies_sidereal,
+        "fixed_stars": fixed_stars,
+        "fixed_star_conjunctions": fixed_star_conjunctions,
         "boundary_distances": {
             "tropical_asc_to_cusp_deg": round(dist_to_asc_cusp, 4),
             "sidereal_asc_to_cusp_deg": round(dist_to_sid_asc_cusp, 4),
