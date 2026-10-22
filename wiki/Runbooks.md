@@ -120,6 +120,46 @@ npx cap run android
 2. **Safe-Area Insets**: Notch, Dynamic Island, and navigation bar insets are respected with `env(safe-area-inset-top)` and `env(safe-area-inset-bottom)`.
 3. **Touch Feedback**: 300ms double-tap delay and tap gray flashes are suppressed via `touch-action: manipulation` and `-webkit-tap-highlight-color: transparent`.
 
+### Sideloading onto Physical Devices
+
+#### 1. Android Sideloading (APK)
+The debug APK is pre-compiled and located at `Synodix-debug.apk` in the repository root (or rebuilt via Gradle):
+```bash
+# To rebuild fresh APK anytime:
+cd frontend/android && export JAVA_HOME="/Library/Java/JavaVirtualMachines/temurin-17.jdk/Contents/Home" && ./gradlew assembleDebug
+
+# Option A: Direct install via ADB (if connected via USB / Wi-Fi debugging)
+adb install Synodix-debug.apk
+
+# Option B: Direct transfer
+# Send Synodix-debug.apk to your Android phone via Google Drive, Telegram, AirDrop-alternative, or USB transfer.
+# On phone: Open the file, allow "Install unknown apps" in Settings > Security, and tap Install.
+```
+
+#### 2. iOS Sideloading
+To install Synodix on an iPhone or iPad without an App Store account:
+
+**Method A: Direct via Xcode (Recommended, 100% Free)**
+1. Connect your iPhone to your Mac via cable.
+2. Run `cd frontend && npx cap open ios` (opens `App.xcodeproj` in Xcode).
+3. In the Xcode toolbar, select your connected iPhone from the device target dropdown.
+4. Select the `App` target in the project navigator > **Signing & Capabilities**.
+5. Select your personal Apple ID from the "Team" dropdown (Xcode creates free 7-day personal development certificates).
+6. Press the **Run** button (`⌘R`) to build and sideload directly onto your iPhone.
+7. On your iPhone: Go to **Settings > General > VPN & Device Management** > Tap your Apple ID > Tap **Trust**.
+
+**Method B: Sideloading Tools (AltStore / Sideloadly / Scarlet)**
+- Use Sideloadly or AltServer on your Mac to sign and install the app over local Wi-Fi without needing Xcode open.
+
+#### 3. Connecting Mobile to Backend
+1. Start the backend daemon listening on all network interfaces:
+   ```bash
+   PYTHONPATH=. .venv/bin/uvicorn backend.app.main:app --host 0.0.0.0 --port 8000
+   ```
+2. Ensure your phone is connected to the same local Wi-Fi network as your Mac.
+3. In the Synodix mobile app, open the sidebar/drawer and tap **Server** to verify or adjust the backend URL (defaults to `http://192.168.1.11:8000`).
+4. Tap **Test Ping** to confirm live astrometric calculation connectivity.
+
 ---
 
 ## 🐳 Docker Containerization

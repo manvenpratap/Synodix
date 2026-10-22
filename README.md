@@ -126,22 +126,27 @@ cd Synodix
 # 3. Run regression tests (Minimal Tokens Protocol)
 ./pipeline.sh test --summary
 
-# 4. Start backend daemon (Terminal 1)
-PYTHONPATH=. .venv/bin/python -m uvicorn backend.app.main:app --host 127.0.0.1 --port 8000 --reload
+# 4. Start backend daemon on all network interfaces for LAN mobile access (Terminal 1)
+PYTHONPATH=. .venv/bin/python -m uvicorn backend.app.main:app --host 0.0.0.0 --port 8000 --reload
 
 # 5. Start frontend dev server (Terminal 2)
-npm run dev --prefix frontend -- --host 127.0.0.1 --port 5173
+npm run dev --prefix frontend -- --host 0.0.0.0 --port 5173
 
-# 6. Native Mobile App Sync & Launch (iOS & Android)
+# 6. Native Mobile App Sync & Sideloading (iOS & Android)
 npm run build --prefix frontend
 cd frontend && npx cap sync
 
-# Open in Xcode or Android Studio:
-npx cap open ios      # Opens frontend/ios/App/App.xcworkspace
+# Sideload Android:
+# Install pre-compiled APK directly:
+adb install Synodix-debug.apk
+
+# Sideload iOS:
+# Open project in Xcode, select Personal Team & connected iPhone, then press Run (Cmd+R):
+npx cap open ios      # Opens frontend/ios/App/App.xcodeproj
 npx cap open android  # Opens frontend/android in Android Studio
 ```
 
-Visit the Observatory UI at `http://localhost:5173`, Swagger API Docs at `http://localhost:8000/docs`, or run natively on an iOS Simulator / Android device via Capacitor.
+Visit the Observatory UI at `http://localhost:5173`, Swagger API Docs at `http://localhost:8000/docs`, or sideload directly onto physical iOS and Android devices.
 
 ---
 

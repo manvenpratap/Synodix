@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { apiUrl } from '../utils/api';
 import {
   Download,
   Printer,
@@ -31,7 +32,7 @@ export const MathematicalEvidenceCard: React.FC<Props> = ({ onClose }) => {
 
   // Fetch latest dynamic data from API on mount (falls back seamlessly to bundled constant)
   useEffect(() => {
-    fetch('/api/mathematical-evidence')
+    fetch(apiUrl('/api/mathematical-evidence'))
       .then((res) => {
         if (res.ok) return res.json();
         throw new Error('API offline');

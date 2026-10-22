@@ -1,7 +1,7 @@
 # Synodix: Project Context & Working Memory
 
-**Last Updated:** 2026-10-21 17:15:00 UTC  
-**Version:** 2.6.0  
+**Last Updated:** 2026-10-22 01:20:00 UTC  
+**Version:** 2.7.0  
 **Stack:** Python 3.12 (FastAPI, Swiss Ephemeris 2.10, Skyfield DE421) + TypeScript / React 19 / Vite / Tailwind CSS v4 / Capacitor 8 (iOS & Android)  
 **Workspace:** `/Volumes/Study/Projects/Astrology` (symlinked as `/Volumes/Study/Astrology`)  
 **Git Remote:** `https://github.com/manvenpratap/Synodix.git`  
@@ -9,9 +9,14 @@
 ---
 
 ## 1. Current Status & Milestone
-- **Active Phase**: Native Mobile Apps (iOS & Android) & Mobile-First Touch Ergonomics (Completed)
+- **Active Phase**: Native Mobile Sideloading & Configurable API Gateway (Completed)
+- **Sideloading Artifacts & Runtime**:
+  - Android Sideload APK: Compiled debug artifact ready at `Synodix-debug.apk` (4.1MB, Gradle build-tools 35, Java 17/21 compatible).
+  - iOS Sideloading: Configured Xcode project at `frontend/ios/App/App.xcodeproj` ready for 1-click deployment via Xcode free developer account, Sideloadly, or AltStore.
+  - Sideload Network Bridge: Client-side `apiUrl()` resolver with automatic fallback to LAN IP (`http://192.168.1.11:8000`) on native mobile, plus interactive Server Connection dialog with live ping diagnostics.
+  - Backend Network Accessibility: FastAPI server bound to `0.0.0.0:8000` to serve requests from physical mobile devices across local Wi-Fi.
 - **Native Mobile Containers (Capacitor 8)**:
-  - iOS Workspace: `frontend/ios/App/App.xcworkspace` configured with Swift Package Manager (SPM) and app ID `org.antigravity.synodix`.
+  - iOS Workspace: `frontend/ios/App/App.xcodeproj` configured with Swift Package Manager (SPM) and app ID `org.antigravity.synodix`.
   - Android Studio Project: `frontend/android/` configured with Gradle wrapper, AndroidManifest, splash configuration, and app ID `org.antigravity.synodix`.
   - Real-time asset synchronization: `npm run build && cd frontend && npx cap sync` pushes built web assets directly into iOS and Android bundles.
 - **Mobile-First Ergonomics (`mobile-design`)**:
