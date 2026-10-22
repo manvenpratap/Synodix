@@ -15,6 +15,7 @@ import {
 
 interface Props {
   data: ChartResponse;
+  onNavigate?: (screen: 'workbench' | 'traditions' | 'synthesis' | 'dossier' | 'verification' | 'evidence') => void;
 }
 
 const TRADITION_PRIMARY_EXPLAINER: Record<string, { id: string; label: string }> = {
@@ -241,7 +242,7 @@ const CULTURE_THEMES: Record<string, {
   },
 };
 
-export const TraditionCharts: React.FC<Props> = ({ data }) => {
+export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
   const [activeTab, setActiveTab] = useState<'jyotisha' | 'bazi' | 'western' | 'persian' | 'egyptian' | 'ziwei' | 'mayan' | 'tibetan' | 'maramataka'>('jyotisha');
   const [chartViewMode, setChartViewMode] = useState<'both' | 'chart' | 'table'>('both');
 
@@ -258,7 +259,7 @@ export const TraditionCharts: React.FC<Props> = ({ data }) => {
 
         {/* Tradition Selector Tabs */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-3.5 border-b border-white/10 gap-3">
-        <div>
+        <div className="hidden sm:block">
           <span className="text-[10px] font-mono uppercase tracking-wider text-cyan-400 font-semibold block">
             Deterministic Tradition Calculators
           </span>
@@ -268,7 +269,7 @@ export const TraditionCharts: React.FC<Props> = ({ data }) => {
         </div>
 
         {/* Clean Typographic Tabs with Cultural Glyphs & Theming */}
-        <div role="tablist" aria-label="Astrological tradition charts" className="flex items-center gap-1.5 overflow-x-auto pb-1 sm:pb-0 scrollbar-thin scroll-smooth overscroll-x-contain">
+        <div role="tablist" aria-label="Astrological tradition charts" className="flex items-center gap-1.5 overflow-x-auto pb-1 sm:pb-0 scrollbar-thin scroll-smooth overscroll-x-contain w-full sm:w-auto">
           {Object.values(CULTURE_THEMES).map((t) => {
             const isActive = activeTab === t.id;
             return (
@@ -296,7 +297,7 @@ export const TraditionCharts: React.FC<Props> = ({ data }) => {
 
       {/* Culturally Themed Display Presentation & Heritage Banner */}
       <div className={`mt-4 p-4 rounded-xl border ${currentTheme.headerBorder} ${currentTheme.headerBg} relative overflow-hidden transition-all duration-300 shadow-sm`}>
-        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 relative z-10">
+        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-3 sm:gap-4 relative z-10">
           <div>
             <div className="flex flex-wrap items-center gap-2">
               <span className="text-lg select-none">{currentTheme.glyph}</span>
@@ -314,10 +315,10 @@ export const TraditionCharts: React.FC<Props> = ({ data }) => {
                 />
               )}
             </div>
-            <p className="text-xs text-slate-300 mt-1 font-sans">
+            <p className="text-xs text-slate-300 mt-1 font-sans hidden sm:block">
               {currentTheme.lineage}
             </p>
-            <p className="text-[11px] text-slate-400 italic mt-0.5 font-serif">
+            <p className="text-[11px] text-slate-400 italic mt-0.5 font-serif hidden sm:block">
               &ldquo;{currentTheme.motto}&rdquo;
             </p>
           </div>
@@ -1614,6 +1615,26 @@ export const TraditionCharts: React.FC<Props> = ({ data }) => {
           </div>
           </>
           )}
+        </div>
+      )}
+
+      {/* Mobile & Tablet Epistemological Journey Navigation Bar */}
+      {onNavigate && (
+        <div className="mt-6 pt-4 border-t border-white/10 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2.5">
+          <button
+            type="button"
+            onClick={() => onNavigate('workbench')}
+            className="inline-flex items-center justify-center gap-2 px-4 py-2.5 min-h-[44px] text-xs font-mono rounded-lg bg-[#101520] hover:bg-[#161d2c] text-slate-300 border border-[#1b2331] cursor-pointer transition-colors active:scale-[0.98]"
+          >
+            <span>← Back to Workbench</span>
+          </button>
+          <button
+            type="button"
+            onClick={() => onNavigate('synthesis')}
+            className="inline-flex items-center justify-center gap-2 px-4 py-2.5 min-h-[44px] text-xs font-mono rounded-lg bg-gradient-to-r from-cyan-700 to-cyan-600 hover:from-cyan-600 hover:to-cyan-500 text-white font-semibold cursor-pointer transition-all shadow-md active:scale-[0.98]"
+          >
+            <span>Explore Cross-Cultural Synthesis Matrix →</span>
+          </button>
         </div>
       )}
       </div>

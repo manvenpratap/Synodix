@@ -19,9 +19,10 @@ import {
 
 interface Props {
   data: ChartResponse;
+  onNavigate?: (screen: 'workbench' | 'traditions' | 'synthesis' | 'dossier' | 'verification' | 'evidence') => void;
 }
 
-export const ReadingView: React.FC<Props> = ({ data }) => {
+export const ReadingView: React.FC<Props> = ({ data, onNavigate }) => {
   const [viewMode, setViewMode] = useState<'interactive' | 'markdown'>('interactive');
   const [domainFilter, setDomainFilter] = useState<'all' | 'consensus' | 'divergent'>('all');
   const [expandedDomainId, setExpandedDomainId] = useState<string | null>(null);
@@ -107,7 +108,7 @@ export const ReadingView: React.FC<Props> = ({ data }) => {
               <BookOpen className="w-5 h-5 text-cyan-400 shrink-0" />
               <span>Cross-Cultural Corroboration Document</span>
             </h2>
-            <p className="text-xs text-slate-400 mt-1 font-sans">
+            <p className="text-xs text-slate-400 mt-1 font-sans hidden sm:block">
               Autonomous cross-system corroboration and divergence synthesis across independent classical civilizational traditions.
             </p>
           </div>
@@ -735,6 +736,26 @@ export const ReadingView: React.FC<Props> = ({ data }) => {
           <div className="p-4 rounded-lg bg-[#080a0f] border border-[#1b2331] font-mono text-xs text-slate-300 whitespace-pre-wrap leading-relaxed max-h-[700px] overflow-y-auto">
             {markdownText}
           </div>
+        </div>
+      )}
+
+      {/* Mobile & Tablet Epistemological Journey Navigation Bar */}
+      {onNavigate && (
+        <div className="p-4 sm:p-5 border-t border-[#1b2331] bg-[#090d14] flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2.5">
+          <button
+            type="button"
+            onClick={() => onNavigate('synthesis')}
+            className="inline-flex items-center justify-center gap-2 px-4 py-2.5 min-h-[44px] text-xs font-mono rounded-lg bg-[#101520] hover:bg-[#161d2c] text-slate-300 border border-[#1b2331] cursor-pointer transition-colors active:scale-[0.98]"
+          >
+            <span>← Synthesis Matrix</span>
+          </button>
+          <button
+            type="button"
+            onClick={() => onNavigate('evidence')}
+            className="inline-flex items-center justify-center gap-2 px-4 py-2.5 min-h-[44px] text-xs font-mono rounded-lg bg-gradient-to-r from-cyan-700 to-cyan-600 hover:from-cyan-600 hover:to-cyan-500 text-white font-semibold cursor-pointer transition-all shadow-md active:scale-[0.98]"
+          >
+            <span>View Mathematical Evidence Whitepaper →</span>
+          </button>
         </div>
       )}
       </div>

@@ -5,9 +5,10 @@ import { ExplainerTrigger } from './ExplainerTrigger';
 
 interface Props {
   synthesis: Synthesis;
+  onNavigate?: (screen: 'workbench' | 'traditions' | 'synthesis' | 'dossier' | 'verification' | 'evidence') => void;
 }
 
-export const SynthesisMatrix: React.FC<Props> = ({ synthesis }) => {
+export const SynthesisMatrix: React.FC<Props> = ({ synthesis, onNavigate }) => {
   const [expandedDomain, setExpandedDomain] = useState<string | null>(null);
   const [filterMode, setFilterMode] = useState<'all' | 'high' | 'divergent'>('all');
   const metrics = synthesis.divergence_metrics;
@@ -170,13 +171,22 @@ export const SynthesisMatrix: React.FC<Props> = ({ synthesis }) => {
 
       {/* Life Domains Table */}
       <div className="space-y-2.5">
-        <span className="text-[10px] font-mono font-semibold text-slate-400 uppercase tracking-wider block">
-          Life Domains ({filteredDomains.length} Shown)
-        </span>
+        <div className="flex items-center justify-between">
+          <span className="text-[10px] font-mono font-semibold text-slate-400 uppercase tracking-wider block">
+            Life Domains ({filteredDomains.length} Shown)
+          </span>
+          <button
+            type="button"
+            onClick={() => setExpandedDomain((prev) => (prev === 'ALL' ? null : 'ALL'))}
+            className="text-[11px] font-mono text-cyan-400 hover:text-cyan-300 cursor-pointer underline py-1 px-2"
+          >
+            {expandedDomain === 'ALL' ? 'Collapse All Domains' : 'Expand All Domains'}
+          </button>
+        </div>
 
         <div className="grid grid-cols-1 gap-2">
           {filteredDomains.map((dom) => {
-            const isExpanded = expandedDomain === dom.domain_id;
+            const isExpanded = expandedDomain === 'ALL' || expandedDomain === dom.domain_id;
             return (
               <div
                 key={dom.domain_id}
@@ -388,6 +398,26 @@ export const SynthesisMatrix: React.FC<Props> = ({ synthesis }) => {
           </div>
         </div>
       </div>
+
+      {/* Mobile & Tablet Epistemological Journey Navigation Bar */}
+      {onNavigate && (
+        <div className="mt-6 pt-4 border-t border-[#1b2331] flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2.5">
+          <button
+            type="button"
+            onClick={() => onNavigate('traditions')}
+            className="inline-flex items-center justify-center gap-2 px-4 py-2.5 min-h-[44px] text-xs font-mono rounded-lg bg-[#101520] hover:bg-[#161d2c] text-slate-300 border border-[#1b2331] cursor-pointer transition-colors active:scale-[0.98]"
+          >
+            <span>← View Traditions</span>
+          </button>
+          <button
+            type="button"
+            onClick={() => onNavigate('dossier')}
+            className="inline-flex items-center justify-center gap-2 px-4 py-2.5 min-h-[44px] text-xs font-mono rounded-lg bg-gradient-to-r from-cyan-700 to-cyan-600 hover:from-cyan-600 hover:to-cyan-500 text-white font-semibold cursor-pointer transition-all shadow-md active:scale-[0.98]"
+          >
+            <span>Read Full Corroboration Dossier →</span>
+          </button>
+        </div>
+      )}
       </div>
     </div>
   );

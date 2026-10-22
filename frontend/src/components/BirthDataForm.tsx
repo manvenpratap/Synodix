@@ -142,10 +142,11 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
       e.preventDefault();
       setActiveSuggestionIndex((prev) => (prev > 0 ? prev - 1 : citySuggestions.length - 1));
     } else if (e.key === 'Enter') {
-      if (activeSuggestionIndex >= 0 && activeSuggestionIndex < citySuggestions.length) {
+      const targetIndex = activeSuggestionIndex >= 0 ? activeSuggestionIndex : 0;
+      if (targetIndex < citySuggestions.length) {
         e.preventDefault();
         e.stopPropagation();
-        handleSelectCity(citySuggestions[activeSuggestionIndex]);
+        handleSelectCity(citySuggestions[targetIndex]);
       }
     }
   };

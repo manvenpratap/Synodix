@@ -121,7 +121,25 @@ def test_mobile_viewport_and_touch_targets():
                 page.wait_for_timeout(400)
                 assert check_no_horizontal_overflow(page), f"Screen '{screen}' should have zero horizontal overflow on {vp['name']}"
 
-            # 10. Test Feature Explainer Modal touch targets
+            # 10. Test Mobile Epistemological Journey Stepper & Navigation CTAs
+            stepper = page.locator("text=Epistemic Journey").first
+            assert stepper.is_visible(), f"Epistemic Journey Stepper should be visible on {vp['name']}"
+            
+            # Navigate via Journey Stepper to Traditions
+            page.evaluate("() => { const b = document.querySelectorAll(\"button\"); for (const el of b) { if (el.innerText.includes('Traditions') && el.innerText.includes('2')) { el.click(); break; } } }")
+            page.wait_for_timeout(400)
+            
+            # Bottom Journey CTA should be visible
+            synth_cta = page.locator("button:has-text('Explore Cross-Cultural Synthesis Matrix')").first
+            assert synth_cta.is_visible(), f"Bottom Journey CTA to Synthesis should be visible on {vp['name']}"
+            synth_cta.click()
+            page.wait_for_timeout(400)
+            
+            # Active subject chip in header should be visible on mobile
+            subj_chip = page.locator("button[aria-label*='Subject:']").first
+            assert subj_chip.is_visible(), f"Active subject chip should be visible on mobile {vp['name']}"
+
+            # 11. Test Feature Explainer Modal touch targets
             guide_btn = page.locator("button[aria-label='Browse Feature Explainers & Astrometric Glossary']").first
             assert guide_btn.is_visible()
             g_box = guide_btn.bounding_box()
@@ -136,7 +154,7 @@ def test_mobile_viewport_and_touch_targets():
             modal_close.click()
             page.wait_for_timeout(300)
 
-            # 11. Check zero critical console errors
+            # 12. Check zero critical console errors
             assert_no_critical_errors(page)
 
             context.close()

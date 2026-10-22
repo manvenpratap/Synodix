@@ -21,9 +21,10 @@ import { EVIDENCE_REPORT_MARKDOWN, EVIDENCE_STATS } from '../data/mathematicalEv
 
 interface Props {
   onClose?: () => void;
+  onNavigate?: (screen: 'workbench' | 'traditions' | 'synthesis' | 'dossier' | 'verification' | 'evidence') => void;
 }
 
-export const MathematicalEvidenceCard: React.FC<Props> = ({ onClose }) => {
+export const MathematicalEvidenceCard: React.FC<Props> = ({ onClose, onNavigate }) => {
   const [viewMode, setViewMode] = useState<'interactive' | 'whitepaper' | 'markdown'>('interactive');
   const [activeTab, setActiveTab] = useState<'hypotheses' | 'debiasing' | 'pillars' | 'moat' | 'checklist'>('hypotheses');
   const [hypothesisFilter, setHypothesisFilter] = useState<'all' | 'enriched' | 'disproven' | 'significant'>('all');
@@ -937,6 +938,26 @@ export const MathematicalEvidenceCard: React.FC<Props> = ({ onClose }) => {
           <pre className="p-4 rounded-lg bg-[#04060a] border border-[#1b2331] text-slate-300 font-mono text-xs overflow-x-auto whitespace-pre-wrap leading-relaxed max-h-[700px] select-all">
             {reportMarkdown}
           </pre>
+        </div>
+      )}
+
+      {/* Mobile & Tablet Epistemological Journey Navigation Bar */}
+      {(onNavigate || onClose) && (
+        <div className="p-4 sm:p-5 border-t border-[#1b2331] bg-[#090d14] flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2.5">
+          <button
+            type="button"
+            onClick={() => onNavigate ? onNavigate('dossier') : onClose?.()}
+            className="inline-flex items-center justify-center gap-2 px-4 py-2.5 min-h-[44px] text-xs font-mono rounded-lg bg-[#101520] hover:bg-[#161d2c] text-slate-300 border border-[#1b2331] cursor-pointer transition-colors active:scale-[0.98]"
+          >
+            <span>← Corroboration Dossier</span>
+          </button>
+          <button
+            type="button"
+            onClick={() => onNavigate ? onNavigate('workbench') : onClose?.()}
+            className="inline-flex items-center justify-center gap-2 px-4 py-2.5 min-h-[44px] text-xs font-mono rounded-lg bg-gradient-to-r from-cyan-700 to-cyan-600 hover:from-cyan-600 hover:to-cyan-500 text-white font-semibold cursor-pointer transition-all shadow-md active:scale-[0.98]"
+          >
+            <span>Return to Workbench (Recalibrate) ↺</span>
+          </button>
         </div>
       )}
       </div>

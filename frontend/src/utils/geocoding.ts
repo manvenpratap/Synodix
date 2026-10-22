@@ -40,8 +40,8 @@ export async function searchCitySuggestions(query: string, limit = 8): Promise<G
     source: 'offline_gazetteer',
   }));
 
-  // If local results are sufficient or user is offline, return immediately
-  if (results.length >= 4 || typeof navigator !== 'undefined' && !navigator.onLine) {
+  // If local results are found or user is offline, return immediately for instant 0ms response
+  if (results.length > 0 || (typeof navigator !== 'undefined' && !navigator.onLine)) {
     return results;
   }
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import type { ChartResponse } from '../types';
 import { ExplainerTrigger } from './ExplainerTrigger';
 
@@ -7,39 +7,55 @@ interface Props {
 }
 
 export const InputAuditCard: React.FC<Props> = ({ data }) => {
+  const [isMobileOpen, setIsMobileOpen] = useState(false);
   const norm = data.birth_input_audit.normalized;
   const boundary = data.birth_input_audit.boundary_audit;
   const uncertClass = data.uncertainty_classification;
 
   return (
-    <div className="bg-[#0d1118] border border-[#1b2331] rounded-lg p-5">
-      {/* Header */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between pb-3.5 border-b border-[#1b2331] gap-3">
-        <div>
-          <span className="text-[10px] font-mono uppercase tracking-wider text-amber-400 font-semibold block">
-            02 / Time Normalization & Boundary Proximity Audit
-          </span>
-          <div className="flex flex-wrap items-center gap-2 mt-0.5">
-            <h3 className="text-base font-semibold text-slate-100">
-              Astronomical & Civil Time Coordinates
-            </h3>
-            <ExplainerTrigger id="time_normalization_eot" label="Solar Time Mechanics" />
+    <div className="machined-bezel p-1 sm:p-1.5 rounded-2xl relative shadow-xl">
+      <div className="machined-core border border-white/[0.06] rounded-[calc(1rem-1px)] p-4 sm:p-5 relative">
+        <div className="reticle-corner-tl" />
+        <div className="reticle-corner-tr" />
+        <div className="reticle-corner-bl" />
+        <div className="reticle-corner-br" />
+
+        {/* Header */}
+        <div className="flex flex-col md:flex-row md:items-center justify-between pb-3.5 border-b border-[#1b2331] gap-3">
+          <div>
+            <span className="text-[10px] font-mono uppercase tracking-wider text-amber-400 font-semibold block">
+              02 / Time Normalization & Boundary Proximity Audit
+            </span>
+            <div className="flex flex-wrap items-center gap-2 mt-0.5">
+              <h3 className="text-base font-semibold text-slate-100">
+                Astronomical & Civil Time Coordinates
+              </h3>
+              <ExplainerTrigger id="time_normalization_eot" label="Solar Time Mechanics" />
+            </div>
+          </div>
+          <div className="flex flex-wrap items-center justify-between md:justify-end gap-2">
+            <span className="px-2 py-0.5 text-xs font-mono rounded bg-[#121721] text-slate-300 border border-[#1b2331]">
+              IANA: {norm.timezone_name} ({norm.utc_offset_hours >= 0 ? `+${norm.utc_offset_hours}` : norm.utc_offset_hours}h)
+            </span>
+            <span className={`px-2 py-0.5 text-xs font-mono font-medium rounded border ${
+              norm.is_dst ? 'bg-amber-950/70 text-amber-300 border-amber-800/80' : 'bg-[#121721] text-slate-400 border-[#1b2331]'
+            }`}>
+              DST: {norm.is_dst ? 'ACTIVE' : 'STANDARD'}
+            </span>
+            <button
+              type="button"
+              onClick={() => setIsMobileOpen(!isMobileOpen)}
+              className="md:hidden text-xs font-mono text-cyan-300 hover:text-cyan-200 font-medium cursor-pointer py-1.5 px-3 rounded-lg bg-[#121824] border border-cyan-800/80 min-h-[44px] flex items-center justify-center active:scale-95 transition-all"
+            >
+              {isMobileOpen ? 'Hide Full Audit ▲' : 'Audit Invariants (4) ▼'}
+            </button>
           </div>
         </div>
-        <div className="flex items-center gap-2">
-          <span className="px-2 py-0.5 text-xs font-mono rounded bg-[#121721] text-slate-300 border border-[#1b2331]">
-            IANA: {norm.timezone_name} ({norm.utc_offset_hours >= 0 ? `+${norm.utc_offset_hours}` : norm.utc_offset_hours}h)
-          </span>
-          <span className={`px-2 py-0.5 text-xs font-mono font-medium rounded border ${
-            norm.is_dst ? 'bg-amber-950/70 text-amber-300 border-amber-800/80' : 'bg-[#121721] text-slate-400 border-[#1b2331]'
-          }`}>
-            DST: {norm.is_dst ? 'ACTIVE' : 'STANDARD'}
-          </span>
-        </div>
-      </div>
 
-      {/* Grid of Key Normalizations */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mt-3.5">
+        {/* Collapsible Content Area (Always visible on Desktop, togglable on Mobile) */}
+        <div className={`mt-3.5 space-y-4 ${isMobileOpen ? 'block' : 'hidden md:block'}`}>
+          {/* Grid of Key Normalizations */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
         {/* UTC Instant */}
         <div className="bg-[#080a0f] p-3 rounded-md border border-[#1b2331]">
           <div className="flex items-center justify-between">
@@ -161,6 +177,8 @@ export const InputAuditCard: React.FC<Props> = ({ data }) => {
             </div>
           ))}
         </div>
+      </div>
+      </div>
       </div>
     </div>
   );

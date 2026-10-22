@@ -98,6 +98,14 @@ const NAV_ITEMS: NavItem[] = [
   }
 ];
 
+const JOURNEY_STEPS: { id: AppScreen; step: number; label: string }[] = [
+  { id: 'workbench', step: 1, label: 'Input' },
+  { id: 'traditions', step: 2, label: 'Traditions' },
+  { id: 'synthesis', step: 3, label: 'Synthesis' },
+  { id: 'dossier', step: 4, label: 'Dossier' },
+  { id: 'evidence', step: 5, label: 'Evidence' },
+];
+
 function AppContent() {
   const { openGlossary } = useExplainer();
   const [currentScreen, setCurrentScreen] = useState<AppScreen>('workbench');
@@ -665,10 +673,23 @@ function AppContent() {
               </span>
               <span className="text-slate-600 hidden sm:inline">/</span>
               <h1 className="text-sm font-semibold text-slate-100 flex items-center gap-2 min-w-0">
-                <span className="truncate max-w-[130px] sm:max-w-none">
+                <span className="truncate max-w-[120px] sm:max-w-none">
                   {NAV_ITEMS.find((n) => n.id === currentScreen)?.label}
                 </span>
               </h1>
+              {/* Mobile Active Subject Chip */}
+              {activeSubjectName && currentScreen !== 'workbench' && (
+                <button
+                  type="button"
+                  onClick={() => navigateTo('workbench')}
+                  className="md:hidden flex items-center gap-1 px-2 py-0.5 rounded-full bg-[#101724] border border-cyan-800/60 text-[10px] font-mono text-cyan-300 truncate max-w-[110px] cursor-pointer shrink-0"
+                  data-tooltip="Switch active subject"
+                  aria-label={`Subject: ${activeSubjectName}. Tap to switch.`}
+                >
+                  <User className="w-2.5 h-2.5 text-cyan-400 shrink-0" />
+                  <span className="truncate">{activeSubjectName}</span>
+                </button>
+              )}
             </div>
 
             {/* Stitch Live Telemetry Badges (Desktop >= 2xl) */}
@@ -761,6 +782,54 @@ function AppContent() {
           </div>
         </header>
 
+        {/* Mobile Epistemological Journey Stepper (<md) */}
+        <div className="md:hidden px-3 py-2 bg-[#0c1018]/90 backdrop-blur-md border-b border-[#1b2331]/80 select-none sticky top-[calc(3.75rem+env(safe-area-inset-top,0px))] z-20">
+          <div className="flex items-center justify-between text-[10px] font-mono mb-1 text-slate-400">
+            <span className="uppercase tracking-wider font-semibold text-[9px] text-cyan-400 flex items-center gap-1">
+              <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 inline-block"></span>
+              Epistemic Journey
+            </span>
+            <span>Step {JOURNEY_STEPS.findIndex((s) => s.id === currentScreen) + 1} of 5</span>
+          </div>
+          <div className="flex items-center justify-between gap-1 overflow-x-auto py-0.5 scrollbar-none">
+            {JOURNEY_STEPS.map((s, idx) => {
+              const isActive = currentScreen === s.id;
+              const isPassed = JOURNEY_STEPS.findIndex((st) => st.id === currentScreen) > idx;
+              return (
+                <React.Fragment key={s.id}>
+                  <button
+                    type="button"
+                    onClick={() => navigateTo(s.id)}
+                    className={`flex items-center gap-1 px-2 py-1 rounded-md text-[10px] font-mono cursor-pointer transition-all shrink-0 active:scale-95 ${
+                      isActive
+                        ? 'bg-cyan-950 text-cyan-300 border border-cyan-700 font-bold shadow-xs'
+                        : isPassed
+                        ? 'bg-[#101722] text-emerald-400 border border-emerald-900/50'
+                        : 'bg-[#0e131d] text-slate-400 border border-[#1a2332]'
+                    }`}
+                  >
+                    <span
+                      className={`w-3.5 h-3.5 rounded-full flex items-center justify-center text-[9px] ${
+                        isActive
+                          ? 'bg-cyan-400 text-slate-950 font-bold'
+                          : isPassed
+                          ? 'bg-emerald-500/20 text-emerald-300'
+                          : 'bg-[#182130] text-slate-400'
+                      }`}
+                    >
+                      {s.step}
+                    </span>
+                    <span>{s.label}</span>
+                  </button>
+                  {idx < JOURNEY_STEPS.length - 1 && (
+                    <span className={`text-[10px] shrink-0 ${isPassed ? 'text-emerald-500/50' : 'text-slate-600'}`}>➔</span>
+                  )}
+                </React.Fragment>
+              );
+            })}
+          </div>
+        </div>
+
         {/* Main Content Viewport */}
         <main className="flex-1 p-4 sm:p-6 lg:p-8 max-w-7xl w-full mx-auto pb-[calc(5rem+env(safe-area-inset-bottom,0px))] md:pb-8">
           {/* Error Banner */}
@@ -788,16 +857,17 @@ function AppContent() {
                   />
                   {chartData && (
                     <div className="space-y-4">
-                      <div className="flex items-center justify-between bg-[#0a0d14] p-3 rounded-lg border border-[#1b2331]">
-                        <div className="text-xs font-mono text-slate-300">
-                          Chart calculated for <strong className="text-cyan-300">{activeSubjectName}</strong> ({activeSubjectDate}).
+                      <div className="flex flex-col sm:flex-row sm:items-center justify-between bg-gradient-to-r from-[#0d1624] to-[#0a0d14] p-3 sm:p-3.5 rounded-xl border border-cyan-900/60 gap-2.5 shadow-xs">
+                        <div className="text-xs font-mono text-slate-200 flex items-center gap-2">
+                          <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shrink-0"></span>
+                          <span>Chart calculated for <strong className="text-cyan-300 font-semibold">{activeSubjectName}</strong> ({activeSubjectDate}).</span>
                         </div>
                         <button
                           type="button"
                           onClick={() => navigateTo('traditions')}
-                          className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs rounded bg-cyan-700 hover:bg-cyan-600 text-white font-medium cursor-pointer transition-colors btn-press"
+                          className="inline-flex items-center justify-center gap-2 px-3.5 py-2 min-h-[44px] sm:min-h-[36px] text-xs rounded-lg bg-cyan-600 hover:bg-cyan-500 text-white font-medium cursor-pointer transition-colors shadow-xs active:scale-95"
                         >
-                          <span>Explore Cultural Traditions</span>
+                          <span>Explore 9 Traditions (Step 2)</span>
                           <ArrowRight className="w-3.5 h-3.5" />
                         </button>
                       </div>
@@ -811,7 +881,7 @@ function AppContent() {
               {currentScreen === 'traditions' && (
                 <div>
                   {chartData ? (
-                    <TraditionCharts data={chartData} />
+                    <TraditionCharts data={chartData} onNavigate={navigateTo} />
                   ) : (
                     <EmptyChartState onOpenWorkbench={() => navigateTo('workbench')} />
                   )}
@@ -822,7 +892,7 @@ function AppContent() {
               {currentScreen === 'synthesis' && (
                 <div>
                   {chartData ? (
-                    <SynthesisMatrix synthesis={chartData.synthesis} />
+                    <SynthesisMatrix synthesis={chartData.synthesis} onNavigate={navigateTo} />
                   ) : (
                     <EmptyChartState onOpenWorkbench={() => navigateTo('workbench')} />
                   )}
@@ -833,7 +903,7 @@ function AppContent() {
               {currentScreen === 'dossier' && (
                 <div>
                   {chartData ? (
-                    <ReadingView data={chartData} />
+                    <ReadingView data={chartData} onNavigate={navigateTo} />
                   ) : (
                     <EmptyChartState onOpenWorkbench={() => navigateTo('workbench')} />
                   )}
@@ -854,7 +924,7 @@ function AppContent() {
               {/* SCREEN 6: Mathematical Evidence & Whitepaper */}
               {currentScreen === 'evidence' && (
                 <div>
-                  <MathematicalEvidenceCard onClose={() => navigateTo('workbench')} />
+                  <MathematicalEvidenceCard onClose={() => navigateTo('workbench')} onNavigate={navigateTo} />
                 </div>
               )}
             </motion.div>

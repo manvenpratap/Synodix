@@ -1,7 +1,7 @@
 # Synodix: Project Context & Working Memory
 
-**Last Updated:** 2026-10-22 22:33:00
-**Version:** 2.16.0  
+**Last Updated:** 2026-10-22 23:20:01
+**Version:** 2.17.0  
 **Stack:** Python 3.12 (FastAPI, Swiss Ephemeris 2.10, Skyfield DE421) + TypeScript / React 19 / Vite / Tailwind CSS v4 / Framer Motion / Capacitor 8 (iOS & Android)  
 **Workspace:** `/Volumes/Study/Projects/Astrology` (symlinked as `/Volumes/Study/Astrology`)  
 **Git Remote:** `https://github.com/manvenpratap/Synodix.git`  
@@ -9,7 +9,19 @@
 ---
 
 ## 1. Current Status & Milestone
-- **Active Phase**: Unique Astrometric Observatory Design & Motion System (Completed)
+- **Active Phase**: Mobile Epistemological Journey Navigation & Decluttering (Completed)
+- **Mobile Journey Stepper & Decluttered Epistemological Navigation**:
+  - **Epistemological Guided Journey**: Introduced a 5-step interactive mobile journey stepper (`1. Input` ➔ `2. Traditions` ➔ `3. Synthesis` ➔ `4. Dossier` ➔ `5. Evidence`) positioned directly below the fixed header on mobile devices. Features status indicators (active step cyan glow, completed steps emerald badge) and one-tap step navigation.
+  - **Forward / Backward Flow CTAs**: Placed thumb-friendly navigation action bars at the bottom of each view (`← Back to Workbench` | `Explore Cross-Cultural Synthesis Matrix →`, `← View Traditions` | `Read Full Corroboration Dossier →`, `← Synthesis Matrix` | `View Mathematical Evidence Whitepaper →`, `← Corroboration Dossier` | `Return to Workbench ↺`), converting 5 disparate tabs into a natural, progressive scientific narrative.
+  - **Decluttered Mobile Layouts Without Feature or Data Loss**:
+    - `InputAuditCard`: Added mobile collapsible disclosure saving >500px of vertical space on Workbench while preserving 100% of astronomical time and boundary invariants.
+    - `TraditionCharts`: Streamlined mobile headers by hiding verbose academic descriptions on `<sm` viewports so the visual instruments (Kundali, wheel, pentagram, steles) and controls are immediately visible.
+    - `SynthesisMatrix`: Added quick "Expand All / Collapse All Domains" toggle for rapid mobile scanning without losing any detailed tradition corroboration data.
+    - `ReadingView`: Streamlined header text to bring the generated reading document directly into view.
+    - Header Active Subject Chip: Added mobile active subject pill next to the title for instantaneous context and one-tap return to profile switching.
+  - **City Autocomplete Fast-Path**: Instant 0ms local offline gazetteer matching for known global cities before network fallback, and resilient Enter-key suggestion selection.
+  - **Workflow Health**: 100% CLEAN (Verified via `./pipeline.sh doctor`)
+  - **Test Invariants**: 16/16 regression suites passing via `./pipeline.sh test --summary` (37.26s)
 - **Unique App Design Overhaul (Spatial Observatory & Machined Doppelrand)**:
   - **Spatial Observatory Atmosphere**: Transformed flat black backdrops into a deep astronomical observatory canvas (`.celestial-observatory-canvas`) featuring subtle coordinate grid dots, celestial radial telemetry auras, and calibrated parchment in Solar Day light mode.
   - **Machined Doppelrand Enclosures**: Replaced generic web boxes with precision double-bezel hardware enclosures (`.machined-bezel` + `.machined-core`), featuring milled hairline bezels, optical corner reticles (`⌜` / `⌝` / `⌞` / `⌟`), and concentric radii across all core cards.
