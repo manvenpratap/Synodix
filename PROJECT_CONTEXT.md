@@ -1,15 +1,19 @@
 # Synodix: Project Context & Working Memory
 
-**Last Updated:** 2026-10-22 11:25:56
-**Version:** 2.14.0  
-**Stack:** Python 3.12 (FastAPI, Swiss Ephemeris 2.10, Skyfield DE421) + TypeScript / React 19 / Vite / Tailwind CSS v4 / Capacitor 8 (iOS & Android)  
+**Last Updated:** 2026-10-22 22:16:46
+**Version:** 2.15.0  
+**Stack:** Python 3.12 (FastAPI, Swiss Ephemeris 2.10, Skyfield DE421) + TypeScript / React 19 / Vite / Tailwind CSS v4 / Framer Motion / Capacitor 8 (iOS & Android)  
 **Workspace:** `/Volumes/Study/Projects/Astrology` (symlinked as `/Volumes/Study/Astrology`)  
 **Git Remote:** `https://github.com/manvenpratap/Synodix.git`  
 
 ---
 
 ## 1. Current Status & Milestone
-- **Active Phase**: Mobile-First Ergonomics & Touch Architecture (`/mobile-design`) (Completed)
+- **Active Phase**: Website Builder Stack Integration (`/website-builder-setup`) (Completed)
+- **Website Builder Stack Integration**:
+  - **UI/UX Pro Max**: Initialized and configured via `uipro init --ai claude`, providing 50+ styles, 161 palettes, and 57 font pairings to eliminate generic AI designs.
+  - **Framer Motion**: Integrated `framer-motion` into `frontend/package.json` for high-performance layout transitions, gesture physics, and page animation cascades.
+  - **21st.dev Magic**: Verified configured MCP server in `~/.claude.json` with direct access to 100+ production-grade React components.
 - **Mobile Design & Platform Ergonomics Achievements**:
   - Eliminated viewport expansion and horizontal overflow across narrow mobile form factors (iPhone SE $375\times 667$, iPhone 14/15 $390\times 844$, Pixel 7 $412\times 915$). All 5 core navigation screens (Workbench, Traditions, Synthesis, Dossier, Evidence) verified at 0px overflow.
   - Resolved top header crowding on mobile viewports (<640px): converted Feature Guide and Theme switcher into compact icon buttons and hid redundant "Study" link (accessible directly at the bottom thumb zone).

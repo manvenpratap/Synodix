@@ -16,6 +16,7 @@
     "@capacitor/ios": "^8.5.3",
     "@tailwindcss/vite": "^4.3.3",
     "astronomy-engine": "^2.1.19",
+    "framer-motion": "^14.6.0",
     "lucide-react": "^1.59.0",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
