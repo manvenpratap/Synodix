@@ -94,6 +94,68 @@ def get_sample_charts(category: Optional[str] = None):
         return [p for p in SAMPLE_PRESETS if p.get("category") == category]
     return SAMPLE_PRESETS
 
+# Curated global cities for backend geocoding lookup
+_COMMON_CITIES = [
+    {"city": "Tokyo", "country": "Japan", "latitude": 35.6762, "longitude": 139.6503},
+    {"city": "London", "country": "United Kingdom", "latitude": 51.5074, "longitude": -0.1278},
+    {"city": "Paris", "country": "France", "latitude": 48.8566, "longitude": 2.3522},
+    {"city": "New York", "country": "United States", "latitude": 40.7128, "longitude": -74.0060},
+    {"city": "San Francisco", "country": "United States", "latitude": 37.7749, "longitude": -122.4194},
+    {"city": "Los Angeles", "country": "United States", "latitude": 34.0522, "longitude": -118.2437},
+    {"city": "Chicago", "country": "United States", "latitude": 41.8781, "longitude": -87.6298},
+    {"city": "New Delhi", "country": "India", "latitude": 28.6139, "longitude": 77.2090},
+    {"city": "Mumbai", "country": "India", "latitude": 19.0760, "longitude": 72.8777},
+    {"city": "Bengaluru", "country": "India", "latitude": 12.9716, "longitude": 77.5946},
+    {"city": "Beijing", "country": "China", "latitude": 39.9042, "longitude": 116.4074},
+    {"city": "Shanghai", "country": "China", "latitude": 31.2304, "longitude": 121.4737},
+    {"city": "Cairo", "country": "Egypt", "latitude": 30.0444, "longitude": 31.2357},
+    {"city": "Alexandria", "country": "Egypt", "latitude": 31.2001, "longitude": 29.9187},
+    {"city": "Baghdad", "country": "Iraq", "latitude": 33.3152, "longitude": 44.3661},
+    {"city": "Rome", "country": "Italy", "latitude": 41.9028, "longitude": 12.4964},
+    {"city": "Athens", "country": "Greece", "latitude": 37.9838, "longitude": 23.7275},
+    {"city": "Sydney", "country": "Australia", "latitude": -33.8688, "longitude": 151.2093},
+    {"city": "Auckland", "country": "New Zealand", "latitude": -36.8485, "longitude": 174.7633},
+    {"city": "Buenos Aires", "country": "Argentina", "latitude": -34.6037, "longitude": -58.3816},
+    {"city": "São Paulo", "country": "Brazil", "latitude": -23.5505, "longitude": -46.6333},
+    {"city": "Berlin", "country": "Germany", "latitude": 52.5200, "longitude": 13.4050},
+    {"city": "Moscow", "country": "Russia", "latitude": 55.7558, "longitude": 37.6173},
+]
+
+@app.get("/api/geocode")
+def geocode_city(q: str):
+    """
+    Auto-suggest and resolve latitude and longitude for a city and country query.
+    """
+    clean_q = q.strip().lower()
+    if not clean_q:
+        return []
+
+    results = []
+    seen = set()
+
+    # 1. Search sample presets first (historical titan birthplaces)
+    for p in SAMPLE_PRESETS:
+        city = p.get("city_name", "")
+        country = p.get("country_name", "")
+        key = f"{city.lower()}-{country.lower()}"
+        if key not in seen and (clean_q in city.lower() or clean_q in country.lower()):
+            seen.add(key)
+            results.append({
+                "city": city,
+                "country": country,
+                "latitude": p.get("latitude", 0.0),
+                "longitude": p.get("longitude", 0.0),
+            })
+
+    # 2. Search common world cities
+    for c in _COMMON_CITIES:
+        key = f"{c['city'].lower()}-{c['country'].lower()}"
+        if key not in seen and (clean_q in c["city"].lower() or clean_q in c["country"].lower()):
+            seen.add(key)
+            results.append(c)
+
+    return results[:10]
+
 @app.get("/api/mathematical-evidence")
 def get_mathematical_evidence():
     stats_file = os.path.join(os.path.dirname(__file__), "data", "mathematical_evidence_stats.json")

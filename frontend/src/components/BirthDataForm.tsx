@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import type { BirthInput, Preset } from '../types';
 import {
   Star,
@@ -14,9 +14,13 @@ import {
   X,
   Bookmark,
   Trash2,
-  Check
+  Check,
+  MapPin,
+  Compass,
+  CheckCircle2
 } from 'lucide-react';
 import { getSavedProfiles, saveProfile, deleteProfile, UserProfile } from '../utils/vault';
+import { searchCitySuggestions, determineCoordinates, requestDeviceLocation, GeocodeResult } from '../utils/geocoding';
 
 interface Props {
   onCompute: (input: BirthInput, name?: string) => void;
@@ -60,6 +64,117 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
   const [profileSaveName, setProfileSaveName] = useState<string>('');
   const [isSaving, setIsSaving] = useState<boolean>(false);
   const [saveSuccess, setSaveSuccess] = useState<boolean>(false);
+
+  // City & Geocoding Intelligence States
+  const [citySuggestions, setCitySuggestions] = useState<GeocodeResult[]>([]);
+  const [isCitySuggestionsOpen, setIsCitySuggestionsOpen] = useState<boolean>(false);
+  const [activeSuggestionIndex, setActiveSuggestionIndex] = useState<number>(-1);
+  const [coordStatus, setCoordStatus] = useState<'preset' | 'auto_resolved' | 'gps' | 'manual'>('preset');
+  const [isLocating, setIsLocating] = useState<boolean>(false);
+  const cityInputRef = useRef<HTMLInputElement>(null);
+  const cityContainerRef = useRef<HTMLDivElement>(null);
+
+  // Close dropdown on outside click or Escape
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (cityContainerRef.current && !cityContainerRef.current.contains(e.target as Node)) {
+        setIsCitySuggestionsOpen(false);
+      }
+    };
+    const handleEsc = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setIsCitySuggestionsOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    window.addEventListener('keydown', handleEsc);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+      window.removeEventListener('keydown', handleEsc);
+    };
+  }, []);
+
+  const handleCityChange = async (val: string) => {
+    setSelectedPresetId('custom');
+    setFormData((prev) => ({ ...prev, city_name: val }));
+
+    if (val.trim().length >= 2) {
+      const suggestions = await searchCitySuggestions(val);
+      setCitySuggestions(suggestions);
+      setIsCitySuggestionsOpen(suggestions.length > 0);
+      setActiveSuggestionIndex(-1);
+    } else {
+      setCitySuggestions([]);
+      setIsCitySuggestionsOpen(false);
+    }
+  };
+
+  const handleSelectCity = (res: GeocodeResult) => {
+    setSelectedPresetId('custom');
+    setFormData((prev) => ({
+      ...prev,
+      city_name: res.city,
+      country_name: res.country,
+      latitude: res.latitude,
+      longitude: res.longitude,
+    }));
+    setCoordStatus('auto_resolved');
+    setIsCitySuggestionsOpen(false);
+    setCitySuggestions([]);
+  };
+
+  const handleCityKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (!isCitySuggestionsOpen || citySuggestions.length === 0) return;
+
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      setActiveSuggestionIndex((prev) => (prev < citySuggestions.length - 1 ? prev + 1 : 0));
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      setActiveSuggestionIndex((prev) => (prev > 0 ? prev - 1 : citySuggestions.length - 1));
+    } else if (e.key === 'Enter') {
+      if (activeSuggestionIndex >= 0 && activeSuggestionIndex < citySuggestions.length) {
+        e.preventDefault();
+        handleSelectCity(citySuggestions[activeSuggestionIndex]);
+      }
+    }
+  };
+
+  const handleCityBlur = async () => {
+    // Delay slightly to allow click on suggestion item to register
+    setTimeout(async () => {
+      if (formData.city_name.trim() && coordStatus === 'manual') {
+        const match = await determineCoordinates(formData.city_name, formData.country_name);
+        if (match) {
+          setFormData((prev) => ({
+            ...prev,
+            latitude: match.latitude,
+            longitude: match.longitude,
+            country_name: prev.country_name || match.country,
+          }));
+          setCoordStatus('auto_resolved');
+        }
+      }
+    }, 200);
+  };
+
+  const handleDetectLocation = async () => {
+    setIsLocating(true);
+    try {
+      const coords = await requestDeviceLocation();
+      setSelectedPresetId('custom');
+      setFormData((prev) => ({
+        ...prev,
+        latitude: coords.latitude,
+        longitude: coords.longitude,
+      }));
+      setCoordStatus('gps');
+    } catch (err: any) {
+      alert(err.message || 'Unable to detect device location.');
+    } finally {
+      setIsLocating(false);
+    }
+  };
 
   const categories = [
     ...(savedProfiles.length > 0 ? [{ id: 'vault', label: 'My Vault', count: savedProfiles.length, icon: Bookmark }] : []),
@@ -136,6 +251,8 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
 
   const handlePresetSelect = (preset: Preset) => {
     setSelectedPresetId(preset.id);
+    setCoordStatus('preset');
+    setIsCitySuggestionsOpen(false);
     const newForm: BirthInput = {
       birth_date: preset.birth_date,
       birth_time: preset.birth_time,
@@ -418,23 +535,108 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-4 gap-3.5">
-          {/* City */}
-          <div>
-            <label htmlFor="city_name" className="block text-[11px] font-mono font-medium text-slate-300 uppercase tracking-wider mb-1">
-              City
-            </label>
-            <input
-              id="city_name"
-              type="text"
-              required
-              value={formData.city_name}
-              onChange={(e) => {
-                setSelectedPresetId('custom');
-                setFormData({ ...formData, city_name: e.target.value });
-              }}
-              placeholder="City name"
-              className="w-full bg-[#080a0f] border border-[#1b2331] rounded-md px-3 py-2 text-xs text-slate-100 focus:outline-none focus:border-cyan-500 focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-1 focus-visible:ring-offset-[#080a0f] transition-colors"
-            />
+          {/* City with Auto-suggest & Geocoding Intelligence */}
+          <div ref={cityContainerRef} className="relative">
+            <div className="flex items-center justify-between mb-1">
+              <label htmlFor="city_name" className="block text-[11px] font-mono font-medium text-slate-300 uppercase tracking-wider">
+                City of Birth
+              </label>
+              {coordStatus === 'auto_resolved' && (
+                <span className="text-[10px] font-mono text-emerald-400 flex items-center gap-1">
+                  <CheckCircle2 className="w-3 h-3 text-emerald-400" />
+                  Auto-Geocoded
+                </span>
+              )}
+            </div>
+            <div className="relative">
+              <input
+                id="city_name"
+                ref={cityInputRef}
+                type="text"
+                required
+                autoComplete="off"
+                value={formData.city_name}
+                onChange={(e) => handleCityChange(e.target.value)}
+                onFocus={() => {
+                  if (formData.city_name.trim().length >= 2 && citySuggestions.length > 0) {
+                    setIsCitySuggestionsOpen(true);
+                  }
+                }}
+                onKeyDown={handleCityKeyDown}
+                onBlur={handleCityBlur}
+                placeholder="Type city (e.g. London, Tokyo)"
+                className="w-full bg-[#080a0f] border border-[#1b2331] rounded-md pl-8 pr-8 py-2 text-xs text-slate-100 focus:outline-none focus:border-cyan-500 focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-1 focus-visible:ring-offset-[#080a0f] transition-colors"
+              />
+              <MapPin className="w-3.5 h-3.5 text-cyan-400 absolute left-2.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+              {formData.city_name && (
+                <button
+                  type="button"
+                  onClick={() => {
+                    setSelectedPresetId('custom');
+                    setFormData((prev) => ({ ...prev, city_name: '' }));
+                    setCitySuggestions([]);
+                    setIsCitySuggestionsOpen(false);
+                    cityInputRef.current?.focus();
+                  }}
+                  className="absolute right-2 top-1/2 -translate-y-1/2 p-1 text-slate-500 hover:text-slate-300 cursor-pointer"
+                  aria-label="Clear city input"
+                  data-tooltip="Clear city"
+                >
+                  <X className="w-3.5 h-3.5" />
+                </button>
+              )}
+            </div>
+
+            {/* City Auto-Suggestions Dropdown */}
+            {isCitySuggestionsOpen && citySuggestions.length > 0 && (
+              <div
+                role="listbox"
+                aria-label="City suggestions"
+                className="absolute left-0 right-0 top-full mt-1.5 z-50 bg-[#0a0e17] border border-cyan-800/80 rounded-lg shadow-2xl overflow-hidden max-h-64 overflow-y-auto divide-y divide-[#1b2331] font-sans"
+              >
+                <div className="px-2.5 py-1.5 bg-[#06090e] border-b border-[#1b2331] flex items-center justify-between text-[10px] font-mono text-slate-400">
+                  <span>SUGGESTED CITIES & COORDINATES</span>
+                  <span className="text-cyan-400">↑↓ to navigate • Enter to select</span>
+                </div>
+                {citySuggestions.map((s, idx) => {
+                  const isSelected = idx === activeSuggestionIndex;
+                  return (
+                    <div
+                      key={`${s.city}-${s.country}-${idx}`}
+                      role="option"
+                      aria-selected={isSelected}
+                      onClick={() => handleSelectCity(s)}
+                      onMouseEnter={() => setActiveSuggestionIndex(idx)}
+                      className={`px-3 py-2 text-xs cursor-pointer transition-colors flex items-center justify-between gap-2 ${
+                        isSelected
+                          ? 'bg-cyan-950/70 text-cyan-200 border-l-2 border-cyan-400'
+                          : 'text-slate-200 hover:bg-[#121824]'
+                      }`}
+                    >
+                      <div className="min-w-0">
+                        <div className="font-medium text-slate-100 flex items-center gap-1.5 truncate">
+                          <span>{s.city}</span>
+                          {s.adminCode && (
+                            <span className="text-[11px] text-slate-400">({s.adminCode})</span>
+                          )}
+                        </div>
+                        <div className="text-[10px] text-slate-400 font-mono truncate">
+                          {s.country}
+                        </div>
+                      </div>
+                      <div className="text-right shrink-0">
+                        <span className="text-[10px] font-mono text-cyan-300/90 block">
+                          {Math.abs(s.latitude).toFixed(2)}°{s.latitude >= 0 ? 'N' : 'S'}, {Math.abs(s.longitude).toFixed(2)}°{s.longitude >= 0 ? 'E' : 'W'}
+                        </span>
+                        <span className="text-[9px] font-mono text-slate-500">
+                          {s.source === 'offline_gazetteer' ? 'Offline Verified' : 'Online Geocode'}
+                        </span>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            )}
           </div>
 
           {/* Country */}
@@ -451,6 +653,7 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
                 setSelectedPresetId('custom');
                 setFormData({ ...formData, country_name: e.target.value });
               }}
+              onBlur={handleCityBlur}
               placeholder="Country"
               className="w-full bg-[#080a0f] border border-[#1b2331] rounded-md px-3 py-2 text-xs text-slate-100 focus:outline-none focus:border-cyan-500 focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-1 focus-visible:ring-offset-[#080a0f] transition-colors"
             />
@@ -458,9 +661,22 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
 
           {/* Coordinates */}
           <div>
-            <label htmlFor="latitude" className="block text-[11px] font-mono font-medium text-slate-300 uppercase tracking-wider mb-1">
-              Decimal Lat / Lon
-            </label>
+            <div className="flex items-center justify-between mb-1">
+              <label htmlFor="latitude" className="block text-[11px] font-mono font-medium text-slate-300 uppercase tracking-wider">
+                Decimal Lat / Lon
+              </label>
+              <button
+                type="button"
+                onClick={handleDetectLocation}
+                disabled={isLocating}
+                className="inline-flex items-center gap-1 text-[10px] font-mono text-cyan-400 hover:text-cyan-200 transition-colors cursor-pointer disabled:opacity-50"
+                data-tooltip="Detect current device GPS coordinates"
+                aria-label="Detect GPS coordinates"
+              >
+                <Compass className={`w-3 h-3 text-cyan-400 ${isLocating ? 'animate-spin' : ''}`} />
+                <span>{isLocating ? 'Detecting...' : 'Detect GPS'}</span>
+              </button>
+            </div>
             <div className="grid grid-cols-2 gap-2">
               <input
                 id="latitude"
@@ -473,6 +689,7 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
                 value={formData.latitude}
                 onChange={(e) => {
                   setSelectedPresetId('custom');
+                  setCoordStatus('manual');
                   setFormData({ ...formData, latitude: parseFloat(e.target.value) || 0 });
                 }}
                 className="w-full bg-[#080a0f] border border-[#1b2331] rounded-md px-2 py-2 text-xs font-mono text-slate-100 focus:outline-none focus:border-cyan-500 focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-1 focus-visible:ring-offset-[#080a0f] transition-colors"
@@ -488,10 +705,17 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
                 value={formData.longitude}
                 onChange={(e) => {
                   setSelectedPresetId('custom');
+                  setCoordStatus('manual');
                   setFormData({ ...formData, longitude: parseFloat(e.target.value) || 0 });
                 }}
                 className="w-full bg-[#080a0f] border border-[#1b2331] rounded-md px-2 py-2 text-xs font-mono text-slate-100 focus:outline-none focus:border-cyan-500 focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-1 focus-visible:ring-offset-[#080a0f] transition-colors"
               />
+            </div>
+            <div className="mt-1 text-[9px] font-mono text-slate-500 flex items-center justify-between">
+              <span>{formData.latitude >= 0 ? `${formData.latitude.toFixed(2)}°N` : `${Math.abs(formData.latitude).toFixed(2)}°S`}, {formData.longitude >= 0 ? `${formData.longitude.toFixed(2)}°E` : `${Math.abs(formData.longitude).toFixed(2)}°W`}</span>
+              <span className={coordStatus === 'auto_resolved' ? 'text-emerald-400' : coordStatus === 'gps' ? 'text-cyan-400' : 'text-slate-400'}>
+                {coordStatus === 'auto_resolved' ? '✓ Auto-matched' : coordStatus === 'gps' ? 'GPS Active' : coordStatus === 'preset' ? 'Rodden Standard' : 'Manual'}
+              </span>
             </div>
           </div>
 

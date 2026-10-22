@@ -1,7 +1,7 @@
 # Synodix: Project Context & Working Memory
 
-**Last Updated:** 2026-10-22 08:11:47
-**Version:** 2.9.0  
+**Last Updated:** 2026-10-22 08:50:55
+**Version:** 2.10.0  
 **Stack:** Python 3.12 (FastAPI, Swiss Ephemeris 2.10, Skyfield DE421) + TypeScript / React 19 / Vite / Tailwind CSS v4 / Capacitor 8 (iOS & Android)  
 **Workspace:** `/Volumes/Study/Projects/Astrology` (symlinked as `/Volumes/Study/Astrology`)  
 **Git Remote:** `https://github.com/manvenpratap/Synodix.git`  
@@ -9,7 +9,21 @@
 ---
 
 ## 1. Current Status & Milestone
-- **Active Phase**: Culturally Authentic Display Presentation Theming (Completed)
+- **Active Phase**: City Auto-Suggest, Geocoding Intelligence & In-App Astrometric Explainers (Completed)
+- **City Auto-Suggest & Coordinate Intelligence**:
+  - Implemented real-time city auto-suggest dropdown and geodetic coordinate resolution in [BirthDataForm.tsx](file:///Volumes/Study/Astrology/frontend/src/components/BirthDataForm.tsx).
+  - Curated offline gazetteer of global cities, capitals, and historical titan birthplaces in [worldCities.ts](file:///Volumes/Study/Astrology/frontend/src/data/worldCities.ts) with prefix and substring indexing.
+  - Hybrid client geocoding engine in [geocoding.ts](file:///Volumes/Study/Astrology/frontend/src/utils/geocoding.ts) providing 0ms instant local resolution with resilient online OpenStreetMap/Photon fallback.
+  - One-click HTML5 GPS device geolocation detection with automatic precision coordinate binding.
+  - Status telemetry badges: `Auto-Geocoded` (emerald), `GPS Active` (cyan), `Manual` (amber) with keyboard navigation (`ArrowDown`, `ArrowUp`, `Enter`, `Escape`) and outside-click dismissal.
+  - Backend `/api/geocode?q={query}` endpoint in [backend/app/main.py](file:///Volumes/Study/Astrology/backend/app/main.py) for synchronized client/server resolution.
+  - Playwright regression suite `tests/test_07_geocoding_intelligence.py` validating dropdown rendering, auto-fill coordinates, keyboard selection, manual overrides, and zero critical console errors.
+- **In-App Astrometric Feature Explainers**:
+  - Over 50 comprehensive domain-accurate feature explainers integrated across all 9 cultural traditions, Synthesis Matrix, Reading View, and Evidence cards.
+  - Interactive `ExplainerTrigger` dialogs providing historical lineage, astronomical mechanics, and mathematical interpretation guidelines on demand.
+  - Header responsiveness fix: tuned live telemetry pills to `2xl:flex` eliminating horizontal overflow at 1280px viewports across all tradition views.
+- **Workflow Health**: 100% CLEAN (Verified via `./pipeline.sh doctor`)
+- **Test Invariants**: 15/15 regression suites passing via `./pipeline.sh test --summary` (30.6s)
 - **Cultural Theming & Instrument Presentation Across 9 Traditions**:
   - Implemented 9 distinct cultural design systems with bespoke palettes, gradients, and structural tokens in `TraditionCharts.tsx`:
     - **Jyotisha**: Sacred Saffron & Vedic Brass (`🕉️`, *यथा पिण्डे तथा ब्रह्माण्डे*, Maharishi Parashara lineage).

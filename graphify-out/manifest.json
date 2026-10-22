@@ -16,27 +16,27 @@
     "hash": "109aded755e8064cd0c2de99e039aeb5"
   },
   "/Volumes/Study/Projects/Astrology/frontend/ios/App/App/public/cordova.js": {
-    "mtime": 1792636750.925797,
+    "mtime": 1792639139.9243028,
     "hash": "d41d8cd98f00b204e9800998ecf8427e"
   },
   "/Volumes/Study/Projects/Astrology/frontend/ios/App/App/public/cordova_plugins.js": {
-    "mtime": 1792636750.9258654,
+    "mtime": 1792639139.9243755,
     "hash": "d41d8cd98f00b204e9800998ecf8427e"
   },
   "/Volumes/Study/Projects/Astrology/frontend/ios/App/App/public/sw.js": {
-    "mtime": 1792636750.909131,
+    "mtime": 1792639139.90264,
     "hash": "a0ce99c83a426bf3fc6b4ae0f0aca671"
   },
   "/Volumes/Study/Projects/Astrology/frontend/ios/App/App/public/assets/bundledTitans-BN_F9cSW.js": {
-    "mtime": 1792636750.9152093,
+    "mtime": 1792639139.9093733,
     "hash": "7cd9dae95507aea3b20b8755dd169162"
   },
-  "/Volumes/Study/Projects/Astrology/frontend/ios/App/App/public/assets/index-1QY9b03D.js": {
-    "mtime": 1792636750.9102726,
-    "hash": "71840773bd26a09f6795cc26b41c4efc"
+  "/Volumes/Study/Projects/Astrology/frontend/ios/App/App/public/assets/index-D3oTHseo.js": {
+    "mtime": 1792639139.9039946,
+    "hash": "9122ccfe35ad0f10c8dd45ec82298349"
   },
   "/Volumes/Study/Projects/Astrology/frontend/ios/App/CapApp-SPM/Package.swift": {
-    "mtime": 1792636750.927787,
+    "mtime": 1792639139.9263859,
     "hash": "0e54c97ada1e3b4af7cd671c3f72fbff"
   },
   "/Volumes/Study/Projects/Astrology/frontend/ios/App/CapApp-SPM/Sources/CapApp-SPM/CapApp-SPM.swift": {
@@ -48,7 +48,7 @@
     "hash": "a0ce99c83a426bf3fc6b4ae0f0aca671"
   },
   "/Volumes/Study/Projects/Astrology/frontend/android/capacitor.settings.gradle": {
-    "mtime": 1792636750.898177,
+    "mtime": 1792639139.8891308,
     "hash": "455ebb7f9fe84a6974da6bdae43097c2"
   },
   "/Volumes/Study/Projects/Astrology/frontend/android/variables.gradle": {
@@ -72,7 +72,7 @@
     "hash": "3cc93b37fd6703f5c3d15427b30e5379"
   },
   "/Volumes/Study/Projects/Astrology/frontend/android/app/capacitor.build.gradle": {
-    "mtime": 1792636750.8982944,
+    "mtime": 1792639139.8892767,
     "hash": "b863e425fbde80251bd3c68ac8ccba02"
   },
   "/Volumes/Study/Projects/Astrology/frontend/android/app/src/androidTest/java/com/getcapacitor/myapp/ExampleInstrumentedTest.java": {
@@ -88,36 +88,36 @@
     "hash": "7974944c87063efef7bb09e95260c4f1"
   },
   "/Volumes/Study/Projects/Astrology/frontend/android/app/src/main/assets/public/cordova.js": {
-    "mtime": 1792636750.8972545,
+    "mtime": 1792639139.8881617,
     "hash": "d41d8cd98f00b204e9800998ecf8427e"
   },
   "/Volumes/Study/Projects/Astrology/frontend/android/app/src/main/assets/public/cordova_plugins.js": {
-    "mtime": 1792636750.8973165,
+    "mtime": 1792639139.8882527,
     "hash": "d41d8cd98f00b204e9800998ecf8427e"
   },
   "/Volumes/Study/Projects/Astrology/frontend/android/app/src/main/assets/public/sw.js": {
-    "mtime": 1792636750.8630126,
+    "mtime": 1792639139.852216,
     "hash": "a0ce99c83a426bf3fc6b4ae0f0aca671"
   },
   "/Volumes/Study/Projects/Astrology/frontend/android/app/src/main/assets/public/assets/bundledTitans-BN_F9cSW.js": {
-    "mtime": 1792636750.870845,
+    "mtime": 1792639139.8596895,
     "hash": "7cd9dae95507aea3b20b8755dd169162"
   },
-  "/Volumes/Study/Projects/Astrology/frontend/android/app/src/main/assets/public/assets/index-1QY9b03D.js": {
-    "mtime": 1792636750.8649848,
-    "hash": "71840773bd26a09f6795cc26b41c4efc"
+  "/Volumes/Study/Projects/Astrology/frontend/android/app/src/main/assets/public/assets/index-D3oTHseo.js": {
+    "mtime": 1792639139.8542244,
+    "hash": "9122ccfe35ad0f10c8dd45ec82298349"
   },
   "/Volumes/Study/Projects/Astrology/frontend/android/capacitor-cordova-android-plugins/build.gradle": {
-    "mtime": 1792636750.898696,
+    "mtime": 1792639139.8897958,
     "hash": "2af61653d70c95d20802c8b5c433ba90"
   },
   "/Volumes/Study/Projects/Astrology/frontend/android/capacitor-cordova-android-plugins/cordova.variables.gradle": {
-    "mtime": 1792636750.8988383,
+    "mtime": 1792639139.8900266,
     "hash": "d2372a0ae9aa60abb8d03e7f06bf9194"
   },
   "/Volumes/Study/Projects/Astrology/frontend/src/App.tsx": {
-    "mtime": 1792635709.2410197,
-    "hash": "53cb7055e1dd026f2d2b0c42dfad94d4"
+    "mtime": 1792638543.5162683,
+    "hash": "9e796049f162e47c4dcd10657dee6fa4"
   },
   "/Volumes/Study/Projects/Astrology/frontend/src/main.tsx": {
     "mtime": 1792475554.5200436,
@@ -126,6 +126,22 @@
   "/Volumes/Study/Projects/Astrology/frontend/src/types.ts": {
     "mtime": 1792547189.0360527,
     "hash": "870c3fbbab7df39771a3debe1dc8a49c"
+  },
+  "/Volumes/Study/Projects/Astrology/frontend/src/context/useExplainer.ts": {
+    "mtime": 1792637390.120951,
+    "hash": "8f225123e339e7da2fa94b3a4517ef7b"
+  },
+  "/Volumes/Study/Projects/Astrology/frontend/src/context/explainerContextDef.ts": {
+    "mtime": 1792637381.0740278,
+    "hash": "e0fbe1c3889e9af3a7f1552c4823d480"
+  },
+  "/Volumes/Study/Projects/Astrology/frontend/src/context/ExplainerContext.tsx": {
+    "mtime": 1792637386.527435,
+    "hash": "cd5cbec06978a9725fb00e3c7d452723"
+  },
+  "/Volumes/Study/Projects/Astrology/frontend/src/utils/geocoding.ts": {
+    "mtime": 1792638890.686409,
+    "hash": "1846ae5fe012d7d7b3c25b8de1a6e317"
   },
   "/Volumes/Study/Projects/Astrology/frontend/src/utils/vault.ts": {
     "mtime": 1792538532.2087414,
@@ -136,32 +152,40 @@
     "hash": "4c046c542cc1694fc335d278641919d7"
   },
   "/Volumes/Study/Projects/Astrology/frontend/src/components/ReadingView.tsx": {
-    "mtime": 1792635741.6816657,
-    "hash": "e62f1d9add38c3910dc647576e9e1d37"
+    "mtime": 1792637916.77625,
+    "hash": "e8c63989be0fa593027701d2b5fd6242"
   },
   "/Volumes/Study/Projects/Astrology/frontend/src/components/TraditionCharts.tsx": {
-    "mtime": 1792636534.1997983,
-    "hash": "3c26a07ac2db1422252fe8f8b4e5a994"
+    "mtime": 1792637834.7791831,
+    "hash": "7af93324aa8943a91b8c6cafa580bc22"
+  },
+  "/Volumes/Study/Projects/Astrology/frontend/src/components/FeatureExplainerModal.tsx": {
+    "mtime": 1792637983.0860367,
+    "hash": "81a7ef24bb981dfe04336b82768dd05a"
   },
   "/Volumes/Study/Projects/Astrology/frontend/src/components/InputAuditCard.tsx": {
-    "mtime": 1792382354.8906565,
-    "hash": "ffe27d847a954b72fd3f1a3eab853768"
+    "mtime": 1792637433.6436665,
+    "hash": "f262bf211f28ae34c5e244a9337e1bf4"
+  },
+  "/Volumes/Study/Projects/Astrology/frontend/src/components/ExplainerTrigger.tsx": {
+    "mtime": 1792637363.813643,
+    "hash": "d2f764dc68e1893988ae76560ecce4bb"
   },
   "/Volumes/Study/Projects/Astrology/frontend/src/components/MathematicalEvidenceCard.tsx": {
-    "mtime": 1792635727.0445387,
-    "hash": "56e3845c1870c3aea8b01753fd2b944a"
+    "mtime": 1792637958.1992867,
+    "hash": "f59e48d24339e43997ca566b0bec3df6"
   },
   "/Volumes/Study/Projects/Astrology/frontend/src/components/SynthesisMatrix.tsx": {
-    "mtime": 1792547214.1819556,
-    "hash": "539a285dc5ceaec635daad27567a2cfe"
+    "mtime": 1792637872.5485008,
+    "hash": "e0e696464d92f7354a7f66b80aef93d9"
   },
   "/Volumes/Study/Projects/Astrology/frontend/src/components/VerificationCard.tsx": {
-    "mtime": 1792633606.5423357,
-    "hash": "6f9774241993ea635a36280b88366bbf"
+    "mtime": 1792637458.5395648,
+    "hash": "977e48ed518e992c0bdadba4479ddaa3"
   },
   "/Volumes/Study/Projects/Astrology/frontend/src/components/BirthDataForm.tsx": {
-    "mtime": 1792635750.4530795,
-    "hash": "53baa62b6e781e7f79d34e90f209d86c"
+    "mtime": 1792638873.3733652,
+    "hash": "3bcd9f163a57ab7334317bc1dbb503c3"
   },
   "/Volumes/Study/Projects/Astrology/frontend/src/components/ChartWheelVisualizer.tsx": {
     "mtime": 1792633715.669341,
@@ -170,6 +194,14 @@
   "/Volumes/Study/Projects/Astrology/frontend/src/data/mathematicalEvidenceData.ts": {
     "mtime": 1792464170.8802814,
     "hash": "ef34e7296e57a8276360a526077aeccf"
+  },
+  "/Volumes/Study/Projects/Astrology/frontend/src/data/worldCities.ts": {
+    "mtime": 1792638705.9792268,
+    "hash": "72ebfbcb58efc41e76c17df447e9ec64"
+  },
+  "/Volumes/Study/Projects/Astrology/frontend/src/data/featureExplainers.ts": {
+    "mtime": 1792637092.4255214,
+    "hash": "f1bf9f331fe0672d69845b6880883704"
   },
   "/Volumes/Study/Projects/Astrology/frontend/src/data/bundledTitans.ts": {
     "mtime": 1792632449.7834723,
@@ -199,6 +231,10 @@
     "mtime": 1792555050.5996642,
     "hash": "971a39c50b31489c6d5e2f3016e17be9"
   },
+  "/Volumes/Study/Projects/Astrology/tests/test_07_geocoding_intelligence.py": {
+    "mtime": 1792638981.4004276,
+    "hash": "e8f1a8107d9df84cb1ce773aa3a40d44"
+  },
   "/Volumes/Study/Projects/Astrology/tests/test_api_integration.py": {
     "mtime": 1792543681.3632927,
     "hash": "7e3c996cd75e78702d4ac60b53c19009"
@@ -224,8 +260,8 @@
     "hash": "0c652a6e084ace247b6564d046184d8d"
   },
   "/Volumes/Study/Projects/Astrology/backend/app/main.py": {
-    "mtime": 1792547059.9267182,
-    "hash": "9e370bf0824f1b9c8ff08ba1afaa257b"
+    "mtime": 1792638747.6084373,
+    "hash": "fe5776faba6731a5cab03bae1051eaff"
   },
   "/Volumes/Study/Projects/Astrology/backend/app/core/ephemeris.py": {
     "mtime": 1792546343.0273902,
@@ -287,9 +323,13 @@
     "mtime": 1792463210.4930446,
     "hash": "7ddff8efa1cc2a51936493dc894502b2"
   },
+  "/Volumes/Study/Projects/Astrology/scripts/pipeline.py": {
+    "mtime": 1792638035.613054,
+    "hash": "c313cba54dd5f1f5bf6841f0bdd84143"
+  },
   "/Volumes/Study/Projects/Astrology/PROJECT_CONTEXT.md": {
-    "mtime": 1792636775.806031,
-    "hash": "9a58a718ca75ae6ac42f8d0ba16ea6ce"
+    "mtime": 1792639157.9768476,
+    "hash": "b0a76ea6b7c0080707c98eaf226350d6"
   },
   "/Volumes/Study/Projects/Astrology/PRODUCT.md": {
     "mtime": 1792543710.5977297,
@@ -316,24 +356,24 @@
     "hash": "10495bfcc6c568eca4dab6dd5df795d3"
   },
   "/Volumes/Study/Projects/Astrology/frontend/ios/App/App/public/index.html": {
-    "mtime": 1792636750.9089036,
-    "hash": "50c46271c1f4eeba6ef799ca856b5688"
+    "mtime": 1792639139.9023862,
+    "hash": "bf595d370dd6a21867547ba8181f8c7f"
   },
   "/Volumes/Study/Projects/Astrology/frontend/ios/App/CapApp-SPM/README.md": {
     "mtime": 1791382562.0,
     "hash": "d256f6b5922d4249607779141357d565"
   },
   "/Volumes/Study/Projects/Astrology/frontend/android/app/src/main/assets/public/index.html": {
-    "mtime": 1792636750.8626957,
-    "hash": "50c46271c1f4eeba6ef799ca856b5688"
+    "mtime": 1792639139.851944,
+    "hash": "bf595d370dd6a21867547ba8181f8c7f"
   },
   "/Volumes/Study/Projects/Astrology/tests/README.md": {
-    "mtime": 1792636617.9278672,
-    "hash": "8f196e79d8945a5ecb114e04ae51512a"
+    "mtime": 1792638931.8106792,
+    "hash": "57e08b3cb078d6b4c44dcbef8b5691b1"
   },
   "/Volumes/Study/Projects/Astrology/tests/screenshots/index.html": {
-    "mtime": 1792636738.408222,
-    "hash": "37081f5b00d608b4c425e01c06584e02"
+    "mtime": 1792639113.6713305,
+    "hash": "68e054620a198b8f4a46ce0baeced70f"
   },
   "/Volumes/Study/Projects/Astrology/wiki/Architecture.md": {
     "mtime": 1792603063.170204,
@@ -480,11 +520,11 @@
     "hash": "958532b95c3e7d4997327dc977b80600"
   },
   "/Volumes/Study/Projects/Astrology/frontend/ios/App/App/public/icons.svg": {
-    "mtime": 1792636750.909016,
+    "mtime": 1792639139.902419,
     "hash": "3b4fcfcf393eca4d264dca4a4663bc37"
   },
   "/Volumes/Study/Projects/Astrology/frontend/ios/App/App/public/favicon.svg": {
-    "mtime": 1792636750.9090774,
+    "mtime": 1792639139.9025457,
     "hash": "7e840862161341271697daa99a40d76b"
   },
   "/Volumes/Study/Projects/Astrology/frontend/public/icons.svg": {
@@ -600,11 +640,11 @@
     "hash": "055a69553b16b0bf5f72094a2e459fc7"
   },
   "/Volumes/Study/Projects/Astrology/frontend/android/app/src/main/assets/public/icons.svg": {
-    "mtime": 1792636750.8630028,
+    "mtime": 1792639139.851982,
     "hash": "3b4fcfcf393eca4d264dca4a4663bc37"
   },
   "/Volumes/Study/Projects/Astrology/frontend/android/app/src/main/assets/public/favicon.svg": {
-    "mtime": 1792636750.862861,
+    "mtime": 1792639139.8521512,
     "hash": "7e840862161341271697daa99a40d76b"
   },
   "/Volumes/Study/Projects/Astrology/frontend/src/assets/hero.png": {
@@ -628,28 +668,32 @@
     "hash": "a0ee934129c3de7e87660799748c1c51"
   },
   "/Volumes/Study/Projects/Astrology/tests/screenshots/cultural_theme_persian.png": {
-    "mtime": 1792636738.4078157,
-    "hash": "c64532bfdb6caf0d974109d16ef291a0"
+    "mtime": 1792639108.340395,
+    "hash": "d9859bbabfdbd175a7f65d163be2b38d"
   },
   "/Volumes/Study/Projects/Astrology/tests/screenshots/cultural_theme_ziwei.png": {
-    "mtime": 1792636737.9517367,
-    "hash": "891b46eee7bf3b75177292119661f42d"
+    "mtime": 1792639107.9156165,
+    "hash": "6a27dc1d908a7c4ddedc92b84019c8f9"
   },
   "/Volumes/Study/Projects/Astrology/tests/screenshots/cultural_theme_western.png": {
-    "mtime": 1792636737.5067303,
-    "hash": "e967140f4ba464a633dd0079a035de96"
+    "mtime": 1792639107.4831717,
+    "hash": "3db8be981a91fddd15bae81f1a9e7a5e"
   },
   "/Volumes/Study/Projects/Astrology/tests/screenshots/theme_dark.png": {
     "mtime": 1792554252.941478,
     "hash": "19ec046d51094c050b13b809bfdb1168"
   },
   "/Volumes/Study/Projects/Astrology/tests/screenshots/cultural_theme_bazi.png": {
-    "mtime": 1792636737.033192,
-    "hash": "4211a51afceb05508c5a547724592239"
+    "mtime": 1792639107.0194159,
+    "hash": "8664ec48950876540c141bb97b8fbb73"
   },
   "/Volumes/Study/Projects/Astrology/tests/screenshots/cultural_theme_jyotisha.png": {
-    "mtime": 1792636736.6132717,
-    "hash": "027733f81d6616a0ab1ac10d63a3c8b8"
+    "mtime": 1792639106.5896132,
+    "hash": "77b45701ceab194c975bf45a24849036"
+  },
+  "/Volumes/Study/Projects/Astrology/tests/screenshots/geocoding_intelligence_verified.png": {
+    "mtime": 1792639113.6707683,
+    "hash": "c96b71f1e59f81b87460ded66a679268"
   },
   "/Volumes/Study/Projects/Astrology/tests/screenshots/theme_light_workbench.png": {
     "mtime": 1792554332.4610753,
