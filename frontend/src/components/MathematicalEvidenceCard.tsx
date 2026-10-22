@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { apiUrl } from '../utils/api';
+import { ExplainerTrigger } from './ExplainerTrigger';
 import {
   Download,
   Printer,
@@ -203,9 +204,12 @@ export const MathematicalEvidenceCard: React.FC<Props> = ({ onClose }) => {
                 p &lt; 0.0001
               </span>
             </div>
-            <h2 className="text-base sm:text-lg font-bold text-slate-100 tracking-tight">
-              Mathematical Evidence & Empirical Validation of Astrological Modeling
-            </h2>
+            <div className="flex flex-wrap items-center gap-2 mt-1">
+              <h2 className="text-base sm:text-lg font-bold text-slate-100 tracking-tight">
+                Mathematical Evidence & Empirical Validation of Astrological Modeling
+              </h2>
+              <ExplainerTrigger id="epistemic_humility_framework" label="Epistemic Humility" variant="badge" />
+            </div>
             <p className="text-xs text-slate-400 mt-0.5 font-mono">
               A Large-Scale Double-Cohort Statistical Study on Classical Yogas, Gauquelin Diurnal Sectors, and 6-Culture Triangulation.
             </p>
@@ -312,7 +316,10 @@ export const MathematicalEvidenceCard: React.FC<Props> = ({ onClose }) => {
         {/* Live Top KPI Scorecard */}
         <div className="grid grid-cols-2 sm:grid-cols-5 gap-2.5 mt-4">
           <div className="bg-[#090c12] border border-[#1b2331] rounded-lg p-2.5">
-            <span className="text-[10px] font-mono text-slate-500 uppercase tracking-wider block">Titan Cohort</span>
+            <div className="flex items-center justify-between">
+              <span className="text-[10px] font-mono text-slate-500 uppercase tracking-wider">Titan Cohort</span>
+              <ExplainerTrigger id="rodden_titan_benchmark" size="xs" variant="icon" />
+            </div>
             <span className="text-lg font-mono font-bold text-cyan-300">100 Records</span>
             <span className="text-[10px] text-slate-400 block mt-0.5">100% Rodden Rating AA/A</span>
           </div>
@@ -327,7 +334,10 @@ export const MathematicalEvidenceCard: React.FC<Props> = ({ onClose }) => {
             <span className="text-[10px] text-emerald-500/90 block mt-0.5 font-semibold">Exceeds Noise (p &lt; 10⁻⁴)</span>
           </div>
           <div className="bg-[#090c12] border border-[#1b2331] rounded-lg p-2.5">
-            <span className="text-[10px] font-mono text-slate-500 uppercase tracking-wider block">Divergence Rate</span>
+            <div className="flex items-center justify-between">
+              <span className="text-[10px] font-mono text-slate-500 uppercase tracking-wider">Divergence Rate</span>
+              <ExplainerTrigger id="honest_divergence_rate" size="xs" variant="icon" />
+            </div>
             <span className="text-lg font-mono font-bold text-amber-400">31.8%</span>
             <span className="text-[10px] text-slate-400 block mt-0.5">Honest Disagreements</span>
           </div>

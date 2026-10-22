@@ -17,7 +17,8 @@ import {
   Moon,
   Server,
   CheckCircle2,
-  AlertCircle
+  AlertCircle,
+  BookOpen
 } from 'lucide-react';
 import { apiUrl, getApiBaseUrl, setApiBaseUrl, DEFAULT_DEV_API_URL } from './utils/api';
 import { getBundledTitanChart } from './data/bundledTitans';
@@ -31,6 +32,10 @@ import { SynthesisMatrix } from './components/SynthesisMatrix';
 import { ReadingView } from './components/ReadingView';
 import { MathematicalEvidenceCard } from './components/MathematicalEvidenceCard';
 import { getPrimaryProfile } from './utils/vault';
+import { ExplainerProvider } from './context/ExplainerContext';
+import { useExplainer } from './context/useExplainer';
+import { FeatureExplainerModal } from './components/FeatureExplainerModal';
+import { ExplainerTrigger } from './components/ExplainerTrigger';
 
 const FALLBACK_PRESETS: Preset[] = TITANS_100_DATA as unknown as Preset[];
 
@@ -92,7 +97,8 @@ const NAV_ITEMS: NavItem[] = [
   }
 ];
 
-export default function App() {
+function AppContent() {
+  const { openGlossary } = useExplainer();
   const [currentScreen, setCurrentScreen] = useState<AppScreen>('workbench');
   const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
   const [chartData, setChartData] = useState<ChartResponse | null>(null);
@@ -412,7 +418,10 @@ export default function App() {
         {chartData && (
           <div className="px-3 pb-2">
             <div className="p-2 rounded bg-[#06090e] border border-[#1b2331] font-mono text-[9px] space-y-0.5 text-slate-400">
-              <div className="text-slate-400 uppercase tracking-wider font-semibold mb-1">ASTROMETRIC CALIBRATION</div>
+              <div className="flex items-center justify-between text-slate-400 uppercase tracking-wider font-semibold mb-1">
+                <span>ASTROMETRIC CALIBRATION</span>
+                <ExplainerTrigger id="time_normalization_eot" variant="icon" size="xs" />
+              </div>
               <div className="flex justify-between"><span>EPOCH:</span> <span className="text-slate-200">J2000.0</span></div>
               <div className="flex justify-between"><span>JULIAN DAY:</span> <span className="text-cyan-300">{chartData.astronomical_base?.julian_day_ut?.toFixed(2) || '2451545.00'}</span></div>
               <div className="flex justify-between"><span>TOPOCENTRIC:</span> <span className="text-emerald-400">IAU 2000B</span></div>
@@ -535,6 +544,24 @@ export default function App() {
               </button>
             </div>
 
+            {/* Mobile Feature Guide Trigger */}
+            <div className="pt-2">
+              <button
+                type="button"
+                onClick={() => {
+                  setIsMobileSidebarOpen(false);
+                  openGlossary();
+                }}
+                className="w-full flex items-center justify-between px-3 py-2 rounded-lg bg-[#111824] hover:bg-[#172233] text-cyan-300 border border-cyan-800/60 font-mono text-xs transition-colors cursor-pointer"
+              >
+                <div className="flex items-center gap-2">
+                  <BookOpen className="w-4 h-4 text-cyan-400" />
+                  <span>Feature Guide & Glossary</span>
+                </div>
+                <ChevronRight className="w-3.5 h-3.5 text-cyan-400" />
+              </button>
+            </div>
+
             <nav className="flex-1 py-4 space-y-1 overflow-y-auto">
               {NAV_ITEMS.map((item) => {
                 const isActive = currentScreen === item.id;
@@ -603,10 +630,12 @@ export default function App() {
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
                 <span className="text-slate-400">JPL DE421:</span>
                 <span className="text-emerald-300 font-semibold">PASS</span>
+                <ExplainerTrigger id="dual_engine_validation" variant="icon" size="xs" />
               </div>
               <div className="flex items-center gap-1.5 px-2.5 py-1 rounded bg-[#0d121c] border border-[#1b2331]">
                 <span className="text-slate-400">Epistemic Rigor:</span>
                 <span className="text-amber-300 font-semibold">94.2%</span>
+                <ExplainerTrigger id="epistemic_humility_framework" variant="icon" size="xs" />
               </div>
               {chartData && (
                 <div className="flex items-center gap-1.5 px-2.5 py-1 rounded bg-[#0d121c] border border-[#1b2331]">
@@ -614,6 +643,7 @@ export default function App() {
                   <span className="text-cyan-300 font-semibold">
                     {(100 - chartData.synthesis.divergence_metrics.divergence_rate_percent).toFixed(1)}%
                   </span>
+                  <ExplainerTrigger id="three_cluster_consensus" variant="icon" size="xs" />
                 </div>
               )}
             </div>
@@ -621,6 +651,19 @@ export default function App() {
 
           {/* Quick Header Actions */}
           <div className="flex items-center gap-2.5 font-mono text-xs">
+            {/* Feature Guide & Glossary Modal Trigger */}
+            <button
+              type="button"
+              onClick={openGlossary}
+              className="inline-flex items-center gap-1.5 px-2.5 py-1 text-xs rounded border border-[#1b2331] bg-[#10151f] hover:bg-[#161d2a] text-cyan-400 hover:text-cyan-200 transition-colors cursor-pointer"
+              data-tooltip="Browse all 50 astronomical & cultural feature explainers"
+              aria-label="Browse Feature Explainers & Astrometric Glossary"
+            >
+              <BookOpen className="w-3.5 h-3.5 text-cyan-400" />
+              <span className="hidden sm:inline">Feature Guide</span>
+              <span className="sm:hidden">Guide</span>
+            </button>
+
             {/* Theme Toggle Button */}
             <button
               type="button"
@@ -894,6 +937,15 @@ export default function App() {
         </div>
       )}
     </div>
+  );
+}
+
+export default function App() {
+  return (
+    <ExplainerProvider>
+      <AppContent />
+      <FeatureExplainerModal />
+    </ExplainerProvider>
   );
 }
 

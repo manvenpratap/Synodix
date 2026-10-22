@@ -1,5 +1,6 @@
 import React from 'react';
 import type { ChartResponse } from '../types';
+import { ExplainerTrigger } from './ExplainerTrigger';
 
 interface Props {
   data: ChartResponse;
@@ -18,9 +19,12 @@ export const InputAuditCard: React.FC<Props> = ({ data }) => {
           <span className="text-[10px] font-mono uppercase tracking-wider text-amber-400 font-semibold block">
             02 / Time Normalization & Boundary Proximity Audit
           </span>
-          <h3 className="text-base font-semibold text-slate-100 mt-0.5">
-            Astronomical & Civil Time Coordinates
-          </h3>
+          <div className="flex flex-wrap items-center gap-2 mt-0.5">
+            <h3 className="text-base font-semibold text-slate-100">
+              Astronomical & Civil Time Coordinates
+            </h3>
+            <ExplainerTrigger id="time_normalization_eot" label="Solar Time Mechanics" />
+          </div>
         </div>
         <div className="flex items-center gap-2">
           <span className="px-2 py-0.5 text-xs font-mono rounded bg-[#121721] text-slate-300 border border-[#1b2331]">
@@ -38,9 +42,12 @@ export const InputAuditCard: React.FC<Props> = ({ data }) => {
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mt-3.5">
         {/* UTC Instant */}
         <div className="bg-[#080a0f] p-3 rounded-md border border-[#1b2331]">
-          <span className="text-[10px] text-slate-400 uppercase tracking-wider font-mono block">
-            UTC Instant
-          </span>
+          <div className="flex items-center justify-between">
+            <span className="text-[10px] text-slate-400 uppercase tracking-wider font-mono block">
+              UTC Instant
+            </span>
+            <ExplainerTrigger id="utc_instant_julian_day" variant="icon" size="xs" />
+          </div>
           <p className="text-xs font-mono font-semibold text-cyan-300 mt-1 truncate">
             {norm.utc_iso.replace('T', ' ').slice(0, 19)}Z
           </p>
@@ -51,9 +58,12 @@ export const InputAuditCard: React.FC<Props> = ({ data }) => {
 
         {/* Local Solar Times */}
         <div className="bg-[#080a0f] p-3 rounded-md border border-[#1b2331]">
-          <span className="text-[10px] text-slate-400 uppercase tracking-wider font-mono block">
-            Solar Time & EoT
-          </span>
+          <div className="flex items-center justify-between">
+            <span className="text-[10px] text-slate-400 uppercase tracking-wider font-mono block">
+              Solar Time & EoT
+            </span>
+            <ExplainerTrigger id="time_normalization_eot" variant="icon" size="xs" />
+          </div>
           <p className="text-xs font-mono font-semibold text-amber-300 mt-1">
             LAST: {norm.last}
           </p>
@@ -64,9 +74,12 @@ export const InputAuditCard: React.FC<Props> = ({ data }) => {
 
         {/* Sunrise & Sunset */}
         <div className="bg-[#080a0f] p-3 rounded-md border border-[#1b2331]">
-          <span className="text-[10px] text-slate-400 uppercase tracking-wider font-mono block">
-            Horizon & Sect
-          </span>
+          <div className="flex items-center justify-between">
+            <span className="text-[10px] text-slate-400 uppercase tracking-wider font-mono block">
+              Horizon & Sect
+            </span>
+            <ExplainerTrigger id="western_sect" variant="icon" size="xs" />
+          </div>
           <p className="text-xs font-mono font-semibold text-emerald-300 mt-1">
             Rise: {norm.sunrise || 'N/A'}
           </p>
@@ -77,9 +90,12 @@ export const InputAuditCard: React.FC<Props> = ({ data }) => {
 
         {/* Boundary Audit */}
         <div className="bg-[#080a0f] p-3 rounded-md border border-[#1b2331]">
-          <span className="text-[10px] text-slate-400 uppercase tracking-wider font-mono block">
-            Boundary Distances
-          </span>
+          <div className="flex items-center justify-between">
+            <span className="text-[10px] text-slate-400 uppercase tracking-wider font-mono block">
+              Boundary Distances
+            </span>
+            <ExplainerTrigger id="cusp_proximity_audit" variant="icon" size="xs" />
+          </div>
           <p className="text-xs font-mono font-semibold text-purple-300 mt-1">
             Asc Cusp: {data.astronomical_base.boundary_distances.tropical_asc_to_cusp_deg}°
           </p>
@@ -96,6 +112,7 @@ export const InputAuditCard: React.FC<Props> = ({ data }) => {
             <span className="text-xs font-mono font-semibold text-slate-200">
               Time-Uncertainty Ensemble (T− / T / T+)
             </span>
+            <ExplainerTrigger id="cusp_proximity_audit" label="Why T-/T+ Exists" />
           </div>
           <div className="flex items-center gap-2">
             <span className={`px-2 py-0.5 text-[11px] font-mono rounded border ${

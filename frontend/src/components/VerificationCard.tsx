@@ -1,5 +1,6 @@
 import React from 'react';
 import type { VerificationReport } from '../types';
+import { ExplainerTrigger } from './ExplainerTrigger';
 
 interface Props {
   report: VerificationReport;
@@ -14,9 +15,12 @@ export const VerificationCard: React.FC<Props> = ({ report }) => {
           <span className="text-[10px] font-mono uppercase tracking-wider text-emerald-400 font-semibold block">
             03 / Dual-Engine Astronomical Verification & Invariants
           </span>
-          <h3 className="text-base font-semibold text-slate-100 mt-0.5">
-            Swiss Ephemeris (pyswisseph) vs NASA/JPL DE421 (Skyfield)
-          </h3>
+          <div className="flex flex-wrap items-center gap-2 mt-0.5">
+            <h3 className="text-base font-semibold text-slate-100">
+              Swiss Ephemeris (pyswisseph) vs NASA/JPL DE421 (Skyfield)
+            </h3>
+            <ExplainerTrigger id="dual_engine_validation" label="Dual Engine Math" />
+          </div>
         </div>
         <div className="flex items-center gap-2">
           <span className="px-2.5 py-0.5 text-xs font-mono font-bold rounded bg-emerald-950 text-emerald-300 border border-emerald-800/80">
@@ -63,9 +67,12 @@ export const VerificationCard: React.FC<Props> = ({ report }) => {
       {/* Dual Engine Diff Table */}
       <div className="mt-4">
         <div className="flex items-center justify-between mb-2">
-          <span className="text-[11px] font-mono text-slate-400 uppercase tracking-wider">
-            Planetary Longitude Verification (Threshold: 0.0100°)
-          </span>
+          <div className="flex items-center gap-1.5">
+            <span className="text-[11px] font-mono text-slate-400 uppercase tracking-wider">
+              Planetary Longitude Verification (Threshold: 0.0100°)
+            </span>
+            <ExplainerTrigger id="dual_engine_validation" variant="icon" size="xs" />
+          </div>
           <span className="text-[11px] text-slate-400 font-mono">
             Max Observed Delta: <strong className="text-emerald-400 tabular-nums">{report.max_planetary_difference_deg}°</strong>
           </span>

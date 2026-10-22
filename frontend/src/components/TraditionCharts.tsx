@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import type { ChartResponse } from '../types';
+import { ExplainerTrigger } from './ExplainerTrigger';
 import {
   NorthIndianChart,
   WesternCircularWheel,
@@ -15,6 +16,18 @@ import {
 interface Props {
   data: ChartResponse;
 }
+
+const TRADITION_PRIMARY_EXPLAINER: Record<string, { id: string; label: string }> = {
+  jyotisha: { id: 'lahiri_ayanamsha', label: 'Vedic Math & Ayanamsha' },
+  bazi: { id: 'bazi_four_pillars', label: 'Four Pillars & Solar Qi' },
+  western: { id: 'western_sect', label: 'Hellenistic Sect & Dignity' },
+  persian: { id: 'almuten_figuris', label: 'Almuten Point System' },
+  egyptian: { id: 'egyptian_decan_clock', label: '36 Decanic Gates' },
+  ziwei: { id: 'ziwei_palaces_stars', label: '12 Palaces & Si Hua' },
+  mayan: { id: 'maya_calendar_round', label: 'Sacred Calendar Round' },
+  tibetan: { id: 'tibetan_mewa_parkha', label: 'Lo Shu Mewa & Khams Lnga' },
+  maramataka: { id: 'maramataka_lunar_dial', label: '30 Oceanic Nights' },
+};
 
 const CULTURE_THEMES: Record<string, {
   id: string;
@@ -287,6 +300,13 @@ export const TraditionCharts: React.FC<Props> = ({ data }) => {
               <span className={`px-2 py-0.5 rounded text-[10px] font-mono font-medium border ${currentTheme.accentBadge}`}>
                 {currentTheme.badge}
               </span>
+              {TRADITION_PRIMARY_EXPLAINER[activeTab] && (
+                <ExplainerTrigger
+                  id={TRADITION_PRIMARY_EXPLAINER[activeTab].id}
+                  label={TRADITION_PRIMARY_EXPLAINER[activeTab].label}
+                  variant="button"
+                />
+              )}
             </div>
             <p className="text-xs text-slate-300 mt-1 font-sans">
               {currentTheme.lineage}
@@ -356,10 +376,11 @@ export const TraditionCharts: React.FC<Props> = ({ data }) => {
                 Nakshatra: {jyotisha.lagna.nakshatra?.name} Pada {jyotisha.lagna.nakshatra?.pada} (Lord: {jyotisha.lagna.nakshatra?.lord}) | D9: {jyotisha.lagna.navamsha_sign} | D3: {jyotisha.lagna.drekkana_sign}
               </p>
             </div>
-            <div className="flex items-center gap-2">
+            <div className="flex flex-wrap items-center gap-2">
               <span className="px-2.5 py-1 text-xs font-mono rounded bg-[#121721] text-amber-300 border border-amber-900/60">
                 Ayanamsha: {data.astronomical_base.ayanamsha.degrees.toFixed(4)}°
               </span>
+              <ExplainerTrigger id="lahiri_ayanamsha" label="Ayanamsha" variant="badge" />
             </div>
           </div>
 
@@ -384,7 +405,17 @@ export const TraditionCharts: React.FC<Props> = ({ data }) => {
           {chartViewMode !== 'chart' && (
             <>
               {/* Grahas Table with Complete Divisional Subdivisions */}
-              <div className="overflow-x-auto rounded border border-[#1b2331]">
+              <div className="space-y-1.5">
+                <div className="flex items-center justify-between px-0.5">
+                  <span className="text-[10px] font-mono text-slate-400 uppercase tracking-wider">
+                    Grahas & Divisional Harmonics (Vargas)
+                  </span>
+                  <div className="flex items-center gap-1.5">
+                    <ExplainerTrigger id="lagna_divisional_subdivisions" label="Varga Harmonics" variant="badge" />
+                    <ExplainerTrigger id="gandanta_zones" label="Gandanta Knots" variant="badge" />
+                  </div>
+                </div>
+                <div className="overflow-x-auto rounded border border-[#1b2331]">
             <table className="w-full text-left text-xs border-collapse">
               <thead>
                 <tr className="bg-[#080a0f] text-slate-400 border-b border-[#1b2331] font-mono uppercase tracking-wider text-[10px]">
@@ -440,13 +471,17 @@ export const TraditionCharts: React.FC<Props> = ({ data }) => {
               </tbody>
             </table>
           </div>
+        </div>
 
           {/* Planetary War Alert if Occurring */}
           {jyotisha.graha_yuddha && jyotisha.graha_yuddha.length > 0 && (
             <div className="bg-[#191013] p-3 rounded-md border border-rose-900/80">
-              <span className="text-[10px] font-mono font-semibold text-rose-400 uppercase tracking-wider block mb-1">
-                Graha Yuddha (Planetary War within 1.0° Longitude)
-              </span>
+              <div className="flex items-center justify-between mb-1">
+                <span className="text-[10px] font-mono font-semibold text-rose-400 uppercase tracking-wider">
+                  Graha Yuddha (Planetary War within 1.0° Longitude)
+                </span>
+                <ExplainerTrigger id="graha_yuddha" label="War Mechanics" variant="badge" />
+              </div>
               <div className="space-y-1.5 text-xs font-mono">
                 {jyotisha.graha_yuddha.map((war: any, idx: number) => (
                   <div key={idx} className="flex flex-col sm:flex-row sm:justify-between text-slate-300">
@@ -503,9 +538,12 @@ export const TraditionCharts: React.FC<Props> = ({ data }) => {
 
           {/* Vimshottari Mahadasha Sequence */}
           <div className="bg-[#080a0f] p-3.5 rounded-md border border-[#1b2331]">
-            <span className="text-[10px] font-mono font-semibold text-slate-400 uppercase tracking-wider block mb-2">
-              Vimshottari Mahadashas (120-Year Full Cycle)
-            </span>
+            <div className="flex items-center justify-between mb-2">
+              <span className="text-[10px] font-mono font-semibold text-slate-400 uppercase tracking-wider">
+                Vimshottari Mahadashas (120-Year Full Cycle)
+              </span>
+              <ExplainerTrigger id="vimshottari_dasha" label="Dasha Formula" variant="badge" />
+            </div>
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-9 gap-2 text-xs font-mono">
               {jyotisha.vimshottari_dashas.map((d: any, idx: number) => (
                 <div key={idx} className="p-2 rounded bg-[#0d1118] border border-[#1b2331] text-center">
@@ -536,10 +574,11 @@ export const TraditionCharts: React.FC<Props> = ({ data }) => {
                 Year Na Yin: {bazi.year_nayin} | In Season: {bazi.day_master.in_season ? 'Yes' : 'No'}
               </p>
             </div>
-            <div className="flex items-center gap-2">
+            <div className="flex flex-wrap items-center gap-2">
               <span className="px-2.5 py-1 text-xs font-mono rounded bg-[#121721] text-red-300 border border-red-900/60">
                 Pillars: {bazi.pillars.year?.stem}{bazi.pillars.year?.branch} • {bazi.pillars.month?.stem}{bazi.pillars.month?.branch} • {bazi.pillars.day?.stem}{bazi.pillars.day?.branch} • {bazi.pillars.hour?.stem}{bazi.pillars.hour?.branch}
               </span>
+              <ExplainerTrigger id="bazi_four_pillars" label="Four Pillars" variant="badge" />
             </div>
           </div>
 
@@ -611,9 +650,12 @@ export const TraditionCharts: React.FC<Props> = ({ data }) => {
           {/* Day Master & Five Elements Balance */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5">
             <div className="bg-[#080a0f] p-3.5 rounded-md border border-[#1b2331]">
-              <span className="text-[10px] font-mono text-slate-400 uppercase tracking-wider block mb-2">
-                Day Master Assessment
-              </span>
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-[10px] font-mono text-slate-400 uppercase tracking-wider">
+                  Day Master Assessment
+                </span>
+                <ExplainerTrigger id="bazi_day_master" label="Day Master" variant="badge" />
+              </div>
               <div className="flex items-center justify-between">
                 <div>
                   <span className="text-xl font-serif text-amber-400">
@@ -639,9 +681,12 @@ export const TraditionCharts: React.FC<Props> = ({ data }) => {
             </div>
 
             <div className="bg-[#080a0f] p-3.5 rounded-md border border-[#1b2331]">
-              <span className="text-[10px] font-mono text-slate-400 uppercase tracking-wider block mb-2">
-                Five Elements Distribution
-              </span>
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-[10px] font-mono text-slate-400 uppercase tracking-wider">
+                  Five Elements Distribution
+                </span>
+                <ExplainerTrigger id="wu_xing_pentagram" label="Wu Xing Cycles" variant="badge" />
+              </div>
               <div className="space-y-1.5 mt-2">
                 {Object.entries(bazi.five_elements_balance.percentages).map(([elem, pct]: [string, any]) => (
                   <div key={elem} className="space-y-0.5">
@@ -669,9 +714,12 @@ export const TraditionCharts: React.FC<Props> = ({ data }) => {
           {/* Branch & Stem Interactions (Combinations, Clashes, Harms, Punishments) */}
           {bazi.branch_interactions && (
             <div className="bg-[#080a0f] p-3.5 rounded-md border border-[#1b2331]">
-              <span className="text-[10px] font-mono text-slate-400 uppercase tracking-wider block mb-2">
-                Pillar Interactions & Combinations (He / Chong / Xing / Hai)
-              </span>
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-[10px] font-mono text-slate-400 uppercase tracking-wider">
+                  Pillar Interactions & Combinations (He / Chong / Xing / Hai)
+                </span>
+                <ExplainerTrigger id="bazi_branch_interactions" label="He / Chong Rules" variant="badge" />
+              </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-2.5 text-xs font-mono">
                 {/* Harmonies & Combinations */}
                 <div className="p-2.5 rounded bg-[#0d1118] border border-[#1b2331]">
@@ -803,12 +851,15 @@ export const TraditionCharts: React.FC<Props> = ({ data }) => {
                 Sect: <strong className="text-white font-mono">{western.sect.label}</strong> • Benefic: <span className="text-emerald-400 font-mono">{western.sect.sect_benefic}</span> • Malefic: <span className="text-rose-400 font-mono">{western.sect.sect_malefic}</span>
               </p>
             </div>
-            {western.lots.lot_of_fortune && (
-              <div className="text-xs font-mono text-slate-300 bg-[#121721] p-2.5 rounded border border-[#1b2331]">
-                <div>Lot of Fortune: {western.lots.lot_of_fortune.sign} {western.lots.lot_of_fortune.degree}° (H{western.lots.lot_of_fortune.house})</div>
-                <div>Lot of Spirit: {western.lots.lot_of_spirit.sign} {western.lots.lot_of_spirit.degree}° (H{western.lots.lot_of_spirit.house})</div>
-              </div>
-            )}
+            <div className="flex flex-wrap items-center gap-2">
+              <ExplainerTrigger id="western_sect" label="Sect Framework" variant="badge" />
+              {western.lots.lot_of_fortune && (
+                <div className="text-xs font-mono text-slate-300 bg-[#121721] p-2.5 rounded border border-[#1b2331]">
+                  <div>Lot of Fortune: {western.lots.lot_of_fortune.sign} {western.lots.lot_of_fortune.degree}° (H{western.lots.lot_of_fortune.house})</div>
+                  <div>Lot of Spirit: {western.lots.lot_of_spirit.sign} {western.lots.lot_of_spirit.degree}° (H{western.lots.lot_of_spirit.house})</div>
+                </div>
+              )}
+            </div>
           </div>
 
           {/* Visual Western Wheel */}
@@ -832,7 +883,14 @@ export const TraditionCharts: React.FC<Props> = ({ data }) => {
           {chartViewMode !== 'chart' && (
             <>
               {/* Planets & Essential Dignities Table */}
-              <div className="overflow-x-auto rounded border border-[#1b2331]">
+              <div className="space-y-1.5">
+                <div className="flex items-center justify-between px-0.5">
+                  <span className="text-[10px] font-mono text-slate-400 uppercase tracking-wider">
+                    Planetary Dignities & Angularity
+                  </span>
+                  <ExplainerTrigger id="essential_dignities_score" label="Dignity Matrix" variant="badge" />
+                </div>
+                <div className="overflow-x-auto rounded border border-[#1b2331]">
             <table className="w-full text-left text-xs border-collapse">
               <thead>
                 <tr className="bg-[#080a0f] text-slate-400 border-b border-[#1b2331] font-mono uppercase tracking-wider text-[10px]">
@@ -871,6 +929,7 @@ export const TraditionCharts: React.FC<Props> = ({ data }) => {
               </tbody>
             </table>
           </div>
+        </div>
 
           {/* Mutual Reception Banner if Present */}
           {western.mutual_receptions && western.mutual_receptions.length > 0 && (
@@ -934,9 +993,12 @@ export const TraditionCharts: React.FC<Props> = ({ data }) => {
           {((western.antiscia_pairs && western.antiscia_pairs.length > 0) ||
             (western.contra_antiscia_pairs && western.contra_antiscia_pairs.length > 0)) && (
             <div className="bg-[#080a0f] p-3.5 rounded-md border border-[#1b2331]">
-              <span className="text-[10px] font-mono font-semibold text-slate-400 uppercase tracking-wider block mb-2">
-                Solstitial & Equinoctial Reflections (Antiscia & Contra-Antiscia)
-              </span>
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-[10px] font-mono font-semibold text-slate-400 uppercase tracking-wider">
+                  Solstitial & Equinoctial Reflections (Antiscia & Contra-Antiscia)
+                </span>
+                <ExplainerTrigger id="antiscia_contra_antiscia" label="Solstice Mirrors" variant="badge" />
+              </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs font-mono">
                 {western.antiscia_pairs?.map((p: any, idx: number) => (
                   <div key={`ant-${idx}`} className="p-2 rounded bg-[#0d1118] border border-[#1b2331] flex justify-between items-center">
@@ -973,10 +1035,13 @@ export const TraditionCharts: React.FC<Props> = ({ data }) => {
                 Lunar Date: {ziwei.lunar_date.year} Year, Month {ziwei.lunar_date.month}, Day {ziwei.lunar_date.day} ({ziwei.lunar_date.hour_branch} Hour)
               </p>
             </div>
-            <div className="text-xs font-mono text-purple-300 bg-[#121721] p-2.5 rounded border border-[#1b2331]">
-              <span className="font-semibold text-amber-400 block mb-0.5">Si Hua Transformations:</span>
-              <div>Lu: {ziwei.si_hua_transformations.Lu} | Quan: {ziwei.si_hua_transformations.Quan}</div>
-              <div>Ke: {ziwei.si_hua_transformations.Ke} | Ji: {ziwei.si_hua_transformations.Ji}</div>
+            <div className="flex flex-wrap items-center gap-2">
+              <div className="text-xs font-mono text-purple-300 bg-[#121721] p-2.5 rounded border border-[#1b2331]">
+                <span className="font-semibold text-amber-400 block mb-0.5">Si Hua Transformations:</span>
+                <div>Lu: {ziwei.si_hua_transformations.Lu} | Quan: {ziwei.si_hua_transformations.Quan}</div>
+                <div>Ke: {ziwei.si_hua_transformations.Ke} | Ji: {ziwei.si_hua_transformations.Ji}</div>
+              </div>
+              <ExplainerTrigger id="ziwei_palaces_stars" label="12 Palaces & Si Hua" variant="badge" />
             </div>
           </div>
 
@@ -1092,8 +1157,11 @@ export const TraditionCharts: React.FC<Props> = ({ data }) => {
                   Total Kin: <span className="text-slate-200">{mayan.long_count.total_kin}</span> • Lord of Night: <span className="text-amber-300">{mayan.lord_of_the_night}</span>
                 </p>
               </div>
-              <div className="px-2.5 py-1 text-xs font-mono font-medium rounded bg-emerald-950 text-emerald-300 border border-emerald-800">
-                Round-Trip Verification: PASS
+              <div className="flex flex-wrap items-center gap-2">
+                <div className="px-2.5 py-1 text-xs font-mono font-medium rounded bg-emerald-950 text-emerald-300 border border-emerald-800">
+                  Round-Trip Verification: PASS
+                </div>
+                <ExplainerTrigger id="maya_calendar_round" label="Sacred Cycles" variant="badge" />
               </div>
             </div>
           </div>
@@ -1195,10 +1263,13 @@ export const TraditionCharts: React.FC<Props> = ({ data }) => {
             <>
               {/* Five Personal Forces */}
               <div className="bg-[#080a0f] p-3.5 rounded-md border border-[#1b2331]">
-            <span className="text-[10px] font-mono font-semibold text-slate-400 uppercase tracking-wider block mb-2.5">
-              Five Personal Forces (Khams Lnga)
-            </span>
-            <div className="grid grid-cols-2 sm:grid-cols-5 gap-2.5 text-center text-xs font-mono">
+                <div className="flex items-center justify-between mb-2.5">
+                  <span className="text-[10px] font-mono font-semibold text-slate-400 uppercase tracking-wider">
+                    Five Personal Forces (Khams Lnga)
+                  </span>
+                  <ExplainerTrigger id="tibetan_mewa_parkha" label="Lo Shu & Forces" variant="badge" />
+                </div>
+                <div className="grid grid-cols-2 sm:grid-cols-5 gap-2.5 text-center text-xs font-mono">
               <div className="p-2.5 rounded bg-[#0d1118] border border-[#1b2331]">
                 <span className="text-[10px] text-slate-500 uppercase block">Sog (Life)</span>
                 <span className="text-xs font-semibold text-emerald-400 mt-0.5 block">{tibetan.five_personal_forces.sog_life_force}</span>
@@ -1270,10 +1341,13 @@ export const TraditionCharts: React.FC<Props> = ({ data }) => {
             <>
               {/* Almuten Figuris Dignity Leaderboard */}
               <div className="bg-[#080a0f] p-3.5 rounded-md border border-[#1b2331]">
-            <span className="text-[10px] font-mono font-semibold text-slate-400 uppercase tracking-wider block mb-2">
-              Weighted Dignity Leaderboard (Abu Ma'shar / Al-Qabisi Point System)
-            </span>
-            <div className="overflow-x-auto rounded border border-[#1b2331]">
+                <div className="flex items-center justify-between mb-2">
+                  <span className="text-[10px] font-mono font-semibold text-slate-400 uppercase tracking-wider">
+                    Weighted Dignity Leaderboard (Abu Ma'shar / Al-Qabisi Point System)
+                  </span>
+                  <ExplainerTrigger id="almuten_figuris" label="Almuten Math" variant="badge" />
+                </div>
+                <div className="overflow-x-auto rounded border border-[#1b2331]">
               <table className="w-full text-left text-xs border-collapse font-mono">
                 <thead>
                   <tr className="bg-[#0d1118] text-slate-400 border-b border-[#1b2331] uppercase text-[10px]">
@@ -1328,9 +1402,12 @@ export const TraditionCharts: React.FC<Props> = ({ data }) => {
 
           {/* Firdaria 75-Year Planetary Chronocrator Timeline */}
           <div className="bg-[#080a0f] p-3.5 rounded-md border border-[#1b2331]">
-            <span className="text-[10px] font-mono font-semibold text-slate-400 uppercase tracking-wider block mb-2">
-              Firdaria Lifespan Timeline (75-Year Planetary Era Cycle)
-            </span>
+            <div className="flex items-center justify-between mb-2">
+              <span className="text-[10px] font-mono font-semibold text-slate-400 uppercase tracking-wider">
+                Firdaria Lifespan Timeline (75-Year Planetary Era Cycle)
+              </span>
+              <ExplainerTrigger id="firdaria_periods" label="Firdaria Timeline" variant="badge" />
+            </div>
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-9 gap-2 text-center text-xs font-mono">
               {persian.firdaria.timeline.map((f: any, idx: number) => (
                 <div key={idx} className="p-2 rounded bg-[#0d1118] border border-[#1b2331]">
@@ -1391,10 +1468,13 @@ export const TraditionCharts: React.FC<Props> = ({ data }) => {
             <>
               {/* 36 Decan Guardians */}
               <div className="bg-[#080a0f] p-3.5 rounded-md border border-[#1b2331]">
-            <span className="text-[10px] font-mono font-semibold text-slate-400 uppercase tracking-wider block mb-2.5">
-              Decanic Guardians of Ra's Cosmic Barque (10° Sky Segments)
-            </span>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 font-mono text-xs">
+                <div className="flex items-center justify-between mb-2.5">
+                  <span className="text-[10px] font-mono font-semibold text-slate-400 uppercase tracking-wider">
+                    Decanic Guardians of Ra's Cosmic Barque (10° Sky Segments)
+                  </span>
+                  <ExplainerTrigger id="egyptian_decan_clock" label="36 Decan Gates" variant="badge" />
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 font-mono text-xs">
               {Object.entries(egyptian.decan_guardians).map(([pointKey, decan]: [string, any]) => (
                 <div key={pointKey} className="p-3 rounded bg-[#0d1118] border border-[#1b2331]">
                   <span className="text-[10px] text-slate-500 uppercase tracking-wider block">
@@ -1481,9 +1561,12 @@ export const TraditionCharts: React.FC<Props> = ({ data }) => {
               {/* Behavioral & Vitality Profile */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5">
             <div className="bg-[#080a0f] p-3.5 rounded-md border border-[#1b2331]">
-              <span className="text-[10px] font-mono text-slate-400 uppercase tracking-wider block mb-2">
-                Biological & Behavioral Rhythm Profile
-              </span>
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-[10px] font-mono text-slate-400 uppercase tracking-wider">
+                  Biological & Behavioral Rhythm Profile
+                </span>
+                <ExplainerTrigger id="maramataka_lunar_dial" label="30 Oceanic Nights" variant="badge" />
+              </div>
               <p className="text-xs text-slate-300 leading-relaxed font-sans">
                 {maramataka.lunar_night.behavioral_profile}
               </p>

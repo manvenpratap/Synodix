@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import type { Synthesis } from '../types';
 import { DomainConsensusRadar } from './ChartWheelVisualizer';
+import { ExplainerTrigger } from './ExplainerTrigger';
 
 interface Props {
   synthesis: Synthesis;
@@ -52,9 +53,12 @@ export const SynthesisMatrix: React.FC<Props> = ({ synthesis }) => {
           <span className="text-[10px] font-mono uppercase tracking-wider text-purple-400 font-semibold block">
             05 / Cross-Cultural Synthesis Without Double-Counting
           </span>
-          <h3 className="text-base font-semibold text-slate-100 mt-0.5">
-            Cross-Cultural Convergence & Divergence Matrix
-          </h3>
+          <div className="flex flex-wrap items-center gap-2 mt-0.5">
+            <h3 className="text-base font-semibold text-slate-100">
+              Cross-Cultural Convergence & Divergence Matrix
+            </h3>
+            <ExplainerTrigger id="three_cluster_consensus" label="Consensus Protocol" variant="badge" />
+          </div>
           <p className="text-xs text-slate-400 mt-0.5">
             3 primary votes: Jyotisha (1), Western (1), Sinic (1). Maya & Tibetan contribute as non-voting symbolic overlays.
           </p>
@@ -63,9 +67,12 @@ export const SynthesisMatrix: React.FC<Props> = ({ synthesis }) => {
         {/* Divergence Metric Badge */}
         <div className="flex items-center gap-3 bg-[#080a0f] px-3 py-2 rounded-md border border-[#1b2331]">
           <div className="text-right">
-            <span className="text-[10px] text-slate-400 uppercase tracking-wider font-mono block">
-              Divergence Rate
-            </span>
+            <div className="flex items-center justify-end gap-1.5">
+              <span className="text-[10px] text-slate-400 uppercase tracking-wider font-mono block">
+                Divergence Rate
+              </span>
+              <ExplainerTrigger id="honest_divergence_rate" size="xs" variant="icon" />
+            </div>
             <span className="text-sm font-mono font-bold text-rose-400 tabular-nums">
               {metrics.divergence_rate_percent}%
             </span>
@@ -91,9 +98,12 @@ export const SynthesisMatrix: React.FC<Props> = ({ synthesis }) => {
               <span className="text-[8px] text-slate-500 uppercase">INDEX</span>
             </div>
             <div>
-              <span className="text-[10px] font-mono uppercase tracking-wider text-slate-400 font-semibold block">
-                GLOBAL TRIANGULATION CONSENSUS
-              </span>
+              <div className="flex flex-wrap items-center gap-2">
+                <span className="text-[10px] font-mono uppercase tracking-wider text-slate-400 font-semibold block">
+                  GLOBAL TRIANGULATION CONSENSUS
+                </span>
+                <ExplainerTrigger id="three_cluster_consensus" label="Triangulation Math" variant="badge" />
+              </div>
               <span className="text-xs text-slate-200 font-medium">
                 Composite Multi-Tradition Concordance (σ = 0.04)
               </span>

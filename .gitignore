@@ -8,6 +8,16 @@ dist/
 .DS_Store
 de421.bsp
 
+# Build and intermediate mobile artifacts
+build/
+ios/build/
+frontend/build/
+frontend/ios/build/
+frontend/android/.gradle/
+frontend/android/build/
+frontend/android/app/build/
+
+
 # Universal Pipeline local resources
 tests/screenshots/
 e2e-tests/screenshots/

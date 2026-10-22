@@ -25,13 +25,14 @@ done
 SCRIPT_DIR="$(cd -P "$(dirname "$SOURCE")" && pwd)"
 SKILL_ROOT="$(cd "$SCRIPT_DIR/.." 2>/dev/null && pwd || echo "$SCRIPT_DIR")"
 
-# Prefer local venv python if present, else fallback to system python
-if [ -x "$SCRIPT_DIR/.venv/bin/python" ]; then
+# Prefer Python engine if available for rich JSON & compact formatting
+if [ -f "$SCRIPT_DIR/.venv/bin/python" ]; then
     PYTHON_BIN="$SCRIPT_DIR/.venv/bin/python"
+elif [ -f "$SCRIPT_DIR/venv/bin/python" ]; then
+    PYTHON_BIN="$SCRIPT_DIR/venv/bin/python"
 else
     PYTHON_BIN="$(command -v python3 || command -v python || true)"
 fi
-export PYTHONPATH="${PYTHONPATH:-.}:$SCRIPT_DIR"
 
 if [ -n "$PYTHON_BIN" ]; then
     for candidate in \
@@ -110,6 +111,35 @@ EOF
         fi
         [ -f package.json ] && npm run build --if-present
         [ -f pom.xml ] && mvn package -DskipTests -q
+        "$0" mobile 2>/dev/null || true
+        ;;
+    mobile|apk|android|ios)
+        echo "==> Packaging mobile app deliverables..."
+        # 1. Android APK
+        if [ -f apps/mobile/android/build-apk.sh ]; then
+            bash apps/mobile/android/build-apk.sh
+        elif [ -f android/gradlew ]; then
+            (cd android && ./gradlew assembleDebug --no-daemon --console=plain)
+        elif [ -f frontend/android/gradlew ]; then
+            (cd frontend/android && ./gradlew assembleDebug --no-daemon --console=plain)
+        fi
+        # 2. iOS Project
+        if [ -f apps/mobile/ios/build-ios.sh ]; then
+            bash apps/mobile/ios/build-ios.sh
+        elif compgen -G "ios/**/*.xcodeproj" >/dev/null 2>&1; then
+            XPROJ=$(compgen -G "ios/**/*.xcodeproj" | head -n 1)
+            xcodebuild -project "$XPROJ" -scheme App -configuration Debug -destination "generic/platform=iOS Simulator" -derivedDataPath ios/build/ios_derived build CODE_SIGNING_ALLOWED=NO 2>/dev/null || true
+        elif compgen -G "frontend/ios/**/*.xcodeproj" >/dev/null 2>&1; then
+            XPROJ=$(compgen -G "frontend/ios/**/*.xcodeproj" | head -n 1)
+            xcodebuild -project "$XPROJ" -scheme App -configuration Debug -destination "generic/platform=iOS Simulator" -derivedDataPath frontend/build/ios_derived build CODE_SIGNING_ALLOWED=NO 2>/dev/null || true
+        fi
+        echo "✓ Mobile delivery packaging check complete."
+        ;;
+    push)
+        echo "==> Executing pre-push mobile delivery update..."
+        "$0" mobile 2>/dev/null || true
+        CURRENT_BRANCH="$(git rev-parse --abbrev-ref HEAD)"
+        git push origin "$CURRENT_BRANCH"
         ;;
     doc)
         if [ -f PROJECT_CONTEXT.md ]; then
@@ -123,13 +153,14 @@ EOF
             exit 1
         fi
         "$0" package
+        git add -A dist/ docs/ android/ ios/ apps/mobile/ frontend/android/ frontend/ios/ 2>/dev/null || true
         git add -u
         git commit -m "$MSG"
         git push origin "$(git rev-parse --abbrev-ref HEAD)"
         ;;
     *)
         echo "Unknown command: $CMD"
-        echo "Usage: ./pipeline.sh {doctor|heal|test|visual|package|doc|ship}"
+        echo "Usage: ./pipeline.sh {doctor|heal|test|visual|package|mobile|apk|ios|push|doc|ship}"
         exit 1
         ;;
 esac

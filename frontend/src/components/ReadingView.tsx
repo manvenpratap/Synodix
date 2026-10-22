@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import type { ChartResponse } from '../types';
+import { ExplainerTrigger } from './ExplainerTrigger';
 import {
   FileText,
   Download,
@@ -260,7 +261,10 @@ export const ReadingView: React.FC<Props> = ({ data }) => {
               </div>
 
               <div className="bg-[#090c12] p-3 rounded border border-[#1b2331]">
-                <span className="text-slate-500 text-[10px] block uppercase mb-1">True Astronomical Solar Times</span>
+                <div className="flex items-center justify-between mb-1">
+                  <span className="text-slate-500 text-[10px] uppercase">True Astronomical Solar Times</span>
+                  <ExplainerTrigger id="time_normalization_eot" size="xs" variant="icon" />
+                </div>
                 <div className="space-y-1 text-slate-300">
                   <div>Local Mean Solar Time (LMST): <span className="text-slate-100">{audit.lmst}</span></div>
                   <div>Local Apparent Solar Time (LAST): <span className="text-slate-100">{audit.last}</span></div>
@@ -270,7 +274,10 @@ export const ReadingView: React.FC<Props> = ({ data }) => {
               </div>
 
               <div className="bg-[#090c12] p-3 rounded border border-[#1b2331]">
-                <span className="text-slate-500 text-[10px] block uppercase mb-1">Boundary Proximity & Sensitivity</span>
+                <div className="flex items-center justify-between mb-1">
+                  <span className="text-slate-500 text-[10px] uppercase">Boundary Proximity & Sensitivity</span>
+                  <ExplainerTrigger id="cusp_proximity_audit" size="xs" variant="icon" />
+                </div>
                 <div className="space-y-1 text-slate-300">
                   <div>
                     Ascendant to Sign Cusp: <strong className="text-slate-100">{data.astronomical_base.boundary_distances.tropical_asc_to_cusp_deg.toFixed(2)}°</strong>
@@ -300,11 +307,13 @@ export const ReadingView: React.FC<Props> = ({ data }) => {
           {/* Section 2 & 3: The Cross-Cultural Corroboration Matrix */}
           <section className="bg-[#0d1118] border border-[#1b2331] rounded-lg p-4 space-y-4">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-[#1b2331] pb-3 gap-2">
-              <div className="flex items-center gap-2">
+              <div className="flex flex-wrap items-center gap-2">
                 <span className="w-2 h-2 rounded-full bg-emerald-400"></span>
                 <h3 className="text-sm font-semibold text-slate-100 uppercase tracking-wider font-mono">
                   2. Cross-Cultural Corroboration Matrix (Life Domains)
                 </h3>
+                <ExplainerTrigger id="three_cluster_consensus" label="Consensus Protocol" variant="badge" />
+                <ExplainerTrigger id="honest_divergence_rate" label="Divergence Metric" variant="badge" />
               </div>
 
               {/* Filter Pills */}
@@ -621,11 +630,12 @@ export const ReadingView: React.FC<Props> = ({ data }) => {
           {/* Section 5: Attributed Temperament Overlays (Maya & Tibetan) */}
           <section className="bg-[#0d1118] border border-[#1b2331] rounded-lg p-4 space-y-3">
             <div className="flex items-center justify-between border-b border-[#1b2331] pb-2.5">
-              <div className="flex items-center gap-2">
+              <div className="flex flex-wrap items-center gap-2">
                 <Sparkles className="w-4 h-4 text-cyan-400" />
                 <h3 className="text-sm font-semibold text-slate-100 uppercase tracking-wider font-mono">
                   4. Attributed Temperament Overlays (Maya & Tibetan)
                 </h3>
+                <ExplainerTrigger id="epistemic_humility_framework" label="Non-Causal Overlays" variant="badge" />
               </div>
               <span className="text-[11px] font-mono text-slate-500">
                 Non-Causal Symbolic Harmonics
@@ -656,11 +666,12 @@ export const ReadingView: React.FC<Props> = ({ data }) => {
           {/* Section 6: Invariants & Astronomical Verification Checklist */}
           <section className="bg-[#0d1118] border border-[#1b2331] rounded-lg p-4 space-y-3">
             <div className="flex items-center justify-between border-b border-[#1b2331] pb-2.5">
-              <div className="flex items-center gap-2">
+              <div className="flex flex-wrap items-center gap-2">
                 <ShieldCheck className="w-4 h-4 text-emerald-400" />
                 <h3 className="text-sm font-semibold text-slate-100 uppercase tracking-wider font-mono">
                   5. Dual-Engine Verification & Invariant Proofs
                 </h3>
+                <ExplainerTrigger id="dual_engine_validation" label="Dual-Engine Proof" variant="badge" />
               </div>
               <span className="text-[11px] font-mono text-emerald-400">
                 All Astronomical Invariants Passed
