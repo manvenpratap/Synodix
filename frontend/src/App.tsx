@@ -624,8 +624,8 @@ function AppContent() {
               </h1>
             </div>
 
-            {/* Stitch Live Telemetry Badges (Desktop >= xl) */}
-            <div className="hidden xl:flex items-center gap-2 font-mono text-[11px] ml-4">
+            {/* Stitch Live Telemetry Badges (Desktop >= 2xl) */}
+            <div className="hidden 2xl:flex items-center gap-2 font-mono text-[11px] ml-4">
               <div className="flex items-center gap-1.5 px-2.5 py-1 rounded bg-[#0d121c] border border-[#1b2331]">
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
                 <span className="text-slate-400">JPL DE421:</span>
