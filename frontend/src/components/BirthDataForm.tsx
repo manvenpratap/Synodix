@@ -247,7 +247,7 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
                   type="button"
                   onClick={() => setSearchQuery('')}
                   aria-label="Clear search input"
-                  className="text-slate-400 hover:text-slate-200 min-w-[36px] min-h-[36px] flex items-center justify-center cursor-pointer rounded focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
+                  className="text-slate-400 hover:text-slate-200 min-w-[44px] min-h-[44px] flex items-center justify-center cursor-pointer rounded focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
                 >
                   <X className="w-3.5 h-3.5" />
                 </button>

@@ -259,6 +259,17 @@ export default function App() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        if (isServerModalOpen) setIsServerModalOpen(false);
+        if (isMobileSidebarOpen) setIsMobileSidebarOpen(false);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isServerModalOpen, isMobileSidebarOpen]);
+
   return (
     <div className="min-h-[100dvh] bg-[#080a0f] text-slate-200 flex flex-col md:flex-row antialiased">
       {/* 1. Desktop Fixed Sidebar Navigation (>=md) */}
@@ -904,7 +915,7 @@ function EmptyChartState({ onOpenWorkbench }: { onOpenWorkbench: () => void }) {
       <button
         type="button"
         onClick={onOpenWorkbench}
-        className="mt-5 inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-cyan-700 hover:bg-cyan-600 text-white font-medium text-xs transition-colors cursor-pointer"
+        className="mt-5 inline-flex items-center gap-2 px-4 py-2.5 min-h-[44px] rounded-lg bg-cyan-700 hover:bg-cyan-600 text-white font-medium text-xs transition-colors cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-1 focus-visible:ring-offset-[#080a0f]"
       >
         <span>Open Workbench & Profile Vault</span>
         <ChevronRight className="w-4 h-4" />

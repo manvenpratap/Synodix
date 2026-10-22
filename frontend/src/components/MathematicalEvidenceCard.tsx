@@ -257,36 +257,40 @@ export const MathematicalEvidenceCard: React.FC<Props> = ({ onClose }) => {
             </div>
 
             {/* Quick Actions */}
-            <div className="flex items-center gap-1">
+            <div className="flex items-center gap-1.5">
               <button
                 type="button"
                 onClick={handleCopy}
-                className="p-1.5 rounded bg-[#101622] hover:bg-[#182233] text-slate-300 hover:text-cyan-300 border border-[#1b2331] transition-colors cursor-pointer"
-                title="Copy Full Report Markdown to Clipboard"
+                className="p-2 min-h-[38px] min-w-[38px] flex items-center justify-center rounded-md bg-[#101622] hover:bg-[#182233] text-slate-300 hover:text-cyan-300 border border-[#1b2331] transition-colors cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
+                data-tooltip="Copy Full Report Markdown to Clipboard"
+                aria-label="Copy Full Report Markdown to Clipboard"
               >
                 {copied ? <Check className="w-4 h-4 text-emerald-400" /> : <Copy className="w-4 h-4" />}
               </button>
               <button
                 type="button"
                 onClick={handleExportMarkdown}
-                className="p-1.5 rounded bg-[#101622] hover:bg-[#182233] text-slate-300 hover:text-cyan-300 border border-[#1b2331] transition-colors cursor-pointer"
-                title="Download Study Report (.md)"
+                className="p-2 min-h-[38px] min-w-[38px] flex items-center justify-center rounded-md bg-[#101622] hover:bg-[#182233] text-slate-300 hover:text-cyan-300 border border-[#1b2331] transition-colors cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
+                data-tooltip="Download Study Report (.md)"
+                aria-label="Download Study Report (.md)"
               >
                 <Download className="w-4 h-4" />
               </button>
               <button
                 type="button"
                 onClick={handleExportJSON}
-                className="px-2 py-1 text-[11px] font-mono rounded bg-[#101622] hover:bg-[#182233] text-slate-300 hover:text-cyan-300 border border-[#1b2331] transition-colors cursor-pointer"
-                title="Export Raw Statistics Dataset (.json)"
+                className="px-2.5 py-1.5 min-h-[38px] text-[11px] font-mono rounded-md bg-[#101622] hover:bg-[#182233] text-slate-300 hover:text-cyan-300 border border-[#1b2331] transition-colors cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
+                data-tooltip="Export Raw Statistics Dataset (.json)"
+                aria-label="Export Raw Statistics Dataset (.json)"
               >
                 .JSON
               </button>
               <button
                 type="button"
                 onClick={handlePrint}
-                className="p-1.5 rounded bg-[#101622] hover:bg-[#182233] text-slate-300 hover:text-cyan-300 border border-[#1b2331] transition-colors cursor-pointer"
-                title="Print or Save PDF"
+                className="p-2 min-h-[38px] min-w-[38px] flex items-center justify-center rounded-md bg-[#101622] hover:bg-[#182233] text-slate-300 hover:text-cyan-300 border border-[#1b2331] transition-colors cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
+                data-tooltip="Print or Save PDF"
+                aria-label="Print or Save PDF"
               >
                 <Printer className="w-4 h-4" />
               </button>
@@ -294,8 +298,9 @@ export const MathematicalEvidenceCard: React.FC<Props> = ({ onClose }) => {
                 <button
                   type="button"
                   onClick={onClose}
-                  className="p-1.5 ml-1 rounded bg-[#151c28] hover:bg-rose-900/60 text-slate-300 hover:text-rose-200 border border-[#1b2331] hover:border-rose-800 transition-colors cursor-pointer"
-                  title="Close Evidence Panel"
+                  className="p-2 min-h-[38px] min-w-[38px] flex items-center justify-center ml-1 rounded-md bg-[#151c28] hover:bg-rose-900/60 text-slate-300 hover:text-rose-200 border border-[#1b2331] hover:border-rose-800 transition-colors cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-rose-400"
+                  data-tooltip="Close Evidence Panel"
+                  aria-label="Close Evidence Panel"
                 >
                   <X className="w-4 h-4" />
                 </button>

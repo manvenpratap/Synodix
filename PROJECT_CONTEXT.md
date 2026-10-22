@@ -1,7 +1,7 @@
 # Synodix: Project Context & Working Memory
 
-**Last Updated:** 2026-10-22 01:50:00 UTC  
-**Version:** 2.8.1  
+**Last Updated:** 2026-10-22 02:24:00 UTC  
+**Version:** 2.8.2  
 **Stack:** Python 3.12 (FastAPI, Swiss Ephemeris 2.10, Skyfield DE421) + TypeScript / React 19 / Vite / Tailwind CSS v4 / Capacitor 8 (iOS & Android)  
 **Workspace:** `/Volumes/Study/Projects/Astrology` (symlinked as `/Volumes/Study/Astrology`)  
 **Git Remote:** `https://github.com/manvenpratap/Synodix.git`  
@@ -9,8 +9,17 @@
 ---
 
 ## 1. Current Status & Milestone
-- **Active Phase**: Impeccable Quality & Accessibility Hardening (Completed)
-- **Frontend Quality & WCAG 2.2 AA Hardening**:
+- **Active Phase**: Impeccable Polish & Production Readiness (Completed)
+- **Frontend Polish & Interaction Standards (`/impeccable polish`)**:
+  - Global `Escape` key event listener added to [App.tsx](file:///Volumes/Study/Astrology/frontend/src/App.tsx) for instant dismiss of mobile sidebar navigation and API server modals without mouse/touch dependency.
+  - Action button touch targets: elevated quick actions across [MathematicalEvidenceCard.tsx](file:///Volumes/Study/Astrology/frontend/src/components/MathematicalEvidenceCard.tsx) and [ReadingView.tsx](file:///Volumes/Study/Astrology/frontend/src/components/ReadingView.tsx) to $\ge 38\text{px} - 44\text{px}$ with visible focus rings (`focus-visible:ring-cyan-400`).
+  - Search clear affordance in [BirthDataForm.tsx](file:///Volumes/Study/Astrology/frontend/src/components/BirthDataForm.tsx) upgraded to $44\times 44\text{px}$ minimum touch target.
+  - Empty chart state action button in [App.tsx](file:///Volumes/Study/Astrology/frontend/src/App.tsx) elevated with full focus visible states and $44\text{px}$ height.
+  - Zero linter issues: 0 warnings and 0 errors across all 22 source modules verified via `oxlint`.
+  - Full mobile distribution artifacts (`dist/`, `Synodix-debug.apk`) synchronized.
+- **Workflow Health**: 100% CLEAN (Verified via `./pipeline.sh doctor`)
+- **Test Invariants**: 12/12 regression suites passing via `./pipeline.sh test --summary` (10.15s)
+- **In-App Pure TypeScript Astrometric Engine**:
   - Remediated all findings from `/impeccable audit` across 5 technical dimensions.
   - WCAG 2.2 AA Contrast: global dark-mode text elevation rule in `index.css` elevating muted text to `#94a3b8` ($\ge 4.5:1$ contrast ratio).
   - Keyboard & ARIA semantics: full keyboard navigation (`role="button"`, `tabIndex={0}`, `onKeyDown` Enter/Space, `aria-pressed`) across preset galleries and interactive domain disclosures.

@@ -139,8 +139,9 @@ export const ReadingView: React.FC<Props> = ({ data }) => {
             <button
               type="button"
               onClick={handleCopy}
-              className="px-3 py-1.5 text-xs font-mono rounded bg-[#121721] hover:bg-[#18202c] text-slate-300 border border-[#1b2331] transition-colors cursor-pointer flex items-center gap-1.5"
-              title="Copy Full Document Markdown"
+              className="px-3 py-2 min-h-[38px] text-xs font-mono rounded bg-[#121721] hover:bg-[#18202c] text-slate-300 border border-[#1b2331] transition-colors cursor-pointer flex items-center gap-1.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
+              data-tooltip="Copy Full Document Markdown"
+              aria-label="Copy Full Document Markdown"
             >
               {copied ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5 text-slate-400" />}
               <span>{copied ? 'Copied!' : 'Copy'}</span>
@@ -148,8 +149,9 @@ export const ReadingView: React.FC<Props> = ({ data }) => {
             <button
               type="button"
               onClick={handleDownloadMarkdown}
-              className="px-3 py-1.5 text-xs font-mono rounded bg-[#121721] hover:bg-[#18202c] text-slate-300 border border-[#1b2331] transition-colors cursor-pointer flex items-center gap-1.5"
-              title="Download Markdown Document"
+              className="px-3 py-2 min-h-[38px] text-xs font-mono rounded bg-[#121721] hover:bg-[#18202c] text-slate-300 border border-[#1b2331] transition-colors cursor-pointer flex items-center gap-1.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
+              data-tooltip="Download Markdown Document (.md)"
+              aria-label="Download Markdown Document (.md)"
             >
               <Download className="w-3.5 h-3.5 text-slate-400" />
               <span>.MD</span>
@@ -157,8 +159,9 @@ export const ReadingView: React.FC<Props> = ({ data }) => {
             <button
               type="button"
               onClick={handleDownloadJSON}
-              className="px-3 py-1.5 text-xs font-mono rounded bg-[#121721] hover:bg-[#18202c] text-slate-300 border border-[#1b2331] transition-colors cursor-pointer flex items-center gap-1.5"
-              title="Download Raw Master Dataset"
+              className="px-3 py-2 min-h-[38px] text-xs font-mono rounded bg-[#121721] hover:bg-[#18202c] text-slate-300 border border-[#1b2331] transition-colors cursor-pointer flex items-center gap-1.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
+              data-tooltip="Download Raw Master Dataset (.json)"
+              aria-label="Download Raw Master Dataset (.json)"
             >
               <FileText className="w-3.5 h-3.5 text-slate-400" />
               <span>.JSON</span>
@@ -166,8 +169,9 @@ export const ReadingView: React.FC<Props> = ({ data }) => {
             <button
               type="button"
               onClick={handlePrint}
-              className="px-3 py-1.5 text-xs font-mono rounded bg-[#121721] hover:bg-[#18202c] text-slate-300 border border-[#1b2331] transition-colors cursor-pointer flex items-center gap-1.5"
-              title="Print Document"
+              className="px-3 py-2 min-h-[38px] text-xs font-mono rounded bg-[#121721] hover:bg-[#18202c] text-slate-300 border border-[#1b2331] transition-colors cursor-pointer flex items-center gap-1.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
+              data-tooltip="Print or Save PDF"
+              aria-label="Print or Save PDF"
             >
               <Printer className="w-3.5 h-3.5 text-slate-400" />
               <span>Print</span>
