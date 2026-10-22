@@ -16,16 +16,229 @@ interface Props {
   data: ChartResponse;
 }
 
+const CULTURE_THEMES: Record<string, {
+  id: string;
+  name: string;
+  nativeTitle: string;
+  glyph: string;
+  lineage: string;
+  motto: string;
+  badge: string;
+  instrumentName: string;
+  containerBg: string;
+  containerBorder: string;
+  headerBg: string;
+  headerBorder: string;
+  accentText: string;
+  accentBadge: string;
+  activeTabClass: string;
+  presentationToggleActive: string;
+  presentationToggleInactive: string;
+  frameBg: string;
+  frameBorder: string;
+}> = {
+  jyotisha: {
+    id: 'jyotisha',
+    name: 'Jyotisha (Vedic)',
+    nativeTitle: 'ज्योतिष • Vedic Astrometry',
+    glyph: '🕉️',
+    lineage: 'Maharishi Parashara • Bṛhat Parāśara Horāśāstra & Lahiri Sidereal Ephemeris',
+    motto: 'यथा पिण्डे तथा ब्रह्माण्डे — As is the microcosm within, so is the cosmic universe without',
+    badge: 'Sacred Saffron & Vedic Brass',
+    instrumentName: 'Parashari Diamond Kundali (D1 Lagna & D9 Navamsha)',
+    containerBg: 'bg-gradient-to-b from-[#181105]/70 via-[#0d0a04] to-[#080703]',
+    containerBorder: 'border-amber-700/60 shadow-lg shadow-amber-950/20',
+    headerBg: 'bg-gradient-to-r from-[#241707] via-[#1a1105] to-[#100a03]',
+    headerBorder: 'border-amber-600/60',
+    accentText: 'text-amber-400',
+    accentBadge: 'bg-amber-950/90 text-amber-200 border-amber-600/80',
+    activeTabClass: 'bg-gradient-to-r from-amber-950 via-amber-900/80 to-amber-950 text-amber-200 border-amber-600 shadow-sm shadow-amber-950/60 font-semibold ring-1 ring-amber-500/40',
+    presentationToggleActive: 'bg-gradient-to-r from-amber-900 to-amber-950 text-amber-200 font-bold border border-amber-600 shadow-xs',
+    presentationToggleInactive: 'text-slate-400 hover:text-amber-200 hover:bg-amber-950/30',
+    frameBg: 'bg-[#120d04]/90',
+    frameBorder: 'border-amber-800/60',
+  },
+  bazi: {
+    id: 'bazi',
+    name: 'BaZi (Four Pillars)',
+    nativeTitle: '八字命理 • Four Pillars of Destiny',
+    glyph: '☯️',
+    lineage: 'Master Xu Ziping • Wu Xing Five Elements Harmonization & Solar Jie Qi Terms',
+    motto: '天地陰陽，五行生剋 — Heavenly Stems and Earthly Branches harmonizing the cosmic breath',
+    badge: 'Imperial Cinnabar & Jade',
+    instrumentName: 'Wu Xing Dynamic Elemental Pentagram (Generating & Overcoming Cycles)',
+    containerBg: 'bg-gradient-to-b from-[#180808]/70 via-[#0e0505] to-[#080303]',
+    containerBorder: 'border-red-800/60 shadow-lg shadow-red-950/20',
+    headerBg: 'bg-gradient-to-r from-[#240b0b] via-[#1a0707] to-[#100404]',
+    headerBorder: 'border-red-600/60',
+    accentText: 'text-red-400',
+    accentBadge: 'bg-red-950/90 text-red-200 border-red-600/80',
+    activeTabClass: 'bg-gradient-to-r from-red-950 via-red-900/80 to-rose-950 text-red-200 border-red-600 shadow-sm shadow-red-950/60 font-semibold ring-1 ring-red-500/40',
+    presentationToggleActive: 'bg-gradient-to-r from-red-900 to-red-950 text-red-200 font-bold border border-red-600 shadow-xs',
+    presentationToggleInactive: 'text-slate-400 hover:text-red-200 hover:bg-red-950/30',
+    frameBg: 'bg-[#120505]/90',
+    frameBorder: 'border-red-800/60',
+  },
+  western: {
+    id: 'western',
+    name: 'Western (Hellenistic)',
+    nativeTitle: 'Ἑλληνιστικὴ Ἀστρολογία • Hellenistic Astrologia',
+    glyph: '🏛️',
+    lineage: 'Claudius Ptolemy (Tetrabiblos) & Vettius Valens • Tropical Whole-Sign Houses',
+    motto: 'Sicut superius, sic inferius — That which is below is like that which is above',
+    badge: 'Aegean Lapis & Grecian Bronze',
+    instrumentName: 'Ptolemaic 360° Circular Aspect Wheel & Essential Dignities',
+    containerBg: 'bg-gradient-to-b from-[#09152b]/70 via-[#060e1d] to-[#040812]',
+    containerBorder: 'border-blue-700/60 shadow-lg shadow-blue-950/20',
+    headerBg: 'bg-gradient-to-r from-[#0d1d3d] via-[#09142a] to-[#050c1b]',
+    headerBorder: 'border-blue-500/60',
+    accentText: 'text-blue-300',
+    accentBadge: 'bg-blue-950/90 text-blue-200 border-blue-500/80',
+    activeTabClass: 'bg-gradient-to-r from-blue-950 via-blue-900/80 to-indigo-950 text-blue-200 border-blue-500 shadow-sm shadow-blue-950/60 font-semibold ring-1 ring-blue-400/40',
+    presentationToggleActive: 'bg-gradient-to-r from-blue-900 to-blue-950 text-blue-200 font-bold border border-blue-500 shadow-xs',
+    presentationToggleInactive: 'text-slate-400 hover:text-blue-200 hover:bg-blue-950/30',
+    frameBg: 'bg-[#060f20]/90',
+    frameBorder: 'border-blue-800/60',
+  },
+  persian: {
+    id: 'persian',
+    name: 'Persian (Almuten)',
+    nativeTitle: 'علم النجوم • ‘Ilm al-Nujūm',
+    glyph: '🕌',
+    lineage: 'Abu Ma’shar al-Balkhi & Al-Qabisi • Baghdad House of Wisdom Tradition',
+    motto: 'The Supreme Almuten guides the celestial soul through weighted accidental dignity',
+    badge: 'Isfahan Turquoise & Damascened Gold',
+    instrumentName: 'Almuten Figuris Comparative Dignity & 75-Year Firdaria Timeline',
+    containerBg: 'bg-gradient-to-b from-[#051a24]/70 via-[#031118] to-[#020a0f]',
+    containerBorder: 'border-cyan-700/60 shadow-lg shadow-cyan-950/20',
+    headerBg: 'bg-gradient-to-r from-[#072535] via-[#051a25] to-[#031018]',
+    headerBorder: 'border-cyan-500/60',
+    accentText: 'text-cyan-300',
+    accentBadge: 'bg-cyan-950/90 text-cyan-200 border-cyan-500/80',
+    activeTabClass: 'bg-gradient-to-r from-cyan-950 via-cyan-900/80 to-teal-950 text-cyan-200 border-cyan-500 shadow-sm shadow-cyan-950/60 font-semibold ring-1 ring-cyan-400/40',
+    presentationToggleActive: 'bg-gradient-to-r from-cyan-900 to-cyan-950 text-cyan-200 font-bold border border-cyan-500 shadow-xs',
+    presentationToggleInactive: 'text-slate-400 hover:text-cyan-200 hover:bg-cyan-950/30',
+    frameBg: 'bg-[#03131c]/90',
+    frameBorder: 'border-cyan-800/60',
+  },
+  egyptian: {
+    id: 'egyptian',
+    name: 'Egyptian (Decans)',
+    nativeTitle: '𓇹𓇳𓏤 • Seba’ut & Bakhtiu Star Watchers',
+    glyph: '𓋹',
+    lineage: 'Dendera Astronomical Zodiac & Senenmut Tomb Ceiling (c. 1473 BCE)',
+    motto: 'Ra navigates the celestial Nile through the 36 hourly Decanic Star Gates of Heaven',
+    badge: 'Pharaonic Sun Gold & Nile Basalt',
+    instrumentName: '36-Decan Star Compass & Sothic Civil Calendar Clock',
+    containerBg: 'bg-gradient-to-b from-[#1c1605]/70 via-[#110d03] to-[#090702]',
+    containerBorder: 'border-yellow-700/60 shadow-lg shadow-yellow-950/20',
+    headerBg: 'bg-gradient-to-r from-[#281f07] via-[#1a1404] to-[#100c02]',
+    headerBorder: 'border-yellow-600/60',
+    accentText: 'text-yellow-400',
+    accentBadge: 'bg-yellow-950/90 text-yellow-200 border-yellow-600/80',
+    activeTabClass: 'bg-gradient-to-r from-yellow-950 via-amber-900/80 to-yellow-950 text-yellow-200 border-yellow-500 shadow-sm shadow-yellow-950/60 font-semibold ring-1 ring-yellow-400/40',
+    presentationToggleActive: 'bg-gradient-to-r from-yellow-900 to-yellow-950 text-yellow-200 font-bold border border-yellow-500 shadow-xs',
+    presentationToggleInactive: 'text-slate-400 hover:text-yellow-200 hover:bg-yellow-950/30',
+    frameBg: 'bg-[#120e03]/90',
+    frameBorder: 'border-yellow-800/60',
+  },
+  ziwei: {
+    id: 'ziwei',
+    name: 'Zi Wei Dou Shu',
+    nativeTitle: '紫微斗數 • Imperial Polar Constellations',
+    glyph: '👑',
+    lineage: 'Grandmaster Chen Tuan • Lao-tzu Hermitage on Mount Hua (c. 980 CE)',
+    motto: '紫微至尊，儀錄百神 — The North Celestial Pole Emperor presides over the Twelve Palaces',
+    badge: 'Forbidden City Imperial Purple',
+    instrumentName: 'Authentic 4x4 Imperial Courtyard Palace Matrix (14 Major & Auxiliary Stars)',
+    containerBg: 'bg-gradient-to-b from-[#1c0926]/70 via-[#110518] to-[#0a030f]',
+    containerBorder: 'border-purple-800/60 shadow-lg shadow-purple-950/20',
+    headerBg: 'bg-gradient-to-r from-[#2a0e3a] via-[#1c0827] to-[#12051a]',
+    headerBorder: 'border-purple-600/60',
+    accentText: 'text-purple-300',
+    accentBadge: 'bg-purple-950/90 text-purple-200 border-purple-600/80',
+    activeTabClass: 'bg-[#2a0e3c] text-purple-200 border-purple-500 shadow-sm shadow-[#1a0526]/60 font-semibold ring-1 ring-purple-400/40',
+    presentationToggleActive: 'bg-[#341249] text-purple-200 font-bold border border-purple-500 shadow-xs',
+    presentationToggleInactive: 'text-slate-400 hover:text-purple-200 hover:bg-purple-950/30',
+    frameBg: 'bg-[#13061c]/90',
+    frameBorder: 'border-purple-800/60',
+  },
+  mayan: {
+    id: 'mayan',
+    name: 'Maya Calendar',
+    nativeTitle: 'Chol Q’ij & Haab’ • Maya Sacred Calendar',
+    glyph: '☀️',
+    lineage: 'Classic Maya Skywatchers of Copán & Palenque • GMT Correlation (584283)',
+    motto: 'The sacred 260-day Tzolk’in and 365-day solar Haab’ mesh into the 52-year Calendar Round',
+    badge: 'Mesoamerican Jadeite & Rainforest Obsidian',
+    instrumentName: 'Tzolk’in & Haab’ Interlocking Stele Gear Compass',
+    containerBg: 'bg-gradient-to-b from-[#071a11]/70 via-[#04110a] to-[#020a06]',
+    containerBorder: 'border-emerald-700/60 shadow-lg shadow-emerald-950/20',
+    headerBg: 'bg-gradient-to-r from-[#0a2719] via-[#061c12] to-[#03110a]',
+    headerBorder: 'border-emerald-500/60',
+    accentText: 'text-emerald-300',
+    accentBadge: 'bg-emerald-950/90 text-emerald-200 border-emerald-500/80',
+    activeTabClass: 'bg-gradient-to-r from-emerald-950 via-emerald-900/80 to-teal-950 text-emerald-200 border-emerald-500 shadow-sm shadow-emerald-950/60 font-semibold ring-1 ring-emerald-400/40',
+    presentationToggleActive: 'bg-gradient-to-r from-emerald-900 to-emerald-950 text-emerald-200 font-bold border border-emerald-500 shadow-xs',
+    presentationToggleInactive: 'text-slate-400 hover:text-emerald-200 hover:bg-emerald-950/30',
+    frameBg: 'bg-[#03130b]/90',
+    frameBorder: 'border-emerald-800/60',
+  },
+  tibetan: {
+    id: 'tibetan',
+    name: 'Tibetan Elemental',
+    nativeTitle: 'དཀར་རྩིས་ • Kar-tsi & Jung-tsi',
+    glyph: '☸️',
+    lineage: 'Phugpa Lhundrup Gyatso • Pema Karpo Five Personal Forces & Lo Shu Mewa',
+    motto: 'Sog, Lu, Wang, Lungta, and La flowing through the 9 Magic Mewa and 8 Parkha Trigrams',
+    badge: 'Himalayan Yak Maroon & Saffron Robe',
+    instrumentName: '3x3 Lo Shu Mewa Magic Square & 8 Parkha Trigram Mandala',
+    containerBg: 'bg-gradient-to-b from-[#1c0810]/70 via-[#120409] to-[#0a0205]',
+    containerBorder: 'border-rose-800/60 shadow-lg shadow-rose-950/20',
+    headerBg: 'bg-gradient-to-r from-[#2c0b18] via-[#1e0710] to-[#120309]',
+    headerBorder: 'border-rose-600/60',
+    accentText: 'text-rose-300',
+    accentBadge: 'bg-rose-950/90 text-rose-200 border-rose-600/80',
+    activeTabClass: 'bg-gradient-to-r from-rose-950 via-rose-900/80 to-orange-950 text-rose-200 border-rose-600 shadow-sm shadow-rose-950/60 font-semibold ring-1 ring-rose-400/40',
+    presentationToggleActive: 'bg-gradient-to-r from-rose-900 to-rose-950 text-rose-200 font-bold border border-rose-600 shadow-xs',
+    presentationToggleInactive: 'text-slate-400 hover:text-rose-200 hover:bg-rose-950/30',
+    frameBg: 'bg-[#130309]/90',
+    frameBorder: 'border-rose-800/60',
+  },
+  maramataka: {
+    id: 'maramataka',
+    name: 'Polynesian Maramataka',
+    nativeTitle: 'Te Maramataka • Oceanic Lunar Wayfinding',
+    glyph: '🌊',
+    lineage: 'Tohunga Kōkōrangi of Aotearoa & Polynesian Voyaging Ancestors',
+    motto: 'Nā te pō i hua mai te ao — Aligning with the 30 lunar nights and tidal Mauri currents',
+    badge: 'Pacific Deep Indigo & Pounamu Green',
+    instrumentName: '30-Phase Oceanic Lunar Dial & Vitality Energy Gauge',
+    containerBg: 'bg-gradient-to-b from-[#051726]/70 via-[#030f19] to-[#02080d]',
+    containerBorder: 'border-teal-700/60 shadow-lg shadow-teal-950/20',
+    headerBg: 'bg-gradient-to-r from-[#07243c] via-[#04192b] to-[#020e19]',
+    headerBorder: 'border-teal-500/60',
+    accentText: 'text-teal-300',
+    accentBadge: 'bg-teal-950/90 text-teal-200 border-teal-500/80',
+    activeTabClass: 'bg-gradient-to-r from-teal-950 via-teal-900/80 to-cyan-950 text-teal-200 border-teal-500 shadow-sm shadow-teal-950/60 font-semibold ring-1 ring-teal-400/40',
+    presentationToggleActive: 'bg-gradient-to-r from-teal-900 to-teal-950 text-teal-200 font-bold border border-teal-500 shadow-xs',
+    presentationToggleInactive: 'text-slate-400 hover:text-teal-200 hover:bg-teal-950/30',
+    frameBg: 'bg-[#03111d]/90',
+    frameBorder: 'border-teal-800/60',
+  },
+};
+
 export const TraditionCharts: React.FC<Props> = ({ data }) => {
   const [activeTab, setActiveTab] = useState<'jyotisha' | 'bazi' | 'western' | 'persian' | 'egyptian' | 'ziwei' | 'mayan' | 'tibetan' | 'maramataka'>('jyotisha');
   const [chartViewMode, setChartViewMode] = useState<'both' | 'chart' | 'table'>('both');
 
   const { jyotisha, bazi, western, ziwei, mayan, tibetan, persian, egyptian, maramataka } = data.traditions;
+  const currentTheme = CULTURE_THEMES[activeTab] || CULTURE_THEMES.jyotisha;
 
   return (
-    <div className="bg-[#0d1118] border border-[#1b2331] rounded-lg p-5">
+    <div className={`rounded-xl p-5 border transition-all duration-300 ${currentTheme.containerBg} ${currentTheme.containerBorder}`}>
       {/* Tradition Selector Tabs */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-3.5 border-b border-[#1b2331] gap-3">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-3.5 border-b border-white/10 gap-3">
         <div>
           <span className="text-[10px] font-mono uppercase tracking-wider text-cyan-400 font-semibold block">
             Deterministic Tradition Calculators
@@ -35,39 +248,96 @@ export const TraditionCharts: React.FC<Props> = ({ data }) => {
           </h3>
         </div>
 
-        {/* Clean Typographic Tabs */}
-        <div role="tablist" aria-label="Astrological tradition charts" className="flex items-center gap-1.5 overflow-x-auto pb-1 sm:pb-0">
-          {[
-            { id: 'jyotisha', label: 'Jyotisha (Vedic)' },
-            { id: 'bazi', label: 'BaZi (Four Pillars)' },
-            { id: 'western', label: 'Western (Hellenistic)' },
-            { id: 'persian', label: 'Persian (Almuten)' },
-            { id: 'egyptian', label: 'Egyptian (Decans)' },
-            { id: 'ziwei', label: 'Zi Wei Dou Shu' },
-            { id: 'mayan', label: 'Maya Calendar' },
-            { id: 'tibetan', label: 'Tibetan Elemental' },
-            { id: 'maramataka', label: 'Polynesian Maramataka' },
-          ].map((tab) => {
-            const isActive = activeTab === tab.id;
+        {/* Clean Typographic Tabs with Cultural Glyphs & Theming */}
+        <div role="tablist" aria-label="Astrological tradition charts" className="flex items-center gap-1.5 overflow-x-auto pb-1 sm:pb-0 scrollbar-thin">
+          {Object.values(CULTURE_THEMES).map((t) => {
+            const isActive = activeTab === t.id;
             return (
               <button
-                key={tab.id}
-                id={`tradition-tab-${tab.id}`}
+                key={t.id}
+                id={`tradition-tab-${t.id}`}
                 role="tab"
                 aria-selected={isActive}
-                aria-controls={`tradition-panel-${tab.id}`}
+                aria-controls={`tradition-panel-${t.id}`}
                 type="button"
-                onClick={() => setActiveTab(tab.id as any)}
-                className={`px-3 py-2 min-h-[44px] text-xs font-mono font-medium rounded-md transition-colors whitespace-nowrap cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-1 focus-visible:ring-offset-[#080a0f] ${
+                onClick={() => setActiveTab(t.id as any)}
+                className={`inline-flex items-center gap-1.5 px-3 py-2 min-h-[44px] text-xs font-mono font-medium rounded-lg transition-all whitespace-nowrap cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-1 focus-visible:ring-offset-[#080a0f] ${
                   isActive
-                    ? 'bg-[#182232] text-cyan-300 border border-cyan-800 shadow-xs'
+                    ? t.activeTabClass
                     : 'text-slate-400 hover:text-slate-200 hover:bg-[#121721] border border-transparent'
                 }`}
               >
-                {tab.label}
+                <span className="text-sm select-none">{t.glyph}</span>
+                <span>{t.name}</span>
               </button>
             );
           })}
+        </div>
+      </div>
+
+      {/* Culturally Themed Display Presentation & Heritage Banner */}
+      <div className={`mt-4 p-4 rounded-xl border ${currentTheme.headerBorder} ${currentTheme.headerBg} relative overflow-hidden transition-all duration-300 shadow-sm`}>
+        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 relative z-10">
+          <div>
+            <div className="flex flex-wrap items-center gap-2">
+              <span className="text-lg select-none">{currentTheme.glyph}</span>
+              <h4 className={`text-sm sm:text-base font-semibold tracking-wide font-sans ${currentTheme.accentText}`}>
+                {currentTheme.nativeTitle}
+              </h4>
+              <span className={`px-2 py-0.5 rounded text-[10px] font-mono font-medium border ${currentTheme.accentBadge}`}>
+                {currentTheme.badge}
+              </span>
+            </div>
+            <p className="text-xs text-slate-300 mt-1 font-sans">
+              {currentTheme.lineage}
+            </p>
+            <p className="text-[11px] text-slate-400 italic mt-0.5 font-serif">
+              &ldquo;{currentTheme.motto}&rdquo;
+            </p>
+          </div>
+
+          {/* Culture-Themed Display Presentation Switcher */}
+          <div className="flex flex-col sm:flex-row sm:items-center gap-2.5 self-start lg:self-auto shrink-0">
+            <span className="text-[11px] font-mono text-slate-400 font-medium">Display Presentation:</span>
+            <div className="flex items-center gap-1 p-1 rounded-lg bg-[#06080e]/90 border border-white/10 backdrop-blur-xs">
+              <button
+                type="button"
+                onClick={() => setChartViewMode('both')}
+                className={`px-3 py-1.5 min-h-[36px] text-xs font-mono rounded-md cursor-pointer transition-all ${
+                  chartViewMode === 'both'
+                    ? currentTheme.presentationToggleActive
+                    : currentTheme.presentationToggleInactive
+                }`}
+                aria-pressed={chartViewMode === 'both'}
+              >
+                Comprehensive
+              </button>
+              <button
+                type="button"
+                onClick={() => setChartViewMode('chart')}
+                className={`px-3 py-1.5 min-h-[36px] text-xs font-mono rounded-md cursor-pointer transition-all ${
+                  chartViewMode === 'chart'
+                    ? currentTheme.presentationToggleActive
+                    : currentTheme.presentationToggleInactive
+                }`}
+                aria-pressed={chartViewMode === 'chart'}
+              >
+                Visual Instrument
+              </button>
+              <button
+                type="button"
+                onClick={() => setChartViewMode('table')}
+                className={`px-3 py-1.5 min-h-[36px] text-xs font-mono rounded-md cursor-pointer transition-all ${
+                  chartViewMode === 'table'
+                    ? currentTheme.presentationToggleActive
+                    : currentTheme.presentationToggleInactive
+                }`}
+                aria-pressed={chartViewMode === 'table'}
+              >
+                Telemetry Tables
+              </button>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -93,43 +363,22 @@ export const TraditionCharts: React.FC<Props> = ({ data }) => {
             </div>
           </div>
 
-          {/* View Mode Toggle */}
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between bg-[#080a0f] p-2.5 rounded-md border border-[#1b2331] gap-2">
-            <span className="text-xs font-mono text-slate-400">Display Presentation:</span>
-            <div className="flex items-center gap-1.5 overflow-x-auto">
-              <button
-                type="button"
-                onClick={() => setChartViewMode('both')}
-                className={`px-2.5 py-1 text-xs font-mono rounded cursor-pointer transition-colors ${
-                  chartViewMode === 'both' ? 'bg-[#182232] text-cyan-300 font-semibold border border-cyan-800' : 'text-slate-400 hover:text-slate-200'
-                }`}
-              >
-                Comprehensive (Kundali + Data)
-              </button>
-              <button
-                type="button"
-                onClick={() => setChartViewMode('chart')}
-                className={`px-2.5 py-1 text-xs font-mono rounded cursor-pointer transition-colors ${
-                  chartViewMode === 'chart' ? 'bg-[#182232] text-cyan-300 font-semibold border border-cyan-800' : 'text-slate-400 hover:text-slate-200'
-                }`}
-              >
-                Visual Kundali
-              </button>
-              <button
-                type="button"
-                onClick={() => setChartViewMode('table')}
-                className={`px-2.5 py-1 text-xs font-mono rounded cursor-pointer transition-colors ${
-                  chartViewMode === 'table' ? 'bg-[#182232] text-cyan-300 font-semibold border border-cyan-800' : 'text-slate-400 hover:text-slate-200'
-                }`}
-              >
-                Telemetry Tables
-              </button>
-            </div>
-          </div>
-
-          {/* Visual Kundali */}
+          {/* Visual Kundali Instrument */}
           {chartViewMode !== 'table' && (
-            <NorthIndianChart jyotisha={jyotisha} />
+            <div className={`p-4 rounded-xl border ${currentTheme.frameBorder} ${currentTheme.frameBg} shadow-inner`}>
+              <div className="flex items-center justify-between pb-2 mb-3 border-b border-white/10">
+                <div className="flex items-center gap-2">
+                  <span className="text-base select-none">{currentTheme.glyph}</span>
+                  <h5 className={`text-xs font-mono font-semibold ${currentTheme.accentText}`}>
+                    {currentTheme.instrumentName}
+                  </h5>
+                </div>
+                <span className="text-[10px] font-mono text-slate-400">
+                  Sidereal Astrometric Instrument
+                </span>
+              </div>
+              <NorthIndianChart jyotisha={jyotisha} />
+            </div>
           )}
 
           {chartViewMode !== 'chart' && (
@@ -275,8 +524,47 @@ export const TraditionCharts: React.FC<Props> = ({ data }) => {
       {/* Tab 2: BaZi */}
       {activeTab === 'bazi' && (
         <div className="mt-4 space-y-4 animate-tab-enter">
-          {/* Four Pillars */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 text-center">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between bg-[#080a0f] p-3.5 rounded-md border border-[#1b2331] gap-3">
+            <div>
+              <span className="text-[10px] text-red-400 font-mono font-semibold uppercase tracking-wider">
+                Solar Term (Jie Qi) • Four Pillars of Destiny
+              </span>
+              <h4 className="text-sm font-semibold text-slate-100 mt-0.5">
+                Day Master: <span className="text-amber-400 font-serif">{bazi.day_master.stem}</span> ({bazi.day_master.element} {bazi.day_master.polarity}) — {bazi.day_master.strength}
+              </h4>
+              <p className="text-xs text-slate-400 font-mono mt-0.5">
+                Year Na Yin: {bazi.year_nayin} | In Season: {bazi.day_master.in_season ? 'Yes' : 'No'}
+              </p>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="px-2.5 py-1 text-xs font-mono rounded bg-[#121721] text-red-300 border border-red-900/60">
+                Pillars: {bazi.pillars.year?.stem}{bazi.pillars.year?.branch} • {bazi.pillars.month?.stem}{bazi.pillars.month?.branch} • {bazi.pillars.day?.stem}{bazi.pillars.day?.branch} • {bazi.pillars.hour?.stem}{bazi.pillars.hour?.branch}
+              </span>
+            </div>
+          </div>
+
+          {/* Wu Xing Element Pentagram Diagram */}
+          {chartViewMode !== 'table' && (
+            <div className={`p-4 rounded-xl border ${currentTheme.frameBorder} ${currentTheme.frameBg} shadow-inner`}>
+              <div className="flex items-center justify-between pb-2 mb-3 border-b border-white/10">
+                <div className="flex items-center gap-2">
+                  <span className="text-base select-none">{currentTheme.glyph}</span>
+                  <h5 className={`text-xs font-mono font-semibold ${currentTheme.accentText}`}>
+                    {currentTheme.instrumentName}
+                  </h5>
+                </div>
+                <span className="text-[10px] font-mono text-slate-400">
+                  Wu Xing Dynamic Gauge
+                </span>
+              </div>
+              <BaZiElementPentagram bazi={bazi} />
+            </div>
+          )}
+
+          {chartViewMode !== 'chart' && (
+            <>
+              {/* Four Pillars */}
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 text-center">
             {['hour', 'day', 'month', 'year'].map((pKey) => {
               const p = bazi.pillars[pKey];
               if (!p || !p.available) return null;
@@ -319,9 +607,6 @@ export const TraditionCharts: React.FC<Props> = ({ data }) => {
               );
             })}
           </div>
-
-          {/* Wu Xing Element Pentagram Diagram */}
-          <BaZiElementPentagram bazi={bazi} />
 
           {/* Day Master & Five Elements Balance */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5">
@@ -498,6 +783,8 @@ export const TraditionCharts: React.FC<Props> = ({ data }) => {
               ))}
             </div>
           </div>
+          </>
+          )}
         </div>
       )}
 
@@ -524,43 +811,22 @@ export const TraditionCharts: React.FC<Props> = ({ data }) => {
             )}
           </div>
 
-          {/* View Mode Toggle */}
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between bg-[#080a0f] p-2.5 rounded-md border border-[#1b2331] gap-2">
-            <span className="text-xs font-mono text-slate-400">Display Presentation:</span>
-            <div className="flex items-center gap-1.5 overflow-x-auto">
-              <button
-                type="button"
-                onClick={() => setChartViewMode('both')}
-                className={`px-2.5 py-1 text-xs font-mono rounded cursor-pointer transition-colors ${
-                  chartViewMode === 'both' ? 'bg-[#182232] text-cyan-300 font-semibold border border-cyan-800' : 'text-slate-400 hover:text-slate-200'
-                }`}
-              >
-                Comprehensive (Wheel + Data)
-              </button>
-              <button
-                type="button"
-                onClick={() => setChartViewMode('chart')}
-                className={`px-2.5 py-1 text-xs font-mono rounded cursor-pointer transition-colors ${
-                  chartViewMode === 'chart' ? 'bg-[#182232] text-cyan-300 font-semibold border border-cyan-800' : 'text-slate-400 hover:text-slate-200'
-                }`}
-              >
-                Visual Wheel
-              </button>
-              <button
-                type="button"
-                onClick={() => setChartViewMode('table')}
-                className={`px-2.5 py-1 text-xs font-mono rounded cursor-pointer transition-colors ${
-                  chartViewMode === 'table' ? 'bg-[#182232] text-cyan-300 font-semibold border border-cyan-800' : 'text-slate-400 hover:text-slate-200'
-                }`}
-              >
-                Telemetry Tables
-              </button>
-            </div>
-          </div>
-
           {/* Visual Western Wheel */}
           {chartViewMode !== 'table' && (
-            <WesternCircularWheel western={western} />
+            <div className={`p-4 rounded-xl border ${currentTheme.frameBorder} ${currentTheme.frameBg} shadow-inner`}>
+              <div className="flex items-center justify-between pb-2 mb-3 border-b border-white/10">
+                <div className="flex items-center gap-2">
+                  <span className="text-base select-none">{currentTheme.glyph}</span>
+                  <h5 className={`text-xs font-mono font-semibold ${currentTheme.accentText}`}>
+                    {currentTheme.instrumentName}
+                  </h5>
+                </div>
+                <span className="text-[10px] font-mono text-slate-400">
+                  Hellenistic 360° Astrolabe
+                </span>
+              </div>
+              <WesternCircularWheel western={western} />
+            </div>
           )}
 
           {chartViewMode !== 'chart' && (
@@ -742,11 +1008,28 @@ export const TraditionCharts: React.FC<Props> = ({ data }) => {
             </div>
           )}
 
-          {/* Zi Wei Authentic 4x4 Courtyard Grid */}
-          <ZiWeiPalaceGrid ziwei={ziwei} />
+          {/* Zi Wei Authentic 4x4 Courtyard Grid Visual Instrument */}
+          {chartViewMode !== 'table' && (
+            <div className={`p-4 rounded-xl border ${currentTheme.frameBorder} ${currentTheme.frameBg} shadow-inner`}>
+              <div className="flex items-center justify-between pb-2 mb-3 border-b border-white/10">
+                <div className="flex items-center gap-2">
+                  <span className="text-base select-none">{currentTheme.glyph}</span>
+                  <h5 className={`text-xs font-mono font-semibold ${currentTheme.accentText}`}>
+                    {currentTheme.instrumentName}
+                  </h5>
+                </div>
+                <span className="text-[10px] font-mono text-slate-400">
+                  Imperial Polar Courtyard Matrix
+                </span>
+              </div>
+              <ZiWeiPalaceGrid ziwei={ziwei} />
+            </div>
+          )}
 
-          {/* 12 Palaces Detailed List with Auxiliary Stars */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2.5">
+          {chartViewMode !== 'chart' && (
+            <>
+              {/* 12 Palaces Detailed List with Auxiliary Stars */}
+              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2.5">
             {ziwei.palaces.map((p: any) => (
               <div
                 key={p.name}
@@ -790,10 +1073,10 @@ export const TraditionCharts: React.FC<Props> = ({ data }) => {
               </div>
             ))}
           </div>
+          </>
+          )}
         </div>
       )}
-
-      {/* Tab 5: Maya Calendar */}
       {activeTab === 'mayan' && (
         <div className="mt-4 space-y-4 animate-tab-enter">
           <div className="bg-[#080a0f] p-3.5 rounded-md border border-[#1b2331]">
@@ -815,10 +1098,27 @@ export const TraditionCharts: React.FC<Props> = ({ data }) => {
             </div>
           </div>
 
-          {/* Maya Sacred Calendar Round Dial */}
-          <MayaCalendarCompass mayan={mayan} />
+          {/* Maya Sacred Calendar Round Dial Visual Instrument */}
+          {chartViewMode !== 'table' && (
+            <div className={`p-4 rounded-xl border ${currentTheme.frameBorder} ${currentTheme.frameBg} shadow-inner`}>
+              <div className="flex items-center justify-between pb-2 mb-3 border-b border-white/10">
+                <div className="flex items-center gap-2">
+                  <span className="text-base select-none">{currentTheme.glyph}</span>
+                  <h5 className={`text-xs font-mono font-semibold ${currentTheme.accentText}`}>
+                    {currentTheme.instrumentName}
+                  </h5>
+                </div>
+                <span className="text-[10px] font-mono text-slate-400">
+                  Classic Maya Stele Dial
+                </span>
+              </div>
+              <MayaCalendarCompass mayan={mayan} />
+            </div>
+          )}
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5">
+          {chartViewMode !== 'chart' && (
+            <>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5">
             <div className="bg-[#080a0f] p-3.5 rounded-md border border-[#1b2331]">
               <span className="text-[10px] text-slate-400 font-mono uppercase tracking-wider block">Tzolk'in 260-Day Sacred Cycle</span>
               <h4 className="text-lg font-mono font-semibold text-slate-100 mt-1">
@@ -845,6 +1145,8 @@ export const TraditionCharts: React.FC<Props> = ({ data }) => {
               </p>
             </div>
           </div>
+          </>
+          )}
         </div>
       )}
 
@@ -871,11 +1173,28 @@ export const TraditionCharts: React.FC<Props> = ({ data }) => {
             </div>
           </div>
 
-          {/* Tibetan Mewa Magic Square & Parkha */}
-          <TibetanMewaGrid tibetan={tibetan} />
+          {/* Tibetan Mewa Magic Square & Parkha Visual Instrument */}
+          {chartViewMode !== 'table' && (
+            <div className={`p-4 rounded-xl border ${currentTheme.frameBorder} ${currentTheme.frameBg} shadow-inner`}>
+              <div className="flex items-center justify-between pb-2 mb-3 border-b border-white/10">
+                <div className="flex items-center gap-2">
+                  <span className="text-base select-none">{currentTheme.glyph}</span>
+                  <h5 className={`text-xs font-mono font-semibold ${currentTheme.accentText}`}>
+                    {currentTheme.instrumentName}
+                  </h5>
+                </div>
+                <span className="text-[10px] font-mono text-slate-400">
+                  Lo Shu 3x3 Magic Mandala
+                </span>
+              </div>
+              <TibetanMewaGrid tibetan={tibetan} />
+            </div>
+          )}
 
-          {/* Five Personal Forces */}
-          <div className="bg-[#080a0f] p-3.5 rounded-md border border-[#1b2331]">
+          {chartViewMode !== 'chart' && (
+            <>
+              {/* Five Personal Forces */}
+              <div className="bg-[#080a0f] p-3.5 rounded-md border border-[#1b2331]">
             <span className="text-[10px] font-mono font-semibold text-slate-400 uppercase tracking-wider block mb-2.5">
               Five Personal Forces (Khams Lnga)
             </span>
@@ -902,6 +1221,8 @@ export const TraditionCharts: React.FC<Props> = ({ data }) => {
               </div>
             </div>
           </div>
+          </>
+          )}
         </div>
       )}
 
@@ -927,11 +1248,28 @@ export const TraditionCharts: React.FC<Props> = ({ data }) => {
             </div>
           </div>
 
-          {/* Almuten Comparative Dignity Bar Visualizer */}
-          <AlmutenDignityBarChart persian={persian} />
+          {/* Almuten Comparative Dignity Bar Visual Instrument */}
+          {chartViewMode !== 'table' && (
+            <div className={`p-4 rounded-xl border ${currentTheme.frameBorder} ${currentTheme.frameBg} shadow-inner`}>
+              <div className="flex items-center justify-between pb-2 mb-3 border-b border-white/10">
+                <div className="flex items-center gap-2">
+                  <span className="text-base select-none">{currentTheme.glyph}</span>
+                  <h5 className={`text-xs font-mono font-semibold ${currentTheme.accentText}`}>
+                    {currentTheme.instrumentName}
+                  </h5>
+                </div>
+                <span className="text-[10px] font-mono text-slate-400">
+                  Abu Ma’shar Almuten Gauge
+                </span>
+              </div>
+              <AlmutenDignityBarChart persian={persian} />
+            </div>
+          )}
 
-          {/* Almuten Figuris Dignity Leaderboard */}
-          <div className="bg-[#080a0f] p-3.5 rounded-md border border-[#1b2331]">
+          {chartViewMode !== 'chart' && (
+            <>
+              {/* Almuten Figuris Dignity Leaderboard */}
+              <div className="bg-[#080a0f] p-3.5 rounded-md border border-[#1b2331]">
             <span className="text-[10px] font-mono font-semibold text-slate-400 uppercase tracking-wider block mb-2">
               Weighted Dignity Leaderboard (Abu Ma'shar / Al-Qabisi Point System)
             </span>
@@ -1004,6 +1342,8 @@ export const TraditionCharts: React.FC<Props> = ({ data }) => {
               ))}
             </div>
           </div>
+          </>
+          )}
         </div>
       )}
 
@@ -1029,11 +1369,28 @@ export const TraditionCharts: React.FC<Props> = ({ data }) => {
             </div>
           </div>
 
-          {/* Ra's Cosmic Barque 36-Decan Star Clock */}
-          <EgyptianDecanStarClock egyptian={egyptian} />
+          {/* Ra's Cosmic Barque 36-Decan Star Clock Visual Instrument */}
+          {chartViewMode !== 'table' && (
+            <div className={`p-4 rounded-xl border ${currentTheme.frameBorder} ${currentTheme.frameBg} shadow-inner`}>
+              <div className="flex items-center justify-between pb-2 mb-3 border-b border-white/10">
+                <div className="flex items-center gap-2">
+                  <span className="text-base select-none">{currentTheme.glyph}</span>
+                  <h5 className={`text-xs font-mono font-semibold ${currentTheme.accentText}`}>
+                    {currentTheme.instrumentName}
+                  </h5>
+                </div>
+                <span className="text-[10px] font-mono text-slate-400">
+                  Dendera Decanic Star Clock
+                </span>
+              </div>
+              <EgyptianDecanStarClock egyptian={egyptian} />
+            </div>
+          )}
 
-          {/* 36 Decan Guardians */}
-          <div className="bg-[#080a0f] p-3.5 rounded-md border border-[#1b2331]">
+          {chartViewMode !== 'chart' && (
+            <>
+              {/* 36 Decan Guardians */}
+              <div className="bg-[#080a0f] p-3.5 rounded-md border border-[#1b2331]">
             <span className="text-[10px] font-mono font-semibold text-slate-400 uppercase tracking-wider block mb-2.5">
               Decanic Guardians of Ra's Cosmic Barque (10° Sky Segments)
             </span>
@@ -1074,6 +1431,8 @@ export const TraditionCharts: React.FC<Props> = ({ data }) => {
               </div>
             )}
           </div>
+          </>
+          )}
         </div>
       )}
 
@@ -1099,11 +1458,28 @@ export const TraditionCharts: React.FC<Props> = ({ data }) => {
             </div>
           </div>
 
-          {/* Oceanic 30-Night Lunar Dial */}
-          <MaramatakaLunarDial maramataka={maramataka} />
+          {/* Oceanic 30-Night Lunar Dial Visual Instrument */}
+          {chartViewMode !== 'table' && (
+            <div className={`p-4 rounded-xl border ${currentTheme.frameBorder} ${currentTheme.frameBg} shadow-inner`}>
+              <div className="flex items-center justify-between pb-2 mb-3 border-b border-white/10">
+                <div className="flex items-center gap-2">
+                  <span className="text-base select-none">{currentTheme.glyph}</span>
+                  <h5 className={`text-xs font-mono font-semibold ${currentTheme.accentText}`}>
+                    {currentTheme.instrumentName}
+                  </h5>
+                </div>
+                <span className="text-[10px] font-mono text-slate-400">
+                  Polynesian Oceanic Dial
+                </span>
+              </div>
+              <MaramatakaLunarDial maramataka={maramataka} />
+            </div>
+          )}
 
-          {/* Behavioral & Vitality Profile */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5">
+          {chartViewMode !== 'chart' && (
+            <>
+              {/* Behavioral & Vitality Profile */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5">
             <div className="bg-[#080a0f] p-3.5 rounded-md border border-[#1b2331]">
               <span className="text-[10px] font-mono text-slate-400 uppercase tracking-wider block mb-2">
                 Biological & Behavioral Rhythm Profile
@@ -1129,6 +1505,8 @@ export const TraditionCharts: React.FC<Props> = ({ data }) => {
               </div>
             </div>
           </div>
+          </>
+          )}
         </div>
       )}
     </div>

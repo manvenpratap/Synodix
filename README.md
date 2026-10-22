@@ -108,8 +108,10 @@ Complete documentation is maintained in the [`wiki/`](wiki/) directory:
 - **9 Life Domains**: Identity, Vitality, Emotion, Intellect, Relationships, Vocation, Prosperity, Transformation, Spirituality.
 - **Honest Divergence Rate**: Disagreements between systems are quantified ($\bar{d} \approx 31.8\%$) and surfaced transparently as productive dialectics rather than smoothed over.
 
-### 4. Ten Interactive SVG Observatory Wheels
-- Custom vector visualizers for each individual tradition, plus a unified multi-ring concentric astrometric wheel.
+### 4. Culturally Authentic Display Presentation Theming & Instruments
+- **9 Distinct Cultural Palettes & Lineage Banners**: Each tradition dynamically renders its authentic cultural color tokens, native scripts/calligraphy (e.g. Sanskrit, Traditional Chinese, Ancient Greek, Arabic, Egyptian Hieroglyphs, Māori), historical lineages, and cosmological mottos.
+- **Universal Display Presentation Switcher**: Instantly toggle between `Comprehensive` (full instrument + data), `Visual Instrument` (focused astrolabe / dial presentation), and `Telemetry Tables` (granular data breakdown).
+- **Culturally Framed Astronomical Visualizers**: 10 interactive SVG wheels and visual instruments framed in museum-grade, culture-accented borders and title bars (Parashari Diamond Kundali, Wu Xing Dynamic Pentagram, Ptolemaic 360° Wheel, Zi Wei Imperial Courtyard, Maya Stele Compass, Lo Shu Magic Square, Abu Ma'shar Almuten Bar Gauge, Ra's Cosmic Barque Star Clock, Oceanic 30-Night Lunar Dial).
 
 ---
 

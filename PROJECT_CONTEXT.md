@@ -1,7 +1,7 @@
 # Synodix: Project Context & Working Memory
 
-**Last Updated:** 2026-10-22 02:24:00 UTC  
-**Version:** 2.8.2  
+**Last Updated:** 2026-10-22 08:11:47
+**Version:** 2.9.0  
 **Stack:** Python 3.12 (FastAPI, Swiss Ephemeris 2.10, Skyfield DE421) + TypeScript / React 19 / Vite / Tailwind CSS v4 / Capacitor 8 (iOS & Android)  
 **Workspace:** `/Volumes/Study/Projects/Astrology` (symlinked as `/Volumes/Study/Astrology`)  
 **Git Remote:** `https://github.com/manvenpratap/Synodix.git`  
@@ -9,7 +9,24 @@
 ---
 
 ## 1. Current Status & Milestone
-- **Active Phase**: Impeccable Polish & Production Readiness (Completed)
+- **Active Phase**: Culturally Authentic Display Presentation Theming (Completed)
+- **Cultural Theming & Instrument Presentation Across 9 Traditions**:
+  - Implemented 9 distinct cultural design systems with bespoke palettes, gradients, and structural tokens in `TraditionCharts.tsx`:
+    - **Jyotisha**: Sacred Saffron & Vedic Brass (`🕉️`, *यथा पिण्डे तथा ब्रह्माण्डे*, Maharishi Parashara lineage).
+    - **BaZi**: Imperial Cinnabar & Jade (`☯️`, *天地陰陽，五行生剋*, Master Xu Ziping lineage).
+    - **Western**: Aegean Lapis & Bronze (`🏛️`, *Sicut superius, sic inferius*, Ptolemy Tetrabiblos lineage).
+    - **Persian**: Isfahan Turquoise & Gold (`🕌`, Abu Ma'shar & Al-Qabisi Baghdad House of Wisdom).
+    - **Egyptian**: Pharaonic Gold & Nile Basalt (`𓋹`, Dendera Zodiac & Senenmut Decans).
+    - **Zi Wei**: Forbidden City Imperial Plum & Amethyst (`👑`, *紫微至尊，儀錄百神*, Chen Tuan Mount Hua lineage).
+    - **Maya**: Mesoamerican Jadeite & Obsidian (`☀️`, Classic Maya Copán/Palenque, GMT Correlation 584283).
+    - **Tibetan**: Himalayan Yak Maroon & Saffron Robe (`☸️`, Phugpa Lhundrup Gyatso, Lo Shu Mewa).
+    - **Maramataka**: Pacific Ocean Deep Indigo & Pounamu Green (`🌊`, *Nā te pō i hua mai te ao*, Tohunga Kōkōrangi).
+  - Cultural Immersion Header Banner: native calligraphy, lineage records, cosmological mottos, and custom presentation toggles.
+  - Universal Display Presentation Switcher: `Comprehensive` (instrument + telemetry), `Visual Instrument` (focused instrument astrolabe), `Telemetry Tables` (tabular breakdown).
+  - Culturally Framed Visual Instruments: custom title bars and theme-accented borders enclosing all 9 astronomical visualizers.
+  - New Playwright Regression Suite: `tests/test_06_cultural_themes.py` verifying tab navigation, display presentation modes, screenshot captures, and zero critical console errors.
+- **Workflow Health**: 100% CLEAN (Verified via `./pipeline.sh doctor`)
+- **Test Invariants**: 13/13 regression suites passing via `./pipeline.sh test --summary` (25.08s)
 - **Frontend Polish & Interaction Standards (`/impeccable polish`)**:
   - Global `Escape` key event listener added to [App.tsx](file:///Volumes/Study/Astrology/frontend/src/App.tsx) for instant dismiss of mobile sidebar navigation and API server modals without mouse/touch dependency.
   - Action button touch targets: elevated quick actions across [MathematicalEvidenceCard.tsx](file:///Volumes/Study/Astrology/frontend/src/components/MathematicalEvidenceCard.tsx) and [ReadingView.tsx](file:///Volumes/Study/Astrology/frontend/src/components/ReadingView.tsx) to $\ge 38\text{px} - 44\text{px}$ with visible focus rings (`focus-visible:ring-cyan-400`).
