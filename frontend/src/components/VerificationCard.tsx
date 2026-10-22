@@ -75,7 +75,7 @@ export const VerificationCard: React.FC<Props> = ({ report }) => {
           <table className="w-full text-left text-xs border-collapse">
             <thead>
               <tr className="bg-[#080a0f] text-slate-400 border-b border-[#1b2331] font-mono uppercase tracking-wider text-[10px]">
-                <th className="py-2 px-3">Celestial Body</th>
+                <th className="py-2 px-3 sticky left-0 bg-[#080a0f] z-10 border-r border-[#1b2331]">Celestial Body</th>
                 <th className="py-2 px-3 font-mono">SwissEph (deg)</th>
                 <th className="py-2 px-3 font-mono">Skyfield JPL (deg)</th>
                 <th className="py-2 px-3 font-mono">Delta (deg)</th>
@@ -86,7 +86,7 @@ export const VerificationCard: React.FC<Props> = ({ report }) => {
             <tbody className="divide-y divide-[#1b2331] bg-[#0d1118] font-mono text-[11px] tabular-nums">
               {report.dual_engine_diffs.map((diff) => (
                 <tr key={diff.body} className="hover:bg-[#121721] transition-colors">
-                  <td className="py-2 px-3 font-sans font-medium text-slate-200">
+                  <td className="py-2 px-3 font-sans font-medium text-slate-200 sticky left-0 bg-[#0d1118] z-10 border-r border-[#1b2331] whitespace-nowrap">
                     {diff.body}
                   </td>
                   <td className="py-2 px-3 text-slate-400">

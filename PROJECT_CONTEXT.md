@@ -1,7 +1,7 @@
 # Synodix: Project Context & Working Memory
 
-**Last Updated:** 2026-10-22 01:30:00 UTC  
-**Version:** 2.8.0  
+**Last Updated:** 2026-10-22 01:50:00 UTC  
+**Version:** 2.8.1  
 **Stack:** Python 3.12 (FastAPI, Swiss Ephemeris 2.10, Skyfield DE421) + TypeScript / React 19 / Vite / Tailwind CSS v4 / Capacitor 8 (iOS & Android)  
 **Workspace:** `/Volumes/Study/Projects/Astrology` (symlinked as `/Volumes/Study/Astrology`)  
 **Git Remote:** `https://github.com/manvenpratap/Synodix.git`  
@@ -9,7 +9,14 @@
 ---
 
 ## 1. Current Status & Milestone
-- **Active Phase**: In-App Pure TypeScript Engine & 100% Offline Standalone Sideloading (Completed)
+- **Active Phase**: Impeccable Quality & Accessibility Hardening (Completed)
+- **Frontend Quality & WCAG 2.2 AA Hardening**:
+  - Remediated all findings from `/impeccable audit` across 5 technical dimensions.
+  - WCAG 2.2 AA Contrast: global dark-mode text elevation rule in `index.css` elevating muted text to `#94a3b8` ($\ge 4.5:1$ contrast ratio).
+  - Keyboard & ARIA semantics: full keyboard navigation (`role="button"`, `tabIndex={0}`, `onKeyDown` Enter/Space, `aria-pressed`) across preset galleries and interactive domain disclosures.
+  - Touch target compliance: all category chips, action triggers, and submit buttons elevated to minimum $\ge 44\times 44\text{px}$.
+  - Mobile table usability: frozen first columns (`sticky left-0 bg-[#0d1118] z-10`) added to planetary and verification tables for seamless horizontal scrolling on narrow viewports.
+  - React 19 clean mount: eliminated cascading `set-state-in-effect` re-render triggers; 0 oxlint warnings/errors across all 22 source modules.
 - **In-App Pure TypeScript Astrometric Engine**:
   - Full local calculation module at `frontend/src/engine/` using `astronomy-engine` (NASA JPL VSOP87 & ELP2000 algorithms).
   - Pure client-side calculations for all 9 traditions (Western, Jyotisha, BaZi, Zi Wei, Maya, Tibetan, Persian, Egyptian, Māori) and 3-cluster consensus matrix.

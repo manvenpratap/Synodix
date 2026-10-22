@@ -16,7 +16,6 @@ import {
   Sun,
   Moon,
   Server,
-  Wifi,
   CheckCircle2,
   AlertCircle
 } from 'lucide-react';
@@ -97,8 +96,8 @@ export default function App() {
   const [currentScreen, setCurrentScreen] = useState<AppScreen>('workbench');
   const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
   const [chartData, setChartData] = useState<ChartResponse | null>(null);
-  const [activeSubjectName, setActiveSubjectName] = useState<string>('Steve Jobs');
-  const [activeSubjectDate, setActiveSubjectDate] = useState<string>('1955-02-24');
+  const [activeSubjectName, setActiveSubjectName] = useState<string>(() => getPrimaryProfile()?.name || 'Steve Jobs');
+  const [activeSubjectDate, setActiveSubjectDate] = useState<string>(() => getPrimaryProfile()?.birth_date || '1955-02-24');
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const [presets, setPresets] = useState<Preset[]>(FALLBACK_PRESETS);
@@ -237,8 +236,6 @@ export default function App() {
     // Check if user has saved a primary profile in their vault
     const primary = getPrimaryProfile();
     if (primary) {
-      setActiveSubjectName(primary.name);
-      setActiveSubjectDate(primary.birth_date);
       handleCompute(primary, primary.name);
     } else {
       // Default to Steve Jobs benchmark
@@ -253,6 +250,7 @@ export default function App() {
         gender: 'male',
       }, 'Steve Jobs');
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const navigateTo = (screen: AppScreen) => {

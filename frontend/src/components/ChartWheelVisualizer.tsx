@@ -262,9 +262,8 @@ export const WesternCircularWheel: React.FC<WesternWheelProps> = ({ western }) =
         <circle cx={center} cy={center} r={radius} fill="#0d1118" stroke="#1b2331" strokeWidth="2" />
 
         {/* 12 Sign Sectors */}
-        {signs.map((s, idx) => {
+        {signs.map((s) => {
           const startAngle = lonToAngle(s.start);
-          const endAngle = lonToAngle(s.start + 30);
           const midAngle = lonToAngle(s.start + 15);
 
           const x1 = center + radius * Math.cos(startAngle);
@@ -617,7 +616,7 @@ export const ZiWeiPalaceGrid: React.FC<ZiWeiGridProps> = ({ ziwei }) => {
         {/* Major Stars */}
         <div className="my-1 space-y-0.5">
           {p.stars.length === 0 ? (
-            <span className="text-[10px] text-slate-600 block">Empty Palace</span>
+            <span className="text-[10px] text-slate-400 block">Empty Palace</span>
           ) : (
             p.stars.slice(0, 3).map((s: string, sIdx: number) => (
               <div

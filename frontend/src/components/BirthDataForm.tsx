@@ -197,7 +197,7 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
                     key={cat.id}
                     type="button"
                     onClick={() => setSelectedCategory(cat.id)}
-                    className={`inline-flex items-center gap-1.5 px-3 py-1.5 min-h-[36px] text-xs rounded-md font-medium transition-colors whitespace-nowrap cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-1 focus-visible:ring-offset-[#080a0f] ${
+                    className={`inline-flex items-center gap-1.5 px-3 py-2 min-h-[44px] text-xs rounded-md font-medium transition-colors whitespace-nowrap cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-1 focus-visible:ring-offset-[#080a0f] ${
                       isSelected
                         ? 'bg-cyan-950 text-cyan-300 border border-cyan-700/80 shadow-xs'
                         : 'bg-[#10151f] hover:bg-[#161d2b] text-slate-300 hover:text-slate-100 border border-[#1b2331]'
@@ -215,7 +215,7 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
             <button
               type="button"
               onClick={() => setSelectedPresetId('custom')}
-              className={`inline-flex items-center gap-1.5 px-3 py-1.5 min-h-[36px] text-xs rounded-md font-mono transition-colors cursor-pointer self-start lg:self-auto whitespace-nowrap focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-1 focus-visible:ring-offset-[#080a0f] ${
+              className={`inline-flex items-center gap-1.5 px-3 py-2 min-h-[44px] text-xs rounded-md font-mono transition-colors cursor-pointer self-start lg:self-auto whitespace-nowrap focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-1 focus-visible:ring-offset-[#080a0f] ${
                 selectedPresetId === 'custom'
                   ? 'bg-cyan-950 text-cyan-300 border border-cyan-700/80 shadow-xs'
                   : 'text-slate-300 hover:text-slate-100 border border-[#1b2331] bg-[#0c1017] hover:bg-[#141b27]'
@@ -281,8 +281,17 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
               return (
                 <div
                   key={p.id}
+                  role="button"
+                  tabIndex={0}
+                  aria-pressed={isSelected}
                   onClick={() => handlePresetSelect(p as any)}
-                  className={`flex flex-col text-left p-2.5 rounded-lg border transition-all cursor-pointer relative group ${
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      e.preventDefault();
+                      handlePresetSelect(p as any);
+                    }
+                  }}
+                  className={`flex flex-col text-left p-2.5 rounded-lg border transition-all cursor-pointer relative group min-h-[58px] focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-1 focus-visible:ring-offset-[#080a0f] ${
                     isSelected
                       ? 'bg-cyan-950/70 border-cyan-500/80 shadow-sm shadow-cyan-950 text-slate-100 ring-1 ring-cyan-500/40'
                       : 'bg-[#10151f] hover:bg-[#151c2a] border-[#1b2331] text-slate-300 hover:border-slate-700'
@@ -540,7 +549,7 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
               <button
                 type="button"
                 onClick={() => setIsSaving(true)}
-                className={`inline-flex items-center gap-1.5 px-3 py-1.5 min-h-[36px] text-xs rounded-md border transition-colors cursor-pointer ${
+                className={`inline-flex items-center gap-1.5 px-3 py-2 min-h-[44px] text-xs rounded-md border transition-colors cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 ${
                   saveSuccess
                     ? 'bg-emerald-950 text-emerald-300 border-emerald-700'
                     : 'bg-[#10151f] hover:bg-[#182233] text-slate-300 hover:text-cyan-300 border-[#1b2331]'
@@ -567,7 +576,7 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
           <button
             type="submit"
             disabled={isLoading}
-            className="w-full sm:w-auto px-5 py-2 min-h-[38px] bg-cyan-700 hover:bg-cyan-600 active:scale-[0.98] text-white font-medium text-xs rounded border border-cyan-600 transition-all cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+            className="w-full sm:w-auto px-5 py-2.5 min-h-[44px] bg-cyan-700 hover:bg-cyan-600 active:scale-[0.98] text-white font-medium text-xs rounded border border-cyan-600 transition-all cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-1 focus-visible:ring-offset-[#080a0f]"
           >
             {isLoading ? (
               <>

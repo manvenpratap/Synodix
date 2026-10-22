@@ -58,7 +58,7 @@ export const TraditionCharts: React.FC<Props> = ({ data }) => {
                 aria-controls={`tradition-panel-${tab.id}`}
                 type="button"
                 onClick={() => setActiveTab(tab.id as any)}
-                className={`px-3 py-1.5 min-h-[36px] text-xs font-mono font-medium rounded-md transition-colors whitespace-nowrap cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-1 focus-visible:ring-offset-[#080a0f] ${
+                className={`px-3 py-2 min-h-[44px] text-xs font-mono font-medium rounded-md transition-colors whitespace-nowrap cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-1 focus-visible:ring-offset-[#080a0f] ${
                   isActive
                     ? 'bg-[#182232] text-cyan-300 border border-cyan-800 shadow-xs'
                     : 'text-slate-400 hover:text-slate-200 hover:bg-[#121721] border border-transparent'
@@ -570,7 +570,7 @@ export const TraditionCharts: React.FC<Props> = ({ data }) => {
             <table className="w-full text-left text-xs border-collapse">
               <thead>
                 <tr className="bg-[#080a0f] text-slate-400 border-b border-[#1b2331] font-mono uppercase tracking-wider text-[10px]">
-                  <th className="py-2 px-3">Planet</th>
+                  <th className="py-2 px-3 sticky left-0 bg-[#080a0f] z-10 border-r border-[#1b2331]">Planet</th>
                   <th className="py-2 px-3">Sign</th>
                   <th className="py-2 px-3 font-mono">Degree</th>
                   <th className="py-2 px-3">House</th>
@@ -582,7 +582,7 @@ export const TraditionCharts: React.FC<Props> = ({ data }) => {
               <tbody className="divide-y divide-[#1b2331] bg-[#0d1118] font-mono text-[11px] tabular-nums">
                 {Object.entries(western.planets).map(([name, p]: [string, any]) => (
                   <tr key={name} className="hover:bg-[#121721] transition-colors">
-                    <td className="py-2 px-3 font-sans font-medium text-slate-200 flex items-center gap-1.5">
+                    <td className="py-2 px-3 font-sans font-medium text-slate-200 flex items-center gap-1.5 sticky left-0 bg-[#0d1118] z-10 border-r border-[#1b2331] whitespace-nowrap">
                       {name}
                       {p.is_retrograde && <span className="text-[10px] text-amber-400 font-mono">(R)</span>}
                     </td>
@@ -939,7 +939,7 @@ export const TraditionCharts: React.FC<Props> = ({ data }) => {
               <table className="w-full text-left text-xs border-collapse font-mono">
                 <thead>
                   <tr className="bg-[#0d1118] text-slate-400 border-b border-[#1b2331] uppercase text-[10px]">
-                    <th className="py-2 px-3">Rank & Planet</th>
+                    <th className="py-2 px-3 sticky left-0 bg-[#0d1118] z-10 border-r border-[#1b2331]">Rank & Planet</th>
                     <th className="py-2 px-3 text-right">Essential Pts</th>
                     <th className="py-2 px-3 text-right">Accidental Pts</th>
                     <th className="py-2 px-3 text-right">Total Score</th>
@@ -949,7 +949,7 @@ export const TraditionCharts: React.FC<Props> = ({ data }) => {
                 <tbody className="divide-y divide-[#1b2331] text-[11px] tabular-nums">
                   {persian.almuten_figuris.leaderboard.map((item: any, idx: number) => (
                     <tr key={item.planet} className={idx === 0 ? 'bg-[#141d2b] font-bold text-amber-300' : 'hover:bg-[#121721]'}>
-                      <td className="py-2 px-3 text-slate-200">
+                      <td className="py-2 px-3 text-slate-200 sticky left-0 bg-[#0d1118] z-10 border-r border-[#1b2331] whitespace-nowrap">
                         #{idx + 1} {item.planet}
                       </td>
                       <td className="py-2 px-3 text-right text-slate-400">+{item.essential_dignity}</td>
