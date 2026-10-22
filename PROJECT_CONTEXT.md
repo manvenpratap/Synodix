@@ -1,7 +1,7 @@
 # Synodix: Project Context & Working Memory
 
-**Last Updated:** 2026-10-22 08:50:55
-**Version:** 2.10.0  
+**Last Updated:** 2026-10-22 09:20:51
+**Version:** 2.11.0  
 **Stack:** Python 3.12 (FastAPI, Swiss Ephemeris 2.10, Skyfield DE421) + TypeScript / React 19 / Vite / Tailwind CSS v4 / Capacitor 8 (iOS & Android)  
 **Workspace:** `/Volumes/Study/Projects/Astrology` (symlinked as `/Volumes/Study/Astrology`)  
 **Git Remote:** `https://github.com/manvenpratap/Synodix.git`  
@@ -9,7 +9,15 @@
 ---
 
 ## 1. Current Status & Milestone
-- **Active Phase**: City Auto-Suggest, Geocoding Intelligence & In-App Astrometric Explainers (Completed)
+- **Active Phase**: Independent Custom Manual Input Experience & Architectural Separation (Completed)
+- **Clean Independent Custom Input Architecture**:
+  - Eliminated visual interference between custom chart calibration and the 100 historical titan sample records in [BirthDataForm.tsx](file:///Volumes/Study/Astrology/frontend/src/components/BirthDataForm.tsx).
+  - Segmented Experience Switcher:
+    - **Custom Manual Input**: A clean, distraction-free astrometric workbench dedicated entirely to personal, client, and custom natal records. The 100 celebrity cards, category pills, and titan search bar are completely hidden. Features custom subject naming, instant reset, personal vault quick-loader, time uncertainty calibrator, geocoding intelligence, and GPS detection.
+    - **Historical Titans Archive (100)**: A dedicated benchmark browser organizing 100 Rodden AA/A verified historical records across 7 categories with real-time search. Selected titans feature a full biographical dossier with one-click "Calculate Titan Chart" and "Customize in Manual Input" (which transfers the titan's coordinates and temporal bounds into the clean custom workbench to edit without visual interference).
+  - New Playwright regression suite `tests/test_08_independent_input_experience.py` validating complete visual isolation, mode switching, custom subject calculation, titan data transfer, zero horizontal overflow, and zero console errors.
+- **Workflow Health**: 100% CLEAN (Verified via `./pipeline.sh doctor`)
+- **Test Invariants**: 16/16 regression suites passing via `./pipeline.sh test --summary` (31.43s)
 - **City Auto-Suggest & Coordinate Intelligence**:
   - Implemented real-time city auto-suggest dropdown and geodetic coordinate resolution in [BirthDataForm.tsx](file:///Volumes/Study/Astrology/frontend/src/components/BirthDataForm.tsx).
   - Curated offline gazetteer of global cities, capitals, and historical titan birthplaces in [worldCities.ts](file:///Volumes/Study/Astrology/frontend/src/data/worldCities.ts) with prefix and substring indexing.

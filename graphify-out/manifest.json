@@ -184,8 +184,8 @@
     "hash": "977e48ed518e992c0bdadba4479ddaa3"
   },
   "/Volumes/Study/Projects/Astrology/frontend/src/components/BirthDataForm.tsx": {
-    "mtime": 1792638873.3733652,
-    "hash": "3bcd9f163a57ab7334317bc1dbb503c3"
+    "mtime": 1792640745.633214,
+    "hash": "a92ab397ba8c2dbd577f32563796b804"
   },
   "/Volumes/Study/Projects/Astrology/frontend/src/components/ChartWheelVisualizer.tsx": {
     "mtime": 1792633715.669341,
@@ -224,8 +224,8 @@
     "hash": "79d810915db2e2fa0e08151b74ddfff2"
   },
   "/Volumes/Study/Projects/Astrology/tests/test_06_cultural_themes.py": {
-    "mtime": 1792636682.8637428,
-    "hash": "408211203dd29941d8b064d5568873f7"
+    "mtime": 1792640871.4479163,
+    "hash": "c423ababc5e25c9d21727f728825c0b0"
   },
   "/Volumes/Study/Projects/Astrology/tests/conftest.py": {
     "mtime": 1792555050.5996642,
@@ -242,6 +242,10 @@
   "/Volumes/Study/Projects/Astrology/tests/test_04_mobile_viewport.py": {
     "mtime": 1792602919.6163862,
     "hash": "3f3c531b77bf7e7ad2c64a2ac4d39c81"
+  },
+  "/Volumes/Study/Projects/Astrology/tests/test_08_independent_input_experience.py": {
+    "mtime": 1792640786.214476,
+    "hash": "d8fa83e1ac2ae17524ffebf121a800d6"
   },
   "/Volumes/Study/Projects/Astrology/tests/test_05_inapp_offline_engine.py": {
     "mtime": 1792632576.7814996,
@@ -328,8 +332,8 @@
     "hash": "c313cba54dd5f1f5bf6841f0bdd84143"
   },
   "/Volumes/Study/Projects/Astrology/PROJECT_CONTEXT.md": {
-    "mtime": 1792639157.9768476,
-    "hash": "b0a76ea6b7c0080707c98eaf226350d6"
+    "mtime": 1792640954.023548,
+    "hash": "89909cdb1f92ba75bfe0a0148ee8cad6"
   },
   "/Volumes/Study/Projects/Astrology/PRODUCT.md": {
     "mtime": 1792543710.5977297,
@@ -368,12 +372,12 @@
     "hash": "bf595d370dd6a21867547ba8181f8c7f"
   },
   "/Volumes/Study/Projects/Astrology/tests/README.md": {
-    "mtime": 1792638931.8106792,
-    "hash": "57e08b3cb078d6b4c44dcbef8b5691b1"
+    "mtime": 1792640942.0253708,
+    "hash": "f97aebb1bd96dfbd1c7ea1fbbc87eec5"
   },
   "/Volumes/Study/Projects/Astrology/tests/screenshots/index.html": {
-    "mtime": 1792639113.6713305,
-    "hash": "68e054620a198b8f4a46ce0baeced70f"
+    "mtime": 1792640925.2004507,
+    "hash": "a7033b072ef86538a19a14971d85c990"
   },
   "/Volumes/Study/Projects/Astrology/wiki/Architecture.md": {
     "mtime": 1792603063.170204,
@@ -663,20 +667,28 @@
     "mtime": 1792554253.1106594,
     "hash": "63080372fa34234aaf2c8790976c34ca"
   },
+  "/Volumes/Study/Projects/Astrology/tests/screenshots/independent_custom_input_clean.png": {
+    "mtime": 1792640923.04207,
+    "hash": "c8084fba77e2125de9cc838f13a0fa9f"
+  },
   "/Volumes/Study/Projects/Astrology/tests/screenshots/theme_light_synthesis.png": {
     "mtime": 1792554333.1927156,
     "hash": "a0ee934129c3de7e87660799748c1c51"
   },
   "/Volumes/Study/Projects/Astrology/tests/screenshots/cultural_theme_persian.png": {
-    "mtime": 1792639108.340395,
+    "mtime": 1792640918.0476525,
     "hash": "d9859bbabfdbd175a7f65d163be2b38d"
   },
+  "/Volumes/Study/Projects/Astrology/tests/screenshots/historical_titan_archive_mode.png": {
+    "mtime": 1792640925.199887,
+    "hash": "2b6afd6c15a707ce78e9e75e261fbbc2"
+  },
   "/Volumes/Study/Projects/Astrology/tests/screenshots/cultural_theme_ziwei.png": {
-    "mtime": 1792639107.9156165,
+    "mtime": 1792640917.603379,
     "hash": "6a27dc1d908a7c4ddedc92b84019c8f9"
   },
   "/Volumes/Study/Projects/Astrology/tests/screenshots/cultural_theme_western.png": {
-    "mtime": 1792639107.4831717,
+    "mtime": 1792640917.1709392,
     "hash": "3db8be981a91fddd15bae81f1a9e7a5e"
   },
   "/Volumes/Study/Projects/Astrology/tests/screenshots/theme_dark.png": {
@@ -684,16 +696,16 @@
     "hash": "19ec046d51094c050b13b809bfdb1168"
   },
   "/Volumes/Study/Projects/Astrology/tests/screenshots/cultural_theme_bazi.png": {
-    "mtime": 1792639107.0194159,
+    "mtime": 1792640916.6922762,
     "hash": "8664ec48950876540c141bb97b8fbb73"
   },
   "/Volumes/Study/Projects/Astrology/tests/screenshots/cultural_theme_jyotisha.png": {
-    "mtime": 1792639106.5896132,
+    "mtime": 1792640916.2477098,
     "hash": "77b45701ceab194c975bf45a24849036"
   },
   "/Volumes/Study/Projects/Astrology/tests/screenshots/geocoding_intelligence_verified.png": {
-    "mtime": 1792639113.6707683,
-    "hash": "c96b71f1e59f81b87460ded66a679268"
+    "mtime": 1792640921.8978965,
+    "hash": "51bfc10457a900206203b66c4d98bda0"
   },
   "/Volumes/Study/Projects/Astrology/tests/screenshots/theme_light_workbench.png": {
     "mtime": 1792554332.4610753,
