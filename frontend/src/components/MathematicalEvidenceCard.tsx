@@ -222,7 +222,7 @@ export const MathematicalEvidenceCard: React.FC<Props> = ({ onClose }) => {
               <button
                 type="button"
                 onClick={() => setViewMode('interactive')}
-                className={`flex items-center gap-1.5 px-3 py-1.5 min-h-[36px] text-xs font-mono rounded transition-colors cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 ${
+                className={`flex items-center gap-1.5 px-3 py-2 sm:py-1.5 min-h-[44px] sm:min-h-[36px] text-xs font-mono rounded transition-colors cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 ${
                   viewMode === 'interactive'
                     ? 'bg-[#182333] text-cyan-300 font-semibold border border-cyan-800/80 shadow-xs'
                     : 'text-slate-400 hover:text-slate-200'
@@ -235,7 +235,7 @@ export const MathematicalEvidenceCard: React.FC<Props> = ({ onClose }) => {
               <button
                 type="button"
                 onClick={() => setViewMode('whitepaper')}
-                className={`flex items-center gap-1.5 px-3 py-1.5 min-h-[36px] text-xs font-mono rounded transition-colors cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 ${
+                className={`flex items-center gap-1.5 px-3 py-2 sm:py-1.5 min-h-[44px] sm:min-h-[36px] text-xs font-mono rounded transition-colors cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 ${
                   viewMode === 'whitepaper'
                     ? 'bg-[#182333] text-cyan-300 font-semibold border border-cyan-800/80 shadow-xs'
                     : 'text-slate-400 hover:text-slate-200'
@@ -248,7 +248,7 @@ export const MathematicalEvidenceCard: React.FC<Props> = ({ onClose }) => {
               <button
                 type="button"
                 onClick={() => setViewMode('markdown')}
-                className={`flex items-center gap-1.5 px-3 py-1.5 min-h-[36px] text-xs font-mono rounded transition-colors cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 ${
+                className={`flex items-center gap-1.5 px-3 py-2 sm:py-1.5 min-h-[44px] sm:min-h-[36px] text-xs font-mono rounded transition-colors cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 ${
                   viewMode === 'markdown'
                     ? 'bg-[#182333] text-cyan-300 font-semibold border border-cyan-800/80 shadow-xs'
                     : 'text-slate-400 hover:text-slate-200'
@@ -265,7 +265,7 @@ export const MathematicalEvidenceCard: React.FC<Props> = ({ onClose }) => {
               <button
                 type="button"
                 onClick={handleCopy}
-                className="p-2 min-h-[38px] min-w-[38px] flex items-center justify-center rounded-md bg-[#101622] hover:bg-[#182233] text-slate-300 hover:text-cyan-300 border border-[#1b2331] transition-colors cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
+                className="p-2 min-h-[44px] min-w-[44px] sm:min-h-[38px] sm:min-w-[38px] flex items-center justify-center rounded-md bg-[#101622] hover:bg-[#182233] text-slate-300 hover:text-cyan-300 border border-[#1b2331] transition-colors cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
                 data-tooltip="Copy Full Report Markdown to Clipboard"
                 aria-label="Copy Full Report Markdown to Clipboard"
               >
@@ -274,7 +274,7 @@ export const MathematicalEvidenceCard: React.FC<Props> = ({ onClose }) => {
               <button
                 type="button"
                 onClick={handleExportMarkdown}
-                className="p-2 min-h-[38px] min-w-[38px] flex items-center justify-center rounded-md bg-[#101622] hover:bg-[#182233] text-slate-300 hover:text-cyan-300 border border-[#1b2331] transition-colors cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
+                className="p-2 min-h-[44px] min-w-[44px] sm:min-h-[38px] sm:min-w-[38px] flex items-center justify-center rounded-md bg-[#101622] hover:bg-[#182233] text-slate-300 hover:text-cyan-300 border border-[#1b2331] transition-colors cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
                 data-tooltip="Download Study Report (.md)"
                 aria-label="Download Study Report (.md)"
               >
@@ -283,7 +283,7 @@ export const MathematicalEvidenceCard: React.FC<Props> = ({ onClose }) => {
               <button
                 type="button"
                 onClick={handleExportJSON}
-                className="px-2.5 py-1.5 min-h-[38px] text-[11px] font-mono rounded-md bg-[#101622] hover:bg-[#182233] text-slate-300 hover:text-cyan-300 border border-[#1b2331] transition-colors cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
+                className="px-2.5 py-1.5 min-h-[44px] sm:min-h-[38px] min-w-[44px] text-[11px] font-mono rounded-md bg-[#101622] hover:bg-[#182233] text-slate-300 hover:text-cyan-300 border border-[#1b2331] transition-colors cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 flex items-center justify-center"
                 data-tooltip="Export Raw Statistics Dataset (.json)"
                 aria-label="Export Raw Statistics Dataset (.json)"
               >
@@ -292,7 +292,7 @@ export const MathematicalEvidenceCard: React.FC<Props> = ({ onClose }) => {
               <button
                 type="button"
                 onClick={handlePrint}
-                className="p-2 min-h-[38px] min-w-[38px] flex items-center justify-center rounded-md bg-[#101622] hover:bg-[#182233] text-slate-300 hover:text-cyan-300 border border-[#1b2331] transition-colors cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
+                className="p-2 min-h-[44px] min-w-[44px] sm:min-h-[38px] sm:min-w-[38px] flex items-center justify-center rounded-md bg-[#101622] hover:bg-[#182233] text-slate-300 hover:text-cyan-300 border border-[#1b2331] transition-colors cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
                 data-tooltip="Print or Save PDF"
                 aria-label="Print or Save PDF"
               >
@@ -302,7 +302,7 @@ export const MathematicalEvidenceCard: React.FC<Props> = ({ onClose }) => {
                 <button
                   type="button"
                   onClick={onClose}
-                  className="p-2 min-h-[38px] min-w-[38px] flex items-center justify-center ml-1 rounded-md bg-[#151c28] hover:bg-rose-900/60 text-slate-300 hover:text-rose-200 border border-[#1b2331] hover:border-rose-800 transition-colors cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-rose-400"
+                  className="p-2 min-h-[44px] min-w-[44px] sm:min-h-[38px] sm:min-w-[38px] flex items-center justify-center ml-1 rounded-md bg-[#151c28] hover:bg-rose-900/60 text-slate-300 hover:text-rose-200 border border-[#1b2331] hover:border-rose-800 transition-colors cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-rose-400"
                   data-tooltip="Close Evidence Panel"
                   aria-label="Close Evidence Panel"
                 >
@@ -385,14 +385,14 @@ export const MathematicalEvidenceCard: React.FC<Props> = ({ onClose }) => {
                 <div className="text-xs text-slate-300">
                   <span className="text-cyan-300 font-semibold">Testing Protocol:</span> Experimental Cohort (100 Historical Titans) vs. Null Model (1,000 Monte Carlo Controls).
                 </div>
-                <div className="flex items-center gap-1 text-[11px] font-mono">
+                <div className="flex flex-wrap items-center gap-1.5 text-[11px] font-mono">
                   <span className="text-slate-400 mr-1">Filter:</span>
                   {(['all', 'significant', 'enriched', 'disproven'] as const).map((cat) => (
                     <button
                       key={cat}
                       type="button"
                       onClick={() => setHypothesisFilter(cat)}
-                      className={`px-2 py-0.5 rounded capitalize cursor-pointer transition-colors ${
+                      className={`px-2.5 py-1 min-h-[36px] sm:min-h-[28px] rounded-md capitalize cursor-pointer transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 ${
                         hypothesisFilter === cat
                           ? 'bg-cyan-950 text-cyan-300 border border-cyan-700/80'
                           : 'text-slate-400 hover:text-slate-200 border border-[#1b2331]'

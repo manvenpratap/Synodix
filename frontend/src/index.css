@@ -543,7 +543,31 @@ html[data-theme="light"] {
   overflow: hidden;
 }
 
-/* 4. Touch & Button Feedback */
+/* 4. Mobile Ergonomics, Touch Targets & Feedback */
+html {
+  scroll-padding-top: calc(4.5rem + env(safe-area-inset-top, 0px));
+  scroll-padding-bottom: calc(5.5rem + env(safe-area-inset-bottom, 0px));
+}
+
+@media (max-width: 639px) {
+  /* Prevent iOS Safari auto-zoom on input focus by guaranteeing 16px font-size */
+  input[type="text"],
+  input[type="number"],
+  input[type="date"],
+  input[type="time"],
+  input[type="search"],
+  select,
+  textarea {
+    font-size: 16px !important;
+  }
+}
+
+.scrollbar-thin,
+[role="tablist"],
+[role="region"] {
+  -webkit-overflow-scrolling: touch;
+}
+
 html,
 body {
   -webkit-tap-highlight-color: transparent;

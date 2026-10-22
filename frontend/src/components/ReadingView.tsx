@@ -113,7 +113,7 @@ export const ReadingView: React.FC<Props> = ({ data }) => {
               <button
                 type="button"
                 onClick={() => setViewMode('interactive')}
-                className={`px-3 py-1.5 min-h-[36px] rounded text-xs font-medium flex items-center gap-1.5 transition-colors cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 ${
+                className={`px-3 py-2 sm:py-1.5 min-h-[44px] sm:min-h-[36px] rounded text-xs font-medium flex items-center gap-1.5 transition-colors cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 ${
                   viewMode === 'interactive'
                     ? 'bg-cyan-950 text-cyan-300 border border-cyan-700/80 shadow-xs'
                     : 'text-slate-400 hover:text-slate-200'
@@ -125,7 +125,7 @@ export const ReadingView: React.FC<Props> = ({ data }) => {
               <button
                 type="button"
                 onClick={() => setViewMode('markdown')}
-                className={`px-3 py-1.5 min-h-[36px] rounded text-xs font-medium flex items-center gap-1.5 transition-colors cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 ${
+                className={`px-3 py-2 sm:py-1.5 min-h-[44px] sm:min-h-[36px] rounded text-xs font-medium flex items-center gap-1.5 transition-colors cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 ${
                   viewMode === 'markdown'
                     ? 'bg-cyan-950 text-cyan-300 border border-cyan-700/80 shadow-xs'
                     : 'text-slate-400 hover:text-slate-200'
@@ -140,7 +140,7 @@ export const ReadingView: React.FC<Props> = ({ data }) => {
             <button
               type="button"
               onClick={handleCopy}
-              className="px-3 py-2 min-h-[38px] text-xs font-mono rounded bg-[#121721] hover:bg-[#18202c] text-slate-300 border border-[#1b2331] transition-colors cursor-pointer flex items-center gap-1.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
+              className="px-3 py-2 min-h-[44px] sm:min-h-[38px] text-xs font-mono rounded bg-[#121721] hover:bg-[#18202c] text-slate-300 border border-[#1b2331] transition-colors cursor-pointer flex items-center gap-1.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
               data-tooltip="Copy Full Document Markdown"
               aria-label="Copy Full Document Markdown"
             >
@@ -150,7 +150,7 @@ export const ReadingView: React.FC<Props> = ({ data }) => {
             <button
               type="button"
               onClick={handleDownloadMarkdown}
-              className="px-3 py-2 min-h-[38px] text-xs font-mono rounded bg-[#121721] hover:bg-[#18202c] text-slate-300 border border-[#1b2331] transition-colors cursor-pointer flex items-center gap-1.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
+              className="px-3 py-2 min-h-[44px] sm:min-h-[38px] text-xs font-mono rounded bg-[#121721] hover:bg-[#18202c] text-slate-300 border border-[#1b2331] transition-colors cursor-pointer flex items-center gap-1.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
               data-tooltip="Download Markdown Document (.md)"
               aria-label="Download Markdown Document (.md)"
             >
@@ -160,7 +160,7 @@ export const ReadingView: React.FC<Props> = ({ data }) => {
             <button
               type="button"
               onClick={handleDownloadJSON}
-              className="px-3 py-2 min-h-[38px] text-xs font-mono rounded bg-[#121721] hover:bg-[#18202c] text-slate-300 border border-[#1b2331] transition-colors cursor-pointer flex items-center gap-1.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
+              className="px-3 py-2 min-h-[44px] sm:min-h-[38px] text-xs font-mono rounded bg-[#121721] hover:bg-[#18202c] text-slate-300 border border-[#1b2331] transition-colors cursor-pointer flex items-center gap-1.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
               data-tooltip="Download Raw Master Dataset (.json)"
               aria-label="Download Raw Master Dataset (.json)"
             >
@@ -170,7 +170,7 @@ export const ReadingView: React.FC<Props> = ({ data }) => {
             <button
               type="button"
               onClick={handlePrint}
-              className="px-3 py-2 min-h-[38px] text-xs font-mono rounded bg-[#121721] hover:bg-[#18202c] text-slate-300 border border-[#1b2331] transition-colors cursor-pointer flex items-center gap-1.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
+              className="px-3 py-2 min-h-[44px] sm:min-h-[38px] text-xs font-mono rounded bg-[#121721] hover:bg-[#18202c] text-slate-300 border border-[#1b2331] transition-colors cursor-pointer flex items-center gap-1.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
               data-tooltip="Print or Save PDF"
               aria-label="Print or Save PDF"
             >
@@ -322,7 +322,7 @@ export const ReadingView: React.FC<Props> = ({ data }) => {
                 <button
                   type="button"
                   onClick={() => setDomainFilter('all')}
-                  className={`px-2.5 py-1 min-h-[32px] rounded text-[11px] cursor-pointer transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 ${
+                  className={`px-3 py-1.5 min-h-[38px] sm:min-h-[32px] rounded text-[11px] cursor-pointer transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 ${
                     domainFilter === 'all'
                       ? 'bg-cyan-950 text-cyan-300 border border-cyan-700/80'
                       : 'text-slate-400 hover:text-slate-200 border border-[#1b2331]'
@@ -333,7 +333,7 @@ export const ReadingView: React.FC<Props> = ({ data }) => {
                 <button
                   type="button"
                   onClick={() => setDomainFilter('consensus')}
-                  className={`px-2.5 py-1 min-h-[32px] rounded text-[11px] cursor-pointer transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 ${
+                  className={`px-3 py-1.5 min-h-[38px] sm:min-h-[32px] rounded text-[11px] cursor-pointer transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 ${
                     domainFilter === 'consensus'
                       ? 'bg-emerald-950 text-emerald-300 border border-emerald-700/80'
                       : 'text-slate-400 hover:text-slate-200 border border-[#1b2331]'
@@ -344,7 +344,7 @@ export const ReadingView: React.FC<Props> = ({ data }) => {
                 <button
                   type="button"
                   onClick={() => setDomainFilter('divergent')}
-                  className={`px-2.5 py-1 min-h-[32px] rounded text-[11px] cursor-pointer transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 ${
+                  className={`px-3 py-1.5 min-h-[38px] sm:min-h-[32px] rounded text-[11px] cursor-pointer transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 ${
                     domainFilter === 'divergent'
                       ? 'bg-amber-950 text-amber-300 border border-amber-700/80'
                       : 'text-slate-400 hover:text-slate-200 border border-[#1b2331]'

@@ -59,7 +59,7 @@ export const FeatureExplainerModal: React.FC = () => {
       role="dialog"
       aria-modal="true"
       aria-labelledby="explainer-modal-title"
-      className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/80 backdrop-blur-sm animate-fade-in overscroll-contain"
+      className="fixed inset-0 z-[70] flex items-center justify-center p-3 sm:p-6 bg-black/80 backdrop-blur-sm animate-fade-in overscroll-contain pt-[max(0.75rem,env(safe-area-inset-top,0px))] pb-[max(0.75rem,env(safe-area-inset-bottom,0px))]"
       onClick={closeExplainer}
     >
       <div
@@ -102,7 +102,7 @@ export const FeatureExplainerModal: React.FC = () => {
               type="button"
               onClick={closeExplainer}
               aria-label="Close explainer modal"
-              className="w-9 h-9 flex items-center justify-center rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 cursor-pointer"
+              className="min-w-[44px] min-h-[44px] flex items-center justify-center rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 cursor-pointer"
             >
               <X className="w-5 h-5" />
             </button>

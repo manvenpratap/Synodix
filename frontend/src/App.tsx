@@ -485,7 +485,7 @@ function AppContent() {
 
       {/* 2. Mobile Drawer Navigation Overlay (<md) */}
       {isMobileSidebarOpen && (
-        <div className="fixed inset-0 z-50 md:hidden bg-black/80 backdrop-blur-sm flex overscroll-contain">
+        <div className="fixed inset-0 z-[60] md:hidden bg-black/80 backdrop-blur-sm flex overscroll-contain">
           <div className="w-72 bg-[#0b0e14] h-full flex flex-col border-r border-[#1b2331] p-4 shadow-2xl pt-[max(1rem,env(safe-area-inset-top,0px))] pb-[max(1rem,env(safe-area-inset-bottom,0px))]">
             <div className="flex items-center justify-between pb-3 border-b border-[#1b2331]">
               <div className="flex items-center gap-2">
@@ -602,13 +602,13 @@ function AppContent() {
       {/* 3. Main Workspace Area */}
       <div className="flex-1 flex flex-col min-w-0">
         {/* Top Header Bar */}
-        <header className="h-[calc(3.5rem+env(safe-area-inset-top,0px))] pt-[env(safe-area-inset-top,0px)] border-b border-[#1b2331] bg-[#0b0e14]/90 backdrop-blur-md px-4 sm:px-6 flex items-center justify-between sticky top-0 z-30">
-          <div className="flex items-center gap-3">
+        <header className="h-[calc(3.5rem+env(safe-area-inset-top,0px))] pt-[env(safe-area-inset-top,0px)] border-b border-[#1b2331] bg-[#0b0e14]/90 backdrop-blur-md px-3 sm:px-6 flex items-center justify-between sticky top-0 z-30">
+          <div className="flex items-center gap-2 sm:gap-3 min-w-0">
             {/* Mobile Hamburger Menu Toggle (<md) */}
             <button
               type="button"
               onClick={() => setIsMobileSidebarOpen(true)}
-              className="md:hidden min-w-[44px] min-h-[44px] flex items-center justify-center -ml-2 rounded-md text-slate-400 hover:text-slate-100 hover:bg-[#121721] cursor-pointer"
+              className="md:hidden min-w-[44px] min-h-[44px] flex items-center justify-center -ml-1 rounded-md text-slate-400 hover:text-slate-100 hover:bg-[#121721] cursor-pointer"
               aria-label="Open sidebar menu"
               data-tooltip="Open navigation drawer"
             >
@@ -616,11 +616,13 @@ function AppContent() {
             </button>
 
             {/* Breadcrumb Screen Title */}
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-1.5 sm:gap-2 min-w-0">
               <span className="text-xs font-mono text-cyan-400 font-semibold tracking-wider hidden sm:inline">SYNODIX</span>
               <span className="text-slate-600 hidden sm:inline">/</span>
-              <h1 className="text-sm font-semibold text-slate-100 flex items-center gap-2">
-                {NAV_ITEMS.find((n) => n.id === currentScreen)?.label}
+              <h1 className="text-sm font-semibold text-slate-100 flex items-center gap-2 min-w-0">
+                <span className="truncate max-w-[130px] sm:max-w-none">
+                  {NAV_ITEMS.find((n) => n.id === currentScreen)?.label}
+                </span>
               </h1>
             </div>
 
@@ -650,39 +652,36 @@ function AppContent() {
           </div>
 
           {/* Quick Header Actions */}
-          <div className="flex items-center gap-2.5 font-mono text-xs">
+          <div className="flex items-center gap-1.5 sm:gap-2.5 font-mono text-xs shrink-0">
             {/* Feature Guide & Glossary Modal Trigger */}
             <button
               type="button"
               onClick={openGlossary}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 min-h-[34px] text-xs rounded border border-[#1b2331] bg-[#10151f] hover:bg-[#161d2a] text-cyan-400 hover:text-cyan-200 transition-colors cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
+              className="inline-flex items-center justify-center gap-1.5 p-2 sm:px-3 sm:py-1.5 min-w-[40px] min-h-[40px] sm:min-h-[34px] text-xs rounded border border-[#1b2331] bg-[#10151f] hover:bg-[#161d2a] text-cyan-400 hover:text-cyan-200 transition-colors cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
               data-tooltip="Browse all 50 astronomical & cultural feature explainers"
               aria-label="Browse Feature Explainers & Astrometric Glossary"
             >
-              <BookOpen className="w-3.5 h-3.5 text-cyan-400" />
+              <BookOpen className="w-4 h-4 text-cyan-400 shrink-0" />
               <span className="hidden sm:inline">Feature Guide</span>
-              <span className="sm:hidden">Guide</span>
             </button>
 
             {/* Theme Toggle Button */}
             <button
               type="button"
               onClick={toggleTheme}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 min-h-[34px] text-xs rounded border border-[#1b2331] bg-[#10151f] hover:bg-[#151c2a] text-slate-300 hover:text-amber-400 transition-colors cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
+              className="inline-flex items-center justify-center gap-1.5 p-2 sm:px-3 sm:py-1.5 min-w-[40px] min-h-[40px] sm:min-h-[34px] text-xs rounded border border-[#1b2331] bg-[#10151f] hover:bg-[#151c2a] text-slate-300 hover:text-amber-400 transition-colors cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
               data-tooltip={theme === 'dark' ? 'Switch to Solar Day Theme' : 'Switch to Deep Space Theme'}
               aria-label={theme === 'dark' ? 'Switch to Solar Day Theme' : 'Switch to Deep Space Theme'}
             >
               {theme === 'dark' ? (
                 <>
-                  <Sun className="w-3.5 h-3.5 text-amber-400" />
+                  <Sun className="w-4 h-4 text-amber-400 shrink-0" />
                   <span className="hidden sm:inline">Light Mode</span>
-                  <span className="sm:hidden">Light</span>
                 </>
               ) : (
                 <>
-                  <Moon className="w-3.5 h-3.5 text-sky-600" />
+                  <Moon className="w-4 h-4 text-sky-400 shrink-0" />
                   <span className="hidden sm:inline">Dark Mode</span>
-                  <span className="sm:hidden">Dark</span>
                 </>
               )}
             </button>
@@ -703,7 +702,7 @@ function AppContent() {
             <button
               type="button"
               onClick={() => navigateTo('evidence')}
-              className={`inline-flex items-center gap-1.5 px-3 py-1.5 min-h-[34px] text-xs rounded border transition-colors cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 ${
+              className={`hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 min-h-[34px] text-xs rounded border transition-colors cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 ${
                 currentScreen === 'evidence'
                   ? 'bg-cyan-950 text-cyan-300 border-cyan-700'
                   : 'bg-[#10151f] hover:bg-[#161d2a] text-cyan-400 border-cyan-800/60'
@@ -712,8 +711,7 @@ function AppContent() {
               aria-label="View Mathematical & Empirical Evidence Whitepaper"
             >
               <FlaskConical className="w-3.5 h-3.5 text-cyan-400" />
-              <span className="hidden sm:inline">Whitepaper</span>
-              <span className="sm:hidden">Study</span>
+              <span>Whitepaper</span>
             </button>
           </div>
         </header>

@@ -125,11 +125,11 @@ export const SynthesisMatrix: React.FC<Props> = ({ synthesis }) => {
         </div>
 
         {/* Filter Segmented Buttons */}
-        <div className="flex items-center gap-1.5 overflow-x-auto pb-1 lg:pb-0" role="group" aria-label="Filter domains">
+        <div className="flex items-center gap-1.5 overflow-x-auto pb-1 lg:pb-0 scrollbar-thin scroll-smooth overscroll-x-contain" role="group" aria-label="Filter domains">
           <button
             type="button"
             onClick={() => setFilterMode('all')}
-            className={`px-3 py-1.5 min-h-[36px] text-xs font-mono rounded cursor-pointer transition-colors whitespace-nowrap focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 ${
+            className={`px-3 py-2 sm:py-1.5 min-h-[44px] sm:min-h-[36px] text-xs font-mono rounded cursor-pointer transition-colors whitespace-nowrap focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 ${
               filterMode === 'all'
                 ? 'bg-[#182232] text-cyan-300 font-semibold border border-cyan-800'
                 : 'text-slate-400 hover:text-slate-200 hover:bg-[#121721] border border-transparent'
@@ -140,7 +140,7 @@ export const SynthesisMatrix: React.FC<Props> = ({ synthesis }) => {
           <button
             type="button"
             onClick={() => setFilterMode('high')}
-            className={`px-3 py-1.5 min-h-[36px] text-xs font-mono rounded cursor-pointer transition-colors whitespace-nowrap focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 ${
+            className={`px-3 py-2 sm:py-1.5 min-h-[44px] sm:min-h-[36px] text-xs font-mono rounded cursor-pointer transition-colors whitespace-nowrap focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 ${
               filterMode === 'high'
                 ? 'bg-emerald-950 text-emerald-300 font-semibold border border-emerald-800'
                 : 'text-slate-400 hover:text-slate-200 hover:bg-[#121721] border border-transparent'
@@ -151,7 +151,7 @@ export const SynthesisMatrix: React.FC<Props> = ({ synthesis }) => {
           <button
             type="button"
             onClick={() => setFilterMode('divergent')}
-            className={`px-3 py-1.5 min-h-[36px] text-xs font-mono rounded cursor-pointer transition-colors whitespace-nowrap focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 ${
+            className={`px-3 py-2 sm:py-1.5 min-h-[44px] sm:min-h-[36px] text-xs font-mono rounded cursor-pointer transition-colors whitespace-nowrap focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 ${
               filterMode === 'divergent'
                 ? 'bg-rose-950 text-rose-300 font-semibold border border-rose-800'
                 : 'text-slate-400 hover:text-slate-200 hover:bg-[#121721] border border-transparent'

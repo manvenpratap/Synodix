@@ -262,7 +262,7 @@ export const TraditionCharts: React.FC<Props> = ({ data }) => {
         </div>
 
         {/* Clean Typographic Tabs with Cultural Glyphs & Theming */}
-        <div role="tablist" aria-label="Astrological tradition charts" className="flex items-center gap-1.5 overflow-x-auto pb-1 sm:pb-0 scrollbar-thin">
+        <div role="tablist" aria-label="Astrological tradition charts" className="flex items-center gap-1.5 overflow-x-auto pb-1 sm:pb-0 scrollbar-thin scroll-smooth overscroll-x-contain">
           {Object.values(CULTURE_THEMES).map((t) => {
             const isActive = activeTab === t.id;
             return (
@@ -317,44 +317,47 @@ export const TraditionCharts: React.FC<Props> = ({ data }) => {
           </div>
 
           {/* Culture-Themed Display Presentation Switcher */}
-          <div className="flex flex-col sm:flex-row sm:items-center gap-2.5 self-start lg:self-auto shrink-0">
+          <div className="flex flex-col sm:flex-row sm:items-center gap-2.5 self-start lg:self-auto shrink-0 w-full sm:w-auto">
             <span className="text-[11px] font-mono text-slate-400 font-medium">Display Presentation:</span>
-            <div className="flex items-center gap-1 p-1 rounded-lg bg-[#06080e]/90 border border-white/10 backdrop-blur-xs">
+            <div className="flex items-center gap-1 p-1 rounded-lg bg-[#06080e]/90 border border-white/10 backdrop-blur-xs w-full sm:w-auto">
               <button
                 type="button"
                 onClick={() => setChartViewMode('both')}
-                className={`px-3 py-1.5 min-h-[36px] text-xs font-mono rounded-md cursor-pointer transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 ${
+                className={`flex-1 sm:flex-initial px-2.5 sm:px-3 py-2 sm:py-1.5 min-h-[44px] sm:min-h-[36px] text-xs font-mono rounded-md cursor-pointer transition-all text-center focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 ${
                   chartViewMode === 'both'
                     ? currentTheme.presentationToggleActive
                     : currentTheme.presentationToggleInactive
                 }`}
                 aria-pressed={chartViewMode === 'both'}
               >
-                Comprehensive
+                <span className="hidden sm:inline">Comprehensive</span>
+                <span className="sm:hidden">All</span>
               </button>
               <button
                 type="button"
                 onClick={() => setChartViewMode('chart')}
-                className={`px-3 py-1.5 min-h-[36px] text-xs font-mono rounded-md cursor-pointer transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 ${
+                className={`flex-1 sm:flex-initial px-2.5 sm:px-3 py-2 sm:py-1.5 min-h-[44px] sm:min-h-[36px] text-xs font-mono rounded-md cursor-pointer transition-all text-center focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 ${
                   chartViewMode === 'chart'
                     ? currentTheme.presentationToggleActive
                     : currentTheme.presentationToggleInactive
                 }`}
                 aria-pressed={chartViewMode === 'chart'}
               >
-                Visual Instrument
+                <span className="hidden sm:inline">Visual Instrument</span>
+                <span className="sm:hidden">Visual</span>
               </button>
               <button
                 type="button"
                 onClick={() => setChartViewMode('table')}
-                className={`px-3 py-1.5 min-h-[36px] text-xs font-mono rounded-md cursor-pointer transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 ${
+                className={`flex-1 sm:flex-initial px-2.5 sm:px-3 py-2 sm:py-1.5 min-h-[44px] sm:min-h-[36px] text-xs font-mono rounded-md cursor-pointer transition-all text-center focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 ${
                   chartViewMode === 'table'
                     ? currentTheme.presentationToggleActive
                     : currentTheme.presentationToggleInactive
                 }`}
                 aria-pressed={chartViewMode === 'table'}
               >
-                Telemetry Tables
+                <span className="hidden sm:inline">Telemetry Tables</span>
+                <span className="sm:hidden">Tables</span>
               </button>
             </div>
           </div>

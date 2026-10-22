@@ -1,7 +1,7 @@
 # Synodix: Project Context & Working Memory
 
-**Last Updated:** 2026-10-22 09:46:38
-**Version:** 2.13.0  
+**Last Updated:** 2026-10-22 11:25:56
+**Version:** 2.14.0  
 **Stack:** Python 3.12 (FastAPI, Swiss Ephemeris 2.10, Skyfield DE421) + TypeScript / React 19 / Vite / Tailwind CSS v4 / Capacitor 8 (iOS & Android)  
 **Workspace:** `/Volumes/Study/Projects/Astrology` (symlinked as `/Volumes/Study/Astrology`)  
 **Git Remote:** `https://github.com/manvenpratap/Synodix.git`  
@@ -9,16 +9,19 @@
 ---
 
 ## 1. Current Status & Milestone
-- **Active Phase**: Modern Web Platform Standards & Interaction Guidance (`/modern-web-guidance`) (Completed)
-- **Modern Web Architecture & Interaction Compliance**:
-  - Implemented standards-compliant scrollbar styling using `scrollbar-color` and `scrollbar-width: thin` with progressive enhancement WebKit fallback (`customize-scrollbar-color-and-thickness`).
-  - Added modern typographic line-wrapping rules (`text-wrap: balance` on all headings and `text-wrap: pretty` on paragraphs) in `index.css` to prevent typographic orphans and balance heading visual rhythm (`improve-text-layout-and-legibility`).
-  - Implemented `overscroll-contain` across modal overlays, scrollable dialog bodies, mobile navigation drawers, and combobox dropdowns to prevent background scroll chaining (`prevent-page-scroll-under-modal-dialog`).
-  - Accessible table scroll regions: added `tabIndex={0}`, `role="region"`, and unique `aria-label` tags across all telemetry data tables (`responsive-table`).
-  - Form ergonomics: added standard HTML5 autofill tokens (`autoComplete="bday"`, `autoComplete="country-name"`) and contextual virtual keyboard hints (`enterKeyHint="search"`, `enterKeyHint="next"`) (`forms`).
-  - Linter & tests: 0 oxlint warnings/errors, 0 impeccable detect issues, 16/16 regression tests passing in 32.66s.
+- **Active Phase**: Mobile-First Ergonomics & Touch Architecture (`/mobile-design`) (Completed)
+- **Mobile Design & Platform Ergonomics Achievements**:
+  - Eliminated viewport expansion and horizontal overflow across narrow mobile form factors (iPhone SE $375\times 667$, iPhone 14/15 $390\times 844$, Pixel 7 $412\times 915$). All 5 core navigation screens (Workbench, Traditions, Synthesis, Dossier, Evidence) verified at 0px overflow.
+  - Resolved top header crowding on mobile viewports (<640px): converted Feature Guide and Theme switcher into compact icon buttons and hid redundant "Study" link (accessible directly at the bottom thumb zone).
+  - Mode Switcher responsive typography: "Custom Manual Input" / "Historical Titans (100)" adapt cleanly on mobile without clipping or forcing horizontal scroll.
+  - Enhanced Touch Target Standards: upgraded inputs, selects, mode switchers, quick action toolbars, and close buttons across `BirthDataForm`, `TraditionCharts`, `ReadingView`, `SynthesisMatrix`, and `MathematicalEvidenceCard` to meet or exceed $\ge 44\times 44\text{px}$ (iOS HIG) and $\ge 48\times 48\text{dp}$ (Android Material).
+  - iOS Safari Auto-Zoom Prevention: enforced `16px !important` minimum font-size rule on all mobile inputs (`input`, `select`, `textarea`) below 640px.
+  - Fixed-Navbar & Sticky-Header Inset Protection: configured `scroll-padding-top: calc(4.5rem + env(safe-area-inset-top, 0px))` and `scroll-padding-bottom: calc(5.5rem + env(safe-area-inset-bottom, 0px))` to prevent elements from scrolling underneath fixed navigation.
+  - Touch scrolling inertia: added `-webkit-overflow-scrolling: touch` and `overscroll-x-contain` across tablists and data matrices.
+  - Expanded Playwright Mobile Regression Suite (`test_04_mobile_viewport.py`) validating multi-screen navigation, mode switcher heights, form input tap targets, explainer modal close targets, and zero critical console errors.
+  - Distribution Packaging: compiled native Android APK (`dist/mobile/astrology-android-debug.apk`, 6.9MB) and iOS Simulator bundle (`dist/mobile/astrology-ios-simulator.zip`, 3.8MB).
 - **Workflow Health**: 100% CLEAN (Verified via `./pipeline.sh doctor`)
-- **Test Invariants**: 16/16 regression suites passing via `./pipeline.sh test --summary` (32.66s)
+- **Test Invariants**: 16/16 regression suites passing via `./pipeline.sh test --summary` (47.47s)
 - **Design System & Interaction Standards**:
   - Full adherence to UI/UX Pro Max and Frontend Design criteria (WCAG AAA/AA, zero AI slop, cohesive astrometric observatory aesthetic).
   - Synchronized all 14 background and border classes in `index.css` for flawless Solar Day light mode rendering with zero dark-border leaks.
