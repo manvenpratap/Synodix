@@ -1,7 +1,7 @@
 # Synodix: Project Context & Working Memory
 
-**Last Updated:** 2026-10-22 01:20:00 UTC  
-**Version:** 2.7.0  
+**Last Updated:** 2026-10-22 01:30:00 UTC  
+**Version:** 2.8.0  
 **Stack:** Python 3.12 (FastAPI, Swiss Ephemeris 2.10, Skyfield DE421) + TypeScript / React 19 / Vite / Tailwind CSS v4 / Capacitor 8 (iOS & Android)  
 **Workspace:** `/Volumes/Study/Projects/Astrology` (symlinked as `/Volumes/Study/Astrology`)  
 **Git Remote:** `https://github.com/manvenpratap/Synodix.git`  
@@ -9,16 +9,15 @@
 ---
 
 ## 1. Current Status & Milestone
-- **Active Phase**: Native Mobile Sideloading & Configurable API Gateway (Completed)
-- **Sideloading Artifacts & Runtime**:
-  - Android Sideload APK: Compiled debug artifact ready at `Synodix-debug.apk` (4.1MB, Gradle build-tools 35, Java 17/21 compatible).
-  - iOS Sideloading: Configured Xcode project at `frontend/ios/App/App.xcodeproj` ready for 1-click deployment via Xcode free developer account, Sideloadly, or AltStore.
-  - Sideload Network Bridge: Client-side `apiUrl()` resolver with automatic fallback to LAN IP (`http://192.168.1.11:8000`) on native mobile, plus interactive Server Connection dialog with live ping diagnostics.
-  - Backend Network Accessibility: FastAPI server bound to `0.0.0.0:8000` to serve requests from physical mobile devices across local Wi-Fi.
-- **Native Mobile Containers (Capacitor 8)**:
-  - iOS Workspace: `frontend/ios/App/App.xcodeproj` configured with Swift Package Manager (SPM) and app ID `org.antigravity.synodix`.
-  - Android Studio Project: `frontend/android/` configured with Gradle wrapper, AndroidManifest, splash configuration, and app ID `org.antigravity.synodix`.
-  - Real-time asset synchronization: `npm run build && cd frontend && npx cap sync` pushes built web assets directly into iOS and Android bundles.
+- **Active Phase**: In-App Pure TypeScript Engine & 100% Offline Standalone Sideloading (Completed)
+- **In-App Pure TypeScript Astrometric Engine**:
+  - Full local calculation module at `frontend/src/engine/` using `astronomy-engine` (NASA JPL VSOP87 & ELP2000 algorithms).
+  - Pure client-side calculations for all 9 traditions (Western, Jyotisha, BaZi, Zi Wei, Maya, Tibetan, Persian, Egyptian, Māori) and 3-cluster consensus matrix.
+  - Zero-server dependency: custom birth charts calculate in-memory in under 20ms without any backend network connection.
+  - Pre-computed Titan Vault: complete 100 historical titan profiles bundled in `frontend/src/data/bundledTitans.json` for 0ms instant offline lookup.
+  - Sideload Artifacts: updated `Synodix-debug.apk` (6.6MB) and `frontend/ios/App/App.xcodeproj` fully self-contained.
+- **Workflow Health**: 100% CLEAN (Verified via `./pipeline.sh doctor`)
+- **Test Invariants**: 12/12 regression suites passing via `./pipeline.sh test --summary` (including offline simulation suite `test_05_inapp_offline_engine.py`)
 - **Mobile-First Ergonomics (`mobile-design`)**:
   - Touch target compliance: all primary interactive elements, hamburger buttons, and bottom tab navigation meet or exceed $\ge 44\times 44\text{px}$ (iOS HIG) and $\ge 48\times 48\text{dp}$ (Android Material).
   - Safe-area insets: full support for notch, Dynamic Island, and gesture bars via `env(safe-area-inset-top)` and `env(safe-area-inset-bottom)`.

@@ -21,6 +21,9 @@ import {
   AlertCircle
 } from 'lucide-react';
 import { apiUrl, getApiBaseUrl, setApiBaseUrl, DEFAULT_DEV_API_URL } from './utils/api';
+import { getBundledTitanChart } from './data/bundledTitans';
+import { calculateChartLocally } from './engine';
+import TITANS_100_DATA from './data/personalities_100.json';
 import { BirthDataForm } from './components/BirthDataForm';
 import { InputAuditCard } from './components/InputAuditCard';
 import { VerificationCard } from './components/VerificationCard';
@@ -30,83 +33,7 @@ import { ReadingView } from './components/ReadingView';
 import { MathematicalEvidenceCard } from './components/MathematicalEvidenceCard';
 import { getPrimaryProfile } from './utils/vault';
 
-const FALLBACK_PRESETS: Preset[] = [
-  {
-    id: 'steve-jobs',
-    name: 'Steve Jobs',
-    tag: 'Apple Co-founder',
-    rodden_rating: 'AA',
-    birth_date: '1955-02-24',
-    birth_time: '19:15',
-    time_certainty: 'exact',
-    latitude: 37.7749,
-    longitude: -122.4194,
-    city_name: 'San Francisco',
-    country_name: 'USA',
-    gender: 'male',
-    note: 'Birth Certificate (AA) • Sidereal Leo 29.06° (0.94° cusp) • Ju Men Orator • Viparita Raja Yoga'
-  },
-  {
-    id: 'albert-einstein',
-    name: 'Albert Einstein',
-    tag: 'Theoretical Physics',
-    rodden_rating: 'AA',
-    birth_date: '1879-03-14',
-    birth_time: '11:30',
-    time_certainty: 'rounded_15',
-    latitude: 48.4011,
-    longitude: 9.9876,
-    city_name: 'Ulm',
-    country_name: 'Germany',
-    gender: 'male',
-    note: 'Birth Registry (AA) • 5 Classical Yogas • Budhaditya & Malavya • Gemini Lagna'
-  },
-  {
-    id: 'carl-jung',
-    name: 'Carl Jung',
-    tag: 'Analytical Psychology',
-    rodden_rating: 'AA',
-    birth_date: '1875-07-26',
-    birth_time: '19:32',
-    time_certainty: 'exact',
-    latitude: 47.5994,
-    longitude: 9.3197,
-    city_name: 'Kesswil',
-    country_name: 'Switzerland',
-    gender: 'male',
-    note: "Father's Diary (AA) • Capricorn Lagna • Wu Qu & Qi Sha • Red Book Alchemical Depth"
-  },
-  {
-    id: 'frida-kahlo',
-    name: 'Frida Kahlo',
-    tag: 'Surrealist Painter',
-    rodden_rating: 'AA',
-    birth_date: '1907-07-06',
-    birth_time: '08:30',
-    time_certainty: 'exact',
-    latitude: 19.3502,
-    longitude: -99.1627,
-    city_name: 'Coyoacán',
-    country_name: 'Mexico',
-    gender: 'female',
-    note: 'Birth Certificate (AA) • Sidereal Leo 0.95° Cusp • Yang Ren Blade • 12th House Lot'
-  },
-  {
-    id: 'muhammad-ali',
-    name: 'Muhammad Ali',
-    tag: 'Heavyweight Champion',
-    rodden_rating: 'AA',
-    birth_date: '1942-01-17',
-    birth_time: '18:35',
-    time_certainty: 'exact',
-    latitude: 38.2527,
-    longitude: -85.7585,
-    city_name: 'Louisville',
-    country_name: 'USA',
-    gender: 'male',
-    note: 'Birth Certificate (AA) • Ruchaka Yoga (Exalted Mars Kendra) • Geng Yang Metal Day Master'
-  }
-];
+const FALLBACK_PRESETS: Preset[] = TITANS_100_DATA as unknown as Preset[];
 
 export type AppScreen =
   | 'workbench'
@@ -239,10 +166,12 @@ export default function App() {
       if (res.ok) {
         const data = await res.json();
         setPresets(data);
+        return;
       }
     } catch {
       // Use fallback presets
     }
+    setPresets(FALLBACK_PRESETS);
   };
 
   const handleCompute = async (input: BirthInput, subjectName?: string) => {
@@ -253,22 +182,51 @@ export default function App() {
     }
     setActiveSubjectDate(input.birth_date);
 
+    // 1. Check if this request corresponds to one of the 100 bundled historical titans
+    const matchingTitan = (presets.length ? presets : FALLBACK_PRESETS).find(
+      (p) =>
+        p.birth_date === input.birth_date &&
+        p.birth_time === input.birth_time &&
+        Math.abs(p.latitude - input.latitude) < 0.05
+    );
+
+    if (matchingTitan) {
+      const bundledChart = await getBundledTitanChart(matchingTitan.id);
+      if (bundledChart) {
+        setChartData(bundledChart);
+        setIsLoading(false);
+        return;
+      }
+    }
+
+    // 2. Try remote API if configured and reachable
     try {
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 2500);
       const res = await fetch(apiUrl('/api/compute-chart'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(input),
+        signal: controller.signal
       });
+      clearTimeout(timeoutId);
 
-      if (!res.ok) {
-        const errJson = await res.json();
-        throw new Error(errJson.detail || 'Chart calculation failed');
+      if (res.ok) {
+        const data: ChartResponse = await res.json();
+        setChartData(data);
+        setIsLoading(false);
+        return;
       }
+    } catch {
+      // Offline or server unavailable: seamless fallback to in-app TypeScript engine
+    }
 
-      const data: ChartResponse = await res.json();
-      setChartData(data);
+    // 3. Fallback: Compute in-app via local TypeScript engine
+    try {
+      const localData = await calculateChartLocally(input);
+      setChartData(localData);
     } catch (err: any) {
-      setError(err.message || 'An unexpected error occurred during calculation');
+      setError(err.message || 'An unexpected error occurred during local calculation');
     } finally {
       setIsLoading(false);
     }

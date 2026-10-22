@@ -146,7 +146,7 @@ npx cap open ios      # Opens frontend/ios/App/App.xcodeproj
 npx cap open android  # Opens frontend/android in Android Studio
 ```
 
-Visit the Observatory UI at `http://localhost:5173`, Swagger API Docs at `http://localhost:8000/docs`, or sideload directly onto physical iOS and Android devices.
+Visit the Observatory UI at `http://localhost:5173`, Swagger API Docs at `http://localhost:8000/docs`, or sideload directly onto physical iOS and Android devices (features 100% self-contained in-app calculation with zero server dependency).
 
 ---
 

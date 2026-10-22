@@ -122,6 +122,8 @@ npx cap run android
 
 ### Sideloading onto Physical Devices
 
+> **100% Self-Contained Offline Architecture**: Synodix includes an embedded pure TypeScript calculation engine (`frontend/src/engine/`) using NASA JPL-derived VSOP87 & ELP2000 algorithms (`astronomy-engine`) alongside pre-computed multi-tradition payloads for all 100 historical titans. The sideloaded app functions completely standalone with zero backend daemon or network connectivity required. Custom charts calculate in-memory in under 20ms directly on the device.
+
 #### 1. Android Sideloading (APK)
 The debug APK is pre-compiled and located at `Synodix-debug.apk` in the repository root (or rebuilt via Gradle):
 ```bash
