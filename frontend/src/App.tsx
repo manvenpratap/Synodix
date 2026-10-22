@@ -280,7 +280,7 @@ function AppContent() {
   return (
     <div className="min-h-[100dvh] celestial-observatory-canvas text-slate-200 flex flex-col md:flex-row antialiased">
       {/* 1. Desktop Fixed Sidebar Navigation (>=md) */}
-      <aside className="hidden md:flex flex-col w-64 lg:w-72 bg-[#0a0d15]/95 backdrop-blur-xl border-r border-[#1a2333] shrink-0 h-[100dvh] sticky top-0 overflow-y-auto select-none z-40 scrollbar-thin">
+      <aside className="hidden md:flex flex-col w-64 lg:w-72 sidebar-canvas border-r border-[#1a2333] shrink-0 h-[100dvh] sticky top-0 overflow-y-auto select-none z-40 scrollbar-thin">
         {/* Brand Logo & Header */}
         <div className="p-4 border-b border-[#1a2333]/80 relative overflow-hidden">
           <div className="flex items-center gap-3">
@@ -644,7 +644,7 @@ function AppContent() {
       {/* 3. Main Workspace Area */}
       <div className="flex-1 flex flex-col min-w-0">
         {/* Top Header Bar */}
-        <header className="h-[calc(3.75rem+env(safe-area-inset-top,0px))] pt-[env(safe-area-inset-top,0px)] border-b sm:border border-[#1b2331] sm:rounded-2xl bg-[#0b0e14]/90 backdrop-blur-md px-3 sm:px-6 flex items-center justify-between sticky top-0 sm:top-2 sm:mx-4 lg:mx-6 z-30 shadow-xs">
+        <header className="h-[calc(3.75rem+env(safe-area-inset-top,0px))] pt-[env(safe-area-inset-top,0px)] border-b sm:border border-[#1b2331] sm:rounded-2xl header-canvas backdrop-blur-md px-3 sm:px-6 flex items-center justify-between sticky top-0 sm:top-2 sm:mx-4 lg:mx-6 z-30 shadow-xs">
           <div className="flex items-center gap-2 sm:gap-3 min-w-0">
             {/* Mobile Hamburger Menu Toggle (<md) */}
             <button

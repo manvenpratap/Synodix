@@ -24,3 +24,6 @@ e2e-tests/screenshots/
 .pytest_cache/
 graphify-out/cache/
 graphify-out/.rebuild.lock
+
+# Root test screenshots
+/*.png

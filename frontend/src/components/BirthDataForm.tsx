@@ -292,7 +292,7 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
 
   return (
     <div className="machined-bezel p-1 sm:p-1.5 rounded-2xl relative shadow-xl">
-      <div className="bg-[#0c1018]/95 backdrop-blur-xl border border-white/[0.04] rounded-[calc(1rem-1px)] p-4 sm:p-6 relative">
+      <div className="machined-core border border-white/[0.06] rounded-[calc(1rem-1px)] p-4 sm:p-6 relative">
         <div className="reticle-corner-tl" />
         <div className="reticle-corner-tr" />
         <div className="reticle-corner-bl" />

@@ -185,7 +185,7 @@ export const MathematicalEvidenceCard: React.FC<Props> = ({ onClose }) => {
 
   return (
     <div className="machined-bezel p-1 sm:p-1.5 rounded-2xl shadow-2xl relative">
-      <div className="bg-[#0b0e15]/95 backdrop-blur-xl border border-cyan-800/60 rounded-[calc(1rem-1px)] overflow-hidden font-sans relative">
+      <div className="machined-core border border-cyan-800/60 rounded-[calc(1rem-1px)] overflow-hidden font-sans relative">
         <div className="reticle-corner-tl" />
         <div className="reticle-corner-tr" />
         <div className="reticle-corner-bl" />
