@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import type { BirthInput, ChartResponse, Preset } from './types';
 import {
   Compass,
@@ -277,56 +278,58 @@ function AppContent() {
   }, [isServerModalOpen, isMobileSidebarOpen]);
 
   return (
-    <div className="min-h-[100dvh] bg-[#080a0f] text-slate-200 flex flex-col md:flex-row antialiased">
+    <div className="min-h-[100dvh] celestial-observatory-canvas text-slate-200 flex flex-col md:flex-row antialiased">
       {/* 1. Desktop Fixed Sidebar Navigation (>=md) */}
-      <aside className="hidden md:flex flex-col w-64 lg:w-72 bg-[#0b0e14] border-r border-[#1b2331] shrink-0 h-[100dvh] sticky top-0 overflow-y-auto select-none z-40 scrollbar-thin">
+      <aside className="hidden md:flex flex-col w-64 lg:w-72 bg-[#0a0d15]/95 backdrop-blur-xl border-r border-[#1a2333] shrink-0 h-[100dvh] sticky top-0 overflow-y-auto select-none z-40 scrollbar-thin">
         {/* Brand Logo & Header */}
-        <div className="p-4 border-b border-[#1b2331]">
+        <div className="p-4 border-b border-[#1a2333]/80 relative overflow-hidden">
           <div className="flex items-center gap-3">
-            {/* Nonagon Armilla Geometric Logo Mark */}
-            <div className="w-9 h-9 rounded-lg bg-[#111722] border border-cyan-800 flex items-center justify-center shrink-0 shadow-xs">
-              <svg viewBox="0 0 40 40" className="w-5 h-5" fill="none">
-                <circle cx="20" cy="20" r="16" stroke="#1b2331" strokeWidth="1.5" />
+            {/* Nonagon Armilla Geometric Logo Mark with slow orbital spin ring */}
+            <div className="relative w-10 h-10 rounded-xl bg-gradient-to-br from-[#101826] to-[#090d14] border border-cyan-800/80 flex items-center justify-center shrink-0 shadow-md ring-1 ring-cyan-500/20 group">
+              <div className="absolute inset-0 rounded-xl bg-cyan-400/5 group-hover:bg-cyan-400/10 transition-colors" />
+              <svg viewBox="0 0 40 40" className="w-6 h-6 animate-orbital-spin" fill="none">
+                <circle cx="20" cy="20" r="16" stroke="#1e293b" strokeWidth="1.2" strokeDasharray="3 3" />
                 <polygon points="20,6 32,27 8,27" stroke="#38bdf8" strokeWidth="1.5" strokeLinejoin="round" />
                 <polygon points="29,10 25,32 5,18" stroke="#f59e0b" strokeWidth="1" strokeOpacity="0.85" strokeLinejoin="round" />
                 <polygon points="34,18 15,32 12,10" stroke="#10b981" strokeWidth="1" strokeOpacity="0.85" strokeLinejoin="round" />
-                <circle cx="20" cy="20" r="2" fill="#38bdf8" />
+                <circle cx="20" cy="20" r="2.5" fill="#38bdf8" />
               </svg>
             </div>
             <div>
               <div className="flex items-center gap-1.5">
-                <span className="font-bold tracking-tight text-slate-100 text-sm font-sans tracking-wide">
+                <span className="font-bold tracking-tight text-slate-100 text-sm font-sans tracking-wider">
                   SYNODIX
                 </span>
-                <span className="px-1.5 py-0.2 rounded text-[9px] font-mono bg-cyan-950 text-cyan-300 border border-cyan-800">
-                  v2.2
+                <span className="px-1.5 py-0.2 rounded text-[9px] font-mono bg-cyan-950 text-cyan-300 border border-cyan-800 font-medium">
+                  v2.15
                 </span>
               </div>
-              <p className="text-[10px] text-slate-400 font-mono mt-0.5">
-                Astrometric Triangulation Engine
+              <p className="text-[10px] text-slate-400 font-mono mt-0.5 tracking-tight flex items-center gap-1">
+                <span className="w-1.5 h-1.5 rounded-full bg-cyan-400/80 inline-block animate-pulse"></span>
+                Astrometric Observatory
               </p>
             </div>
           </div>
         </div>
 
-        {/* Active Subject Context Pill */}
+        {/* Active Subject Context Pill — Engraved Instrument Plate */}
         <div className="px-3 pt-3">
-          <div className="p-2.5 rounded-lg bg-[#0e131d] border border-[#1e2738] flex flex-col gap-1">
+          <div className="p-3 rounded-xl bg-gradient-to-b from-[#0e1422] to-[#0a0d16] border border-[#1e293b] shadow-xs flex flex-col gap-1.5 relative overflow-hidden group">
             <div className="flex items-center justify-between">
-              <span className="text-[10px] uppercase font-mono text-slate-400 font-semibold tracking-wider flex items-center gap-1">
+              <span className="text-[10px] uppercase font-mono text-slate-400 font-semibold tracking-wider flex items-center gap-1.5">
                 <User className="w-3 h-3 text-cyan-400" />
-                Active Subject
+                Subject Dossier
               </span>
               <button
                 type="button"
                 onClick={() => navigateTo('workbench')}
-                className="text-[10px] font-mono text-cyan-400 hover:text-cyan-300 cursor-pointer underline"
+                className="text-[10px] font-mono text-cyan-400 hover:text-cyan-300 cursor-pointer underline hover:text-cyan-200 transition-colors"
               >
                 Switch
               </button>
             </div>
             <div className="flex items-baseline justify-between">
-              <span className="text-xs font-semibold text-slate-100 truncate">
+              <span className="text-xs font-semibold text-slate-100 truncate tracking-wide">
                 {activeSubjectName}
               </span>
               <span className="text-[10px] font-mono text-slate-400 tabular-nums">
@@ -334,36 +337,73 @@ function AppContent() {
               </span>
             </div>
             {chartData && (
-              <div className="flex items-center justify-between text-[10px] font-mono pt-1 border-t border-[#1b2331]/80 text-slate-400">
-                <span>Divergence:</span>
-                <span className={`font-semibold ${
-                  chartData.synthesis.divergence_metrics.divergence_rate_percent > 40
-                    ? 'text-rose-400'
-                    : 'text-emerald-400'
-                }`}>
-                  {chartData.synthesis.divergence_metrics.divergence_rate_percent}%
-                </span>
+              <div className="pt-1.5 border-t border-[#1b2331]/80 text-[10px] font-mono flex flex-col gap-1">
+                <div className="flex items-center justify-between text-slate-400">
+                  <span className="flex items-center gap-1">
+                    <span>Divergence:</span>
+                    <ExplainerTrigger id="divergence_rate_calculation" variant="icon" size="xs" />
+                  </span>
+                  <span className={`font-semibold ${
+                    chartData.synthesis.divergence_metrics.divergence_rate_percent > 40
+                      ? 'text-rose-400'
+                      : 'text-emerald-400'
+                  }`}>
+                    {chartData.synthesis.divergence_metrics.divergence_rate_percent}%
+                  </span>
+                </div>
+                {/* Divergence Mini Gauge Bar */}
+                <div className="w-full h-1 bg-[#151c28] rounded-full overflow-hidden">
+                  <div
+                    className={`h-full transition-all duration-500 rounded-full ${
+                      chartData.synthesis.divergence_metrics.divergence_rate_percent > 40
+                        ? 'bg-gradient-to-r from-amber-500 to-rose-500'
+                        : 'bg-gradient-to-r from-cyan-500 to-emerald-400'
+                    }`}
+                    style={{ width: `${Math.min(100, Math.max(8, 100 - chartData.synthesis.divergence_metrics.divergence_rate_percent))}%` }}
+                  />
+                </div>
               </div>
             )}
           </div>
         </div>
 
-        {/* Canonical Traditions Alignment Status (Stitch Observatory Style) */}
+        {/* Canonical Traditions Alignment Status (Astrometric Array) */}
         <div className="px-3 pt-2">
-          <div className="p-2 rounded-lg bg-[#080d14] border border-[#1b2331]">
-            <span className="text-[9px] uppercase font-mono text-slate-400 font-semibold tracking-wider block mb-1.5 px-0.5">
-              CANONICAL SYSTEMS (9)
-            </span>
+          <div className="p-2.5 rounded-xl bg-gradient-to-b from-[#090e17] to-[#070b12] border border-[#1a2332]">
+            <div className="flex items-center justify-between mb-1.5 px-0.5">
+              <span className="text-[9px] uppercase font-mono text-slate-400 font-semibold tracking-wider">
+                CIVILIZATIONAL ARRAY (9)
+              </span>
+              <span className="text-[9px] font-mono text-cyan-400/90 font-medium">9 / 9 ACTIVE</span>
+            </div>
             <div className="grid grid-cols-3 gap-1 text-[9px] font-mono text-center">
-              <div className="p-1 rounded bg-[#0d121c] border border-[#1b2331] text-emerald-400">JYOT</div>
-              <div className="p-1 rounded bg-[#0d121c] border border-[#1b2331] text-cyan-400">HELL</div>
-              <div className="p-1 rounded bg-[#0d121c] border border-[#1b2331] text-amber-400">BAZI</div>
-              <div className="p-1 rounded bg-[#0d121c] border border-[#1b2331] text-purple-400">ZIWEI</div>
-              <div className="p-1 rounded bg-[#0d121c] border border-[#1b2331] text-cyan-400">MAYA</div>
-              <div className="p-1 rounded bg-[#0d121c] border border-[#1b2331] text-rose-400">TIBET</div>
-              <div className="p-1 rounded bg-[#0d121c] border border-[#1b2331] text-amber-400">PERS</div>
-              <div className="p-1 rounded bg-[#0d121c] border border-[#1b2331] text-cyan-400">EGYPT</div>
-              <div className="p-1 rounded bg-[#0d121c] border border-[#1b2331] text-emerald-400">MARA</div>
+              <div className="px-1 py-1 rounded bg-[#0d131f] border border-[#1e2a3a] text-amber-300 font-medium flex items-center justify-center gap-1 hover:border-amber-500/50 transition-colors" data-tooltip="Jyotisha (Vedic)">
+                <span className="text-[8px]">🕉️</span> JYOT
+              </div>
+              <div className="px-1 py-1 rounded bg-[#0d131f] border border-[#1e2a3a] text-cyan-300 font-medium flex items-center justify-center gap-1 hover:border-cyan-500/50 transition-colors" data-tooltip="Western (Hellenistic)">
+                <span className="text-[8px]">🏛️</span> HELL
+              </div>
+              <div className="px-1 py-1 rounded bg-[#0d131f] border border-[#1e2a3a] text-rose-300 font-medium flex items-center justify-center gap-1 hover:border-rose-500/50 transition-colors" data-tooltip="BaZi (Four Pillars)">
+                <span className="text-[8px]">☯️</span> BAZI
+              </div>
+              <div className="px-1 py-1 rounded bg-[#0d131f] border border-[#1e2a3a] text-purple-300 font-medium flex items-center justify-center gap-1 hover:border-purple-500/50 transition-colors" data-tooltip="Zi Wei Dou Shu">
+                <span className="text-[8px]">👑</span> ZIWEI
+              </div>
+              <div className="px-1 py-1 rounded bg-[#0d131f] border border-[#1e2a3a] text-emerald-300 font-medium flex items-center justify-center gap-1 hover:border-emerald-500/50 transition-colors" data-tooltip="Maya (Tzolk'in)">
+                <span className="text-[8px]">☀️</span> MAYA
+              </div>
+              <div className="px-1 py-1 rounded bg-[#0d131f] border border-[#1e2a3a] text-amber-400 font-medium flex items-center justify-center gap-1 hover:border-amber-500/50 transition-colors" data-tooltip="Tibetan (Phugpa)">
+                <span className="text-[8px]">☸️</span> TIBET
+              </div>
+              <div className="px-1 py-1 rounded bg-[#0d131f] border border-[#1e2a3a] text-teal-300 font-medium flex items-center justify-center gap-1 hover:border-teal-500/50 transition-colors" data-tooltip="Persian (Almuten)">
+                <span className="text-[8px]">🕌</span> PERS
+              </div>
+              <div className="px-1 py-1 rounded bg-[#0d131f] border border-[#1e2a3a] text-yellow-300 font-medium flex items-center justify-center gap-1 hover:border-yellow-500/50 transition-colors" data-tooltip="Egyptian (Decans)">
+                <span className="text-[8px]">𓋹</span> EGYPT
+              </div>
+              <div className="px-1 py-1 rounded bg-[#0d131f] border border-[#1e2a3a] text-emerald-400 font-medium flex items-center justify-center gap-1 hover:border-emerald-500/50 transition-colors" data-tooltip="Māori (Maramataka)">
+                <span className="text-[8px]">🌊</span> MARA
+              </div>
             </div>
           </div>
         </div>
@@ -382,18 +422,20 @@ function AppContent() {
                 key={item.id}
                 type="button"
                 onClick={() => navigateTo(item.id)}
-                className={`w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-left transition-all cursor-pointer group ${
+                className={`w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-left transition-all cursor-pointer group relative ${
                   isActive
-                    ? 'bg-[#141d2b] text-cyan-300 font-medium border border-cyan-800/80 shadow-xs ring-1 ring-cyan-500/20'
-                    : 'text-slate-300 hover:text-slate-100 hover:bg-[#101520] border border-transparent'
+                    ? 'bg-gradient-to-r from-cyan-950/60 via-[#121a28] to-[#0c1018] text-cyan-300 font-medium border-l-2 border-l-cyan-400 border-y border-r border-cyan-800/40 shadow-xs ring-1 ring-cyan-500/20 translate-x-0.5'
+                    : 'text-slate-300 hover:text-slate-100 hover:bg-[#101622]/80 border border-transparent hover:border-[#1b2535]'
                 }`}
               >
                 <div className="flex items-center gap-2.5 min-w-0">
-                  <Icon className={`w-4 h-4 shrink-0 transition-colors ${
-                    isActive ? 'text-cyan-400' : 'text-slate-400 group-hover:text-slate-200'
-                  }`} />
+                  <div className={`w-7 h-7 rounded-lg flex items-center justify-center shrink-0 transition-colors ${
+                    isActive ? 'bg-cyan-950/80 border border-cyan-700/60 text-cyan-400' : 'bg-[#0f1420] border border-[#1c2433] text-slate-400 group-hover:text-slate-200 group-hover:border-slate-600'
+                  }`}>
+                    <Icon className="w-3.5 h-3.5" />
+                  </div>
                   <div className="truncate">
-                    <span className="text-xs block font-sans truncate">{item.label}</span>
+                    <span className="text-xs block font-sans truncate font-medium">{item.label}</span>
                     <span className="text-[10px] text-slate-400 block truncate font-mono">
                       {item.description}
                     </span>
@@ -401,9 +443,9 @@ function AppContent() {
                 </div>
 
                 {item.badge && (
-                  <span className={`px-1.5 py-0.2 rounded text-[9px] font-mono shrink-0 ml-1 ${
+                  <span className={`px-1.5 py-0.5 rounded text-[9px] font-mono shrink-0 ml-1 ${
                     isActive
-                      ? 'bg-cyan-950 text-cyan-300 border border-cyan-800'
+                      ? 'bg-cyan-950 text-cyan-300 border border-cyan-700 font-semibold shadow-xs'
                       : 'bg-[#151c28] text-slate-400 border border-[#1b2331]'
                   }`}>
                     {item.badge}
@@ -602,7 +644,7 @@ function AppContent() {
       {/* 3. Main Workspace Area */}
       <div className="flex-1 flex flex-col min-w-0">
         {/* Top Header Bar */}
-        <header className="h-[calc(3.5rem+env(safe-area-inset-top,0px))] pt-[env(safe-area-inset-top,0px)] border-b border-[#1b2331] bg-[#0b0e14]/90 backdrop-blur-md px-3 sm:px-6 flex items-center justify-between sticky top-0 z-30">
+        <header className="h-[calc(3.75rem+env(safe-area-inset-top,0px))] pt-[env(safe-area-inset-top,0px)] border-b sm:border border-[#1b2331] sm:rounded-2xl bg-[#0b0e14]/90 backdrop-blur-md px-3 sm:px-6 flex items-center justify-between sticky top-0 sm:top-2 sm:mx-4 lg:mx-6 z-30 shadow-xs">
           <div className="flex items-center gap-2 sm:gap-3 min-w-0">
             {/* Mobile Hamburger Menu Toggle (<md) */}
             <button
@@ -617,7 +659,10 @@ function AppContent() {
 
             {/* Breadcrumb Screen Title */}
             <div className="flex items-center gap-1.5 sm:gap-2 min-w-0">
-              <span className="text-xs font-mono text-cyan-400 font-semibold tracking-wider hidden sm:inline">SYNODIX</span>
+              <span className="text-xs font-mono text-cyan-400 font-semibold tracking-wider hidden sm:inline flex items-center gap-1.5">
+                <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse"></span>
+                SYNODIX
+              </span>
               <span className="text-slate-600 hidden sm:inline">/</span>
               <h1 className="text-sm font-semibold text-slate-100 flex items-center gap-2 min-w-0">
                 <span className="truncate max-w-[130px] sm:max-w-none">
@@ -725,85 +770,95 @@ function AppContent() {
             </div>
           )}
 
-          {/* SCREEN 1: Workbench & Profile Vault */}
-          {currentScreen === 'workbench' && (
-            <div className="space-y-6 animate-screen-enter">
-              <BirthDataForm
-                onCompute={handleCompute}
-                isLoading={isLoading}
-                samplePresets={presets}
-              />
-              {chartData && (
-                <div className="space-y-4">
-                  <div className="flex items-center justify-between bg-[#0a0d14] p-3 rounded-lg border border-[#1b2331]">
-                    <div className="text-xs font-mono text-slate-300">
-                      Chart calculated for <strong className="text-cyan-300">{activeSubjectName}</strong> ({activeSubjectDate}).
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={currentScreen}
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -6 }}
+              transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
+            >
+              {/* SCREEN 1: Workbench & Profile Vault */}
+              {currentScreen === 'workbench' && (
+                <div className="space-y-6">
+                  <BirthDataForm
+                    onCompute={handleCompute}
+                    isLoading={isLoading}
+                    samplePresets={presets}
+                  />
+                  {chartData && (
+                    <div className="space-y-4">
+                      <div className="flex items-center justify-between bg-[#0a0d14] p-3 rounded-lg border border-[#1b2331]">
+                        <div className="text-xs font-mono text-slate-300">
+                          Chart calculated for <strong className="text-cyan-300">{activeSubjectName}</strong> ({activeSubjectDate}).
+                        </div>
+                        <button
+                          type="button"
+                          onClick={() => navigateTo('traditions')}
+                          className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs rounded bg-cyan-700 hover:bg-cyan-600 text-white font-medium cursor-pointer transition-colors btn-press"
+                        >
+                          <span>Explore Cultural Traditions</span>
+                          <ArrowRight className="w-3.5 h-3.5" />
+                        </button>
+                      </div>
+                      <InputAuditCard data={chartData} />
                     </div>
-                    <button
-                      type="button"
-                      onClick={() => navigateTo('traditions')}
-                      className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs rounded bg-cyan-700 hover:bg-cyan-600 text-white font-medium cursor-pointer transition-colors btn-press"
-                    >
-                      <span>Explore Cultural Traditions</span>
-                      <ArrowRight className="w-3.5 h-3.5" />
-                    </button>
-                  </div>
-                  <InputAuditCard data={chartData} />
+                  )}
                 </div>
               )}
-            </div>
-          )}
 
-          {/* SCREEN 2: Cultural Traditions */}
-          {currentScreen === 'traditions' && (
-            <div className="animate-screen-enter">
-              {chartData ? (
-                <TraditionCharts data={chartData} />
-              ) : (
-                <EmptyChartState onOpenWorkbench={() => navigateTo('workbench')} />
+              {/* SCREEN 2: Cultural Traditions */}
+              {currentScreen === 'traditions' && (
+                <div>
+                  {chartData ? (
+                    <TraditionCharts data={chartData} />
+                  ) : (
+                    <EmptyChartState onOpenWorkbench={() => navigateTo('workbench')} />
+                  )}
+                </div>
               )}
-            </div>
-          )}
 
-          {/* SCREEN 3: Domain Synthesis Matrix */}
-          {currentScreen === 'synthesis' && (
-            <div className="animate-screen-enter">
-              {chartData ? (
-                <SynthesisMatrix synthesis={chartData.synthesis} />
-              ) : (
-                <EmptyChartState onOpenWorkbench={() => navigateTo('workbench')} />
+              {/* SCREEN 3: Domain Synthesis Matrix */}
+              {currentScreen === 'synthesis' && (
+                <div>
+                  {chartData ? (
+                    <SynthesisMatrix synthesis={chartData.synthesis} />
+                  ) : (
+                    <EmptyChartState onOpenWorkbench={() => navigateTo('workbench')} />
+                  )}
+                </div>
               )}
-            </div>
-          )}
 
-          {/* SCREEN 4: Corroboration Dossier & Narrative */}
-          {currentScreen === 'dossier' && (
-            <div className="animate-screen-enter">
-              {chartData ? (
-                <ReadingView data={chartData} />
-              ) : (
-                <EmptyChartState onOpenWorkbench={() => navigateTo('workbench')} />
+              {/* SCREEN 4: Corroboration Dossier & Narrative */}
+              {currentScreen === 'dossier' && (
+                <div>
+                  {chartData ? (
+                    <ReadingView data={chartData} />
+                  ) : (
+                    <EmptyChartState onOpenWorkbench={() => navigateTo('workbench')} />
+                  )}
+                </div>
               )}
-            </div>
-          )}
 
-          {/* SCREEN 5: Astronomical Verification & JPL DE421 Diffs */}
-          {currentScreen === 'verification' && (
-            <div className="animate-screen-enter">
-              {chartData ? (
-                <VerificationCard report={chartData.verification_report} />
-              ) : (
-                <EmptyChartState onOpenWorkbench={() => navigateTo('workbench')} />
+              {/* SCREEN 5: Astronomical Verification & JPL DE421 Diffs */}
+              {currentScreen === 'verification' && (
+                <div>
+                  {chartData ? (
+                    <VerificationCard report={chartData.verification_report} />
+                  ) : (
+                    <EmptyChartState onOpenWorkbench={() => navigateTo('workbench')} />
+                  )}
+                </div>
               )}
-            </div>
-          )}
 
-          {/* SCREEN 6: Mathematical Evidence & Whitepaper */}
-          {currentScreen === 'evidence' && (
-            <div className="animate-screen-enter">
-              <MathematicalEvidenceCard onClose={() => navigateTo('workbench')} />
-            </div>
-          )}
+              {/* SCREEN 6: Mathematical Evidence & Whitepaper */}
+              {currentScreen === 'evidence' && (
+                <div>
+                  <MathematicalEvidenceCard onClose={() => navigateTo('workbench')} />
+                </div>
+              )}
+            </motion.div>
+          </AnimatePresence>
         </main>
       </div>
 

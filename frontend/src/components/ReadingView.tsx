@@ -77,8 +77,14 @@ export const ReadingView: React.FC<Props> = ({ data }) => {
   });
 
   return (
-    <div className="bg-[#0b0e14] border border-[#1b2331] rounded-xl overflow-hidden shadow-2xl">
-      {/* ==================== 1. DOCUMENT TOP BANNER & ACTION BAR ==================== */}
+    <div className="machined-bezel p-1 sm:p-1.5 rounded-2xl shadow-2xl relative">
+      <div className="bg-[#0b0e14]/95 backdrop-blur-xl border border-white/[0.04] rounded-[calc(1rem-1px)] overflow-hidden relative">
+        <div className="reticle-corner-tl" />
+        <div className="reticle-corner-tr" />
+        <div className="reticle-corner-bl" />
+        <div className="reticle-corner-br" />
+
+        {/* ==================== 1. DOCUMENT TOP BANNER & ACTION BAR ==================== */}
       <div className="bg-[#0d121c] border-b border-[#1b2331] p-5 sm:p-6">
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
           <div>
@@ -731,6 +737,7 @@ export const ReadingView: React.FC<Props> = ({ data }) => {
           </div>
         </div>
       )}
+      </div>
     </div>
   );
 };

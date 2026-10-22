@@ -291,9 +291,15 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
   });
 
   return (
-    <div className="bg-[#0d1118] border border-[#1b2331] rounded-lg p-5">
-      {/* Top Header & Independent Experience Mode Switcher */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between pb-4 border-b border-[#1b2331] gap-3">
+    <div className="machined-bezel p-1 sm:p-1.5 rounded-2xl relative shadow-xl">
+      <div className="bg-[#0c1018]/95 backdrop-blur-xl border border-white/[0.04] rounded-[calc(1rem-1px)] p-4 sm:p-6 relative">
+        <div className="reticle-corner-tl" />
+        <div className="reticle-corner-tr" />
+        <div className="reticle-corner-bl" />
+        <div className="reticle-corner-br" />
+
+        {/* Top Header & Independent Experience Mode Switcher */}
+        <div className="flex flex-col md:flex-row md:items-center justify-between pb-4 border-b border-[#1b2331] gap-3">
         <div>
           <div className="flex flex-wrap items-center gap-x-2 gap-y-0.5">
             <span className="text-[10px] font-mono uppercase tracking-wider text-cyan-400 font-semibold">
@@ -1028,6 +1034,7 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
           )}
         </div>
       )}
+      </div>
     </div>
   );
 };

@@ -46,8 +46,14 @@ export const SynthesisMatrix: React.FC<Props> = ({ synthesis }) => {
   };
 
   return (
-    <div className="bg-[#0d1118] border border-[#1b2331] rounded-lg p-5 space-y-5">
-      {/* Header & Divergence Metric */}
+    <div className="machined-bezel p-1 sm:p-1.5 rounded-2xl shadow-xl relative">
+      <div className="bg-[#0c1018]/95 backdrop-blur-xl border border-white/[0.04] rounded-[calc(1rem-1px)] p-4 sm:p-6 space-y-5 relative">
+        <div className="reticle-corner-tl" />
+        <div className="reticle-corner-tr" />
+        <div className="reticle-corner-bl" />
+        <div className="reticle-corner-br" />
+
+        {/* Header & Divergence Metric */}
       <div className="flex flex-col md:flex-row md:items-center justify-between pb-3.5 border-b border-[#1b2331] gap-3">
         <div>
           <span className="text-[10px] font-mono uppercase tracking-wider text-purple-400 font-semibold block">
@@ -381,6 +387,7 @@ export const SynthesisMatrix: React.FC<Props> = ({ synthesis }) => {
             {synthesis.chronology.convergence_status}
           </div>
         </div>
+      </div>
       </div>
     </div>
   );
