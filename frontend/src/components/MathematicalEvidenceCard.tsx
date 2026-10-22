@@ -404,7 +404,12 @@ export const MathematicalEvidenceCard: React.FC<Props> = ({ onClose }) => {
                 </div>
               </div>
 
-              <div className="overflow-x-auto rounded-lg border border-[#1b2331]">
+              <div
+                tabIndex={0}
+                role="region"
+                aria-label="Empirical hypothesis testing results table"
+                className="overflow-x-auto rounded-lg border border-[#1b2331] focus:outline-none focus-visible:ring-1 focus-visible:ring-cyan-500"
+              >
                 <table className="w-full text-left text-xs font-mono border-collapse bg-[#0c1018]">
                   <thead>
                     <tr className="border-b border-[#1b2331] text-[10px] text-slate-400 uppercase bg-[#080b11]">
@@ -618,7 +623,12 @@ export const MathematicalEvidenceCard: React.FC<Props> = ({ onClose }) => {
           {/* TAB 4: Commercial & Ethical Moat */}
           {activeTab === 'moat' && (
             <div className="space-y-4 text-xs text-slate-300">
-              <div className="overflow-x-auto rounded-lg border border-[#1b2331]">
+              <div
+                tabIndex={0}
+                role="region"
+                aria-label="Empirical hypothesis testing results table"
+                className="overflow-x-auto rounded-lg border border-[#1b2331] focus:outline-none focus-visible:ring-1 focus-visible:ring-cyan-500"
+              >
                 <table className="w-full text-left font-mono border-collapse bg-[#0c1018]">
                   <thead>
                     <tr className="border-b border-[#1b2331] text-[10px] text-slate-400 uppercase bg-[#080b11]">
@@ -784,7 +794,12 @@ export const MathematicalEvidenceCard: React.FC<Props> = ({ onClose }) => {
               Every hypothesis was evaluated with two-tailed p-values, Z-scores, and odds ratios comparing observed frequencies against the 1,000 random control distribution.
             </p>
 
-            <div className="overflow-x-auto rounded border border-[#1b2331] my-3">
+            <div
+              tabIndex={0}
+              role="region"
+              aria-label="Academic statistical evaluation table"
+              className="overflow-x-auto rounded border border-[#1b2331] my-3 focus:outline-none focus-visible:ring-1 focus-visible:ring-cyan-500"
+            >
               <table className="w-full text-left text-xs font-mono bg-[#0a0d14]">
                 <thead>
                   <tr className="border-b border-[#1b2331] text-slate-400 uppercase bg-[#06080e]">

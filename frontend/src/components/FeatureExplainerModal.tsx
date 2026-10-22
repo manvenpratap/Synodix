@@ -59,7 +59,7 @@ export const FeatureExplainerModal: React.FC = () => {
       role="dialog"
       aria-modal="true"
       aria-labelledby="explainer-modal-title"
-      className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/80 backdrop-blur-sm animate-fade-in"
+      className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/80 backdrop-blur-sm animate-fade-in overscroll-contain"
       onClick={closeExplainer}
     >
       <div
@@ -110,7 +110,7 @@ export const FeatureExplainerModal: React.FC = () => {
         </div>
 
         {/* Modal Body */}
-        <div className="p-5 sm:p-6 overflow-y-auto space-y-5 scrollbar-thin">
+        <div className="p-5 sm:p-6 overflow-y-auto space-y-5 scrollbar-thin overscroll-contain">
           {activeExplainer ? (
             /* --- DETAILED SINGLE EXPLAINER VIEW --- */
             <div className="space-y-5">
@@ -233,6 +233,7 @@ export const FeatureExplainerModal: React.FC = () => {
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     placeholder="Search explainers (e.g., Ayanamsha, Day Master, Sect, Decans, Mewa, Consensus)..."
+                    enterKeyHint="search"
                     className="w-full bg-[#080d16] border border-[#1b2537] rounded-lg pl-9 pr-3 py-2 text-xs text-slate-200 font-mono placeholder:text-slate-500 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500"
                   />
                   {searchQuery && (

@@ -404,20 +404,48 @@ body {
   font-variant-numeric: tabular-nums;
 }
 
-/* Custom scrollbars */
-::-webkit-scrollbar {
-  width: 5px;
-  height: 5px;
+/* Typographic legibility & balanced wrapping (modern-web-guidance: improve-text-layout-and-legibility) */
+h1, h2, h3, h4, h5, h6 {
+  text-wrap: balance;
 }
-::-webkit-scrollbar-track {
-  background: #080a0f;
+
+p, blockquote {
+  text-wrap: pretty;
 }
-::-webkit-scrollbar-thumb {
-  background: #222d3d;
-  border-radius: 2px;
+
+/* Standards-compliant scrollbars (modern-web-guidance: customize-scrollbar-color-and-thickness) */
+:root {
+  --scrollbar-thumb: #222d3d;
+  --scrollbar-track: #080a0f;
+  scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+  scrollbar-width: thin;
 }
-::-webkit-scrollbar-thumb:hover {
-  background: #33435a;
+
+[data-theme="light"],
+html[data-theme="light"] {
+  --scrollbar-thumb: #cbd5e1;
+  --scrollbar-track: #f1f5f9;
+  scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+}
+
+@supports not (scrollbar-color: auto) {
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--scrollbar-track);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--scrollbar-thumb);
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #33435a;
+  }
+  [data-theme="light"] ::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+  }
 }
 
 /* =========================================================================

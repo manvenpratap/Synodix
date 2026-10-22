@@ -1,7 +1,7 @@
 # Synodix: Project Context & Working Memory
 
-**Last Updated:** 2026-10-22 09:29:50
-**Version:** 2.12.0  
+**Last Updated:** 2026-10-22 09:46:38
+**Version:** 2.13.0  
 **Stack:** Python 3.12 (FastAPI, Swiss Ephemeris 2.10, Skyfield DE421) + TypeScript / React 19 / Vite / Tailwind CSS v4 / Capacitor 8 (iOS & Android)  
 **Workspace:** `/Volumes/Study/Projects/Astrology` (symlinked as `/Volumes/Study/Astrology`)  
 **Git Remote:** `https://github.com/manvenpratap/Synodix.git`  
@@ -9,7 +9,16 @@
 ---
 
 ## 1. Current Status & Milestone
-- **Active Phase**: Comprehensive UI/UX Design Review & Design System Polish (`/frontend-design`, `/ui-ux-pro-max`) (Completed)
+- **Active Phase**: Modern Web Platform Standards & Interaction Guidance (`/modern-web-guidance`) (Completed)
+- **Modern Web Architecture & Interaction Compliance**:
+  - Implemented standards-compliant scrollbar styling using `scrollbar-color` and `scrollbar-width: thin` with progressive enhancement WebKit fallback (`customize-scrollbar-color-and-thickness`).
+  - Added modern typographic line-wrapping rules (`text-wrap: balance` on all headings and `text-wrap: pretty` on paragraphs) in `index.css` to prevent typographic orphans and balance heading visual rhythm (`improve-text-layout-and-legibility`).
+  - Implemented `overscroll-contain` across modal overlays, scrollable dialog bodies, mobile navigation drawers, and combobox dropdowns to prevent background scroll chaining (`prevent-page-scroll-under-modal-dialog`).
+  - Accessible table scroll regions: added `tabIndex={0}`, `role="region"`, and unique `aria-label` tags across all telemetry data tables (`responsive-table`).
+  - Form ergonomics: added standard HTML5 autofill tokens (`autoComplete="bday"`, `autoComplete="country-name"`) and contextual virtual keyboard hints (`enterKeyHint="search"`, `enterKeyHint="next"`) (`forms`).
+  - Linter & tests: 0 oxlint warnings/errors, 0 impeccable detect issues, 16/16 regression tests passing in 32.66s.
+- **Workflow Health**: 100% CLEAN (Verified via `./pipeline.sh doctor`)
+- **Test Invariants**: 16/16 regression suites passing via `./pipeline.sh test --summary` (32.66s)
 - **Design System & Interaction Standards**:
   - Full adherence to UI/UX Pro Max and Frontend Design criteria (WCAG AAA/AA, zero AI slop, cohesive astrometric observatory aesthetic).
   - Synchronized all 14 background and border classes in `index.css` for flawless Solar Day light mode rendering with zero dark-border leaks.

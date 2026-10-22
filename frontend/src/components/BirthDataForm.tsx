@@ -447,6 +447,7 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
                   id="birth_date"
                   type="date"
                   required
+                  autoComplete="bday"
                   value={formData.birth_date}
                   onChange={(e) => setFormData({ ...formData, birth_date: e.target.value })}
                   className="w-full bg-[#080a0f] border border-[#1b2331] rounded-md px-3 py-2 text-xs font-mono text-slate-100 focus:outline-none focus:border-cyan-500 focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-1 focus-visible:ring-offset-[#080a0f] transition-colors"
@@ -560,7 +561,7 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
                   <div
                     role="listbox"
                     aria-label="City suggestions"
-                    className="absolute left-0 right-0 top-full mt-1.5 z-50 bg-[#0a0e17] border border-cyan-800/80 rounded-lg shadow-2xl overflow-hidden max-h-64 overflow-y-auto divide-y divide-[#1b2331] font-sans"
+                    className="absolute left-0 right-0 top-full mt-1.5 z-50 bg-[#0a0e17] border border-cyan-800/80 rounded-lg shadow-2xl overflow-hidden max-h-64 overflow-y-auto divide-y divide-[#1b2331] font-sans overscroll-contain"
                   >
                     <div className="px-2.5 py-1.5 bg-[#06090e] border-b border-[#1b2331] flex items-center justify-between text-[10px] font-mono text-slate-400">
                       <span>SUGGESTED CITIES & COORDINATES</span>
@@ -619,6 +620,7 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
                   id="country_name"
                   type="text"
                   required
+                  autoComplete="country-name"
                   value={formData.country_name}
                   onChange={(e) => setFormData({ ...formData, country_name: e.target.value })}
                   onBlur={handleCityBlur}
@@ -867,6 +869,7 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
                   onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder="Search by name, discovery, or city (e.g. Einstein, Jordan, Kahlo, Curie, London)..."
                   aria-label="Search 100 historical figures by name, field, or city"
+                  enterKeyHint="search"
                   className="w-full bg-transparent text-xs text-slate-200 placeholder-slate-500 focus:outline-none font-sans py-1"
                 />
                 {searchQuery && (

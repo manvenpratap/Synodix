@@ -78,7 +78,12 @@ export const VerificationCard: React.FC<Props> = ({ report }) => {
           </span>
         </div>
 
-        <div className="overflow-x-auto rounded border border-[#1b2331]">
+        <div
+          tabIndex={0}
+          role="region"
+          aria-label="Dual-Engine Ephemeris Cross-Validation Table"
+          className="overflow-x-auto rounded border border-[#1b2331] focus:outline-none focus-visible:ring-1 focus-visible:ring-cyan-500"
+        >
           <table className="w-full text-left text-xs border-collapse">
             <thead>
               <tr className="bg-[#080a0f] text-slate-400 border-b border-[#1b2331] font-mono uppercase tracking-wider text-[10px]">

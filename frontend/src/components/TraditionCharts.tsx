@@ -415,7 +415,12 @@ export const TraditionCharts: React.FC<Props> = ({ data }) => {
                     <ExplainerTrigger id="gandanta_zones" label="Gandanta Knots" variant="badge" />
                   </div>
                 </div>
-                <div className="overflow-x-auto rounded border border-[#1b2331]">
+                <div
+                  tabIndex={0}
+                  role="region"
+                  aria-label="Jyotisha planetary positions and dignities"
+                  className="overflow-x-auto rounded border border-[#1b2331] focus:outline-none focus-visible:ring-1 focus-visible:ring-cyan-500"
+                >
             <table className="w-full text-left text-xs border-collapse">
               <thead>
                 <tr className="bg-[#080a0f] text-slate-400 border-b border-[#1b2331] font-mono uppercase tracking-wider text-[10px]">
@@ -890,7 +895,12 @@ export const TraditionCharts: React.FC<Props> = ({ data }) => {
                   </span>
                   <ExplainerTrigger id="essential_dignities_score" label="Dignity Matrix" variant="badge" />
                 </div>
-                <div className="overflow-x-auto rounded border border-[#1b2331]">
+                <div
+                  tabIndex={0}
+                  role="region"
+                  aria-label="Jyotisha planetary positions and dignities"
+                  className="overflow-x-auto rounded border border-[#1b2331] focus:outline-none focus-visible:ring-1 focus-visible:ring-cyan-500"
+                >
             <table className="w-full text-left text-xs border-collapse">
               <thead>
                 <tr className="bg-[#080a0f] text-slate-400 border-b border-[#1b2331] font-mono uppercase tracking-wider text-[10px]">
@@ -1347,7 +1357,12 @@ export const TraditionCharts: React.FC<Props> = ({ data }) => {
                   </span>
                   <ExplainerTrigger id="almuten_figuris" label="Almuten Math" variant="badge" />
                 </div>
-                <div className="overflow-x-auto rounded border border-[#1b2331]">
+                <div
+                  tabIndex={0}
+                  role="region"
+                  aria-label="Jyotisha planetary positions and dignities"
+                  className="overflow-x-auto rounded border border-[#1b2331] focus:outline-none focus-visible:ring-1 focus-visible:ring-cyan-500"
+                >
               <table className="w-full text-left text-xs border-collapse font-mono">
                 <thead>
                   <tr className="bg-[#0d1118] text-slate-400 border-b border-[#1b2331] uppercase text-[10px]">

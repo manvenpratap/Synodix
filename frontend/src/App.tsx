@@ -485,7 +485,7 @@ function AppContent() {
 
       {/* 2. Mobile Drawer Navigation Overlay (<md) */}
       {isMobileSidebarOpen && (
-        <div className="fixed inset-0 z-50 md:hidden bg-black/80 backdrop-blur-sm flex">
+        <div className="fixed inset-0 z-50 md:hidden bg-black/80 backdrop-blur-sm flex overscroll-contain">
           <div className="w-72 bg-[#0b0e14] h-full flex flex-col border-r border-[#1b2331] p-4 shadow-2xl pt-[max(1rem,env(safe-area-inset-top,0px))] pb-[max(1rem,env(safe-area-inset-bottom,0px))]">
             <div className="flex items-center justify-between pb-3 border-b border-[#1b2331]">
               <div className="flex items-center gap-2">
@@ -844,7 +844,7 @@ function AppContent() {
       </nav>
       {/* 5. Server Connection Modal (for Sideloaded Mobile Devices & Remote Hosts) */}
       {isServerModalOpen && (
-        <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
+        <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 overscroll-contain">
           <div className="w-full max-w-md bg-[#0b0e14] border border-[#1b2331] rounded-xl p-5 shadow-2xl animate-screen-enter">
             <div className="flex items-center justify-between pb-3 border-b border-[#1b2331]">
               <div className="flex items-center gap-2">
