@@ -222,7 +222,7 @@ export const MathematicalEvidenceCard: React.FC<Props> = ({ onClose }) => {
               <button
                 type="button"
                 onClick={() => setViewMode('interactive')}
-                className={`flex items-center gap-1.5 px-2.5 py-1 text-xs font-mono rounded transition-colors cursor-pointer ${
+                className={`flex items-center gap-1.5 px-3 py-1.5 min-h-[36px] text-xs font-mono rounded transition-colors cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 ${
                   viewMode === 'interactive'
                     ? 'bg-[#182333] text-cyan-300 font-semibold border border-cyan-800/80 shadow-xs'
                     : 'text-slate-400 hover:text-slate-200'
@@ -235,7 +235,7 @@ export const MathematicalEvidenceCard: React.FC<Props> = ({ onClose }) => {
               <button
                 type="button"
                 onClick={() => setViewMode('whitepaper')}
-                className={`flex items-center gap-1.5 px-2.5 py-1 text-xs font-mono rounded transition-colors cursor-pointer ${
+                className={`flex items-center gap-1.5 px-3 py-1.5 min-h-[36px] text-xs font-mono rounded transition-colors cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 ${
                   viewMode === 'whitepaper'
                     ? 'bg-[#182333] text-cyan-300 font-semibold border border-cyan-800/80 shadow-xs'
                     : 'text-slate-400 hover:text-slate-200'
@@ -248,7 +248,7 @@ export const MathematicalEvidenceCard: React.FC<Props> = ({ onClose }) => {
               <button
                 type="button"
                 onClick={() => setViewMode('markdown')}
-                className={`flex items-center gap-1.5 px-2.5 py-1 text-xs font-mono rounded transition-colors cursor-pointer ${
+                className={`flex items-center gap-1.5 px-3 py-1.5 min-h-[36px] text-xs font-mono rounded transition-colors cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 ${
                   viewMode === 'markdown'
                     ? 'bg-[#182333] text-cyan-300 font-semibold border border-cyan-800/80 shadow-xs'
                     : 'text-slate-400 hover:text-slate-200'
@@ -898,7 +898,7 @@ export const MathematicalEvidenceCard: React.FC<Props> = ({ onClose }) => {
               <button
                 type="button"
                 onClick={handleCopy}
-                className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-[#121824] hover:bg-[#1a2334] text-slate-200 border border-[#1b2331] cursor-pointer"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 min-h-[36px] rounded bg-[#121824] hover:bg-[#1a2334] text-slate-200 border border-[#1b2331] transition-colors cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
               >
                 {copied ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
                 <span>{copied ? 'Copied' : 'Copy Source'}</span>
@@ -906,7 +906,7 @@ export const MathematicalEvidenceCard: React.FC<Props> = ({ onClose }) => {
               <button
                 type="button"
                 onClick={handleExportMarkdown}
-                className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-[#121824] hover:bg-[#1a2334] text-slate-200 border border-[#1b2331] cursor-pointer"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 min-h-[36px] rounded bg-[#121824] hover:bg-[#1a2334] text-slate-200 border border-[#1b2331] transition-colors cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
               >
                 <Download className="w-3.5 h-3.5" />
                 <span>Download .md</span>

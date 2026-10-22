@@ -113,7 +113,7 @@ export const ReadingView: React.FC<Props> = ({ data }) => {
               <button
                 type="button"
                 onClick={() => setViewMode('interactive')}
-                className={`px-3 py-1.5 rounded text-xs font-medium flex items-center gap-1.5 transition-colors cursor-pointer ${
+                className={`px-3 py-1.5 min-h-[36px] rounded text-xs font-medium flex items-center gap-1.5 transition-colors cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 ${
                   viewMode === 'interactive'
                     ? 'bg-cyan-950 text-cyan-300 border border-cyan-700/80 shadow-xs'
                     : 'text-slate-400 hover:text-slate-200'
@@ -125,7 +125,7 @@ export const ReadingView: React.FC<Props> = ({ data }) => {
               <button
                 type="button"
                 onClick={() => setViewMode('markdown')}
-                className={`px-3 py-1.5 rounded text-xs font-medium flex items-center gap-1.5 transition-colors cursor-pointer ${
+                className={`px-3 py-1.5 min-h-[36px] rounded text-xs font-medium flex items-center gap-1.5 transition-colors cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 ${
                   viewMode === 'markdown'
                     ? 'bg-cyan-950 text-cyan-300 border border-cyan-700/80 shadow-xs'
                     : 'text-slate-400 hover:text-slate-200'
@@ -317,12 +317,12 @@ export const ReadingView: React.FC<Props> = ({ data }) => {
               </div>
 
               {/* Filter Pills */}
-              <div className="flex items-center gap-1.5 font-mono text-xs">
+              <div className="flex items-center gap-1.5 font-mono text-xs flex-wrap">
                 <span className="text-[10px] text-slate-500 uppercase mr-1">Filter:</span>
                 <button
                   type="button"
                   onClick={() => setDomainFilter('all')}
-                  className={`px-2 py-0.5 rounded text-[11px] cursor-pointer transition-colors ${
+                  className={`px-2.5 py-1 min-h-[32px] rounded text-[11px] cursor-pointer transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 ${
                     domainFilter === 'all'
                       ? 'bg-cyan-950 text-cyan-300 border border-cyan-700/80'
                       : 'text-slate-400 hover:text-slate-200 border border-[#1b2331]'
@@ -333,7 +333,7 @@ export const ReadingView: React.FC<Props> = ({ data }) => {
                 <button
                   type="button"
                   onClick={() => setDomainFilter('consensus')}
-                  className={`px-2 py-0.5 rounded text-[11px] cursor-pointer transition-colors ${
+                  className={`px-2.5 py-1 min-h-[32px] rounded text-[11px] cursor-pointer transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 ${
                     domainFilter === 'consensus'
                       ? 'bg-emerald-950 text-emerald-300 border border-emerald-700/80'
                       : 'text-slate-400 hover:text-slate-200 border border-[#1b2331]'
@@ -344,7 +344,7 @@ export const ReadingView: React.FC<Props> = ({ data }) => {
                 <button
                   type="button"
                   onClick={() => setDomainFilter('divergent')}
-                  className={`px-2 py-0.5 rounded text-[11px] cursor-pointer transition-colors ${
+                  className={`px-2.5 py-1 min-h-[32px] rounded text-[11px] cursor-pointer transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 ${
                     domainFilter === 'divergent'
                       ? 'bg-amber-950 text-amber-300 border border-amber-700/80'
                       : 'text-slate-400 hover:text-slate-200 border border-[#1b2331]'
@@ -721,7 +721,7 @@ export const ReadingView: React.FC<Props> = ({ data }) => {
             <button
               type="button"
               onClick={handleCopy}
-              className="px-2.5 py-1 rounded bg-[#121721] text-cyan-300 border border-[#1b2331] hover:bg-[#18202c] cursor-pointer"
+              className="px-3 py-1.5 min-h-[36px] rounded bg-[#121721] hover:bg-[#18202c] text-cyan-300 border border-[#1b2331] transition-colors cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
             >
               {copied ? 'Copied to Clipboard!' : 'Copy Raw Text'}
             </button>

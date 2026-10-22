@@ -129,10 +129,10 @@ export const SynthesisMatrix: React.FC<Props> = ({ synthesis }) => {
           <button
             type="button"
             onClick={() => setFilterMode('all')}
-            className={`px-2.5 py-1 text-xs font-mono rounded cursor-pointer transition-colors whitespace-nowrap ${
+            className={`px-3 py-1.5 min-h-[36px] text-xs font-mono rounded cursor-pointer transition-colors whitespace-nowrap focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 ${
               filterMode === 'all'
                 ? 'bg-[#182232] text-cyan-300 font-semibold border border-cyan-800'
-                : 'text-slate-400 hover:text-slate-200 hover:bg-[#121721]'
+                : 'text-slate-400 hover:text-slate-200 hover:bg-[#121721] border border-transparent'
             }`}
           >
             All Domains ({totalDomainCount})
@@ -140,10 +140,10 @@ export const SynthesisMatrix: React.FC<Props> = ({ synthesis }) => {
           <button
             type="button"
             onClick={() => setFilterMode('high')}
-            className={`px-2.5 py-1 text-xs font-mono rounded cursor-pointer transition-colors whitespace-nowrap ${
+            className={`px-3 py-1.5 min-h-[36px] text-xs font-mono rounded cursor-pointer transition-colors whitespace-nowrap focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 ${
               filterMode === 'high'
                 ? 'bg-emerald-950 text-emerald-300 font-semibold border border-emerald-800'
-                : 'text-slate-400 hover:text-slate-200 hover:bg-[#121721]'
+                : 'text-slate-400 hover:text-slate-200 hover:bg-[#121721] border border-transparent'
             }`}
           >
             High Signal ({metrics.strong_domains})
@@ -151,10 +151,10 @@ export const SynthesisMatrix: React.FC<Props> = ({ synthesis }) => {
           <button
             type="button"
             onClick={() => setFilterMode('divergent')}
-            className={`px-2.5 py-1 text-xs font-mono rounded cursor-pointer transition-colors whitespace-nowrap ${
+            className={`px-3 py-1.5 min-h-[36px] text-xs font-mono rounded cursor-pointer transition-colors whitespace-nowrap focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 ${
               filterMode === 'divergent'
                 ? 'bg-rose-950 text-rose-300 font-semibold border border-rose-800'
-                : 'text-slate-400 hover:text-slate-200 hover:bg-[#121721]'
+                : 'text-slate-400 hover:text-slate-200 hover:bg-[#121721] border border-transparent'
             }`}
           >
             Divergent ({metrics.divergent_domains})

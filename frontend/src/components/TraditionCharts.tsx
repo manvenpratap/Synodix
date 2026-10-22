@@ -323,7 +323,7 @@ export const TraditionCharts: React.FC<Props> = ({ data }) => {
               <button
                 type="button"
                 onClick={() => setChartViewMode('both')}
-                className={`px-3 py-1.5 min-h-[36px] text-xs font-mono rounded-md cursor-pointer transition-all ${
+                className={`px-3 py-1.5 min-h-[36px] text-xs font-mono rounded-md cursor-pointer transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 ${
                   chartViewMode === 'both'
                     ? currentTheme.presentationToggleActive
                     : currentTheme.presentationToggleInactive
@@ -335,7 +335,7 @@ export const TraditionCharts: React.FC<Props> = ({ data }) => {
               <button
                 type="button"
                 onClick={() => setChartViewMode('chart')}
-                className={`px-3 py-1.5 min-h-[36px] text-xs font-mono rounded-md cursor-pointer transition-all ${
+                className={`px-3 py-1.5 min-h-[36px] text-xs font-mono rounded-md cursor-pointer transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 ${
                   chartViewMode === 'chart'
                     ? currentTheme.presentationToggleActive
                     : currentTheme.presentationToggleInactive
@@ -347,7 +347,7 @@ export const TraditionCharts: React.FC<Props> = ({ data }) => {
               <button
                 type="button"
                 onClick={() => setChartViewMode('table')}
-                className={`px-3 py-1.5 min-h-[36px] text-xs font-mono rounded-md cursor-pointer transition-all ${
+                className={`px-3 py-1.5 min-h-[36px] text-xs font-mono rounded-md cursor-pointer transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 ${
                   chartViewMode === 'table'
                     ? currentTheme.presentationToggleActive
                     : currentTheme.presentationToggleInactive

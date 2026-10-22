@@ -655,7 +655,7 @@ function AppContent() {
             <button
               type="button"
               onClick={openGlossary}
-              className="inline-flex items-center gap-1.5 px-2.5 py-1 text-xs rounded border border-[#1b2331] bg-[#10151f] hover:bg-[#161d2a] text-cyan-400 hover:text-cyan-200 transition-colors cursor-pointer"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 min-h-[34px] text-xs rounded border border-[#1b2331] bg-[#10151f] hover:bg-[#161d2a] text-cyan-400 hover:text-cyan-200 transition-colors cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
               data-tooltip="Browse all 50 astronomical & cultural feature explainers"
               aria-label="Browse Feature Explainers & Astrometric Glossary"
             >
@@ -668,7 +668,7 @@ function AppContent() {
             <button
               type="button"
               onClick={toggleTheme}
-              className="inline-flex items-center gap-1.5 px-2.5 py-1 text-xs rounded border border-[#1b2331] bg-[#10151f] hover:bg-[#151c2a] text-slate-300 hover:text-amber-400 transition-colors cursor-pointer"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 min-h-[34px] text-xs rounded border border-[#1b2331] bg-[#10151f] hover:bg-[#151c2a] text-slate-300 hover:text-amber-400 transition-colors cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
               data-tooltip={theme === 'dark' ? 'Switch to Solar Day Theme' : 'Switch to Deep Space Theme'}
               aria-label={theme === 'dark' ? 'Switch to Solar Day Theme' : 'Switch to Deep Space Theme'}
             >
@@ -691,7 +691,7 @@ function AppContent() {
               <button
                 type="button"
                 onClick={() => navigateTo('workbench')}
-                className="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-1 text-xs rounded border border-[#1b2331] bg-[#10151f] hover:bg-[#151c2a] text-slate-300 hover:text-cyan-300 transition-colors cursor-pointer"
+                className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 min-h-[34px] text-xs rounded border border-[#1b2331] bg-[#10151f] hover:bg-[#151c2a] text-slate-300 hover:text-cyan-300 transition-colors cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
                 data-tooltip="Return to Workbench to switch or calculate a profile"
                 aria-label="Switch Profile"
               >
@@ -703,7 +703,7 @@ function AppContent() {
             <button
               type="button"
               onClick={() => navigateTo('evidence')}
-              className={`inline-flex items-center gap-1.5 px-2.5 py-1 text-xs rounded border transition-colors cursor-pointer ${
+              className={`inline-flex items-center gap-1.5 px-3 py-1.5 min-h-[34px] text-xs rounded border transition-colors cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 ${
                 currentScreen === 'evidence'
                   ? 'bg-cyan-950 text-cyan-300 border-cyan-700'
                   : 'bg-[#10151f] hover:bg-[#161d2a] text-cyan-400 border-cyan-800/60'
@@ -912,7 +912,7 @@ function AppContent() {
               <button
                 type="button"
                 onClick={() => testServerConnection(serverUrlInput)}
-                className="px-3 py-2 min-h-[44px] rounded bg-[#121824] hover:bg-[#182234] border border-[#1b2331] text-slate-300 text-xs font-medium cursor-pointer"
+                className="px-3 py-2 min-h-[44px] rounded bg-[#121824] hover:bg-[#182234] border border-[#1b2331] text-slate-300 text-xs font-medium cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
               >
                 Test Ping
               </button>
@@ -920,14 +920,14 @@ function AppContent() {
                 <button
                   type="button"
                   onClick={() => setIsServerModalOpen(false)}
-                  className="px-3 py-2 min-h-[44px] rounded text-slate-400 hover:text-slate-200 text-xs cursor-pointer"
+                  className="px-3 py-2 min-h-[44px] rounded text-slate-400 hover:text-slate-200 text-xs cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-400"
                 >
                   Cancel
                 </button>
                 <button
                   type="button"
                   onClick={saveServerUrl}
-                  className="px-4 py-2 min-h-[44px] rounded bg-cyan-700 hover:bg-cyan-600 text-white text-xs font-semibold cursor-pointer"
+                  className="px-4 py-2 min-h-[44px] rounded bg-cyan-700 hover:bg-cyan-600 text-white text-xs font-semibold cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-1 focus-visible:ring-offset-[#0b0e14]"
                 >
                   Save & Apply
                 </button>

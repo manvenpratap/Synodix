@@ -239,7 +239,8 @@ export const FeatureExplainerModal: React.FC = () => {
                     <button
                       type="button"
                       onClick={() => setSearchQuery('')}
-                      className="absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-white text-xs font-mono"
+                      className="absolute right-2.5 top-1/2 -translate-y-1/2 px-2 py-1 text-slate-400 hover:text-white text-xs font-mono cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 rounded"
+                      aria-label="Clear explainer search"
                     >
                       Clear
                     </button>
@@ -250,7 +251,7 @@ export const FeatureExplainerModal: React.FC = () => {
                 <select
                   value={selectedCategory}
                   onChange={(e) => setSelectedCategory(e.target.value)}
-                  className="bg-[#080d16] border border-[#1b2537] rounded-lg px-3 py-2 text-xs text-slate-300 font-mono focus:outline-none focus:border-cyan-500 cursor-pointer"
+                  className="bg-[#080d16] border border-[#1b2537] rounded-lg px-3 py-2 text-xs text-slate-300 font-mono focus:outline-none focus:border-cyan-500 focus-visible:ring-2 focus-visible:ring-cyan-400 cursor-pointer"
                 >
                   <option value="all">All Categories ({Object.keys(FEATURE_EXPLAINERS).length})</option>
                   {EXPLAINER_CATEGORIES.map((c) => (
@@ -308,7 +309,7 @@ export const FeatureExplainerModal: React.FC = () => {
                       setSearchQuery('');
                       setSelectedCategory('all');
                     }}
-                    className="mt-2 text-xs font-mono text-cyan-400 underline cursor-pointer"
+                    className="mt-2 text-xs font-mono text-cyan-400 hover:text-cyan-300 underline cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 rounded px-2 py-1"
                   >
                     Reset filters
                   </button>
