@@ -426,7 +426,7 @@ function AppContent() {
         </div>
 
         {/* Navigation Screen Links */}
-        <nav className="flex-1 p-3 space-y-1">
+        <nav aria-label="Workspace Screens" className="flex-1 p-3 space-y-1">
           <span className="px-2 text-[10px] font-mono text-slate-400 uppercase tracking-wider block mb-1.5 font-semibold">
             WORKSPACE SCREENS
           </span>
@@ -439,7 +439,8 @@ function AppContent() {
                 key={item.id}
                 type="button"
                 onClick={() => navigateTo(item.id)}
-                className={`w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-left transition-all cursor-pointer group relative ${
+                aria-current={isActive ? 'page' : undefined}
+                className={`w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-left transition-all cursor-pointer group relative focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-1 focus-visible:ring-offset-[#080a0f] ${
                   isActive
                     ? 'bg-gradient-to-r from-cyan-950/60 via-[#121a28] to-[#0c1018] text-cyan-300 font-medium border-l-2 border-l-cyan-400 border-y border-r border-cyan-800/40 shadow-xs ring-1 ring-cyan-500/20 translate-x-0.5'
                     : 'text-slate-300 hover:text-slate-100 hover:bg-[#101622]/80 border border-transparent hover:border-[#1b2535]'
@@ -545,7 +546,13 @@ function AppContent() {
       {/* 2. Mobile Drawer Navigation Overlay (<md) */}
       {isMobileSidebarOpen && (
         <div className="fixed inset-0 z-[60] md:hidden bg-black/80 backdrop-blur-sm flex overscroll-contain">
-          <div className="w-72 bg-[#0b0e14] h-full flex flex-col border-r border-[#1b2331] p-4 shadow-2xl pt-[max(1rem,env(safe-area-inset-top,0px))] pb-[max(1rem,env(safe-area-inset-bottom,0px))]">
+          <div
+            id="mobile-navigation-drawer"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Navigation Drawer"
+            className="w-72 bg-[#0b0e14] h-full flex flex-col border-r border-[#1b2331] p-4 shadow-2xl pt-[max(1rem,env(safe-area-inset-top,0px))] pb-[max(1rem,env(safe-area-inset-bottom,0px))]"
+          >
             <div className="flex items-center justify-between pb-3 border-b border-[#1b2331]">
               <div className="flex items-center gap-2">
                 <div className="w-7 h-7 rounded bg-cyan-950 border border-cyan-800 flex items-center justify-center font-bold text-xs text-cyan-300 font-mono">
@@ -556,7 +563,7 @@ function AppContent() {
               <button
                 type="button"
                 onClick={() => setIsMobileSidebarOpen(false)}
-                className="min-w-[44px] min-h-[44px] flex items-center justify-center -mr-2 text-slate-400 hover:text-slate-100 cursor-pointer"
+                className="min-w-[44px] min-h-[44px] flex items-center justify-center -mr-2 text-slate-400 hover:text-slate-100 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 rounded"
                 aria-label="Close navigation"
                 data-tooltip="Close navigation drawer"
               >
@@ -621,7 +628,7 @@ function AppContent() {
               </button>
             </div>
 
-            <nav className="flex-1 py-4 space-y-1 overflow-y-auto">
+            <nav aria-label="Mobile Drawer Screens" className="flex-1 py-4 space-y-1 overflow-y-auto">
               {NAV_ITEMS.map((item) => {
                 const isActive = currentScreen === item.id;
                 const Icon = item.icon;
@@ -630,7 +637,8 @@ function AppContent() {
                     key={item.id}
                     type="button"
                     onClick={() => navigateTo(item.id)}
-                    className={`w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-left transition-all ${
+                    aria-current={isActive ? 'page' : undefined}
+                    className={`w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-left transition-all cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 ${
                       isActive
                         ? 'bg-[#141d2b] text-cyan-300 font-semibold border border-cyan-800'
                         : 'text-slate-300 hover:bg-[#101520]'
@@ -667,7 +675,9 @@ function AppContent() {
             <button
               type="button"
               onClick={() => setIsMobileSidebarOpen(true)}
-              className="md:hidden min-w-[44px] min-h-[44px] flex items-center justify-center -ml-1 rounded-md text-slate-400 hover:text-slate-100 hover:bg-[#121721] cursor-pointer"
+              aria-expanded={isMobileSidebarOpen}
+              aria-controls="mobile-navigation-drawer"
+              className="md:hidden min-w-[44px] min-h-[44px] flex items-center justify-center -ml-1 rounded-md text-slate-400 hover:text-slate-100 hover:bg-[#121721] cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
               aria-label="Open sidebar menu"
               data-tooltip="Open navigation drawer"
             >
@@ -791,15 +801,20 @@ function AppContent() {
         </header>
 
         {/* Mobile Epistemological Journey Stepper (<md) */}
-        <div className="md:hidden px-3 py-2 bg-[#0c1018]/90 backdrop-blur-md border-b border-[#1b2331]/80 select-none sticky top-[calc(3.75rem+env(safe-area-inset-top,0px))] z-20">
-          <div className="flex items-center justify-between text-[10px] font-mono mb-1 text-slate-400">
-            <span className="uppercase tracking-wider font-semibold text-[9px] text-cyan-400 flex items-center gap-1">
-              <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 inline-block"></span>
+        <nav
+          aria-label="Epistemic Journey Stepper"
+          className="md:hidden px-3 py-2 bg-[#0c1018]/90 backdrop-blur-md border-b border-[#1b2331]/80 select-none sticky top-[calc(3.75rem+env(safe-area-inset-top,0px))] z-20"
+        >
+          <div className="flex items-center justify-between text-[10px] font-mono mb-1.5 text-slate-400">
+            <span className="uppercase tracking-wider font-semibold text-[9px] text-cyan-400 flex items-center gap-1.5">
+              <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 inline-block animate-pulse"></span>
               Epistemic Journey
             </span>
-            <span>Step {JOURNEY_STEPS.findIndex((s) => s.id === currentScreen) + 1} of 5</span>
+            <span className="text-[10px] text-slate-300 font-mono">
+              Step {JOURNEY_STEPS.findIndex((s) => s.id === currentScreen) + 1} of 5
+            </span>
           </div>
-          <div className="flex items-center justify-between gap-1 overflow-x-auto py-0.5 scrollbar-none">
+          <div className="flex items-center justify-between gap-1 overflow-x-auto py-0.5 scrollbar-none overscroll-x-contain">
             {JOURNEY_STEPS.map((s, idx) => {
               const isActive = currentScreen === s.id;
               const isPassed = JOURNEY_STEPS.findIndex((st) => st.id === currentScreen) > idx;
@@ -808,16 +823,18 @@ function AppContent() {
                   <button
                     type="button"
                     onClick={() => navigateTo(s.id)}
-                    className={`flex items-center gap-1 px-2 py-1 rounded-md text-[10px] font-mono cursor-pointer transition-all shrink-0 active:scale-95 ${
+                    aria-current={isActive ? 'step' : undefined}
+                    aria-label={`Step ${s.step}: ${s.label}${isActive ? ' (current step)' : isPassed ? ' (completed)' : ''}`}
+                    className={`flex items-center gap-1.5 px-2.5 py-1.5 min-h-[38px] rounded-lg text-[10px] font-mono cursor-pointer transition-all shrink-0 active:scale-95 touch-manipulation focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 ${
                       isActive
                         ? 'bg-cyan-950 text-cyan-300 border border-cyan-700 font-bold shadow-xs ring-1 ring-cyan-500/50'
                         : isPassed
-                        ? 'bg-[#101722] text-emerald-400 border border-emerald-900/50'
-                        : 'bg-[#0e131d] text-slate-400 border border-[#1a2332]'
+                        ? 'bg-[#101722] text-emerald-400 border border-emerald-900/50 hover:bg-[#152030]'
+                        : 'bg-[#0e131d] text-slate-400 border border-[#1a2332] hover:text-slate-300'
                     }`}
                   >
                     <span
-                      className={`w-3.5 h-3.5 rounded-full flex items-center justify-center text-[9px] transition-all ${
+                      className={`w-4 h-4 rounded-full flex items-center justify-center text-[9px] transition-all shrink-0 ${
                         isActive
                           ? 'bg-cyan-400 text-slate-950 font-bold ring-2 ring-cyan-300/40'
                           : isPassed
@@ -827,16 +844,23 @@ function AppContent() {
                     >
                       {s.step}
                     </span>
-                    <span>{s.label}</span>
+                    <span className="truncate">{s.label}</span>
                   </button>
                   {idx < JOURNEY_STEPS.length - 1 && (
-                    <span className={`text-[10px] shrink-0 transition-colors ${isPassed ? 'text-emerald-400 font-semibold' : 'text-slate-600'}`}>➔</span>
+                    <span className={`text-[10px] shrink-0 transition-colors select-none ${isPassed ? 'text-emerald-400 font-semibold' : 'text-slate-600'}`}>➔</span>
                   )}
                 </React.Fragment>
               );
             })}
           </div>
-        </div>
+          {/* Ambient Progress Conduit */}
+          <div className="w-full bg-[#16202e] h-0.5 mt-2 rounded-full overflow-hidden">
+            <div
+              className="h-full bg-cyan-400 transition-all duration-300 rounded-full shadow-[0_0_6px_#38bdf8]"
+              style={{ width: `${((JOURNEY_STEPS.findIndex((s) => s.id === currentScreen) + 1) / 5) * 100}%` }}
+            />
+          </div>
+        </nav>
 
         {/* Main Content Viewport */}
         <main className="flex-1 p-4 sm:p-6 lg:p-8 max-w-7xl w-full mx-auto pb-[calc(5rem+env(safe-area-inset-bottom,0px))] md:pb-8">
@@ -943,14 +967,14 @@ function AppContent() {
       {/* 4. Mobile Bottom Navigation Bar (<md) */}
       <nav
         aria-label="Mobile Navigation"
-        className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-[#0b0e14]/95 backdrop-blur-md border-t border-[#1b2331] px-2 py-1 pb-[max(0.75rem,env(safe-area-inset-bottom,0px))] flex items-center justify-around text-[10px] font-mono shadow-2xl"
+        className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-[#0b0e14]/95 backdrop-blur-md border-t border-[#1b2331] px-1.5 py-1 pb-[max(0.75rem,env(safe-area-inset-bottom,0px))] flex items-center justify-around text-[10px] font-mono shadow-2xl"
       >
         {[
-          { id: 'workbench', label: 'Workbench', icon: Sliders },
-          { id: 'traditions', label: 'Traditions', icon: Compass },
-          { id: 'synthesis', label: 'Synthesis', icon: Layers },
-          { id: 'dossier', label: 'Dossier', icon: FileText },
-          { id: 'evidence', label: 'Evidence', icon: FlaskConical },
+          { id: 'workbench', label: 'Workbench', step: '1', icon: Sliders },
+          { id: 'traditions', label: 'Traditions', step: '2', icon: Compass },
+          { id: 'synthesis', label: 'Synthesis', step: '3', icon: Layers },
+          { id: 'dossier', label: 'Dossier', step: '4', icon: FileText },
+          { id: 'evidence', label: 'Evidence', step: '5', icon: FlaskConical },
         ].map((item) => {
           const isActive = currentScreen === item.id;
           const Icon = item.icon;
@@ -959,16 +983,31 @@ function AppContent() {
               key={item.id}
               type="button"
               onClick={() => navigateTo(item.id as AppScreen)}
-              data-tooltip={`Navigate to ${item.label}`}
+              data-tooltip={`Navigate to ${item.label} (Step ${item.step})`}
               aria-label={item.label}
-              className={`flex flex-col items-center justify-center p-1 min-w-[56px] min-h-[44px] rounded-md transition-all cursor-pointer active:scale-[0.94] ${
+              aria-current={isActive ? 'page' : undefined}
+              className={`relative flex flex-col items-center justify-center p-1 min-w-[56px] min-h-[44px] rounded-lg transition-all cursor-pointer active:scale-[0.94] touch-manipulation focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 ${
                 isActive
                   ? 'text-cyan-300 font-bold bg-[#141c28]'
-                  : 'text-slate-400 hover:text-slate-200'
+                  : 'text-slate-400 hover:text-slate-200 hover:bg-[#10151f]'
               }`}
             >
-              <Icon className={`w-4 h-4 mb-0.5 ${isActive ? 'text-cyan-300' : 'text-slate-400'}`} />
-              <span>{item.label}</span>
+              {isActive && (
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-7 h-0.5 bg-cyan-400 rounded-full shadow-[0_0_8px_#38bdf8]" />
+              )}
+              <div className="relative">
+                <Icon className={`w-4 h-4 mb-0.5 ${isActive ? 'text-cyan-300' : 'text-slate-400'}`} />
+                <span
+                  className={`absolute -top-1 -right-2 text-[8px] font-mono w-3 h-3 rounded-full flex items-center justify-center select-none ${
+                    isActive
+                      ? 'bg-cyan-400 text-slate-950 font-bold'
+                      : 'bg-[#182130] text-slate-400 border border-[#1b2331]'
+                  }`}
+                >
+                  {item.step}
+                </span>
+              </div>
+              <span className="mt-0.5">{item.label}</span>
             </button>
           );
         })}

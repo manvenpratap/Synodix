@@ -1,7 +1,7 @@
 # Synodix: Project Context & Working Memory
 
-**Last Updated:** 2026-10-23 07:00:22
-**Version:** 2.19.0  
+**Last Updated:** 2026-10-23 07:13:49
+**Version:** 2.20.0  
 **Stack:** Python 3.12 (FastAPI, Swiss Ephemeris 2.10, Skyfield DE421) + TypeScript / React 19 / Vite / Tailwind CSS v4 / Framer Motion / Capacitor 8 (iOS & Android)  
 **Workspace:** `/Volumes/Study/Projects/Astrology` (symlinked as `/Volumes/Study/Astrology`)  
 **Git Remote:** `https://github.com/manvenpratap/Synodix.git`  
@@ -9,7 +9,16 @@
 ---
 
 ## 1. Current Status & Milestone
-- **Active Phase**: Anti-AI-Slop 30-Pattern Audit & Archaeoastronomical Observatory Refactor (Completed)
+- **Active Phase**: Frontend Design & UI Accessibility: Decluttered Mobile Navigation & Accessible Epistemic Journey (Completed)
+- **Frontend Design & UI Accessibility Enhancements (v2.20.0)**:
+  - **Epistemic Journey Stepper Overhaul**: Upgraded the mobile journey stepper into an institutional `<nav aria-label="Epistemic Journey Stepper">` featuring `aria-current="step"`, accessible step-announcement labels, dynamic progress conduit bar, enlarged touch targets (`min-h-[38px] px-2.5 py-1.5 touch-manipulation`), and clean optical connectors.
+  - **Mobile Bottom Navigation Integration**: Added `aria-current="page"`, optical active neon top-accent bar (`shadow-[0_0_8px_#38bdf8]`) satisfying WCAG 1.4.1 (not relying on color alone), step number indicators (`1` through `5`) directly linking tabs to the 5-step epistemic narrative, and active scale physics.
+  - **Complete WAI-ARIA Tab & Tabpanel Architecture**: Connected all 9 tradition visualizers in `TraditionCharts.tsx` with compliant `role="tabpanel" id="tradition-panel-{id}" aria-labelledby="tradition-tab-{id}" tabIndex={0}`. Connected mode switcher panels in `BirthDataForm.tsx` with `role="tabpanel" id="panel-custom-mode"` and `panel-archive-mode`.
+  - **Full Disclosure Accessibility**: Added `aria-expanded` and `aria-controls` to `InputAuditCard.tsx` collapsible disclosure and hamburger menu trigger in `App.tsx`.
+  - **Screen Reader State on Filter Buttons**: Added `aria-pressed` states on domain filter buttons in `SynthesisMatrix.tsx` and enlarged touch targets for all expansion actions.
+  - **Solar Day Light Mode Contrast Fix**: Eliminated duplicate `.text-slate-500` rule in `index.css`, enforcing `#475569` for a guaranteed 7.0:1 AAA contrast ratio.
+  - **Workflow Health**: 100% CLEAN (Verified via `./pipeline.sh doctor`)
+  - **Test Invariants**: 16/16 regression suites passing via `./pipeline.sh test --summary` (39.46s)
 - **Anti-AI-Slop Architectural Enhancements (v2.19.0)**:
   - **100% Sparkle Eradication**: Removed all `<Sparkles>` icons across the application (`BirthDataForm.tsx`, `FeatureExplainerModal.tsx`, `ReadingView.tsx`). Replaced with authentic navigational and scholarly symbols (`Compass`, `BookOpen`) or clean typography.
   - **Machined Solid CTA Buttons**: Replaced multi-stop SaaS button gradients with solid, high-contrast celestial cyan (`bg-cyan-700 hover:bg-cyan-600 border border-cyan-500/80 shadow-xs`) on primary computation actions and mobile journey navigation bars (`TraditionCharts.tsx`, `SynthesisMatrix.tsx`, `ReadingView.tsx`, `MathematicalEvidenceCard.tsx`).

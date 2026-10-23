@@ -135,6 +135,7 @@ export const SynthesisMatrix: React.FC<Props> = ({ synthesis, onNavigate }) => {
         <div className="flex items-center gap-1.5 overflow-x-auto pb-1 lg:pb-0 scrollbar-thin scroll-smooth overscroll-x-contain" role="group" aria-label="Filter domains">
           <button
             type="button"
+            aria-pressed={filterMode === 'all'}
             onClick={() => setFilterMode('all')}
             className={`px-3 py-2 sm:py-1.5 min-h-[44px] sm:min-h-[36px] text-xs font-mono rounded cursor-pointer transition-colors whitespace-nowrap focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 ${
               filterMode === 'all'
@@ -146,6 +147,7 @@ export const SynthesisMatrix: React.FC<Props> = ({ synthesis, onNavigate }) => {
           </button>
           <button
             type="button"
+            aria-pressed={filterMode === 'high'}
             onClick={() => setFilterMode('high')}
             className={`px-3 py-2 sm:py-1.5 min-h-[44px] sm:min-h-[36px] text-xs font-mono rounded cursor-pointer transition-colors whitespace-nowrap focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 ${
               filterMode === 'high'
@@ -157,6 +159,7 @@ export const SynthesisMatrix: React.FC<Props> = ({ synthesis, onNavigate }) => {
           </button>
           <button
             type="button"
+            aria-pressed={filterMode === 'divergent'}
             onClick={() => setFilterMode('divergent')}
             className={`px-3 py-2 sm:py-1.5 min-h-[44px] sm:min-h-[36px] text-xs font-mono rounded cursor-pointer transition-colors whitespace-nowrap focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 ${
               filterMode === 'divergent'
@@ -178,7 +181,7 @@ export const SynthesisMatrix: React.FC<Props> = ({ synthesis, onNavigate }) => {
           <button
             type="button"
             onClick={() => setExpandedDomain((prev) => (prev === 'ALL' ? null : 'ALL'))}
-            className="text-[11px] font-mono text-cyan-400 hover:text-cyan-300 cursor-pointer underline py-1 px-2"
+            className="text-[11px] font-mono text-cyan-400 hover:text-cyan-300 cursor-pointer hover:underline py-2 px-2.5 min-h-[44px] inline-flex items-center rounded focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
           >
             {expandedDomain === 'ALL' ? 'Collapse All Domains' : 'Expand All Domains'}
           </button>

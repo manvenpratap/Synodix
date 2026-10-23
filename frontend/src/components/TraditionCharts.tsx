@@ -373,7 +373,13 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
 
       {/* Tab 1: Jyotisha */}
       {activeTab === 'jyotisha' && (
-        <div className="mt-4 space-y-4 animate-tab-enter">
+        <div
+          id="tradition-panel-jyotisha"
+          role="tabpanel"
+          aria-labelledby="tradition-tab-jyotisha"
+          tabIndex={0}
+          className="mt-4 space-y-4 animate-tab-enter focus:outline-none"
+        >
           <div className="flex flex-col sm:flex-row sm:items-center justify-between bg-[#080a0f] p-3.5 rounded-md border border-[#1b2331] gap-3">
             <div>
               <span className="text-[10px] text-amber-400 font-mono font-semibold uppercase tracking-wider">
@@ -576,7 +582,13 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
 
       {/* Tab 2: BaZi */}
       {activeTab === 'bazi' && (
-        <div className="mt-4 space-y-4 animate-tab-enter">
+        <div
+          id="tradition-panel-bazi"
+          role="tabpanel"
+          aria-labelledby="tradition-tab-bazi"
+          tabIndex={0}
+          className="mt-4 space-y-4 animate-tab-enter focus:outline-none"
+        >
           <div className="flex flex-col sm:flex-row sm:items-center justify-between bg-[#080a0f] p-3.5 rounded-md border border-[#1b2331] gap-3">
             <div>
               <span className="text-[10px] text-red-400 font-mono font-semibold uppercase tracking-wider">
@@ -853,7 +865,13 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
 
       {/* Tab 3: Western */}
       {activeTab === 'western' && (
-        <div className="mt-4 space-y-4 animate-tab-enter">
+        <div
+          id="tradition-panel-western"
+          role="tabpanel"
+          aria-labelledby="tradition-tab-western"
+          tabIndex={0}
+          className="mt-4 space-y-4 animate-tab-enter focus:outline-none"
+        >
           <div className="flex flex-col sm:flex-row sm:items-center justify-between bg-[#080a0f] p-3.5 rounded-md border border-[#1b2331] gap-3">
             <div>
               <span className="text-[10px] text-blue-400 font-mono font-semibold uppercase tracking-wider">
@@ -1042,7 +1060,13 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
 
       {/* Tab 4: Zi Wei Dou Shu */}
       {activeTab === 'ziwei' && (
-        <div className="mt-4 space-y-4 animate-tab-enter">
+        <div
+          id="tradition-panel-ziwei"
+          role="tabpanel"
+          aria-labelledby="tradition-tab-ziwei"
+          tabIndex={0}
+          className="mt-4 space-y-4 animate-tab-enter focus:outline-none"
+        >
           <div className="flex flex-col sm:flex-row sm:items-center justify-between bg-[#080a0f] p-3.5 rounded-md border border-[#1b2331] gap-3">
             <div>
               <span className="text-[10px] text-purple-400 font-mono font-semibold uppercase tracking-wider">
@@ -1163,7 +1187,13 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
         </div>
       )}
       {activeTab === 'mayan' && (
-        <div className="mt-4 space-y-4 animate-tab-enter">
+        <div
+          id="tradition-panel-mayan"
+          role="tabpanel"
+          aria-labelledby="tradition-tab-mayan"
+          tabIndex={0}
+          className="mt-4 space-y-4 animate-tab-enter focus:outline-none"
+        >
           <div className="bg-[#080a0f] p-3.5 rounded-md border border-[#1b2331]">
             <span className="text-[10px] text-cyan-400 font-mono font-semibold uppercase tracking-wider">
               Classic Maya Long Count & Calendar Round • GMT Correlation (584283)
@@ -1240,7 +1270,13 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
 
       {/* Tab 6: Tibetan Elemental */}
       {activeTab === 'tibetan' && (
-        <div className="mt-4 space-y-4 animate-tab-enter">
+        <div
+          id="tradition-panel-tibetan"
+          role="tabpanel"
+          aria-labelledby="tradition-tab-tibetan"
+          tabIndex={0}
+          className="mt-4 space-y-4 animate-tab-enter focus:outline-none"
+        >
           <div className="bg-[#080a0f] p-3.5 rounded-md border border-[#1b2331]">
             <span className="text-[10px] text-rose-400 font-mono font-semibold uppercase tracking-wider">
               Tibetan Elemental Astrology (Jungtsi / འབྱུང་རྩིས)
@@ -1319,7 +1355,13 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
 
       {/* Tab: Persian & Medieval Arabic (Ilm al-Nujūm) */}
       {activeTab === 'persian' && persian && (
-        <div className="mt-4 space-y-4 animate-tab-enter">
+        <div
+          id="tradition-panel-persian"
+          role="tabpanel"
+          aria-labelledby="tradition-tab-persian"
+          tabIndex={0}
+          className="mt-4 space-y-4 animate-tab-enter focus:outline-none"
+        >
           <div className="flex flex-col sm:flex-row sm:items-center justify-between bg-[#080a0f] p-3.5 rounded-md border border-[#1b2331] gap-3">
             <div>
               <span className="text-[10px] text-amber-400 font-mono font-semibold uppercase tracking-wider">
@@ -1451,7 +1493,13 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
 
       {/* Tab: Ancient Egyptian (Decanic & Chronocrators) */}
       {activeTab === 'egyptian' && egyptian && (
-        <div className="mt-4 space-y-4 animate-tab-enter">
+        <div
+          id="tradition-panel-egyptian"
+          role="tabpanel"
+          aria-labelledby="tradition-tab-egyptian"
+          tabIndex={0}
+          className="mt-4 space-y-4 animate-tab-enter focus:outline-none"
+        >
           <div className="flex flex-col sm:flex-row sm:items-center justify-between bg-[#080a0f] p-3.5 rounded-md border border-[#1b2331] gap-3">
             <div>
               <span className="text-[10px] text-cyan-400 font-mono font-semibold uppercase tracking-wider">
@@ -1543,7 +1591,13 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
 
       {/* Tab: Polynesian & Māori Maramataka */}
       {activeTab === 'maramataka' && maramataka && (
-        <div className="mt-4 space-y-4 animate-tab-enter">
+        <div
+          id="tradition-panel-maramataka"
+          role="tabpanel"
+          aria-labelledby="tradition-tab-maramataka"
+          tabIndex={0}
+          className="mt-4 space-y-4 animate-tab-enter focus:outline-none"
+        >
           <div className="flex flex-col sm:flex-row sm:items-center justify-between bg-[#080a0f] p-3.5 rounded-md border border-[#1b2331] gap-3">
             <div>
               <span className="text-[10px] text-emerald-400 font-mono font-semibold uppercase tracking-wider">

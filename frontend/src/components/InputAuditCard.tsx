@@ -45,7 +45,10 @@ export const InputAuditCard: React.FC<Props> = ({ data }) => {
             <button
               type="button"
               onClick={() => setIsMobileOpen(!isMobileOpen)}
-              className="md:hidden text-xs font-mono text-cyan-300 hover:text-cyan-200 font-medium cursor-pointer py-1.5 px-3 rounded-lg bg-[#121824] border border-cyan-800/80 min-h-[44px] flex items-center justify-center active:scale-95 transition-all"
+              aria-expanded={isMobileOpen}
+              aria-controls="input-audit-collapsible-content"
+              aria-label={isMobileOpen ? 'Hide Input Audit Invariants' : 'Expand Input Audit Invariants'}
+              className="md:hidden text-xs font-mono text-cyan-300 hover:text-cyan-200 font-medium cursor-pointer py-1.5 px-3 rounded-lg bg-[#121824] border border-cyan-800/80 min-h-[44px] flex items-center justify-center active:scale-95 transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
             >
               {isMobileOpen ? 'Hide Full Audit ▲' : 'Audit Invariants (4) ▼'}
             </button>
@@ -53,7 +56,10 @@ export const InputAuditCard: React.FC<Props> = ({ data }) => {
         </div>
 
         {/* Collapsible Content Area (Always visible on Desktop, togglable on Mobile) */}
-        <div className={`mt-3.5 space-y-4 ${isMobileOpen ? 'block' : 'hidden md:block'}`}>
+        <div
+          id="input-audit-collapsible-content"
+          className={`mt-3.5 space-y-4 ${isMobileOpen ? 'block' : 'hidden md:block'}`}
+        >
           {/* Grid of Key Normalizations */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
         {/* UTC Instant */}

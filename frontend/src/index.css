@@ -177,10 +177,6 @@ html[data-theme="light"] {
   color: #475569 !important;
 }
 
-[data-theme="light"] .text-slate-500 {
-  color: #64748b !important;
-}
-
 [data-theme="light"] .text-slate-600 {
   color: #94a3b8 !important;
 }

@@ -328,6 +328,7 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
             role="tab"
             id="tab-custom-mode"
             aria-selected={activeMode === 'custom'}
+            aria-controls="panel-custom-mode"
             onClick={() => setActiveMode('custom')}
             className={`relative flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-3 sm:px-3.5 py-2.5 sm:py-1.5 min-h-[44px] sm:min-h-[38px] text-xs rounded-md font-medium transition-colors cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 ${
               activeMode === 'custom'
@@ -353,6 +354,7 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
             role="tab"
             id="tab-archive-mode"
             aria-selected={activeMode === 'archive'}
+            aria-controls="panel-archive-mode"
             onClick={() => setActiveMode('archive')}
             className={`relative flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-3 sm:px-3.5 py-2.5 sm:py-1.5 min-h-[44px] sm:min-h-[38px] text-xs rounded-md font-medium transition-colors cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 ${
               activeMode === 'archive'
@@ -380,7 +382,13 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
       {/* EXPERIENCE 1: CLEAN & INDEPENDENT CUSTOM MANUAL CALIBRATION               */}
       {/* ========================================================================= */}
       {activeMode === 'custom' ? (
-        <div className="pt-3 space-y-4">
+        <div
+          id="panel-custom-mode"
+          role="tabpanel"
+          aria-labelledby="tab-custom-mode"
+          tabIndex={0}
+          className="pt-3 space-y-4 focus:outline-none"
+        >
           {/* Vault Quick Access & Workspace Sub-header */}
           <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-3 border-b border-[#1b2331]/70 gap-2.5">
             <div className="flex items-center gap-2">
@@ -868,7 +876,13 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
         /* ========================================================================= */
         /* EXPERIENCE 2: DEDICATED HISTORICAL TITAN BENCHMARK ARCHIVE                */
         /* ========================================================================= */
-        <div className="pt-3 space-y-3.5">
+        <div
+          id="panel-archive-mode"
+          role="tabpanel"
+          aria-labelledby="tab-archive-mode"
+          tabIndex={0}
+          className="pt-3 space-y-3.5 focus:outline-none"
+        >
           {/* Controls: Categories & Search */}
           <div className="flex flex-col gap-2.5">
             <div className="flex items-center gap-1.5 overflow-x-auto pb-1 scrollbar-thin">
