@@ -59,11 +59,11 @@ export const FeatureExplainerModal: React.FC = () => {
       role="dialog"
       aria-modal="true"
       aria-labelledby="explainer-modal-title"
-      className="fixed inset-0 z-[70] flex items-center justify-center p-3 sm:p-6 bg-black/80 backdrop-blur-sm animate-fade-in overscroll-contain pt-[max(0.75rem,env(safe-area-inset-top,0px))] pb-[max(0.75rem,env(safe-area-inset-bottom,0px))]"
+      className="fixed inset-0 z-[70] flex items-center justify-center p-3 sm:p-6 bg-black/80 backdrop-blur-md overscroll-contain pt-[max(0.75rem,env(safe-area-inset-top,0px))] pb-[max(0.75rem,env(safe-area-inset-bottom,0px))]"
       onClick={closeExplainer}
     >
       <div
-        className="bg-[#0b0f17] border border-[#1e293b] text-slate-200 rounded-2xl w-full max-w-3xl max-h-[90vh] flex flex-col shadow-2xl overflow-hidden relative"
+        className="bg-[#0b0f17] border border-[#1e293b] text-slate-200 rounded-2xl w-full max-w-3xl max-h-[90vh] flex flex-col shadow-2xl overflow-hidden relative animate-screen-enter"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Top Header Bar */}

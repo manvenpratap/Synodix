@@ -336,14 +336,23 @@ function AppContent() {
                 Switch
               </button>
             </div>
-            <div className="flex items-baseline justify-between">
-              <span className="text-xs font-semibold text-slate-100 truncate tracking-wide">
-                {activeSubjectName}
-              </span>
-              <span className="text-[10px] font-mono text-slate-400 tabular-nums">
-                {activeSubjectDate}
-              </span>
-            </div>
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={`${activeSubjectName}-${activeSubjectDate}`}
+                initial={{ opacity: 0, y: 4 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -4 }}
+                transition={{ duration: 0.18, ease: [0.16, 1, 0.3, 1] }}
+                className="flex items-baseline justify-between"
+              >
+                <span className="text-xs font-semibold text-slate-100 truncate tracking-wide">
+                  {activeSubjectName}
+                </span>
+                <span className="text-[10px] font-mono text-slate-400 tabular-nums">
+                  {activeSubjectDate}
+                </span>
+              </motion.div>
+            </AnimatePresence>
             {chartData && (
               <div className="pt-1.5 border-t border-[#1b2331]/80 text-[10px] font-mono flex flex-col gap-1">
                 <div className="flex items-center justify-between text-slate-400">
@@ -735,21 +744,20 @@ function AppContent() {
             <button
               type="button"
               onClick={toggleTheme}
-              className="inline-flex items-center justify-center gap-1.5 p-2 sm:px-3 sm:py-1.5 min-w-[40px] min-h-[40px] sm:min-h-[34px] text-xs rounded border border-[#1b2331] bg-[#10151f] hover:bg-[#151c2a] text-slate-300 hover:text-amber-400 transition-colors cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
+              className="inline-flex items-center justify-center gap-1.5 p-2 sm:px-3 sm:py-1.5 min-w-[40px] min-h-[40px] sm:min-h-[34px] text-xs rounded border border-[#1b2331] bg-[#10151f] hover:bg-[#151c2a] text-slate-300 hover:text-amber-400 transition-colors cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 group"
               data-tooltip={theme === 'dark' ? 'Switch to Solar Day Theme' : 'Switch to Deep Space Theme'}
               aria-label={theme === 'dark' ? 'Switch to Solar Day Theme' : 'Switch to Deep Space Theme'}
             >
-              {theme === 'dark' ? (
-                <>
+              <div className="transition-transform duration-500 ease-out group-hover:rotate-45 group-active:scale-90">
+                {theme === 'dark' ? (
                   <Sun className="w-4 h-4 text-amber-400 shrink-0" />
-                  <span className="hidden sm:inline">Light Mode</span>
-                </>
-              ) : (
-                <>
+                ) : (
                   <Moon className="w-4 h-4 text-sky-400 shrink-0" />
-                  <span className="hidden sm:inline">Dark Mode</span>
-                </>
-              )}
+                )}
+              </div>
+              <span className="hidden sm:inline">
+                {theme === 'dark' ? 'Light Mode' : 'Dark Mode'}
+              </span>
             </button>
 
             {currentScreen !== 'workbench' && (
@@ -802,18 +810,18 @@ function AppContent() {
                     onClick={() => navigateTo(s.id)}
                     className={`flex items-center gap-1 px-2 py-1 rounded-md text-[10px] font-mono cursor-pointer transition-all shrink-0 active:scale-95 ${
                       isActive
-                        ? 'bg-cyan-950 text-cyan-300 border border-cyan-700 font-bold shadow-xs'
+                        ? 'bg-cyan-950 text-cyan-300 border border-cyan-700 font-bold shadow-xs ring-1 ring-cyan-500/50'
                         : isPassed
                         ? 'bg-[#101722] text-emerald-400 border border-emerald-900/50'
                         : 'bg-[#0e131d] text-slate-400 border border-[#1a2332]'
                     }`}
                   >
                     <span
-                      className={`w-3.5 h-3.5 rounded-full flex items-center justify-center text-[9px] ${
+                      className={`w-3.5 h-3.5 rounded-full flex items-center justify-center text-[9px] transition-all ${
                         isActive
-                          ? 'bg-cyan-400 text-slate-950 font-bold'
+                          ? 'bg-cyan-400 text-slate-950 font-bold ring-2 ring-cyan-300/40'
                           : isPassed
-                          ? 'bg-emerald-500/20 text-emerald-300'
+                          ? 'bg-emerald-500/20 text-emerald-300 font-semibold'
                           : 'bg-[#182130] text-slate-400'
                       }`}
                     >
@@ -822,7 +830,7 @@ function AppContent() {
                     <span>{s.label}</span>
                   </button>
                   {idx < JOURNEY_STEPS.length - 1 && (
-                    <span className={`text-[10px] shrink-0 ${isPassed ? 'text-emerald-500/50' : 'text-slate-600'}`}>➔</span>
+                    <span className={`text-[10px] shrink-0 transition-colors ${isPassed ? 'text-emerald-400 font-semibold' : 'text-slate-600'}`}>➔</span>
                   )}
                 </React.Fragment>
               );

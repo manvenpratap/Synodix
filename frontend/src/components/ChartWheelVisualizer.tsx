@@ -81,8 +81,8 @@ export const NorthIndianChart: React.FC<VedicChartProps> = ({ jyotisha }) => {
         <rect x="10" y="10" width="380" height="380" fill="#0d1118" stroke="#1b2331" strokeWidth="2" />
 
         {/* Diagonal Cross */}
-        <line x1="10" y1="10" x2="390" y2="390" stroke="#2a3649" strokeWidth="1.5" />
-        <line x1="10" y1="390" x2="390" y2="10" stroke="#2a3649" strokeWidth="1.5" />
+        <line x1="10" y1="10" x2="390" y2="390" stroke="#2a3649" strokeWidth="1.5" className="animate-kundali-draw" />
+        <line x1="10" y1="390" x2="390" y2="10" stroke="#2a3649" strokeWidth="1.5" className="animate-kundali-draw" />
 
         {/* Inner Diamond (Kendra axis) */}
         <polygon
@@ -91,6 +91,7 @@ export const NorthIndianChart: React.FC<VedicChartProps> = ({ jyotisha }) => {
           stroke="#38bdf8"
           strokeWidth="1.5"
           strokeOpacity="0.7"
+          className="animate-kundali-draw"
         />
 
         {/* House Highlights: Kendra houses (1, 4, 7, 10) have subtle accent tint */}
@@ -328,6 +329,7 @@ export const WesternCircularWheel: React.FC<WesternWheelProps> = ({ western }) =
               strokeWidth="0.8"
               strokeOpacity="0.45"
               strokeDasharray={asp.aspect === 'Sextile' ? '3,2' : undefined}
+              className="animate-beam-pulse hover:stroke-opacity-100 hover:stroke-[1.6] transition-all cursor-pointer"
             />
           );
         })}
@@ -485,7 +487,8 @@ export const BaZiElementPentagram: React.FC<BaZiPentagramProps> = ({ bazi }) => 
               stroke="#f43f5e"
               strokeWidth="1"
               strokeDasharray="4 3"
-              strokeOpacity="0.35"
+              strokeOpacity="0.45"
+              className="animate-beam-pulse hover:stroke-opacity-90 hover:stroke-[1.8] transition-all cursor-pointer"
             />
           );
         })}
@@ -595,12 +598,12 @@ export const ZiWeiPalaceGrid: React.FC<ZiWeiGridProps> = ({ ziwei }) => {
     return (
       <div
         key={branch}
-        className={`p-2 rounded border flex flex-col justify-between text-left transition-colors ${
+        className={`p-2 rounded border flex flex-col justify-between text-left transition-all hover:-translate-y-0.5 hover:shadow-md cursor-pointer ${
           p.is_ming
-            ? 'bg-[#182335] border-cyan-500 shadow-xs'
+            ? 'bg-[#182335] border-cyan-500 shadow-xs animate-aura-breathe'
             : p.is_shen
-            ? 'bg-[#1a1c29] border-purple-500'
-            : 'bg-[#0d1118] border-[#1b2331] hover:bg-[#121721]'
+            ? 'bg-[#1a1c29] border-purple-500 animate-aura-breathe'
+            : 'bg-[#0d1118] border-[#1b2331] hover:bg-[#121721] hover:border-slate-600'
         }`}
       >
         {/* Header: Name + Branch + Badges */}
@@ -1238,39 +1241,43 @@ export const MayaCalendarCompass: React.FC<MayanCompassProps> = ({ mayan }) => {
       >
         {/* Outer Haab' Ring (365 days / 18 months + Wayeb) */}
         <circle cx={center} cy={center} r={outerR} fill="#0d1118" stroke="#1b2331" strokeWidth="2" />
-        {Array.from({ length: 19 }).map((_, i) => {
-          const ang = (i / 19) * 360 - 90;
-          const rad = (ang * Math.PI) / 180;
-          return (
-            <line
-              key={i}
-              x1={center + (outerR - 10) * Math.cos(rad)}
-              y1={center + (outerR - 10) * Math.sin(rad)}
-              x2={center + outerR * Math.cos(rad)}
-              y2={center + outerR * Math.sin(rad)}
-              stroke="#0284c7"
-              strokeWidth="1.5"
-            />
-          );
-        })}
+        <g className="animate-gear-sync" style={{ transformOrigin: `${center}px ${center}px` }}>
+          {Array.from({ length: 19 }).map((_, i) => {
+            const ang = (i / 19) * 360 - 90;
+            const rad = (ang * Math.PI) / 180;
+            return (
+              <line
+                key={i}
+                x1={center + (outerR - 10) * Math.cos(rad)}
+                y1={center + (outerR - 10) * Math.sin(rad)}
+                x2={center + outerR * Math.cos(rad)}
+                y2={center + outerR * Math.sin(rad)}
+                stroke="#0284c7"
+                strokeWidth="1.5"
+              />
+            );
+          })}
+        </g>
 
         {/* Inner Tzolk'in Ring (260 days / 20 day signs x 13 numbers) */}
         <circle cx={center} cy={center} r={innerR} fill="#090d15" stroke="#0284c7" strokeWidth="1.5" />
-        {Array.from({ length: 20 }).map((_, i) => {
-          const ang = (i / 20) * 360 - 90;
-          const rad = (ang * Math.PI) / 180;
-          return (
-            <line
-              key={i}
-              x1={center + (innerR - 8) * Math.cos(rad)}
-              y1={center + (innerR - 8) * Math.sin(rad)}
-              x2={center + innerR * Math.cos(rad)}
-              y2={center + innerR * Math.sin(rad)}
-              stroke="#38bdf8"
-              strokeWidth="1"
-            />
-          );
-        })}
+        <g className="animate-gear-reverse" style={{ transformOrigin: `${center}px ${center}px` }}>
+          {Array.from({ length: 20 }).map((_, i) => {
+            const ang = (i / 20) * 360 - 90;
+            const rad = (ang * Math.PI) / 180;
+            return (
+              <line
+                key={i}
+                x1={center + (innerR - 8) * Math.cos(rad)}
+                y1={center + (innerR - 8) * Math.sin(rad)}
+                x2={center + innerR * Math.cos(rad)}
+                y2={center + innerR * Math.sin(rad)}
+                stroke="#38bdf8"
+                strokeWidth="1"
+              />
+            );
+          })}
+        </g>
 
         {/* Hub: Kin & Calendar Round */}
         <circle cx={center} cy={center} r={44} fill="#080a0f" stroke="#38bdf8" strokeWidth="2" />

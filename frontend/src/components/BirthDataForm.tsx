@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import type { BirthInput, Preset } from '../types';
 import {
   Star,
@@ -320,7 +321,7 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
         <div
           role="tablist"
           aria-label="Input Experience Switcher"
-          className="flex items-center bg-[#070a0f] p-1 rounded-lg border border-[#1b2331] w-full sm:w-auto"
+          className="relative flex items-center bg-[#070a0f] p-1 rounded-lg border border-[#1b2331] w-full sm:w-auto"
         >
           <button
             type="button"
@@ -328,15 +329,24 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
             id="tab-custom-mode"
             aria-selected={activeMode === 'custom'}
             onClick={() => setActiveMode('custom')}
-            className={`flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-3 sm:px-3.5 py-2.5 sm:py-1.5 min-h-[44px] sm:min-h-[38px] text-xs rounded-md font-medium transition-all cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 ${
+            className={`relative flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-3 sm:px-3.5 py-2.5 sm:py-1.5 min-h-[44px] sm:min-h-[38px] text-xs rounded-md font-medium transition-colors cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 ${
               activeMode === 'custom'
-                ? 'bg-cyan-950 text-cyan-300 border border-cyan-700/80 shadow-xs'
-                : 'text-slate-400 hover:text-slate-200 hover:bg-[#10151f]'
+                ? 'text-cyan-300 font-semibold'
+                : 'text-slate-400 hover:text-slate-200'
             }`}
           >
-            <PenTool className="w-3.5 h-3.5 shrink-0" />
-            <span className="hidden sm:inline">Custom Manual Input</span>
-            <span className="sm:hidden">Custom Input</span>
+            {activeMode === 'custom' && (
+              <motion.div
+                layoutId="active-experience-pill"
+                className="absolute inset-0 bg-cyan-950/90 border border-cyan-700/80 rounded-md shadow-xs pointer-events-none"
+                transition={{ type: 'spring', stiffness: 500, damping: 35 }}
+              />
+            )}
+            <span className="relative z-10 flex items-center gap-2">
+              <PenTool className="w-3.5 h-3.5 shrink-0" />
+              <span className="hidden sm:inline">Custom Manual Input</span>
+              <span className="sm:hidden">Custom Input</span>
+            </span>
           </button>
           <button
             type="button"
@@ -344,15 +354,24 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
             id="tab-archive-mode"
             aria-selected={activeMode === 'archive'}
             onClick={() => setActiveMode('archive')}
-            className={`flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-3 sm:px-3.5 py-2.5 sm:py-1.5 min-h-[44px] sm:min-h-[38px] text-xs rounded-md font-medium transition-all cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 ${
+            className={`relative flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-3 sm:px-3.5 py-2.5 sm:py-1.5 min-h-[44px] sm:min-h-[38px] text-xs rounded-md font-medium transition-colors cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 ${
               activeMode === 'archive'
-                ? 'bg-cyan-950 text-cyan-300 border border-cyan-700/80 shadow-xs'
-                : 'text-slate-400 hover:text-slate-200 hover:bg-[#10151f]'
+                ? 'text-cyan-300 font-semibold'
+                : 'text-slate-400 hover:text-slate-200'
             }`}
           >
-            <Users className="w-3.5 h-3.5 shrink-0" />
-            <span className="hidden sm:inline">Historical Titans (100)</span>
-            <span className="sm:hidden">Titans (100)</span>
+            {activeMode === 'archive' && (
+              <motion.div
+                layoutId="active-experience-pill"
+                className="absolute inset-0 bg-cyan-950/90 border border-cyan-700/80 rounded-md shadow-xs pointer-events-none"
+                transition={{ type: 'spring', stiffness: 500, damping: 35 }}
+              />
+            )}
+            <span className="relative z-10 flex items-center gap-2">
+              <Users className="w-3.5 h-3.5 shrink-0" />
+              <span className="hidden sm:inline">Historical Titans (100)</span>
+              <span className="sm:hidden">Titans (100)</span>
+            </span>
           </button>
         </div>
       </div>
@@ -651,12 +670,15 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
                     type="button"
                     onClick={handleDetectLocation}
                     disabled={isLocating}
-                    className="inline-flex items-center gap-1 min-h-[36px] sm:min-h-[28px] px-2.5 py-1 text-[11px] font-mono text-cyan-400 hover:text-cyan-200 bg-[#0d121c] border border-[#1b2331] rounded transition-colors cursor-pointer disabled:opacity-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
+                    className="relative inline-flex items-center gap-1.5 min-h-[36px] sm:min-h-[28px] px-2.5 py-1 text-[11px] font-mono text-cyan-400 hover:text-cyan-200 bg-[#0d121c] border border-cyan-800/60 rounded transition-all cursor-pointer disabled:opacity-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 overflow-hidden shadow-xs hover:border-cyan-500"
                     data-tooltip="Detect current device GPS coordinates"
                     aria-label="Detect GPS coordinates"
                   >
-                    <Compass className={`w-3.5 h-3.5 text-cyan-400 ${isLocating ? 'animate-spin' : ''}`} />
-                    <span>{isLocating ? 'Detecting...' : 'Detect GPS'}</span>
+                    {isLocating && (
+                      <span className="absolute inset-0 rounded border-2 border-cyan-400 animate-radar-pulse pointer-events-none" />
+                    )}
+                    <Compass className={`w-3.5 h-3.5 text-cyan-400 ${isLocating ? 'animate-spin' : 'transition-transform duration-300 hover:rotate-45'}`} />
+                    <span>{isLocating ? 'Pinging GPS...' : 'Detect GPS'}</span>
                   </button>
                 </div>
                 <div className="grid grid-cols-2 gap-2">
@@ -802,18 +824,26 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
               <button
                 type="submit"
                 disabled={isLoading}
-                className="w-full sm:w-auto px-5 py-2.5 min-h-[44px] bg-cyan-700 hover:bg-cyan-600 active:scale-[0.98] text-white font-medium text-xs rounded border border-cyan-600 transition-all cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-1 focus-visible:ring-offset-[#080a0f]"
+                className="relative overflow-hidden w-full sm:w-auto px-5 py-2.5 min-h-[44px] bg-gradient-to-r from-cyan-700 via-cyan-600 to-cyan-700 hover:from-cyan-600 hover:to-cyan-500 active:scale-[0.98] text-white font-medium text-xs rounded border border-cyan-500/80 transition-all cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-1 focus-visible:ring-offset-[#080a0f] shadow-md hover:shadow-cyan-500/20"
               >
+                {isLoading && (
+                  <div className="absolute inset-0 pointer-events-none">
+                    <div className="w-1/3 h-full bg-gradient-to-r from-transparent via-white/30 to-transparent animate-laser-scan" />
+                  </div>
+                )}
                 {isLoading ? (
                   <>
                     <svg className="animate-spin h-3.5 w-3.5 text-white" viewBox="0 0 24 24" fill="none">
                       <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                       <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                     </svg>
-                    <span>Evaluating Dual Engines & Uncertainty Ensemble...</span>
+                    <span className="relative z-10 font-mono tracking-wide">Evaluating Dual Engines & Uncertainty Ensemble...</span>
                   </>
                 ) : (
-                  <span>Compute, Verify & Synthesize Chart</span>
+                  <>
+                    <Sparkles className="w-3.5 h-3.5 text-cyan-200" />
+                    <span>Compute, Verify & Synthesize Chart</span>
+                  </>
                 )}
               </button>
             </div>
@@ -908,7 +938,8 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
               displayedTitans.map((p) => {
                 const isSelected = selectedTitan?.id === p.id;
                 return (
-                  <div
+                  <motion.div
+                    layout
                     key={p.id}
                     role="button"
                     tabIndex={0}
@@ -920,7 +951,7 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
                         handleSelectTitan(p, false);
                       }
                     }}
-                    className={`flex flex-col text-left p-2.5 rounded-lg border transition-all cursor-pointer relative group min-h-[58px] focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-1 focus-visible:ring-offset-[#080a0f] ${
+                    className={`flex flex-col text-left p-2.5 rounded-lg border transition-all cursor-pointer relative group min-h-[58px] active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-1 focus-visible:ring-offset-[#080a0f] ${
                       isSelected
                         ? 'bg-cyan-950/70 border-cyan-500/80 shadow-sm shadow-cyan-950 text-slate-100 ring-1 ring-cyan-500/40'
                         : 'bg-[#10151f] hover:bg-[#151c2a] border-[#1b2331] text-slate-300 hover:border-slate-700'
@@ -948,7 +979,7 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
                     <span className="text-[9px] text-slate-400 font-mono mt-0.5 truncate">
                       {p.birth_date} • {p.city_name}
                     </span>
-                  </div>
+                  </motion.div>
                 );
               })
             )}
@@ -956,7 +987,13 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
 
           {/* Selected Titan Dossier & Direct Actions */}
           {selectedTitan && (
-            <div className="p-3.5 rounded-lg bg-[#0a0e16] border border-cyan-900/60 shadow-lg mt-3">
+            <motion.div
+              key={selectedTitan.id}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
+              className="p-3.5 rounded-lg bg-[#0a0e16] border border-cyan-900/60 shadow-lg mt-3"
+            >
               <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 pb-3 border-b border-[#1b2331]">
                 <div className="flex items-center gap-2.5">
                   <div className="w-9 h-9 rounded-lg bg-cyan-950/80 border border-cyan-700/60 flex items-center justify-center text-cyan-300 font-bold text-sm shrink-0">
@@ -1031,7 +1068,7 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
                   &quot;{selectedTitan.note}&quot;
                 </div>
               )}
-            </div>
+            </motion.div>
           )}
         </div>
       )}

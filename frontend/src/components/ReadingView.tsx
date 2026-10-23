@@ -147,11 +147,15 @@ export const ReadingView: React.FC<Props> = ({ data, onNavigate }) => {
             <button
               type="button"
               onClick={handleCopy}
-              className="px-3 py-2 min-h-[44px] sm:min-h-[38px] text-xs font-mono rounded bg-[#121721] hover:bg-[#18202c] text-slate-300 border border-[#1b2331] transition-colors cursor-pointer flex items-center gap-1.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
+              className={`px-3 py-2 min-h-[44px] sm:min-h-[38px] text-xs font-mono rounded bg-[#121721] hover:bg-[#18202c] border transition-all cursor-pointer flex items-center gap-1.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 active:scale-95 ${
+                copied
+                  ? 'border-emerald-500 text-emerald-300 bg-emerald-950/40 shadow-xs'
+                  : 'text-slate-300 border-[#1b2331]'
+              }`}
               data-tooltip="Copy Full Document Markdown"
               aria-label="Copy Full Document Markdown"
             >
-              {copied ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5 text-slate-400" />}
+              {copied ? <Check className="w-3.5 h-3.5 text-emerald-400 animate-pulse" /> : <Copy className="w-3.5 h-3.5 text-slate-400" />}
               <span>{copied ? 'Copied!' : 'Copy'}</span>
             </button>
             <button

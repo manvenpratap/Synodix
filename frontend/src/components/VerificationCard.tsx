@@ -37,7 +37,7 @@ export const VerificationCard: React.FC<Props> = ({ report }) => {
         {report.invariants.map((inv, idx) => (
           <div
             key={idx}
-            className="bg-[#080a0f] p-3 rounded-md border border-[#1b2331] flex flex-col justify-between"
+            className="bg-[#080a0f] p-3 rounded-md border border-[#1b2331] flex flex-col justify-between hover:border-cyan-800/80 hover:-translate-y-0.5 transition-all duration-200 cursor-pointer shadow-xs"
           >
             <div>
               <div className="flex items-center justify-between">
