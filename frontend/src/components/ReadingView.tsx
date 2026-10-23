@@ -11,7 +11,6 @@ import {
   AlertTriangle,
   ShieldCheck,
   Clock,
-  Sparkles,
   BookOpen,
   Eye,
   Code
@@ -642,7 +641,7 @@ export const ReadingView: React.FC<Props> = ({ data, onNavigate }) => {
           <section className="bg-[#0d1118] border border-[#1b2331] rounded-lg p-4 space-y-3">
             <div className="flex items-center justify-between border-b border-[#1b2331] pb-2.5">
               <div className="flex flex-wrap items-center gap-2">
-                <Sparkles className="w-4 h-4 text-cyan-400" />
+                <BookOpen className="w-4 h-4 text-cyan-400" />
                 <h3 className="text-sm font-semibold text-slate-100 uppercase tracking-wider font-mono">
                   4. Attributed Temperament Overlays (Maya & Tibetan)
                 </h3>
@@ -756,7 +755,7 @@ export const ReadingView: React.FC<Props> = ({ data, onNavigate }) => {
           <button
             type="button"
             onClick={() => onNavigate('evidence')}
-            className="inline-flex items-center justify-center gap-2 px-4 py-2.5 min-h-[44px] text-xs font-mono rounded-lg bg-gradient-to-r from-cyan-700 to-cyan-600 hover:from-cyan-600 hover:to-cyan-500 text-white font-semibold cursor-pointer transition-all shadow-md active:scale-[0.98]"
+            className="inline-flex items-center justify-center gap-2 px-4 py-2.5 min-h-[44px] text-xs font-mono rounded-lg bg-cyan-700 hover:bg-cyan-600 text-white font-semibold cursor-pointer transition-all border border-cyan-500/80 shadow-xs active:scale-[0.98]"
           >
             <span>View Mathematical Evidence Whitepaper →</span>
           </button>

@@ -1,7 +1,7 @@
 # Synodix: Project Context & Working Memory
 
-**Last Updated:** 2026-10-23 06:49:47
-**Version:** 2.18.0  
+**Last Updated:** 2026-10-23 07:00:22
+**Version:** 2.19.0  
 **Stack:** Python 3.12 (FastAPI, Swiss Ephemeris 2.10, Skyfield DE421) + TypeScript / React 19 / Vite / Tailwind CSS v4 / Framer Motion / Capacitor 8 (iOS & Android)  
 **Workspace:** `/Volumes/Study/Projects/Astrology` (symlinked as `/Volumes/Study/Astrology`)  
 **Git Remote:** `https://github.com/manvenpratap/Synodix.git`  
@@ -9,7 +9,13 @@
 ---
 
 ## 1. Current Status & Milestone
-- **Active Phase**: Impeccable Motion System: 27 World-Class Animations (Completed)
+- **Active Phase**: Anti-AI-Slop 30-Pattern Audit & Archaeoastronomical Observatory Refactor (Completed)
+- **Anti-AI-Slop Architectural Enhancements (v2.19.0)**:
+  - **100% Sparkle Eradication**: Removed all `<Sparkles>` icons across the application (`BirthDataForm.tsx`, `FeatureExplainerModal.tsx`, `ReadingView.tsx`). Replaced with authentic navigational and scholarly symbols (`Compass`, `BookOpen`) or clean typography.
+  - **Machined Solid CTA Buttons**: Replaced multi-stop SaaS button gradients with solid, high-contrast celestial cyan (`bg-cyan-700 hover:bg-cyan-600 border border-cyan-500/80 shadow-xs`) on primary computation actions and mobile journey navigation bars (`TraditionCharts.tsx`, `SynthesisMatrix.tsx`, `ReadingView.tsx`, `MathematicalEvidenceCard.tsx`).
+  - **Archaeoastronomical Research Terminal Discipline**: Preserved strict inward-contracting radius scale (enclosures 16px/12px, cards 8px/6px, controls 4px, badges 2px) and tabular monospace numerals (`tabular-nums font-mono`) for all degrees, arcsecond deltas, and Julian day calculations.
+  - **Workflow Health**: 100% CLEAN (Verified via `./pipeline.sh doctor`)
+  - **Test Invariants**: 16/16 regression suites passing via `./pipeline.sh test --summary` (38.99s)
 - **Impeccable Motion System Architecture (27 Opportunities Implemented)**:
   - **Pillar I (Astrometric Ingestion & Workbench)**: Calculation laser scan sweep across button surface (`.animate-laser-scan`), geodetic GPS radar pulse (`.animate-radar-pulse`), sliding spring pill for segmented mode switcher (`layoutId="active-experience-pill"`), and FLIP card reflow for 100 Titans gallery with smooth biographical dossier ingress.
   - **Pillar II (Spatial Continuity & HUD Navigation)**: Mobile journey stepper pulse and energy bead propagation, shared-element subject plate crossfade flip on subject switch, solar eclipse rotation on theme toggle, and optical reticle corner lock-in (`.reticle-corner-*`).

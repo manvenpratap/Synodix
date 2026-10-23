@@ -6,7 +6,7 @@ import {
   FlaskConical,
   Landmark,
   Palette,
-  Sparkles,
+  BookOpen,
   Trophy,
   Clapperboard,
   Users,
@@ -41,7 +41,7 @@ const CATEGORIES = [
   { id: 'science_tech', label: 'Science & Tech', count: 18, icon: FlaskConical },
   { id: 'leaders_statesmen', label: 'Leaders', count: 18, icon: Landmark },
   { id: 'arts_music_lit', label: 'Arts & Music', count: 20, icon: Palette },
-  { id: 'philosophy_spirituality', label: 'Philosophy', count: 14, icon: Sparkles },
+  { id: 'philosophy_spirituality', label: 'Philosophy', count: 14, icon: BookOpen },
   { id: 'sports_athletics', label: 'Sports & Martial', count: 16, icon: Trophy },
   { id: 'cinema_business', label: 'Cinema & Media', count: 14, icon: Clapperboard },
   { id: 'all', label: 'All 100 Records', count: 100, icon: Users },
@@ -824,7 +824,7 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
               <button
                 type="submit"
                 disabled={isLoading}
-                className="relative overflow-hidden w-full sm:w-auto px-5 py-2.5 min-h-[44px] bg-gradient-to-r from-cyan-700 via-cyan-600 to-cyan-700 hover:from-cyan-600 hover:to-cyan-500 active:scale-[0.98] text-white font-medium text-xs rounded border border-cyan-500/80 transition-all cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-1 focus-visible:ring-offset-[#080a0f] shadow-md hover:shadow-cyan-500/20"
+                className="relative overflow-hidden w-full sm:w-auto px-5 py-2.5 min-h-[44px] bg-cyan-700 hover:bg-cyan-600 active:scale-[0.98] text-white font-medium text-xs rounded border border-cyan-500/80 transition-all cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-1 focus-visible:ring-offset-[#080a0f] shadow-sm"
               >
                 {isLoading && (
                   <div className="absolute inset-0 pointer-events-none">
@@ -841,7 +841,7 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
                   </>
                 ) : (
                   <>
-                    <Sparkles className="w-3.5 h-3.5 text-cyan-200" />
+                    <Compass className="w-3.5 h-3.5 text-cyan-200" />
                     <span>Compute, Verify & Synthesize Chart</span>
                   </>
                 )}

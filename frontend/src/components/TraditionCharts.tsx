@@ -1631,7 +1631,7 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
           <button
             type="button"
             onClick={() => onNavigate('synthesis')}
-            className="inline-flex items-center justify-center gap-2 px-4 py-2.5 min-h-[44px] text-xs font-mono rounded-lg bg-gradient-to-r from-cyan-700 to-cyan-600 hover:from-cyan-600 hover:to-cyan-500 text-white font-semibold cursor-pointer transition-all shadow-md active:scale-[0.98]"
+            className="inline-flex items-center justify-center gap-2 px-4 py-2.5 min-h-[44px] text-xs font-mono rounded-lg bg-cyan-700 hover:bg-cyan-600 text-white font-semibold cursor-pointer transition-all border border-cyan-500/80 shadow-xs active:scale-[0.98]"
           >
             <span>Explore Cross-Cultural Synthesis Matrix →</span>
           </button>

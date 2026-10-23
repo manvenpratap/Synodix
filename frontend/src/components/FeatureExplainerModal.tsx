@@ -13,7 +13,6 @@ import {
   History,
   Search,
   ChevronRight,
-  Sparkles,
   Layers,
 } from 'lucide-react';
 
@@ -134,7 +133,7 @@ export const FeatureExplainerModal: React.FC = () => {
               {/* Quick Summary Card */}
               <div className="p-4 rounded-xl bg-gradient-to-r from-[#0d1624] via-[#09101c] to-[#070b14] border border-cyan-900/60 shadow-inner">
                 <div className="flex items-start gap-3">
-                  <Sparkles className="w-5 h-5 text-cyan-300 shrink-0 mt-0.5" />
+                  <Compass className="w-5 h-5 text-cyan-300 shrink-0 mt-0.5" />
                   <div>
                     <h3 className="text-xs font-mono font-semibold text-cyan-300 uppercase tracking-wider mb-1">
                       Concept Overview
