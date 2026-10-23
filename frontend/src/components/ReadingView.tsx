@@ -77,19 +77,18 @@ export const ReadingView: React.FC<Props> = ({ data, onNavigate }) => {
   });
 
   return (
-    <div className="machined-bezel p-1 sm:p-1.5 rounded-2xl shadow-2xl relative">
-      <div className="machined-core border border-white/[0.06] rounded-[calc(1rem-1px)] overflow-hidden relative">
-        <div className="reticle-corner-tl" />
-        <div className="reticle-corner-tr" />
-        <div className="reticle-corner-bl" />
-        <div className="reticle-corner-br" />
+    <div className="machined-bezel rounded-2xl shadow-2xl relative overflow-hidden">
+      <div className="reticle-corner-tl" />
+      <div className="reticle-corner-tr" />
+      <div className="reticle-corner-bl" />
+      <div className="reticle-corner-br" />
 
-        {/* ==================== 1. DOCUMENT TOP BANNER & ACTION BAR ==================== */}
+      {/* ==================== 1. DOCUMENT TOP BANNER & ACTION BAR ==================== */}
       <div className="bg-[#0d121c] border-b border-[#1b2331] p-5 sm:p-6">
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
           <div>
             <div className="flex flex-wrap items-center gap-2 mb-1.5">
-              <span className="px-2 py-0.5 rounded bg-emerald-950 text-emerald-300 border border-emerald-800/60 font-mono text-[10px] font-semibold uppercase tracking-wider flex items-center gap-1">
+              <span className="px-2 py-0.5 rounded bg-emerald-950 text-emerald-300 border border-emerald-800/60 font-mono text-[11px] font-semibold uppercase tracking-wider flex items-center gap-1">
                 <ShieldCheck className="w-3 h-3 text-emerald-400" />
                 Audited Epistemological Document
               </span>
@@ -761,7 +760,6 @@ export const ReadingView: React.FC<Props> = ({ data, onNavigate }) => {
           </button>
         </div>
       )}
-      </div>
     </div>
   );
 };

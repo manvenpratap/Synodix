@@ -308,12 +308,12 @@ function AppContent() {
                 <span className="font-bold tracking-tight text-slate-100 text-sm font-sans tracking-wider">
                   SYNODIX
                 </span>
-                <span className="px-1.5 py-0.2 rounded text-[9px] font-mono bg-cyan-950 text-cyan-300 border border-cyan-800 font-medium">
+                <span className="px-1.5 py-0.2 rounded text-[11px] font-mono bg-cyan-950 text-cyan-300 border border-cyan-800 font-medium">
                   v2.15
                 </span>
               </div>
-              <p className="text-[10px] text-slate-400 font-mono mt-0.5 tracking-tight flex items-center gap-1">
-                <span className="w-1.5 h-1.5 rounded-full bg-cyan-400/80 inline-block animate-pulse"></span>
+              <p className="text-[11px] text-slate-400 font-mono mt-0.5 tracking-tight flex items-center gap-1">
+                <span className="w-1.5 h-1.5 rounded-full bg-cyan-400/80 inline-block shadow-[0_0_4px_#38bdf8]"></span>
                 Astrometric Observatory
               </p>
             </div>
@@ -324,14 +324,14 @@ function AppContent() {
         <div className="px-3 pt-3">
           <div className="p-3 rounded-xl bg-gradient-to-b from-[#0e1422] to-[#0a0d16] border border-[#1e293b] shadow-xs flex flex-col gap-1.5 relative overflow-hidden group">
             <div className="flex items-center justify-between">
-              <span className="text-[10px] uppercase font-mono text-slate-400 font-semibold tracking-wider flex items-center gap-1.5">
+              <span className="text-[11px] uppercase font-mono text-slate-400 font-semibold tracking-wider flex items-center gap-1.5">
                 <User className="w-3 h-3 text-cyan-400" />
                 Subject Dossier
               </span>
               <button
                 type="button"
                 onClick={() => navigateTo('workbench')}
-                className="text-[10px] font-mono text-cyan-400 hover:text-cyan-300 cursor-pointer underline hover:text-cyan-200 transition-colors"
+                className="text-[11px] font-mono text-cyan-400 hover:text-cyan-300 cursor-pointer underline hover:text-cyan-200 transition-colors"
               >
                 Switch
               </button>
@@ -348,13 +348,13 @@ function AppContent() {
                 <span className="text-xs font-semibold text-slate-100 truncate tracking-wide">
                   {activeSubjectName}
                 </span>
-                <span className="text-[10px] font-mono text-slate-400 tabular-nums">
+                <span className="text-[11px] font-mono text-slate-400 tabular-nums">
                   {activeSubjectDate}
                 </span>
               </motion.div>
             </AnimatePresence>
             {chartData && (
-              <div className="pt-1.5 border-t border-[#1b2331]/80 text-[10px] font-mono flex flex-col gap-1">
+              <div className="pt-1.5 border-t border-[#1b2331]/80 text-[11px] font-mono flex flex-col gap-1">
                 <div className="flex items-center justify-between text-slate-400">
                   <span className="flex items-center gap-1">
                     <span>Divergence:</span>
@@ -388,38 +388,38 @@ function AppContent() {
         <div className="px-3 pt-2">
           <div className="p-2.5 rounded-xl bg-gradient-to-b from-[#090e17] to-[#070b12] border border-[#1a2332]">
             <div className="flex items-center justify-between mb-1.5 px-0.5">
-              <span className="text-[9px] uppercase font-mono text-slate-400 font-semibold tracking-wider">
+              <span className="text-[11px] uppercase font-mono text-slate-400 font-semibold tracking-wider">
                 CIVILIZATIONAL ARRAY (9)
               </span>
-              <span className="text-[9px] font-mono text-cyan-400/90 font-medium">9 / 9 ACTIVE</span>
+              <span className="text-[11px] font-mono text-cyan-400/90 font-medium">9 / 9 ACTIVE</span>
             </div>
-            <div className="grid grid-cols-3 gap-1 text-[9px] font-mono text-center">
+            <div className="grid grid-cols-3 gap-1 text-[11px] font-mono text-center">
               <div className="px-1 py-1 rounded bg-[#0d131f] border border-[#1e2a3a] text-amber-300 font-medium flex items-center justify-center gap-1 hover:border-amber-500/50 transition-colors" data-tooltip="Jyotisha (Vedic)">
-                <span className="text-[8px]">🕉️</span> JYOT
+                <span>🕉️</span> JYOT
               </div>
               <div className="px-1 py-1 rounded bg-[#0d131f] border border-[#1e2a3a] text-cyan-300 font-medium flex items-center justify-center gap-1 hover:border-cyan-500/50 transition-colors" data-tooltip="Western (Hellenistic)">
-                <span className="text-[8px]">🏛️</span> HELL
+                <span>🏛️</span> HELL
               </div>
               <div className="px-1 py-1 rounded bg-[#0d131f] border border-[#1e2a3a] text-rose-300 font-medium flex items-center justify-center gap-1 hover:border-rose-500/50 transition-colors" data-tooltip="BaZi (Four Pillars)">
-                <span className="text-[8px]">☯️</span> BAZI
+                <span>☯️</span> BAZI
               </div>
               <div className="px-1 py-1 rounded bg-[#0d131f] border border-[#1e2a3a] text-purple-300 font-medium flex items-center justify-center gap-1 hover:border-purple-500/50 transition-colors" data-tooltip="Zi Wei Dou Shu">
-                <span className="text-[8px]">👑</span> ZIWEI
+                <span>👑</span> ZIWEI
               </div>
               <div className="px-1 py-1 rounded bg-[#0d131f] border border-[#1e2a3a] text-emerald-300 font-medium flex items-center justify-center gap-1 hover:border-emerald-500/50 transition-colors" data-tooltip="Maya (Tzolk'in)">
-                <span className="text-[8px]">☀️</span> MAYA
+                <span>☀️</span> MAYA
               </div>
               <div className="px-1 py-1 rounded bg-[#0d131f] border border-[#1e2a3a] text-amber-400 font-medium flex items-center justify-center gap-1 hover:border-amber-500/50 transition-colors" data-tooltip="Tibetan (Phugpa)">
-                <span className="text-[8px]">☸️</span> TIBET
+                <span>☸️</span> TIBET
               </div>
               <div className="px-1 py-1 rounded bg-[#0d131f] border border-[#1e2a3a] text-teal-300 font-medium flex items-center justify-center gap-1 hover:border-teal-500/50 transition-colors" data-tooltip="Persian (Almuten)">
-                <span className="text-[8px]">🕌</span> PERS
+                <span>🕌</span> PERS
               </div>
               <div className="px-1 py-1 rounded bg-[#0d131f] border border-[#1e2a3a] text-yellow-300 font-medium flex items-center justify-center gap-1 hover:border-yellow-500/50 transition-colors" data-tooltip="Egyptian (Decans)">
-                <span className="text-[8px]">𓋹</span> EGYPT
+                <span>𓋹</span> EGYPT
               </div>
               <div className="px-1 py-1 rounded bg-[#0d131f] border border-[#1e2a3a] text-emerald-400 font-medium flex items-center justify-center gap-1 hover:border-emerald-500/50 transition-colors" data-tooltip="Māori (Maramataka)">
-                <span className="text-[8px]">🌊</span> MARA
+                <span>🌊</span> MARA
               </div>
             </div>
           </div>
@@ -427,7 +427,7 @@ function AppContent() {
 
         {/* Navigation Screen Links */}
         <nav aria-label="Workspace Screens" className="flex-1 p-3 space-y-1">
-          <span className="px-2 text-[10px] font-mono text-slate-400 uppercase tracking-wider block mb-1.5 font-semibold">
+          <span className="px-2 text-[11px] font-mono text-slate-400 uppercase tracking-wider block mb-1.5 font-semibold">
             WORKSPACE SCREENS
           </span>
 
@@ -442,7 +442,7 @@ function AppContent() {
                 aria-current={isActive ? 'page' : undefined}
                 className={`w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-left transition-all cursor-pointer group relative focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-1 focus-visible:ring-offset-[#080a0f] ${
                   isActive
-                    ? 'bg-gradient-to-r from-cyan-950/60 via-[#121a28] to-[#0c1018] text-cyan-300 font-medium border-l-2 border-l-cyan-400 border-y border-r border-cyan-800/40 shadow-xs ring-1 ring-cyan-500/20 translate-x-0.5'
+                    ? 'bg-[#121a28] text-cyan-300 font-medium border-l-2 border-l-cyan-400 border-y border-r border-cyan-800/40 shadow-xs ring-1 ring-cyan-500/20 translate-x-0.5'
                     : 'text-slate-300 hover:text-slate-100 hover:bg-[#101622]/80 border border-transparent hover:border-[#1b2535]'
                 }`}
               >
@@ -454,14 +454,14 @@ function AppContent() {
                   </div>
                   <div className="truncate">
                     <span className="text-xs block font-sans truncate font-medium">{item.label}</span>
-                    <span className="text-[10px] text-slate-400 block truncate font-mono">
+                    <span className="text-[11px] text-slate-400 block truncate font-mono">
                       {item.description}
                     </span>
                   </div>
                 </div>
 
                 {item.badge && (
-                  <span className={`px-1.5 py-0.5 rounded text-[9px] font-mono shrink-0 ml-1 ${
+                  <span className={`px-1.5 py-0.5 rounded text-[11px] font-mono shrink-0 ml-1 ${
                     isActive
                       ? 'bg-cyan-950 text-cyan-300 border border-cyan-700 font-semibold shadow-xs'
                       : 'bg-[#151c28] text-slate-400 border border-[#1b2331]'
@@ -477,7 +477,7 @@ function AppContent() {
         {/* Calibration Inset Box (Stitch Observatory Style) */}
         {chartData && (
           <div className="px-3 pb-2">
-            <div className="p-2 rounded bg-[#06090e] border border-[#1b2331] font-mono text-[9px] space-y-0.5 text-slate-400">
+            <div className="p-2 rounded bg-[#06090e] border border-[#1b2331] font-mono text-[11px] space-y-0.5 text-slate-400">
               <div className="flex items-center justify-between text-slate-400 uppercase tracking-wider font-semibold mb-1">
                 <span>ASTROMETRIC CALIBRATION</span>
                 <ExplainerTrigger id="time_normalization_eot" variant="icon" size="xs" />
@@ -490,10 +490,10 @@ function AppContent() {
         )}
 
         {/* Sidebar Footer with Engine Diagnostics */}
-        <div className="p-3 border-t border-[#1b2331] bg-[#090c12] text-[10px] font-mono space-y-2">
+        <div className="p-3 border-t border-[#1b2331] bg-[#090c12] text-[11px] font-mono space-y-2">
           <div className="flex items-center justify-between text-slate-400">
             <span className="flex items-center gap-1.5">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 shadow-[0_0_4px_#10b981] inline-block"></span>
               NASA JPL DE421
             </span>
             <span className="text-emerald-400 font-semibold">VERIFIED</span>
@@ -507,7 +507,7 @@ function AppContent() {
             <button
               type="button"
               onClick={toggleTheme}
-              className="flex items-center gap-1 text-[10px] font-mono text-cyan-400 hover:text-cyan-300 cursor-pointer"
+              className="flex items-center gap-1 text-[11px] font-mono text-cyan-400 hover:text-cyan-300 cursor-pointer"
               data-tooltip={theme === 'dark' ? 'Switch to Solar Day Theme' : 'Switch to Deep Space Theme'}
               aria-label={theme === 'dark' ? 'Switch to Solar Day Theme' : 'Switch to Deep Space Theme'}
             >
@@ -529,7 +529,7 @@ function AppContent() {
             <button
               type="button"
               onClick={() => setIsServerModalOpen(true)}
-              className="flex items-center gap-1 text-[10px] font-mono text-cyan-400 hover:text-cyan-300 cursor-pointer"
+              className="flex items-center gap-1 text-[11px] font-mono text-cyan-400 hover:text-cyan-300 cursor-pointer"
               data-tooltip="Configure backend API server address"
               aria-label="Server Settings"
             >
@@ -537,7 +537,7 @@ function AppContent() {
               <span>{getApiBaseUrl() ? 'Custom' : 'Direct'}</span>
             </button>
           </div>
-          <div className="text-[9px] text-slate-400 pt-1 text-center">
+          <div className="text-xs font-mono text-slate-400 pt-1 text-center">
             SwissEph 2.10 • Global Civilizations
           </div>
         </div>
@@ -573,7 +573,7 @@ function AppContent() {
 
             {/* Mobile Theme Switcher */}
             <div className="flex items-center justify-between px-1 py-2.5 my-1 border-b border-[#1b2331]">
-              <span className="text-[10px] font-mono uppercase text-slate-400 font-semibold">Theme</span>
+              <span className="text-[11px] font-mono uppercase text-slate-400 font-semibold">Theme</span>
               <button
                 type="button"
                 onClick={toggleTheme}
@@ -597,7 +597,7 @@ function AppContent() {
 
             {/* Mobile Server Config */}
             <div className="flex items-center justify-between px-1 py-2.5 my-1 border-b border-[#1b2331]">
-              <span className="text-[10px] font-mono uppercase text-slate-400 font-semibold">Server</span>
+              <span className="text-[11px] font-mono uppercase text-slate-400 font-semibold">Server</span>
               <button
                 type="button"
                 onClick={() => setIsServerModalOpen(true)}
@@ -649,7 +649,7 @@ function AppContent() {
                       <span className="text-xs font-sans">{item.label}</span>
                     </div>
                     {item.badge && (
-                      <span className="text-[9px] font-mono px-1 rounded bg-[#18202c] text-cyan-300">
+                      <span className="text-[11px] font-mono px-1 rounded bg-[#18202c] text-cyan-300">
                         {item.badge}
                       </span>
                     )}
@@ -658,7 +658,7 @@ function AppContent() {
               })}
             </nav>
 
-            <div className="pt-3 border-t border-[#1b2331] text-[10px] font-mono text-slate-400">
+            <div className="pt-3 border-t border-[#1b2331] text-[11px] font-mono text-slate-400">
               NASA JPL DE421 • Multi-Tradition
             </div>
           </div>
@@ -687,11 +687,11 @@ function AppContent() {
             {/* Breadcrumb Screen Title */}
             <div className="flex items-center gap-1.5 sm:gap-2 min-w-0">
               <span className="text-xs font-mono text-cyan-400 font-semibold tracking-wider hidden sm:inline flex items-center gap-1.5">
-                <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse"></span>
+                <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 inline-block"></span>
                 SYNODIX
               </span>
               <span className="text-slate-600 hidden sm:inline">/</span>
-              <h1 className="text-sm font-semibold text-slate-100 flex items-center gap-2 min-w-0">
+              <h1 className="text-lg font-bold text-slate-100 flex items-center gap-2 min-w-0">
                 <span className="truncate max-w-[120px] sm:max-w-none">
                   {NAV_ITEMS.find((n) => n.id === currentScreen)?.label}
                 </span>
@@ -701,7 +701,7 @@ function AppContent() {
                 <button
                   type="button"
                   onClick={() => navigateTo('workbench')}
-                  className="md:hidden flex items-center gap-1 px-2 py-0.5 rounded-full bg-[#101724] border border-cyan-800/60 text-[10px] font-mono text-cyan-300 truncate max-w-[110px] cursor-pointer shrink-0"
+                  className="md:hidden flex items-center gap-1 px-2 py-0.5 rounded-full bg-[#101724] border border-cyan-800/60 text-[11px] font-mono text-cyan-300 truncate max-w-[110px] cursor-pointer shrink-0"
                   data-tooltip="Switch active subject"
                   aria-label={`Subject: ${activeSubjectName}. Tap to switch.`}
                 >
@@ -714,7 +714,7 @@ function AppContent() {
             {/* Stitch Live Telemetry Badges (Desktop >= 2xl) */}
             <div className="hidden 2xl:flex items-center gap-2 font-mono text-[11px] ml-4">
               <div className="flex items-center gap-1.5 px-2.5 py-1 rounded bg-[#0d121c] border border-[#1b2331]">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 inline-block"></span>
                 <span className="text-slate-400">JPL DE421:</span>
                 <span className="text-emerald-300 font-semibold">PASS</span>
                 <ExplainerTrigger id="dual_engine_validation" variant="icon" size="xs" />
@@ -805,12 +805,12 @@ function AppContent() {
           aria-label="Epistemic Journey Stepper"
           className="md:hidden px-3 py-2 bg-[#0c1018]/90 backdrop-blur-md border-b border-[#1b2331]/80 select-none sticky top-[calc(3.75rem+env(safe-area-inset-top,0px))] z-20"
         >
-          <div className="flex items-center justify-between text-[10px] font-mono mb-1.5 text-slate-400">
-            <span className="uppercase tracking-wider font-semibold text-[9px] text-cyan-400 flex items-center gap-1.5">
-              <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 inline-block animate-pulse"></span>
+          <div className="flex items-center justify-between text-[11px] font-mono mb-1.5 text-slate-400">
+            <span className="uppercase tracking-wider font-semibold text-[11px] text-cyan-400 flex items-center gap-1.5">
+              <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 inline-block"></span>
               Epistemic Journey
             </span>
-            <span className="text-[10px] text-slate-300 font-mono">
+            <span className="text-[11px] text-slate-300 font-mono">
               Step {JOURNEY_STEPS.findIndex((s) => s.id === currentScreen) + 1} of 5
             </span>
           </div>
@@ -825,7 +825,7 @@ function AppContent() {
                     onClick={() => navigateTo(s.id)}
                     aria-current={isActive ? 'step' : undefined}
                     aria-label={`Step ${s.step}: ${s.label}${isActive ? ' (current step)' : isPassed ? ' (completed)' : ''}`}
-                    className={`flex items-center gap-1.5 px-2.5 py-1.5 min-h-[38px] rounded-lg text-[10px] font-mono cursor-pointer transition-all shrink-0 active:scale-95 touch-manipulation focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 ${
+                    className={`flex items-center gap-1.5 px-2.5 py-1.5 min-h-[38px] rounded-lg text-[11px] font-mono cursor-pointer transition-all shrink-0 active:scale-95 touch-manipulation focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 ${
                       isActive
                         ? 'bg-cyan-950 text-cyan-300 border border-cyan-700 font-bold shadow-xs ring-1 ring-cyan-500/50'
                         : isPassed
@@ -834,7 +834,7 @@ function AppContent() {
                     }`}
                   >
                     <span
-                      className={`w-4 h-4 rounded-full flex items-center justify-center text-[9px] transition-all shrink-0 ${
+                      className={`w-4 h-4 rounded-full flex items-center justify-center text-[11px] transition-all shrink-0 ${
                         isActive
                           ? 'bg-cyan-400 text-slate-950 font-bold ring-2 ring-cyan-300/40'
                           : isPassed
@@ -847,7 +847,7 @@ function AppContent() {
                     <span className="truncate">{s.label}</span>
                   </button>
                   {idx < JOURNEY_STEPS.length - 1 && (
-                    <span className={`text-[10px] shrink-0 transition-colors select-none ${isPassed ? 'text-emerald-400 font-semibold' : 'text-slate-600'}`}>➔</span>
+                    <span className={`text-[11px] shrink-0 transition-colors select-none ${isPassed ? 'text-emerald-400 font-semibold' : 'text-slate-600'}`}>➔</span>
                   )}
                 </React.Fragment>
               );
@@ -889,15 +889,15 @@ function AppContent() {
                   />
                   {chartData && (
                     <div className="space-y-4">
-                      <div className="flex flex-col sm:flex-row sm:items-center justify-between bg-gradient-to-r from-[#0d1624] to-[#0a0d14] p-3 sm:p-3.5 rounded-xl border border-cyan-900/60 gap-2.5 shadow-xs">
+                      <div className="flex flex-col sm:flex-row sm:items-center justify-between bg-[#0d1624] p-3 sm:p-3.5 rounded-xl border border-cyan-900/60 gap-2.5 shadow-xs">
                         <div className="text-xs font-mono text-slate-200 flex items-center gap-2">
-                          <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shrink-0"></span>
+                          <span className="w-2 h-2 rounded-full bg-emerald-400 shrink-0"></span>
                           <span>Chart calculated for <strong className="text-cyan-300 font-semibold">{activeSubjectName}</strong> ({activeSubjectDate}).</span>
                         </div>
                         <button
                           type="button"
                           onClick={() => navigateTo('traditions')}
-                          className="inline-flex items-center justify-center gap-2 px-3.5 py-2 min-h-[44px] sm:min-h-[36px] text-xs rounded-lg bg-cyan-600 hover:bg-cyan-500 text-white font-medium cursor-pointer transition-colors shadow-xs active:scale-95"
+                          className="inline-flex items-center justify-center gap-2 px-3.5 py-2 min-h-[44px] sm:min-h-[36px] text-xs rounded-lg bg-cyan-700 hover:bg-cyan-600 text-white font-semibold border border-cyan-500/80 cursor-pointer transition-colors shadow-xs active:scale-95"
                         >
                           <span>Explore 9 Traditions (Step 2)</span>
                           <ArrowRight className="w-3.5 h-3.5" />
@@ -998,7 +998,7 @@ function AppContent() {
               <div className="relative">
                 <Icon className={`w-4 h-4 mb-0.5 ${isActive ? 'text-cyan-300' : 'text-slate-400'}`} />
                 <span
-                  className={`absolute -top-1 -right-2 text-[8px] font-mono w-3 h-3 rounded-full flex items-center justify-center select-none ${
+                  className={`absolute -top-1 -right-2 text-[11px] font-mono w-3.5 h-3.5 rounded-full flex items-center justify-center select-none leading-none ${
                     isActive
                       ? 'bg-cyan-400 text-slate-950 font-bold'
                       : 'bg-[#182130] text-slate-400 border border-[#1b2331]'
@@ -1048,7 +1048,7 @@ function AppContent() {
                   placeholder="e.g. http://192.168.1.11:8000"
                   className="w-full px-3 py-2 text-xs font-mono rounded bg-[#101520] border border-[#1b2331] text-slate-100 focus:outline-none focus:border-cyan-500"
                 />
-                <div className="flex items-center justify-between mt-1.5 text-[10px] text-slate-400">
+                <div className="flex items-center justify-between mt-1.5 text-[11px] text-slate-400">
                   <span>Local Wi-Fi: <code className="text-cyan-400">http://192.168.1.11:8000</code></span>
                   <button
                     type="button"

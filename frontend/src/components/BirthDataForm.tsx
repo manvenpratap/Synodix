@@ -293,26 +293,25 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
   });
 
   return (
-    <div className="machined-bezel p-1 sm:p-1.5 rounded-2xl relative shadow-xl">
-      <div className="machined-core border border-white/[0.06] rounded-[calc(1rem-1px)] p-4 sm:p-6 relative">
-        <div className="reticle-corner-tl" />
-        <div className="reticle-corner-tr" />
-        <div className="reticle-corner-bl" />
-        <div className="reticle-corner-br" />
+    <div className="machined-bezel p-4 sm:p-6 rounded-2xl relative shadow-xl">
+      <div className="reticle-corner-tl" />
+      <div className="reticle-corner-tr" />
+      <div className="reticle-corner-bl" />
+      <div className="reticle-corner-br" />
 
         {/* Top Header & Independent Experience Mode Switcher */}
         <div className="flex flex-col md:flex-row md:items-center justify-between pb-4 border-b border-[#1b2331] gap-3">
         <div>
           <div className="flex flex-wrap items-center gap-x-2 gap-y-0.5">
-            <span className="text-[10px] font-mono uppercase tracking-wider text-cyan-400 font-semibold">
+            <span className="text-[11px] font-mono uppercase tracking-wider text-cyan-400 font-semibold">
               01 / Astrometric Calibration & Input
             </span>
             <span className="text-slate-600 hidden sm:inline">•</span>
-            <span className="text-[10px] text-slate-400 font-mono">
+            <span className="text-xs text-slate-400 font-mono">
               {activeMode === 'custom' ? 'Clean Independent Workspace' : '100 Verified Historical Records'}
             </span>
           </div>
-          <h2 className="text-sm sm:text-base font-semibold text-slate-100 mt-1">
+          <h2 className="text-base sm:text-lg font-semibold text-slate-100 mt-1">
             {activeMode === 'custom' ? 'Custom Birth Chart Calibration' : 'Historical Titan Benchmark Library'}
           </h2>
         </div>
@@ -392,12 +391,12 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
           {/* Vault Quick Access & Workspace Sub-header */}
           <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-3 border-b border-[#1b2331]/70 gap-2.5">
             <div className="flex items-center gap-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-              <span className="text-[11px] font-mono text-slate-300 font-medium">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 inline-block"></span>
+              <span className="text-xs font-mono text-slate-300 font-medium">
                 Distraction-Free Telemetry Studio
               </span>
               <span className="text-slate-600">•</span>
-              <span className="text-[10px] font-mono text-slate-400">
+              <span className="text-xs font-mono text-slate-400">
                 WGS-84 Standards & Dual-Engine Verification
               </span>
             </div>
@@ -405,7 +404,7 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
             {/* My Vault Quick Load Bar */}
             {savedProfiles.length > 0 && (
               <div className="flex items-center gap-1.5 flex-wrap">
-                <span className="text-[10px] font-mono uppercase tracking-wider text-slate-400 flex items-center gap-1">
+                <span className="text-[11px] font-mono uppercase tracking-wider text-slate-400 flex items-center gap-1">
                   <Bookmark className="w-3 h-3 text-cyan-400" />
                   Vault ({savedProfiles.length}):
                 </span>
@@ -440,7 +439,7 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
 
           <form onSubmit={handleSubmit} className="space-y-4">
             {/* Subject Dossier Name & Reset */}
-            <div className="bg-[#0a0e16] p-3 rounded-lg border border-[#1b2331] flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
+            <div className="pb-3 border-b border-[#1b2331]/80 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
               <div className="flex-1">
                 <label
                   htmlFor="subject_name"
@@ -548,7 +547,7 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
                     City of Birth
                   </label>
                   {coordStatus === 'auto_resolved' && (
-                    <span className="text-[10px] font-mono text-emerald-400 flex items-center gap-1">
+                    <span className="text-[11px] font-mono text-emerald-400 flex items-center gap-1">
                       <CheckCircle2 className="w-3 h-3 text-emerald-400" />
                       Auto-Geocoded
                     </span>
@@ -599,7 +598,7 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
                     aria-label="City suggestions"
                     className="absolute left-0 right-0 top-full mt-1.5 z-50 bg-[#0a0e17] border border-cyan-800/80 rounded-lg shadow-2xl overflow-hidden max-h-64 overflow-y-auto divide-y divide-[#1b2331] font-sans overscroll-contain"
                   >
-                    <div className="px-2.5 py-1.5 bg-[#06090e] border-b border-[#1b2331] flex items-center justify-between text-[10px] font-mono text-slate-400">
+                    <div className="px-2.5 py-1.5 bg-[#06090e] border-b border-[#1b2331] flex items-center justify-between text-[11px] font-mono text-slate-400">
                       <span>SUGGESTED CITIES & COORDINATES</span>
                       <span className="text-cyan-400">↑↓ to navigate • Enter to select</span>
                     </div>
@@ -625,15 +624,15 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
                                 <span className="text-[11px] text-slate-400">({s.adminCode})</span>
                               )}
                             </div>
-                            <div className="text-[10px] text-slate-400 font-mono truncate">
+                            <div className="text-[11px] text-slate-400 font-mono truncate">
                               {s.country}
                             </div>
                           </div>
                           <div className="text-right shrink-0">
-                            <span className="text-[10px] font-mono text-cyan-300/90 block">
+                            <span className="text-[11px] font-mono text-cyan-300/90 block">
                               {Math.abs(s.latitude).toFixed(2)}°{s.latitude >= 0 ? 'N' : 'S'}, {Math.abs(s.longitude).toFixed(2)}°{s.longitude >= 0 ? 'E' : 'W'}
                             </span>
-                            <span className="text-[9px] font-mono text-slate-500">
+                            <span className="text-[11px] font-mono text-slate-500">
                               {s.source === 'offline_gazetteer' ? 'Offline Verified' : 'Online Geocode'}
                             </span>
                           </div>
@@ -721,7 +720,7 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
                     className="w-full bg-[#080a0f] border border-[#1b2331] rounded-md px-2.5 py-2.5 sm:py-2 min-h-[44px] sm:min-h-[38px] text-xs font-mono text-slate-100 focus:outline-none focus:border-cyan-500 focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-1 focus-visible:ring-offset-[#080a0f] transition-colors"
                   />
                 </div>
-                <div className="mt-1 text-[9px] font-mono text-slate-500 flex items-center justify-between">
+                <div className="mt-1 text-[11px] font-mono text-slate-500 flex items-center justify-between">
                   <span>
                     {formData.latitude >= 0 ? `${formData.latitude.toFixed(2)}°N` : `${Math.abs(formData.latitude).toFixed(2)}°S`},{' '}
                     {formData.longitude >= 0 ? `${formData.longitude.toFixed(2)}°E` : `${Math.abs(formData.longitude).toFixed(2)}°W`}
@@ -824,7 +823,7 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
                     )}
                   </button>
                 )}
-                <span className="text-[11px] font-mono text-slate-400 hidden lg:inline">
+                <span className="text-xs font-mono text-slate-400 hidden lg:inline">
                   NASA JPL DE421 Ephemeris active
                 </span>
               </div>
@@ -858,7 +857,7 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
 
             {/* Subtle Independent Gateway to Benchmark Archive */}
             <div className="pt-3 border-t border-[#1b2331]/60 flex flex-col sm:flex-row sm:items-center justify-between text-xs text-slate-400 gap-2">
-              <span className="text-[11px]">
+              <span className="text-xs">
                 Want to cross-examine against historical geniuses and certified records?
               </span>
               <button
@@ -902,7 +901,7 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
                   >
                     <Icon className={`w-3.5 h-3.5 ${isSelected ? 'text-cyan-300' : 'text-slate-400'}`} />
                     <span>{cat.label}</span>
-                    <span className="text-[10px] opacity-75 font-mono">({cat.count})</span>
+                    <span className="text-[11px] opacity-75 font-mono">({cat.count})</span>
                   </button>
                 );
               })}
@@ -976,7 +975,7 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
                         {p.name}
                       </span>
                       <span
-                        className={`text-[9px] font-mono px-1 py-0.2 rounded font-semibold shrink-0 ${
+                        className={`text-[11px] font-mono px-1 py-0.2 rounded font-semibold shrink-0 ${
                           p.rodden_rating === 'AA'
                             ? 'bg-emerald-950 text-emerald-300 border border-emerald-800/60'
                             : 'bg-blue-950 text-blue-300 border border-blue-800/60'
@@ -986,11 +985,11 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
                       </span>
                     </div>
                     {p.tag && (
-                      <span className="text-[10px] text-cyan-400/80 truncate mt-0.5 font-sans">
+                      <span className="text-[11px] text-cyan-400/80 truncate mt-0.5 font-sans">
                         {p.tag}
                       </span>
                     )}
-                    <span className="text-[9px] text-slate-400 font-mono mt-0.5 truncate">
+                    <span className="text-[11px] text-slate-400 font-mono mt-0.5 truncate">
                       {p.birth_date} • {p.city_name}
                     </span>
                   </motion.div>
@@ -1017,7 +1016,7 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
                     <div className="flex items-center gap-2">
                       <h4 className="text-sm font-semibold text-slate-100">{selectedTitan.name}</h4>
                       <span
-                        className={`text-[10px] font-mono px-1.5 py-0.5 rounded font-semibold ${
+                        className={`text-[11px] font-mono px-1.5 py-0.5 rounded font-semibold ${
                           selectedTitan.rodden_rating === 'AA'
                             ? 'bg-emerald-950 text-emerald-300 border border-emerald-800/60'
                             : 'bg-blue-950 text-blue-300 border border-blue-800/60'
@@ -1055,21 +1054,21 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
 
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 mt-2.5 text-[11px] font-mono">
                 <div className="bg-[#080a0f] p-2 rounded border border-[#1b2331]/60">
-                  <span className="text-slate-500 block text-[9px] uppercase">Birth Date</span>
+                  <span className="text-slate-500 block text-[11px] uppercase">Birth Date</span>
                   <span className="text-slate-200">{selectedTitan.birth_date}</span>
                 </div>
                 <div className="bg-[#080a0f] p-2 rounded border border-[#1b2331]/60">
-                  <span className="text-slate-500 block text-[9px] uppercase">Local Time</span>
+                  <span className="text-slate-500 block text-[11px] uppercase">Local Time</span>
                   <span className="text-slate-200">{selectedTitan.birth_time} (Civil)</span>
                 </div>
                 <div className="bg-[#080a0f] p-2 rounded border border-[#1b2331]/60">
-                  <span className="text-slate-500 block text-[9px] uppercase">Birthplace</span>
+                  <span className="text-slate-500 block text-[11px] uppercase">Birthplace</span>
                   <span className="text-slate-200 truncate block">
                     {selectedTitan.city_name}, {selectedTitan.country_name}
                   </span>
                 </div>
                 <div className="bg-[#080a0f] p-2 rounded border border-[#1b2331]/60">
-                  <span className="text-slate-500 block text-[9px] uppercase">WGS-84 Coordinates</span>
+                  <span className="text-slate-500 block text-[11px] uppercase">WGS-84 Coordinates</span>
                   <span className="text-cyan-300 truncate block">
                     {Math.abs(selectedTitan.latitude).toFixed(2)}°{selectedTitan.latitude >= 0 ? 'N' : 'S'},{' '}
                     {Math.abs(selectedTitan.longitude).toFixed(2)}°{selectedTitan.longitude >= 0 ? 'E' : 'W'}
@@ -1078,7 +1077,7 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
               </div>
 
               {selectedTitan.note && (
-                <div className="mt-2 text-[11px] text-slate-400 font-sans italic bg-[#080a0f]/50 p-2 rounded border border-[#1b2331]/40">
+                <div className="mt-2 text-xs text-slate-400 font-sans italic bg-[#080a0f]/50 p-2 rounded border border-[#1b2331]/40">
                   &quot;{selectedTitan.note}&quot;
                 </div>
               )}
@@ -1086,7 +1085,6 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
           )}
         </div>
       )}
-      </div>
     </div>
   );
 };

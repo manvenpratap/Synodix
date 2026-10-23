@@ -1,7 +1,7 @@
 # Synodix: Project Context & Working Memory
 
-**Last Updated:** 2026-10-23 07:13:49
-**Version:** 2.20.0  
+**Last Updated:** 2026-10-23 08:16:03
+**Version:** 2.21.0  
 **Stack:** Python 3.12 (FastAPI, Swiss Ephemeris 2.10, Skyfield DE421) + TypeScript / React 19 / Vite / Tailwind CSS v4 / Framer Motion / Capacitor 8 (iOS & Android)  
 **Workspace:** `/Volumes/Study/Projects/Astrology` (symlinked as `/Volumes/Study/Astrology`)  
 **Git Remote:** `https://github.com/manvenpratap/Synodix.git`  
@@ -9,7 +9,17 @@
 ---
 
 ## 1. Current Status & Milestone
-- **Active Phase**: Frontend Design & UI Accessibility: Decluttered Mobile Navigation & Accessible Epistemic Journey (Completed)
+- **Active Phase**: Impeccable Design Audit: 100% Elimination of Live DOM & Static Code Anti-Patterns (Completed)
+- **Live DOM & Static Anti-Pattern Eradication (v2.21.0)**:
+  - **100% Elimination of Undersized UI Text**: Enforced the 11px floor across all functional badges, timecodes, labels, navigation items, and tabular monospace data in `App.tsx`, `BirthDataForm.tsx`, `InputAuditCard.tsx`, and `ExplainerTrigger.tsx`.
+  - **Upgraded Body Text Floor**: Enforced 12px (`text-xs`) minimum on all body sentences, subtitle annotations, and notices, eliminating all `[tiny-text]` findings.
+  - **Typographic Hierarchy Compliance**: Upgraded main viewport heading `h1` in `App.tsx` from 14px (`text-sm`) to 18px (`text-lg font-bold`), establishing a compliant $1.50\times$ scale over 12px body text.
+  - **Calm Status Indicators**: Replaced decorative `animate-pulse` animations on small indicator dots with calm, high-contrast, static indicators.
+  - **WCAG AA Contrast Compliance**: Upgraded CTA button in `App.tsx` to `bg-cyan-700 hover:bg-cyan-600 font-semibold border border-cyan-500/80` (>5.0:1 contrast ratio against white text).
+  - **Single-Container Doppelrand Hardware Enclosures**: Replaced nested container wrappers across all 6 core components (`BirthDataForm`, `InputAuditCard`, `TraditionCharts`, `SynthesisMatrix`, `ReadingView`, `MathematicalEvidenceCard`) with CSS multi-stop box-shadows, completely eliminating `[nested-cards]` anti-patterns while preserving 100% of the aesthetic and corner reticles.
+  - **Zero Detector Findings**: Verified `impeccable detect --json http://127.0.0.1:5173` returns `[]` (0 live DOM anti-patterns) and `impeccable detect --json frontend/src` returns `[]` (0 static anti-patterns).
+  - **Workflow Health**: 100% CLEAN (Verified via `./pipeline.sh doctor`)
+  - **Test Invariants**: 16/16 regression suites passing via `./pipeline.sh test --summary` (40.08s)
 - **Frontend Design & UI Accessibility Enhancements (v2.20.0)**:
   - **Epistemic Journey Stepper Overhaul**: Upgraded the mobile journey stepper into an institutional `<nav aria-label="Epistemic Journey Stepper">` featuring `aria-current="step"`, accessible step-announcement labels, dynamic progress conduit bar, enlarged touch targets (`min-h-[38px] px-2.5 py-1.5 touch-manipulation`), and clean optical connectors.
   - **Mobile Bottom Navigation Integration**: Added `aria-current="page"`, optical active neon top-accent bar (`shadow-[0_0_8px_#38bdf8]`) satisfying WCAG 1.4.1 (not relying on color alone), step number indicators (`1` through `5`) directly linking tabs to the 5-step epistemic narrative, and active scale physics.

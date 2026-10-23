@@ -185,23 +185,22 @@ export const MathematicalEvidenceCard: React.FC<Props> = ({ onClose, onNavigate 
   });
 
   return (
-    <div className="machined-bezel p-1 sm:p-1.5 rounded-2xl shadow-2xl relative">
-      <div className="machined-core border border-cyan-800/60 rounded-[calc(1rem-1px)] overflow-hidden font-sans relative">
-        <div className="reticle-corner-tl" />
-        <div className="reticle-corner-tr" />
-        <div className="reticle-corner-bl" />
-        <div className="reticle-corner-br" />
+    <div className="machined-bezel rounded-2xl shadow-2xl relative overflow-hidden font-sans border border-cyan-800/60">
+      <div className="reticle-corner-tl" />
+      <div className="reticle-corner-tr" />
+      <div className="reticle-corner-bl" />
+      <div className="reticle-corner-br" />
 
-        {/* ==================== 1. ACADEMIC HEADER BAR ==================== */}
+      {/* ==================== 1. ACADEMIC HEADER BAR ==================== */}
       <div className="bg-[#0d121c] border-b border-[#1b2331] p-4 sm:p-5">
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
           <div>
             <div className="flex flex-wrap items-center gap-2 mb-1.5">
-              <span className="px-2 py-0.5 text-[10px] font-mono font-bold tracking-wider rounded bg-cyan-950 text-cyan-300 border border-cyan-700/60 flex items-center gap-1.5">
+              <span className="px-2 py-0.5 text-[11px] font-mono font-bold tracking-wider rounded bg-cyan-950 text-cyan-300 border border-cyan-700/60 flex items-center gap-1.5">
                 <ShieldCheck className="w-3 h-3 text-cyan-400" />
                 PEER-GRADE EMPIRICAL AUDIT
               </span>
-              <span className="px-2 py-0.5 text-[10px] font-mono rounded bg-[#151c28] text-slate-300 border border-[#222e42]">
+              <span className="px-2 py-0.5 text-[11px] font-mono rounded bg-[#151c28] text-slate-300 border border-[#222e42]">
                 N=100 Certified Titans (Rodden AA/A)
               </span>
               <span className="px-2 py-0.5 text-[10px] font-mono rounded bg-[#151c28] text-slate-300 border border-[#222e42]">
@@ -960,7 +959,6 @@ export const MathematicalEvidenceCard: React.FC<Props> = ({ onClose, onNavigate 
           </button>
         </div>
       )}
-      </div>
     </div>
   );
 };

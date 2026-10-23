@@ -250,17 +250,16 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
   const currentTheme = CULTURE_THEMES[activeTab] || CULTURE_THEMES.jyotisha;
 
   return (
-    <div className="machined-bezel p-1 sm:p-1.5 rounded-2xl shadow-2xl relative transition-all duration-500">
-      <div className={`rounded-[calc(1rem-1px)] p-4 sm:p-6 border transition-all duration-300 relative overflow-hidden backdrop-blur-xl ${currentTheme.containerBg} ${currentTheme.containerBorder}`}>
-        <div className="reticle-corner-tl" />
-        <div className="reticle-corner-tr" />
-        <div className="reticle-corner-bl" />
-        <div className="reticle-corner-br" />
+    <div className={`machined-bezel p-4 sm:p-6 rounded-2xl shadow-2xl relative transition-all duration-500 overflow-hidden backdrop-blur-xl ${currentTheme.containerBg} ${currentTheme.containerBorder}`}>
+      <div className="reticle-corner-tl" />
+      <div className="reticle-corner-tr" />
+      <div className="reticle-corner-bl" />
+      <div className="reticle-corner-br" />
 
-        {/* Tradition Selector Tabs */}
+      {/* Tradition Selector Tabs */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-3.5 border-b border-white/10 gap-3">
         <div className="hidden sm:block">
-          <span className="text-[10px] font-mono uppercase tracking-wider text-cyan-400 font-semibold block">
+          <span className="text-[11px] font-mono uppercase tracking-wider text-cyan-400 font-semibold block">
             Deterministic Tradition Calculators
           </span>
           <h3 className="text-base font-semibold text-slate-100 mt-0.5">
@@ -1691,7 +1690,6 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
           </button>
         </div>
       )}
-      </div>
     </div>
   );
 };

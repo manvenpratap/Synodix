@@ -47,17 +47,16 @@ export const SynthesisMatrix: React.FC<Props> = ({ synthesis, onNavigate }) => {
   };
 
   return (
-    <div className="machined-bezel p-1 sm:p-1.5 rounded-2xl shadow-xl relative">
-      <div className="machined-core border border-white/[0.06] rounded-[calc(1rem-1px)] p-4 sm:p-6 space-y-5 relative">
-        <div className="reticle-corner-tl" />
-        <div className="reticle-corner-tr" />
-        <div className="reticle-corner-bl" />
-        <div className="reticle-corner-br" />
+    <div className="machined-bezel p-4 sm:p-6 rounded-2xl shadow-xl relative space-y-5">
+      <div className="reticle-corner-tl" />
+      <div className="reticle-corner-tr" />
+      <div className="reticle-corner-bl" />
+      <div className="reticle-corner-br" />
 
-        {/* Header & Divergence Metric */}
+      {/* Header & Divergence Metric */}
       <div className="flex flex-col md:flex-row md:items-center justify-between pb-3.5 border-b border-[#1b2331] gap-3">
         <div>
-          <span className="text-[10px] font-mono uppercase tracking-wider text-purple-400 font-semibold block">
+          <span className="text-[11px] font-mono uppercase tracking-wider text-purple-400 font-semibold block">
             05 / Cross-Cultural Synthesis Without Double-Counting
           </span>
           <div className="flex flex-wrap items-center gap-2 mt-0.5">
@@ -421,7 +420,6 @@ export const SynthesisMatrix: React.FC<Props> = ({ synthesis, onNavigate }) => {
           </button>
         </div>
       )}
-      </div>
     </div>
   );
 };

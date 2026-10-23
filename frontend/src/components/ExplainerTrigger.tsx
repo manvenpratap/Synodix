@@ -60,7 +60,7 @@ export const ExplainerTrigger: React.FC<Props> = ({
       onClick={handleClick}
       data-tooltip="Click to inspect feature explainer & mathematics"
       aria-label={`Explain feature: ${label || id}`}
-      className={`inline-flex items-center gap-1 px-2 py-1 sm:py-0.5 min-h-[32px] sm:min-h-0 rounded text-[10px] font-mono font-medium bg-[#0f1726] hover:bg-[#152033] text-cyan-300 hover:text-cyan-100 border border-cyan-800/60 hover:border-cyan-600 transition-all cursor-pointer focus:outline-none focus-visible:ring-1 focus-visible:ring-cyan-400 ${className}`}
+      className={`inline-flex items-center gap-1 px-2 py-1 sm:py-0.5 min-h-[32px] sm:min-h-0 rounded text-[11px] font-mono font-medium bg-[#0f1726] hover:bg-[#152033] text-cyan-300 hover:text-cyan-100 border border-cyan-800/60 hover:border-cyan-600 transition-all cursor-pointer focus:outline-none focus-visible:ring-1 focus-visible:ring-cyan-400 ${className}`}
     >
       <HelpCircle className={size === 'xs' ? 'w-2.5 h-2.5' : 'w-3 h-3'} />
       {label && <span>{label}</span>}
