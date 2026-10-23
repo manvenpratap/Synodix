@@ -24,8 +24,9 @@ Execute via the minimal-token pipeline runner:
 - `test_06_cultural_themes.py`: Validates authentic cultural immersion banners, palettes, and display presentation switchers across all 9 astrological traditions (Jyotisha, BaZi, Western, Zi Wei, Maya, Tibetan, Persian, Egyptian, Maramataka) with zero console errors.
 - `test_07_geocoding_intelligence.py`: Validates real-time city auto-suggest dropdown, automatic geodetic latitude & longitude resolution, keyboard navigation, and manual coordinate override with zero console errors.
 - `test_08_independent_input_experience.py`: Validates clean independent Custom Manual Input experience, complete isolation from 100 sample records, mode switching, and Titan data transfer with zero console errors.
+- `test_09_dossier_inferences.py`: Validates Corroboration Dossier substantive inferences profile, explicit Subject vs Birthplace separation, Core Archetype spotlight, 5 civilizational foundation pillars, 3-column analytical triad, and mobile layout integrity.
 - `conftest.py`: Playwright & browser fixtures for local UI and headless browser regression checks.
 - `helpers.py`: Bounding-box collision detection, viewport overflow assertions, and local screenshot catalog.
 
 ---
-**Total Active Test Modules:** 8
+**Total Active Test Modules:** 9

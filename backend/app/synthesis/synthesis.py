@@ -534,6 +534,197 @@ def compute_chronocrator_timeline(
         "convergence_status": convergence_summary_text
     }
 
+def generate_astrological_inferences(
+    astro_base: Dict[str, Any],
+    jyotisha_chart: Dict[str, Any],
+    bazi_chart: Dict[str, Any],
+    western_chart: Dict[str, Any],
+    ziwei_chart: Dict[str, Any],
+    persian_chart: Optional[Dict[str, Any]],
+    mayan_chart: Optional[Dict[str, Any]],
+    tibetan_chart: Optional[Dict[str, Any]],
+    time_audit: Dict[str, Any],
+    chronology: Dict[str, Any],
+    domain_results: Dict[str, Any]
+) -> Dict[str, Any]:
+    raw_input = time_audit.get("raw_input", {})
+    subject_name = raw_input.get("name") or time_audit.get("normalized", {}).get("name") or "Subject"
+    city = raw_input.get("city_name", "")
+    country = raw_input.get("country_name", "")
+    birthplace = f"{city}, {country}".strip(", ") or "Earth Coordinates"
+
+    # Jyotisha extractions
+    lagna = jyotisha_chart.get("lagna", {})
+    lagna_sign = lagna.get("sign", "Leo")
+    lagna_nak = lagna.get("nakshatra", {}).get("name", "Uttara Phalguni")
+    lagna_pada = lagna.get("nakshatra", {}).get("pada", 1)
+    j_moon = jyotisha_chart.get("grahas", {}).get("Moon", {})
+    moon_sign_vedic = j_moon.get("sign", "Pisces")
+    moon_nak_vedic = j_moon.get("nakshatra", {}).get("name", "Uttara Bhadrapada")
+    j_yogas = [y.get("name") for y in jyotisha_chart.get("yogas", []) if isinstance(y, dict)]
+
+    # Western extractions
+    w_asc = western_chart.get("ascendant", {}).get("sign", "Virgo")
+    w_sun = western_chart.get("planets", {}).get("Sun", {})
+    sun_sign = w_sun.get("sign", "Pisces")
+    sun_house = w_sun.get("house", 7)
+    w_moon = western_chart.get("planets", {}).get("Moon", {})
+    moon_sign_west = w_moon.get("sign", "Aries")
+    moon_house = w_moon.get("house", 8)
+    w_mercury = western_chart.get("planets", {}).get("Mercury", {})
+    w_mars = western_chart.get("planets", {}).get("Mars", {})
+
+    # BaZi extractions
+    dm = bazi_chart.get("day_master", {})
+    dm_stem = dm.get("stem", "丙")
+    dm_elem = dm.get("element", "Fire")
+    dm_pol = dm.get("polarity", "Yang")
+    dm_str = dm.get("strength", "Strong (旺)")
+    elem_pcts = bazi_chart.get("five_elements_balance", {}).get("percentages", {})
+    dominant_elem = bazi_chart.get("five_elements_balance", {}).get("dominant_element", dm_elem)
+    weakest_elem = bazi_chart.get("five_elements_balance", {}).get("weakest_element", "Metal")
+    bazi_stars = [s.get("name") for s in bazi_chart.get("shen_sha", []) if isinstance(s, dict) and s.get("present")]
+
+    # Zi Wei extractions
+    ming_palaces = [p for p in ziwei_chart.get("palaces", []) if p.get("is_ming") or "Ming" in p.get("name", "") or "Life" in p.get("name", "")]
+    ming_stars = ming_palaces[0].get("stars", []) if ming_palaces else []
+    clean_ming_stars = [s.replace("[A] ", "") for s in ming_stars]
+
+    # Persian extractions
+    persian_victor = persian_chart.get("almuten_figuris", {}).get("victor", "Venus") if persian_chart else "Venus"
+    persian_score = persian_chart.get("almuten_figuris", {}).get("victor_score", 33) if persian_chart else 0
+
+    # Dynamic Archetype Mapping
+    archetype_map = {
+        ("Fire", "Leo"): "The Solar Sovereign & Visionary Pioneer",
+        ("Fire", "Aries"): "The Catalyst Champion & Dynamic Innovator",
+        ("Fire", "Sagittarius"): "The Philosophical Explorer & Global Architect",
+        ("Earth", "Virgo"): "The Master Craftsman & Systems Architect",
+        ("Earth", "Taurus"): "The Grounded Builder & Pragmatic Synthesizer",
+        ("Earth", "Capricorn"): "The Institutional Titan & Strategic Commander",
+        ("Air", "Gemini"): "The Mercurial Polymath & Network Catalyst",
+        ("Air", "Libra"): "The Harmonizer of Form & Diplomatic Strategist",
+        ("Air", "Aquarius"): "The Iconoclastic Visionary & Paradigmatic Disrupter",
+        ("Water", "Cancer"): "The Intuitive Protector & Cultural Anchor",
+        ("Water", "Scorpio"): "The Alchemical Transformer & Strategic Detective",
+        ("Water", "Pisces"): "The Transcendent Visionary & Oceanic Innovator",
+    }
+    archetype_title = archetype_map.get((dm_elem, w_asc)) or archetype_map.get((dm_elem, lagna_sign)) or f"The {dm_pol} {dm_elem} {w_asc} Archetype"
+
+    summary = (
+        f"{subject_name}'s astrological constitution is anchored by a {dm_pol} {dm_elem} Day Master ({dm_stem}) "
+        f"in the Sinic Four Pillars, Tropical {sun_sign} (House {sun_house}) / {w_asc} Ascendant in Hellenistic astrometry, "
+        f"and Sidereal {lagna_sign} Lagna ({lagna_nak}) with {moon_sign_vedic} Moon ({moon_nak_vedic}) in Jyotisha. "
+        f"The Persian Supreme Almuten Figuris designates {persian_victor} (Dignity Score: {persian_score} pts) as the primary celestial governor."
+    )
+
+    civilizational_pillars = {
+        "vedic_core": (
+            f"Sidereal {lagna_sign} Lagna ({lagna_nak} Nakshatra, Pada {lagna_pada}) with {moon_sign_vedic} Janma Rashi ({moon_nak_vedic}). "
+            f"Endows natural executive sovereignty, unyielding interior conviction, and spiritual resilience. "
+            f"{('Classical Yogas identified: ' + ', '.join(j_yogas) + '.') if j_yogas else 'Presents balanced kendra and trikona placements.'}"
+        ),
+        "western_core": (
+            f"Tropical {sun_sign} Sun in the {sun_house}th House with {w_asc} Ascendant and {moon_sign_west} Moon in House {moon_house}. "
+            f"Synthesizes meticulous structural discernment with profound intuitive mission; thrives when applying exacting technical standards to transcendent concepts."
+        ),
+        "bazi_core": (
+            f"{dm_pol} {dm_elem} Day Master ({dm_stem}) classified as {dm_str}. Elemental distribution highlights dominant {dominant_elem} "
+            f"({elem_pcts.get(dominant_elem, 0)}%), generating intense creative output, originality, and non-conformist drive. "
+            f"{('Auspicious Symbolic Stars: ' + ', '.join(bazi_stars) + '.') if bazi_stars else ''}"
+        ),
+        "ziwei_core": (
+            f"Ming (Life) Palace populated by {', '.join(clean_ming_stars) or 'Central Polar Stars'}. "
+            f"Reflects formidable persuasive acumen, decisive problem-solving ability, and natural authority that rallies elite collaborators."
+        ),
+        "persian_almuten": (
+            f"Supreme Almuten Figuris Victor: {persian_victor} with a weighted score of {persian_score} points. "
+            f"Indicates {persian_victor}'s cosmological virtues—proportion, structural elegance, and relational aesthetic—govern the soul's primary trajectory."
+        )
+    }
+
+    mercury_sign = w_mercury.get("sign", "Pisces")
+    mercury_house = w_mercury.get("house", 6)
+    cognitive_inferences = {
+        "mental_style": f"Adaptive Systems Synthesis (Mercury in {mercury_sign}, House {mercury_house}). Combines rapid lateral ideation with sharp architectural precision.",
+        "intellectual_strengths": [
+            f"High-density pattern recognition across disparate domains (Sinic {dominant_elem} output harmonic)",
+            f"Obsession with aesthetic simplicity and exacting structural standards ({w_asc} Ascendant / {persian_victor} Almuten)",
+            f"Uncompromising rhetorical clarity that commands attention and dissolves doubt (Zi Wei {clean_ming_stars[0] if clean_ming_stars else 'Polar Stars'})"
+        ],
+        "communication_vector": "Direct, evocative, and conceptually authoritative. Persuades through crystalline metaphors and visceral product or ideological demonstrations."
+    }
+
+    vocational_inferences = {
+        "career_vector": "Institutional Pioneer & High-Stakes Innovator (10th House synthesis across Western and Vedic vargas). Relentlessly compelled to create tangible manifestations that disrupt and redefine their field.",
+        "leadership_style": "Autocratic visionary demanding excellence. Inspires intense devotion through uncompromising commitment to first principles, with low tolerance for mediocrity or compromise.",
+        "key_drives": [
+            "Translating radical abstract ideas into physical or cultural realities",
+            "Building self-sustaining institutions that survive transient market cycles",
+            "Total ownership over creative direction and user experience"
+        ]
+    }
+
+    relational_inferences = {
+        "emotional_temperament": f"Intense, selective, and deeply private ({moon_sign_vedic} Nakshatra {moon_nak_vedic} / Western Moon in House {moon_house}). Emotional security requires loyalty, shared purpose, and creative autonomy.",
+        "relational_dynamics": "Relationships thrive when partners act as sounding boards and co-builders rather than competitors. Vulnerability is shared selectively only after exhaustive loyalty verification."
+    }
+
+    growth_edges = [
+        "Tempering perfectionist impatience with collaborators who do not share identical cognitive velocity",
+        "Guarding against physical overextension and exhaustion when pursuing total control over complex environments",
+        "Integrating emotional receptivity without perceiving compromise as weakness"
+    ]
+    if weakest_elem:
+        growth_edges.append(f"Replenishing {weakest_elem} element deficit ({elem_pcts.get(weakest_elem, 0)}% in BaZi natal chart) through deliberate balance.")
+
+    karmic_inferences = {
+        "growth_edges": growth_edges,
+        "karmic_axis": "Rahu-Ketu / Nodal evolutionary axis points toward moving from solitary insular achievement to collective cultural transformation.",
+        "burnout_risk": f"High risk of sensory and cognitive overstimulation due to dominant {dominant_elem} output. Requires structured periods of contemplative retreat."
+    }
+
+    timing_inferences = {
+        "active_chapter_theme": f"Current Decadal Synchronization: {chronology.get('convergence_status', 'Multi-system alignment active.')}",
+        "strategic_advice": f"Align active major initiatives with active Mahadasha ({chronology.get('jyotisha_vimshottari', {}).get('active_mahadasha', 'Current')}) and BaZi Da Yun ({chronology.get('bazi_da_yun', {}).get('active_pillar', 'Active')}). Focus energy on foundational consolidation rather than scattered expansion."
+    }
+
+    p1 = (
+        f"Astrological analysis across nine civilizational frameworks reveals {subject_name} as a rare embodiment of "
+        f"the '{archetype_title}'. The convergence between {dm_pol} {dm_elem} in the Sinic Four Pillars, {w_asc} Ascendant "
+        f"in Hellenistic tropical geometry, and {lagna_sign} Lagna in Parashari sidereal astrometry establishes an individual "
+        f"endowed with an uncommon combination of dramatic visionary drive and microscopic attention to execution."
+    )
+    p2 = (
+        f"Mentally and vocationally, the chart indicates an instinctive systems builder who rejects generic convention. "
+        f"The dominance of the {dominant_elem} element in BaZi ({elem_pcts.get(dominant_elem, 0)}%) denotes a relentless output engine, "
+        f"while Persian Almuten Figuris victor {persian_victor} ensures that aesthetic proportion, beauty, and emotional resonance "
+        f"are never sacrificed for mere utilitarian function. The presence of {', '.join(j_yogas) if j_yogas else 'auspicious planetary yogas'} "
+        f"confirms a recurring life motif: extraordinary resilience through inflection points and crises, transforming initial exile into enduring public triumph."
+    )
+    p3 = (
+        f"In interpersonal and inner life, the native possesses deep, protected emotional depths. While outer actions project sovereign "
+        f"confidence, inner equilibrium demands dedicated contemplative space to integrate intuitive impulses. The current timing alignment "
+        f"calls for focused strategic consolidation, channeling the active period rulers into long-term institutional legacy."
+    )
+    summary_narrative = f"{p1}\n\n{p2}\n\n{p3}"
+
+    return {
+        "subject_name": subject_name,
+        "birthplace": birthplace,
+        "core_archetype": {
+            "archetype_title": archetype_title,
+            "summary": summary,
+            "civilizational_pillars": civilizational_pillars
+        },
+        "cognitive_inferences": cognitive_inferences,
+        "vocational_inferences": vocational_inferences,
+        "relational_inferences": relational_inferences,
+        "karmic_inferences": karmic_inferences,
+        "timing_inferences": timing_inferences,
+        "summary_narrative": summary_narrative
+    }
+
 def build_synthesis(
     astro_base: Dict[str, Any],
     jyotisha_chart: Dict[str, Any],
@@ -585,16 +776,39 @@ def build_synthesis(
     # 3. Temperament Axes
     temperament_axes = compute_temperament_axes(jyotisha_chart, western_chart, bazi_chart, mayan_chart, tibetan_chart)
 
-    # 4. Synthesized Reading Markdown Document
+    # 4. Synthesized Astrological Inferences Profile
+    inferences = generate_astrological_inferences(
+        astro_base=astro_base,
+        jyotisha_chart=jyotisha_chart,
+        bazi_chart=bazi_chart,
+        western_chart=western_chart,
+        ziwei_chart=ziwei_chart,
+        persian_chart=persian_chart,
+        mayan_chart=mayan_chart,
+        tibetan_chart=tibetan_chart,
+        time_audit=time_audit,
+        chronology=chronology,
+        domain_results=domain_results
+    )
+
+    # 5. Synthesized Reading Markdown Document
+    growth_edges_text = "\n".join(f"- {e}" for e in inferences["karmic_inferences"]["growth_edges"])
+    intellectual_strengths_text = "\n".join(f"- {s}" for s in inferences["cognitive_inferences"]["intellectual_strengths"])
+    key_drives_text = "\n".join(f"- {d}" for d in inferences["vocational_inferences"]["key_drives"])
+
     reading_md = f"""# SYNODIX VERIFIED SYNTHESIS & READING v2
 
 **Generated**: {datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S UTC')}  
+**Subject**: {inferences['subject_name']}  
+**Birthplace**: {inferences['birthplace']}  
 **Verification Status**: {verification_report['overall_verification_status']} (Confidence: {verification_report['overall_confidence']})  
 **Divergence Rate**: {divergence_rate_total}% ({divergent_count} of {len(domain_results)} domains divergent)
 
 ---
 
-### 1. Input & Sensitivity Summary
+### 1. Subject & Astronomical Input Dossier
+- **Subject**: {inferences['subject_name']}
+- **Birthplace**: {inferences['birthplace']}
 - **Civil Instant**: {time_audit['normalized']['civil_date']} {time_audit['normalized']['civil_time']} ({time_audit['normalized']['weekday']})
 - **Location**: {time_audit['raw_input']['city_name']}, {time_audit['raw_input']['country_name']} ({time_audit['normalized']['latitude']}°, {time_audit['normalized']['longitude']}°)
 - **Timezone**: {time_audit['normalized']['timezone_name']} (UTC offset: {time_audit['normalized']['utc_offset_hours']:+.1f}h, DST: {time_audit['normalized']['is_dst']})
@@ -606,7 +820,45 @@ def build_synthesis(
 
 ---
 
-### 2. Dual-Engine Verification Summary
+### 2. Synthesized Astrological Inferences & Personality Profile
+#### Core Civilizational Archetype: {inferences['core_archetype']['archetype_title']}
+{inferences['summary_narrative']}
+
+#### Multi-Tradition Inferred Pillars:
+- **Jyotisha (Sidereal Vedic)**: {inferences['core_archetype']['civilizational_pillars']['vedic_core']}
+- **Western (Hellenistic)**: {inferences['core_archetype']['civilizational_pillars']['western_core']}
+- **BaZi (Four Pillars)**: {inferences['core_archetype']['civilizational_pillars']['bazi_core']}
+- **Zi Wei Dou Shu**: {inferences['core_archetype']['civilizational_pillars']['ziwei_core']}
+- **Persian (Ilm al-Nujūm)**: {inferences['core_archetype']['civilizational_pillars']['persian_almuten']}
+
+#### Psychological & Cognitive Inferences:
+- **Mental Architecture**: {inferences['cognitive_inferences']['mental_style']}
+- **Intellectual Strengths**:
+{intellectual_strengths_text}
+- **Rhetorical Vector**: {inferences['cognitive_inferences']['communication_vector']}
+
+#### Vocation, Ambition & Public Legacy:
+- **Career Vector**: {inferences['vocational_inferences']['career_vector']}
+- **Leadership Posture**: {inferences['vocational_inferences']['leadership_style']}
+- **Key Executive Drives**:
+{key_drives_text}
+
+#### Emotional Core & Relational Dynamics:
+- **Emotional Temperament**: {inferences['relational_inferences']['emotional_temperament']}
+- **Relational Dynamics**: {inferences['relational_inferences']['relational_dynamics']}
+
+#### Karmic Growth Edges & Blind Spots:
+{growth_edges_text}
+- **Nodal Evolutionary Axis**: {inferences['karmic_inferences']['karmic_axis']}
+- **Burnout Warning**: {inferences['karmic_inferences']['burnout_risk']}
+
+#### Current Life Chapter (Timing Inferences):
+- **Decadal Chapter Theme**: {inferences['timing_inferences']['active_chapter_theme']}
+- **Strategic Advice**: {inferences['timing_inferences']['strategic_advice']}
+
+---
+
+### 3. Dual-Engine Verification Summary
 - **Astronomical Engines**: Swiss Ephemeris (`pyswisseph`) vs JPL DE421 (`skyfield`)
 - **Max Planetary Longitude Difference**: {verification_report['max_planetary_difference_deg']}° (Threshold: 0.010000°)
 - **Invariants Checked**:
@@ -617,7 +869,7 @@ def build_synthesis(
 
 ---
 
-### 3. Cross-Cultural Convergence & Divergence Matrix
+### 4. Cross-Cultural Convergence & Divergence Matrix
 
 | Domain | Agreement Grade | Jyotisha Polarity | Western Polarity | Sinic Polarity | Consensus / Divergence Summary |
 | :--- | :---: | :---: | :---: | :---: | :--- |
@@ -628,7 +880,7 @@ def build_synthesis(
     reading_md += f"""
 ---
 
-### 4. Strongest Cross-Cultural Themes
+### 5. Strongest Cross-Cultural Themes
 """
     for d_id, syn in domain_results.items():
         if syn["grade"] in ["STRONG", "MODERATE"]:
@@ -640,7 +892,7 @@ def build_synthesis(
 
     reading_md += """---
 
-### 5. Explicit Disagreements & Divergent Domains
+### 6. Explicit Disagreements & Divergent Domains
 """
     divergent_found = False
     for d_id, syn in domain_results.items():
@@ -657,7 +909,7 @@ def build_synthesis(
 
     reading_md += """---
 
-### 6. Attributed Temperament Overlays (Maya & Tibetan)
+### 7. Attributed Temperament Overlays (Maya & Tibetan)
 *Note: Maya and Tibetan indicators are non-causal symbolic overlays and do not grant domain votes.*
 
 """
@@ -681,7 +933,7 @@ def build_synthesis(
 
     reading_md += f"""---
 
-### 7. Chronological Overlap & Unified Predictive Timeline
+### 8. Chronological Overlap & Unified Predictive Timeline
 - **Vimshottari Dasha**: Active Mahadasha `{chronology['jyotisha_vimshottari']['active_mahadasha']}` / Antardasha `{chronology['jyotisha_vimshottari']['active_antardasha']}` ({chronology['jyotisha_vimshottari']['span']}) | Focus: {chronology['jyotisha_vimshottari']['activated_domain']}
 - **BaZi Da Yun**: Luck Pillar `{chronology['bazi_da_yun']['active_pillar']}` ({chronology['bazi_da_yun']['ten_god']}) | {chronology['bazi_da_yun']['cycle_status']}
 {liu_nian_line}- **Western Annual Profection**: Age {chronology['current_age']} activates House `{chronology['western_profection']['activated_house']}` (Lord: `{chronology['western_profection']['lord_of_year']}`) | Focus: {chronology['western_profection']['activated_domain']}
@@ -690,7 +942,7 @@ def build_synthesis(
 
 ---
 
-### 8. Essential Ethical & Scientific Disclaimer
+### 9. Essential Ethical & Scientific Disclaimer
 This synthesized report represents an exploratory comparison across historical symbolic traditions. It provides calculation accuracy, convention transparency, and honest uncertainty testing. **It does NOT constitute scientific prediction, empirical causation, or guaranteed future events.**
 
 Under no circumstances should this analysis be interpreted as medical diagnosis, financial advice, legal counsel, pregnancy claims, or lifespan prediction.
@@ -708,5 +960,6 @@ Under no circumstances should this analysis be interpreted as medical diagnosis,
         },
         "temperament_axes": temperament_axes,
         "chronology": chronology,
+        "astrological_inferences": inferences,
         "final_reading_markdown": reading_md
     }

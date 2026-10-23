@@ -21,6 +21,7 @@ def normalize_birth_input(
     city_name: str = "",
     country_name: str = "",
     gender: str = "neutral",  # "male", "female", "neutral"
+    name: str = "",
 ) -> dict:
     # 1. Parse date
     y, m, d = map(int, birth_date.split("-"))
@@ -123,6 +124,7 @@ def normalize_birth_input(
 
     return {
         "raw_input": {
+            "name": name,
             "birth_date": birth_date,
             "birth_time": birth_time,
             "latitude": latitude,
@@ -134,6 +136,7 @@ def normalize_birth_input(
             "gender": gender,
         },
         "normalized": {
+            "name": name or "Subject",
             "civil_date": f"{y:04d}-{m:02d}-{d:02d}",
             "civil_time": f"{hh:02d}:{mm:02d}:{ss:02d}",
             "has_birth_time": has_time,

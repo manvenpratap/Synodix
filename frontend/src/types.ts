@@ -1,4 +1,5 @@
 export interface BirthInput {
+  name?: string;
   birth_date: string;
   birth_time: string;
   time_certainty: 'exact' | 'rounded_15' | 'approx_30' | 'unknown';
@@ -141,6 +142,46 @@ export interface Chronology {
   convergence_status: string;
 }
 
+export interface AstrologicalInferences {
+  subject_name: string;
+  birthplace: string;
+  core_archetype: {
+    archetype_title: string;
+    summary: string;
+    civilizational_pillars: {
+      vedic_core: string;
+      western_core: string;
+      bazi_core: string;
+      ziwei_core: string;
+      persian_almuten: string;
+    };
+  };
+  cognitive_inferences: {
+    mental_style: string;
+    intellectual_strengths: string[];
+    communication_vector: string;
+  };
+  vocational_inferences: {
+    career_vector: string;
+    leadership_style: string;
+    key_drives: string[];
+  };
+  relational_inferences: {
+    emotional_temperament: string;
+    relational_dynamics: string;
+  };
+  karmic_inferences: {
+    growth_edges: string[];
+    karmic_axis: string;
+    burnout_risk: string;
+  };
+  timing_inferences: {
+    active_chapter_theme: string;
+    strategic_advice: string;
+  };
+  summary_narrative: string;
+}
+
 export interface Synthesis {
   domain_results: Record<string, DomainSynthesis>;
   divergence_metrics: {
@@ -153,6 +194,7 @@ export interface Synthesis {
   };
   temperament_axes: TemperamentAxis[];
   chronology: Chronology;
+  astrological_inferences?: AstrologicalInferences;
   final_reading_markdown: string;
 }
 

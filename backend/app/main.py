@@ -39,6 +39,7 @@ app.add_middleware(
 )
 
 class BirthInputRequest(BaseModel):
+    name: Optional[str] = Field(default="", example="Steve Jobs", description="Subject full name")
     birth_date: str = Field(..., example="1985-10-24", description="YYYY-MM-DD")
     birth_time: str = Field(default="", example="15:30", description="HH:MM (24-hour time)")
     time_certainty: str = Field(default="exact", example="exact", description="exact, rounded_15, approx_30, unknown")
@@ -198,7 +199,8 @@ def audit_input_endpoint(req: BirthInputRequest):
             custom_uncertainty_mins=req.custom_uncertainty_mins,
             city_name=req.city_name,
             country_name=req.country_name,
-            gender=req.gender
+            gender=req.gender,
+            name=req.name or ""
         )
         return audit
     except Exception as e:
@@ -217,7 +219,8 @@ def compute_chart_endpoint(req: BirthInputRequest):
             custom_uncertainty_mins=req.custom_uncertainty_mins,
             city_name=req.city_name,
             country_name=req.country_name,
-            gender=req.gender
+            gender=req.gender,
+            name=req.name or ""
         )
 
         has_time = audit["normalized"]["has_birth_time"]

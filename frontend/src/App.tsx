@@ -931,7 +931,7 @@ function AppContent() {
               {currentScreen === 'dossier' && (
                 <div>
                   {chartData ? (
-                    <ReadingView data={chartData} onNavigate={navigateTo} />
+                    <ReadingView data={chartData} subjectName={activeSubjectName} onNavigate={navigateTo} />
                   ) : (
                     <EmptyChartState onOpenWorkbench={() => navigateTo('workbench')} />
                   )}

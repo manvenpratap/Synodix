@@ -167,7 +167,8 @@ def test_six_culture_pipeline():
     assert chrono["ziwei_da_xian"]["active_palace"] is not None
     assert chrono["persian_firdaria"]["active_ruler"] in ["Sun", "Venus", "Mercury", "Moon", "Saturn", "Jupiter", "Mars", "North Node", "South Node"]
     assert len(chrono["convergence_status"]) > 10
-    assert "7. Chronological Overlap & Unified Predictive Timeline" in synthesis["final_reading_markdown"]
+    assert "Chronological Overlap & Unified Predictive Timeline" in synthesis["final_reading_markdown"]
+    assert "Synthesized Astrological Inferences & Personality Profile" in synthesis["final_reading_markdown"]
     print(f"    [PASS] 9-Domain synthesis & predictive chronocrator timeline verified! Active Mahadasha: {chrono['jyotisha_vimshottari']['active_mahadasha']}/{chrono['jyotisha_vimshottari']['active_antardasha']}, Profection: House {chrono['western_profection']['activated_house']}.")
 
     print(">>> 12. Testing Ancient Egyptian Decanic & Chronocrator Engine...")

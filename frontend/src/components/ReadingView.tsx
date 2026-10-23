@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import type { ChartResponse } from '../types';
 import { ExplainerTrigger } from './ExplainerTrigger';
+import { getAstrologicalInferences } from '../utils/astrologicalInferences';
 import {
   FileText,
   Download,
@@ -13,20 +14,27 @@ import {
   Clock,
   BookOpen,
   Eye,
-  Code
+  Code,
+  User,
+  MapPin,
+  Cpu,
+  Briefcase,
+  Heart
 } from 'lucide-react';
 
 interface Props {
   data: ChartResponse;
+  subjectName?: string;
   onNavigate?: (screen: 'workbench' | 'traditions' | 'synthesis' | 'dossier' | 'verification' | 'evidence') => void;
 }
 
-export const ReadingView: React.FC<Props> = ({ data, onNavigate }) => {
+export const ReadingView: React.FC<Props> = ({ data, subjectName, onNavigate }) => {
   const [viewMode, setViewMode] = useState<'interactive' | 'markdown'>('interactive');
   const [domainFilter, setDomainFilter] = useState<'all' | 'consensus' | 'divergent'>('all');
   const [expandedDomainId, setExpandedDomainId] = useState<string | null>(null);
   const [copied, setCopied] = useState<boolean>(false);
 
+  const inferences = getAstrologicalInferences(data, subjectName);
   const markdownText = data.synthesis.final_reading_markdown;
   const audit = data.birth_input_audit.normalized;
   const verification = data.verification_report;
@@ -190,41 +198,47 @@ export const ReadingView: React.FC<Props> = ({ data, onNavigate }) => {
         </div>
 
         {/* Document Metadata Badges */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-2 mt-4 pt-4 border-t border-[#1b2331]/80 text-[11px] font-mono">
-          <div className="bg-[#080b11] px-2.5 py-1.5 rounded border border-[#1b2331]">
-            <span className="text-slate-500 block text-[9px] uppercase">Subject</span>
-            <span className="font-semibold text-slate-200 truncate block">
-              {data.birth_input_audit.raw_input.city_name || 'Subject Chart'}
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2 mt-4 pt-4 border-t border-[#1b2331]/80 text-[11px] font-mono">
+          <div className="bg-[#080b11] px-2.5 py-1.5 rounded border border-[#1b2331] min-w-0">
+            <span className="text-slate-500 text-[9px] uppercase flex items-center gap-1">
+              <User className="w-2.5 h-2.5 text-cyan-400 shrink-0" />
+              Subject
+            </span>
+            <span className="font-semibold text-cyan-300 truncate block mt-0.5" title={inferences.subject_name}>
+              {inferences.subject_name}
             </span>
           </div>
-          <div className="bg-[#080b11] px-2.5 py-1.5 rounded border border-[#1b2331]">
+          <div className="bg-[#080b11] px-2.5 py-1.5 rounded border border-[#1b2331] min-w-0">
+            <span className="text-slate-500 text-[9px] uppercase flex items-center gap-1">
+              <MapPin className="w-2.5 h-2.5 text-amber-400 shrink-0" />
+              Birthplace
+            </span>
+            <span className="font-semibold text-slate-200 truncate block mt-0.5" title={inferences.birthplace}>
+              {inferences.birthplace}
+            </span>
+          </div>
+          <div className="bg-[#080b11] px-2.5 py-1.5 rounded border border-[#1b2331] min-w-0">
             <span className="text-slate-500 block text-[9px] uppercase">Civil Instant</span>
-            <span className="font-semibold text-slate-200 truncate block">
+            <span className="font-semibold text-slate-200 truncate block mt-0.5">
               {audit.civil_date} {audit.civil_time}
             </span>
           </div>
-          <div className="bg-[#080b11] px-2.5 py-1.5 rounded border border-[#1b2331]">
-            <span className="text-slate-500 block text-[9px] uppercase">Ephemeris Engine</span>
-            <span className="font-semibold text-cyan-300 truncate block">
-              SwissEph + JPL DE421
+          <div className="bg-[#080b11] px-2.5 py-1.5 rounded border border-[#1b2331] min-w-0">
+            <span className="text-slate-500 block text-[9px] uppercase">Core Archetype</span>
+            <span className="font-semibold text-amber-300 truncate block mt-0.5" title={inferences.core_archetype.archetype_title}>
+              {inferences.core_archetype.archetype_title}
             </span>
           </div>
-          <div className="bg-[#080b11] px-2.5 py-1.5 rounded border border-[#1b2331]">
-            <span className="text-slate-500 block text-[9px] uppercase">Max Planetary Δ</span>
-            <span className="font-semibold text-emerald-400 truncate block">
-              {verification.max_planetary_difference_deg}° (&le;0.01°)
-            </span>
-          </div>
-          <div className="bg-[#080b11] px-2.5 py-1.5 rounded border border-[#1b2331]">
+          <div className="bg-[#080b11] px-2.5 py-1.5 rounded border border-[#1b2331] min-w-0">
             <span className="text-slate-500 block text-[9px] uppercase">Verification Status</span>
-            <span className="font-semibold text-emerald-400 flex items-center gap-1 truncate">
+            <span className="font-semibold text-emerald-400 flex items-center gap-1 truncate mt-0.5">
               <CheckCircle2 className="w-3 h-3 text-emerald-400 shrink-0" />
               {verification.overall_verification_status} ({verification.overall_confidence})
             </span>
           </div>
-          <div className="bg-[#080b11] px-2.5 py-1.5 rounded border border-[#1b2331]">
+          <div className="bg-[#080b11] px-2.5 py-1.5 rounded border border-[#1b2331] min-w-0">
             <span className="text-slate-500 block text-[9px] uppercase">Multi-System Divergence</span>
-            <span className={`font-bold truncate block ${synthesis.divergence_metrics.divergence_rate_percent > 30 ? 'text-amber-400' : 'text-emerald-400'}`}>
+            <span className={`font-bold truncate block mt-0.5 ${synthesis.divergence_metrics.divergence_rate_percent > 30 ? 'text-amber-400' : 'text-emerald-400'}`}>
               {synthesis.divergence_metrics.divergence_rate_percent}% ({synthesis.divergence_metrics.divergent_domains}/9 Divergent)
             </span>
           </div>
@@ -260,8 +274,10 @@ export const ReadingView: React.FC<Props> = ({ data, onNavigate }) => {
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs font-mono">
               <div className="bg-[#090c12] p-3 rounded border border-[#1b2331]">
-                <span className="text-slate-500 text-[10px] block uppercase mb-1">Civil & Solar Coordinates</span>
+                <span className="text-slate-500 text-[10px] block uppercase mb-1">Subject & Civil Coordinates</span>
                 <div className="space-y-1 text-slate-300">
+                  <div>Subject: <strong className="text-cyan-300">{inferences.subject_name}</strong></div>
+                  <div>Birthplace: <strong className="text-slate-100">{inferences.birthplace}</strong></div>
                   <div>Date: <strong className="text-slate-100">{audit.civil_date}</strong> ({audit.weekday})</div>
                   <div>Civil Time: <strong className="text-slate-100">{audit.civil_time}</strong> (UTC {audit.utc_offset_hours >= 0 ? `+${audit.utc_offset_hours}` : audit.utc_offset_hours}h)</div>
                   <div>Coordinates: <span className="text-slate-200">{audit.latitude}°, {audit.longitude}°</span></div>
@@ -313,13 +329,244 @@ export const ReadingView: React.FC<Props> = ({ data, onNavigate }) => {
             </div>
           </section>
 
-          {/* Section 2 & 3: The Cross-Cultural Corroboration Matrix */}
+          {/* Section 2: Synthesized Astrological Inferences & Personality Profile */}
+          <section className="bg-[#0d1118] border border-[#1b2331] rounded-lg p-4 sm:p-5 space-y-4">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-[#1b2331] pb-3 gap-2">
+              <div className="flex flex-wrap items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-cyan-400"></span>
+                <h3 className="text-sm font-semibold text-slate-100 uppercase tracking-wider font-mono">
+                  2. Synthesized Astrological Inferences & Personality Profile
+                </h3>
+                <span className="px-2 py-0.5 rounded text-[10px] font-mono bg-cyan-950 text-cyan-300 border border-cyan-800 font-semibold uppercase">
+                  9-System Deductive Profile
+                </span>
+              </div>
+              <span className="text-[11px] font-mono text-slate-400">
+                Archetype: <strong className="text-amber-300">{inferences.core_archetype.archetype_title}</strong>
+              </span>
+            </div>
+
+            {/* Archetype Hero Spotlight */}
+            <div className="bg-gradient-to-r from-[#0d1624] via-[#09101b] to-[#080d15] p-4 sm:p-5 rounded-lg border border-cyan-900/50 relative overflow-hidden">
+              <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 pb-3 border-b border-cyan-900/40">
+                <div>
+                  <span className="text-[10px] font-mono text-cyan-400 uppercase tracking-widest block mb-0.5">
+                    Primary Civilizational Archetype
+                  </span>
+                  <h4 className="text-base sm:text-lg font-bold text-slate-100 tracking-wide font-sans">
+                    {inferences.core_archetype.archetype_title}
+                  </h4>
+                </div>
+                <div className="flex items-center gap-2 self-start md:self-auto shrink-0 font-mono text-xs">
+                  <span className="px-2.5 py-1 rounded bg-[#0b121d] text-cyan-300 border border-cyan-800/80 text-[11px]">
+                    Subject: <strong className="text-white">{inferences.subject_name}</strong>
+                  </span>
+                  <span className="px-2.5 py-1 rounded bg-[#0b121d] text-slate-300 border border-[#1b2331] text-[11px]">
+                    Birthplace: <strong className="text-slate-100">{inferences.birthplace}</strong>
+                  </span>
+                </div>
+              </div>
+
+              {/* Narrative Summary Paragraphs */}
+              <div className="mt-3.5 space-y-2.5 text-xs sm:text-[13px] text-slate-300 leading-relaxed font-sans">
+                {inferences.summary_narrative.split('\n\n').map((paragraph, idx) => (
+                  <p key={idx} className="text-slate-200">
+                    {paragraph}
+                  </p>
+                ))}
+              </div>
+            </div>
+
+            {/* Five Civilizational Foundations */}
+            <div className="space-y-2">
+              <span className="text-[11px] font-mono text-slate-400 uppercase tracking-wider block">
+                Foundational Planetary Anchors Across Traditions
+              </span>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-2.5 text-xs font-mono">
+                {/* Vedic */}
+                <div className="bg-[#090d15] p-3 rounded-lg border border-[#1b2331] space-y-1.5 flex flex-col justify-between">
+                  <div>
+                    <div className="flex items-center justify-between mb-1">
+                      <span className="text-[10px] uppercase font-bold text-amber-400">Vedic Jyotisha</span>
+                      <span className="text-[9px] px-1.5 py-0.2 rounded bg-amber-950/60 text-amber-300 border border-amber-800/40">D1 / D9</span>
+                    </div>
+                    <p className="text-[11px] text-slate-300 font-sans leading-relaxed">
+                      {inferences.core_archetype.civilizational_pillars.vedic_core}
+                    </p>
+                  </div>
+                </div>
+
+                {/* Western */}
+                <div className="bg-[#090d15] p-3 rounded-lg border border-[#1b2331] space-y-1.5 flex flex-col justify-between">
+                  <div>
+                    <div className="flex items-center justify-between mb-1">
+                      <span className="text-[10px] uppercase font-bold text-cyan-400">Hellenistic Western</span>
+                      <span className="text-[9px] px-1.5 py-0.2 rounded bg-cyan-950/60 text-cyan-300 border border-cyan-800/40">Tropical</span>
+                    </div>
+                    <p className="text-[11px] text-slate-300 font-sans leading-relaxed">
+                      {inferences.core_archetype.civilizational_pillars.western_core}
+                    </p>
+                  </div>
+                </div>
+
+                {/* BaZi */}
+                <div className="bg-[#090d15] p-3 rounded-lg border border-[#1b2331] space-y-1.5 flex flex-col justify-between">
+                  <div>
+                    <div className="flex items-center justify-between mb-1">
+                      <span className="text-[10px] uppercase font-bold text-emerald-400">BaZi Four Pillars</span>
+                      <span className="text-[9px] px-1.5 py-0.2 rounded bg-emerald-950/60 text-emerald-300 border border-emerald-800/40">Wu Xing</span>
+                    </div>
+                    <p className="text-[11px] text-slate-300 font-sans leading-relaxed">
+                      {inferences.core_archetype.civilizational_pillars.bazi_core}
+                    </p>
+                  </div>
+                </div>
+
+                {/* Zi Wei */}
+                <div className="bg-[#090d15] p-3 rounded-lg border border-[#1b2331] space-y-1.5 flex flex-col justify-between">
+                  <div>
+                    <div className="flex items-center justify-between mb-1">
+                      <span className="text-[10px] uppercase font-bold text-purple-400">Zi Wei Dou Shu</span>
+                      <span className="text-[9px] px-1.5 py-0.2 rounded bg-purple-950/60 text-purple-300 border border-purple-800/40">Polar Stars</span>
+                    </div>
+                    <p className="text-[11px] text-slate-300 font-sans leading-relaxed">
+                      {inferences.core_archetype.civilizational_pillars.ziwei_core}
+                    </p>
+                  </div>
+                </div>
+
+                {/* Persian Almuten */}
+                <div className="bg-[#090d15] p-3 rounded-lg border border-[#1b2331] space-y-1.5 flex flex-col justify-between sm:col-span-2 lg:col-span-1">
+                  <div>
+                    <div className="flex items-center justify-between mb-1">
+                      <span className="text-[10px] uppercase font-bold text-teal-400">Persian Almuten</span>
+                      <span className="text-[9px] px-1.5 py-0.2 rounded bg-teal-950/60 text-teal-300 border border-teal-800/40">Ibn Ezra</span>
+                    </div>
+                    <p className="text-[11px] text-slate-300 font-sans leading-relaxed">
+                      {inferences.core_archetype.civilizational_pillars.persian_almuten}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* 3-Column Analytical Triad */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-3.5 pt-1">
+              {/* Column 1: Cognitive Wiring */}
+              <div className="bg-[#090c12] p-4 rounded-lg border border-[#1b2331] space-y-3 flex flex-col">
+                <div className="flex items-center gap-2 border-b border-[#1b2331] pb-2">
+                  <Cpu className="w-4 h-4 text-cyan-400 shrink-0" />
+                  <h4 className="text-xs font-bold text-slate-100 uppercase tracking-wider font-mono">
+                    Cognitive Architecture
+                  </h4>
+                </div>
+                <div className="space-y-2 text-xs text-slate-300 flex-1">
+                  <div>
+                    <span className="text-[10px] font-mono text-slate-500 uppercase block">Mental Style</span>
+                    <p className="text-slate-200 mt-0.5">{inferences.cognitive_inferences.mental_style}</p>
+                  </div>
+                  <div>
+                    <span className="text-[10px] font-mono text-slate-500 uppercase block">Intellectual Strengths</span>
+                    <ul className="list-disc list-inside mt-1 space-y-1 text-slate-300 text-[11px]">
+                      {inferences.cognitive_inferences.intellectual_strengths.map((str, idx) => (
+                        <li key={idx} className="leading-snug">{str}</li>
+                      ))}
+                    </ul>
+                  </div>
+                  <div className="pt-1 border-t border-[#1b2331]/80">
+                    <span className="text-[10px] font-mono text-slate-500 uppercase block">Rhetorical Style</span>
+                    <p className="text-slate-300 text-[11px] mt-0.5">{inferences.cognitive_inferences.communication_vector}</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Column 2: Vocation & Executive Ambition */}
+              <div className="bg-[#090c12] p-4 rounded-lg border border-[#1b2331] space-y-3 flex flex-col">
+                <div className="flex items-center gap-2 border-b border-[#1b2331] pb-2">
+                  <Briefcase className="w-4 h-4 text-amber-400 shrink-0" />
+                  <h4 className="text-xs font-bold text-slate-100 uppercase tracking-wider font-mono">
+                    Vocation & Executive Drive
+                  </h4>
+                </div>
+                <div className="space-y-2 text-xs text-slate-300 flex-1">
+                  <div>
+                    <span className="text-[10px] font-mono text-slate-500 uppercase block">Career Vector</span>
+                    <p className="text-slate-200 mt-0.5">{inferences.vocational_inferences.career_vector}</p>
+                  </div>
+                  <div>
+                    <span className="text-[10px] font-mono text-slate-500 uppercase block">Leadership Posture</span>
+                    <p className="text-slate-300 mt-0.5">{inferences.vocational_inferences.leadership_style}</p>
+                  </div>
+                  <div className="pt-1 border-t border-[#1b2331]/80">
+                    <span className="text-[10px] font-mono text-slate-500 uppercase block">Primary Ambitions</span>
+                    <ul className="list-disc list-inside mt-1 space-y-1 text-slate-300 text-[11px]">
+                      {inferences.vocational_inferences.key_drives.map((drv, idx) => (
+                        <li key={idx} className="leading-snug">{drv}</li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              {/* Column 3: Relational Dynamics & Karmic Evolution */}
+              <div className="bg-[#090c12] p-4 rounded-lg border border-[#1b2331] space-y-3 flex flex-col">
+                <div className="flex items-center gap-2 border-b border-[#1b2331] pb-2">
+                  <Heart className="w-4 h-4 text-rose-400 shrink-0" />
+                  <h4 className="text-xs font-bold text-slate-100 uppercase tracking-wider font-mono">
+                    Relational & Karmic Blueprint
+                  </h4>
+                </div>
+                <div className="space-y-2 text-xs text-slate-300 flex-1">
+                  <div>
+                    <span className="text-[10px] font-mono text-slate-500 uppercase block">Emotional Temperament</span>
+                    <p className="text-slate-200 mt-0.5">{inferences.relational_inferences.emotional_temperament}</p>
+                  </div>
+                  <div>
+                    <span className="text-[10px] font-mono text-slate-500 uppercase block">Relational Dynamics</span>
+                    <p className="text-slate-300 mt-0.5">{inferences.relational_inferences.relational_dynamics}</p>
+                  </div>
+                  <div className="pt-1 border-t border-[#1b2331]/80">
+                    <span className="text-[10px] font-mono text-slate-500 uppercase block">Growth Edges & Blind Spots</span>
+                    <ul className="list-disc list-inside mt-1 space-y-1 text-amber-300/90 text-[11px]">
+                      {inferences.karmic_inferences.growth_edges.map((edge, idx) => (
+                        <li key={idx} className="leading-snug">{edge}</li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Active Life Chapter & Strategic Timing Banner */}
+            <div className="p-3.5 rounded-lg bg-[#090d15] border border-cyan-900/60 font-mono text-xs flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+              <div className="space-y-1">
+                <div className="flex items-center gap-2">
+                  <Clock className="w-3.5 h-3.5 text-cyan-400" />
+                  <span className="font-bold text-cyan-300 uppercase tracking-wider text-[11px]">
+                    Current Timing Chapter:
+                  </span>
+                  <span className="text-slate-200">{inferences.timing_inferences.active_chapter_theme}</span>
+                </div>
+                <p className="text-[11px] text-slate-400 font-sans">
+                  {inferences.timing_inferences.strategic_advice}
+                </p>
+              </div>
+              <div className="shrink-0">
+                <span className="px-2.5 py-1 rounded bg-[#0d1624] text-emerald-400 border border-emerald-800/60 text-[10px] uppercase font-bold tracking-wider inline-flex items-center gap-1">
+                  <CheckCircle2 className="w-3 h-3" />
+                  Quad-Cycle Synchronized
+                </span>
+              </div>
+            </div>
+          </section>
+
+          {/* Section 3: The Cross-Cultural Corroboration Matrix */}
           <section className="bg-[#0d1118] border border-[#1b2331] rounded-lg p-4 space-y-4">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-[#1b2331] pb-3 gap-2">
               <div className="flex flex-wrap items-center gap-2">
                 <span className="w-2 h-2 rounded-full bg-emerald-400"></span>
                 <h3 className="text-sm font-semibold text-slate-100 uppercase tracking-wider font-mono">
-                  2. Cross-Cultural Corroboration Matrix (Life Domains)
+                  3. Cross-Cultural Corroboration Matrix (Life Domains)
                 </h3>
                 <ExplainerTrigger id="three_cluster_consensus" label="Consensus Protocol" variant="badge" />
                 <ExplainerTrigger id="honest_divergence_rate" label="Divergence Metric" variant="badge" />
@@ -543,7 +790,7 @@ export const ReadingView: React.FC<Props> = ({ data, onNavigate }) => {
               <div className="flex items-center gap-2">
                 <Clock className="w-4 h-4 text-cyan-400" />
                 <h3 className="text-sm font-semibold text-slate-100 uppercase tracking-wider font-mono">
-                  3. Quad-System Chronological Synchronization
+                  4. Quad-System Chronological Synchronization
                 </h3>
               </div>
               <span className="text-[11px] font-mono text-slate-500">
@@ -642,7 +889,7 @@ export const ReadingView: React.FC<Props> = ({ data, onNavigate }) => {
               <div className="flex flex-wrap items-center gap-2">
                 <BookOpen className="w-4 h-4 text-cyan-400" />
                 <h3 className="text-sm font-semibold text-slate-100 uppercase tracking-wider font-mono">
-                  4. Attributed Temperament Overlays (Maya & Tibetan)
+                  5. Attributed Temperament Overlays (Maya & Tibetan)
                 </h3>
                 <ExplainerTrigger id="epistemic_humility_framework" label="Non-Causal Overlays" variant="badge" />
               </div>
@@ -678,7 +925,7 @@ export const ReadingView: React.FC<Props> = ({ data, onNavigate }) => {
               <div className="flex flex-wrap items-center gap-2">
                 <ShieldCheck className="w-4 h-4 text-emerald-400" />
                 <h3 className="text-sm font-semibold text-slate-100 uppercase tracking-wider font-mono">
-                  5. Dual-Engine Verification & Invariant Proofs
+                  6. Dual-Engine Verification & Invariant Proofs
                 </h3>
                 <ExplainerTrigger id="dual_engine_validation" label="Dual-Engine Proof" variant="badge" />
               </div>

@@ -1,7 +1,7 @@
 # Synodix: Project Context & Working Memory
 
-**Last Updated:** 2026-10-23 08:51:39
-**Version:** 2.22.0  
+**Last Updated:** 2026-10-23 09:18:27
+**Version:** 2.23.0  
 **Stack:** Python 3.12 (FastAPI, Swiss Ephemeris 2.10, Skyfield DE421) + TypeScript / React 19 / Vite / Tailwind CSS v4 / Framer Motion / Capacitor 8 (iOS & Android)  
 **Workspace:** `/Volumes/Study/Projects/Astrology` (symlinked as `/Volumes/Study/Astrology`)  
 **Git Remote:** `https://github.com/manvenpratap/Synodix.git`  
@@ -9,7 +9,21 @@
 ---
 
 ## 1. Current Status & Milestone
-- **Active Phase**: Mobile Ergonomics: Complete Elimination of Horizontal Side-Scrolling Across All Viewports (Completed)
+- **Active Phase**: Substantive Astrological Inferences & Subject vs Birthplace Disentanglement (Completed)
+- **Substantive Astrological Inferences Profile & Subject Separation (v2.23.0)**:
+  - **Disentangled Subject vs Birthplace**: Fully separated the subject's personal name (`inferences.subject_name`) from the birth location (`inferences.birthplace`) in the Document Metadata Badges and Executive Input Dossier. Resolves the previous bug where `raw_input.city_name` was displayed under the "Subject" label.
+  - **Synthesized Astrological Inferences & Personality Profile (`ReadingView.tsx` & `synthesis.py`)**: Added an interactive, substantive analytical section (Section 2) answering what was inferred from the 9-tradition astrological study of the person:
+    - *Primary Civilizational Archetype Spotlight*: Maps Day Master element + Lagna/Ascendant into a classical archetypal title (e.g. "The Solar Sovereign & Visionary Pioneer") with an executive 3-paragraph narrative synthesis.
+    - *5 Foundational Planetary Anchors*: Structural cards detailing the concrete astrological mechanics across Vedic Jyotisha (Lagna, Nakshatra, Pada, Yogas), Hellenistic Western (Sun/Moon/Ascendant, House geometry), BaZi Four Pillars (Day Master polarity/element, Wu Xing distribution, symbolic stars), Zi Wei Dou Shu (Ming Palace stars and persuasive acumen), and Persian Almuten Figuris (Ibn Ezra victor and dignity score).
+    - *3-Column Analytical Triad*: Deep psychological, vocational, and relational breakdown:
+      1. *Cognitive Architecture*: Mental style, 3 high-density intellectual strengths, and rhetorical delivery vector.
+      2. *Vocation & Executive Drive*: Career trajectory, leadership posture, and primary ambitions.
+      3. *Relational & Karmic Blueprint*: Emotional core temperament, relational dynamics, karmic growth edges, and element deficit balance.
+    - *Quad-Cycle Active Timing Chapter*: Strategic decadal advisory banner synchronizing Vimshottari Mahadasha, BaZi Da Yun, Hellenistic Profections, and Zi Wei Da Xian.
+  - **Dual-Stack Architectural Resilience**: Built both Python backend generation in `backend/app/synthesis/synthesis.py` (for API responses and Markdown/JSON exports) and client-side TypeScript synthesis in `frontend/src/utils/astrologicalInferences.ts` (for instant 0ms offline execution with bundled 100 Titans).
+  - **Automated Regression Suite (`test_09_dossier_inferences.py`)**: Validates Subject vs Birthplace badge separation, Section 2 rendering, all 5 civilizational anchor cards, the 3-column analytical triad, mobile viewport responsiveness, zero horizontal overflow, and zero critical console errors.
+  - **Workflow Health**: 100% CLEAN (Verified via `./pipeline.sh doctor`)
+  - **Test Invariants**: 18/18 regression suites passing via `./pipeline.sh test --summary` (44.83s)
 - **Elimination of Horizontal Side-Scroll & Viewport Panning (v2.22.0)**:
   - **Global Anti-Pan & Anti-Side-Scroll Architecture (`index.css`)**: Enforced `overflow-x: hidden !important`, `max-width: 100vw !important`, `width: 100% !important`, `touch-action: pan-y`, `overscroll-behavior-x: none`, and `-webkit-overflow-scrolling: touch` across `html`, `body`, and `#root`. Completely eliminates elastic rubber-band horizontal panning and unintentional horizontal displacement on touch devices.
   - **Epistemic Journey Stepper Overhaul (`App.tsx`)**: Replaced the 543px wide horizontal scroll strip on `<md` with a responsive 5-column grid (`grid grid-cols-5 gap-1 py-0.5 w-full`). All 5 stages (`1. Input`, `2. Traditions`, `3. Synthesis`, `4. Dossier`, `5. Evidence`) fit cleanly across all mobile widths (from 320px iPhone SE to 430px iPhone Pro Max) with zero horizontal overflow.
