@@ -361,7 +361,7 @@ export const MathematicalEvidenceCard: React.FC<Props> = ({ onClose, onNavigate 
       {viewMode === 'interactive' && (
         <div className="p-4 sm:p-6 space-y-6">
           {/* Section Navigation Pills */}
-          <div className="flex border-b border-[#1b2331] gap-1 overflow-x-auto pb-2 text-xs font-mono">
+          <div className="flex flex-wrap border-b border-[#1b2331] gap-1.5 pb-2 text-xs font-mono">
             {[
               { id: 'hypotheses', label: '1. Hypotheses Scorecard (H1–H7)' },
               { id: 'debiasing', label: '2. Astronomical De-Biasing Analysis' },
@@ -373,7 +373,7 @@ export const MathematicalEvidenceCard: React.FC<Props> = ({ onClose, onNavigate 
                 key={tab.id}
                 type="button"
                 onClick={() => setActiveTab(tab.id as any)}
-                className={`px-3 py-1.5 rounded-md font-medium whitespace-nowrap cursor-pointer transition-colors border ${
+                className={`px-3 py-1.5 rounded-md font-medium whitespace-normal sm:whitespace-nowrap cursor-pointer transition-colors border ${
                   activeTab === tab.id
                     ? 'border-cyan-700/80 text-cyan-300 bg-[#141b27] shadow-xs'
                     : 'border-transparent text-slate-400 hover:text-slate-200 hover:bg-[#10141d]'
@@ -414,60 +414,100 @@ export const MathematicalEvidenceCard: React.FC<Props> = ({ onClose, onNavigate 
                 tabIndex={0}
                 role="region"
                 aria-label="Empirical hypothesis testing results table"
-                className="overflow-x-auto rounded-lg border border-[#1b2331] focus:outline-none focus-visible:ring-1 focus-visible:ring-cyan-500"
+                className="rounded-lg border border-[#1b2331] focus:outline-none focus-visible:ring-1 focus-visible:ring-cyan-500 overflow-hidden"
               >
-                <table className="w-full text-left text-xs font-mono border-collapse bg-[#0c1018]">
-                  <thead>
-                    <tr className="border-b border-[#1b2331] text-[10px] text-slate-400 uppercase bg-[#080b11]">
-                      <th className="py-2.5 px-3 sticky left-0 bg-[#080b11] z-10 border-r border-[#1b2331]">Test</th>
-                      <th className="py-2.5 px-3">Formal Astrological Claim</th>
-                      <th className="py-2.5 px-3">Cohort</th>
-                      <th className="py-2.5 px-3 text-right">Titans %</th>
-                      <th className="py-2.5 px-3 text-right">Controls %</th>
-                      <th className="py-2.5 px-3 text-right">Odds Ratio</th>
-                      <th className="py-2.5 px-3 text-right">Z-Score</th>
-                      <th className="py-2.5 px-3 text-right">p-value</th>
-                      <th className="py-2.5 px-3 text-center">Empirical Verdict</th>
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-[#1b2331]/70">
-                    {filteredHypotheses.map((h) => (
-                      <tr key={h.id} className="hover:bg-[#111723] transition-colors">
-                        <td className="py-2.5 px-3 font-bold text-cyan-400 sticky left-0 bg-[#0c1018] z-10 border-r border-[#1b2331]">{h.id}</td>
-                        <td className="py-2.5 px-3 font-sans text-slate-200">
-                          <span className="font-semibold">{h.claim}</span>
-                        </td>
-                        <td className="py-2.5 px-3 text-cyan-300 text-[11px] whitespace-nowrap">{h.subgroup}</td>
-                        <td className="py-2.5 px-3 text-right font-bold text-slate-100">{h.observed}</td>
-                        <td className="py-2.5 px-3 text-right text-slate-400">{h.baseline}</td>
-                        <td className={`py-2.5 px-3 text-right font-bold ${parseFloat(h.oddsRatio) >= 2.0 ? 'text-emerald-400' : 'text-slate-300'}`}>
-                          {h.oddsRatio}
-                        </td>
-                        <td className="py-2.5 px-3 text-right text-slate-300">{h.zScore}</td>
-                        <td className={`py-2.5 px-3 text-right font-bold ${h.pValue.includes('0.0001') ? 'text-emerald-400' : 'text-slate-400'}`}>
-                          {h.pValue}
-                        </td>
-                        <td className="py-2.5 px-3 text-center">
-                          {h.status === 'significant' && (
-                            <span className="px-2 py-0.5 rounded text-[10px] bg-emerald-950 text-emerald-300 border border-emerald-700 font-bold whitespace-nowrap">
-                              ✓ EXTREMELY SIGNIFICANT
-                            </span>
-                          )}
-                          {h.status === 'trend' && (
-                            <span className="px-2 py-0.5 rounded text-[10px] bg-amber-950 text-amber-300 border border-amber-700 whitespace-nowrap">
-                              Enriched ({h.oddsRatio})
-                            </span>
-                          )}
-                          {h.status === 'disproven' && (
-                            <span className="px-2 py-0.5 rounded text-[10px] bg-rose-950 text-rose-300 border border-rose-800 whitespace-nowrap">
-                              ✕ DISPROVEN (Baseline)
-                            </span>
-                          )}
-                        </td>
+                {/* Mobile-first stacked cards (<sm) */}
+                <div className="sm:hidden space-y-2.5 p-2.5 bg-[#0c1018]">
+                  {filteredHypotheses.map((h) => (
+                    <div key={h.id} className="p-3 rounded-lg bg-[#080a0f] border border-[#1b2331] space-y-2 font-mono text-xs">
+                      <div className="flex items-center justify-between">
+                        <span className="font-bold text-cyan-400">{h.id}</span>
+                        {h.status === 'significant' && (
+                          <span className="px-2 py-0.5 rounded text-[10px] bg-emerald-950 text-emerald-300 border border-emerald-700 font-bold">
+                            ✓ EXTREMELY SIGNIFICANT
+                          </span>
+                        )}
+                        {h.status === 'trend' && (
+                          <span className="px-2 py-0.5 rounded text-[10px] bg-amber-950 text-amber-300 border border-amber-700">
+                            Enriched ({h.oddsRatio})
+                          </span>
+                        )}
+                        {h.status === 'disproven' && (
+                          <span className="px-2 py-0.5 rounded text-[10px] bg-rose-950 text-rose-300 border border-rose-800">
+                            ✕ DISPROVEN (Baseline)
+                          </span>
+                        )}
+                      </div>
+                      <p className="font-sans text-slate-200 text-xs font-semibold leading-snug">{h.claim}</p>
+                      <div className="text-[11px] text-slate-400">
+                        Cohort: <span className="text-cyan-300">{h.subgroup}</span>
+                      </div>
+                      <div className="grid grid-cols-2 gap-1.5 pt-1.5 border-t border-[#1b2331] text-[11px] tabular-nums">
+                        <div>Titans: <strong className="text-slate-100">{h.observed}</strong></div>
+                        <div>Controls: <strong className="text-slate-400">{h.baseline}</strong></div>
+                        <div>Odds Ratio: <strong className={parseFloat(h.oddsRatio) >= 2.0 ? 'text-emerald-400' : 'text-slate-300'}>{h.oddsRatio}</strong></div>
+                        <div>Z-Score: <strong className="text-slate-300">{h.zScore}</strong></div>
+                        <div className="col-span-2">p-value: <strong className={h.pValue.includes('0.0001') ? 'text-emerald-400' : 'text-slate-400'}>{h.pValue}</strong></div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Desktop tabular view (>=sm) */}
+                <div className="hidden sm:block overflow-x-auto">
+                  <table className="w-full text-left text-xs font-mono border-collapse bg-[#0c1018]">
+                    <thead>
+                      <tr className="border-b border-[#1b2331] text-[10px] text-slate-400 uppercase bg-[#080b11]">
+                        <th className="py-2.5 px-3 sticky left-0 bg-[#080b11] z-10 border-r border-[#1b2331]">Test</th>
+                        <th className="py-2.5 px-3">Formal Astrological Claim</th>
+                        <th className="py-2.5 px-3">Cohort</th>
+                        <th className="py-2.5 px-3 text-right">Titans %</th>
+                        <th className="py-2.5 px-3 text-right">Controls %</th>
+                        <th className="py-2.5 px-3 text-right">Odds Ratio</th>
+                        <th className="py-2.5 px-3 text-right">Z-Score</th>
+                        <th className="py-2.5 px-3 text-right">p-value</th>
+                        <th className="py-2.5 px-3 text-center">Empirical Verdict</th>
                       </tr>
-                    ))}
-                  </tbody>
-                </table>
+                    </thead>
+                    <tbody className="divide-y divide-[#1b2331]/70">
+                      {filteredHypotheses.map((h) => (
+                        <tr key={h.id} className="hover:bg-[#111723] transition-colors">
+                          <td className="py-2.5 px-3 font-bold text-cyan-400 sticky left-0 bg-[#0c1018] z-10 border-r border-[#1b2331]">{h.id}</td>
+                          <td className="py-2.5 px-3 font-sans text-slate-200">
+                            <span className="font-semibold">{h.claim}</span>
+                          </td>
+                          <td className="py-2.5 px-3 text-cyan-300 text-[11px] whitespace-nowrap">{h.subgroup}</td>
+                          <td className="py-2.5 px-3 text-right font-bold text-slate-100">{h.observed}</td>
+                          <td className="py-2.5 px-3 text-right text-slate-400">{h.baseline}</td>
+                          <td className={`py-2.5 px-3 text-right font-bold ${parseFloat(h.oddsRatio) >= 2.0 ? 'text-emerald-400' : 'text-slate-300'}`}>
+                            {h.oddsRatio}
+                          </td>
+                          <td className="py-2.5 px-3 text-right text-slate-300">{h.zScore}</td>
+                          <td className={`py-2.5 px-3 text-right font-bold ${h.pValue.includes('0.0001') ? 'text-emerald-400' : 'text-slate-400'}`}>
+                            {h.pValue}
+                          </td>
+                          <td className="py-2.5 px-3 text-center">
+                            {h.status === 'significant' && (
+                              <span className="px-2 py-0.5 rounded text-[10px] bg-emerald-950 text-emerald-300 border border-emerald-700 font-bold whitespace-nowrap">
+                                ✓ EXTREMELY SIGNIFICANT
+                              </span>
+                            )}
+                            {h.status === 'trend' && (
+                              <span className="px-2 py-0.5 rounded text-[10px] bg-amber-950 text-amber-300 border border-amber-700 whitespace-nowrap">
+                                Enriched ({h.oddsRatio})
+                              </span>
+                            )}
+                            {h.status === 'disproven' && (
+                              <span className="px-2 py-0.5 rounded text-[10px] bg-rose-950 text-rose-300 border border-rose-800 whitespace-nowrap">
+                                ✕ DISPROVEN (Baseline)
+                              </span>
+                            )}
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
               </div>
             </div>
           )}
@@ -632,45 +672,91 @@ export const MathematicalEvidenceCard: React.FC<Props> = ({ onClose, onNavigate 
               <div
                 tabIndex={0}
                 role="region"
-                aria-label="Empirical hypothesis testing results table"
-                className="overflow-x-auto rounded-lg border border-[#1b2331] focus:outline-none focus-visible:ring-1 focus-visible:ring-cyan-500"
+                aria-label="Competitive moat comparison table"
+                className="rounded-lg border border-[#1b2331] focus:outline-none focus-visible:ring-1 focus-visible:ring-cyan-500 overflow-hidden"
               >
-                <table className="w-full text-left font-mono border-collapse bg-[#0c1018]">
-                  <thead>
-                    <tr className="border-b border-[#1b2331] text-[10px] text-slate-400 uppercase bg-[#080b11]">
-                      <th className="py-2.5 px-3">Competitive Dimension</th>
-                      <th className="py-2.5 px-3 text-rose-400">Typical Consumer Apps (Co-Star, The Pattern)</th>
-                      <th className="py-2.5 px-3 text-cyan-300 font-bold">Your Six-Culture Engine</th>
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-[#1b2331]/70 font-sans text-xs">
-                    <tr>
-                      <td className="py-2.5 px-3 font-semibold text-slate-200">Ontological Stance</td>
-                      <td className="py-2.5 px-3 text-slate-400">Promotes deterministic fortunes & fatalistic claims</td>
-                      <td className="py-2.5 px-3 text-emerald-300 font-semibold">Rejects fatalism; models archetypal cultural typologies</td>
-                    </tr>
-                    <tr>
-                      <td className="py-2.5 px-3 font-semibold text-slate-200">Uncertainty Handling</td>
-                      <td className="py-2.5 px-3 text-slate-400">Hides timing uncertainty; invents false precision</td>
-                      <td className="py-2.5 px-3 text-cyan-300">Transparent T±15m uncertainty ensemble audit</td>
-                    </tr>
-                    <tr>
-                      <td className="py-2.5 px-3 font-semibold text-slate-200">Cosmological Scope</td>
-                      <td className="py-2.5 px-3 text-slate-400">Single-culture dogma (usually Western tropical only)</td>
-                      <td className="py-2.5 px-3 text-cyan-300">Triangulates 6 world cosmologies with divergence rate</td>
-                    </tr>
-                    <tr>
-                      <td className="py-2.5 px-3 font-semibold text-slate-200">Validation Standard</td>
-                      <td className="py-2.5 px-3 text-slate-400">Cherry-picked anecdotes & Texas sharpshooter bias</td>
-                      <td className="py-2.5 px-3 text-emerald-300">Benchmarked against 1,000 Monte Carlo controls</td>
-                    </tr>
-                    <tr>
-                      <td className="py-2.5 px-3 font-semibold text-slate-200">Ephemeris Precision</td>
-                      <td className="py-2.5 px-3 text-slate-400">Unverifiable proprietary approximations</td>
-                      <td className="py-2.5 px-3 text-cyan-300">Dual-Engine (SwissEph + NASA JPL DE421 to &le;0.01°)</td>
-                    </tr>
-                  </tbody>
-                </table>
+                {/* Mobile-first stacked cards (<sm) */}
+                <div className="sm:hidden space-y-2.5 p-2.5 bg-[#0c1018]">
+                  {[
+                    {
+                      dim: 'Ontological Stance',
+                      typical: 'Promotes deterministic fortunes & fatalistic claims',
+                      engine: 'Rejects fatalism; models archetypal cultural typologies'
+                    },
+                    {
+                      dim: 'Uncertainty Handling',
+                      typical: 'Hides timing uncertainty; invents false precision',
+                      engine: 'Transparent T±15m uncertainty ensemble audit'
+                    },
+                    {
+                      dim: 'Cosmological Scope',
+                      typical: 'Single-culture dogma (usually Western tropical only)',
+                      engine: 'Triangulates 6 world cosmologies with divergence rate'
+                    },
+                    {
+                      dim: 'Validation Standard',
+                      typical: 'Cherry-picked anecdotes & Texas sharpshooter bias',
+                      engine: 'Benchmarked against 1,000 Monte Carlo controls'
+                    },
+                    {
+                      dim: 'Ephemeris Precision',
+                      typical: 'Unverifiable proprietary approximations',
+                      engine: 'Dual-Engine (SwissEph + NASA JPL DE421 to ≤0.01°)'
+                    }
+                  ].map((row, i) => (
+                    <div key={i} className="p-3 rounded-lg bg-[#080a0f] border border-[#1b2331] space-y-2">
+                      <div className="font-semibold text-slate-200 text-xs font-mono">{row.dim}</div>
+                      <div className="text-[11px] p-2 rounded bg-[#100808] border border-rose-950/80 text-rose-300">
+                        <span className="font-semibold block text-[10px] text-rose-400 uppercase font-mono mb-0.5">Consumer Apps:</span>
+                        {row.typical}
+                      </div>
+                      <div className="text-[11px] p-2 rounded bg-[#081510] border border-emerald-950/80 text-emerald-300">
+                        <span className="font-semibold block text-[10px] text-emerald-400 uppercase font-mono mb-0.5">Your Nine-Culture Engine:</span>
+                        {row.engine}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Desktop tabular view (>=sm) */}
+                <div className="hidden sm:block overflow-x-auto">
+                  <table className="w-full text-left font-mono border-collapse bg-[#0c1018]">
+                    <thead>
+                      <tr className="border-b border-[#1b2331] text-[10px] text-slate-400 uppercase bg-[#080b11]">
+                        <th className="py-2.5 px-3">Competitive Dimension</th>
+                        <th className="py-2.5 px-3 text-rose-400">Typical Consumer Apps (Co-Star, The Pattern)</th>
+                        <th className="py-2.5 px-3 text-cyan-300 font-bold">Your Six-Culture Engine</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-[#1b2331]/70 font-sans text-xs">
+                      <tr>
+                        <td className="py-2.5 px-3 font-semibold text-slate-200">Ontological Stance</td>
+                        <td className="py-2.5 px-3 text-slate-400">Promotes deterministic fortunes & fatalistic claims</td>
+                        <td className="py-2.5 px-3 text-emerald-300 font-semibold">Rejects fatalism; models archetypal cultural typologies</td>
+                      </tr>
+                      <tr>
+                        <td className="py-2.5 px-3 font-semibold text-slate-200">Uncertainty Handling</td>
+                        <td className="py-2.5 px-3 text-slate-400">Hides timing uncertainty; invents false precision</td>
+                        <td className="py-2.5 px-3 text-cyan-300">Transparent T±15m uncertainty ensemble audit</td>
+                      </tr>
+                      <tr>
+                        <td className="py-2.5 px-3 font-semibold text-slate-200">Cosmological Scope</td>
+                        <td className="py-2.5 px-3 text-slate-400">Single-culture dogma (usually Western tropical only)</td>
+                        <td className="py-2.5 px-3 text-cyan-300">Triangulates 6 world cosmologies with divergence rate</td>
+                      </tr>
+                      <tr>
+                        <td className="py-2.5 px-3 font-semibold text-slate-200">Validation Standard</td>
+                        <td className="py-2.5 px-3 text-slate-400">Cherry-picked anecdotes & Texas sharpshooter bias</td>
+                        <td className="py-2.5 px-3 text-emerald-300">Benchmarked against 1,000 Monte Carlo controls</td>
+                      </tr>
+                      <tr>
+                        <td className="py-2.5 px-3 font-semibold text-slate-200">Ephemeris Precision</td>
+                        <td className="py-2.5 px-3 text-slate-400">Unverifiable proprietary approximations</td>
+                        <td className="py-2.5 px-3 text-cyan-300">Dual-Engine (SwissEph + NASA JPL DE421 to &le;0.01°)</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
               </div>
 
               <div className="bg-[#090d15] p-4 rounded-lg border border-cyan-800/40">
@@ -804,36 +890,59 @@ export const MathematicalEvidenceCard: React.FC<Props> = ({ onClose, onNavigate 
               tabIndex={0}
               role="region"
               aria-label="Academic statistical evaluation table"
-              className="overflow-x-auto rounded border border-[#1b2331] my-3 focus:outline-none focus-visible:ring-1 focus-visible:ring-cyan-500"
+              className="rounded border border-[#1b2331] my-3 focus:outline-none focus-visible:ring-1 focus-visible:ring-cyan-500 overflow-hidden"
             >
-              <table className="w-full text-left text-xs font-mono bg-[#0a0d14]">
-                <thead>
-                  <tr className="border-b border-[#1b2331] text-slate-400 uppercase bg-[#06080e]">
-                    <th className="p-2">ID</th>
-                    <th className="p-2">Claim</th>
-                    <th className="p-2">Subgroup</th>
-                    <th className="p-2 text-right">Titans</th>
-                    <th className="p-2 text-right">Controls</th>
-                    <th className="p-2 text-right">Odds</th>
-                    <th className="p-2 text-right">Z</th>
-                    <th className="p-2 text-right">p</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-[#1b2331]">
-                  {hypotheses.map((h) => (
-                    <tr key={h.id}>
-                      <td className="p-2 font-bold text-cyan-400">{h.id}</td>
-                      <td className="p-2 font-sans">{h.claim}</td>
-                      <td className="p-2 text-slate-400">{h.subgroup}</td>
-                      <td className="p-2 text-right font-bold">{h.observed}</td>
-                      <td className="p-2 text-right text-slate-400">{h.baseline}</td>
-                      <td className="p-2 text-right text-emerald-400">{h.oddsRatio}</td>
-                      <td className="p-2 text-right">{h.zScore}</td>
-                      <td className="p-2 text-right font-bold text-cyan-300">{h.pValue}</td>
+              {/* Mobile stacked cards (<sm) */}
+              <div className="sm:hidden space-y-2 p-2 bg-[#0a0d14]">
+                {hypotheses.map((h) => (
+                  <div key={h.id} className="p-2.5 rounded bg-[#06080e] border border-[#1b2331] space-y-1.5 font-mono text-xs">
+                    <div className="flex items-center justify-between">
+                      <span className="font-bold text-cyan-400">{h.id}</span>
+                      <span className="text-[11px] text-cyan-300 font-semibold">{h.pValue}</span>
+                    </div>
+                    <p className="font-sans text-slate-200 text-xs font-medium">{h.claim}</p>
+                    <div className="text-[11px] text-slate-400">Cohort: {h.subgroup}</div>
+                    <div className="grid grid-cols-2 gap-1 pt-1 border-t border-[#1b2331] text-[11px] tabular-nums">
+                      <div>Titans: <strong>{h.observed}</strong></div>
+                      <div>Controls: <span className="text-slate-400">{h.baseline}</span></div>
+                      <div>Odds: <strong className="text-emerald-400">{h.oddsRatio}</strong></div>
+                      <div>Z: <span>{h.zScore}</span></div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Desktop tabular view (>=sm) */}
+              <div className="hidden sm:block overflow-x-auto">
+                <table className="w-full text-left text-xs font-mono bg-[#0a0d14]">
+                  <thead>
+                    <tr className="border-b border-[#1b2331] text-slate-400 uppercase bg-[#06080e]">
+                      <th className="p-2">ID</th>
+                      <th className="p-2">Claim</th>
+                      <th className="p-2">Subgroup</th>
+                      <th className="p-2 text-right">Titans</th>
+                      <th className="p-2 text-right">Controls</th>
+                      <th className="p-2 text-right">Odds</th>
+                      <th className="p-2 text-right">Z</th>
+                      <th className="p-2 text-right">p</th>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
+                  </thead>
+                  <tbody className="divide-y divide-[#1b2331]">
+                    {hypotheses.map((h) => (
+                      <tr key={h.id}>
+                        <td className="p-2 font-bold text-cyan-400">{h.id}</td>
+                        <td className="p-2 font-sans">{h.claim}</td>
+                        <td className="p-2 text-slate-400">{h.subgroup}</td>
+                        <td className="p-2 text-right font-bold">{h.observed}</td>
+                        <td className="p-2 text-right text-slate-400">{h.baseline}</td>
+                        <td className="p-2 text-right text-emerald-400">{h.oddsRatio}</td>
+                        <td className="p-2 text-right">{h.zScore}</td>
+                        <td className="p-2 text-right font-bold text-cyan-300">{h.pValue}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
             </div>
           </section>
 

@@ -33,6 +33,7 @@ const TRADITION_PRIMARY_EXPLAINER: Record<string, { id: string; label: string }>
 const CULTURE_THEMES: Record<string, {
   id: string;
   name: string;
+  shortName?: string;
   nativeTitle: string;
   glyph: string;
   lineage: string;
@@ -54,6 +55,7 @@ const CULTURE_THEMES: Record<string, {
   jyotisha: {
     id: 'jyotisha',
     name: 'Jyotisha (Vedic)',
+    shortName: 'Vedic',
     nativeTitle: 'ज्योतिष • Vedic Astrometry',
     glyph: '🕉️',
     lineage: 'Maharishi Parashara • Bṛhat Parāśara Horāśāstra & Lahiri Sidereal Ephemeris',
@@ -75,6 +77,7 @@ const CULTURE_THEMES: Record<string, {
   bazi: {
     id: 'bazi',
     name: 'BaZi (Four Pillars)',
+    shortName: 'BaZi',
     nativeTitle: '八字命理 • Four Pillars of Destiny',
     glyph: '☯️',
     lineage: 'Master Xu Ziping • Wu Xing Five Elements Harmonization & Solar Jie Qi Terms',
@@ -96,6 +99,7 @@ const CULTURE_THEMES: Record<string, {
   western: {
     id: 'western',
     name: 'Western (Hellenistic)',
+    shortName: 'Hellenic',
     nativeTitle: 'Ἑλληνιστικὴ Ἀστρολογία • Hellenistic Astrologia',
     glyph: '🏛️',
     lineage: 'Claudius Ptolemy (Tetrabiblos) & Vettius Valens • Tropical Whole-Sign Houses',
@@ -117,6 +121,7 @@ const CULTURE_THEMES: Record<string, {
   persian: {
     id: 'persian',
     name: 'Persian (Almuten)',
+    shortName: 'Persian',
     nativeTitle: 'علم النجوم • ‘Ilm al-Nujūm',
     glyph: '🕌',
     lineage: 'Abu Ma’shar al-Balkhi & Al-Qabisi • Baghdad House of Wisdom Tradition',
@@ -138,6 +143,7 @@ const CULTURE_THEMES: Record<string, {
   egyptian: {
     id: 'egyptian',
     name: 'Egyptian (Decans)',
+    shortName: 'Egyptian',
     nativeTitle: '𓇹𓇳𓏤 • Seba’ut & Bakhtiu Star Watchers',
     glyph: '𓋹',
     lineage: 'Dendera Astronomical Zodiac & Senenmut Tomb Ceiling (c. 1473 BCE)',
@@ -159,6 +165,7 @@ const CULTURE_THEMES: Record<string, {
   ziwei: {
     id: 'ziwei',
     name: 'Zi Wei Dou Shu',
+    shortName: 'Zi Wei',
     nativeTitle: '紫微斗數 • Imperial Polar Constellations',
     glyph: '👑',
     lineage: 'Grandmaster Chen Tuan • Lao-tzu Hermitage on Mount Hua (c. 980 CE)',
@@ -180,6 +187,7 @@ const CULTURE_THEMES: Record<string, {
   mayan: {
     id: 'mayan',
     name: 'Maya Calendar',
+    shortName: 'Maya',
     nativeTitle: 'Chol Q’ij & Haab’ • Maya Sacred Calendar',
     glyph: '☀️',
     lineage: 'Classic Maya Skywatchers of Copán & Palenque • GMT Correlation (584283)',
@@ -201,6 +209,7 @@ const CULTURE_THEMES: Record<string, {
   tibetan: {
     id: 'tibetan',
     name: 'Tibetan Elemental',
+    shortName: 'Tibetan',
     nativeTitle: 'དཀར་རྩིས་ • Kar-tsi & Jung-tsi',
     glyph: '☸️',
     lineage: 'Phugpa Lhundrup Gyatso • Pema Karpo Five Personal Forces & Lo Shu Mewa',
@@ -222,6 +231,7 @@ const CULTURE_THEMES: Record<string, {
   maramataka: {
     id: 'maramataka',
     name: 'Polynesian Maramataka',
+    shortName: 'Māori',
     nativeTitle: 'Te Maramataka • Oceanic Lunar Wayfinding',
     glyph: '🌊',
     lineage: 'Tohunga Kōkōrangi of Aotearoa & Polynesian Voyaging Ancestors',
@@ -268,7 +278,11 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
         </div>
 
         {/* Clean Typographic Tabs with Cultural Glyphs & Theming */}
-        <div role="tablist" aria-label="Astrological tradition charts" className="flex items-center gap-1.5 overflow-x-auto pb-1 sm:pb-0 scrollbar-thin scroll-smooth overscroll-x-contain w-full sm:w-auto">
+        <div
+          role="tablist"
+          aria-label="Astrological tradition charts"
+          className="grid grid-cols-3 sm:flex sm:flex-wrap items-center gap-1.5 w-full sm:w-auto pb-1 sm:pb-0"
+        >
           {Object.values(CULTURE_THEMES).map((t) => {
             const isActive = activeTab === t.id;
             return (
@@ -280,14 +294,15 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
                 aria-controls={`tradition-panel-${t.id}`}
                 type="button"
                 onClick={() => setActiveTab(t.id as any)}
-                className={`inline-flex items-center gap-1.5 px-3 py-2 min-h-[44px] text-xs font-mono font-medium rounded-lg transition-all whitespace-nowrap cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-1 focus-visible:ring-offset-[#080a0f] ${
+                className={`inline-flex items-center justify-center sm:justify-start gap-1 sm:gap-1.5 px-2 sm:px-3 py-2 min-h-[44px] text-[11px] sm:text-xs font-mono font-medium rounded-lg transition-all cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-1 focus-visible:ring-offset-[#080a0f] ${
                   isActive
                     ? t.activeTabClass
                     : 'text-slate-400 hover:text-slate-200 hover:bg-[#121721] border border-transparent'
                 }`}
               >
-                <span className="text-sm select-none">{t.glyph}</span>
-                <span>{t.name}</span>
+                <span className="text-sm select-none shrink-0">{t.glyph}</span>
+                <span className="hidden sm:inline whitespace-nowrap">{t.name}</span>
+                <span className="sm:hidden truncate">{t.shortName || t.name}</span>
               </button>
             );
           })}
@@ -434,63 +449,109 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
                   tabIndex={0}
                   role="region"
                   aria-label="Jyotisha planetary positions and dignities"
-                  className="overflow-x-auto rounded border border-[#1b2331] focus:outline-none focus-visible:ring-1 focus-visible:ring-cyan-500"
+                  className="rounded border border-[#1b2331] focus:outline-none focus-visible:ring-1 focus-visible:ring-cyan-500 overflow-hidden"
                 >
-            <table className="w-full text-left text-xs border-collapse">
-              <thead>
-                <tr className="bg-[#080a0f] text-slate-400 border-b border-[#1b2331] font-mono uppercase tracking-wider text-[10px]">
-                  <th className="py-2 px-3 sticky left-0 bg-[#080a0f] z-10 border-r border-[#1b2331]">Graha</th>
-                  <th className="py-2 px-3">Sign</th>
-                  <th className="py-2 px-3 font-mono">Degree</th>
-                  <th className="py-2 px-3">House</th>
-                  <th className="py-2 px-3">Dignity</th>
-                  <th className="py-2 px-3">Nakshatra & Pada</th>
-                  <th className="py-2 px-3">D9 Nav</th>
-                  <th className="py-2 px-3">D10 Dash</th>
-                  <th className="py-2 px-3">D3 Drek</th>
-                  <th className="py-2 px-3">D7 Sapt</th>
-                  <th className="py-2 px-3">D12 Dwad</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-[#1b2331] bg-[#0d1118] font-mono text-[11px] tabular-nums">
-                {Object.entries(jyotisha.grahas).map(([name, g]: [string, any]) => (
-                  <tr key={name} className="hover:bg-[#121721] transition-colors">
-                    <td className="py-2 px-3 font-sans font-medium text-slate-100 flex items-center gap-1.5 whitespace-nowrap sticky left-0 bg-[#0d1118] z-10 border-r border-[#1b2331]">
-                      {name}
-                      {g.is_retrograde && <span className="text-[10px] text-amber-400 font-mono" title="Retrograde">(R)</span>}
-                      {g.is_combust && <span className="text-[10px] text-rose-400 font-mono" title="Combust">(C)</span>}
-                      {g.is_gandanta && (
-                        <span className="text-[10px] text-rose-400 font-mono bg-rose-950/60 px-1 rounded border border-rose-900" title={g.gandanta_zone}>
-                          GD
-                        </span>
-                      )}
-                    </td>
-                    <td className="py-2 px-3 text-slate-300">{g.sign}</td>
-                    <td className="py-2 px-3 text-cyan-300">{g.degree_in_sign.toFixed(2)}°</td>
-                    <td className="py-2 px-3 font-mono font-medium text-slate-200">H{g.house}</td>
-                    <td className="py-2 px-3">
-                      <span className={`px-1.5 py-0.2 rounded text-[10px] font-mono ${
-                        g.dignity === 'Exalted' ? 'bg-emerald-950 text-emerald-300 border border-emerald-800' :
-                        g.dignity === 'Debilitated' ? 'bg-rose-950 text-rose-300 border border-rose-800' :
-                        g.dignity === 'Own Sign' ? 'bg-cyan-950 text-cyan-300 border border-cyan-800' :
-                        'text-slate-400'
-                      }`}>
-                        {g.dignity}
-                      </span>
-                    </td>
-                    <td className="py-2 px-3 text-slate-300 whitespace-nowrap">
-                      {g.nakshatra?.name} P{g.nakshatra?.pada} ({g.nakshatra?.lord})
-                    </td>
-                    <td className="py-2 px-3 text-amber-300">{g.navamsha_sign}</td>
-                    <td className="py-2 px-3 text-purple-300">{g.dashamsha_sign}</td>
-                    <td className="py-2 px-3 text-slate-300">{g.drekkana_sign || '-'}</td>
-                    <td className="py-2 px-3 text-slate-400">{g.saptamsha_sign || '-'}</td>
-                    <td className="py-2 px-3 text-slate-400">{g.dwadashamsha_sign || '-'}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+                  {/* Mobile-first stacked cards (<sm) */}
+                  <div className="sm:hidden space-y-2 p-2 bg-[#0c1018]">
+                    {Object.entries(jyotisha.grahas).map(([name, g]: [string, any]) => (
+                      <div key={name} className="p-2.5 rounded bg-[#080a0f] border border-[#1b2331] space-y-1.5">
+                        <div className="flex items-center justify-between">
+                          <span className="font-sans font-semibold text-slate-100 flex items-center gap-1.5 text-xs">
+                            {name}
+                            {g.is_retrograde && <span className="text-[10px] text-amber-400 font-mono" title="Retrograde">(R)</span>}
+                            {g.is_combust && <span className="text-[10px] text-rose-400 font-mono" title="Combust">(C)</span>}
+                            {g.is_gandanta && (
+                              <span className="text-[10px] text-rose-400 font-mono bg-rose-950/60 px-1 rounded border border-rose-900" title={g.gandanta_zone}>
+                                GD: {g.gandanta_zone}
+                              </span>
+                            )}
+                          </span>
+                          <span className={`px-1.5 py-0.5 rounded text-[10px] font-mono ${
+                            g.dignity === 'Exalted' ? 'bg-emerald-950 text-emerald-300 border border-emerald-800' :
+                            g.dignity === 'Debilitated' ? 'bg-rose-950 text-rose-300 border border-rose-800' :
+                            g.dignity === 'Own Sign' ? 'bg-cyan-950 text-cyan-300 border border-cyan-800' :
+                            'text-slate-400'
+                          }`}>
+                            {g.dignity}
+                          </span>
+                        </div>
+                        <div className="flex items-center justify-between text-[11px] font-mono text-slate-300 pt-0.5 border-t border-[#1b2331]/60">
+                          <span>{g.sign} <strong className="text-cyan-300">{g.degree_in_sign.toFixed(2)}°</strong></span>
+                          <span className="text-slate-400">House <strong className="text-slate-200">H{g.house}</strong></span>
+                        </div>
+                        <div className="text-[11px] font-mono text-slate-400 flex items-center justify-between">
+                          <span>Nakshatra: <span className="text-slate-200">{g.nakshatra?.name}</span></span>
+                          <span>Pada <span className="text-slate-200">{g.nakshatra?.pada}</span> ({g.nakshatra?.lord})</span>
+                        </div>
+                        <div className="flex items-center gap-1 text-[10px] font-mono text-slate-400 pt-1 border-t border-[#1b2331]/40 flex-wrap">
+                          <span className="px-1 py-0.5 rounded bg-[#101724] border border-[#1b2331]">D9: {g.navamsha_sign}</span>
+                          <span className="px-1 py-0.5 rounded bg-[#101724] border border-[#1b2331]">D10: {g.dashamsha_sign}</span>
+                          {g.drekkana_sign && <span className="px-1 py-0.5 rounded bg-[#101724] border border-[#1b2331]">D3: {g.drekkana_sign}</span>}
+                          {g.saptamsha_sign && <span className="px-1 py-0.5 rounded bg-[#101724] border border-[#1b2331]">D7: {g.saptamsha_sign}</span>}
+                          {g.dwadashamsha_sign && <span className="px-1 py-0.5 rounded bg-[#101724] border border-[#1b2331]">D12: {g.dwadashamsha_sign}</span>}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Desktop tabular view (>=sm) */}
+                  <div className="hidden sm:block overflow-x-auto">
+                    <table className="w-full text-left text-xs border-collapse">
+                      <thead>
+                        <tr className="bg-[#080a0f] text-slate-400 border-b border-[#1b2331] font-mono uppercase tracking-wider text-[10px]">
+                          <th className="py-2 px-3 sticky left-0 bg-[#080a0f] z-10 border-r border-[#1b2331]">Graha</th>
+                          <th className="py-2 px-3">Sign</th>
+                          <th className="py-2 px-3 font-mono">Degree</th>
+                          <th className="py-2 px-3">House</th>
+                          <th className="py-2 px-3">Dignity</th>
+                          <th className="py-2 px-3">Nakshatra & Pada</th>
+                          <th className="py-2 px-3">D9 Nav</th>
+                          <th className="py-2 px-3">D10 Dash</th>
+                          <th className="py-2 px-3">D3 Drek</th>
+                          <th className="py-2 px-3">D7 Sapt</th>
+                          <th className="py-2 px-3">D12 Dwad</th>
+                        </tr>
+                      </thead>
+                      <tbody className="divide-y divide-[#1b2331] bg-[#0d1118] font-mono text-[11px] tabular-nums">
+                        {Object.entries(jyotisha.grahas).map(([name, g]: [string, any]) => (
+                          <tr key={name} className="hover:bg-[#121721] transition-colors">
+                            <td className="py-2 px-3 font-sans font-medium text-slate-100 flex items-center gap-1.5 whitespace-nowrap sticky left-0 bg-[#0d1118] z-10 border-r border-[#1b2331]">
+                              {name}
+                              {g.is_retrograde && <span className="text-[10px] text-amber-400 font-mono" title="Retrograde">(R)</span>}
+                              {g.is_combust && <span className="text-[10px] text-rose-400 font-mono" title="Combust">(C)</span>}
+                              {g.is_gandanta && (
+                                <span className="text-[10px] text-rose-400 font-mono bg-rose-950/60 px-1 rounded border border-rose-900" title={g.gandanta_zone}>
+                                  GD
+                                </span>
+                              )}
+                            </td>
+                            <td className="py-2 px-3 text-slate-300">{g.sign}</td>
+                            <td className="py-2 px-3 text-cyan-300">{g.degree_in_sign.toFixed(2)}°</td>
+                            <td className="py-2 px-3 font-mono font-medium text-slate-200">H{g.house}</td>
+                            <td className="py-2 px-3">
+                              <span className={`px-1.5 py-0.2 rounded text-[10px] font-mono ${
+                                g.dignity === 'Exalted' ? 'bg-emerald-950 text-emerald-300 border border-emerald-800' :
+                                g.dignity === 'Debilitated' ? 'bg-rose-950 text-rose-300 border border-rose-800' :
+                                g.dignity === 'Own Sign' ? 'bg-cyan-950 text-cyan-300 border border-cyan-800' :
+                                'text-slate-400'
+                              }`}>
+                                {g.dignity}
+                              </span>
+                            </td>
+                            <td className="py-2 px-3 text-slate-300 whitespace-nowrap">
+                              {g.nakshatra?.name} P{g.nakshatra?.pada} ({g.nakshatra?.lord})
+                            </td>
+                            <td className="py-2 px-3 text-amber-300">{g.navamsha_sign}</td>
+                            <td className="py-2 px-3 text-purple-300">{g.dashamsha_sign}</td>
+                            <td className="py-2 px-3 text-slate-300">{g.drekkana_sign || '-'}</td>
+                            <td className="py-2 px-3 text-slate-400">{g.saptamsha_sign || '-'}</td>
+                            <td className="py-2 px-3 text-slate-400">{g.dwadashamsha_sign || '-'}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
         </div>
 
           {/* Planetary War Alert if Occurring */}
@@ -925,47 +986,89 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
                 <div
                   tabIndex={0}
                   role="region"
-                  aria-label="Jyotisha planetary positions and dignities"
-                  className="overflow-x-auto rounded border border-[#1b2331] focus:outline-none focus-visible:ring-1 focus-visible:ring-cyan-500"
+                  aria-label="Western planetary positions and dignities"
+                  className="rounded border border-[#1b2331] focus:outline-none focus-visible:ring-1 focus-visible:ring-cyan-500 overflow-hidden"
                 >
-            <table className="w-full text-left text-xs border-collapse">
-              <thead>
-                <tr className="bg-[#080a0f] text-slate-400 border-b border-[#1b2331] font-mono uppercase tracking-wider text-[10px]">
-                  <th className="py-2 px-3 sticky left-0 bg-[#080a0f] z-10 border-r border-[#1b2331]">Planet</th>
-                  <th className="py-2 px-3">Sign</th>
-                  <th className="py-2 px-3 font-mono">Degree</th>
-                  <th className="py-2 px-3">House</th>
-                  <th className="py-2 px-3">Angularity</th>
-                  <th className="py-2 px-3 font-mono">Dignity Score</th>
-                  <th className="py-2 px-3">Essential Breakdown</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-[#1b2331] bg-[#0d1118] font-mono text-[11px] tabular-nums">
-                {Object.entries(western.planets).map(([name, p]: [string, any]) => (
-                  <tr key={name} className="hover:bg-[#121721] transition-colors">
-                    <td className="py-2 px-3 font-sans font-medium text-slate-200 flex items-center gap-1.5 sticky left-0 bg-[#0d1118] z-10 border-r border-[#1b2331] whitespace-nowrap">
-                      {name}
-                      {p.is_retrograde && <span className="text-[10px] text-amber-400 font-mono">(R)</span>}
-                    </td>
-                    <td className="py-2 px-3 text-slate-300">{p.sign}</td>
-                    <td className="py-2 px-3 text-cyan-300">{p.degree_in_sign?.toFixed(2)}°</td>
-                    <td className="py-2 px-3 text-slate-200">H{p.house}</td>
-                    <td className="py-2 px-3 text-slate-400">{p.angularity}</td>
-                    <td className="py-2 px-3">
-                      {p.is_traditional ? (
-                        <span className={p.dignity_score > 0 ? 'text-emerald-400' : p.dignity_score < 0 ? 'text-rose-400' : 'text-slate-400'}>
-                          {p.dignity_score > 0 ? `+${p.dignity_score}` : p.dignity_score}
-                        </span>
-                      ) : <span className="text-slate-400 font-normal">Modern</span>}
-                    </td>
-                    <td className="py-2 px-3 text-slate-300 text-[11px]">
-                      {p.dignity_breakdown?.join(', ') || 'Peregrine (0)'}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+                  {/* Mobile-first stacked cards (<sm) */}
+                  <div className="sm:hidden space-y-2 p-2 bg-[#0c1018]">
+                    {Object.entries(western.planets).map(([name, p]: [string, any]) => (
+                      <div key={name} className="p-2.5 rounded bg-[#080a0f] border border-[#1b2331] space-y-1.5">
+                        <div className="flex items-center justify-between">
+                          <span className="font-sans font-semibold text-slate-200 flex items-center gap-1.5 text-xs">
+                            {name}
+                            {p.is_retrograde && <span className="text-[10px] text-amber-400 font-mono">(R)</span>}
+                          </span>
+                          {p.is_traditional ? (
+                            <span className={`px-1.5 py-0.5 rounded text-[10px] font-mono font-semibold ${
+                              p.dignity_score > 0 ? 'bg-emerald-950 text-emerald-300 border border-emerald-800' :
+                              p.dignity_score < 0 ? 'bg-rose-950 text-rose-300 border border-rose-800' :
+                              'bg-[#101724] text-slate-400 border border-[#1b2331]'
+                            }`}>
+                              Score: {p.dignity_score > 0 ? `+${p.dignity_score}` : p.dignity_score}
+                            </span>
+                          ) : (
+                            <span className="text-[10px] text-slate-400 font-mono">Modern</span>
+                          )}
+                        </div>
+                        <div className="flex items-center justify-between text-[11px] font-mono text-slate-300 pt-0.5 border-t border-[#1b2331]/60">
+                          <span>{p.sign} <strong className="text-cyan-300">{p.degree_in_sign?.toFixed(2)}°</strong></span>
+                          <span>House <strong className="text-slate-200">H{p.house}</strong></span>
+                          <span className="text-slate-400">{p.angularity}</span>
+                        </div>
+                        {p.dignity_breakdown && p.dignity_breakdown.length > 0 && (
+                          <div className="text-[10px] font-mono text-slate-400 pt-1 border-t border-[#1b2331]/40 flex flex-wrap gap-1">
+                            {p.dignity_breakdown.map((d: string, idx: number) => (
+                              <span key={idx} className="px-1 py-0.2 rounded bg-[#101724] border border-[#1b2331] text-slate-300">
+                                {d}
+                              </span>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Desktop tabular view (>=sm) */}
+                  <div className="hidden sm:block overflow-x-auto">
+                    <table className="w-full text-left text-xs border-collapse">
+                      <thead>
+                        <tr className="bg-[#080a0f] text-slate-400 border-b border-[#1b2331] font-mono uppercase tracking-wider text-[10px]">
+                          <th className="py-2 px-3 sticky left-0 bg-[#080a0f] z-10 border-r border-[#1b2331]">Planet</th>
+                          <th className="py-2 px-3">Sign</th>
+                          <th className="py-2 px-3 font-mono">Degree</th>
+                          <th className="py-2 px-3">House</th>
+                          <th className="py-2 px-3">Angularity</th>
+                          <th className="py-2 px-3 font-mono">Dignity Score</th>
+                          <th className="py-2 px-3">Essential Breakdown</th>
+                        </tr>
+                      </thead>
+                      <tbody className="divide-y divide-[#1b2331] bg-[#0d1118] font-mono text-[11px] tabular-nums">
+                        {Object.entries(western.planets).map(([name, p]: [string, any]) => (
+                          <tr key={name} className="hover:bg-[#121721] transition-colors">
+                            <td className="py-2 px-3 font-sans font-medium text-slate-200 flex items-center gap-1.5 sticky left-0 bg-[#0d1118] z-10 border-r border-[#1b2331] whitespace-nowrap">
+                              {name}
+                              {p.is_retrograde && <span className="text-[10px] text-amber-400 font-mono">(R)</span>}
+                            </td>
+                            <td className="py-2 px-3 text-slate-300">{p.sign}</td>
+                            <td className="py-2 px-3 text-cyan-300">{p.degree_in_sign?.toFixed(2)}°</td>
+                            <td className="py-2 px-3 text-slate-200">H{p.house}</td>
+                            <td className="py-2 px-3 text-slate-400">{p.angularity}</td>
+                            <td className="py-2 px-3">
+                              {p.is_traditional ? (
+                                <span className={p.dignity_score > 0 ? 'text-emerald-400' : p.dignity_score < 0 ? 'text-rose-400' : 'text-slate-400'}>
+                                  {p.dignity_score > 0 ? `+${p.dignity_score}` : p.dignity_score}
+                                </span>
+                              ) : <span className="text-slate-400 font-normal">Modern</span>}
+                            </td>
+                            <td className="py-2 px-3 text-slate-300 text-[11px]">
+                              {p.dignity_breakdown?.join(', ') || 'Peregrine (0)'}
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
         </div>
 
           {/* Mutual Reception Banner if Present */}
@@ -1411,42 +1514,77 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
                 <div
                   tabIndex={0}
                   role="region"
-                  aria-label="Jyotisha planetary positions and dignities"
-                  className="overflow-x-auto rounded border border-[#1b2331] focus:outline-none focus-visible:ring-1 focus-visible:ring-cyan-500"
+                  aria-label="Persian almuten figuris leaderboard"
+                  className="rounded border border-[#1b2331] focus:outline-none focus-visible:ring-1 focus-visible:ring-cyan-500 overflow-hidden"
                 >
-              <table className="w-full text-left text-xs border-collapse font-mono">
-                <thead>
-                  <tr className="bg-[#0d1118] text-slate-400 border-b border-[#1b2331] uppercase text-[10px]">
-                    <th className="py-2 px-3 sticky left-0 bg-[#0d1118] z-10 border-r border-[#1b2331]">Rank & Planet</th>
-                    <th className="py-2 px-3 text-right">Essential Pts</th>
-                    <th className="py-2 px-3 text-right">Accidental Pts</th>
-                    <th className="py-2 px-3 text-right">Total Score</th>
-                    <th className="py-2 px-3">Status</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-[#1b2331] text-[11px] tabular-nums">
-                  {persian.almuten_figuris.leaderboard.map((item: any, idx: number) => (
-                    <tr key={item.planet} className={idx === 0 ? 'bg-[#141d2b] font-bold text-amber-300' : 'hover:bg-[#121721]'}>
-                      <td className="py-2 px-3 text-slate-200 sticky left-0 bg-[#0d1118] z-10 border-r border-[#1b2331] whitespace-nowrap">
-                        #{idx + 1} {item.planet}
-                      </td>
-                      <td className="py-2 px-3 text-right text-slate-400">+{item.essential_dignity}</td>
-                      <td className="py-2 px-3 text-right text-slate-400">+{item.accidental_dignity}</td>
-                      <td className="py-2 px-3 text-right font-bold text-cyan-300">{item.total_score}</td>
-                      <td className="py-2 px-3">
-                        {idx === 0 ? (
-                          <span className="px-1.5 py-0.5 rounded text-[9px] bg-amber-950 text-amber-300 border border-amber-700">
-                            ALMUTEN FIGURIS
+                  {/* Mobile-first stacked cards (<sm) */}
+                  <div className="sm:hidden space-y-2 p-2 bg-[#0c1018]">
+                    {persian.almuten_figuris.leaderboard.map((item: any, idx: number) => (
+                      <div
+                        key={item.planet}
+                        className={`p-2.5 rounded border space-y-1.5 font-mono ${
+                          idx === 0
+                            ? 'bg-[#141d2b] border-amber-600/70 shadow-xs'
+                            : 'bg-[#080a0f] border-[#1b2331]'
+                        }`}
+                      >
+                        <div className="flex items-center justify-between">
+                          <span className={`text-xs font-semibold ${idx === 0 ? 'text-amber-300' : 'text-slate-200'}`}>
+                            #{idx + 1} {item.planet}
                           </span>
-                        ) : (
-                          <span className="text-slate-500 text-[10px]">Candidate</span>
-                        )}
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
+                          {idx === 0 ? (
+                            <span className="px-1.5 py-0.5 rounded text-[9px] bg-amber-950 text-amber-300 border border-amber-700 font-bold">
+                              ALMUTEN FIGURIS
+                            </span>
+                          ) : (
+                            <span className="text-slate-500 text-[10px]">Candidate</span>
+                          )}
+                        </div>
+                        <div className="flex items-center justify-between text-[11px] text-slate-300 pt-0.5 border-t border-[#1b2331]/60">
+                          <span className="text-slate-400">Essential: <strong className="text-slate-200">+{item.essential_dignity}</strong></span>
+                          <span className="text-slate-400">Accidental: <strong className="text-slate-200">+{item.accidental_dignity}</strong></span>
+                          <span className="text-cyan-300 font-bold">Total: {item.total_score} pts</span>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Desktop tabular view (>=sm) */}
+                  <div className="hidden sm:block overflow-x-auto">
+                    <table className="w-full text-left text-xs border-collapse font-mono">
+                      <thead>
+                        <tr className="bg-[#0d1118] text-slate-400 border-b border-[#1b2331] uppercase text-[10px]">
+                          <th className="py-2 px-3 sticky left-0 bg-[#0d1118] z-10 border-r border-[#1b2331]">Rank & Planet</th>
+                          <th className="py-2 px-3 text-right">Essential Pts</th>
+                          <th className="py-2 px-3 text-right">Accidental Pts</th>
+                          <th className="py-2 px-3 text-right">Total Score</th>
+                          <th className="py-2 px-3">Status</th>
+                        </tr>
+                      </thead>
+                      <tbody className="divide-y divide-[#1b2331] text-[11px] tabular-nums">
+                        {persian.almuten_figuris.leaderboard.map((item: any, idx: number) => (
+                          <tr key={item.planet} className={idx === 0 ? 'bg-[#141d2b] font-bold text-amber-300' : 'hover:bg-[#121721]'}>
+                            <td className="py-2 px-3 text-slate-200 sticky left-0 bg-[#0d1118] z-10 border-r border-[#1b2331] whitespace-nowrap">
+                              #{idx + 1} {item.planet}
+                            </td>
+                            <td className="py-2 px-3 text-right text-slate-400">+{item.essential_dignity}</td>
+                            <td className="py-2 px-3 text-right text-slate-400">+{item.accidental_dignity}</td>
+                            <td className="py-2 px-3 text-right font-bold text-cyan-300">{item.total_score}</td>
+                            <td className="py-2 px-3">
+                              {idx === 0 ? (
+                                <span className="px-1.5 py-0.5 rounded text-[9px] bg-amber-950 text-amber-300 border border-amber-700">
+                                  ALMUTEN FIGURIS
+                                </span>
+                              ) : (
+                                <span className="text-slate-500 text-[10px]">Candidate</span>
+                              )}
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
           </div>
 
           {/* Hermetic Arabic Parts (Lots) */}

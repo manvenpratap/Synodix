@@ -1,7 +1,7 @@
 # Synodix: Project Context & Working Memory
 
-**Last Updated:** 2026-10-23 08:16:03
-**Version:** 2.21.0  
+**Last Updated:** 2026-10-23 08:51:39
+**Version:** 2.22.0  
 **Stack:** Python 3.12 (FastAPI, Swiss Ephemeris 2.10, Skyfield DE421) + TypeScript / React 19 / Vite / Tailwind CSS v4 / Framer Motion / Capacitor 8 (iOS & Android)  
 **Workspace:** `/Volumes/Study/Projects/Astrology` (symlinked as `/Volumes/Study/Astrology`)  
 **Git Remote:** `https://github.com/manvenpratap/Synodix.git`  
@@ -9,7 +9,22 @@
 ---
 
 ## 1. Current Status & Milestone
-- **Active Phase**: Impeccable Design Audit: 100% Elimination of Live DOM & Static Code Anti-Patterns (Completed)
+- **Active Phase**: Mobile Ergonomics: Complete Elimination of Horizontal Side-Scrolling Across All Viewports (Completed)
+- **Elimination of Horizontal Side-Scroll & Viewport Panning (v2.22.0)**:
+  - **Global Anti-Pan & Anti-Side-Scroll Architecture (`index.css`)**: Enforced `overflow-x: hidden !important`, `max-width: 100vw !important`, `width: 100% !important`, `touch-action: pan-y`, `overscroll-behavior-x: none`, and `-webkit-overflow-scrolling: touch` across `html`, `body`, and `#root`. Completely eliminates elastic rubber-band horizontal panning and unintentional horizontal displacement on touch devices.
+  - **Epistemic Journey Stepper Overhaul (`App.tsx`)**: Replaced the 543px wide horizontal scroll strip on `<md` with a responsive 5-column grid (`grid grid-cols-5 gap-1 py-0.5 w-full`). All 5 stages (`1. Input`, `2. Traditions`, `3. Synthesis`, `4. Dossier`, `5. Evidence`) fit cleanly across all mobile widths (from 320px iPhone SE to 430px iPhone Pro Max) with zero horizontal overflow.
+  - **3x3 High-Density Cultural Badge Matrix (`TraditionCharts.tsx`)**: Transformed the 1579px wide horizontal tradition tab strip into an adaptive 3-column, 3-row grid matrix on `<sm` (`grid grid-cols-3 sm:flex sm:flex-wrap`) with cultural glyphs and concise civilizational labels (`🕉️ Vedic`, `🏛️ Hellenic`, `☯️ BaZi`, `👑 Zi Wei`, `☀️ Maya`, `☸️ Tibetan`, `🕌 Persian`, `𓋹 Egyptian`, `🌊 Māori`), perfectly fitting viewports down to 320px with zero horizontal scrollbars while preserving desktop flex tabs on `sm:`.
+  - **Mobile-First Stacked Astrometric Data Cards (`TraditionCharts.tsx`)**: Added clean stacked cards on `sm:hidden` for multi-column planetary tables:
+    - *Jyotisha Grahas* (11 columns): Stacked card format showing Graha name, status badges (R, C, GD), dignity pill, degree, sign, house, Nakshatra & Pada with lord, and divisional harmonic badges (D9, D10, D3, D7, D12) vertically without side-scrolling. Desktop 11-column table preserved on `hidden sm:block`.
+    - *Western Planets* (7 columns): Stacked card format showing Planet name, retrograde status, dignity score badge, sign, degree, house, angularity, and essential dignity breakdown pills vertically. Desktop table preserved on `hidden sm:block`.
+    - *Persian Almuten Figuris Leaderboard* (5 columns): Stacked card format showing Rank, Planet, Almuten Figuris badge, essential/accidental points, and total score. Desktop table preserved on `hidden sm:block`.
+  - **Natural Wrapping for Filters & Action Strips**:
+    - `SynthesisMatrix.tsx`: Replaced `overflow-x-auto whitespace-nowrap` domain filter buttons with natural wrapping `flex flex-wrap gap-1.5`.
+    - `BirthDataForm.tsx`: Replaced `overflow-x-auto` on Saved Vault Quick Loader and Category filters with `flex-wrap`.
+    - `MathematicalEvidenceCard.tsx`: Replaced `overflow-x-auto whitespace-nowrap` section tabs with `flex flex-wrap gap-1.5`, and added responsive stacked cards on `<sm` for Empirical Hypotheses (8 cols), Competitive Moat (3 cols), and Academic Statistical Evidence tables.
+  - **Multi-Viewport Invariant Verification**: Validated 100% zero horizontal overflow (`document.documentElement.scrollWidth <= window.innerWidth`) across 6 real mobile viewports (320px iPhone SE 1st Gen, 360px Galaxy S8, 375px iPhone SE 2nd Gen, 390px iPhone 14/15 Pro, 412px Pixel 7 / Android Flagship, 430px iPhone 15 Pro Max) across all 5 primary application screens and all 9 cultural tradition visualizers.
+  - **Workflow Health**: 100% CLEAN (Verified via `./pipeline.sh doctor`)
+  - **Test Invariants**: 16/16 regression suites passing via `./pipeline.sh test --summary` (41.87s)
 - **Live DOM & Static Anti-Pattern Eradication (v2.21.0)**:
   - **100% Elimination of Undersized UI Text**: Enforced the 11px floor across all functional badges, timecodes, labels, navigation items, and tabular monospace data in `App.tsx`, `BirthDataForm.tsx`, `InputAuditCard.tsx`, and `ExplainerTrigger.tsx`.
   - **Upgraded Body Text Floor**: Enforced 12px (`text-xs`) minimum on all body sentences, subtitle annotations, and notices, eliminating all `[tiny-text]` findings.

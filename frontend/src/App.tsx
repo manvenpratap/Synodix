@@ -286,7 +286,7 @@ function AppContent() {
   }, [isServerModalOpen, isMobileSidebarOpen]);
 
   return (
-    <div className="min-h-[100dvh] celestial-observatory-canvas text-slate-200 flex flex-col md:flex-row antialiased">
+    <div className="min-h-[100dvh] w-full max-w-full overflow-x-hidden celestial-observatory-canvas text-slate-200 flex flex-col md:flex-row antialiased">
       {/* 1. Desktop Fixed Sidebar Navigation (>=md) */}
       <aside className="hidden md:flex flex-col w-64 lg:w-72 sidebar-canvas border-r border-[#1a2333] shrink-0 h-[100dvh] sticky top-0 overflow-y-auto select-none z-40 scrollbar-thin">
         {/* Brand Logo & Header */}
@@ -667,7 +667,7 @@ function AppContent() {
       )}
 
       {/* 3. Main Workspace Area */}
-      <div className="flex-1 flex flex-col min-w-0">
+      <div className="flex-1 flex flex-col min-w-0 w-full max-w-full overflow-x-hidden">
         {/* Top Header Bar */}
         <header className="h-[calc(3.75rem+env(safe-area-inset-top,0px))] pt-[env(safe-area-inset-top,0px)] border-b sm:border border-[#1b2331] sm:rounded-2xl header-canvas backdrop-blur-md px-3 sm:px-6 flex items-center justify-between sticky top-0 sm:top-2 sm:mx-4 lg:mx-6 z-30 shadow-xs">
           <div className="flex items-center gap-2 sm:gap-3 min-w-0">
@@ -814,42 +814,38 @@ function AppContent() {
               Step {JOURNEY_STEPS.findIndex((s) => s.id === currentScreen) + 1} of 5
             </span>
           </div>
-          <div className="flex items-center justify-between gap-1 overflow-x-auto py-0.5 scrollbar-none overscroll-x-contain">
+          <div className="grid grid-cols-5 gap-1 py-0.5 w-full">
             {JOURNEY_STEPS.map((s, idx) => {
               const isActive = currentScreen === s.id;
               const isPassed = JOURNEY_STEPS.findIndex((st) => st.id === currentScreen) > idx;
               return (
-                <React.Fragment key={s.id}>
-                  <button
-                    type="button"
-                    onClick={() => navigateTo(s.id)}
-                    aria-current={isActive ? 'step' : undefined}
-                    aria-label={`Step ${s.step}: ${s.label}${isActive ? ' (current step)' : isPassed ? ' (completed)' : ''}`}
-                    className={`flex items-center gap-1.5 px-2.5 py-1.5 min-h-[38px] rounded-lg text-[11px] font-mono cursor-pointer transition-all shrink-0 active:scale-95 touch-manipulation focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 ${
+                <button
+                  key={s.id}
+                  type="button"
+                  onClick={() => navigateTo(s.id)}
+                  aria-current={isActive ? 'step' : undefined}
+                  aria-label={`Step ${s.step}: ${s.label}${isActive ? ' (current step)' : isPassed ? ' (completed)' : ''}`}
+                  className={`flex flex-col min-[380px]:flex-row items-center justify-center gap-0.5 min-[380px]:gap-1 px-1 py-1.5 min-h-[38px] rounded-lg text-center font-mono cursor-pointer transition-all active:scale-95 touch-manipulation focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 ${
+                    isActive
+                      ? 'bg-cyan-950 text-cyan-300 border border-cyan-700 font-bold shadow-xs ring-1 ring-cyan-500/50'
+                      : isPassed
+                      ? 'bg-[#101722] text-emerald-400 border border-emerald-900/50 hover:bg-[#152030]'
+                      : 'bg-[#0e131d] text-slate-400 border border-[#1a2332] hover:text-slate-300'
+                  }`}
+                >
+                  <span
+                    className={`w-4 h-4 rounded-full flex items-center justify-center text-[10px] transition-all shrink-0 ${
                       isActive
-                        ? 'bg-cyan-950 text-cyan-300 border border-cyan-700 font-bold shadow-xs ring-1 ring-cyan-500/50'
+                        ? 'bg-cyan-400 text-slate-950 font-bold ring-2 ring-cyan-300/40'
                         : isPassed
-                        ? 'bg-[#101722] text-emerald-400 border border-emerald-900/50 hover:bg-[#152030]'
-                        : 'bg-[#0e131d] text-slate-400 border border-[#1a2332] hover:text-slate-300'
+                        ? 'bg-emerald-500/20 text-emerald-300 font-semibold'
+                        : 'bg-[#182130] text-slate-400'
                     }`}
                   >
-                    <span
-                      className={`w-4 h-4 rounded-full flex items-center justify-center text-[11px] transition-all shrink-0 ${
-                        isActive
-                          ? 'bg-cyan-400 text-slate-950 font-bold ring-2 ring-cyan-300/40'
-                          : isPassed
-                          ? 'bg-emerald-500/20 text-emerald-300 font-semibold'
-                          : 'bg-[#182130] text-slate-400'
-                      }`}
-                    >
-                      {s.step}
-                    </span>
-                    <span className="truncate">{s.label}</span>
-                  </button>
-                  {idx < JOURNEY_STEPS.length - 1 && (
-                    <span className={`text-[11px] shrink-0 transition-colors select-none ${isPassed ? 'text-emerald-400 font-semibold' : 'text-slate-600'}`}>➔</span>
-                  )}
-                </React.Fragment>
+                    {s.step}
+                  </span>
+                  <span className="truncate text-[10px] min-[360px]:text-[11px]">{s.label}</span>
+                </button>
               );
             })}
           </div>

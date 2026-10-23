@@ -131,7 +131,7 @@ export const SynthesisMatrix: React.FC<Props> = ({ synthesis, onNavigate }) => {
         </div>
 
         {/* Filter Segmented Buttons */}
-        <div className="flex items-center gap-1.5 overflow-x-auto pb-1 lg:pb-0 scrollbar-thin scroll-smooth overscroll-x-contain" role="group" aria-label="Filter domains">
+        <div className="flex flex-wrap items-center gap-1.5 pb-1 lg:pb-0" role="group" aria-label="Filter domains">
           <button
             type="button"
             aria-pressed={filterMode === 'all'}

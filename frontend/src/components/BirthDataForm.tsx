@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import type { BirthInput, Preset } from '../types';
 import {
   Star,
@@ -408,7 +408,7 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
                   <Bookmark className="w-3 h-3 text-cyan-400" />
                   Vault ({savedProfiles.length}):
                 </span>
-                <div className="flex items-center gap-1 overflow-x-auto max-w-[340px] sm:max-w-none scrollbar-thin">
+                <div className="flex items-center gap-1 flex-wrap">
                   {savedProfiles.map((sp) => (
                     <div
                       key={sp.id}
@@ -884,7 +884,7 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
         >
           {/* Controls: Categories & Search */}
           <div className="flex flex-col gap-2.5">
-            <div className="flex items-center gap-1.5 overflow-x-auto pb-1 scrollbar-thin">
+            <div className="flex items-center gap-1.5 flex-wrap pb-1">
               {CATEGORIES.map((cat) => {
                 const Icon = cat.icon;
                 const isSelected = selectedCategory === cat.id;
