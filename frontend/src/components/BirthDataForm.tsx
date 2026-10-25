@@ -219,6 +219,8 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
         ...prev,
         latitude: coords.latitude,
         longitude: coords.longitude,
+        city_name: coords.city || prev.city_name,
+        country_name: coords.country || prev.country_name,
       }));
       setCoordStatus('gps');
     } catch (err: any) {

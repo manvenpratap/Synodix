@@ -132,11 +132,82 @@ export async function determineCoordinates(city: string, country?: string): Prom
   return null;
 }
 
+export interface DeviceLocationResult {
+  latitude: number;
+  longitude: number;
+  city?: string;
+  country?: string;
+}
+
 /**
- * Requests device GPS coordinates via HTML5 Geolocation API.
+ * Reverse geocodes decimal coordinates (lat, lon) into a city and country.
+ * Prioritizes fast online Photon reverse geocoding, with instant offline
+ * nearest-neighbor fallback from curated WORLD_CITIES.
  */
-export function requestDeviceLocation(): Promise<{ latitude: number; longitude: number }> {
-  return new Promise((resolve, reject) => {
+export async function reverseGeocode(
+  latitude: number,
+  longitude: number
+): Promise<{ city: string; country: string } | null> {
+  // 1. Online reverse geocode via Photon if network is available
+  if (typeof navigator === 'undefined' || navigator.onLine !== false) {
+    try {
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 2000);
+      const url = `https://photon.komoot.io/reverse?lat=${encodeURIComponent(latitude)}&lon=${encodeURIComponent(longitude)}`;
+      const res = await fetch(url, { signal: controller.signal });
+      clearTimeout(timeoutId);
+
+      if (res.ok) {
+        const data = await res.json();
+        const feat = data.features?.[0];
+        const props = feat?.properties;
+        if (props) {
+          const city =
+            props.city ||
+            props.town ||
+            props.village ||
+            props.municipality ||
+            props.locality ||
+            props.county ||
+            props.name;
+          const country = props.country;
+          if (city && country) {
+            return { city, country };
+          }
+        }
+      }
+    } catch {
+      // Fall through to offline nearest-neighbor match
+    }
+  }
+
+  // 2. Offline nearest neighbor in WORLD_CITIES gazetteer
+  let closestCity: { city: string; country: string } | null = null;
+  let minDistanceSq = Infinity;
+
+  for (const c of WORLD_CITIES) {
+    const dLat = c.latitude - latitude;
+    const dLon = c.longitude - longitude;
+    const meanLatRad = ((c.latitude + latitude) / 2) * (Math.PI / 180);
+    const cosLat = Math.cos(meanLatRad);
+    const scaledDLon = dLon * cosLat;
+    const distSq = dLat * dLat + scaledDLon * scaledDLon;
+
+    if (distSq < minDistanceSq) {
+      minDistanceSq = distSq;
+      closestCity = { city: c.city, country: c.country };
+    }
+  }
+
+  return closestCity;
+}
+
+/**
+ * Requests device GPS coordinates via HTML5 Geolocation API,
+ * and automatically reverse geocodes them into city and country names.
+ */
+export async function requestDeviceLocation(): Promise<DeviceLocationResult> {
+  const coords = await new Promise<{ latitude: number; longitude: number }>((resolve, reject) => {
     if (!navigator.geolocation) {
       reject(new Error('Geolocation is not supported by your browser/device.'));
       return;
@@ -155,4 +226,15 @@ export function requestDeviceLocation(): Promise<{ latitude: number; longitude: 
       { timeout: 8000, enableHighAccuracy: true }
     );
   });
+
+  try {
+    const geo = await reverseGeocode(coords.latitude, coords.longitude);
+    return {
+      ...coords,
+      city: geo?.city,
+      country: geo?.country,
+    };
+  } catch {
+    return coords;
+  }
 }

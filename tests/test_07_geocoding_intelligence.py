@@ -130,3 +130,62 @@ def test_ui_city_autosuggest_and_coordinate_resolution():
         assert_no_critical_errors(page)
         save_screenshot(page, "geocoding_intelligence_verified")
         browser.close()
+
+
+def test_ui_detect_gps_populates_coordinates_city_and_country():
+    """Verify that clicking Detect GPS populates coordinates, city, and country."""
+    with sync_playwright() as pw:
+        browser = _launch_browser(pw)
+        # Grant geolocation permission and mock geolocation (San Francisco: 37.7749, -122.4194)
+        context = browser.new_context(
+            viewport={"width": 1280, "height": 900},
+            permissions=["geolocation"],
+            geolocation={"latitude": 37.7749, "longitude": -122.4194},
+        )
+        page = context.new_page()
+
+        page._console_errors = []
+        page.on("console", lambda msg: page._console_errors.append(msg.text) if msg.type == "error" else None)
+        page.on("pageerror", lambda err: page._console_errors.append(str(err)))
+
+        page.goto("http://127.0.0.1:5173", wait_until="domcontentloaded")
+        page.wait_for_selector("text=Synodix", timeout=10000)
+
+        city_input = page.locator("input#city_name")
+        country_input = page.locator("input#country_name")
+        lat_input = page.locator("input#latitude")
+        lon_input = page.locator("input#longitude")
+
+        # Clear inputs to prove GPS populates them
+        city_input.fill("")
+        country_input.fill("")
+        lat_input.fill("0")
+        lon_input.fill("0")
+
+        # Click "Detect GPS" button
+        gps_btn = page.locator("button[aria-label='Detect GPS coordinates']")
+        assert gps_btn.is_visible(), "Detect GPS button must be visible"
+        gps_btn.click()
+
+        # Wait for GPS detection and reverse geocoding to complete
+        page.wait_for_timeout(1000)
+
+        # Assert coordinates are populated
+        lat_val = float(lat_input.input_value())
+        lon_val = float(lon_input.input_value())
+        assert abs(lat_val - 37.7749) < 0.01, f"Latitude {lat_val} should match 37.7749"
+        assert abs(lon_val - (-122.4194)) < 0.01, f"Longitude {lon_val} should match -122.4194"
+
+        # Assert city and country are populated
+        city_val = city_input.input_value()
+        country_val = country_input.input_value()
+        assert city_val != "", "City must be populated by Detect GPS"
+        assert country_val != "", "Country must be populated by Detect GPS"
+        assert "San Francisco" in city_val or "Francisco" in city_val, f"Expected San Francisco, got {city_val}"
+        assert "United States" in country_val or "USA" in country_val, f"Expected United States/USA, got {country_val}"
+
+        # Assert zero critical console errors
+        assert_no_critical_errors(page)
+        save_screenshot(page, "detect_gps_city_country_verified")
+        browser.close()
+

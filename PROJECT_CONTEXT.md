@@ -1,7 +1,7 @@
 # Synodix: Project Context & Working Memory
 
-**Last Updated:** 2026-10-25 09:43:08
-**Version:** 2.24.0  
+**Last Updated:** 2026-10-25 09:53:57
+**Version:** 2.25.0  
 **Stack:** Python 3.12 (FastAPI, Swiss Ephemeris 2.10, Skyfield DE421) + TypeScript / React 19 / Vite / Tailwind CSS v4 / Framer Motion / Capacitor 8 (iOS & Android)  
 **Workspace:** `/Volumes/Study/Projects/Astrology` (symlinked as `/Volumes/Study/Astrology`)  
 **Git Remote:** `https://github.com/manvenpratap/Synodix.git`  
@@ -9,7 +9,13 @@
 ---
 
 ## 1. Current Status & Milestone
-- **Active Phase**: Impeccable Design Critique Resolutions & Craft Floor Hardening (Completed)
+- **Active Phase**: GPS Geodetic Reverse Geocoding for City & Country (Completed)
+- **GPS Reverse Geocoding & Automatic City/Country Resolution (v2.25.0)**:
+  - **Reverse Geocoding Intelligence (`geocoding.ts`)**: Implemented `reverseGeocode(latitude, longitude)` supporting fast online Photon reverse geocoding (`https://photon.komoot.io/reverse?lat=...&lon=...`) with instant offline nearest-neighbor fallback from the curated `WORLD_CITIES` gazetteer.
+  - **Automatic City & Country Auto-Population (`BirthDataForm.tsx`)**: Updated `handleDetectLocation()` so that clicking "Detect GPS" now automatically populates `city_name` and `country_name` alongside high-precision `latitude` and `longitude`, setting `coordStatus: 'gps'` and preserving draft state.
+  - **Automated Regression Suite (`test_07_geocoding_intelligence.py`)**: Added `test_ui_detect_gps_populates_coordinates_city_and_country` testing end-to-end device location emulation, asserting that coordinates, city ("San Francisco"), and country ("United States") populate accurately with zero critical console errors.
+  - **Workflow Health**: 100% CLEAN (Verified via `./pipeline.sh doctor`)
+  - **Test Invariants**: 19/19 regression suites passing via `./pipeline.sh test --summary` (48.18s)
 - **Impeccable Design Critique Resolutions & Craft Floor Hardening (v2.24.0)**:
   - **11px Quality Floor on All Mobile Nav & Functional Controls (`App.tsx`, `BirthDataForm.tsx`)**: Upgraded all 5 bottom navigation button labels (`Workbench`, `Traditions`, `Synthesis`, `Dossier`, `Evidence`) and coordinate hemisphere toggles to `text-[11px] font-medium tracking-tight`, eliminating all `[undersized-ui-text]` violations.
   - **Hemisphere Inversion Ambiguity in Decimal Coordinates (`BirthDataForm.tsx`)**: Replaced raw numeric entry with relative container inputs featuring interactive `°N`/`°S` and `°E`/`°W` toggle buttons. Allows instant 1-tap sign-flipping with unambiguous hemisphere status.
