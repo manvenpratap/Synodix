@@ -1,6 +1,6 @@
 # Synodix: Project Context & Working Memory
 
-**Last Updated:** 2026-10-25 13:04:22
+**Last Updated:** 2026-10-25 13:22:36
 **Version:** 2.31.0  
 **Stack:** Python 3.12 (FastAPI, Swiss Ephemeris 2.10, Skyfield DE421) + TypeScript / React 19 / Vite / Tailwind CSS v4 / Framer Motion / Capacitor 8 (iOS & Android)  
 **Workspace:** `/Volumes/Study/Projects/Astrology` (symlinked as `/Volumes/Study/Astrology`)  
@@ -21,8 +21,12 @@
     - **Strict WCAG 2.2 AA Reduced-Motion Compliant**: Targeted cancellation of kinetic scaling and translations (`transform: none !important`, `animation: none !important`) under `prefers-reduced-motion: reduce`, gracefully degrading to instantaneous opacity transitions.
   - **Motion Catalog Artifact (`tradition_calculators_motion_catalog.md`)**:
     - Published authoritative 6-pillar motion opportunities catalog documenting timing budgets, easing curves, hardware acceleration constraints, and accessibility contracts.
+  - **Unified Versioning Architecture & Stale Cache Purging (`version.ts`, `App.tsx`, `sw.js`, `main.tsx`)**:
+    - Centralized application version in `frontend/src/version.ts` as `APP_VERSION = '2.31.0'` and `APP_VERSION_LABEL = 'v2.31.0'`.
+    - Eliminated obsolete hardcoded `v2.15` in `App.tsx` desktop sidebar and synchronized the mobile navigation drawer with the exact authoritative version badge.
+    - Bumped Service Worker cache name to `synodix-v2.31.0` and automated immediate purging of `synodix-v2.30.0` and older cache stores on both client load and service worker activation, preventing stale browser tabs from showing historical versions (`v2.2` / `v2.15`).
   - **Automated Regression Invariant**:
-    - All 24 regression test suites passing cleanly via `./pipeline.sh test --summary` (58.83s).
+    - All 24 regression test suites passing cleanly via `./pipeline.sh test --summary` (60.39s).
   - **Workflow Health**: 100% CLEAN (Verified via `./pipeline.sh doctor`).
 - **Instant Local Proximity Reverse-Geocoding & Resilient GPS City Auto-Population (v2.30.0)**:
   - **Service Worker Cache-Busting & Zero Stale Asset Invalidation (`sw.js`, `main.tsx`, `index.html`)**:

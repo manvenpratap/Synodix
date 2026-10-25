@@ -339,10 +339,11 @@ def test_ui_city_selector_finds_jamshedpur_and_gurugram():
         assert abs(float(lon_input.input_value()) - 86.2030) < 0.1
 
         # 2. Test searching "Guru"
+        city_input.click()
         city_input.fill("")
-        city_input.press_sequentially("Guru", delay=40)
-        page.wait_for_timeout(400)
-
+        page.wait_for_timeout(100)
+        city_input.press_sequentially("Guru", delay=50)
+        dropdown.wait_for(state="visible", timeout=3000)
         assert dropdown.is_visible(), "Dropdown listbox should be visible for Guru"
         gurugram_opt = page.locator("div[role='option']:has-text('Gurugram')").first
         assert gurugram_opt.is_visible(), "Gurugram option must be present in suggestion dropdown"

@@ -36,6 +36,7 @@ import { ExplainerProvider } from './context/ExplainerContext';
 import { useExplainer } from './context/useExplainer';
 import { FeatureExplainerModal } from './components/FeatureExplainerModal';
 import { ExplainerTrigger } from './components/ExplainerTrigger';
+import { APP_VERSION_LABEL } from './version';
 
 const FALLBACK_PRESETS: Preset[] = TITANS_100_DATA as unknown as Preset[];
 
@@ -308,7 +309,7 @@ function AppContent() {
                   SYNODIX
                 </span>
                 <span className="px-1.5 py-0.2 rounded text-[11px] font-mono bg-cyan-950 text-cyan-300 border border-cyan-800 font-medium">
-                  v2.15
+                  {APP_VERSION_LABEL}
                 </span>
               </div>
               <p className="text-xs text-slate-400 font-mono mt-0.5 tracking-tight flex items-center gap-1">
@@ -553,7 +554,12 @@ function AppContent() {
                 <div className="w-7 h-7 rounded bg-cyan-950 border border-cyan-800 flex items-center justify-center font-bold text-xs text-cyan-300 font-mono">
                   SX
                 </div>
-                <span className="font-bold text-slate-100 text-sm">Synodix</span>
+                <div className="flex items-center gap-1.5">
+                  <span className="font-bold text-slate-100 text-sm">Synodix</span>
+                  <span className="px-1.5 py-0.2 rounded text-[10px] font-mono bg-cyan-950 text-cyan-300 border border-cyan-800 font-medium">
+                    {APP_VERSION_LABEL}
+                  </span>
+                </div>
               </div>
               <button
                 type="button"
