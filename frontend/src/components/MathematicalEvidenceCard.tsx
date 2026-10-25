@@ -11,7 +11,6 @@ import {
   BookOpen,
   Eye,
   Code,
-  X,
   AlertTriangle,
   Globe,
   Compass,
@@ -20,11 +19,10 @@ import {
 import { EVIDENCE_REPORT_MARKDOWN, EVIDENCE_STATS } from '../data/mathematicalEvidenceData';
 
 interface Props {
-  onClose?: () => void;
   onNavigate?: (screen: 'workbench' | 'traditions' | 'synthesis' | 'dossier' | 'verification' | 'evidence') => void;
 }
 
-export const MathematicalEvidenceCard: React.FC<Props> = ({ onClose, onNavigate }) => {
+export const MathematicalEvidenceCard: React.FC<Props> = ({ onNavigate }) => {
   const [viewMode, setViewMode] = useState<'interactive' | 'whitepaper' | 'markdown'>('interactive');
   const [activeTab, setActiveTab] = useState<'hypotheses' | 'debiasing' | 'pillars' | 'moat' | 'checklist'>('hypotheses');
   const [hypothesisFilter, setHypothesisFilter] = useState<'all' | 'enriched' | 'disproven' | 'significant'>('all');
@@ -304,17 +302,6 @@ export const MathematicalEvidenceCard: React.FC<Props> = ({ onClose, onNavigate 
               >
                 <Printer className="w-4 h-4" />
               </button>
-              {onClose && (
-                <button
-                  type="button"
-                  onClick={onClose}
-                  className="p-2 min-h-[44px] min-w-[44px] sm:min-h-[38px] sm:min-w-[38px] flex items-center justify-center ml-1 rounded-md bg-[#151c28] hover:bg-rose-900/60 text-slate-300 hover:text-rose-200 border border-[#1b2331] hover:border-rose-800 transition-colors cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-rose-400"
-                  data-tooltip="Close Evidence Panel"
-                  aria-label="Close Evidence Panel"
-                >
-                  <X className="w-4 h-4" />
-                </button>
-              )}
             </div>
           </div>
         </div>
@@ -1050,18 +1037,18 @@ export const MathematicalEvidenceCard: React.FC<Props> = ({ onClose, onNavigate 
       )}
 
       {/* Mobile & Tablet Epistemological Journey Navigation Bar */}
-      {(onNavigate || onClose) && (
+      {onNavigate && (
         <div className="p-4 sm:p-5 border-t border-[#1b2331] bg-[#090d14] flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2.5">
           <button
             type="button"
-            onClick={() => onNavigate ? onNavigate('dossier') : onClose?.()}
+            onClick={() => onNavigate('dossier')}
             className="inline-flex items-center justify-center gap-2 px-4 py-2.5 min-h-[44px] text-xs font-mono rounded-lg bg-[#101520] hover:bg-[#161d2c] text-slate-300 border border-[#1b2331] cursor-pointer transition-colors active:scale-[0.98]"
           >
             <span>← Corroboration Dossier</span>
           </button>
           <button
             type="button"
-            onClick={() => onNavigate ? onNavigate('workbench') : onClose?.()}
+            onClick={() => onNavigate('workbench')}
             className="inline-flex items-center justify-center gap-2 px-4 py-2.5 min-h-[44px] text-xs font-mono rounded-lg bg-cyan-700 hover:bg-cyan-600 text-white font-semibold cursor-pointer transition-all border border-cyan-500/80 shadow-xs active:scale-[0.98]"
           >
             <span>Return to Workbench (Recalibrate) ↺</span>

@@ -13,7 +13,6 @@ import {
   User,
   ChevronRight,
   ArrowRight,
-  Bookmark,
   Sun,
   Moon,
   Server,
@@ -328,13 +327,9 @@ function AppContent() {
                 <User className="w-3 h-3 text-cyan-400" />
                 Subject Dossier
               </span>
-              <button
-                type="button"
-                onClick={() => navigateTo('workbench')}
-                className="text-[11px] font-mono text-cyan-400 hover:text-cyan-300 cursor-pointer underline hover:text-cyan-200 transition-colors"
-              >
-                Switch
-              </button>
+              <span className="text-[11px] font-mono text-cyan-400/80 font-medium">
+                ACTIVE
+              </span>
             </div>
             <AnimatePresence mode="wait">
               <motion.div
@@ -769,34 +764,6 @@ function AppContent() {
                 {theme === 'dark' ? 'Light Mode' : 'Dark Mode'}
               </span>
             </button>
-
-            {currentScreen !== 'workbench' && (
-              <button
-                type="button"
-                onClick={() => navigateTo('workbench')}
-                className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 min-h-[34px] text-xs rounded border border-[#1b2331] bg-[#10151f] hover:bg-[#151c2a] text-slate-300 hover:text-cyan-300 transition-colors cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
-                data-tooltip="Return to Workbench to switch or calculate a profile"
-                aria-label="Switch Profile"
-              >
-                <Bookmark className="w-3.5 h-3.5 text-cyan-400" />
-                <span>Switch Profile</span>
-              </button>
-            )}
-
-            <button
-              type="button"
-              onClick={() => navigateTo('evidence')}
-              className={`hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 min-h-[34px] text-xs rounded border transition-colors cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 ${
-                currentScreen === 'evidence'
-                  ? 'bg-cyan-950 text-cyan-300 border-cyan-700'
-                  : 'bg-[#10151f] hover:bg-[#161d2a] text-cyan-400 border-cyan-800/60'
-              }`}
-              data-tooltip="View Mathematical & Empirical Evidence Whitepaper"
-              aria-label="View Mathematical & Empirical Evidence Whitepaper"
-            >
-              <FlaskConical className="w-3.5 h-3.5 text-cyan-400" />
-              <span>Whitepaper</span>
-            </button>
           </div>
         </header>
 
@@ -952,7 +919,7 @@ function AppContent() {
               {/* SCREEN 6: Mathematical Evidence & Whitepaper */}
               {currentScreen === 'evidence' && (
                 <div>
-                  <MathematicalEvidenceCard onClose={() => navigateTo('workbench')} onNavigate={navigateTo} />
+                  <MathematicalEvidenceCard onNavigate={navigateTo} />
                 </div>
               )}
             </motion.div>

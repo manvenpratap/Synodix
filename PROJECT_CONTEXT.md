@@ -1,7 +1,7 @@
 # Synodix: Project Context & Working Memory
 
-**Last Updated:** 2026-10-25 10:15:33
-**Version:** 2.26.0  
+**Last Updated:** 2026-10-25 11:02:17
+**Version:** 2.27.0  
 **Stack:** Python 3.12 (FastAPI, Swiss Ephemeris 2.10, Skyfield DE421) + TypeScript / React 19 / Vite / Tailwind CSS v4 / Framer Motion / Capacitor 8 (iOS & Android)  
 **Workspace:** `/Volumes/Study/Projects/Astrology` (symlinked as `/Volumes/Study/Astrology`)  
 **Git Remote:** `https://github.com/manvenpratap/Synodix.git`  
@@ -9,7 +9,13 @@
 ---
 
 ## 1. Current Status & Milestone
-- **Active Phase**: Comprehensive Playwright & Impeccable Design Audit & Anti-Pattern Eradication (Completed)
+- **Active Phase**: Elimination of Duplicate Navigation & Redundant Screen Entry Points (Completed)
+- **Elimination of Duplicate Navigation & Redundant Entry Points (v2.27.0)**:
+  - **Eradicated Redundant Header Screen Pills (`App.tsx`)**: Removed the ad-hoc `Whitepaper` and `Switch Profile` pill buttons from the top-right header actions bar. Screen routing belongs strictly in the primary navigation architectures (desktop sidebar and mobile bottom nav/stepper), freeing the header to function exclusively as a clean global utility bar (Feature Guide modal and Theme switch).
+  - **Eliminated Sidebar Subject Dossier In-Card Duplicate Link (`App.tsx`)**: Replaced the redundant "Switch" text button in the Subject Dossier card (which sat 20px above `NAV_ITEMS[0]` "Workbench") with an informative, non-interactive `ACTIVE` status badge.
+  - **Removed Modal-Like Dismiss Button from Full Screen (`MathematicalEvidenceCard.tsx`)**: Removed the `X` button and `onClose` callback from the Mathematical Evidence view, establishing it as an authoritative first-class workspace screen rather than a dismissable overlay.
+  - **Workflow Health**: 100% CLEAN (Verified via `./pipeline.sh doctor`)
+  - **Test Invariants**: 20/20 regression suites passing via `./pipeline.sh test --summary` (51.03s)
 - **Comprehensive Multi-Screen Impeccable & Playwright Audit (v2.26.0)**:
   - **Exhaustive Multi-Screen Automated Verification**: Built and executed automated Playwright + Impeccable scans navigating every single screen and feature:
     - *Screen 1 (Workbench)*: Custom manual form, geodetic reverse geocoding, 100 Titans catalog, Input Audit Card telemetry.
