@@ -692,7 +692,7 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
                         >
                           <div className="min-w-0">
                             <div className="font-medium text-slate-100 flex items-center gap-1.5 truncate">
-                              {isSelected && <span className="text-cyan-400 font-mono text-[10px]">▶</span>}
+                              {isSelected && <span className="text-cyan-400 font-mono text-[11px]">▶</span>}
                               <span>{s.city}</span>
                               {s.adminCode && (
                                 <span className="text-[11px] text-slate-400">({s.adminCode})</span>

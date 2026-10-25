@@ -274,7 +274,7 @@ export const ReadingView: React.FC<Props> = ({ data, subjectName, onNavigate }) 
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs font-mono">
               <div className="bg-[#090c12] p-3 rounded border border-[#1b2331]">
-                <span className="text-slate-500 text-[10px] block uppercase mb-1">Subject & Civil Coordinates</span>
+                <span className="text-slate-500 text-[11px] block uppercase mb-1">Subject & Civil Coordinates</span>
                 <div className="space-y-1 text-slate-300">
                   <div>Subject: <strong className="text-cyan-300">{inferences.subject_name}</strong></div>
                   <div>Birthplace: <strong className="text-slate-100">{inferences.birthplace}</strong></div>
@@ -287,7 +287,7 @@ export const ReadingView: React.FC<Props> = ({ data, subjectName, onNavigate }) 
 
               <div className="bg-[#090c12] p-3 rounded border border-[#1b2331]">
                 <div className="flex items-center justify-between mb-1">
-                  <span className="text-slate-500 text-[10px] uppercase">True Astronomical Solar Times</span>
+                  <span className="text-slate-500 text-[11px] uppercase">True Astronomical Solar Times</span>
                   <ExplainerTrigger id="time_normalization_eot" size="xs" variant="icon" />
                 </div>
                 <div className="space-y-1 text-slate-300">
@@ -300,7 +300,7 @@ export const ReadingView: React.FC<Props> = ({ data, subjectName, onNavigate }) 
 
               <div className="bg-[#090c12] p-3 rounded border border-[#1b2331]">
                 <div className="flex items-center justify-between mb-1">
-                  <span className="text-slate-500 text-[10px] uppercase">Boundary Proximity & Sensitivity</span>
+                  <span className="text-slate-500 text-[11px] uppercase">Boundary Proximity & Sensitivity</span>
                   <ExplainerTrigger id="cusp_proximity_audit" size="xs" variant="icon" />
                 </div>
                 <div className="space-y-1 text-slate-300">
@@ -337,7 +337,7 @@ export const ReadingView: React.FC<Props> = ({ data, subjectName, onNavigate }) 
                 <h3 className="text-sm font-semibold text-slate-100 uppercase tracking-wider font-mono">
                   2. Synthesized Astrological Inferences & Personality Profile
                 </h3>
-                <span className="px-2 py-0.5 rounded text-[10px] font-mono bg-cyan-950 text-cyan-300 border border-cyan-800 font-semibold uppercase">
+                <span className="px-2 py-0.5 rounded text-[11px] font-mono bg-cyan-950 text-cyan-300 border border-cyan-800 font-semibold uppercase">
                   9-System Deductive Profile
                 </span>
               </div>
@@ -350,7 +350,7 @@ export const ReadingView: React.FC<Props> = ({ data, subjectName, onNavigate }) 
             <div className="bg-gradient-to-r from-[#0d1624] via-[#09101b] to-[#080d15] p-4 sm:p-5 rounded-lg border border-cyan-900/50 relative overflow-hidden">
               <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 pb-3 border-b border-cyan-900/40">
                 <div>
-                  <span className="text-[10px] font-mono text-cyan-400 uppercase tracking-widest block mb-0.5">
+                  <span className="text-[11px] font-mono text-cyan-400 uppercase tracking-widest block mb-0.5">
                     Primary Civilizational Archetype
                   </span>
                   <h4 className="text-base sm:text-lg font-bold text-slate-100 tracking-wide font-sans">
@@ -387,10 +387,10 @@ export const ReadingView: React.FC<Props> = ({ data, subjectName, onNavigate }) 
                 <div className="bg-[#090d15] p-3 rounded-lg border border-[#1b2331] space-y-1.5 flex flex-col justify-between">
                   <div>
                     <div className="flex items-center justify-between mb-1">
-                      <span className="text-[10px] uppercase font-bold text-amber-400">Vedic Jyotisha</span>
-                      <span className="text-[9px] px-1.5 py-0.2 rounded bg-amber-950/60 text-amber-300 border border-amber-800/40">D1 / D9</span>
+                      <span className="text-[11px] uppercase font-bold text-amber-400">Vedic Jyotisha</span>
+                      <span className="text-[11px] px-1.5 py-0.5 rounded bg-amber-950/60 text-amber-300 border border-amber-800/40">D1 / D9</span>
                     </div>
-                    <p className="text-[11px] text-slate-300 font-sans leading-relaxed">
+                    <p className="text-xs text-slate-300 font-sans leading-relaxed">
                       {inferences.core_archetype.civilizational_pillars.vedic_core}
                     </p>
                   </div>
@@ -400,10 +400,10 @@ export const ReadingView: React.FC<Props> = ({ data, subjectName, onNavigate }) 
                 <div className="bg-[#090d15] p-3 rounded-lg border border-[#1b2331] space-y-1.5 flex flex-col justify-between">
                   <div>
                     <div className="flex items-center justify-between mb-1">
-                      <span className="text-[10px] uppercase font-bold text-cyan-400">Hellenistic Western</span>
-                      <span className="text-[9px] px-1.5 py-0.2 rounded bg-cyan-950/60 text-cyan-300 border border-cyan-800/40">Tropical</span>
+                      <span className="text-[11px] uppercase font-bold text-cyan-400">Hellenistic Western</span>
+                      <span className="text-[11px] px-1.5 py-0.5 rounded bg-cyan-950/60 text-cyan-300 border border-cyan-800/40">Tropical</span>
                     </div>
-                    <p className="text-[11px] text-slate-300 font-sans leading-relaxed">
+                    <p className="text-xs text-slate-300 font-sans leading-relaxed">
                       {inferences.core_archetype.civilizational_pillars.western_core}
                     </p>
                   </div>
@@ -413,10 +413,10 @@ export const ReadingView: React.FC<Props> = ({ data, subjectName, onNavigate }) 
                 <div className="bg-[#090d15] p-3 rounded-lg border border-[#1b2331] space-y-1.5 flex flex-col justify-between">
                   <div>
                     <div className="flex items-center justify-between mb-1">
-                      <span className="text-[10px] uppercase font-bold text-emerald-400">BaZi Four Pillars</span>
-                      <span className="text-[9px] px-1.5 py-0.2 rounded bg-emerald-950/60 text-emerald-300 border border-emerald-800/40">Wu Xing</span>
+                      <span className="text-[11px] uppercase font-bold text-emerald-400">BaZi Four Pillars</span>
+                      <span className="text-[11px] px-1.5 py-0.5 rounded bg-emerald-950/60 text-emerald-300 border border-emerald-800/40">Wu Xing</span>
                     </div>
-                    <p className="text-[11px] text-slate-300 font-sans leading-relaxed">
+                    <p className="text-xs text-slate-300 font-sans leading-relaxed">
                       {inferences.core_archetype.civilizational_pillars.bazi_core}
                     </p>
                   </div>
@@ -426,10 +426,10 @@ export const ReadingView: React.FC<Props> = ({ data, subjectName, onNavigate }) 
                 <div className="bg-[#090d15] p-3 rounded-lg border border-[#1b2331] space-y-1.5 flex flex-col justify-between">
                   <div>
                     <div className="flex items-center justify-between mb-1">
-                      <span className="text-[10px] uppercase font-bold text-purple-400">Zi Wei Dou Shu</span>
-                      <span className="text-[9px] px-1.5 py-0.2 rounded bg-purple-950/60 text-purple-300 border border-purple-800/40">Polar Stars</span>
+                      <span className="text-[11px] uppercase font-bold text-purple-400">Zi Wei Dou Shu</span>
+                      <span className="text-[11px] px-1.5 py-0.5 rounded bg-purple-950/60 text-purple-300 border border-purple-800/40">Polar Stars</span>
                     </div>
-                    <p className="text-[11px] text-slate-300 font-sans leading-relaxed">
+                    <p className="text-xs text-slate-300 font-sans leading-relaxed">
                       {inferences.core_archetype.civilizational_pillars.ziwei_core}
                     </p>
                   </div>
@@ -439,10 +439,10 @@ export const ReadingView: React.FC<Props> = ({ data, subjectName, onNavigate }) 
                 <div className="bg-[#090d15] p-3 rounded-lg border border-[#1b2331] space-y-1.5 flex flex-col justify-between sm:col-span-2 lg:col-span-1">
                   <div>
                     <div className="flex items-center justify-between mb-1">
-                      <span className="text-[10px] uppercase font-bold text-teal-400">Persian Almuten</span>
-                      <span className="text-[9px] px-1.5 py-0.2 rounded bg-teal-950/60 text-teal-300 border border-teal-800/40">Ibn Ezra</span>
+                      <span className="text-[11px] uppercase font-bold text-teal-400">Persian Almuten</span>
+                      <span className="text-[11px] px-1.5 py-0.5 rounded bg-teal-950/60 text-teal-300 border border-teal-800/40">Ibn Ezra</span>
                     </div>
-                    <p className="text-[11px] text-slate-300 font-sans leading-relaxed">
+                    <p className="text-xs text-slate-300 font-sans leading-relaxed">
                       {inferences.core_archetype.civilizational_pillars.persian_almuten}
                     </p>
                   </div>
@@ -462,20 +462,20 @@ export const ReadingView: React.FC<Props> = ({ data, subjectName, onNavigate }) 
                 </div>
                 <div className="space-y-2 text-xs text-slate-300 flex-1">
                   <div>
-                    <span className="text-[10px] font-mono text-slate-500 uppercase block">Mental Style</span>
+                    <span className="text-[11px] font-mono text-slate-400 uppercase block">Mental Style</span>
                     <p className="text-slate-200 mt-0.5">{inferences.cognitive_inferences.mental_style}</p>
                   </div>
                   <div>
-                    <span className="text-[10px] font-mono text-slate-500 uppercase block">Intellectual Strengths</span>
-                    <ul className="list-disc list-inside mt-1 space-y-1 text-slate-300 text-[11px]">
+                    <span className="text-[11px] font-mono text-slate-400 uppercase block">Intellectual Strengths</span>
+                    <ul className="list-disc list-inside mt-1 space-y-1 text-slate-300 text-xs">
                       {inferences.cognitive_inferences.intellectual_strengths.map((str, idx) => (
                         <li key={idx} className="leading-snug">{str}</li>
                       ))}
                     </ul>
                   </div>
                   <div className="pt-1 border-t border-[#1b2331]/80">
-                    <span className="text-[10px] font-mono text-slate-500 uppercase block">Rhetorical Style</span>
-                    <p className="text-slate-300 text-[11px] mt-0.5">{inferences.cognitive_inferences.communication_vector}</p>
+                    <span className="text-[11px] font-mono text-slate-400 uppercase block">Rhetorical Style</span>
+                    <p className="text-slate-300 text-xs mt-0.5">{inferences.cognitive_inferences.communication_vector}</p>
                   </div>
                 </div>
               </div>
@@ -490,16 +490,16 @@ export const ReadingView: React.FC<Props> = ({ data, subjectName, onNavigate }) 
                 </div>
                 <div className="space-y-2 text-xs text-slate-300 flex-1">
                   <div>
-                    <span className="text-[10px] font-mono text-slate-500 uppercase block">Career Vector</span>
+                    <span className="text-[11px] font-mono text-slate-400 uppercase block">Career Vector</span>
                     <p className="text-slate-200 mt-0.5">{inferences.vocational_inferences.career_vector}</p>
                   </div>
                   <div>
-                    <span className="text-[10px] font-mono text-slate-500 uppercase block">Leadership Posture</span>
+                    <span className="text-[11px] font-mono text-slate-400 uppercase block">Leadership Posture</span>
                     <p className="text-slate-300 mt-0.5">{inferences.vocational_inferences.leadership_style}</p>
                   </div>
                   <div className="pt-1 border-t border-[#1b2331]/80">
-                    <span className="text-[10px] font-mono text-slate-500 uppercase block">Primary Ambitions</span>
-                    <ul className="list-disc list-inside mt-1 space-y-1 text-slate-300 text-[11px]">
+                    <span className="text-[11px] font-mono text-slate-400 uppercase block">Primary Ambitions</span>
+                    <ul className="list-disc list-inside mt-1 space-y-1 text-slate-300 text-xs">
                       {inferences.vocational_inferences.key_drives.map((drv, idx) => (
                         <li key={idx} className="leading-snug">{drv}</li>
                       ))}
@@ -518,16 +518,16 @@ export const ReadingView: React.FC<Props> = ({ data, subjectName, onNavigate }) 
                 </div>
                 <div className="space-y-2 text-xs text-slate-300 flex-1">
                   <div>
-                    <span className="text-[10px] font-mono text-slate-500 uppercase block">Emotional Temperament</span>
+                    <span className="text-[11px] font-mono text-slate-400 uppercase block">Emotional Temperament</span>
                     <p className="text-slate-200 mt-0.5">{inferences.relational_inferences.emotional_temperament}</p>
                   </div>
                   <div>
-                    <span className="text-[10px] font-mono text-slate-500 uppercase block">Relational Dynamics</span>
+                    <span className="text-[11px] font-mono text-slate-400 uppercase block">Relational Dynamics</span>
                     <p className="text-slate-300 mt-0.5">{inferences.relational_inferences.relational_dynamics}</p>
                   </div>
                   <div className="pt-1 border-t border-[#1b2331]/80">
-                    <span className="text-[10px] font-mono text-slate-500 uppercase block">Growth Edges & Blind Spots</span>
-                    <ul className="list-disc list-inside mt-1 space-y-1 text-amber-300/90 text-[11px]">
+                    <span className="text-[11px] font-mono text-slate-400 uppercase block">Growth Edges & Blind Spots</span>
+                    <ul className="list-disc list-inside mt-1 space-y-1 text-amber-300/90 text-xs">
                       {inferences.karmic_inferences.growth_edges.map((edge, idx) => (
                         <li key={idx} className="leading-snug">{edge}</li>
                       ))}
@@ -547,12 +547,12 @@ export const ReadingView: React.FC<Props> = ({ data, subjectName, onNavigate }) 
                   </span>
                   <span className="text-slate-200">{inferences.timing_inferences.active_chapter_theme}</span>
                 </div>
-                <p className="text-[11px] text-slate-400 font-sans">
+                <p className="text-xs text-slate-400 font-sans">
                   {inferences.timing_inferences.strategic_advice}
                 </p>
               </div>
               <div className="shrink-0">
-                <span className="px-2.5 py-1 rounded bg-[#0d1624] text-emerald-400 border border-emerald-800/60 text-[10px] uppercase font-bold tracking-wider inline-flex items-center gap-1">
+                <span className="px-2.5 py-1 rounded bg-[#0d1624] text-emerald-400 border border-emerald-800/60 text-[11px] uppercase font-bold tracking-wider inline-flex items-center gap-1">
                   <CheckCircle2 className="w-3 h-3" />
                   Quad-Cycle Synchronized
                 </span>
@@ -574,7 +574,7 @@ export const ReadingView: React.FC<Props> = ({ data, subjectName, onNavigate }) 
 
               {/* Filter Pills */}
               <div className="flex items-center gap-1.5 font-mono text-xs flex-wrap">
-                <span className="text-[10px] text-slate-500 uppercase mr-1">Filter:</span>
+                <span className="text-[11px] text-slate-500 uppercase mr-1">Filter:</span>
                 <button
                   type="button"
                   onClick={() => setDomainFilter('all')}
@@ -655,7 +655,7 @@ export const ReadingView: React.FC<Props> = ({ data, subjectName, onNavigate }) 
                       <div className="flex items-center gap-2 font-mono text-xs self-start md:self-auto shrink-0">
                         {/* Grade */}
                         <span
-                          className={`px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider ${
+                          className={`px-2 py-0.5 rounded text-[11px] font-bold uppercase tracking-wider ${
                             isStrong
                               ? 'bg-emerald-950 text-emerald-300 border border-emerald-800'
                               : isDivergent
@@ -667,7 +667,7 @@ export const ReadingView: React.FC<Props> = ({ data, subjectName, onNavigate }) 
                         </span>
 
                         {/* Tri-Cluster Badges */}
-                        <div className="flex items-center gap-1 text-[10px]">
+                        <div className="flex items-center gap-1 text-[11px]">
                           <span
                             className={`px-1.5 py-0.5 rounded border ${
                               dom.evaluations.jyotisha.polarity === 'Positive'
@@ -800,7 +800,7 @@ export const ReadingView: React.FC<Props> = ({ data, subjectName, onNavigate }) 
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 font-mono text-xs">
               <div className="bg-[#090c12] p-3 rounded border border-[#1b2331]">
-                <span className="text-slate-500 text-[10px] block uppercase">Vimshottari Dasha</span>
+                <span className="text-slate-500 text-[11px] block uppercase">Vimshottari Dasha</span>
                 <span className="text-sm font-bold text-cyan-300 block mt-1">
                   {chronology.jyotisha_vimshottari.active_mahadasha || 'Active Period'}
                   {chronology.jyotisha_vimshottari.active_antardasha && (
@@ -810,13 +810,13 @@ export const ReadingView: React.FC<Props> = ({ data, subjectName, onNavigate }) 
                 <span className="text-[11px] text-slate-400 block mt-0.5">
                   Span: {chronology.jyotisha_vimshottari.span || 'Current'}
                 </span>
-                <span className="text-[10px] text-slate-500 block mt-1">
+                <span className="text-[11px] text-slate-500 block mt-1">
                   Focus: {chronology.jyotisha_vimshottari.activated_domain}
                 </span>
               </div>
 
               <div className="bg-[#090c12] p-3 rounded border border-[#1b2331]">
-                <span className="text-slate-500 text-[10px] block uppercase">BaZi Da Yun Pillar</span>
+                <span className="text-slate-500 text-[11px] block uppercase">BaZi Da Yun Pillar</span>
                 <span className="text-sm font-bold text-cyan-300 block mt-1">
                   {chronology.bazi_da_yun.active_pillar || 'Pillar'}
                 </span>
@@ -824,18 +824,18 @@ export const ReadingView: React.FC<Props> = ({ data, subjectName, onNavigate }) 
                   Ten God: {chronology.bazi_da_yun.ten_god || 'Direct Officer'}
                 </span>
                 {chronology.bazi_da_yun.current_liu_nian ? (
-                  <span className="text-[10px] text-emerald-400/90 block mt-1">
+                  <span className="text-[11px] text-emerald-400/90 block mt-1">
                     Annual: {chronology.bazi_da_yun.current_liu_nian.year} {chronology.bazi_da_yun.current_liu_nian.pillar} ({chronology.bazi_da_yun.current_liu_nian.ten_god})
                   </span>
                 ) : (
-                  <span className="text-[10px] text-slate-500 block mt-1">
+                  <span className="text-[11px] text-slate-500 block mt-1">
                     Start Age: {chronology.bazi_da_yun.start_age || 'Active'}
                   </span>
                 )}
               </div>
 
               <div className="bg-[#090c12] p-3 rounded border border-[#1b2331]">
-                <span className="text-slate-500 text-[10px] block uppercase">Hellenistic Profection</span>
+                <span className="text-slate-500 text-[11px] block uppercase">Hellenistic Profection</span>
                 <span className="text-sm font-bold text-cyan-300 block mt-1">
                   House {chronology.western_profection.activated_house}
                 </span>
@@ -843,18 +843,18 @@ export const ReadingView: React.FC<Props> = ({ data, subjectName, onNavigate }) 
                   Lord of Year: {chronology.western_profection.lord_of_year}
                 </span>
                 {chronology.western_profection.active_transits_summary && chronology.western_profection.active_transits_summary.length > 0 ? (
-                  <span className="text-[10px] text-blue-300/80 block mt-1 truncate" title={chronology.western_profection.active_transits_summary[0]}>
+                  <span className="text-[11px] text-blue-300/80 block mt-1 truncate" title={chronology.western_profection.active_transits_summary[0]}>
                     Transit: {chronology.western_profection.active_transits_summary[0]}
                   </span>
                 ) : (
-                  <span className="text-[10px] text-slate-500 block mt-1">
+                  <span className="text-[11px] text-slate-500 block mt-1">
                     Domain: {chronology.western_profection.activated_domain}
                   </span>
                 )}
               </div>
 
               <div className="bg-[#090c12] p-3 rounded border border-[#1b2331]">
-                <span className="text-slate-500 text-[10px] block uppercase">
+                <span className="text-slate-500 text-[11px] block uppercase">
                   {chronology.persian_firdaria ? "Zi Wei & Firdaria" : "Zi Wei Da Xian (Decade)"}
                 </span>
                 <span className="text-sm font-bold text-cyan-300 block mt-1">
@@ -864,11 +864,11 @@ export const ReadingView: React.FC<Props> = ({ data, subjectName, onNavigate }) 
                   Decadal Span: {chronology.ziwei_da_xian.age_span || 'Active'}
                 </span>
                 {chronology.persian_firdaria ? (
-                  <span className="text-[10px] text-purple-300/80 block mt-1">
+                  <span className="text-[11px] text-purple-300/80 block mt-1">
                     Firdaria: {chronology.persian_firdaria.active_ruler} ({chronology.persian_firdaria.years_span})
                   </span>
                 ) : (
-                  <span className="text-[10px] text-slate-500 block mt-1">
+                  <span className="text-[11px] text-slate-500 block mt-1">
                     10-Year Major Palace Shift
                   </span>
                 )}
@@ -903,14 +903,14 @@ export const ReadingView: React.FC<Props> = ({ data, subjectName, onNavigate }) 
                 <div key={ax.axis_id} className="bg-[#090c12] p-3 rounded border border-[#1b2331] space-y-1.5">
                   <div className="flex items-center justify-between font-mono">
                     <span className="font-semibold text-slate-100 text-xs">{ax.name}</span>
-                    <span className="text-[10px] text-cyan-400 px-1 py-0.2 rounded bg-cyan-950/60 border border-cyan-800/60">
+                    <span className="text-[11px] text-cyan-400 px-1 py-0.2 rounded bg-cyan-950/60 border border-cyan-800/60">
                       {ax.axis_id}
                     </span>
                   </div>
-                  <p className="text-slate-400 text-[11px] font-sans">
+                  <p className="text-slate-400 text-xs font-sans">
                     {ax.expression}
                   </p>
-                  <div className="pt-1.5 border-t border-[#1b2331]/80 text-[10px] font-mono space-y-0.5 text-slate-400">
+                  <div className="pt-1.5 border-t border-[#1b2331]/80 text-[11px] font-mono space-y-0.5 text-slate-400">
                     <div>Base: <span className="text-slate-300">{ax.computed_base}</span></div>
                     <div>Overlay: <span className="text-amber-300/90">{ax.symbolic_overlay}</span></div>
                   </div>
@@ -937,7 +937,7 @@ export const ReadingView: React.FC<Props> = ({ data, subjectName, onNavigate }) 
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 font-mono text-xs">
               <div className="bg-[#090c12] p-2.5 rounded border border-emerald-900/40 flex items-center justify-between">
                 <div>
-                  <span className="text-slate-500 text-[10px] block">Rahu–Ketu Invariant</span>
+                  <span className="text-slate-500 text-[11px] block">Rahu–Ketu Invariant</span>
                   <span className="text-xs font-bold text-emerald-400">Exact 180° Nodal Axis</span>
                 </div>
                 <Check className="w-4 h-4 text-emerald-400" />
@@ -945,7 +945,7 @@ export const ReadingView: React.FC<Props> = ({ data, subjectName, onNavigate }) 
 
               <div className="bg-[#090c12] p-2.5 rounded border border-emerald-900/40 flex items-center justify-between">
                 <div>
-                  <span className="text-slate-500 text-[10px] block">Vimshottari Cycle</span>
+                  <span className="text-slate-500 text-[11px] block">Vimshottari Cycle</span>
                   <span className="text-xs font-bold text-emerald-400">Exact 120-Year Sum</span>
                 </div>
                 <Check className="w-4 h-4 text-emerald-400" />
@@ -953,7 +953,7 @@ export const ReadingView: React.FC<Props> = ({ data, subjectName, onNavigate }) 
 
               <div className="bg-[#090c12] p-2.5 rounded border border-emerald-900/40 flex items-center justify-between">
                 <div>
-                  <span className="text-slate-500 text-[10px] block">Zi Wei Palaces</span>
+                  <span className="text-slate-500 text-[11px] block">Zi Wei Palaces</span>
                   <span className="text-xs font-bold text-emerald-400">12 Unique Branches</span>
                 </div>
                 <Check className="w-4 h-4 text-emerald-400" />
@@ -961,7 +961,7 @@ export const ReadingView: React.FC<Props> = ({ data, subjectName, onNavigate }) 
 
               <div className="bg-[#090c12] p-2.5 rounded border border-emerald-900/40 flex items-center justify-between">
                 <div>
-                  <span className="text-slate-500 text-[10px] block">Maya Long Count</span>
+                  <span className="text-slate-500 text-[11px] block">Maya Long Count</span>
                   <span className="text-xs font-bold text-emerald-400">Exact Round-Trip</span>
                 </div>
                 <Check className="w-4 h-4 text-emerald-400" />

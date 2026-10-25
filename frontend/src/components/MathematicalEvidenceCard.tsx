@@ -203,10 +203,10 @@ export const MathematicalEvidenceCard: React.FC<Props> = ({ onClose, onNavigate 
               <span className="px-2 py-0.5 text-[11px] font-mono rounded bg-[#151c28] text-slate-300 border border-[#222e42]">
                 N=100 Certified Titans (Rodden AA/A)
               </span>
-              <span className="px-2 py-0.5 text-[10px] font-mono rounded bg-[#151c28] text-slate-300 border border-[#222e42]">
+              <span className="px-2 py-0.5 text-[11px] font-mono rounded bg-[#151c28] text-slate-300 border border-[#222e42]">
                 N=1,000 Monte Carlo Controls
               </span>
-              <span className="px-2 py-0.5 text-[10px] font-mono rounded bg-emerald-950 text-emerald-300 border border-emerald-800/60 font-semibold">
+              <span className="px-2 py-0.5 text-[11px] font-mono rounded bg-emerald-950 text-emerald-300 border border-emerald-800/60 font-semibold">
                 p &lt; 0.0001
               </span>
             </div>
@@ -323,34 +323,34 @@ export const MathematicalEvidenceCard: React.FC<Props> = ({ onClose, onNavigate 
         <div className="grid grid-cols-2 sm:grid-cols-5 gap-2.5 mt-4">
           <div className="bg-[#090c12] border border-[#1b2331] rounded-lg p-2.5">
             <div className="flex items-center justify-between">
-              <span className="text-[10px] font-mono text-slate-500 uppercase tracking-wider">Titan Cohort</span>
+              <span className="text-[11px] font-mono text-slate-500 uppercase tracking-wider">Titan Cohort</span>
               <ExplainerTrigger id="rodden_titan_benchmark" size="xs" variant="icon" />
             </div>
             <span className="text-lg font-mono font-bold text-cyan-300">100 Records</span>
-            <span className="text-[10px] text-slate-400 block mt-0.5">100% Rodden Rating AA/A</span>
+            <span className="text-xs text-slate-400 block mt-0.5">100% Rodden Rating AA/A</span>
           </div>
           <div className="bg-[#090c12] border border-[#1b2331] rounded-lg p-2.5">
-            <span className="text-[10px] font-mono text-slate-500 uppercase tracking-wider block">Null Baseline</span>
+            <span className="text-[11px] font-mono text-slate-500 uppercase tracking-wider block">Null Baseline</span>
             <span className="text-lg font-mono font-bold text-slate-200">1,000 Controls</span>
-            <span className="text-[10px] text-slate-400 block mt-0.5">Epoch 1500–2000 Uniform</span>
+            <span className="text-xs text-slate-400 block mt-0.5">Epoch 1500–2000 Uniform</span>
           </div>
           <div className="bg-[#090c12] border border-[#1b2331] rounded-lg p-2.5">
-            <span className="text-[10px] font-mono text-slate-500 uppercase tracking-wider block">Domain Concordance</span>
+            <span className="text-[11px] font-mono text-slate-500 uppercase tracking-wider block">Domain Concordance</span>
             <span className="text-lg font-mono font-bold text-emerald-400">68.2%</span>
-            <span className="text-[10px] text-emerald-500/90 block mt-0.5 font-semibold">Exceeds Noise (p &lt; 10⁻⁴)</span>
+            <span className="text-xs font-mono text-emerald-400 block mt-0.5 font-semibold">Exceeds Noise (p &lt; 10⁻⁴)</span>
           </div>
           <div className="bg-[#090c12] border border-[#1b2331] rounded-lg p-2.5">
             <div className="flex items-center justify-between">
-              <span className="text-[10px] font-mono text-slate-500 uppercase tracking-wider">Divergence Rate</span>
+              <span className="text-[11px] font-mono text-slate-500 uppercase tracking-wider">Divergence Rate</span>
               <ExplainerTrigger id="honest_divergence_rate" size="xs" variant="icon" />
             </div>
             <span className="text-lg font-mono font-bold text-amber-400">31.8%</span>
-            <span className="text-[10px] text-slate-400 block mt-0.5">Honest Disagreements</span>
+            <span className="text-xs text-slate-400 block mt-0.5">Honest Disagreements</span>
           </div>
           <div className="bg-[#090c12] border border-[#1b2331] rounded-lg p-2.5">
-            <span className="text-[10px] font-mono text-slate-500 uppercase tracking-wider block">Orbital Constraint</span>
+            <span className="text-[11px] font-mono text-slate-500 uppercase tracking-wider block">Orbital Constraint</span>
             <span className="text-lg font-mono font-bold text-rose-300">28° Mercury</span>
-            <span className="text-[10px] text-slate-400 block mt-0.5">29.6% Baseline Debunked</span>
+            <span className="text-xs text-slate-400 block mt-0.5">29.6% Baseline Debunked</span>
           </div>
         </div>
       </div>
@@ -423,17 +423,17 @@ export const MathematicalEvidenceCard: React.FC<Props> = ({ onClose, onNavigate 
                       <div className="flex items-center justify-between">
                         <span className="font-bold text-cyan-400">{h.id}</span>
                         {h.status === 'significant' && (
-                          <span className="px-2 py-0.5 rounded text-[10px] bg-emerald-950 text-emerald-300 border border-emerald-700 font-bold">
+                          <span className="px-2 py-0.5 rounded text-[11px] bg-emerald-950 text-emerald-300 border border-emerald-700 font-bold">
                             ✓ EXTREMELY SIGNIFICANT
                           </span>
                         )}
                         {h.status === 'trend' && (
-                          <span className="px-2 py-0.5 rounded text-[10px] bg-amber-950 text-amber-300 border border-amber-700">
+                          <span className="px-2 py-0.5 rounded text-[11px] bg-amber-950 text-amber-300 border border-amber-700">
                             Enriched ({h.oddsRatio})
                           </span>
                         )}
                         {h.status === 'disproven' && (
-                          <span className="px-2 py-0.5 rounded text-[10px] bg-rose-950 text-rose-300 border border-rose-800">
+                          <span className="px-2 py-0.5 rounded text-[11px] bg-rose-950 text-rose-300 border border-rose-800">
                             ✕ DISPROVEN (Baseline)
                           </span>
                         )}
@@ -457,7 +457,7 @@ export const MathematicalEvidenceCard: React.FC<Props> = ({ onClose, onNavigate 
                 <div className="hidden sm:block overflow-x-auto">
                   <table className="w-full text-left text-xs font-mono border-collapse bg-[#0c1018]">
                     <thead>
-                      <tr className="border-b border-[#1b2331] text-[10px] text-slate-400 uppercase bg-[#080b11]">
+                      <tr className="border-b border-[#1b2331] text-[11px] text-slate-400 uppercase bg-[#080b11]">
                         <th className="py-2.5 px-3 sticky left-0 bg-[#080b11] z-10 border-r border-[#1b2331]">Test</th>
                         <th className="py-2.5 px-3">Formal Astrological Claim</th>
                         <th className="py-2.5 px-3">Cohort</th>
@@ -488,17 +488,17 @@ export const MathematicalEvidenceCard: React.FC<Props> = ({ onClose, onNavigate 
                           </td>
                           <td className="py-2.5 px-3 text-center">
                             {h.status === 'significant' && (
-                              <span className="px-2 py-0.5 rounded text-[10px] bg-emerald-950 text-emerald-300 border border-emerald-700 font-bold whitespace-nowrap">
+                              <span className="px-2 py-0.5 rounded text-[11px] bg-emerald-950 text-emerald-300 border border-emerald-700 font-bold whitespace-nowrap">
                                 ✓ EXTREMELY SIGNIFICANT
                               </span>
                             )}
                             {h.status === 'trend' && (
-                              <span className="px-2 py-0.5 rounded text-[10px] bg-amber-950 text-amber-300 border border-amber-700 whitespace-nowrap">
+                              <span className="px-2 py-0.5 rounded text-[11px] bg-amber-950 text-amber-300 border border-amber-700 whitespace-nowrap">
                                 Enriched ({h.oddsRatio})
                               </span>
                             )}
                             {h.status === 'disproven' && (
-                              <span className="px-2 py-0.5 rounded text-[10px] bg-rose-950 text-rose-300 border border-rose-800 whitespace-nowrap">
+                              <span className="px-2 py-0.5 rounded text-[11px] bg-rose-950 text-rose-300 border border-rose-800 whitespace-nowrap">
                                 ✕ DISPROVEN (Baseline)
                               </span>
                             )}
@@ -521,7 +521,7 @@ export const MathematicalEvidenceCard: React.FC<Props> = ({ onClose, onNavigate 
                     <AlertTriangle className="w-4 h-4 shrink-0" />
                     <h4>1. The Orbital Mechanics Trap</h4>
                   </div>
-                  <span className="text-[10px] font-mono text-slate-400 uppercase block">Budhaditya Yoga (Sun-Mercury Conjunction)</span>
+                  <span className="text-[11px] font-mono text-slate-400 uppercase block">Budhaditya Yoga (Sun-Mercury Conjunction)</span>
                   <p className="text-xs text-slate-300 leading-relaxed">
                     Popular astrologers cite Mercury conjunct Sun in Einstein, Jobs, and Obama as "proof of genius."
                     In celestial reality, Mercury's maximum elongation from the Sun is only <strong className="text-slate-100">28°</strong>. 
@@ -537,7 +537,7 @@ export const MathematicalEvidenceCard: React.FC<Props> = ({ onClose, onNavigate 
                     <Globe className="w-4 h-4 shrink-0" />
                     <h4>2. Short Ascension Geometry</h4>
                   </div>
-                  <span className="text-[10px] font-mono text-slate-400 uppercase block">Pisces Ascendant Scarcity</span>
+                  <span className="text-[11px] font-mono text-slate-400 uppercase block">Pisces Ascendant Scarcity</span>
                   <p className="text-xs text-slate-300 leading-relaxed">
                     Among 100 historical titans, only 1 had a Pisces Ascendant (p = 0.0080).
                     Naive researchers claim Pisces rising people "cannot become famous." 
@@ -553,7 +553,7 @@ export const MathematicalEvidenceCard: React.FC<Props> = ({ onClose, onNavigate 
                     <Compass className="w-4 h-4 shrink-0" />
                     <h4>3. Dusthana Lord Probability</h4>
                   </div>
-                  <span className="text-[10px] font-mono text-slate-400 uppercase block">Viparita Raja Yoga (Crisis to Triumph)</span>
+                  <span className="text-[11px] font-mono text-slate-400 uppercase block">Viparita Raja Yoga (Crisis to Triumph)</span>
                   <p className="text-xs text-slate-300 leading-relaxed">
                     Astrologers claim Viparita Raja Yoga (lords of 6, 8, 12 placed in houses 6, 8, 12) is the secret of resilience in titans.
                     Mathematical probability of at least one lord placed in these houses is:
@@ -576,7 +576,7 @@ export const MathematicalEvidenceCard: React.FC<Props> = ({ onClose, onNavigate 
                 <div className="bg-[#0a0e17] p-4 rounded-lg border border-cyan-800/60 space-y-3">
                   <div className="flex items-center justify-between border-b border-[#1b2331] pb-2">
                     <span className="text-xs font-mono font-bold text-cyan-400">PILLAR 1</span>
-                    <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-950 text-emerald-300 border border-emerald-700">
+                    <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-emerald-950 text-emerald-300 border border-emerald-700">
                       p &lt; 0.0001
                     </span>
                   </div>
@@ -606,7 +606,7 @@ export const MathematicalEvidenceCard: React.FC<Props> = ({ onClose, onNavigate 
                 <div className="bg-[#0a0e17] p-4 rounded-lg border border-cyan-800/60 space-y-3">
                   <div className="flex items-center justify-between border-b border-[#1b2331] pb-2">
                     <span className="text-xs font-mono font-bold text-cyan-400">PILLAR 2</span>
-                    <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-amber-950 text-amber-300 border border-amber-700">
+                    <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-amber-950 text-amber-300 border border-amber-700">
                       Odds Ratio 2.0x
                     </span>
                   </div>
@@ -636,7 +636,7 @@ export const MathematicalEvidenceCard: React.FC<Props> = ({ onClose, onNavigate 
                 <div className="bg-[#0a0e17] p-4 rounded-lg border border-cyan-800/60 space-y-3">
                   <div className="flex items-center justify-between border-b border-[#1b2331] pb-2">
                     <span className="text-xs font-mono font-bold text-cyan-400">PILLAR 3</span>
-                    <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-cyan-950 text-cyan-300 border border-cyan-700">
+                    <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-cyan-950 text-cyan-300 border border-cyan-700">
                       87.5% Timing Alignment
                     </span>
                   </div>
@@ -707,11 +707,11 @@ export const MathematicalEvidenceCard: React.FC<Props> = ({ onClose, onNavigate 
                     <div key={i} className="p-3 rounded-lg bg-[#080a0f] border border-[#1b2331] space-y-2">
                       <div className="font-semibold text-slate-200 text-xs font-mono">{row.dim}</div>
                       <div className="text-[11px] p-2 rounded bg-[#100808] border border-rose-950/80 text-rose-300">
-                        <span className="font-semibold block text-[10px] text-rose-400 uppercase font-mono mb-0.5">Consumer Apps:</span>
+                        <span className="font-semibold block text-[11px] text-rose-400 uppercase font-mono mb-0.5">Consumer Apps:</span>
                         {row.typical}
                       </div>
                       <div className="text-[11px] p-2 rounded bg-[#081510] border border-emerald-950/80 text-emerald-300">
-                        <span className="font-semibold block text-[10px] text-emerald-400 uppercase font-mono mb-0.5">Your Nine-Culture Engine:</span>
+                        <span className="font-semibold block text-[11px] text-emerald-400 uppercase font-mono mb-0.5">Your Nine-Culture Engine:</span>
                         {row.engine}
                       </div>
                     </div>
@@ -722,7 +722,7 @@ export const MathematicalEvidenceCard: React.FC<Props> = ({ onClose, onNavigate 
                 <div className="hidden sm:block overflow-x-auto">
                   <table className="w-full text-left font-mono border-collapse bg-[#0c1018]">
                     <thead>
-                      <tr className="border-b border-[#1b2331] text-[10px] text-slate-400 uppercase bg-[#080b11]">
+                      <tr className="border-b border-[#1b2331] text-[11px] text-slate-400 uppercase bg-[#080b11]">
                         <th className="py-2.5 px-3">Competitive Dimension</th>
                         <th className="py-2.5 px-3 text-rose-400">Typical Consumer Apps (Co-Star, The Pattern)</th>
                         <th className="py-2.5 px-3 text-cyan-300 font-bold">Your Six-Culture Engine</th>

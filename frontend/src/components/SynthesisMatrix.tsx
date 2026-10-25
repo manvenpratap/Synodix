@@ -74,7 +74,7 @@ export const SynthesisMatrix: React.FC<Props> = ({ synthesis, onNavigate }) => {
         <div className="flex items-center gap-3 bg-[#080a0f] px-3 py-2 rounded-md border border-[#1b2331]">
           <div className="text-right">
             <div className="flex items-center justify-end gap-1.5">
-              <span className="text-[10px] text-slate-400 uppercase tracking-wider font-mono block">
+              <span className="text-[11px] text-slate-400 uppercase tracking-wider font-mono block">
                 Divergence Rate
               </span>
               <ExplainerTrigger id="honest_divergence_rate" size="xs" variant="icon" />
@@ -101,11 +101,11 @@ export const SynthesisMatrix: React.FC<Props> = ({ synthesis, onNavigate }) => {
           <div className="flex items-center gap-3">
             <div className="w-12 h-12 rounded-lg bg-[#0d121c] border border-[#1e2738] flex flex-col items-center justify-center font-mono">
               <span className="text-sm font-bold text-cyan-300">{consensusPercent}%</span>
-              <span className="text-[8px] text-slate-500 uppercase">INDEX</span>
+              <span className="text-[11px] text-slate-500 uppercase font-semibold">INDEX</span>
             </div>
             <div>
               <div className="flex flex-wrap items-center gap-2">
-                <span className="text-[10px] font-mono uppercase tracking-wider text-slate-400 font-semibold block">
+                <span className="text-[11px] font-mono uppercase tracking-wider text-slate-400 font-semibold block">
                   GLOBAL TRIANGULATION CONSENSUS
                 </span>
                 <ExplainerTrigger id="three_cluster_consensus" label="Triangulation Math" variant="badge" />
@@ -174,7 +174,7 @@ export const SynthesisMatrix: React.FC<Props> = ({ synthesis, onNavigate }) => {
       {/* Life Domains Table */}
       <div className="space-y-2.5">
         <div className="flex items-center justify-between">
-          <span className="text-[10px] font-mono font-semibold text-slate-400 uppercase tracking-wider block">
+          <span className="text-[11px] font-mono font-semibold text-slate-400 uppercase tracking-wider block">
             Life Domains ({filteredDomains.length} Shown)
           </span>
           <button
@@ -214,7 +214,7 @@ export const SynthesisMatrix: React.FC<Props> = ({ synthesis, onNavigate }) => {
                       <h5 className="text-xs font-semibold text-slate-200">
                         {dom.domain_name}
                       </h5>
-                      <p className="text-[11px] text-slate-400 mt-0.5 line-clamp-1">
+                      <p className="text-xs text-slate-400 mt-0.5 line-clamp-1">
                         {dom.consensus_theme}
                       </p>
                     </div>
@@ -230,13 +230,13 @@ export const SynthesisMatrix: React.FC<Props> = ({ synthesis, onNavigate }) => {
                       <span title="Sinic">S: <span className={getPolarityColor(dom.evaluations.sinic.polarity)}>{dom.evaluations.sinic.polarity[0]}</span></span>
                     </div>
 
-                    <span className={`px-2 py-0.5 text-[10px] font-mono font-semibold rounded border uppercase tracking-wider ${getGradeBadge(dom.grade)}`}>
+                    <span className={`px-2 py-1 text-[11px] font-mono font-semibold rounded border uppercase tracking-wider ${getGradeBadge(dom.grade)}`}>
                       {dom.grade}
                     </span>
 
                     <span
                       aria-hidden="true"
-                      className={`text-slate-500 font-mono text-[10px] inline-block transition-transform duration-200 ${
+                      className={`text-slate-500 font-mono text-[11px] inline-block transition-transform duration-200 ${
                         isExpanded ? 'rotate-180' : 'rotate-0'
                       }`}
                     >
@@ -256,11 +256,11 @@ export const SynthesisMatrix: React.FC<Props> = ({ synthesis, onNavigate }) => {
                       <div className="p-2.5 rounded bg-[#0d1118] border border-[#1b2331]">
                         <div className="flex justify-between items-center mb-1">
                           <span className="font-medium text-amber-400 font-mono text-[11px]">Jyotisha</span>
-                          <span className={`text-[10px] font-mono ${getPolarityColor(dom.evaluations.jyotisha.polarity)}`}>
+                          <span className={`text-[11px] font-mono ${getPolarityColor(dom.evaluations.jyotisha.polarity)}`}>
                             {dom.evaluations.jyotisha.polarity} ({dom.evaluations.jyotisha.prominence})
                           </span>
                         </div>
-                        <p className="text-slate-300 font-mono text-[10px] leading-relaxed">
+                        <p className="text-slate-300 font-mono text-xs leading-relaxed">
                           {dom.evaluations.jyotisha.basis}
                         </p>
                       </div>
@@ -269,11 +269,11 @@ export const SynthesisMatrix: React.FC<Props> = ({ synthesis, onNavigate }) => {
                       <div className="p-2.5 rounded bg-[#0d1118] border border-[#1b2331]">
                         <div className="flex justify-between items-center mb-1">
                           <span className="font-medium text-blue-400 font-mono text-[11px]">Western</span>
-                          <span className={`text-[10px] font-mono ${getPolarityColor(dom.evaluations.western.polarity)}`}>
+                          <span className={`text-[11px] font-mono ${getPolarityColor(dom.evaluations.western.polarity)}`}>
                             {dom.evaluations.western.polarity} ({dom.evaluations.western.prominence})
                           </span>
                         </div>
-                        <p className="text-slate-300 font-mono text-[10px] leading-relaxed">
+                        <p className="text-slate-300 font-mono text-xs leading-relaxed">
                           {dom.evaluations.western.basis}
                         </p>
                       </div>
@@ -282,11 +282,11 @@ export const SynthesisMatrix: React.FC<Props> = ({ synthesis, onNavigate }) => {
                       <div className="p-2.5 rounded bg-[#0d1118] border border-[#1b2331]">
                         <div className="flex justify-between items-center mb-1">
                           <span className="font-medium text-emerald-400 font-mono text-[11px]">Sinic (BaZi + Zi Wei)</span>
-                          <span className={`text-[10px] font-mono ${getPolarityColor(dom.evaluations.sinic.polarity)}`}>
+                          <span className={`text-[11px] font-mono ${getPolarityColor(dom.evaluations.sinic.polarity)}`}>
                             {dom.evaluations.sinic.polarity} ({dom.evaluations.sinic.prominence})
                           </span>
                         </div>
-                        <p className="text-slate-300 font-mono text-[10px] leading-relaxed">
+                        <p className="text-slate-300 font-mono text-xs leading-relaxed">
                           {dom.evaluations.sinic.basis}
                         </p>
                       </div>
@@ -301,7 +301,7 @@ export const SynthesisMatrix: React.FC<Props> = ({ synthesis, onNavigate }) => {
 
       {/* Temperament Axes */}
       <div className="pt-3 border-t border-[#1b2331]">
-        <span className="text-[10px] font-mono font-semibold text-slate-400 uppercase tracking-wider block mb-2.5">
+        <span className="text-[11px] font-mono font-semibold text-slate-400 uppercase tracking-wider block mb-2.5">
           Temperament Axes (Computed Base + Attributed Overlays)
         </span>
 
@@ -314,7 +314,7 @@ export const SynthesisMatrix: React.FC<Props> = ({ synthesis, onNavigate }) => {
               <p className="text-xs text-cyan-300 font-medium mt-1">
                 {ax.expression}
               </p>
-              <div className="mt-2 text-[10px] space-y-0.5 text-slate-400 pt-1.5 border-t border-[#1b2331] font-mono">
+              <div className="mt-2 text-[11px] space-y-0.5 text-slate-400 pt-1.5 border-t border-[#1b2331] font-mono">
                 <div><span className="text-slate-500">Base:</span> {ax.computed_base}</div>
                 <div><span className="text-purple-400">Overlay:</span> {ax.symbolic_overlay}</div>
               </div>
@@ -325,70 +325,70 @@ export const SynthesisMatrix: React.FC<Props> = ({ synthesis, onNavigate }) => {
 
       {/* Chronological Overlap */}
       <div className="pt-3 border-t border-[#1b2331]">
-        <span className="text-[10px] font-mono font-semibold text-slate-400 uppercase tracking-wider block mb-2.5">
+        <span className="text-[11px] font-mono font-semibold text-slate-400 uppercase tracking-wider block mb-2.5">
           Unified Chronology Alignment (Active Timing Cycles)
         </span>
 
         <div className="p-3.5 rounded-md bg-[#080a0f] border border-[#1b2331]">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5 text-xs">
             <div className="p-2.5 rounded bg-[#0d1118] border border-[#1b2331]">
-              <span className="text-[10px] font-mono uppercase text-amber-400 font-semibold block">Vimshottari Dasha</span>
+              <span className="text-[11px] font-mono uppercase text-amber-400 font-semibold block">Vimshottari Dasha</span>
               <p className="font-semibold text-slate-200 mt-0.5">
                 {synthesis.chronology.jyotisha_vimshottari.active_mahadasha}
                 {synthesis.chronology.jyotisha_vimshottari.active_antardasha && (
                   <span className="text-amber-300/80 font-normal"> / {synthesis.chronology.jyotisha_vimshottari.active_antardasha}</span>
                 )}
               </p>
-              <span className="text-[10px] text-slate-400 font-mono block">
+              <span className="text-[11px] text-slate-400 font-mono block">
                 {synthesis.chronology.jyotisha_vimshottari.span}
               </span>
-              <span className="text-[10px] text-slate-500 font-mono block mt-1">
+              <span className="text-[11px] text-slate-500 font-mono block mt-1">
                 Focus: {synthesis.chronology.jyotisha_vimshottari.activated_domain}
               </span>
             </div>
 
             <div className="p-2.5 rounded bg-[#0d1118] border border-[#1b2331]">
-              <span className="text-[10px] font-mono uppercase text-emerald-400 font-semibold block">BaZi Da Yun</span>
+              <span className="text-[11px] font-mono uppercase text-emerald-400 font-semibold block">BaZi Da Yun</span>
               <p className="font-semibold text-slate-200 mt-0.5 font-serif">
                 {synthesis.chronology.bazi_da_yun.active_pillar}
               </p>
-              <span className="text-[10px] text-slate-400 font-mono block">
+              <span className="text-[11px] text-slate-400 font-mono block">
                 {synthesis.chronology.bazi_da_yun.ten_god} (From age {synthesis.chronology.bazi_da_yun.start_age})
               </span>
               {synthesis.chronology.bazi_da_yun.current_liu_nian && (
-                <span className="text-[10px] text-emerald-400/80 font-mono block mt-1">
+                <span className="text-[11px] text-emerald-400/80 font-mono block mt-1">
                   Annual: {synthesis.chronology.bazi_da_yun.current_liu_nian.year} {synthesis.chronology.bazi_da_yun.current_liu_nian.pillar} ({synthesis.chronology.bazi_da_yun.current_liu_nian.ten_god})
                 </span>
               )}
             </div>
 
             <div className="p-2.5 rounded bg-[#0d1118] border border-[#1b2331]">
-              <span className="text-[10px] font-mono uppercase text-blue-400 font-semibold block">Annual Profection</span>
+              <span className="text-[11px] font-mono uppercase text-blue-400 font-semibold block">Annual Profection</span>
               <p className="font-semibold text-slate-200 mt-0.5">
                 House {synthesis.chronology.western_profection.activated_house}
               </p>
-              <span className="text-[10px] text-slate-400 font-mono block">
+              <span className="text-[11px] text-slate-400 font-mono block">
                 Lord of Year: {synthesis.chronology.western_profection.lord_of_year}
               </span>
               {synthesis.chronology.western_profection.active_transits_summary && synthesis.chronology.western_profection.active_transits_summary.length > 0 && (
-                <span className="text-[10px] text-blue-300/80 font-mono block mt-1 truncate" title={synthesis.chronology.western_profection.active_transits_summary[0]}>
+                <span className="text-[11px] text-blue-300/80 font-mono block mt-1 truncate" title={synthesis.chronology.western_profection.active_transits_summary[0]}>
                   Transit: {synthesis.chronology.western_profection.active_transits_summary[0]}
                 </span>
               )}
             </div>
 
             <div className="p-2.5 rounded bg-[#0d1118] border border-[#1b2331]">
-              <span className="text-[10px] font-mono uppercase text-purple-400 font-semibold block">
+              <span className="text-[11px] font-mono uppercase text-purple-400 font-semibold block">
                 {synthesis.chronology.persian_firdaria ? "Zi Wei & Firdaria" : "Zi Wei Decadal"}
               </span>
               <p className="font-semibold text-slate-200 mt-0.5">
                 {synthesis.chronology.ziwei_da_xian.active_palace}
               </p>
-              <span className="text-[10px] text-slate-400 font-mono block">
+              <span className="text-[11px] text-slate-400 font-mono block">
                 Age: {synthesis.chronology.ziwei_da_xian.age_span}
               </span>
               {synthesis.chronology.persian_firdaria && (
-                <span className="text-[10px] text-purple-300/80 font-mono block mt-1">
+                <span className="text-[11px] text-purple-300/80 font-mono block mt-1">
                   Firdaria: {synthesis.chronology.persian_firdaria.active_ruler} ({synthesis.chronology.persian_firdaria.years_span})
                 </span>
               )}

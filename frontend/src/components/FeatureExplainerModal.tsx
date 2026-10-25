@@ -72,7 +72,7 @@ export const FeatureExplainerModal: React.FC = () => {
               {activeExplainer ? <BookOpen className="w-4 h-4" /> : <Layers className="w-4 h-4" />}
             </div>
             <div>
-              <span className="text-[10px] font-mono uppercase tracking-wider text-cyan-400 font-semibold block">
+              <span className="text-[11px] font-mono uppercase tracking-wider text-cyan-400 font-semibold block">
                 Synodix Astronomical & Cultural Knowledge Guide
               </span>
               <h2
@@ -156,7 +156,7 @@ export const FeatureExplainerModal: React.FC = () => {
                 <ul className="space-y-2.5">
                   {activeExplainer.howItWorks.map((step, idx) => (
                     <li key={idx} className="flex items-start gap-2.5 text-xs text-slate-300 leading-relaxed font-sans">
-                      <span className="w-5 h-5 rounded-full bg-[#131c2d] text-cyan-400 font-mono text-[10px] font-bold flex items-center justify-center shrink-0 border border-[#223049] mt-0.5">
+                      <span className="w-5 h-5 rounded-full bg-[#131c2d] text-cyan-400 font-mono text-[11px] font-bold flex items-center justify-center shrink-0 border border-[#223049] mt-0.5">
                         {idx + 1}
                       </span>
                       <span>{step}</span>
@@ -175,7 +175,7 @@ export const FeatureExplainerModal: React.FC = () => {
                         Astronomical Formula & Algorithm
                       </h3>
                     </div>
-                    <span className="text-[10px] font-mono text-slate-400">Deterministic JPL / Ephemeris Code</span>
+                    <span className="text-[11px] font-mono text-slate-400">Deterministic JPL / Ephemeris Code</span>
                   </div>
                   <div className="p-3 rounded-lg bg-[#0a0f19] border border-[#1f2c42] font-mono text-xs text-cyan-200 overflow-x-auto selection:bg-cyan-900 selection:text-white">
                     <code>{activeExplainer.astronomicalFormula}</code>
@@ -201,7 +201,7 @@ export const FeatureExplainerModal: React.FC = () => {
                 <div className="flex items-center gap-2">
                   <History className="w-4 h-4 text-purple-400 shrink-0" />
                   <div>
-                    <span className="text-[10px] font-mono text-slate-400 uppercase tracking-wider block">
+                    <span className="text-[11px] font-mono text-slate-400 uppercase tracking-wider block">
                       Historical Skywatcher Lineage & Foundational Texts
                     </span>
                     <span className="text-xs font-medium text-slate-200 font-sans mt-0.5 block">
@@ -273,11 +273,11 @@ export const FeatureExplainerModal: React.FC = () => {
                   >
                     <div>
                       <div className="flex items-center justify-between mb-1.5">
-                        <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#101827] text-cyan-300 border border-[#1f2b40]">
+                        <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-[#101827] text-cyan-300 border border-[#1f2b40]">
                           {item.category}
                         </span>
                         {item.culturalTradition && (
-                          <span className="text-[10px] font-mono text-amber-300">
+                          <span className="text-[11px] font-mono text-amber-300">
                             {item.culturalTradition}
                           </span>
                         )}
@@ -285,12 +285,12 @@ export const FeatureExplainerModal: React.FC = () => {
                       <h4 className="text-xs sm:text-sm font-semibold text-slate-100 group-hover:text-cyan-200 transition-colors">
                         {item.title}
                       </h4>
-                      <p className="text-[11px] text-slate-400 line-clamp-2 mt-1 font-sans">
+                      <p className="text-xs text-slate-400 line-clamp-2 mt-1 font-sans">
                         {item.shortSummary}
                       </p>
                     </div>
 
-                    <div className="mt-3 pt-2 border-t border-white/5 flex items-center justify-between text-[10px] font-mono text-slate-400 group-hover:text-cyan-300">
+                    <div className="mt-3 pt-2 border-t border-white/5 flex items-center justify-between text-[11px] font-mono text-slate-400 group-hover:text-cyan-300">
                       <span>Click for deep explanation</span>
                       <ChevronRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
                     </div>

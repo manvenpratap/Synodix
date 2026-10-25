@@ -69,7 +69,7 @@ export const NorthIndianChart: React.FC<VedicChartProps> = ({ jyotisha }) => {
         <span className="text-[11px] font-mono uppercase tracking-wider text-amber-400 font-semibold">
           North Indian Kundaḷī (Lagna: {jyotisha.lagna.sign})
         </span>
-        <span className="text-[10px] font-mono text-slate-400">Fixed House Geometry</span>
+        <span className="text-[11px] font-mono text-slate-400">Fixed House Geometry</span>
       </div>
 
       <svg
@@ -170,7 +170,7 @@ export const NorthIndianChart: React.FC<VedicChartProps> = ({ jyotisha }) => {
         })}
       </svg>
 
-      <div className="mt-2 text-[10px] text-slate-400 font-mono text-center">
+      <div className="mt-2 text-[11px] text-slate-400 font-mono text-center">
         Numbers indicate Zodiac Signs (1=Aries ... 12=Pisces) • H1-H4-H7-H10 highlighted Kendras
       </div>
     </div>
@@ -251,7 +251,7 @@ export const WesternCircularWheel: React.FC<WesternWheelProps> = ({ western }) =
         <span className="text-[11px] font-mono uppercase tracking-wider text-cyan-400 font-semibold">
           Western 360° Circular Wheel (Asc: {western.ascendant.sign} {western.ascendant.degree}°)
         </span>
-        <span className="text-[10px] font-mono text-slate-400">Whole Sign Houses</span>
+        <span className="text-[11px] font-mono text-slate-400">Whole Sign Houses</span>
       </div>
 
       <svg
@@ -397,7 +397,7 @@ export const WesternCircularWheel: React.FC<WesternWheelProps> = ({ western }) =
         </text>
       </svg>
 
-      <div className="mt-2 text-[10px] text-slate-400 font-mono text-center">
+      <div className="mt-2 text-[11px] text-slate-400 font-mono text-center">
         Aspect Chords: <span className="text-emerald-400">Green = Trine/Sextile</span> • <span className="text-rose-400">Rose = Square/Opposition</span> • <span className="text-amber-400">® = Retrograde</span>
       </div>
     </div>
@@ -443,7 +443,7 @@ export const BaZiElementPentagram: React.FC<BaZiPentagramProps> = ({ bazi }) => 
         <span className="text-[11px] font-mono uppercase tracking-wider text-emerald-400 font-semibold">
           Wu Xing Five Elements Flow (五行生克)
         </span>
-        <span className="text-[10px] font-mono text-slate-400">Day Master: {bazi.day_master?.stem} ({dayMasterElement})</span>
+        <span className="text-[11px] font-mono text-slate-400">Day Master: {bazi.day_master?.stem} ({dayMasterElement})</span>
       </div>
 
       <svg
@@ -561,7 +561,7 @@ export const BaZiElementPentagram: React.FC<BaZiPentagramProps> = ({ bazi }) => 
         })}
       </svg>
 
-      <div className="mt-2 text-[10px] text-slate-400 font-mono text-center flex items-center justify-center gap-3">
+      <div className="mt-2 text-[11px] text-slate-400 font-mono text-center flex items-center justify-center gap-3">
         <span><strong className="text-emerald-400">Green Ring:</strong> Generating (生)</span>
         <span>•</span>
         <span><strong className="text-rose-400">Dashed Star:</strong> Controlling (克)</span>
@@ -613,18 +613,18 @@ export const ZiWeiPalaceGrid: React.FC<ZiWeiGridProps> = ({ ziwei }) => {
             {p.is_ming && <span className="text-[9px] px-1 rounded bg-cyan-950 text-cyan-300 border border-cyan-800">MING</span>}
             {p.is_shen && <span className="text-[9px] px-1 rounded bg-purple-950 text-purple-300 border border-purple-800">SHEN</span>}
           </span>
-          <span className="text-[10px] font-mono text-slate-500">{p.branch}</span>
+          <span className="text-[11px] font-mono text-slate-500">{p.branch}</span>
         </div>
 
         {/* Major Stars */}
         <div className="my-1 space-y-0.5">
           {p.stars.length === 0 ? (
-            <span className="text-[10px] text-slate-400 block">Empty Palace</span>
+            <span className="text-[11px] text-slate-400 block">Empty Palace</span>
           ) : (
             p.stars.slice(0, 3).map((s: string, sIdx: number) => (
               <div
                 key={sIdx}
-                className={`text-[10px] font-mono truncate ${
+                className={`text-[11px] font-mono truncate ${
                   s.startsWith('[A]')
                     ? 'text-cyan-400/90'
                     : 'text-amber-300 font-semibold'
@@ -650,7 +650,7 @@ export const ZiWeiPalaceGrid: React.FC<ZiWeiGridProps> = ({ ziwei }) => {
         <span className="text-[11px] font-mono uppercase tracking-wider text-purple-400 font-semibold">
           Zi Wei Dou Shu 12-Palace Heavenly Grid (紫微斗数命盘)
         </span>
-        <span className="text-[10px] font-mono text-slate-400">Bureau: {ziwei.five_elements_bureau?.name}</span>
+        <span className="text-[11px] font-mono text-slate-400">Bureau: {ziwei.five_elements_bureau?.name}</span>
       </div>
 
       <div className="w-full max-w-[560px] grid grid-cols-4 grid-rows-4 gap-1.5 min-h-[380px]">
@@ -664,7 +664,7 @@ export const ZiWeiPalaceGrid: React.FC<ZiWeiGridProps> = ({ ziwei }) => {
         {getPalaceCell('辰')}
         <div className="col-span-2 row-span-2 bg-[#090d15] rounded border border-purple-900/40 p-3 flex flex-col justify-between text-center select-none">
           <div className="border-b border-[#1b2331] pb-1.5">
-            <span className="text-[10px] font-mono uppercase text-purple-400 block tracking-wider font-semibold">
+            <span className="text-[11px] font-mono uppercase text-purple-400 block tracking-wider font-semibold">
               Central Courtyard (中天命盘)
             </span>
             <h4 className="text-sm font-bold text-slate-100 mt-0.5">
@@ -678,7 +678,7 @@ export const ZiWeiPalaceGrid: React.FC<ZiWeiGridProps> = ({ ziwei }) => {
               Lunar: Year {ziwei.lunar_date?.year}, M{ziwei.lunar_date?.month}, D{ziwei.lunar_date?.day}
             </div>
             {ziwei.ming_star_quality && (
-              <div className="text-[10px] text-amber-300">
+              <div className="text-[11px] text-amber-300">
                 Evaluation: {ziwei.ming_star_quality.assessment}
               </div>
             )}
@@ -701,7 +701,7 @@ export const ZiWeiPalaceGrid: React.FC<ZiWeiGridProps> = ({ ziwei }) => {
         {getPalaceCell('亥')}
       </div>
 
-      <div className="mt-2 text-[10px] text-slate-400 font-mono text-center">
+      <div className="mt-2 text-[11px] text-slate-400 font-mono text-center">
         Traditional clockwise layout • <span className="text-cyan-300">Cyan Border = Ming (Life)</span> • <span className="text-purple-300">Purple Border = Shen (Body)</span>
       </div>
     </div>
@@ -725,7 +725,7 @@ export const AlmutenDignityBarChart: React.FC<AlmutenBarProps> = ({ persian }) =
         <span className="text-[11px] font-mono uppercase tracking-wider text-amber-400 font-semibold">
           Almuten Figuris Point Distribution (Weighted Scoring)
         </span>
-        <span className="text-[10px] font-mono text-slate-400">Victor: {persian.almuten_figuris?.victor}</span>
+        <span className="text-[11px] font-mono text-slate-400">Victor: {persian.almuten_figuris?.victor}</span>
       </div>
 
       <div className="space-y-2">
@@ -742,7 +742,7 @@ export const AlmutenDignityBarChart: React.FC<AlmutenBarProps> = ({ persian }) =
                 </span>
                 <span className="tabular-nums font-bold text-slate-200">
                   {item.total_score} pts{' '}
-                  <span className="text-[10px] font-normal text-slate-500">
+                  <span className="text-[11px] font-normal text-slate-500">
                     ({item.essential_dignity} ess + {item.accidental_dignity} acc)
                   </span>
                 </span>
@@ -766,7 +766,7 @@ export const AlmutenDignityBarChart: React.FC<AlmutenBarProps> = ({ persian }) =
         })}
       </div>
 
-      <div className="mt-3 text-[10px] text-slate-400 font-mono flex items-center justify-center gap-4">
+      <div className="mt-3 text-[11px] text-slate-400 font-mono flex items-center justify-center gap-4">
         <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-sm bg-cyan-500"></span> Essential Dignity (Domicile, Exaltation, Bounds)</span>
         <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-sm bg-amber-500"></span> Accidental Dignity (House Angularity & Day Ruler)</span>
       </div>
@@ -800,7 +800,7 @@ export const MaramatakaLunarDial: React.FC<MaramatakaDialProps> = ({ maramataka 
         <span className="text-[11px] font-mono uppercase tracking-wider text-emerald-400 font-semibold">
           Maramataka 30-Night Oceanic Dial
         </span>
-        <span className="text-[10px] font-mono text-slate-400">Night #{currentNightNum}</span>
+        <span className="text-[11px] font-mono text-slate-400">Night #{currentNightNum}</span>
       </div>
 
       <svg
@@ -850,7 +850,7 @@ export const MaramatakaLunarDial: React.FC<MaramatakaDialProps> = ({ maramataka 
         <circle cx={pointerX} cy={pointerY} r={6} fill="#10b981" stroke="#f1f5f9" strokeWidth="1.5" />
       </svg>
 
-      <div className="mt-2 text-[10px] text-slate-400 font-mono text-center">
+      <div className="mt-2 text-[11px] text-slate-400 font-mono text-center">
         {maramataka.oceanic_archetype?.optimal_action} • {night.elongation_degrees}° Elongation
       </div>
     </div>
@@ -910,7 +910,7 @@ export const DomainConsensusRadar: React.FC<RadarProps> = ({ synthesis }) => {
         <span className="text-[11px] font-mono uppercase tracking-wider text-purple-400 font-semibold">
           9-Domain Consensus Radar Matrix (D1–D9)
         </span>
-        <span className="text-[10px] font-mono text-slate-400">
+        <span className="text-[11px] font-mono text-slate-400">
           Divergence: <strong className="text-rose-400">{synthesis.divergence_metrics?.divergence_rate_percent}%</strong>
         </span>
       </div>
@@ -1015,7 +1015,7 @@ export const DomainConsensusRadar: React.FC<RadarProps> = ({ synthesis }) => {
         })}
       </svg>
 
-      <div className="mt-2 text-[10px] text-slate-400 font-mono text-center flex items-center justify-center gap-3 flex-wrap">
+      <div className="mt-2 text-[11px] text-slate-400 font-mono text-center flex items-center justify-center gap-3 flex-wrap">
         <span className="flex items-center gap-1">
           <span className="w-2 h-2 rounded-full bg-emerald-400"></span> Strong (3/3)
         </span>
@@ -1069,7 +1069,7 @@ export const TibetanMewaGrid: React.FC<TibetanMewaProps> = ({ tibetan }) => {
         <span className="text-[11px] font-mono uppercase tracking-wider text-rose-400 font-semibold">
           Tibetan Mewa Magic Square & Parkha (Luoshu Matrix)
         </span>
-        <span className="text-[10px] font-mono text-slate-400">Sum = 15</span>
+        <span className="text-[11px] font-mono text-slate-400">Sum = 15</span>
       </div>
 
       <div className="w-full max-w-[340px] grid grid-cols-3 gap-2">
@@ -1092,7 +1092,7 @@ export const TibetanMewaGrid: React.FC<TibetanMewaProps> = ({ tibetan }) => {
                 >
                   {num}
                 </span>
-                <span className="text-[10px] font-mono font-medium text-slate-300 mt-1">
+                <span className="text-[11px] font-mono font-medium text-slate-300 mt-1">
                   {meta?.element}
                 </span>
                 {isNatal && (
@@ -1149,7 +1149,7 @@ export const EgyptianDecanStarClock: React.FC<EgyptianClockProps> = ({ egyptian 
         <span className="text-[11px] font-mono uppercase tracking-wider text-cyan-400 font-semibold">
           Ra's Cosmic Barque 36-Decan Star Clock
         </span>
-        <span className="text-[10px] font-mono text-slate-400">10° Segments</span>
+        <span className="text-[11px] font-mono text-slate-400">10° Segments</span>
       </div>
 
       <svg
@@ -1203,7 +1203,7 @@ export const EgyptianDecanStarClock: React.FC<EgyptianClockProps> = ({ egyptian 
         )}
       </svg>
 
-      <div className="mt-2 text-[10px] text-slate-400 font-mono text-center">
+      <div className="mt-2 text-[11px] text-slate-400 font-mono text-center">
         Ascendant Decan: <span className="text-amber-300">{guardians.ascendant_decan?.decan_name}</span> (Deity: {guardians.ascendant_decan?.presiding_deity})
       </div>
     </div>
@@ -1231,7 +1231,7 @@ export const MayaCalendarCompass: React.FC<MayanCompassProps> = ({ mayan }) => {
         <span className="text-[11px] font-mono uppercase tracking-wider text-cyan-400 font-semibold">
           Maya Calendar Round Interlocking Wheels
         </span>
-        <span className="text-[10px] font-mono text-slate-400">52-Year Cycle</span>
+        <span className="text-[11px] font-mono text-slate-400">52-Year Cycle</span>
       </div>
 
       <svg
@@ -1292,7 +1292,7 @@ export const MayaCalendarCompass: React.FC<MayanCompassProps> = ({ mayan }) => {
         </text>
       </svg>
 
-      <div className="mt-2 text-[10px] text-slate-400 font-mono text-center">
+      <div className="mt-2 text-[11px] text-slate-400 font-mono text-center">
         Long Count: <span className="text-cyan-300">{mayan.long_count?.formatted}</span> • Kin #{mayan.long_count?.total_kin}
       </div>
     </div>

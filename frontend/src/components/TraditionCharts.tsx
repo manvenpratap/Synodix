@@ -332,7 +332,7 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
             <p className="text-xs text-slate-300 mt-1 font-sans hidden sm:block">
               {currentTheme.lineage}
             </p>
-            <p className="text-[11px] text-slate-400 italic mt-0.5 font-serif hidden sm:block">
+            <p className="text-xs text-slate-400 italic mt-0.5 font-serif hidden sm:block">
               &ldquo;{currentTheme.motto}&rdquo;
             </p>
           </div>

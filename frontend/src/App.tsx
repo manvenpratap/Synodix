@@ -834,7 +834,7 @@ function AppContent() {
                   }`}
                 >
                   <span
-                    className={`w-4 h-4 rounded-full flex items-center justify-center text-[10px] transition-all shrink-0 ${
+                    className={`w-4 h-4 rounded-full flex items-center justify-center text-[11px] transition-all shrink-0 ${
                       isActive
                         ? 'bg-cyan-400 text-slate-950 font-bold ring-2 ring-cyan-300/40'
                         : isPassed
@@ -844,7 +844,7 @@ function AppContent() {
                   >
                     {s.step}
                   </span>
-                  <span className="truncate text-[10px] min-[360px]:text-[11px]">{s.label}</span>
+                  <span className="truncate text-[11px] font-medium">{s.label}</span>
                 </button>
               );
             })}

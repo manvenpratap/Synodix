@@ -12,7 +12,7 @@ export const VerificationCard: React.FC<Props> = ({ report }) => {
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-center justify-between pb-3.5 border-b border-[#1b2331] gap-3">
         <div>
-          <span className="text-[10px] font-mono uppercase tracking-wider text-emerald-400 font-semibold block">
+          <span className="text-[11px] font-mono uppercase tracking-wider text-emerald-400 font-semibold block">
             03 / Dual-Engine Astronomical Verification & Invariants
           </span>
           <div className="flex flex-wrap items-center gap-2 mt-0.5">
@@ -41,10 +41,10 @@ export const VerificationCard: React.FC<Props> = ({ report }) => {
           >
             <div>
               <div className="flex items-center justify-between">
-                <span className="text-[10px] text-cyan-400 font-mono font-semibold uppercase tracking-wider">
+                <span className="text-[11px] text-cyan-400 font-mono font-semibold uppercase tracking-wider">
                   {inv.system}
                 </span>
-                <span className={`px-1.5 py-0.2 text-[10px] font-mono font-bold rounded ${
+                <span className={`px-2 py-0.5 text-[11px] font-mono font-bold rounded ${
                   inv.status === 'PASS'
                     ? 'bg-emerald-950 text-emerald-300 border border-emerald-800/80'
                     : 'bg-amber-950 text-amber-300 border border-amber-800/80'
@@ -56,7 +56,7 @@ export const VerificationCard: React.FC<Props> = ({ report }) => {
                 {inv.description}
               </p>
             </div>
-            <div className="mt-2 text-[10px] font-mono text-slate-400 pt-1.5 border-t border-[#1b2331] flex justify-between">
+            <div className="mt-2 text-[11px] font-mono text-slate-400 pt-1.5 border-t border-[#1b2331] flex justify-between">
               <span>Actual:</span>
               <span className="text-emerald-300 font-semibold">{inv.actual}</span>
             </div>
@@ -86,7 +86,7 @@ export const VerificationCard: React.FC<Props> = ({ report }) => {
         >
           <table className="w-full text-left text-xs border-collapse">
             <thead>
-              <tr className="bg-[#080a0f] text-slate-400 border-b border-[#1b2331] font-mono uppercase tracking-wider text-[10px]">
+              <tr className="bg-[#080a0f] text-slate-400 border-b border-[#1b2331] font-mono uppercase tracking-wider text-[11px]">
                 <th className="py-2 px-3 sticky left-0 bg-[#080a0f] z-10 border-r border-[#1b2331]">Celestial Body</th>
                 <th className="py-2 px-3 font-mono">SwissEph (deg)</th>
                 <th className="py-2 px-3 font-mono">Skyfield JPL (deg)</th>
@@ -114,7 +114,7 @@ export const VerificationCard: React.FC<Props> = ({ report }) => {
                     {diff.difference_arcsec?.toFixed(2)}″
                   </td>
                   <td className="py-2 px-3 text-right">
-                    <span className="px-1.5 py-0.5 rounded text-[10px] font-mono font-semibold bg-emerald-950 text-emerald-400 border border-emerald-800/80">
+                    <span className="px-2 py-0.5 rounded text-[11px] font-mono font-semibold bg-emerald-950 text-emerald-400 border border-emerald-800/80">
                       PASS
                     </span>
                   </td>

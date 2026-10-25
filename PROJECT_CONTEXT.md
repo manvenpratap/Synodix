@@ -1,7 +1,7 @@
 # Synodix: Project Context & Working Memory
 
-**Last Updated:** 2026-10-25 09:53:57
-**Version:** 2.25.0  
+**Last Updated:** 2026-10-25 10:15:33
+**Version:** 2.26.0  
 **Stack:** Python 3.12 (FastAPI, Swiss Ephemeris 2.10, Skyfield DE421) + TypeScript / React 19 / Vite / Tailwind CSS v4 / Framer Motion / Capacitor 8 (iOS & Android)  
 **Workspace:** `/Volumes/Study/Projects/Astrology` (symlinked as `/Volumes/Study/Astrology`)  
 **Git Remote:** `https://github.com/manvenpratap/Synodix.git`  
@@ -9,7 +9,22 @@
 ---
 
 ## 1. Current Status & Milestone
-- **Active Phase**: GPS Geodetic Reverse Geocoding for City & Country (Completed)
+- **Active Phase**: Comprehensive Playwright & Impeccable Design Audit & Anti-Pattern Eradication (Completed)
+- **Comprehensive Multi-Screen Impeccable & Playwright Audit (v2.26.0)**:
+  - **Exhaustive Multi-Screen Automated Verification**: Built and executed automated Playwright + Impeccable scans navigating every single screen and feature:
+    - *Screen 1 (Workbench)*: Custom manual form, geodetic reverse geocoding, 100 Titans catalog, Input Audit Card telemetry.
+    - *Screen 2 (Traditions)*: All 9 deterministic cultural visualizers (Jyotisha, Hellenistic Western, BaZi, Zi Wei Dou Shu, Maya Tzolk'in/Haab', Tibetan Elemental, Persian Almuten Figuris, Egyptian Decans, Māori Maramataka).
+    - *Screen 3 (Synthesis)*: Domain consensus radar matrix, 9-domain evaluation cards, temperament axes, unified active timing chronology.
+    - *Screen 4 (Dossier)*: Executive reading view, metadata badges, 5 planetary anchors, 3-column analytical triad, active timing decadal chapter.
+    - *Screen 5 (Evidence)*: 100 Titans vs 1,000 controls double-cohort study, Monte Carlo scorecard, empirical hypotheses, academic citation matrix.
+    - *Multi-Theme & Multi-Viewport*: Validated across Deep Space Dark Mode, Solar Day Light Mode, Desktop (1280x800), and Mobile (390x844).
+  - **Zero Anti-Pattern Hardening**:
+    - *Strict 11px Quality Floor*: Upgraded all UI controls, tabular monospace labels, status pills, and legend badges to $\ge 11\text{px}$ (`text-[11px] font-mono`) across `SynthesisMatrix`, `FeatureExplainerModal`, `TraditionCharts`, `MathematicalEvidenceCard`, `VerificationCard`, and `ChartWheelVisualizer`.
+    - *Strict 12px Narrative Floor*: Upgraded all descriptive paragraphs, epigraph quotes, and evaluation bases to $\ge 12\text{px}$ (`text-xs font-mono` / `text-xs leading-relaxed`), eliminating all `[tiny-text]` violations.
+    - *Zero Console Errors*: Asserted `assert_no_critical_errors(page)` across all page transitions and modal flows.
+  - **Automated Regression Suite (`test_10_impeccable_quality_audit.py`)**: Added dedicated automated typography and multi-screen visual audit asserting 0 undersized interactive text, 0 tiny body paragraphs, and 0 console errors.
+  - **Workflow Health**: 100% CLEAN (Verified via `./pipeline.sh doctor`)
+  - **Test Invariants**: 20/20 regression suites passing via `./pipeline.sh test --summary` (54.51s)
 - **GPS Reverse Geocoding & Automatic City/Country Resolution (v2.25.0)**:
   - **Reverse Geocoding Intelligence (`geocoding.ts`)**: Implemented `reverseGeocode(latitude, longitude)` supporting fast online Photon reverse geocoding (`https://photon.komoot.io/reverse?lat=...&lon=...`) with instant offline nearest-neighbor fallback from the curated `WORLD_CITIES` gazetteer.
   - **Automatic City & Country Auto-Population (`BirthDataForm.tsx`)**: Updated `handleDetectLocation()` so that clicking "Detect GPS" now automatically populates `city_name` and `country_name` alongside high-precision `latitude` and `longitude`, setting `coordStatus: 'gps'` and preserving draft state.
