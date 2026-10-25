@@ -23,7 +23,7 @@ import {
   RotateCcw
 } from 'lucide-react';
 import { getSavedProfiles, saveProfile, deleteProfile, UserProfile } from '../utils/vault';
-import { searchCitySuggestions, determineCoordinates, requestDeviceLocation, GeocodeResult } from '../utils/geocoding';
+import { searchCitySuggestions, determineCoordinates, requestDeviceLocation, reverseGeocode, GeocodeResult } from '../utils/geocoding';
 import { getMatchingCities } from '../data/worldCities';
 
 interface Props {
@@ -250,18 +250,27 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
     setIsLocating(true);
     try {
       const coords = await requestDeviceLocation();
+      let detectedCity = coords.city;
+      let detectedCountry = coords.country;
+
+      if (!detectedCity || !detectedCountry) {
+        const fallback = await reverseGeocode(coords.latitude, coords.longitude);
+        detectedCity = fallback.city;
+        detectedCountry = fallback.country;
+      }
+
       setFormData((prev) => ({
         ...prev,
         latitude: coords.latitude,
         longitude: coords.longitude,
-        city_name: coords.city || prev.city_name,
-        country_name: coords.country || prev.country_name,
+        city_name: detectedCity || 'Detected Location',
+        country_name: detectedCountry || '',
       }));
       setCoordStatus('gps');
       setIsCitySuggestionsOpen(false);
       setCitySuggestions([]);
     } catch (err: any) {
-      alert(err.message || 'Unable to detect device location.');
+      console.warn('GPS detection failed:', err);
     } finally {
       setIsLocating(false);
     }

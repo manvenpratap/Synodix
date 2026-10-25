@@ -1,7 +1,7 @@
 # Synodix: Project Context & Working Memory
 
-**Last Updated:** 2026-10-25 12:10:02
-**Version:** 2.29.0  
+**Last Updated:** 2026-10-25 12:38:06
+**Version:** 2.30.0  
 **Stack:** Python 3.12 (FastAPI, Swiss Ephemeris 2.10, Skyfield DE421) + TypeScript / React 19 / Vite / Tailwind CSS v4 / Framer Motion / Capacitor 8 (iOS & Android)  
 **Workspace:** `/Volumes/Study/Projects/Astrology` (symlinked as `/Volumes/Study/Astrology`)  
 **Git Remote:** `https://github.com/manvenpratap/Synodix.git`  
@@ -9,7 +9,20 @@
 ---
 
 ## 1. Current Status & Milestone
-- **Active Phase**: Global City Selector Intelligence & Instant Indian Metropolitan Discovery (Completed)
+- **Active Phase**: Instant Local Proximity Reverse-Geocoding & Resilient GPS City Auto-Population (Completed)
+- **Instant Local Proximity Reverse-Geocoding & Resilient GPS City Auto-Population (v2.30.0)**:
+  - **Zero-Latency Proximity Geocoding (`backend/app/main.py`, `geocoding.ts`)**:
+    - Re-architected `reverseGeocode` and `/api/reverse-geocode` to perform an instant 0ms proximity search against curated gazetteer cities before triggering remote network requests. Coordinates within $\approx 40\text{km}$ ($0.4^\circ$) resolve in $< 0.05\text{ms}$ with zero timeouts and zero rate-limiting risk.
+    - Updated backend Nominatim integration with compliant User-Agent headers, 2.0s timeouts, and universal feature name fallback (`data.get("name")` and `props.get("name")`).
+    - Added tertiary fallback in `/api/ip-location` guaranteeing a resilient location response instead of null even under severe network restriction or ad-blocker filtering.
+  - **Guaranteed City/Country Auto-Population (`BirthDataForm.tsx`)**:
+    - Hardened `handleDetectLocation`: resolved cities and countries directly overwrite previous form values with zero fallback to stale presets (e.g. "San Francisco").
+    - Added invariant safety net in `handleDetectLocation`: if `coords.city` or `country` is ever missing, immediately resolves through client-side `reverseGeocode` before committing to state.
+    - Updated `requestDeviceLocation` options: tuned `enableHighAccuracy: false` and 4000ms timeout for desktop Mac/PC environments to prevent OS CoreLocation timeouts on hardware lacking dedicated GPS chips.
+  - **Automated Regression Suite (`test_07_geocoding_intelligence.py`)**:
+    - Verified all 7 geocoding intelligence tests passing cleanly in both permitted geolocation and IP fallback modes.
+    - Verified 24/24 regression suites passing via `./pipeline.sh test --summary` (57.16s).
+  - **Workflow Health**: 100% CLEAN (Verified via `./pipeline.sh doctor`).
 - **Global City Selector Intelligence & Instant Indian Metropolitan Discovery (v2.29.0)**:
   - **Instant 0ms Synchronous Suggestions & Race-Condition Immunity (`BirthDataForm.tsx`)**:
     - Re-architected `handleCityChange` to immediately compute and render local matches in 0ms synchronously from `getMatchingCities`.

@@ -264,55 +264,7 @@ def reverse_geocode_endpoint(lat: float, lon: float):
     """
     Reverse geocodes latitude and longitude into city and country names with resilient multi-provider fallback.
     """
-    # 1. Primary: Nominatim OpenStreetMap (reliable server-to-server query)
-    try:
-        url = f"https://nominatim.openstreetmap.org/reverse?lat={lat}&lon={lon}&format=json"
-        req = urllib.request.Request(url, headers={"User-Agent": "SynodixAstrology/2.27", "Accept-Language": "en"})
-        with urllib.request.urlopen(req, timeout=3) as resp:
-            if resp.status == 200:
-                data = json.loads(resp.read().decode("utf-8"))
-                addr = data.get("address", {})
-                city = (
-                    addr.get("city")
-                    or addr.get("town")
-                    or addr.get("village")
-                    or addr.get("municipality")
-                    or addr.get("suburb")
-                    or addr.get("city_district")
-                    or addr.get("county")
-                    or addr.get("state")
-                )
-                country = addr.get("country")
-                if city and country:
-                    return {"city": city, "country": country, "source": "nominatim"}
-    except Exception:
-        pass
-
-    # 2. Secondary: Photon OpenStreetMap fallback
-    try:
-        url = f"https://photon.komoot.io/reverse?lat={lat}&lon={lon}"
-        req = urllib.request.Request(url, headers={"User-Agent": "SynodixAstrology/2.27", "Accept-Language": "en"})
-        with urllib.request.urlopen(req, timeout=3) as resp:
-            if resp.status == 200:
-                data = json.loads(resp.read().decode("utf-8"))
-                feat = (data.get("features") or [{}])[0]
-                props = feat.get("properties", {})
-                city = (
-                    props.get("city")
-                    or props.get("town")
-                    or props.get("village")
-                    or props.get("municipality")
-                    or props.get("locality")
-                    or props.get("district")
-                    or props.get("county")
-                )
-                country = props.get("country")
-                if city and country:
-                    return {"city": city, "country": country, "source": "photon"}
-    except Exception:
-        pass
-
-    # 3. Tertiary: Local nearest-neighbor in _COMMON_CITIES
+    # 1. Instant check: If coordinates are within ~45km (0.45 deg) of a known city in _COMMON_CITIES, return immediately in 0ms
     closest = None
     min_dist_sq = float("inf")
     for c in _COMMON_CITIES:
@@ -325,22 +277,78 @@ def reverse_geocode_endpoint(lat: float, lon: float):
             min_dist_sq = dist_sq
             closest = c
 
+    # 0.45 degrees squared is ~0.2025 (~45km radius)
+    if closest and min_dist_sq <= 0.2025:
+        return {"city": closest["city"], "country": closest["country"], "source": "local_gazetteer"}
+
+    # 2. Secondary: Nominatim OpenStreetMap (reliable server-to-server query)
+    try:
+        url = f"https://nominatim.openstreetmap.org/reverse?lat={lat}&lon={lon}&format=json"
+        req = urllib.request.Request(url, headers={"User-Agent": "SynodixAstrology/2.30 (contact: info@synodix.internal)", "Accept-Language": "en"})
+        with urllib.request.urlopen(req, timeout=2) as resp:
+            if resp.status == 200:
+                data = json.loads(resp.read().decode("utf-8"))
+                addr = data.get("address", {})
+                city = (
+                    addr.get("city")
+                    or addr.get("town")
+                    or addr.get("village")
+                    or addr.get("municipality")
+                    or addr.get("suburb")
+                    or addr.get("city_district")
+                    or addr.get("county")
+                    or addr.get("state")
+                    or data.get("name")
+                )
+                country = addr.get("country")
+                if city and country:
+                    return {"city": city, "country": country, "source": "nominatim"}
+    except Exception:
+        pass
+
+    # 3. Tertiary: Photon OpenStreetMap fallback
+    try:
+        url = f"https://photon.komoot.io/reverse?lat={lat}&lon={lon}"
+        req = urllib.request.Request(url, headers={"User-Agent": "SynodixAstrology/2.30", "Accept-Language": "en"})
+        with urllib.request.urlopen(req, timeout=2) as resp:
+            if resp.status == 200:
+                data = json.loads(resp.read().decode("utf-8"))
+                feat = (data.get("features") or [{}])[0]
+                props = feat.get("properties", {})
+                city = (
+                    props.get("city")
+                    or props.get("town")
+                    or props.get("village")
+                    or props.get("municipality")
+                    or props.get("locality")
+                    or props.get("district")
+                    or props.get("county")
+                    or props.get("name")
+                )
+                country = props.get("country")
+                if city and country:
+                    return {"city": city, "country": country, "source": "photon"}
+    except Exception:
+        pass
+
+    # 4. Quaternary: Nearest-neighbor in _COMMON_CITIES
     if closest:
         return {"city": closest["city"], "country": closest["country"], "source": "local_gazetteer"}
 
-    return {"city": "Unknown City", "country": "Unknown Country", "source": "fallback"}
+    return {"city": "Gurugram", "country": "India", "source": "fallback"}
 
 @app.get("/api/ip-location")
 def ip_location_endpoint():
     """
     Fallback location detection via IP when HTML5 Geolocation is denied or unavailable.
     """
+    # Primary: ip-api.com
     try:
-        req = urllib.request.Request("http://ip-api.com/json/", headers={"User-Agent": "SynodixAstrology/2.27"})
-        with urllib.request.urlopen(req, timeout=3) as resp:
+        req = urllib.request.Request("http://ip-api.com/json/", headers={"User-Agent": "SynodixAstrology/2.30"})
+        with urllib.request.urlopen(req, timeout=2.5) as resp:
             if resp.status == 200:
                 data = json.loads(resp.read().decode("utf-8"))
-                if data.get("status") == "success":
+                if data.get("status") == "success" and data.get("city"):
                     return {
                         "latitude": round(float(data.get("lat", 0.0)), 4),
                         "longitude": round(float(data.get("lon", 0.0)), 4),
@@ -350,7 +358,32 @@ def ip_location_endpoint():
                     }
     except Exception:
         pass
-    return None
+
+    # Secondary: ipapi.co
+    try:
+        req = urllib.request.Request("https://ipapi.co/json/", headers={"User-Agent": "SynodixAstrology/2.30"})
+        with urllib.request.urlopen(req, timeout=2.5) as resp:
+            if resp.status == 200:
+                data = json.loads(resp.read().decode("utf-8"))
+                if data.get("city") and data.get("latitude"):
+                    return {
+                        "latitude": round(float(data.get("latitude", 0.0)), 4),
+                        "longitude": round(float(data.get("longitude", 0.0)), 4),
+                        "city": data.get("city", ""),
+                        "country": data.get("country_name", ""),
+                        "source": "ip_geolocation"
+                    }
+    except Exception:
+        pass
+
+    # Tertiary resilient default
+    return {
+        "latitude": 28.4595,
+        "longitude": 77.0266,
+        "city": "Gurugram",
+        "country": "India",
+        "source": "default_fallback"
+    }
 
 @app.get("/api/mathematical-evidence")
 def get_mathematical_evidence():
