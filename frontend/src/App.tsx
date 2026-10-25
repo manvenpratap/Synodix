@@ -312,7 +312,7 @@ function AppContent() {
                   v2.15
                 </span>
               </div>
-              <p className="text-[11px] text-slate-400 font-mono mt-0.5 tracking-tight flex items-center gap-1">
+              <p className="text-xs text-slate-400 font-mono mt-0.5 tracking-tight flex items-center gap-1">
                 <span className="w-1.5 h-1.5 rounded-full bg-cyan-400/80 inline-block shadow-[0_0_4px_#38bdf8]"></span>
                 Astrometric Observatory
               </p>
@@ -442,7 +442,7 @@ function AppContent() {
                 aria-current={isActive ? 'page' : undefined}
                 className={`w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-left transition-all cursor-pointer group relative focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-1 focus-visible:ring-offset-[#080a0f] ${
                   isActive
-                    ? 'bg-[#121a28] text-cyan-300 font-medium border-l-2 border-l-cyan-400 border-y border-r border-cyan-800/40 shadow-xs ring-1 ring-cyan-500/20 translate-x-0.5'
+                    ? 'bg-[#121a28] text-cyan-300 font-medium border border-cyan-500/60 shadow-xs ring-1 ring-cyan-500/20 translate-x-0.5'
                     : 'text-slate-300 hover:text-slate-100 hover:bg-[#101622]/80 border border-transparent hover:border-[#1b2535]'
                 }`}
               >
@@ -691,8 +691,8 @@ function AppContent() {
                 SYNODIX
               </span>
               <span className="text-slate-600 hidden sm:inline">/</span>
-              <h1 className="text-lg font-bold text-slate-100 flex items-center gap-2 min-w-0">
-                <span className="truncate max-w-[120px] sm:max-w-none">
+              <h1 className="text-xl sm:text-2xl font-bold text-slate-100 flex items-center gap-2 min-w-0">
+                <span className="truncate max-w-[140px] sm:max-w-none">
                   {NAV_ITEMS.find((n) => n.id === currentScreen)?.label}
                 </span>
               </h1>
@@ -963,7 +963,7 @@ function AppContent() {
       {/* 4. Mobile Bottom Navigation Bar (<md) */}
       <nav
         aria-label="Mobile Navigation"
-        className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-[#0b0e14]/95 backdrop-blur-md border-t border-[#1b2331] px-1.5 py-1 pb-[max(0.75rem,env(safe-area-inset-bottom,0px))] flex items-center justify-around text-[10px] font-mono shadow-2xl"
+        className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-[#0b0e14]/95 backdrop-blur-md border-t border-[#1b2331] px-1 py-1 pb-[max(0.75rem,env(safe-area-inset-bottom,0px))] flex items-center justify-around text-[11px] font-mono font-medium tracking-tight shadow-2xl"
       >
         {[
           { id: 'workbench', label: 'Workbench', step: '1', icon: Sliders },
@@ -1003,7 +1003,7 @@ function AppContent() {
                   {item.step}
                 </span>
               </div>
-              <span className="mt-0.5">{item.label}</span>
+              <span className="mt-0.5 text-[11px] leading-tight font-medium tracking-tight">{item.label}</span>
             </button>
           );
         })}

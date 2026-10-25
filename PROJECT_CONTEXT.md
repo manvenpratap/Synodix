@@ -1,7 +1,7 @@
 # Synodix: Project Context & Working Memory
 
-**Last Updated:** 2026-10-23 09:18:27
-**Version:** 2.23.0  
+**Last Updated:** 2026-10-25 09:43:08
+**Version:** 2.24.0  
 **Stack:** Python 3.12 (FastAPI, Swiss Ephemeris 2.10, Skyfield DE421) + TypeScript / React 19 / Vite / Tailwind CSS v4 / Framer Motion / Capacitor 8 (iOS & Android)  
 **Workspace:** `/Volumes/Study/Projects/Astrology` (symlinked as `/Volumes/Study/Astrology`)  
 **Git Remote:** `https://github.com/manvenpratap/Synodix.git`  
@@ -9,7 +9,18 @@
 ---
 
 ## 1. Current Status & Milestone
-- **Active Phase**: Substantive Astrological Inferences & Subject vs Birthplace Disentanglement (Completed)
+- **Active Phase**: Impeccable Design Critique Resolutions & Craft Floor Hardening (Completed)
+- **Impeccable Design Critique Resolutions & Craft Floor Hardening (v2.24.0)**:
+  - **11px Quality Floor on All Mobile Nav & Functional Controls (`App.tsx`, `BirthDataForm.tsx`)**: Upgraded all 5 bottom navigation button labels (`Workbench`, `Traditions`, `Synthesis`, `Dossier`, `Evidence`) and coordinate hemisphere toggles to `text-[11px] font-medium tracking-tight`, eliminating all `[undersized-ui-text]` violations.
+  - **Hemisphere Inversion Ambiguity in Decimal Coordinates (`BirthDataForm.tsx`)**: Replaced raw numeric entry with relative container inputs featuring interactive `°N`/`°S` and `°E`/`°W` toggle buttons. Allows instant 1-tap sign-flipping with unambiguous hemisphere status.
+  - **Eradication of Asymmetric Side-Tab Border Tells (`InputAuditCard.tsx`, `BirthDataForm.tsx`, `App.tsx`)**: Replaced all `border-l-2` single-side colored borders with uniform architectural 1px borders, subtle top hairline accents, and uniform active focus rings, fully satisfying the human-crafted craft floor standards.
+  - **Unsaved Custom Calibration Draft Preservation (`BirthDataForm.tsx`)**: Implemented automatic `sessionStorage` snapshotting for custom calibrations and added a 1-click "Restore Draft" button next to "Reset Form", preventing user data loss when switching to Titan benchmarks in Archive mode.
+  - **Refined WCAG 2.2 AA Reduced-Motion Architecture (`index.css`)**: Replaced the global `0.01ms !important` transition kill-switch with targeted cancellation of kinetic transforms and continuous keyframes (`transform: none`, `animation: none`) while preserving gentle 80ms state transitions for color and opacity on buttons, links, and tabs.
+  - **Flattened Telemetry Cells in Input Audit Card (`InputAuditCard.tsx`)**: Streamlined metric displays into clean telemetry readout cells with top hairline dividers, eliminating `[nested-cards]` warnings while retaining high-density time audit metrics.
+  - **Typographic Scale & Step Ratio (`App.tsx`)**: Upgraded main viewport `h1` heading to `text-xl sm:text-2xl` (20px/24px) over 12px body text, establishing an authoritative $>1.4\times$ step ratio.
+  - **Multi-Viewport Impeccable Verification**: Verified 0 anti-patterns across Desktop (1280x800), Tablet (768x1024), Mobile (390x844), and static code scans (`impeccable detect` returns `[]`).
+  - **Workflow Health**: 100% CLEAN (Verified via `./pipeline.sh doctor`)
+  - **Test Invariants**: 18/18 regression suites passing via `./pipeline.sh test --summary` (46.77s)
 - **Substantive Astrological Inferences Profile & Subject Separation (v2.23.0)**:
   - **Disentangled Subject vs Birthplace**: Fully separated the subject's personal name (`inferences.subject_name`) from the birth location (`inferences.birthplace`) in the Document Metadata Badges and Executive Input Dossier. Resolves the previous bug where `raw_input.city_name` was displayed under the "Subject" label.
   - **Synthesized Astrological Inferences & Personality Profile (`ReadingView.tsx` & `synthesis.py`)**: Added an interactive, substantive analytical section (Section 2) answering what was inferred from the 9-tradition astrological study of the person:

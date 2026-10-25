@@ -900,13 +900,26 @@ textarea {
   *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+
+  /* Preserve gentle state transitions (color, opacity) while eliminating disorienting kinetic motion */
+  button,
+  a,
+  input,
+  select,
+  textarea,
+  [role="button"],
+  [role="tab"] {
+    transition-duration: 0.08s !important;
+    transition-property: opacity, background-color, border-color, color !important;
+    transform: none !important;
   }
 
   .animate-screen-enter,
   .animate-tab-enter,
-  .animate-radar-reveal {
+  .animate-radar-reveal,
+  .animate-radar-pulse {
     animation: none !important;
     opacity: 1 !important;
     transform: none !important;

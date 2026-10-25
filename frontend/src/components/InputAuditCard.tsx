@@ -33,10 +33,10 @@ export const InputAuditCard: React.FC<Props> = ({ data }) => {
             </div>
           </div>
           <div className="flex flex-wrap items-center justify-between md:justify-end gap-2">
-            <span className="px-2 py-0.5 text-xs font-mono rounded bg-[#121721] text-slate-300 border border-[#1b2331]">
+            <span className="px-2 py-1 text-xs font-mono rounded bg-[#121721] text-slate-300 border border-[#1b2331]">
               IANA: {norm.timezone_name} ({norm.utc_offset_hours >= 0 ? `+${norm.utc_offset_hours}` : norm.utc_offset_hours}h)
             </span>
-            <span className={`px-2 py-0.5 text-xs font-mono font-medium rounded border ${
+            <span className={`px-2 py-1 text-xs font-mono font-medium rounded border ${
               norm.is_dst ? 'bg-amber-950/70 text-amber-300 border-amber-800/80' : 'bg-[#121721] text-slate-400 border-[#1b2331]'
             }`}>
               DST: {norm.is_dst ? 'ACTIVE' : 'STANDARD'}
@@ -62,7 +62,7 @@ export const InputAuditCard: React.FC<Props> = ({ data }) => {
           {/* Grid of Key Normalizations */}
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-2.5">
             {/* UTC Instant */}
-            <div className="p-3 border-l-2 border-l-cyan-500/70 border-y border-r border-[#1b2331]/80 bg-[#080a0f]/40">
+            <div className="p-3 bg-[#080a0f]/50 border-t border-[#1b2331]/80">
               <div className="flex items-center justify-between">
                 <span className="text-[11px] text-slate-400 uppercase tracking-wider font-mono block">
                   UTC Instant
@@ -78,7 +78,7 @@ export const InputAuditCard: React.FC<Props> = ({ data }) => {
             </div>
 
             {/* Local Solar Times */}
-            <div className="p-3 border-l-2 border-l-amber-500/70 border-y border-r border-[#1b2331]/80 bg-[#080a0f]/40">
+            <div className="p-3 bg-[#080a0f]/50 border-t border-[#1b2331]/80">
               <div className="flex items-center justify-between">
                 <span className="text-[11px] text-slate-400 uppercase tracking-wider font-mono block">
                   Solar Time & EoT
@@ -94,7 +94,7 @@ export const InputAuditCard: React.FC<Props> = ({ data }) => {
             </div>
 
             {/* Sunrise & Sunset */}
-            <div className="p-3 border-l-2 border-l-emerald-500/70 border-y border-r border-[#1b2331]/80 bg-[#080a0f]/40">
+            <div className="p-3 bg-[#080a0f]/50 border-t border-[#1b2331]/80">
               <div className="flex items-center justify-between">
                 <span className="text-[11px] text-slate-400 uppercase tracking-wider font-mono block">
                   Horizon & Sect
@@ -110,7 +110,7 @@ export const InputAuditCard: React.FC<Props> = ({ data }) => {
             </div>
 
             {/* Boundary Audit */}
-            <div className="p-3 border-l-2 border-l-purple-500/70 border-y border-r border-[#1b2331]/80 bg-[#080a0f]/40">
+            <div className="p-3 bg-[#080a0f]/50 border-t border-[#1b2331]/80">
               <div className="flex items-center justify-between">
                 <span className="text-[11px] text-slate-400 uppercase tracking-wider font-mono block">
                   Boundary Distances
@@ -136,14 +136,14 @@ export const InputAuditCard: React.FC<Props> = ({ data }) => {
                 <ExplainerTrigger id="cusp_proximity_audit" label="Why T-/T+ Exists" />
               </div>
               <div className="flex items-center gap-2">
-                <span className={`px-2 py-0.5 text-[11px] font-mono rounded border ${
+                <span className={`px-2 py-1 text-[11px] font-mono rounded border ${
                   uncertClass.tropical_ascendant === 'STABLE'
                     ? 'bg-emerald-950 text-emerald-300 border-emerald-800/80'
                     : 'bg-amber-950 text-amber-300 border-amber-800/80'
                 }`}>
                   Tropical Asc: {uncertClass.tropical_ascendant}
                 </span>
-                <span className={`px-2 py-0.5 text-[11px] font-mono rounded border ${
+                <span className={`px-2 py-1 text-[11px] font-mono rounded border ${
                   uncertClass.sidereal_ascendant === 'STABLE'
                     ? 'bg-emerald-950 text-emerald-300 border-emerald-800/80'
                     : 'bg-amber-950 text-amber-300 border-amber-800/80'

@@ -86,6 +86,48 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
   const cityInputRef = useRef<HTMLInputElement>(null);
   const cityContainerRef = useRef<HTMLDivElement>(null);
 
+  // Custom Draft Natal Preservation (prevents loss on switching to Titan benchmarks)
+  const [hasSavedDraft, setHasSavedDraft] = useState<boolean>(() => {
+    try {
+      return !!sessionStorage.getItem('synodix_draft_natal');
+    } catch {
+      return false;
+    }
+  });
+
+  // Automatically preserve custom calibrations in sessionStorage whenever modified in custom mode
+  useEffect(() => {
+    if (activeMode === 'custom' && coordStatus !== 'preset') {
+      try {
+        sessionStorage.setItem(
+          'synodix_draft_natal',
+          JSON.stringify({
+            formData,
+            customSubjectName,
+            coordStatus,
+          })
+        );
+        setHasSavedDraft(true);
+      } catch {
+        // Safe fallback if sessionStorage is restricted
+      }
+    }
+  }, [formData, customSubjectName, coordStatus, activeMode]);
+
+  const handleRestoreDraft = () => {
+    try {
+      const saved = sessionStorage.getItem('synodix_draft_natal');
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (parsed.formData) setFormData(parsed.formData);
+        if (parsed.customSubjectName) setCustomSubjectName(parsed.customSubjectName);
+        if (parsed.coordStatus) setCoordStatus(parsed.coordStatus);
+      }
+    } catch (e) {
+      console.warn('Failed to restore custom draft:', e);
+    }
+  };
+
   // Close dropdown on outside click or Escape
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
@@ -241,6 +283,23 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
 
   // Titan Selection Handlers
   const handleSelectTitan = (titan: Preset, andCompute = false) => {
+    // If user currently had custom edits, snapshot into draft before loading Titan
+    if (coordStatus !== 'preset') {
+      try {
+        sessionStorage.setItem(
+          'synodix_draft_natal',
+          JSON.stringify({
+            formData,
+            customSubjectName,
+            coordStatus,
+          })
+        );
+        setHasSavedDraft(true);
+      } catch {
+        // Safe fallback
+      }
+    }
+
     setSelectedTitanId(titan.id);
     const newForm: BirthInput = {
       birth_date: titan.birth_date,
@@ -457,6 +516,18 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
                 />
               </div>
               <div className="flex items-center gap-2 self-end sm:self-auto pt-1 sm:pt-4">
+                {hasSavedDraft && (
+                  <button
+                    type="button"
+                    onClick={handleRestoreDraft}
+                    className="inline-flex items-center gap-1.5 px-3 py-2 min-h-[44px] sm:min-h-[36px] text-[11px] font-mono text-cyan-400 hover:text-cyan-300 border border-cyan-800/60 hover:border-cyan-600 bg-cyan-950/30 rounded-md cursor-pointer transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
+                    data-tooltip="Restore unsaved manual calibration draft"
+                    aria-label="Restore Custom Draft"
+                  >
+                    <RotateCcw className="w-3 h-3 text-cyan-400" />
+                    <span>Restore Draft</span>
+                  </button>
+                )}
                 <button
                   type="button"
                   onClick={handleResetForm}
@@ -611,14 +682,15 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
                           aria-selected={isSelected}
                           onClick={() => handleSelectCity(s)}
                           onMouseEnter={() => setActiveSuggestionIndex(idx)}
-                          className={`px-3 py-2 text-xs cursor-pointer transition-colors flex items-center justify-between gap-2 ${
+                          className={`px-3 py-2 text-xs cursor-pointer transition-colors flex items-center justify-between gap-2 rounded ${
                             isSelected
-                              ? 'bg-cyan-950/70 text-cyan-200 border-l-2 border-cyan-400'
-                              : 'text-slate-200 hover:bg-[#121824]'
+                              ? 'bg-cyan-950/60 text-cyan-200 border border-cyan-500/50 ring-1 ring-cyan-500/20'
+                              : 'text-slate-200 hover:bg-[#121824] border border-transparent'
                           }`}
                         >
                           <div className="min-w-0">
                             <div className="font-medium text-slate-100 flex items-center gap-1.5 truncate">
+                              {isSelected && <span className="text-cyan-400 font-mono text-[10px]">▶</span>}
                               <span>{s.city}</span>
                               {s.adminCode && (
                                 <span className="text-[11px] text-slate-400">({s.adminCode})</span>
@@ -689,36 +761,64 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
                   </button>
                 </div>
                 <div className="grid grid-cols-2 gap-2">
-                  <input
-                    id="latitude"
-                    type="number"
-                    step="0.0001"
-                    min="-90"
-                    max="90"
-                    required
-                    aria-label="Decimal Latitude (-90 to 90 degrees)"
-                    value={formData.latitude}
-                    onChange={(e) => {
-                      setCoordStatus('manual');
-                      setFormData({ ...formData, latitude: parseFloat(e.target.value) || 0 });
-                    }}
-                    className="w-full bg-[#080a0f] border border-[#1b2331] rounded-md px-2.5 py-2.5 sm:py-2 min-h-[44px] sm:min-h-[38px] text-xs font-mono text-slate-100 focus:outline-none focus:border-cyan-500 focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-1 focus-visible:ring-offset-[#080a0f] transition-colors"
-                  />
-                  <input
-                    id="longitude"
-                    type="number"
-                    step="0.0001"
-                    min="-180"
-                    max="180"
-                    required
-                    aria-label="Decimal Longitude (-180 to 180 degrees)"
-                    value={formData.longitude}
-                    onChange={(e) => {
-                      setCoordStatus('manual');
-                      setFormData({ ...formData, longitude: parseFloat(e.target.value) || 0 });
-                    }}
-                    className="w-full bg-[#080a0f] border border-[#1b2331] rounded-md px-2.5 py-2.5 sm:py-2 min-h-[44px] sm:min-h-[38px] text-xs font-mono text-slate-100 focus:outline-none focus:border-cyan-500 focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-1 focus-visible:ring-offset-[#080a0f] transition-colors"
-                  />
+                  <div className="relative">
+                    <input
+                      id="latitude"
+                      type="number"
+                      step="0.0001"
+                      min="-90"
+                      max="90"
+                      required
+                      aria-label="Decimal Latitude (-90 to 90 degrees)"
+                      value={formData.latitude}
+                      onChange={(e) => {
+                        setCoordStatus('manual');
+                        setFormData({ ...formData, latitude: parseFloat(e.target.value) || 0 });
+                      }}
+                      className="w-full bg-[#080a0f] border border-[#1b2331] rounded-md pl-2.5 pr-11 py-2.5 sm:py-2 min-h-[44px] sm:min-h-[38px] text-xs font-mono text-slate-100 focus:outline-none focus:border-cyan-500 focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-1 focus-visible:ring-offset-[#080a0f] transition-colors"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setCoordStatus('manual');
+                        setFormData((prev) => ({ ...prev, latitude: -prev.latitude }));
+                      }}
+                      title={`Toggle hemisphere: ${formData.latitude >= 0 ? 'North (°N)' : 'South (°S)'}. Click to invert.`}
+                      aria-label={`Toggle latitude hemisphere. Current: ${formData.latitude >= 0 ? 'North' : 'South'}`}
+                      className="absolute right-1 top-1/2 -translate-y-1/2 px-2 py-0.5 text-[11px] font-mono font-bold rounded bg-[#121721] hover:bg-[#1c2433] text-cyan-300 border border-[#1b2331] cursor-pointer transition-colors focus:outline-none focus-visible:ring-1 focus-visible:ring-cyan-400"
+                    >
+                      {formData.latitude >= 0 ? '°N' : '°S'}
+                    </button>
+                  </div>
+                  <div className="relative">
+                    <input
+                      id="longitude"
+                      type="number"
+                      step="0.0001"
+                      min="-180"
+                      max="180"
+                      required
+                      aria-label="Decimal Longitude (-180 to 180 degrees)"
+                      value={formData.longitude}
+                      onChange={(e) => {
+                        setCoordStatus('manual');
+                        setFormData({ ...formData, longitude: parseFloat(e.target.value) || 0 });
+                      }}
+                      className="w-full bg-[#080a0f] border border-[#1b2331] rounded-md pl-2.5 pr-11 py-2.5 sm:py-2 min-h-[44px] sm:min-h-[38px] text-xs font-mono text-slate-100 focus:outline-none focus:border-cyan-500 focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-1 focus-visible:ring-offset-[#080a0f] transition-colors"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setCoordStatus('manual');
+                        setFormData((prev) => ({ ...prev, longitude: -prev.longitude }));
+                      }}
+                      title={`Toggle hemisphere: ${formData.longitude >= 0 ? 'East (°E)' : 'West (°W)'}. Click to invert.`}
+                      aria-label={`Toggle longitude hemisphere. Current: ${formData.longitude >= 0 ? 'East' : 'West'}`}
+                      className="absolute right-1 top-1/2 -translate-y-1/2 px-2 py-0.5 text-[11px] font-mono font-bold rounded bg-[#121721] hover:bg-[#1c2433] text-cyan-300 border border-[#1b2331] cursor-pointer transition-colors focus:outline-none focus-visible:ring-1 focus-visible:ring-cyan-400"
+                    >
+                      {formData.longitude >= 0 ? '°E' : '°W'}
+                    </button>
+                  </div>
                 </div>
                 <div className="mt-1 text-[11px] font-mono text-slate-500 flex items-center justify-between">
                   <span>
