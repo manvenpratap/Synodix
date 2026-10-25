@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import type { ChartResponse } from '../types';
 import { ExplainerTrigger } from './ExplainerTrigger';
 import {
@@ -281,12 +282,12 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
         <div
           role="tablist"
           aria-label="Astrological tradition charts"
-          className="grid grid-cols-3 sm:flex sm:flex-wrap items-center gap-1.5 w-full sm:w-auto pb-1 sm:pb-0"
+          className="grid grid-cols-3 sm:flex sm:flex-wrap items-center gap-1.5 w-full sm:w-auto pb-1 sm:pb-0 relative"
         >
           {Object.values(CULTURE_THEMES).map((t) => {
             const isActive = activeTab === t.id;
             return (
-              <button
+              <motion.button
                 key={t.id}
                 id={`tradition-tab-${t.id}`}
                 role="tab"
@@ -294,25 +295,38 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
                 aria-controls={`tradition-panel-${t.id}`}
                 type="button"
                 onClick={() => setActiveTab(t.id as any)}
-                className={`inline-flex items-center justify-center sm:justify-start gap-1 sm:gap-1.5 px-2 sm:px-3 py-2 min-h-[44px] text-[11px] sm:text-xs font-mono font-medium rounded-lg transition-all cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-1 focus-visible:ring-offset-[#080a0f] ${
+                whileTap={{ scale: 0.96 }}
+                className={`relative inline-flex items-center justify-center sm:justify-start gap-1 sm:gap-1.5 px-2 sm:px-3 py-2 min-h-[44px] text-[11px] sm:text-xs font-mono font-medium rounded-lg cursor-pointer transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-1 focus-visible:ring-offset-[#080a0f] ${
                   isActive
-                    ? t.activeTabClass
+                    ? 'text-white font-semibold'
                     : 'text-slate-400 hover:text-slate-200 hover:bg-[#121721] border border-transparent'
                 }`}
               >
-                <span className="text-sm select-none shrink-0">{t.glyph}</span>
-                <span className="hidden sm:inline whitespace-nowrap">{t.name}</span>
-                <span className="sm:hidden truncate">{t.shortName || t.name}</span>
-              </button>
+                {isActive && (
+                  <motion.div
+                    layoutId="active-tradition-indicator"
+                    className={`absolute inset-0 rounded-lg pointer-events-none ${t.activeTabClass}`}
+                    transition={{ type: 'spring', stiffness: 480, damping: 36, mass: 0.8 }}
+                  />
+                )}
+                <span className="relative z-10 text-sm select-none shrink-0">{t.glyph}</span>
+                <span className="relative z-10 hidden sm:inline whitespace-nowrap">{t.name}</span>
+                <span className="relative z-10 sm:hidden truncate">{t.shortName || t.name}</span>
+              </motion.button>
             );
           })}
         </div>
       </div>
 
       {/* Culturally Themed Display Presentation & Heritage Banner */}
-      <div className={`mt-4 p-4 rounded-xl border ${currentTheme.headerBorder} ${currentTheme.headerBg} relative overflow-hidden transition-all duration-300 shadow-sm`}>
+      <div className={`mt-4 p-4 rounded-xl border ${currentTheme.headerBorder} ${currentTheme.headerBg} relative overflow-hidden transition-colors duration-300 shadow-sm`}>
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-3 sm:gap-4 relative z-10">
-          <div>
+          <motion.div
+            key={activeTab}
+            initial={{ opacity: 0, x: -4 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
+          >
             <div className="flex flex-wrap items-center gap-2">
               <span className="text-lg select-none">{currentTheme.glyph}</span>
               <h4 className={`text-sm sm:text-base font-semibold tracking-wide font-sans ${currentTheme.accentText}`}>
@@ -335,51 +349,44 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
             <p className="text-xs text-slate-400 italic mt-0.5 font-serif hidden sm:block">
               &ldquo;{currentTheme.motto}&rdquo;
             </p>
-          </div>
+          </motion.div>
 
           {/* Culture-Themed Display Presentation Switcher */}
           <div className="flex flex-col sm:flex-row sm:items-center gap-2.5 self-start lg:self-auto shrink-0 w-full sm:w-auto">
             <span className="text-[11px] font-mono text-slate-400 font-medium">Display Presentation:</span>
-            <div className="flex items-center gap-1 p-1 rounded-lg bg-[#06080e]/90 border border-white/10 backdrop-blur-xs w-full sm:w-auto">
-              <button
-                type="button"
-                onClick={() => setChartViewMode('both')}
-                className={`flex-1 sm:flex-initial px-2.5 sm:px-3 py-2 sm:py-1.5 min-h-[44px] sm:min-h-[36px] text-xs font-mono rounded-md cursor-pointer transition-all text-center focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 ${
-                  chartViewMode === 'both'
-                    ? currentTheme.presentationToggleActive
-                    : currentTheme.presentationToggleInactive
-                }`}
-                aria-pressed={chartViewMode === 'both'}
-              >
-                <span className="hidden sm:inline">Comprehensive</span>
-                <span className="sm:hidden">All</span>
-              </button>
-              <button
-                type="button"
-                onClick={() => setChartViewMode('chart')}
-                className={`flex-1 sm:flex-initial px-2.5 sm:px-3 py-2 sm:py-1.5 min-h-[44px] sm:min-h-[36px] text-xs font-mono rounded-md cursor-pointer transition-all text-center focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 ${
-                  chartViewMode === 'chart'
-                    ? currentTheme.presentationToggleActive
-                    : currentTheme.presentationToggleInactive
-                }`}
-                aria-pressed={chartViewMode === 'chart'}
-              >
-                <span className="hidden sm:inline">Visual Instrument</span>
-                <span className="sm:hidden">Visual</span>
-              </button>
-              <button
-                type="button"
-                onClick={() => setChartViewMode('table')}
-                className={`flex-1 sm:flex-initial px-2.5 sm:px-3 py-2 sm:py-1.5 min-h-[44px] sm:min-h-[36px] text-xs font-mono rounded-md cursor-pointer transition-all text-center focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 ${
-                  chartViewMode === 'table'
-                    ? currentTheme.presentationToggleActive
-                    : currentTheme.presentationToggleInactive
-                }`}
-                aria-pressed={chartViewMode === 'table'}
-              >
-                <span className="hidden sm:inline">Telemetry Tables</span>
-                <span className="sm:hidden">Tables</span>
-              </button>
+            <div className="flex items-center gap-1 p-1 rounded-lg bg-[#06080e]/90 border border-white/10 backdrop-blur-xs w-full sm:w-auto relative">
+              {(['both', 'chart', 'table'] as const).map((mode) => {
+                const isModeActive = chartViewMode === mode;
+                const labels = {
+                  both: { full: 'Comprehensive', short: 'All' },
+                  chart: { full: 'Visual Instrument', short: 'Visual' },
+                  table: { full: 'Telemetry Tables', short: 'Tables' },
+                };
+                return (
+                  <motion.button
+                    key={mode}
+                    type="button"
+                    onClick={() => setChartViewMode(mode)}
+                    whileTap={{ scale: 0.96 }}
+                    className={`relative flex-1 sm:flex-initial px-2.5 sm:px-3 py-2 sm:py-1.5 min-h-[44px] sm:min-h-[36px] text-xs font-mono rounded-md cursor-pointer transition-colors text-center focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 ${
+                      isModeActive
+                        ? 'text-white font-bold'
+                        : 'text-slate-400 hover:text-slate-200'
+                    }`}
+                    aria-pressed={isModeActive}
+                  >
+                    {isModeActive && (
+                      <motion.div
+                        layoutId="presentation-mode-indicator"
+                        className={`absolute inset-0 rounded-md pointer-events-none ${currentTheme.presentationToggleActive}`}
+                        transition={{ type: 'spring', stiffness: 500, damping: 35 }}
+                      />
+                    )}
+                    <span className="relative z-10 hidden sm:inline">{labels[mode].full}</span>
+                    <span className="relative z-10 sm:hidden">{labels[mode].short}</span>
+                  </motion.button>
+                );
+              })}
             </div>
           </div>
         </div>
@@ -416,7 +423,7 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
 
           {/* Visual Kundali Instrument */}
           {chartViewMode !== 'table' && (
-            <div className={`p-4 rounded-xl border ${currentTheme.frameBorder} ${currentTheme.frameBg} shadow-inner`}>
+            <div className={`p-4 rounded-xl border ${currentTheme.frameBorder} ${currentTheme.frameBg} shadow-inner animate-instrument-focus`}>
               <div className="flex items-center justify-between pb-2 mb-3 border-b border-white/10">
                 <div className="flex items-center gap-2">
                   <span className="text-base select-none">{currentTheme.glyph}</span>
@@ -671,7 +678,7 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
 
           {/* Wu Xing Element Pentagram Diagram */}
           {chartViewMode !== 'table' && (
-            <div className={`p-4 rounded-xl border ${currentTheme.frameBorder} ${currentTheme.frameBg} shadow-inner`}>
+            <div className={`p-4 rounded-xl border ${currentTheme.frameBorder} ${currentTheme.frameBg} shadow-inner animate-instrument-focus`}>
               <div className="flex items-center justify-between pb-2 mb-3 border-b border-white/10">
                 <div className="flex items-center gap-2">
                   <span className="text-base select-none">{currentTheme.glyph}</span>
@@ -957,7 +964,7 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
 
           {/* Visual Western Wheel */}
           {chartViewMode !== 'table' && (
-            <div className={`p-4 rounded-xl border ${currentTheme.frameBorder} ${currentTheme.frameBg} shadow-inner`}>
+            <div className={`p-4 rounded-xl border ${currentTheme.frameBorder} ${currentTheme.frameBg} shadow-inner animate-instrument-focus`}>
               <div className="flex items-center justify-between pb-2 mb-3 border-b border-white/10">
                 <div className="flex items-center gap-2">
                   <span className="text-base select-none">{currentTheme.glyph}</span>
@@ -1221,7 +1228,7 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
 
           {/* Zi Wei Authentic 4x4 Courtyard Grid Visual Instrument */}
           {chartViewMode !== 'table' && (
-            <div className={`p-4 rounded-xl border ${currentTheme.frameBorder} ${currentTheme.frameBg} shadow-inner`}>
+            <div className={`p-4 rounded-xl border ${currentTheme.frameBorder} ${currentTheme.frameBg} shadow-inner animate-instrument-focus`}>
               <div className="flex items-center justify-between pb-2 mb-3 border-b border-white/10">
                 <div className="flex items-center gap-2">
                   <span className="text-base select-none">{currentTheme.glyph}</span>
@@ -1320,7 +1327,7 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
 
           {/* Maya Sacred Calendar Round Dial Visual Instrument */}
           {chartViewMode !== 'table' && (
-            <div className={`p-4 rounded-xl border ${currentTheme.frameBorder} ${currentTheme.frameBg} shadow-inner`}>
+            <div className={`p-4 rounded-xl border ${currentTheme.frameBorder} ${currentTheme.frameBg} shadow-inner animate-instrument-focus`}>
               <div className="flex items-center justify-between pb-2 mb-3 border-b border-white/10">
                 <div className="flex items-center gap-2">
                   <span className="text-base select-none">{currentTheme.glyph}</span>
@@ -1401,7 +1408,7 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
 
           {/* Tibetan Mewa Magic Square & Parkha Visual Instrument */}
           {chartViewMode !== 'table' && (
-            <div className={`p-4 rounded-xl border ${currentTheme.frameBorder} ${currentTheme.frameBg} shadow-inner`}>
+            <div className={`p-4 rounded-xl border ${currentTheme.frameBorder} ${currentTheme.frameBg} shadow-inner animate-instrument-focus`}>
               <div className="flex items-center justify-between pb-2 mb-3 border-b border-white/10">
                 <div className="flex items-center gap-2">
                   <span className="text-base select-none">{currentTheme.glyph}</span>
@@ -1485,7 +1492,7 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
 
           {/* Almuten Comparative Dignity Bar Visual Instrument */}
           {chartViewMode !== 'table' && (
-            <div className={`p-4 rounded-xl border ${currentTheme.frameBorder} ${currentTheme.frameBg} shadow-inner`}>
+            <div className={`p-4 rounded-xl border ${currentTheme.frameBorder} ${currentTheme.frameBg} shadow-inner animate-instrument-focus`}>
               <div className="flex items-center justify-between pb-2 mb-3 border-b border-white/10">
                 <div className="flex items-center gap-2">
                   <span className="text-base select-none">{currentTheme.glyph}</span>
@@ -1658,7 +1665,7 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
 
           {/* Ra's Cosmic Barque 36-Decan Star Clock Visual Instrument */}
           {chartViewMode !== 'table' && (
-            <div className={`p-4 rounded-xl border ${currentTheme.frameBorder} ${currentTheme.frameBg} shadow-inner`}>
+            <div className={`p-4 rounded-xl border ${currentTheme.frameBorder} ${currentTheme.frameBg} shadow-inner animate-instrument-focus`}>
               <div className="flex items-center justify-between pb-2 mb-3 border-b border-white/10">
                 <div className="flex items-center gap-2">
                   <span className="text-base select-none">{currentTheme.glyph}</span>
@@ -1756,7 +1763,7 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
 
           {/* Oceanic 30-Night Lunar Dial Visual Instrument */}
           {chartViewMode !== 'table' && (
-            <div className={`p-4 rounded-xl border ${currentTheme.frameBorder} ${currentTheme.frameBg} shadow-inner`}>
+            <div className={`p-4 rounded-xl border ${currentTheme.frameBorder} ${currentTheme.frameBg} shadow-inner animate-instrument-focus`}>
               <div className="flex items-center justify-between pb-2 mb-3 border-b border-white/10">
                 <div className="flex items-center gap-2">
                   <span className="text-base select-none">{currentTheme.glyph}</span>

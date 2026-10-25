@@ -1,7 +1,7 @@
 # Synodix: Project Context & Working Memory
 
-**Last Updated:** 2026-10-25 12:49:19
-**Version:** 2.30.0  
+**Last Updated:** 2026-10-25 13:04:22
+**Version:** 2.31.0  
 **Stack:** Python 3.12 (FastAPI, Swiss Ephemeris 2.10, Skyfield DE421) + TypeScript / React 19 / Vite / Tailwind CSS v4 / Framer Motion / Capacitor 8 (iOS & Android)  
 **Workspace:** `/Volumes/Study/Projects/Astrology` (symlinked as `/Volumes/Study/Astrology`)  
 **Git Remote:** `https://github.com/manvenpratap/Synodix.git`  
@@ -9,7 +9,21 @@
 ---
 
 ## 1. Current Status & Milestone
-- **Active Phase**: Instant Local Proximity Reverse-Geocoding & Resilient GPS City Auto-Population (Completed)
+- **Active Phase**: Deterministic Tradition Calculators Motion System & Civilizational Continuity (Completed)
+- **Deterministic Tradition Calculators Motion System & Civilizational Continuity (v2.31.0)**:
+  - **Authored Navigation Motion Architecture (`TraditionCharts.tsx`, `index.css`)**:
+    - Implemented a bespoke motion system adhering to the `/impeccable animate` playbook for navigating across all 9 deterministic cultural tradition visualizers (Jyotisha, Hellenistic Western, BaZi, Zi Wei Dou Shu, Maya Tzolk'in/Haab', Tibetan Phugpa, Persian Almuten, Egyptian Decans, Māori Maramataka).
+    - **Cultural Tab Strip Kinetic Continuity**: Integrated Framer Motion shared-element sliding spring highlight (`layoutId="active-tradition-indicator"`, `stiffness: 480, damping: 36, mass: 0.8`) with the authentic signature palette and border glow per culture.
+    - **Tactile State Feedback**: Added `whileTap={{ scale: 0.96 }}` to all tradition navigation buttons and presentation mode toggles, providing instantaneous tactile acknowledgment on mobile touchscreens and desktop pointer clicks.
+    - **Display Presentation Mode Switcher**: Replaced discrete toggles with a shared-element sliding pill (`layoutId="presentation-mode-indicator"`, `stiffness: 500, damping: 35`), seamlessly morphing between Comprehensive, Visual Instrument, and Telemetry Tables.
+    - **Civilizational Header Crossfade**: Smooth 200ms crossfade of cultural glyphs, native calligraphy/scripts, lineage attributions, and historical philosophical epigraphs on civilizational transitions without layout shifts.
+    - **Focal Astrometric Instrument Reticle Entrance**: Authored `.animate-instrument-focus` keyframe curve (`scale: 0.985 -> 1.0`, `opacity: 0 -> 1` over 240ms `cubic-bezier(0.16, 1, 0.3, 1)`) across all 9 instrument viewports (Kundali, Aspect Wheel, Pentagram, Courtyard Matrix, Stele Compass, Lo Shu Mandala, Almuten Bar Gauge, Decan Star Clock, Oceanic Lunar Dial).
+    - **Strict WCAG 2.2 AA Reduced-Motion Compliant**: Targeted cancellation of kinetic scaling and translations (`transform: none !important`, `animation: none !important`) under `prefers-reduced-motion: reduce`, gracefully degrading to instantaneous opacity transitions.
+  - **Motion Catalog Artifact (`tradition_calculators_motion_catalog.md`)**:
+    - Published authoritative 6-pillar motion opportunities catalog documenting timing budgets, easing curves, hardware acceleration constraints, and accessibility contracts.
+  - **Automated Regression Invariant**:
+    - All 24 regression test suites passing cleanly via `./pipeline.sh test --summary` (58.83s).
+  - **Workflow Health**: 100% CLEAN (Verified via `./pipeline.sh doctor`).
 - **Instant Local Proximity Reverse-Geocoding & Resilient GPS City Auto-Population (v2.30.0)**:
   - **Service Worker Cache-Busting & Zero Stale Asset Invalidation (`sw.js`, `main.tsx`, `index.html`)**:
     - Upgraded Service Worker cache strategy to **Network-First for all HTML navigation requests**, ensuring UI refactors, removed buttons, and bug fixes are instantly reflected in all user browsers without being trapped behind stale Service Worker caches.

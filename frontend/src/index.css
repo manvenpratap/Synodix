@@ -496,6 +496,21 @@ html[data-theme="light"] {
   animation: tabEnter 180ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
+.animate-instrument-focus {
+  animation: instrumentFocus 240ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes instrumentFocus {
+  from {
+    opacity: 0;
+    transform: scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
 /* 2. Celestial Visualizer Motion */
 @keyframes celestialGlow {
   0%, 100% {
@@ -918,6 +933,7 @@ textarea {
 
   .animate-screen-enter,
   .animate-tab-enter,
+  .animate-instrument-focus,
   .animate-radar-reveal,
   .animate-radar-pulse {
     animation: none !important;
