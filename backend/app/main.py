@@ -54,6 +54,7 @@ class BirthInputRequest(BaseModel):
 import json
 import os
 import urllib.request
+import urllib.parse
 import math
 
 _data_file = os.path.join(os.path.dirname(__file__), "data", "personalities_100.json")
@@ -122,6 +123,43 @@ _COMMON_CITIES = [
     {"city": "Kolkata", "country": "India", "latitude": 22.5726, "longitude": 88.3639},
     {"city": "Ahmedabad", "country": "India", "latitude": 23.0225, "longitude": 72.5714},
     {"city": "Jaipur", "country": "India", "latitude": 26.9124, "longitude": 75.7873},
+    {"city": "Jamshedpur", "country": "India", "latitude": 22.8015, "longitude": 86.2030},
+    {"city": "Ranchi", "country": "India", "latitude": 23.3441, "longitude": 85.3096},
+    {"city": "Dhanbad", "country": "India", "latitude": 23.7957, "longitude": 86.4304},
+    {"city": "Bokaro", "country": "India", "latitude": 23.6693, "longitude": 86.1511},
+    {"city": "Patna", "country": "India", "latitude": 25.5941, "longitude": 85.1376},
+    {"city": "Lucknow", "country": "India", "latitude": 26.8467, "longitude": 80.9462},
+    {"city": "Kanpur", "country": "India", "latitude": 26.4499, "longitude": 80.3319},
+    {"city": "Agra", "country": "India", "latitude": 27.1767, "longitude": 78.0081},
+    {"city": "Meerut", "country": "India", "latitude": 28.9845, "longitude": 77.7064},
+    {"city": "Prayagraj", "country": "India", "latitude": 25.4358, "longitude": 81.8463},
+    {"city": "Allahabad", "country": "India", "latitude": 25.4358, "longitude": 81.8463},
+    {"city": "Varanasi", "country": "India", "latitude": 25.3176, "longitude": 82.9739},
+    {"city": "Amritsar", "country": "India", "latitude": 31.6340, "longitude": 74.8723},
+    {"city": "Ludhiana", "country": "India", "latitude": 30.9010, "longitude": 75.8573},
+    {"city": "Surat", "country": "India", "latitude": 21.1702, "longitude": 72.8311},
+    {"city": "Vadodara", "country": "India", "latitude": 22.3072, "longitude": 73.1812},
+    {"city": "Rajkot", "country": "India", "latitude": 22.3039, "longitude": 70.8022},
+    {"city": "Nashik", "country": "India", "latitude": 19.9975, "longitude": 73.7898},
+    {"city": "Indore", "country": "India", "latitude": 22.7196, "longitude": 75.8577},
+    {"city": "Bhopal", "country": "India", "latitude": 23.2599, "longitude": 77.4126},
+    {"city": "Gwalior", "country": "India", "latitude": 26.2183, "longitude": 78.1828},
+    {"city": "Jabalpur", "country": "India", "latitude": 23.1815, "longitude": 79.9864},
+    {"city": "Raipur", "country": "India", "latitude": 21.2514, "longitude": 81.6296},
+    {"city": "Bhubaneswar", "country": "India", "latitude": 20.2961, "longitude": 85.8245},
+    {"city": "Cuttack", "country": "India", "latitude": 20.4625, "longitude": 85.8828},
+    {"city": "Guwahati", "country": "India", "latitude": 26.1445, "longitude": 91.7362},
+    {"city": "Dehradun", "country": "India", "latitude": 30.3165, "longitude": 78.0322},
+    {"city": "Shimla", "country": "India", "latitude": 31.1048, "longitude": 77.1734},
+    {"city": "Jammu", "country": "India", "latitude": 32.7266, "longitude": 74.8570},
+    {"city": "Srinagar", "country": "India", "latitude": 34.0837, "longitude": 74.7973},
+    {"city": "Coimbatore", "country": "India", "latitude": 11.0168, "longitude": 76.9558},
+    {"city": "Madurai", "country": "India", "latitude": 9.9252, "longitude": 78.1198},
+    {"city": "Vijayawada", "country": "India", "latitude": 16.5062, "longitude": 80.6480},
+    {"city": "Visakhapatnam", "country": "India", "latitude": 17.6868, "longitude": 83.2185},
+    {"city": "Kochi", "country": "India", "latitude": 9.9312, "longitude": 76.2673},
+    {"city": "Mysore", "country": "India", "latitude": 12.2958, "longitude": 76.6394},
+    {"city": "Mangalore", "country": "India", "latitude": 12.9141, "longitude": 74.8560},
     {"city": "Beijing", "country": "China", "latitude": 39.9042, "longitude": 116.4074},
     {"city": "Shanghai", "country": "China", "latitude": 31.2304, "longitude": 121.4737},
     {"city": "Cairo", "country": "Egypt", "latitude": 30.0444, "longitude": 31.2357},
@@ -141,6 +179,7 @@ _COMMON_CITIES = [
 def geocode_city(q: str):
     """
     Auto-suggest and resolve latitude and longitude for a city and country query.
+    Searches sample presets, local world cities gazetteer, and enriches via Nominatim OpenStreetMap.
     """
     clean_q = q.strip().lower()
     if not clean_q:
@@ -161,6 +200,7 @@ def geocode_city(q: str):
                 "country": country,
                 "latitude": p.get("latitude", 0.0),
                 "longitude": p.get("longitude", 0.0),
+                "source": "preset"
             })
 
     # 2. Search common world cities
@@ -168,7 +208,54 @@ def geocode_city(q: str):
         key = f"{c['city'].lower()}-{c['country'].lower()}"
         if key not in seen and (clean_q in c["city"].lower() or clean_q in c["country"].lower()):
             seen.add(key)
-            results.append(c)
+            results.append({
+                **c,
+                "source": "offline_gazetteer"
+            })
+
+    # 3. If query has >=2 characters and results < 8, enrich from Nominatim OpenStreetMap
+    if len(clean_q) >= 2 and len(results) < 8:
+        try:
+            enc_q = urllib.parse.quote(q.strip())
+            url = f"https://nominatim.openstreetmap.org/search?q={enc_q}&format=json&limit=8&addressdetails=1"
+            req = urllib.request.Request(
+                url,
+                headers={"User-Agent": "SynodixAstrology/2.28", "Accept-Language": "en"}
+            )
+            with urllib.request.urlopen(req, timeout=3) as resp:
+                if resp.status == 200:
+                    nom_data = json.loads(resp.read().decode("utf-8"))
+                    for item in nom_data:
+                        addr = item.get("address", {})
+                        city = (
+                            addr.get("city")
+                            or addr.get("town")
+                            or addr.get("village")
+                            or addr.get("municipality")
+                            or addr.get("suburb")
+                            or addr.get("county")
+                            or item.get("name")
+                        )
+                        country = addr.get("country")
+                        admin = addr.get("state") or addr.get("province") or addr.get("state_district")
+                        lat = float(item.get("lat", 0))
+                        lon = float(item.get("lon", 0))
+                        if city and country and lat != 0 and lon != 0:
+                            key = f"{city.lower()}-{country.lower()}"
+                            if key not in seen:
+                                seen.add(key)
+                                results.append({
+                                    "city": city,
+                                    "country": country,
+                                    "adminCode": admin,
+                                    "latitude": round(lat, 4),
+                                    "longitude": round(lon, 4),
+                                    "source": "online_nominatim"
+                                })
+                                if len(results) >= 10:
+                                    break
+        except Exception:
+            pass
 
     return results[:10]
 

@@ -189,7 +189,7 @@ def test_ui_detect_gps_populates_coordinates_city_and_country():
         gps_btn.click()
 
         # Wait for GPS detection and reverse geocoding to complete
-        page.wait_for_timeout(1000)
+        page.wait_for_function("() => document.querySelector('input#latitude') && document.querySelector('input#latitude').value !== '0'", timeout=6000)
 
         # Assert coordinates are populated
         lat_val = float(lat_input.input_value())
@@ -241,7 +241,7 @@ def test_ui_detect_gps_updates_existing_preset_values():
         # Click Detect GPS
         gps_btn = page.locator("button[aria-label='Detect GPS coordinates']")
         gps_btn.click()
-        page.wait_for_timeout(1000)
+        page.wait_for_function("() => document.querySelector('input#city_name') && document.querySelector('input#city_name').value !== 'San Francisco'", timeout=6000)
 
         # Assert city and country were updated from San Francisco to Tokyo / Suginami / Japan
         city_val = city_input.input_value()
@@ -296,6 +296,78 @@ def test_ui_detect_gps_fallback_when_geolocation_denied():
         assert lon_input.input_value() != "0", "Longitude should be populated by IP fallback"
         assert city_input.input_value() != "", "City should be populated by IP fallback"
         assert country_input.input_value() != "", "Country should be populated by IP fallback"
+
+        assert_no_critical_errors(page)
+        browser.close()
+
+
+def test_ui_city_selector_finds_jamshedpur_and_gurugram():
+    """Verify that city selector reliably discovers Jamshedpur and Gurugram, populating coordinates and India."""
+    with sync_playwright() as pw:
+        browser = _launch_browser(pw)
+        context = browser.new_context(viewport={"width": 1280, "height": 900})
+        page = context.new_page()
+
+        page._console_errors = []
+        page.on("console", lambda msg: page._console_errors.append(msg.text) if msg.type == "error" else None)
+        page.on("pageerror", lambda err: page._console_errors.append(str(err)))
+
+        page.goto("http://127.0.0.1:5173", wait_until="domcontentloaded")
+        page.wait_for_selector("text=Synodix", timeout=10000)
+
+        city_input = page.locator("input#city_name")
+        country_input = page.locator("input#country_name")
+        lat_input = page.locator("input#latitude")
+        lon_input = page.locator("input#longitude")
+
+        # 1. Test searching "Jamshed"
+        city_input.fill("")
+        city_input.press_sequentially("Jamshed", delay=40)
+        page.wait_for_timeout(400)
+
+        dropdown = page.locator("div[role='listbox']")
+        assert dropdown.is_visible(), "Dropdown listbox should be visible for Jamshed"
+
+        jamshedpur_opt = page.locator("div[role='option']:has-text('Jamshedpur')").first
+        assert jamshedpur_opt.is_visible(), "Jamshedpur option must be present in suggestion dropdown"
+        jamshedpur_opt.click()
+        page.wait_for_timeout(200)
+
+        assert city_input.input_value() == "Jamshedpur"
+        assert country_input.input_value() == "India"
+        assert abs(float(lat_input.input_value()) - 22.8015) < 0.1
+        assert abs(float(lon_input.input_value()) - 86.2030) < 0.1
+
+        # 2. Test searching "Guru"
+        city_input.fill("")
+        city_input.press_sequentially("Guru", delay=40)
+        page.wait_for_timeout(400)
+
+        assert dropdown.is_visible(), "Dropdown listbox should be visible for Guru"
+        gurugram_opt = page.locator("div[role='option']:has-text('Gurugram')").first
+        assert gurugram_opt.is_visible(), "Gurugram option must be present in suggestion dropdown"
+        gurugram_opt.click()
+        page.wait_for_timeout(200)
+
+        assert city_input.input_value() == "Gurugram"
+        assert country_input.input_value() == "India"
+        assert abs(float(lat_input.input_value()) - 28.4595) < 0.1
+        assert abs(float(lon_input.input_value()) - 77.0266) < 0.1
+
+        # 3. Test typing and blur auto-resolution
+        city_input.fill("")
+        country_input.fill("United States") # simulate stale country from preset
+        lat_input.fill("0")
+        lon_input.fill("0")
+        city_input.press_sequentially("Jamshedpur", delay=30)
+        # Blur the input by focusing date input
+        page.locator("input#birth_date").focus()
+        page.wait_for_timeout(500)
+
+        # Country should automatically resolve to India and lat/lon updated
+        assert country_input.input_value() == "India", f"Country should auto-resolve to India on blur, got {country_input.input_value()}"
+        assert abs(float(lat_input.input_value()) - 22.8015) < 0.1
+        assert abs(float(lon_input.input_value()) - 86.2030) < 0.1
 
         assert_no_critical_errors(page)
         browser.close()

@@ -17,20 +17,20 @@ export interface GeocodeResult {
   adminCode?: string;
   latitude: number;
   longitude: number;
-  source: 'offline_gazetteer' | 'online_photon' | 'device_gps';
+  source: 'offline_gazetteer' | 'online_photon' | 'device_gps' | 'online_nominatim';
 }
 
 /**
  * Searches for city suggestions using local offline gazetteer first,
- * with optional online enrichment if connected.
+ * with backend gateway and online Nominatim enrichment.
  */
-export async function searchCitySuggestions(query: string, limit = 8): Promise<GeocodeResult[]> {
+export async function searchCitySuggestions(query: string, limit = 10): Promise<GeocodeResult[]> {
   const trimmed = query.trim();
   if (trimmed.length < 2) {
     return [];
   }
 
-  // 1. Instant offline search
+  // 1. Instant offline search from curated local gazetteer
   const localMatches = getMatchingCities(trimmed, limit);
   const results: GeocodeResult[] = localMatches.map((c) => ({
     city: c.city,
@@ -41,47 +41,38 @@ export async function searchCitySuggestions(query: string, limit = 8): Promise<G
     source: 'offline_gazetteer',
   }));
 
-  // If local results are found or user is offline, return immediately for instant 0ms response
-  if (results.length > 0 || (typeof navigator !== 'undefined' && !navigator.onLine)) {
-    return results;
+  // If local results already satisfy the limit or user is offline, return immediately (0ms)
+  if (results.length >= 6 || (typeof navigator !== 'undefined' && !navigator.onLine)) {
+    return results.slice(0, limit);
   }
 
-  // 2. Online enrichment fallback via Photon (Komoot / OpenStreetMap)
+  // 2. Query backend geocode gateway (ultra-fast, 0 CORS, local caching + OSM Nominatim enrichment)
   try {
     const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 1800);
-
-    const url = `https://photon.komoot.io/api/?q=${encodeURIComponent(trimmed)}&limit=6`;
-    const res = await fetch(url, { signal: controller.signal });
+    const timeoutId = setTimeout(() => controller.abort(), 2000);
+    const res = await fetch(apiUrl(`/api/geocode?q=${encodeURIComponent(trimmed)}`), {
+      signal: controller.signal,
+    });
     clearTimeout(timeoutId);
 
     if (res.ok) {
       const data = await res.json();
-      if (data.features && Array.isArray(data.features)) {
-        for (const feat of data.features) {
-          const props = feat.properties || {};
-          const coords = feat.geometry?.coordinates;
-          const cityName = props.name || props.city || props.town || props.village;
-          const countryName = props.country;
-
-          if (cityName && countryName && Array.isArray(coords) && coords.length >= 2) {
-            const lon = Number(coords[0]);
-            const lat = Number(coords[1]);
-
-            // Deduplicate against local matches
+      if (Array.isArray(data)) {
+        for (const item of data) {
+          if (item.city && item.country) {
             const exists = results.some(
-              (r) => r.city.toLowerCase() === cityName.toLowerCase() &&
-                     r.country.toLowerCase() === countryName.toLowerCase()
+              (r) =>
+                r.city.toLowerCase() === item.city.toLowerCase() &&
+                r.country.toLowerCase() === item.country.toLowerCase()
             );
-
-            if (!exists && !isNaN(lat) && !isNaN(lon)) {
+            if (!exists) {
               results.push({
-                city: cityName,
-                country: countryName,
-                adminCode: props.state || props.county,
-                latitude: Number(lat.toFixed(4)),
-                longitude: Number(lon.toFixed(4)),
-                source: 'online_photon',
+                city: item.city,
+                country: item.country,
+                adminCode: item.adminCode,
+                latitude: Number(Number(item.latitude).toFixed(4)),
+                longitude: Number(Number(item.longitude).toFixed(4)),
+                source: item.source || 'online_nominatim',
               });
             }
           }
@@ -90,7 +81,63 @@ export async function searchCitySuggestions(query: string, limit = 8): Promise<G
       }
     }
   } catch {
-    // Silently fall back to offline results if network fails or times out
+    // Backend gateway unreachable; fall through to client-side Nominatim
+  }
+
+  // 3. Fallback: Direct OpenStreetMap Nominatim client-side search if results still empty
+  if (results.length === 0 && (typeof navigator === 'undefined' || navigator.onLine !== false)) {
+    try {
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 2000);
+      const url = `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(trimmed)}&format=json&limit=8&addressdetails=1`;
+      const res = await fetch(url, {
+        headers: { 'User-Agent': 'SynodixAstrology/2.28', 'Accept-Language': 'en' },
+        signal: controller.signal,
+      });
+      clearTimeout(timeoutId);
+
+      if (res.ok) {
+        const data = await res.json();
+        if (Array.isArray(data)) {
+          for (const item of data) {
+            const addr = item.address || {};
+            const cityName =
+              addr.city ||
+              addr.town ||
+              addr.village ||
+              addr.municipality ||
+              addr.suburb ||
+              addr.county ||
+              item.name;
+            const countryName = addr.country;
+            const adminCode = addr.state || addr.province || addr.state_district;
+            const lat = Number(item.lat);
+            const lon = Number(item.lon);
+
+            if (cityName && countryName && !isNaN(lat) && !isNaN(lon)) {
+              const exists = results.some(
+                (r) =>
+                  r.city.toLowerCase() === cityName.toLowerCase() &&
+                  r.country.toLowerCase() === countryName.toLowerCase()
+              );
+              if (!exists) {
+                results.push({
+                  city: cityName,
+                  country: countryName,
+                  adminCode,
+                  latitude: Number(lat.toFixed(4)),
+                  longitude: Number(lon.toFixed(4)),
+                  source: 'online_nominatim',
+                });
+              }
+            }
+            if (results.length >= limit) break;
+          }
+        }
+      }
+    } catch {
+      // Fall through to return existing results
+    }
   }
 
   return results.slice(0, limit);
@@ -103,12 +150,15 @@ export async function determineCoordinates(city: string, country?: string): Prom
   const normCity = city.trim().toLowerCase();
   const normCountry = country ? country.trim().toLowerCase() : '';
 
-  // Check offline gazetteer first
+  // 1. Check offline gazetteer first (with exact city + country or city alone)
   const exactMatch = WORLD_CITIES.find((c) => {
     const cCity = c.city.toLowerCase();
     const cCountry = c.country.toLowerCase();
     if (normCountry) {
-      return cCity === normCity && (cCountry === normCountry || cCountry.includes(normCountry) || normCountry.includes(cCountry));
+      return (
+        cCity === normCity &&
+        (cCountry === normCountry || cCountry.includes(normCountry) || normCountry.includes(cCountry))
+      );
     }
     return cCity === normCity;
   });
@@ -124,10 +174,33 @@ export async function determineCoordinates(city: string, country?: string): Prom
     };
   }
 
-  // Fallback: search online
+  // If no match with country, try matching city alone in offline gazetteer
+  if (normCountry) {
+    const cityOnlyMatch = WORLD_CITIES.find((c) => c.city.toLowerCase() === normCity);
+    if (cityOnlyMatch) {
+      return {
+        city: cityOnlyMatch.city,
+        country: cityOnlyMatch.country,
+        adminCode: cityOnlyMatch.adminCode,
+        latitude: cityOnlyMatch.latitude,
+        longitude: cityOnlyMatch.longitude,
+        source: 'offline_gazetteer',
+      };
+    }
+  }
+
+  // 2. Fallback: search via online / backend gateway
   const searchResults = await searchCitySuggestions(country ? `${city}, ${country}` : city, 1);
   if (searchResults.length > 0) {
     return searchResults[0];
+  }
+
+  // If search with country returned empty, retry with city alone
+  if (country) {
+    const cityOnlyResults = await searchCitySuggestions(city, 1);
+    if (cityOnlyResults.length > 0) {
+      return cityOnlyResults[0];
+    }
   }
 
   return null;

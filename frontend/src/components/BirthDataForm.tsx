@@ -24,6 +24,7 @@ import {
 } from 'lucide-react';
 import { getSavedProfiles, saveProfile, deleteProfile, UserProfile } from '../utils/vault';
 import { searchCitySuggestions, determineCoordinates, requestDeviceLocation, GeocodeResult } from '../utils/geocoding';
+import { getMatchingCities } from '../data/worldCities';
 
 interface Props {
   onCompute: (input: BirthInput, name?: string) => void;
@@ -148,17 +149,45 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
     };
   }, []);
 
-  const handleCityChange = async (val: string) => {
-    setFormData((prev) => ({ ...prev, city_name: val }));
+  const latestCityQueryRef = useRef<string>('');
 
-    if (val.trim().length >= 2) {
-      const suggestions = await searchCitySuggestions(val);
-      setCitySuggestions(suggestions);
-      setIsCitySuggestionsOpen(suggestions.length > 0);
-      setActiveSuggestionIndex(-1);
-    } else {
+  const handleCityChange = (val: string) => {
+    setFormData((prev) => ({ ...prev, city_name: val }));
+    setCoordStatus('manual');
+    latestCityQueryRef.current = val;
+
+    const trimmed = val.trim();
+    if (trimmed.length < 2) {
       setCitySuggestions([]);
       setIsCitySuggestionsOpen(false);
+      return;
+    }
+
+    // 1. Instant synchronous offline matching (0ms latency)
+    const localMatches: GeocodeResult[] = getMatchingCities(trimmed, 10).map((c) => ({
+      city: c.city,
+      country: c.country,
+      adminCode: c.adminCode,
+      latitude: c.latitude,
+      longitude: c.longitude,
+      source: 'offline_gazetteer',
+    }));
+
+    if (localMatches.length > 0) {
+      setCitySuggestions(localMatches);
+      setIsCitySuggestionsOpen(true);
+      setActiveSuggestionIndex(-1);
+    }
+
+    // 2. Async search & enrichment with race-condition guard
+    if (localMatches.length < 8) {
+      searchCitySuggestions(trimmed, 10).then((results) => {
+        if (latestCityQueryRef.current.trim() === trimmed && results.length > 0) {
+          setCitySuggestions(results);
+          setIsCitySuggestionsOpen(true);
+          setActiveSuggestionIndex(-1);
+        }
+      });
     }
   };
 
@@ -176,6 +205,18 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
   };
 
   const handleCityKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      e.stopPropagation();
+      if (isCitySuggestionsOpen && citySuggestions.length > 0) {
+        const targetIndex = activeSuggestionIndex >= 0 ? activeSuggestionIndex : 0;
+        if (targetIndex < citySuggestions.length) {
+          handleSelectCity(citySuggestions[targetIndex]);
+        }
+      }
+      return;
+    }
+
     if (!isCitySuggestionsOpen || citySuggestions.length === 0) return;
 
     if (e.key === 'ArrowDown') {
@@ -184,13 +225,6 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
     } else if (e.key === 'ArrowUp') {
       e.preventDefault();
       setActiveSuggestionIndex((prev) => (prev > 0 ? prev - 1 : citySuggestions.length - 1));
-    } else if (e.key === 'Enter') {
-      const targetIndex = activeSuggestionIndex >= 0 ? activeSuggestionIndex : 0;
-      if (targetIndex < citySuggestions.length) {
-        e.preventDefault();
-        e.stopPropagation();
-        handleSelectCity(citySuggestions[targetIndex]);
-      }
     }
   };
 
@@ -203,12 +237,13 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
             ...prev,
             latitude: match.latitude,
             longitude: match.longitude,
-            country_name: prev.country_name || match.country,
+            city_name: match.city,
+            country_name: match.country,
           }));
           setCoordStatus('auto_resolved');
         }
       }
-    }, 200);
+    }, 250);
   };
 
   const handleDetectLocation = async () => {
@@ -638,7 +673,7 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
                     value={formData.city_name}
                     onChange={(e) => handleCityChange(e.target.value)}
                     onFocus={() => {
-                      if (formData.city_name.trim().length >= 2 && citySuggestions.length > 0) {
+                      if (citySuggestions.length > 0) {
                         setIsCitySuggestionsOpen(true);
                       }
                     }}

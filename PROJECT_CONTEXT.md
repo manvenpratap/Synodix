@@ -1,7 +1,7 @@
 # Synodix: Project Context & Working Memory
 
-**Last Updated:** 2026-10-25 11:20:10
-**Version:** 2.28.0  
+**Last Updated:** 2026-10-25 12:10:02
+**Version:** 2.29.0  
 **Stack:** Python 3.12 (FastAPI, Swiss Ephemeris 2.10, Skyfield DE421) + TypeScript / React 19 / Vite / Tailwind CSS v4 / Framer Motion / Capacitor 8 (iOS & Android)  
 **Workspace:** `/Volumes/Study/Projects/Astrology` (symlinked as `/Volumes/Study/Astrology`)  
 **Git Remote:** `https://github.com/manvenpratap/Synodix.git`  
@@ -9,7 +9,23 @@
 ---
 
 ## 1. Current Status & Milestone
-- **Active Phase**: Robust GPS Reverse Geocoding, IP Fallback & City/Country Population (Completed)
+- **Active Phase**: Global City Selector Intelligence & Instant Indian Metropolitan Discovery (Completed)
+- **Global City Selector Intelligence & Instant Indian Metropolitan Discovery (v2.29.0)**:
+  - **Instant 0ms Synchronous Suggestions & Race-Condition Immunity (`BirthDataForm.tsx`)**:
+    - Re-architected `handleCityChange` to immediately compute and render local matches in 0ms synchronously from `getMatchingCities`.
+    - Introduced `latestCityQueryRef` to guard asynchronous backend/OSM enrichment against keystroke race conditions, ensuring stale responses never overwrite current input.
+    - Eliminated uncontrolled async searches on `onFocus` that previously triggered race conditions with default preset values.
+    - Added form `Enter` key handling in `handleCityKeyDown`: `preventDefault` protects against accidental page reloads while seamlessly confirming suggestion selections.
+  - **Major Gazetteer Expansion for India & Global Industrial Hubs (`worldCities.ts`, `backend/app/main.py`)**:
+    - Added comprehensive gazetteer entries for all tier-1/tier-2 Indian cities and state capitals: Jamshedpur, Ranchi, Dhanbad, Bokaro, Patna, Gaya, Muzaffarpur, Bhagalpur, Lucknow, Kanpur, Agra, Meerut, Bareilly, Aligarh, Prayagraj, Allahabad, Varanasi, Amritsar, Ludhiana, Jalandhar, Surat, Vadodara, Rajkot, Bhavnagar, Jamnagar, Nashik, Aurangabad, Chhatrapati Sambhajinagar, Solapur, Kolhapur, Gwalior, Jabalpur, Raipur, Bilaspur, Bhubaneswar, Cuttack, Rourkela, Puri, Guwahati, Shillong, Dehradun, Shimla, Jammu, Srinagar, Coimbatore, Madurai, Tiruchirappalli, Salem, Tirunelveli, Vijayawada, Guntur, Tirupati, Warangal, Kozhikode, Thiruvananthapuram, Thrissur, Mangalore, Mysore, Hubli, Belgaum.
+  - **Universal Nominatim & Backend Search Gateway (`backend/app/main.py`, `geocoding.ts`)**:
+    - Upgraded `/api/geocode` endpoint: queries local `_COMMON_CITIES`, historical presets, and dynamically queries OpenStreetMap Nominatim search (`https://nominatim.openstreetmap.org/search`) with English locale headers for any town on Earth.
+    - Updated `determineCoordinates()`: if searching with `city, country` yields no result (e.g. stale default country "USA" paired with typed city "Jamshedpur"), automatically falls back to searching `city` alone and auto-updates `country_name` to "India".
+  - **Automated Regression Suite (`test_07_geocoding_intelligence.py`)**:
+    - Added `test_ui_city_selector_finds_jamshedpur_and_gurugram`: tests real-time suggestion selection for Jamshedpur and Gurugram, coordinates auto-population, and blur auto-resolution from stale preset country.
+    - All 7 geocoding intelligence tests passing in 22.57s.
+  - **Workflow Health**: 100% CLEAN (Verified via `./pipeline.sh doctor`)
+  - **Test Invariants**: 24/24 regression suites passing via `./pipeline.sh test --summary` (65.41s)
 - **Robust GPS Reverse Geocoding & City/Country Auto-Population (v2.28.0)**:
   - **Multi-Tier Reverse Geocoding Gateway (`backend/app/main.py`, `frontend/src/utils/geocoding.ts`)**:
     - Added `@app.get("/api/reverse-geocode")` server gateway with multi-tier fallback: Primary Nominatim OpenStreetMap (with User-Agent and English language headers, 0 CORS, sub-200ms latency), Secondary Photon fallback, and Tertiary offline nearest-neighbor.
