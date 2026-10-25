@@ -9,12 +9,25 @@ createRoot(document.getElementById('root')!).render(
   </StrictMode>,
 )
 
-// Register service worker for offline PWA support
-if ('serviceWorker' in navigator && import.meta.env.PROD) {
+// Register service worker with aggressive cache invalidation & update checks
+if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/sw.js').catch((err) => {
+    // Purge any legacy stale caches
+    if (typeof caches !== 'undefined') {
+      caches.keys().then((keys) => {
+        for (const key of keys) {
+          if (key !== 'synodix-v2.30.0') {
+            caches.delete(key);
+          }
+        }
+      });
+    }
+
+    navigator.serviceWorker.register('/sw.js').then((reg) => {
+      // Force update check on every load
+      reg.update();
+    }).catch((err) => {
       console.warn('ServiceWorker registration failed: ', err)
     })
   })
 }
-

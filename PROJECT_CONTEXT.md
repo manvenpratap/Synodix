@@ -1,6 +1,6 @@
 # Synodix: Project Context & Working Memory
 
-**Last Updated:** 2026-10-25 12:38:06
+**Last Updated:** 2026-10-25 12:49:19
 **Version:** 2.30.0  
 **Stack:** Python 3.12 (FastAPI, Swiss Ephemeris 2.10, Skyfield DE421) + TypeScript / React 19 / Vite / Tailwind CSS v4 / Framer Motion / Capacitor 8 (iOS & Android)  
 **Workspace:** `/Volumes/Study/Projects/Astrology` (symlinked as `/Volumes/Study/Astrology`)  
@@ -11,6 +11,13 @@
 ## 1. Current Status & Milestone
 - **Active Phase**: Instant Local Proximity Reverse-Geocoding & Resilient GPS City Auto-Population (Completed)
 - **Instant Local Proximity Reverse-Geocoding & Resilient GPS City Auto-Population (v2.30.0)**:
+  - **Service Worker Cache-Busting & Zero Stale Asset Invalidation (`sw.js`, `main.tsx`, `index.html`)**:
+    - Upgraded Service Worker cache strategy to **Network-First for all HTML navigation requests**, ensuring UI refactors, removed buttons, and bug fixes are instantly reflected in all user browsers without being trapped behind stale Service Worker caches.
+    - Automated background purging of legacy `astrology-v1` caches on activation, bumped cache identity to `synodix-v2.30.0`, and added proactive `registration.update()` checks on every application load.
+    - Added HTTP `no-cache, no-store, must-revalidate` directives to `index.html` headers to prevent aggressive disk caching of the entry point HTML.
+  - **Elimination of Duplicate Navigation & Redundant Screen Entry Points**:
+    - Verified complete eradication of the redundant `Whitepaper` pill and `Switch Profile` button from the top-right header actions bar.
+    - Ensured screen routing belongs strictly to the primary navigation systems: desktop sidebar (`NAV_ITEMS`), mobile bottom navigation (`BOTTOM_NAV_ITEMS`), and the linear Epistemic Journey Stepper (`JOURNEY_STEPS`).
   - **Zero-Latency Proximity Geocoding (`backend/app/main.py`, `geocoding.ts`)**:
     - Re-architected `reverseGeocode` and `/api/reverse-geocode` to perform an instant 0ms proximity search against curated gazetteer cities before triggering remote network requests. Coordinates within $\approx 40\text{km}$ ($0.4^\circ$) resolve in $< 0.05\text{ms}$ with zero timeouts and zero rate-limiting risk.
     - Updated backend Nominatim integration with compliant User-Agent headers, 2.0s timeouts, and universal feature name fallback (`data.get("name")` and `props.get("name")`).
