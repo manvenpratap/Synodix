@@ -223,6 +223,8 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
         country_name: coords.country || prev.country_name,
       }));
       setCoordStatus('gps');
+      setIsCitySuggestionsOpen(false);
+      setCitySuggestions([]);
     } catch (err: any) {
       alert(err.message || 'Unable to detect device location.');
     } finally {

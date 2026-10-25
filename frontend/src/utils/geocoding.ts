@@ -9,6 +9,7 @@
  */
 
 import { WORLD_CITIES, getMatchingCities } from '../data/worldCities';
+import { apiUrl } from './api';
 
 export interface GeocodeResult {
   city: string;
@@ -141,15 +142,70 @@ export interface DeviceLocationResult {
 
 /**
  * Reverse geocodes decimal coordinates (lat, lon) into a city and country.
- * Prioritizes fast online Photon reverse geocoding, with instant offline
- * nearest-neighbor fallback from curated WORLD_CITIES.
+ * Prioritizes:
+ * 1. Local Synodix backend reverse-geocoding gateway (server-side, zero-CORS).
+ * 2. Direct OpenStreetMap Nominatim reverse geocoding.
+ * 3. Photon OpenStreetMap reverse geocoding.
+ * 4. Offline nearest-neighbor fallback from curated WORLD_CITIES.
  */
 export async function reverseGeocode(
   latitude: number,
   longitude: number
 ): Promise<{ city: string; country: string } | null> {
-  // 1. Online reverse geocode via Photon if network is available
+  // 1. Try local Synodix backend reverse-geocoding gateway
+  try {
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 3000);
+    const res = await fetch(
+      apiUrl(`/api/reverse-geocode?lat=${encodeURIComponent(latitude)}&lon=${encodeURIComponent(longitude)}`),
+      { signal: controller.signal }
+    );
+    clearTimeout(timeoutId);
+
+    if (res.ok) {
+      const data = await res.json();
+      if (data.city && data.country && data.city !== 'Unknown City') {
+        return { city: data.city, country: data.country };
+      }
+    }
+  } catch {
+    // Fall through to direct client-side providers
+  }
+
+  // 2. Direct OpenStreetMap Nominatim reverse geocoding
   if (typeof navigator === 'undefined' || navigator.onLine !== false) {
+    try {
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 3000);
+      const url = `https://nominatim.openstreetmap.org/reverse?lat=${encodeURIComponent(latitude)}&lon=${encodeURIComponent(longitude)}&format=json`;
+      const res = await fetch(url, {
+        headers: { 'User-Agent': 'SynodixAstrology/2.27', 'Accept-Language': 'en' },
+        signal: controller.signal,
+      });
+      clearTimeout(timeoutId);
+
+      if (res.ok) {
+        const data = await res.json();
+        const addr = data.address || {};
+        const city =
+          addr.city ||
+          addr.town ||
+          addr.village ||
+          addr.municipality ||
+          addr.suburb ||
+          addr.city_district ||
+          addr.county ||
+          addr.state_district;
+        const country = addr.country;
+        if (city && country) {
+          return { city, country };
+        }
+      }
+    } catch {
+      // Fall through to Photon
+    }
+
+    // 3. Photon reverse geocoding fallback
     try {
       const controller = new AbortController();
       const timeoutId = setTimeout(() => controller.abort(), 2000);
@@ -168,6 +224,7 @@ export async function reverseGeocode(
             props.village ||
             props.municipality ||
             props.locality ||
+            props.district ||
             props.county ||
             props.name;
           const country = props.country;
@@ -181,7 +238,7 @@ export async function reverseGeocode(
     }
   }
 
-  // 2. Offline nearest neighbor in WORLD_CITIES gazetteer
+  // 4. Offline nearest neighbor in curated WORLD_CITIES gazetteer
   let closestCity: { city: string; country: string } | null = null;
   let minDistanceSq = Infinity;
 
@@ -203,38 +260,90 @@ export async function reverseGeocode(
 }
 
 /**
- * Requests device GPS coordinates via HTML5 Geolocation API,
- * and automatically reverse geocodes them into city and country names.
+ * Requests device GPS coordinates via HTML5 Geolocation API with automatic
+ * IP-based fallback if denied/unavailable, and automatically reverse geocodes
+ * them into verified city and country names.
  */
 export async function requestDeviceLocation(): Promise<DeviceLocationResult> {
-  const coords = await new Promise<{ latitude: number; longitude: number }>((resolve, reject) => {
-    if (!navigator.geolocation) {
-      reject(new Error('Geolocation is not supported by your browser/device.'));
-      return;
+  let coords: { latitude: number; longitude: number; city?: string; country?: string } | null = null;
+
+  // 1. Try HTML5 Geolocation API first
+  if (typeof navigator !== 'undefined' && navigator.geolocation) {
+    try {
+      coords = await new Promise<{ latitude: number; longitude: number }>((resolve, reject) => {
+        navigator.geolocation.getCurrentPosition(
+          (pos) => {
+            resolve({
+              latitude: Number(pos.coords.latitude.toFixed(4)),
+              longitude: Number(pos.coords.longitude.toFixed(4)),
+            });
+          },
+          (err) => {
+            reject(err);
+          },
+          { timeout: 7000, enableHighAccuracy: true, maximumAge: 60000 }
+        );
+      });
+    } catch {
+      coords = null;
     }
-
-    navigator.geolocation.getCurrentPosition(
-      (pos) => {
-        resolve({
-          latitude: Number(pos.coords.latitude.toFixed(4)),
-          longitude: Number(pos.coords.longitude.toFixed(4)),
-        });
-      },
-      (err) => {
-        reject(new Error(err.message || 'Unable to retrieve location.'));
-      },
-      { timeout: 8000, enableHighAccuracy: true }
-    );
-  });
-
-  try {
-    const geo = await reverseGeocode(coords.latitude, coords.longitude);
-    return {
-      ...coords,
-      city: geo?.city,
-      country: geo?.country,
-    };
-  } catch {
-    return coords;
   }
+
+  // 2. Fallback: If HTML5 Geolocation was denied, timed out, or unavailable, try IP location
+  if (!coords) {
+    try {
+      const backendRes = await fetch(apiUrl('/api/ip-location'));
+      if (backendRes.ok) {
+        const ipData = await backendRes.json();
+        if (ipData && ipData.latitude && ipData.longitude) {
+          coords = {
+            latitude: Number(Number(ipData.latitude).toFixed(4)),
+            longitude: Number(Number(ipData.longitude).toFixed(4)),
+            city: ipData.city || undefined,
+            country: ipData.country || undefined,
+          };
+        }
+      }
+    } catch {
+      // Direct client-side ip-api fallback
+      try {
+        const directRes = await fetch('http://ip-api.com/json/');
+        if (directRes.ok) {
+          const directData = await directRes.json();
+          if (directData && directData.status === 'success') {
+            coords = {
+              latitude: Number(Number(directData.lat).toFixed(4)),
+              longitude: Number(Number(directData.lon).toFixed(4)),
+              city: directData.city || undefined,
+              country: directData.country || undefined,
+            };
+          }
+        }
+      } catch {
+        // Fall through
+      }
+    }
+  }
+
+  if (!coords) {
+    throw new Error('Unable to detect location. Please check connection or enter coordinates manually.');
+  }
+
+  // 3. If city and country are not yet resolved, reverse geocode now
+  if (!coords.city || !coords.country) {
+    try {
+      const geo = await reverseGeocode(coords.latitude, coords.longitude);
+      if (geo) {
+        return {
+          ...coords,
+          city: geo.city,
+          country: geo.country,
+        };
+      }
+    } catch {
+      // Return coords as-is if reverse geocode fails
+    }
+  }
+
+  return coords;
 }

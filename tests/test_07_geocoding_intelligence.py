@@ -43,6 +43,27 @@ def test_backend_geocode_endpoint():
     assert abs(london["longitude"] - (-0.1278)) < 0.1, "London longitude should match standard"
 
 
+def test_backend_reverse_geocode_and_ip_endpoints():
+    """Verify backend API reverse geocoding and IP location endpoints."""
+    # 1. Reverse geocode endpoint
+    rev_url = "http://127.0.0.1:8000/api/reverse-geocode?lat=28.4595&lon=77.0266"
+    req = urllib.request.Request(rev_url)
+    with urllib.request.urlopen(req, timeout=5) as response:
+        assert response.status == 200
+        data = json.loads(response.read().decode("utf-8"))
+        assert "Gurugram" in data.get("city", "") or "Gurgaon" in data.get("city", "") or "Delhi" in data.get("city", "")
+        assert data.get("country") == "India"
+
+    # 2. IP location endpoint
+    ip_url = "http://127.0.0.1:8000/api/ip-location"
+    req = urllib.request.Request(ip_url)
+    with urllib.request.urlopen(req, timeout=5) as response:
+        assert response.status == 200
+        data = json.loads(response.read().decode("utf-8"))
+        assert "latitude" in data and "longitude" in data
+        assert "city" in data and "country" in data
+
+
 def test_ui_city_autosuggest_and_coordinate_resolution():
     """Verify frontend UI city auto-suggest and automatic lat/lon resolution."""
     with sync_playwright() as pw:
@@ -187,5 +208,95 @@ def test_ui_detect_gps_populates_coordinates_city_and_country():
         # Assert zero critical console errors
         assert_no_critical_errors(page)
         save_screenshot(page, "detect_gps_city_country_verified")
+        browser.close()
+
+
+def test_ui_detect_gps_updates_existing_preset_values():
+    """Verify that clicking Detect GPS replaces existing preset values with new coordinates and city/country."""
+    with sync_playwright() as pw:
+        browser = _launch_browser(pw)
+        # Mock geolocation to Tokyo (35.6762, 139.6503)
+        context = browser.new_context(
+            viewport={"width": 1280, "height": 900},
+            permissions=["geolocation"],
+            geolocation={"latitude": 35.6762, "longitude": 139.6503},
+        )
+        page = context.new_page()
+
+        page._console_errors = []
+        page.on("console", lambda msg: page._console_errors.append(msg.text) if msg.type == "error" else None)
+        page.on("pageerror", lambda err: page._console_errors.append(str(err)))
+
+        page.goto("http://127.0.0.1:5173", wait_until="domcontentloaded")
+        page.wait_for_selector("text=Synodix", timeout=10000)
+
+        city_input = page.locator("input#city_name")
+        country_input = page.locator("input#country_name")
+        lat_input = page.locator("input#latitude")
+        lon_input = page.locator("input#longitude")
+
+        # Keep initial default preset (San Francisco, US)
+        assert city_input.input_value() == "San Francisco"
+
+        # Click Detect GPS
+        gps_btn = page.locator("button[aria-label='Detect GPS coordinates']")
+        gps_btn.click()
+        page.wait_for_timeout(1000)
+
+        # Assert city and country were updated from San Francisco to Tokyo / Suginami / Japan
+        city_val = city_input.input_value()
+        country_val = country_input.input_value()
+        assert "Tokyo" in city_val or "Suginami" in city_val or "Japan" in country_val, f"City should update, got {city_val}"
+        assert "Japan" in country_val, f"Country should update to Japan, got {country_val}"
+        assert abs(float(lat_input.input_value()) - 35.6762) < 0.05
+        assert abs(float(lon_input.input_value()) - 139.6503) < 0.05
+
+        assert_no_critical_errors(page)
+        browser.close()
+
+
+def test_ui_detect_gps_fallback_when_geolocation_denied():
+    """Verify that when HTML5 Geolocation is denied/unavailable on desktop, Detect GPS gracefully falls back to IP location."""
+    with sync_playwright() as pw:
+        browser = _launch_browser(pw)
+        # Context without geolocation permission (denied/unsupported)
+        context = browser.new_context(
+            viewport={"width": 1280, "height": 900},
+            permissions=[],
+        )
+        page = context.new_page()
+
+        page._console_errors = []
+        page.on("console", lambda msg: page._console_errors.append(msg.text) if msg.type == "error" else None)
+        page.on("pageerror", lambda err: page._console_errors.append(str(err)))
+
+        page.goto("http://127.0.0.1:5173", wait_until="domcontentloaded")
+        page.wait_for_selector("text=Synodix", timeout=10000)
+
+        city_input = page.locator("input#city_name")
+        country_input = page.locator("input#country_name")
+        lat_input = page.locator("input#latitude")
+        lon_input = page.locator("input#longitude")
+
+        # Clear to test fallback population
+        city_input.fill("")
+        country_input.fill("")
+        lat_input.fill("0")
+        lon_input.fill("0")
+
+        # Click Detect GPS
+        gps_btn = page.locator("button[aria-label='Detect GPS coordinates']")
+        gps_btn.click()
+
+        # Wait for IP location fallback
+        page.wait_for_timeout(1500)
+
+        # Verify coordinates and city/country were populated via fallback
+        assert lat_input.input_value() != "0", "Latitude should be populated by IP fallback"
+        assert lon_input.input_value() != "0", "Longitude should be populated by IP fallback"
+        assert city_input.input_value() != "", "City should be populated by IP fallback"
+        assert country_input.input_value() != "", "Country should be populated by IP fallback"
+
+        assert_no_critical_errors(page)
         browser.close()
 

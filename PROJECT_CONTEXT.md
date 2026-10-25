@@ -1,7 +1,7 @@
 # Synodix: Project Context & Working Memory
 
-**Last Updated:** 2026-10-25 11:02:17
-**Version:** 2.27.0  
+**Last Updated:** 2026-10-25 11:20:10
+**Version:** 2.28.0  
 **Stack:** Python 3.12 (FastAPI, Swiss Ephemeris 2.10, Skyfield DE421) + TypeScript / React 19 / Vite / Tailwind CSS v4 / Framer Motion / Capacitor 8 (iOS & Android)  
 **Workspace:** `/Volumes/Study/Projects/Astrology` (symlinked as `/Volumes/Study/Astrology`)  
 **Git Remote:** `https://github.com/manvenpratap/Synodix.git`  
@@ -9,7 +9,24 @@
 ---
 
 ## 1. Current Status & Milestone
-- **Active Phase**: Elimination of Duplicate Navigation & Redundant Screen Entry Points (Completed)
+- **Active Phase**: Robust GPS Reverse Geocoding, IP Fallback & City/Country Population (Completed)
+- **Robust GPS Reverse Geocoding & City/Country Auto-Population (v2.28.0)**:
+  - **Multi-Tier Reverse Geocoding Gateway (`backend/app/main.py`, `frontend/src/utils/geocoding.ts`)**:
+    - Added `@app.get("/api/reverse-geocode")` server gateway with multi-tier fallback: Primary Nominatim OpenStreetMap (with User-Agent and English language headers, 0 CORS, sub-200ms latency), Secondary Photon fallback, and Tertiary offline nearest-neighbor.
+    - Updated client-side reverse geocoding to query local backend gateway first, direct Nominatim second, Photon third, and curated `WORLD_CITIES` gazetteer fourth.
+  - **Desktop & Permission-Denied Seamless IP Geolocation Fallback (`geocoding.ts`, `backend/app/main.py`)**:
+    - Added `@app.get("/api/ip-location")` endpoint delivering instant IP-based latitude, longitude, city, and country.
+    - Updated `requestDeviceLocation()`: tries HTML5 Geolocation API first; if unavailable, denied, or timed out (common on desktop Mac/PC browsers), seamlessly falls back to IP geolocation, ensuring Detect GPS always succeeds without blocking error alerts.
+  - **Form State & City/Country Auto-Population (`BirthDataForm.tsx`)**:
+    - When Detect GPS is clicked, accurately updates coordinates and auto-populates `city_name` and `country_name`, overwrites preset values (e.g. Steve Jobs "San Francisco"), sets `coordStatus: 'gps'`, and automatically dismisses city suggestion dropdowns.
+  - **Curated Gazetteer Expansion (`worldCities.ts`, `backend/app/main.py`)**:
+    - Expanded world cities database to include Gurugram, Gurgaon, Noida, Greater Noida, Ghaziabad, Faridabad, Chandigarh, Navi Mumbai, Thane, Indore, Bhopal, Nagpur, Kochi, and Visakhapatnam.
+  - **Automated Regression Suite (`test_07_geocoding_intelligence.py`)**:
+    - Added backend reverse geocode and IP location verification tests.
+    - Added UI test verifying Detect GPS updates existing preset values with new city/country and coordinates.
+    - Added UI test verifying graceful fallback to IP location when HTML5 geolocation is ungranted or denied.
+  - **Workflow Health**: 100% CLEAN (Verified via `./pipeline.sh doctor`)
+  - **Test Invariants**: 23/23 regression suites passing via `./pipeline.sh test --summary` (56.36s)
 - **Elimination of Duplicate Navigation & Redundant Entry Points (v2.27.0)**:
   - **Eradicated Redundant Header Screen Pills (`App.tsx`)**: Removed the ad-hoc `Whitepaper` and `Switch Profile` pill buttons from the top-right header actions bar. Screen routing belongs strictly in the primary navigation architectures (desktop sidebar and mobile bottom nav/stepper), freeing the header to function exclusively as a clean global utility bar (Feature Guide modal and Theme switch).
   - **Eliminated Sidebar Subject Dossier In-Card Duplicate Link (`App.tsx`)**: Replaced the redundant "Switch" text button in the Subject Dossier card (which sat 20px above `NAV_ITEMS[0]` "Workbench") with an informative, non-interactive `ACTIVE` status badge.

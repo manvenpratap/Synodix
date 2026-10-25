@@ -53,6 +53,8 @@ class BirthInputRequest(BaseModel):
 
 import json
 import os
+import urllib.request
+import math
 
 _data_file = os.path.join(os.path.dirname(__file__), "data", "personalities_100.json")
 if os.path.exists(_data_file):
@@ -105,8 +107,21 @@ _COMMON_CITIES = [
     {"city": "Los Angeles", "country": "United States", "latitude": 34.0522, "longitude": -118.2437},
     {"city": "Chicago", "country": "United States", "latitude": 41.8781, "longitude": -87.6298},
     {"city": "New Delhi", "country": "India", "latitude": 28.6139, "longitude": 77.2090},
+    {"city": "Delhi", "country": "India", "latitude": 28.7041, "longitude": 77.1025},
+    {"city": "Gurugram", "country": "India", "latitude": 28.4595, "longitude": 77.0266},
+    {"city": "Gurgaon", "country": "India", "latitude": 28.4595, "longitude": 77.0266},
+    {"city": "Noida", "country": "India", "latitude": 28.5355, "longitude": 77.3910},
+    {"city": "Ghaziabad", "country": "India", "latitude": 28.6692, "longitude": 77.4538},
+    {"city": "Faridabad", "country": "India", "latitude": 28.4089, "longitude": 77.3178},
+    {"city": "Chandigarh", "country": "India", "latitude": 30.7333, "longitude": 76.7794},
     {"city": "Mumbai", "country": "India", "latitude": 19.0760, "longitude": 72.8777},
     {"city": "Bengaluru", "country": "India", "latitude": 12.9716, "longitude": 77.5946},
+    {"city": "Hyderabad", "country": "India", "latitude": 17.3850, "longitude": 78.4867},
+    {"city": "Chennai", "country": "India", "latitude": 13.0827, "longitude": 80.2707},
+    {"city": "Pune", "country": "India", "latitude": 18.5204, "longitude": 73.8567},
+    {"city": "Kolkata", "country": "India", "latitude": 22.5726, "longitude": 88.3639},
+    {"city": "Ahmedabad", "country": "India", "latitude": 23.0225, "longitude": 72.5714},
+    {"city": "Jaipur", "country": "India", "latitude": 26.9124, "longitude": 75.7873},
     {"city": "Beijing", "country": "China", "latitude": 39.9042, "longitude": 116.4074},
     {"city": "Shanghai", "country": "China", "latitude": 31.2304, "longitude": 121.4737},
     {"city": "Cairo", "country": "Egypt", "latitude": 30.0444, "longitude": 31.2357},
@@ -156,6 +171,99 @@ def geocode_city(q: str):
             results.append(c)
 
     return results[:10]
+
+@app.get("/api/reverse-geocode")
+def reverse_geocode_endpoint(lat: float, lon: float):
+    """
+    Reverse geocodes latitude and longitude into city and country names with resilient multi-provider fallback.
+    """
+    # 1. Primary: Nominatim OpenStreetMap (reliable server-to-server query)
+    try:
+        url = f"https://nominatim.openstreetmap.org/reverse?lat={lat}&lon={lon}&format=json"
+        req = urllib.request.Request(url, headers={"User-Agent": "SynodixAstrology/2.27", "Accept-Language": "en"})
+        with urllib.request.urlopen(req, timeout=3) as resp:
+            if resp.status == 200:
+                data = json.loads(resp.read().decode("utf-8"))
+                addr = data.get("address", {})
+                city = (
+                    addr.get("city")
+                    or addr.get("town")
+                    or addr.get("village")
+                    or addr.get("municipality")
+                    or addr.get("suburb")
+                    or addr.get("city_district")
+                    or addr.get("county")
+                    or addr.get("state")
+                )
+                country = addr.get("country")
+                if city and country:
+                    return {"city": city, "country": country, "source": "nominatim"}
+    except Exception:
+        pass
+
+    # 2. Secondary: Photon OpenStreetMap fallback
+    try:
+        url = f"https://photon.komoot.io/reverse?lat={lat}&lon={lon}"
+        req = urllib.request.Request(url, headers={"User-Agent": "SynodixAstrology/2.27", "Accept-Language": "en"})
+        with urllib.request.urlopen(req, timeout=3) as resp:
+            if resp.status == 200:
+                data = json.loads(resp.read().decode("utf-8"))
+                feat = (data.get("features") or [{}])[0]
+                props = feat.get("properties", {})
+                city = (
+                    props.get("city")
+                    or props.get("town")
+                    or props.get("village")
+                    or props.get("municipality")
+                    or props.get("locality")
+                    or props.get("district")
+                    or props.get("county")
+                )
+                country = props.get("country")
+                if city and country:
+                    return {"city": city, "country": country, "source": "photon"}
+    except Exception:
+        pass
+
+    # 3. Tertiary: Local nearest-neighbor in _COMMON_CITIES
+    closest = None
+    min_dist_sq = float("inf")
+    for c in _COMMON_CITIES:
+        d_lat = c["latitude"] - lat
+        d_lon = c["longitude"] - lon
+        mean_lat_rad = math.radians((c["latitude"] + lat) / 2)
+        scaled_d_lon = d_lon * math.cos(mean_lat_rad)
+        dist_sq = d_lat * d_lat + scaled_d_lon * scaled_d_lon
+        if dist_sq < min_dist_sq:
+            min_dist_sq = dist_sq
+            closest = c
+
+    if closest:
+        return {"city": closest["city"], "country": closest["country"], "source": "local_gazetteer"}
+
+    return {"city": "Unknown City", "country": "Unknown Country", "source": "fallback"}
+
+@app.get("/api/ip-location")
+def ip_location_endpoint():
+    """
+    Fallback location detection via IP when HTML5 Geolocation is denied or unavailable.
+    """
+    try:
+        req = urllib.request.Request("http://ip-api.com/json/", headers={"User-Agent": "SynodixAstrology/2.27"})
+        with urllib.request.urlopen(req, timeout=3) as resp:
+            if resp.status == 200:
+                data = json.loads(resp.read().decode("utf-8"))
+                if data.get("status") == "success":
+                    return {
+                        "latitude": round(float(data.get("lat", 0.0)), 4),
+                        "longitude": round(float(data.get("lon", 0.0)), 4),
+                        "city": data.get("city", ""),
+                        "country": data.get("country", ""),
+                        "source": "ip_geolocation"
+                    }
+    except Exception:
+        pass
+    return None
 
 @app.get("/api/mathematical-evidence")
 def get_mathematical_evidence():
