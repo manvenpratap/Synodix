@@ -1,7 +1,7 @@
 # Synodix: Project Context & Working Memory
 
-**Last Updated:** 2026-10-25 13:22:36
-**Version:** 2.31.0  
+**Last Updated:** 2026-10-26 08:42:55
+**Version:** 2.31.1  
 **Stack:** Python 3.12 (FastAPI, Swiss Ephemeris 2.10, Skyfield DE421) + TypeScript / React 19 / Vite / Tailwind CSS v4 / Framer Motion / Capacitor 8 (iOS & Android)  
 **Workspace:** `/Volumes/Study/Projects/Astrology` (symlinked as `/Volumes/Study/Astrology`)  
 **Git Remote:** `https://github.com/manvenpratap/Synodix.git`  
@@ -9,7 +9,23 @@
 ---
 
 ## 1. Current Status & Milestone
-- **Active Phase**: Deterministic Tradition Calculators Motion System & Civilizational Continuity (Completed)
+- **Active Phase**: Zero-Collision Responsive Ergonomics & Window Scroll Unblocking (Completed)
+- **Zero-Collision Responsive Ergonomics & Window Scroll Unblocking (v2.31.1)**:
+  - **Unblocked Global Window Wheel & Trackpad Scrolling (`index.css`, `App.tsx`)**:
+    - Removed `overscroll-behavior-y: none;` and `touch-action: pan-y;` on `html, body, #root` that previously swallowed mouse-wheel and trackpad gestures on macOS and Windows browsers when at `scrollY === 0`.
+    - Removed redundant `overflow-x-hidden` on inner flex workspace wrappers in `App.tsx`, preventing unintentional CSS promotion of `overflow-y` to `auto` and nested scroll-trapping. Verified smooth window scrolling on mouse wheel (advancing `scrollY` past 500px).
+  - **Eliminated Overlapping Cards & Crushed Form Columns (`BirthDataForm.tsx`)**:
+    - Re-architected location and coordinates input row from brittle `md:grid-cols-4` to responsive `grid-cols-1 sm:grid-cols-2 xl:grid-cols-4`, preventing the 480px tablet viewport container from crushing inputs into 110px.
+    - Added `truncate` to the Decimal Lat/Lon label and `shrink-0` to the `Detect GPS` button, preventing button collisions with coordinate fields.
+    - Removed `layout` prop on the 100 historical Titans cards inside scrollable lists, eliminating Framer Motion FLIP re-layout calculation jitter.
+  - **Responsive Tradition Navigation & Cultural Presentation Banner (`TraditionCharts.tsx`)**:
+    - Replaced rigid horizontal tab row with responsive grid: `grid-cols-3 sm:grid-cols-3 lg:grid-cols-5 2xl:flex 2xl:flex-wrap`, rendering `shortName` on `<2xl` to eliminate button clipping and text overlap on tablet and mobile viewports.
+    - Stacked the Display Presentation mode switcher cleanly on `<2xl` viewports.
+  - **Hardened Geocoding Blur Race-Condition Immunity (`BirthDataForm.tsx`, `test_07_geocoding_intelligence.py`)**:
+    - Introduced `blurTimeoutRef`, `formDataRef`, and `coordStatusRef` in `BirthDataForm.tsx`. When a user selects a suggestion from the dropdown, any pending blur timeout is instantaneously canceled, preventing stale reverse-geocoding requests from overwriting verified selection data.
+  - **Automated Regression Invariant**:
+    - All 24 regression test suites passing cleanly via `./pipeline.sh test --summary` (59.65s).
+  - **Workflow Health**: 100% CLEAN (Verified via `./pipeline.sh doctor`).
 - **Deterministic Tradition Calculators Motion System & Civilizational Continuity (v2.31.0)**:
   - **Authored Navigation Motion Architecture (`TraditionCharts.tsx`, `index.css`)**:
     - Implemented a bespoke motion system adhering to the `/impeccable animate` playbook for navigating across all 9 deterministic cultural tradition visualizers (Jyotisha, Hellenistic Western, BaZi, Zi Wei Dou Shu, Maya Tzolk'in/Haab', Tibetan Phugpa, Persian Almuten, Egyptian Decans, Māori Maramataka).

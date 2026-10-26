@@ -268,21 +268,26 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
       <div className="reticle-corner-br" />
 
       {/* Tradition Selector Tabs */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-3.5 border-b border-white/10 gap-3">
-        <div className="hidden sm:block">
-          <span className="text-[11px] font-mono uppercase tracking-wider text-cyan-400 font-semibold block">
-            Deterministic Tradition Calculators
+      <div className="flex flex-col gap-3 pb-3.5 border-b border-white/10">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1.5">
+          <div>
+            <span className="text-[11px] font-mono uppercase tracking-wider text-cyan-400 font-semibold block">
+              Deterministic Tradition Calculators
+            </span>
+            <h3 className="text-base font-semibold text-slate-100 mt-0.5">
+              Cultural Computation Datasets
+            </h3>
+          </div>
+          <span className="text-[11px] font-mono text-slate-400 hidden sm:inline">
+            9 Calibrated Ephemerides
           </span>
-          <h3 className="text-base font-semibold text-slate-100 mt-0.5">
-            Cultural Computation Datasets
-          </h3>
         </div>
 
         {/* Clean Typographic Tabs with Cultural Glyphs & Theming */}
         <div
           role="tablist"
           aria-label="Astrological tradition charts"
-          className="grid grid-cols-3 sm:flex sm:flex-wrap items-center gap-1.5 w-full sm:w-auto pb-1 sm:pb-0 relative"
+          className="grid grid-cols-3 sm:grid-cols-3 lg:grid-cols-5 2xl:flex 2xl:flex-wrap items-center gap-1.5 w-full relative"
         >
           {Object.values(CULTURE_THEMES).map((t) => {
             const isActive = activeTab === t.id;
@@ -296,7 +301,7 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
                 type="button"
                 onClick={() => setActiveTab(t.id as any)}
                 whileTap={{ scale: 0.96 }}
-                className={`relative inline-flex items-center justify-center sm:justify-start gap-1 sm:gap-1.5 px-2 sm:px-3 py-2 min-h-[44px] text-[11px] sm:text-xs font-mono font-medium rounded-lg cursor-pointer transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-1 focus-visible:ring-offset-[#080a0f] ${
+                className={`relative inline-flex items-center justify-center sm:justify-start gap-1 sm:gap-1.5 px-2 sm:px-2.5 py-2 min-h-[44px] text-[11px] sm:text-xs font-mono font-medium rounded-lg cursor-pointer transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-1 focus-visible:ring-offset-[#080a0f] truncate ${
                   isActive
                     ? 'text-white font-semibold'
                     : 'text-slate-400 hover:text-slate-200 hover:bg-[#121721] border border-transparent'
@@ -310,8 +315,8 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
                   />
                 )}
                 <span className="relative z-10 text-sm select-none shrink-0">{t.glyph}</span>
-                <span className="relative z-10 hidden sm:inline whitespace-nowrap">{t.name}</span>
-                <span className="relative z-10 sm:hidden truncate">{t.shortName || t.name}</span>
+                <span className="relative z-10 hidden 2xl:inline whitespace-nowrap">{t.name}</span>
+                <span className="relative z-10 2xl:hidden truncate">{t.shortName || t.name}</span>
               </motion.button>
             );
           })}
@@ -320,7 +325,7 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
 
       {/* Culturally Themed Display Presentation & Heritage Banner */}
       <div className={`mt-4 p-4 rounded-xl border ${currentTheme.headerBorder} ${currentTheme.headerBg} relative overflow-hidden transition-colors duration-300 shadow-sm`}>
-        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-3 sm:gap-4 relative z-10">
+        <div className="flex flex-col 2xl:flex-row 2xl:items-center justify-between gap-3 sm:gap-4 relative z-10">
           <motion.div
             key={activeTab}
             initial={{ opacity: 0, x: -4 }}
@@ -352,8 +357,8 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
           </motion.div>
 
           {/* Culture-Themed Display Presentation Switcher */}
-          <div className="flex flex-col sm:flex-row sm:items-center gap-2.5 self-start lg:self-auto shrink-0 w-full sm:w-auto">
-            <span className="text-[11px] font-mono text-slate-400 font-medium">Display Presentation:</span>
+          <div className="flex flex-col sm:flex-row sm:items-center gap-2.5 self-start 2xl:self-auto shrink-0 w-full sm:w-auto pt-2.5 2xl:pt-0 border-t border-white/10 2xl:border-t-0">
+            <span className="text-[11px] font-mono text-slate-400 font-medium shrink-0">Display Presentation:</span>
             <div className="flex items-center gap-1 p-1 rounded-lg bg-[#06080e]/90 border border-white/10 backdrop-blur-xs w-full sm:w-auto relative">
               {(['both', 'chart', 'table'] as const).map((mode) => {
                 const isModeActive = chartViewMode === mode;

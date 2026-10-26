@@ -150,6 +150,19 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
   }, []);
 
   const latestCityQueryRef = useRef<string>('');
+  const blurTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const formDataRef = useRef(formData);
+  formDataRef.current = formData;
+  const coordStatusRef = useRef(coordStatus);
+  coordStatusRef.current = coordStatus;
+
+  useEffect(() => {
+    return () => {
+      if (blurTimeoutRef.current) {
+        clearTimeout(blurTimeoutRef.current);
+      }
+    };
+  }, []);
 
   const handleCityChange = (val: string) => {
     setFormData((prev) => ({ ...prev, city_name: val }));
@@ -192,6 +205,10 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
   };
 
   const handleSelectCity = (res: GeocodeResult) => {
+    if (blurTimeoutRef.current) {
+      clearTimeout(blurTimeoutRef.current);
+      blurTimeoutRef.current = null;
+    }
     setFormData((prev) => ({
       ...prev,
       city_name: res.city,
@@ -229,10 +246,12 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
   };
 
   const handleCityBlur = async () => {
-    setTimeout(async () => {
-      if (formData.city_name.trim() && coordStatus === 'manual') {
-        const match = await determineCoordinates(formData.city_name, formData.country_name);
-        if (match) {
+    if (blurTimeoutRef.current) clearTimeout(blurTimeoutRef.current);
+    blurTimeoutRef.current = setTimeout(async () => {
+      blurTimeoutRef.current = null;
+      if (formDataRef.current.city_name.trim() && coordStatusRef.current === 'manual') {
+        const match = await determineCoordinates(formDataRef.current.city_name, formDataRef.current.country_name);
+        if (match && coordStatusRef.current === 'manual') {
           setFormData((prev) => ({
             ...prev,
             latitude: match.latitude,
@@ -243,7 +262,7 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
           setCoordStatus('auto_resolved');
         }
       }
-    }, 250);
+    }, 150);
   };
 
   const handleDetectLocation = async () => {
@@ -588,7 +607,7 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
             </div>
 
             {/* Row 1: Temporal Calibration */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-3.5">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5">
               {/* Date of Birth */}
               <div>
                 <label
@@ -655,7 +674,7 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
             </div>
 
             {/* Row 2: Location & Coordinates Intelligence */}
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-3.5">
+            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-3.5">
               {/* City with Auto-suggest & Geocoding Intelligence */}
               <div ref={cityContainerRef} className="relative">
                 <div className="flex items-center justify-between mb-1">
@@ -786,10 +805,10 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
 
               {/* Decimal Coordinates */}
               <div>
-                <div className="flex items-center justify-between mb-1">
+                <div className="flex items-center justify-between mb-1 gap-1">
                   <label
                     htmlFor="latitude"
-                    className="block text-[11px] font-mono font-medium text-slate-300 uppercase tracking-wider"
+                    className="block text-[11px] font-mono font-medium text-slate-300 uppercase tracking-wider truncate"
                   >
                     Decimal Lat / Lon
                   </label>
@@ -797,7 +816,7 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
                     type="button"
                     onClick={handleDetectLocation}
                     disabled={isLocating}
-                    className="relative inline-flex items-center gap-1.5 min-h-[36px] sm:min-h-[28px] px-2.5 py-1 text-[11px] font-mono text-cyan-400 hover:text-cyan-200 bg-[#0d121c] border border-cyan-800/60 rounded transition-all cursor-pointer disabled:opacity-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 overflow-hidden shadow-xs hover:border-cyan-500"
+                    className="relative shrink-0 inline-flex items-center gap-1.5 min-h-[36px] sm:min-h-[28px] px-2.5 py-1 text-[11px] font-mono text-cyan-400 hover:text-cyan-200 bg-[#0d121c] border border-cyan-800/60 rounded transition-all cursor-pointer disabled:opacity-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 overflow-hidden shadow-xs hover:border-cyan-500"
                     data-tooltip="Detect current device GPS coordinates"
                     aria-label="Detect GPS coordinates"
                   >
@@ -823,7 +842,7 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
                         setCoordStatus('manual');
                         setFormData({ ...formData, latitude: parseFloat(e.target.value) || 0 });
                       }}
-                      className="w-full bg-[#080a0f] border border-[#1b2331] rounded-md pl-2.5 pr-11 py-2.5 sm:py-2 min-h-[44px] sm:min-h-[38px] text-xs font-mono text-slate-100 focus:outline-none focus:border-cyan-500 focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-1 focus-visible:ring-offset-[#080a0f] transition-colors"
+                      className="w-full bg-[#080a0f] border border-[#1b2331] rounded-md pl-2 pr-9 py-2.5 sm:py-2 min-h-[44px] sm:min-h-[38px] text-xs font-mono text-slate-100 focus:outline-none focus:border-cyan-500 focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-1 focus-visible:ring-offset-[#080a0f] transition-colors"
                     />
                     <button
                       type="button"
@@ -852,7 +871,7 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
                         setCoordStatus('manual');
                         setFormData({ ...formData, longitude: parseFloat(e.target.value) || 0 });
                       }}
-                      className="w-full bg-[#080a0f] border border-[#1b2331] rounded-md pl-2.5 pr-11 py-2.5 sm:py-2 min-h-[44px] sm:min-h-[38px] text-xs font-mono text-slate-100 focus:outline-none focus:border-cyan-500 focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-1 focus-visible:ring-offset-[#080a0f] transition-colors"
+                      className="w-full bg-[#080a0f] border border-[#1b2331] rounded-md pl-2 pr-9 py-2.5 sm:py-2 min-h-[44px] sm:min-h-[38px] text-xs font-mono text-slate-100 focus:outline-none focus:border-cyan-500 focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-1 focus-visible:ring-offset-[#080a0f] transition-colors"
                     />
                     <button
                       type="button"
@@ -1100,7 +1119,6 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
                 const isSelected = selectedTitan?.id === p.id;
                 return (
                   <motion.div
-                    layout
                     key={p.id}
                     role="button"
                     tabIndex={0}
