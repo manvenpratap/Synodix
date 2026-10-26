@@ -102,6 +102,38 @@ def test_cultural_traditions_theming_and_presentations():
             # Verify layout integrity
             assert check_no_horizontal_overflow(page)
 
+        # Verify 3D Vertical Carousel Deck & View Mode Switching
+        carousel_deck = page.locator("div[aria-label='Tradition Cards Vertical Carousel Deck']")
+        assert carousel_deck.is_visible(), "Vertical Carousel Deck must be visible by default"
+
+        # Previous card navigation (since previous loop ended on Maramataka, the 9th card)
+        prev_btn = page.locator("button[aria-label='Previous tradition card']")
+        assert prev_btn.is_visible() and prev_btn.is_enabled(), "Carousel prev button must be enabled on last card"
+        prev_btn.click()
+        page.wait_for_timeout(250)
+
+        # Reset to first card (Jyotisha) to verify next card navigation
+        page.locator("button#tradition-tab-jyotisha").click()
+        page.wait_for_timeout(250)
+        next_btn = page.locator("button[aria-label='Next tradition card']")
+        assert next_btn.is_visible() and next_btn.is_enabled(), "Carousel next button must be enabled on first card"
+        next_btn.click()
+        page.wait_for_timeout(250)
+
+        # Verify switching to Inspector Matrix mode
+        inspector_btn = page.locator("button:has-text('Inspector Matrix')")
+        assert inspector_btn.is_visible(), "Inspector Matrix button must be visible"
+        inspector_btn.click()
+        page.wait_for_timeout(250)
+        assert not carousel_deck.is_visible(), "Carousel deck must be hidden in Inspector Matrix mode"
+
+        # Switch back to Carousel Deck mode
+        deck_btn = page.locator("button:has-text('Carousel Deck')")
+        assert deck_btn.is_visible(), "Carousel Deck mode button must be visible"
+        deck_btn.click()
+        page.wait_for_timeout(250)
+        assert carousel_deck.is_visible(), "Carousel deck must be visible again after switching back"
+
         # Capture key cultural presentation screenshots for verification catalog
         for tid in ["jyotisha", "bazi", "western", "ziwei", "persian"]:
             page.locator(f"button#tradition-tab-{tid}").click()

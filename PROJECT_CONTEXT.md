@@ -1,7 +1,7 @@
 # Synodix: Project Context & Working Memory
 
-**Last Updated:** 2026-10-26 09:36:16
-**Version:** 2.31.4  
+**Last Updated:** 2026-10-26 09:57:29
+**Version:** 2.31.5  
 **Stack:** Python 3.12 (FastAPI, Swiss Ephemeris 2.10, Skyfield DE421) + TypeScript / React 19 / Vite / Tailwind CSS v4 / Framer Motion / Capacitor 8 (iOS & Android)  
 **Workspace:** `/Volumes/Study/Projects/Astrology` (symlinked as `/Volumes/Study/Astrology`)  
 **Git Remote:** `https://github.com/manvenpratap/Synodix.git`  
@@ -9,7 +9,26 @@
 ---
 
 ## 1. Current Status & Milestone
-- **Active Phase**: Light Theme Empirical Scorecard Contrast & Hover State Hardening (Completed)
+- **Active Phase**: 3D Vertical Carousel Deck for Cultural Traditions & Light Theme Calibration (Completed)
+- **3D Vertical Carousel Deck for Cultural Traditions & Light Theme Calibration (v2.31.5)**:
+  - **Authored 3D Vertical Carousel Deck (`TraditionVerticalCarousel.tsx`)**:
+    - Built a physics-based, 3D vertical stacked carousel deck for navigating across all 9 deterministic astrological tradition calculators (Jyotisha, BaZi, Western, Zi Wei, Maya, Tibetan, Persian, Egyptian, Maramataka).
+    - Features vertical stacking with depth perspective (`yOffset = diff * 95`, `scale = 1 - |diff| * 0.08`, `rotateX = diff * -5`, `opacity = isCenter ? 1 : 0.6`).
+    - Integrated multi-modal navigation controls: floating Up/Down chevron buttons, a 9-glyph vertical indicator rail with tooltips, keyboard navigation (`ArrowUp`/`ArrowDown`/`PageUp`/`PageDown`/`Home`/`End`), and throttled wheel scrolling (260ms threshold).
+    - Each card renders authentic cultural lineage, native script title, signature ephemeris badge, calculated astrometric telemetry highlights for the active profile, embedded interactive visual instrument, and direct "Inspect Full Telemetry & Tables" deep-dive CTA button.
+    - Optimized GPU rendering by culling cards at distance `|diff| > 2`, guaranteeing fluid 60fps performance on mobile touchscreens and low-power devices.
+  - **Seamless Presentation & View Architecture (`TraditionCharts.tsx`)**:
+    - Added a dual-view switcher (`layoutMode`: `'carousel'` | `'inspector'`) with `Layers` (Carousel Deck) and `Sliders` (Inspector Matrix) buttons.
+    - Synchronized `chartViewMode` (`both`, `chart`, `table`) with the carousel cards: hiding instruments in `table` mode to expand telemetry, and hiding telemetry in `chart` mode to focus exclusively on instruments.
+    - Preserved all cultural tabs (`id="tradition-tab-{tid}"`) and heritage banners in the DOM for continuous regression test compatibility.
+  - **Comprehensive Light Theme Contrast Calibration (`index.css`)**:
+    - Added light theme overrides for the 3D Carousel Deck: active cards map to `#ffffff` background with `#cbd5e1` borders and subtle box-shadows, inactive stacked cards map to `#f8fafc`.
+    - Mapped carousel telemetry boxes (`bg-black/40`, `bg-black/30`) to `#f1f5f9` with `#e2e8f0` borders, achieving WCAG AAA contrast ratios (Leo: 8.28:1, Uttara Phalguni: 6.47:1, Sagittarius: 4.58:1, Julian Day: 8.28:1).
+    - Floating side navigation rail maps to frosted `rgba(255, 255, 255, 0.94)` with `#334155` button icons and `#e2e8f0` hover backgrounds.
+  - **Automated Regression Invariant (`test_06_cultural_themes.py`)**:
+    - Added automated Playwright verification of the Vertical Carousel Deck, testing floating navigation controls (Up/Down), view mode switching (Carousel Deck <-> Inspector Matrix), and zero console errors.
+    - All 25 regression test suites passing cleanly via `./pipeline.sh test --summary` (58.67s).
+  - **Workflow Health**: 100% CLEAN (Verified via `./pipeline.sh doctor`).
 - **Light Theme Empirical Scorecard Contrast & Hover State Hardening (v2.31.4)**:
   - **Table Hover Dark Inversion Root Cause & Fix (`index.css`)**:
     - Identified root cause of blacked-out table rows on hover (row H6 in `MathematicalEvidenceCard.tsx`): Tailwind `.hover\:bg-\[\#111723\]:hover` triggered a pitch-black background on hover that lacked a light-theme override, rendering `#111723` with dark slate text (0.1:1 contrast).

@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Layers, Sliders } from 'lucide-react';
 import type { ChartResponse } from '../types';
 import { ExplainerTrigger } from './ExplainerTrigger';
+import { TraditionVerticalCarousel, TraditionKey } from './TraditionVerticalCarousel';
 import {
   NorthIndianChart,
   WesternCircularWheel,
@@ -254,8 +256,9 @@ const CULTURE_THEMES: Record<string, {
 };
 
 export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
-  const [activeTab, setActiveTab] = useState<'jyotisha' | 'bazi' | 'western' | 'persian' | 'egyptian' | 'ziwei' | 'mayan' | 'tibetan' | 'maramataka'>('jyotisha');
+  const [activeTab, setActiveTab] = useState<TraditionKey>('jyotisha');
   const [chartViewMode, setChartViewMode] = useState<'both' | 'chart' | 'table'>('both');
+  const [layoutMode, setLayoutMode] = useState<'carousel' | 'inspector'>('carousel');
 
   const { jyotisha, bazi, western, ziwei, mayan, tibetan, persian, egyptian, maramataka } = data.traditions;
   const currentTheme = CULTURE_THEMES[activeTab] || CULTURE_THEMES.jyotisha;
@@ -269,7 +272,7 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
 
       {/* Tradition Selector Tabs */}
       <div className="flex flex-col gap-3 pb-3.5 border-b border-white/10">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1.5">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
           <div>
             <span className="text-[11px] font-mono uppercase tracking-wider text-cyan-400 font-semibold block">
               Deterministic Tradition Calculators
@@ -278,9 +281,42 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
               Cultural Computation Datasets
             </h3>
           </div>
-          <span className="text-[11px] font-mono text-slate-400 hidden sm:inline">
-            9 Calibrated Ephemerides
-          </span>
+          <div className="flex items-center gap-2">
+            {/* View Mode Toggle: Vertical Carousel vs Full Inspector */}
+            <div className="flex items-center p-0.5 rounded-lg bg-[#06080e]/90 border border-white/10 text-xs font-mono">
+              <button
+                type="button"
+                onClick={() => setLayoutMode('carousel')}
+                className={`flex items-center gap-1.5 px-2.5 py-1 min-h-[32px] rounded cursor-pointer transition-colors ${
+                  layoutMode === 'carousel'
+                    ? 'bg-cyan-950 text-cyan-300 border border-cyan-700/80 font-bold'
+                    : 'text-slate-400 hover:text-slate-200'
+                }`}
+                data-tooltip="View traditions as an animated 3D vertical carousel deck"
+                aria-label="Vertical Carousel Deck view"
+              >
+                <Layers className="w-3.5 h-3.5" />
+                <span>Carousel Deck</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => setLayoutMode('inspector')}
+                className={`flex items-center gap-1.5 px-2.5 py-1 min-h-[32px] rounded cursor-pointer transition-colors ${
+                  layoutMode === 'inspector'
+                    ? 'bg-cyan-950 text-cyan-300 border border-cyan-700/80 font-bold'
+                    : 'text-slate-400 hover:text-slate-200'
+                }`}
+                data-tooltip="View detailed telemetry inspector and analytical tables"
+                aria-label="Detailed Inspector view"
+              >
+                <Sliders className="w-3.5 h-3.5" />
+                <span>Inspector Matrix</span>
+              </button>
+            </div>
+            <span className="text-[11px] font-mono text-slate-400 hidden xl:inline">
+              9 Ephemerides
+            </span>
+          </div>
         </div>
 
         {/* Clean Typographic Tabs with Cultural Glyphs & Theming */}
@@ -397,6 +433,27 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
         </div>
       </div>
 
+      {/* 1. Vertical Carousel Deck Presentation Mode */}
+      {layoutMode === 'carousel' && (
+        <div className="mt-4">
+          <TraditionVerticalCarousel
+            data={data}
+            activeTab={activeTab}
+            chartViewMode={chartViewMode}
+            onSelectTradition={(trad) => setActiveTab(trad)}
+            onOpenInspector={(trad) => {
+              setActiveTab(trad);
+              setLayoutMode('inspector');
+            }}
+            cultureThemes={CULTURE_THEMES}
+            primaryExplainers={TRADITION_PRIMARY_EXPLAINER}
+          />
+        </div>
+      )}
+
+      {/* 2. Full Detailed Inspector Matrix Mode */}
+      {layoutMode === 'inspector' && (
+        <>
       {/* Tab 1: Jyotisha */}
       {activeTab === 'jyotisha' && (
         <div
@@ -1819,6 +1876,8 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
           </>
           )}
         </div>
+      )}
+        </>
       )}
 
       {/* Mobile & Tablet Epistemological Journey Navigation Bar */}
