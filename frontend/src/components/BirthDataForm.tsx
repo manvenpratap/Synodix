@@ -437,7 +437,7 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
               {activeMode === 'custom' ? 'Clean Independent Workspace' : '100 Verified Historical Records'}
             </span>
           </div>
-          <h2 className="text-base sm:text-lg font-semibold text-slate-100 mt-1">
+          <h2 className="text-base sm:text-lg font-semibold text-slate-100 mt-2.5 sm:mt-3">
             {activeMode === 'custom' ? 'Custom Birth Chart Calibration' : 'Historical Titan Benchmark Library'}
           </h2>
         </div>
@@ -538,7 +538,7 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
                   {savedProfiles.map((sp) => (
                     <div
                       key={sp.id}
-                      className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[11px] font-mono bg-[#10151f] hover:bg-[#161f2e] border border-[#1b2331] text-slate-300 transition-colors shrink-0"
+                      className="inline-flex items-center gap-1.5 px-2.5 py-1 min-h-[28px] rounded text-[11px] font-mono bg-[#10151f] hover:bg-[#161f2e] border border-[#1b2331] text-slate-300 transition-colors shrink-0"
                     >
                       <button
                         type="button"
@@ -569,7 +569,7 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
               <div className="flex-1">
                 <label
                   htmlFor="subject_name"
-                  className="block text-[11px] font-mono font-medium text-slate-300 uppercase tracking-wider mb-1"
+                  className="block text-xs font-mono font-medium text-slate-300 mb-1"
                 >
                   Subject / Profile Dossier Name
                 </label>
@@ -612,7 +612,7 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
               <div>
                 <label
                   htmlFor="birth_date"
-                  className="block text-[11px] font-mono font-medium text-slate-300 uppercase tracking-wider mb-1"
+                  className="block text-xs font-mono font-medium text-slate-300 mb-1"
                 >
                   Date of Birth (Gregorian Civil)
                 </label>
@@ -631,7 +631,7 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
               <div>
                 <label
                   htmlFor="birth_time"
-                  className="block text-[11px] font-mono font-medium text-slate-300 uppercase tracking-wider mb-1"
+                  className="block text-xs font-mono font-medium text-slate-300 mb-1"
                 >
                   Time (24-Hour Local Civil)
                 </label>
@@ -650,7 +650,7 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
               <div>
                 <label
                   htmlFor="time_certainty"
-                  className="block text-[11px] font-mono font-medium text-slate-300 uppercase tracking-wider mb-1"
+                  className="block text-xs font-mono font-medium text-slate-300 mb-1"
                 >
                   Time Certainty / Record Quality
                 </label>
@@ -680,7 +680,7 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
                 <div className="flex items-center justify-between mb-1">
                   <label
                     htmlFor="city_name"
-                    className="block text-[11px] font-mono font-medium text-slate-300 uppercase tracking-wider"
+                    className="block text-xs font-mono font-medium text-slate-300"
                   >
                     City of Birth
                   </label>
@@ -786,7 +786,7 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
               <div>
                 <label
                   htmlFor="country_name"
-                  className="block text-[11px] font-mono font-medium text-slate-300 uppercase tracking-wider mb-1"
+                  className="block text-xs font-mono font-medium text-slate-300 mb-1"
                 >
                   Country
                 </label>
@@ -808,7 +808,7 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
                 <div className="flex items-center justify-between mb-1 gap-1">
                   <label
                     htmlFor="latitude"
-                    className="block text-[11px] font-mono font-medium text-slate-300 uppercase tracking-wider truncate"
+                    className="block text-xs font-mono font-medium text-slate-300 truncate"
                   >
                     Decimal Lat / Lon
                   </label>
@@ -916,7 +916,7 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
               <div>
                 <label
                   htmlFor="gender"
-                  className="block text-[11px] font-mono font-medium text-slate-300 uppercase tracking-wider mb-1"
+                  className="block text-xs font-mono font-medium text-slate-300 mb-1"
                 >
                   Gender (BaZi / Tibetan Cycle)
                 </label>

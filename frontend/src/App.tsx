@@ -288,7 +288,7 @@ function AppContent() {
   return (
     <div className="min-h-[100dvh] w-full max-w-full celestial-observatory-canvas text-slate-200 flex flex-col md:flex-row antialiased">
       {/* 1. Desktop Fixed Sidebar Navigation (>=md) */}
-      <aside className="hidden md:flex flex-col w-64 lg:w-72 sidebar-canvas border-r border-[#1a2333] shrink-0 h-[100dvh] sticky top-0 overflow-y-auto select-none z-40 scrollbar-thin">
+      <aside className="hidden md:flex flex-col w-64 lg:w-72 sidebar-canvas border-r border-[#1a2333] shrink-0 h-[100dvh] sticky top-0 overflow-y-auto overflow-x-hidden select-none z-40 scrollbar-thin">
         {/* Brand Logo & Header */}
         <div className="p-4 border-b border-[#1a2333]/80 relative overflow-hidden">
           <div className="flex items-center gap-3">
@@ -390,32 +390,32 @@ function AppContent() {
               <span className="text-[11px] font-mono text-cyan-400/90 font-medium">9 / 9 ACTIVE</span>
             </div>
             <div className="grid grid-cols-3 gap-1 text-[11px] font-mono text-center">
-              <div className="px-1 py-1 rounded bg-[#0d131f] border border-[#1e2a3a] text-amber-300 font-medium flex items-center justify-center gap-1 hover:border-amber-500/50 transition-colors" data-tooltip="Jyotisha (Vedic)">
-                <span>🕉️</span> JYOT
+              <div className="px-1 py-1 rounded bg-[#0d131f] border border-[#1e2a3a] text-amber-300 font-medium flex items-center justify-center gap-1 hover:border-amber-500/50 transition-colors min-w-0" data-tooltip="Jyotisha (Vedic)">
+                <span className="shrink-0">🕉️</span> <span className="truncate">JYOT</span>
               </div>
-              <div className="px-1 py-1 rounded bg-[#0d131f] border border-[#1e2a3a] text-cyan-300 font-medium flex items-center justify-center gap-1 hover:border-cyan-500/50 transition-colors" data-tooltip="Western (Hellenistic)">
-                <span>🏛️</span> HELL
+              <div className="px-1 py-1 rounded bg-[#0d131f] border border-[#1e2a3a] text-cyan-300 font-medium flex items-center justify-center gap-1 hover:border-cyan-500/50 transition-colors min-w-0" data-tooltip="Western (Hellenistic)">
+                <span className="shrink-0">🏛️</span> <span className="truncate">HELL</span>
               </div>
-              <div className="px-1 py-1 rounded bg-[#0d131f] border border-[#1e2a3a] text-rose-300 font-medium flex items-center justify-center gap-1 hover:border-rose-500/50 transition-colors" data-tooltip="BaZi (Four Pillars)">
-                <span>☯️</span> BAZI
+              <div className="px-1 py-1 rounded bg-[#0d131f] border border-[#1e2a3a] text-rose-300 font-medium flex items-center justify-center gap-1 hover:border-rose-500/50 transition-colors min-w-0" data-tooltip="BaZi (Four Pillars)">
+                <span className="shrink-0">☯️</span> <span className="truncate">BAZI</span>
               </div>
-              <div className="px-1 py-1 rounded bg-[#0d131f] border border-[#1e2a3a] text-purple-300 font-medium flex items-center justify-center gap-1 hover:border-purple-500/50 transition-colors" data-tooltip="Zi Wei Dou Shu">
-                <span>👑</span> ZIWEI
+              <div className="px-1 py-1 rounded bg-[#0d131f] border border-[#1e2a3a] text-purple-300 font-medium flex items-center justify-center gap-1 hover:border-purple-500/50 transition-colors min-w-0" data-tooltip="Zi Wei Dou Shu">
+                <span className="shrink-0">👑</span> <span className="truncate">ZIWEI</span>
               </div>
-              <div className="px-1 py-1 rounded bg-[#0d131f] border border-[#1e2a3a] text-emerald-300 font-medium flex items-center justify-center gap-1 hover:border-emerald-500/50 transition-colors" data-tooltip="Maya (Tzolk'in)">
-                <span>☀️</span> MAYA
+              <div className="px-1 py-1 rounded bg-[#0d131f] border border-[#1e2a3a] text-emerald-300 font-medium flex items-center justify-center gap-1 hover:border-emerald-500/50 transition-colors min-w-0" data-tooltip="Maya (Tzolk'in)">
+                <span className="shrink-0">☀️</span> <span className="truncate">MAYA</span>
               </div>
-              <div className="px-1 py-1 rounded bg-[#0d131f] border border-[#1e2a3a] text-amber-400 font-medium flex items-center justify-center gap-1 hover:border-amber-500/50 transition-colors" data-tooltip="Tibetan (Phugpa)">
-                <span>☸️</span> TIBET
+              <div className="px-1 py-1 rounded bg-[#0d131f] border border-[#1e2a3a] text-amber-400 font-medium flex items-center justify-center gap-1 hover:border-amber-500/50 transition-colors min-w-0" data-tooltip="Tibetan (Phugpa)">
+                <span className="shrink-0">☸️</span> <span className="truncate">TIBET</span>
               </div>
-              <div className="px-1 py-1 rounded bg-[#0d131f] border border-[#1e2a3a] text-teal-300 font-medium flex items-center justify-center gap-1 hover:border-teal-500/50 transition-colors" data-tooltip="Persian (Almuten)">
-                <span>🕌</span> PERS
+              <div className="px-1 py-1 rounded bg-[#0d131f] border border-[#1e2a3a] text-teal-300 font-medium flex items-center justify-center gap-1 hover:border-teal-500/50 transition-colors min-w-0" data-tooltip="Persian (Almuten)">
+                <span className="shrink-0">🕌</span> <span className="truncate">PERS</span>
               </div>
-              <div className="px-1 py-1 rounded bg-[#0d131f] border border-[#1e2a3a] text-yellow-300 font-medium flex items-center justify-center gap-1 hover:border-yellow-500/50 transition-colors" data-tooltip="Egyptian (Decans)">
-                <span>𓋹</span> EGYPT
+              <div className="px-1 py-1 rounded bg-[#0d131f] border border-[#1e2a3a] text-yellow-300 font-medium flex items-center justify-center gap-1 hover:border-yellow-500/50 transition-colors min-w-0" data-tooltip="Egyptian (Decans)">
+                <span className="shrink-0">𓋹</span> <span className="truncate">EGYPT</span>
               </div>
-              <div className="px-1 py-1 rounded bg-[#0d131f] border border-[#1e2a3a] text-emerald-400 font-medium flex items-center justify-center gap-1 hover:border-emerald-500/50 transition-colors" data-tooltip="Māori (Maramataka)">
-                <span>🌊</span> MARA
+              <div className="px-1 py-1 rounded bg-[#0d131f] border border-[#1e2a3a] text-emerald-400 font-medium flex items-center justify-center gap-1 hover:border-emerald-500/50 transition-colors min-w-0" data-tooltip="Māori (Maramataka)">
+                <span className="shrink-0">🌊</span> <span className="truncate">MARA</span>
               </div>
             </div>
           </div>

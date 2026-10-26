@@ -25,7 +25,7 @@ export const InputAuditCard: React.FC<Props> = ({ data }) => {
             <span className="text-[11px] font-mono uppercase tracking-wider text-amber-400 font-semibold block">
               02 / Time Normalization & Boundary Proximity Audit
             </span>
-            <div className="flex flex-wrap items-center gap-2 mt-0.5">
+            <div className="flex flex-wrap items-center gap-2 mt-2">
               <h3 className="text-base font-semibold text-slate-100">
                 Astronomical & Civil Time Coordinates
               </h3>
@@ -62,9 +62,9 @@ export const InputAuditCard: React.FC<Props> = ({ data }) => {
           {/* Grid of Key Normalizations */}
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-2.5">
             {/* UTC Instant */}
-            <div className="p-3 bg-[#080a0f]/50 border-t border-[#1b2331]/80">
+            <div className="p-3 bg-[#080a0f]/50 border-t border-[#1b2331]/80 rounded-lg">
               <div className="flex items-center justify-between">
-                <span className="text-[11px] text-slate-400 uppercase tracking-wider font-mono block">
+                <span className="text-xs text-slate-400 font-mono font-medium block">
                   UTC Instant
                 </span>
                 <ExplainerTrigger id="utc_instant_julian_day" variant="icon" size="xs" />
@@ -78,9 +78,9 @@ export const InputAuditCard: React.FC<Props> = ({ data }) => {
             </div>
 
             {/* Local Solar Times */}
-            <div className="p-3 bg-[#080a0f]/50 border-t border-[#1b2331]/80">
+            <div className="p-3 bg-[#080a0f]/50 border-t border-[#1b2331]/80 rounded-lg">
               <div className="flex items-center justify-between">
-                <span className="text-[11px] text-slate-400 uppercase tracking-wider font-mono block">
+                <span className="text-xs text-slate-400 font-mono font-medium block">
                   Solar Time & EoT
                 </span>
                 <ExplainerTrigger id="time_normalization_eot" variant="icon" size="xs" />
@@ -94,9 +94,9 @@ export const InputAuditCard: React.FC<Props> = ({ data }) => {
             </div>
 
             {/* Sunrise & Sunset */}
-            <div className="p-3 bg-[#080a0f]/50 border-t border-[#1b2331]/80">
+            <div className="p-3 bg-[#080a0f]/50 border-t border-[#1b2331]/80 rounded-lg">
               <div className="flex items-center justify-between">
-                <span className="text-[11px] text-slate-400 uppercase tracking-wider font-mono block">
+                <span className="text-xs text-slate-400 font-mono font-medium block">
                   Horizon & Sect
                 </span>
                 <ExplainerTrigger id="western_sect" variant="icon" size="xs" />
@@ -110,9 +110,9 @@ export const InputAuditCard: React.FC<Props> = ({ data }) => {
             </div>
 
             {/* Boundary Audit */}
-            <div className="p-3 bg-[#080a0f]/50 border-t border-[#1b2331]/80">
+            <div className="p-3 bg-[#080a0f]/50 border-t border-[#1b2331]/80 rounded-lg">
               <div className="flex items-center justify-between">
-                <span className="text-[11px] text-slate-400 uppercase tracking-wider font-mono block">
+                <span className="text-xs text-slate-400 font-mono font-medium block">
                   Boundary Distances
                 </span>
                 <ExplainerTrigger id="cusp_proximity_audit" variant="icon" size="xs" />

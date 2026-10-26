@@ -1,7 +1,7 @@
 # Synodix: Project Context & Working Memory
 
-**Last Updated:** 2026-10-26 08:42:55
-**Version:** 2.31.1  
+**Last Updated:** 2026-10-26 09:02:29
+**Version:** 2.31.2  
 **Stack:** Python 3.12 (FastAPI, Swiss Ephemeris 2.10, Skyfield DE421) + TypeScript / React 19 / Vite / Tailwind CSS v4 / Framer Motion / Capacitor 8 (iOS & Android)  
 **Workspace:** `/Volumes/Study/Projects/Astrology` (symlinked as `/Volumes/Study/Astrology`)  
 **Git Remote:** `https://github.com/manvenpratap/Synodix.git`  
@@ -9,7 +9,26 @@
 ---
 
 ## 1. Current Status & Milestone
-- **Active Phase**: Zero-Collision Responsive Ergonomics & Window Scroll Unblocking (Completed)
+- **Active Phase**: Light Theme Color Contrast, Tooltip Orientation & Sidebar Ergonomics (Completed)
+- **Light Theme Color Contrast, Tooltip Orientation & Sidebar Ergonomics (v2.31.2)**:
+  - **Downward Top-Bar Tooltip Anchoring (`index.css`)**:
+    - Re-architected `[data-tooltip]` CSS pseudo-elements for elements within `header`: positioned tooltips downwards (`top: calc(100% + 8px); bottom: auto;`) instead of upwards, completely preventing tooltips on the Dark Mode toggle and Feature Guide from clipping into the browser toolbar or native window controls.
+    - Added right-aligned tooltip anchoring (`right: 0; left: auto; transform: none;`) for controls anchored at the right viewport edge.
+  - **Sidebar Horizontal Lock & Content Alignment (`App.tsx`, `index.css`)**:
+    - Explicitly locked `aside` with `overflow-x: hidden !important;` and `overscroll-behavior-x: none;`, permanently preventing accidental horizontal trackpad swiping from shifting the sidebar content 52px leftwards and cutting off the orbital logo and card boundaries.
+    - Added `min-w-0 truncate` to all 9 civilizational array cells in `App.tsx`, guaranteeing they never exceed parent sidebar column bounds.
+  - **Comprehensive Light Theme Color Contrast Architecture (`index.css`)**:
+    - Added high-contrast WCAG 2.2 AA ($\ge 4.5:1$) spectral mappings for unmapped colors: `text-yellow-300` / `text-yellow-400` (#854d0e, 5.4:1), `text-teal-300` / `text-teal-400` (#0f766e, 5.2:1), `text-sky-300`, `text-indigo-300`, and `text-violet-300`.
+    - Fully mapped opacity variants (`bg-[#080a0f]/50`, `bg-[#0c1018]/90`, `bg-[#06080e]/90`, `bg-[#0b0e14]/60`, etc.) and unmapped background hexes (`bg-[#0d1624]`, `bg-[#101724]`, `bg-[#182130]`) to alabaster/slate light tokens, eliminating dark-on-dark contrast failures on the active subject calculation banner and `InputAuditCard` metric sub-cards.
+    - Upgraded `.text-slate-400` to `#475569` (5.8:1) and `.text-slate-500` to `#334155` (7.5:1) in light theme, elevating all secondary body labels and Julian Day readouts to WCAG AAA contrast.
+  - **Typography & Impeccable Heuristic Polish (`BirthDataForm.tsx`, `InputAuditCard.tsx`)**:
+    - Converted loud, all-caps input labels (`DATE OF BIRTH (GREGORIAN CIVIL)`, `TIME CERTAINTY / RECORD QUALITY`, `CITY OF BIRTH`, `DECIMAL LAT / LON`, `GENDER`) to clean, legible title case (`Date of Birth (Gregorian Civil)`), completely eliminating `[ALL-CAPS BODY TEXT]` violations.
+    - Fixed heading vertical rhythm and crowding: added `mt-2.5 sm:mt-3` above `Custom Birth Chart Calibration` and `mt-2` above `Astronomical & Civil Time Coordinates`.
+    - Upgraded Vault profile pills from cramped `py-0.5` (2px) to ergonomic `px-2.5 py-1 min-h-[28px]`.
+  - **Automated Regression Invariant (`test_10_impeccable_quality_audit.py`)**:
+    - Added automated verification test `test_impeccable_light_mode_contrast_and_tooltip_bounds`: validates sidebar scroll lock, tooltip downward bounds, and contrast ratios for `PERS` and `EGYPT` badges $\ge 4.5:1$.
+    - All 25 regression test suites passing cleanly via `./pipeline.sh test --summary` (58.39s).
+  - **Workflow Health**: 100% CLEAN (Verified via `./pipeline.sh doctor`).
 - **Zero-Collision Responsive Ergonomics & Window Scroll Unblocking (v2.31.1)**:
   - **Unblocked Global Window Wheel & Trackpad Scrolling (`index.css`, `App.tsx`)**:
     - Removed `overscroll-behavior-y: none;` and `touch-action: pan-y;` on `html, body, #root` that previously swallowed mouse-wheel and trackpad gestures on macOS and Windows browsers when at `scrollY === 0`.
