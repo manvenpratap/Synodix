@@ -470,7 +470,7 @@ export const TraditionVerticalCarousel: React.FC<Props> = ({
                   className={`w-6 h-6 rounded-full flex items-center justify-center text-xs transition-all cursor-pointer ${
                     isSelected
                       ? 'bg-cyan-400 text-slate-950 font-bold scale-110 shadow-[0_0_8px_#38bdf8]'
-                      : 'text-slate-400 hover:text-slate-200 hover:bg-white/15'
+                      : 'text-slate-300 hover:text-white hover:bg-white/15'
                   }`}
                 >
                   <span className="text-[10px] select-none">{theme?.glyph || '•'}</span>

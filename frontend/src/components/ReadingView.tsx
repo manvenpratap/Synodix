@@ -100,11 +100,11 @@ export const ReadingView: React.FC<Props> = ({ data, subjectName, onNavigate }) 
                 <ShieldCheck className="w-3 h-3 text-emerald-400" />
                 Audited Epistemological Document
               </span>
-              <span className="text-slate-600 hidden sm:inline">•</span>
+              <span className="text-slate-400 hidden sm:inline">•</span>
               <span className="text-[11px] text-cyan-400 font-mono">
                 Standard v2.0
               </span>
-              <span className="text-slate-600 hidden sm:inline">•</span>
+              <span className="text-slate-400 hidden sm:inline">•</span>
               <span className="text-[11px] text-slate-400 font-mono">
                 Synodix Corroboration Engine
               </span>

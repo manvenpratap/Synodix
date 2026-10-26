@@ -348,7 +348,7 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
                 whileTap={{ scale: 0.96 }}
                 className={`relative inline-flex items-center justify-center sm:justify-start gap-1 sm:gap-1.5 px-2 sm:px-2.5 py-2 min-h-[44px] text-[11px] sm:text-xs font-mono font-medium rounded-lg cursor-pointer transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-1 focus-visible:ring-offset-[#080a0f] truncate ${
                   isActive
-                    ? 'text-white font-semibold'
+                    ? 'bg-[#0e1626] text-white font-semibold border border-cyan-500/50'
                     : 'text-slate-400 hover:text-slate-200 hover:bg-[#121721] border border-transparent'
                 }`}
               >
@@ -427,7 +427,7 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
                     whileTap={{ scale: 0.96 }}
                     className={`relative flex-1 sm:flex-initial px-2.5 sm:px-3 py-2 sm:py-1.5 min-h-[44px] sm:min-h-[36px] text-xs font-mono rounded-md cursor-pointer transition-colors text-center focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 ${
                       isModeActive
-                        ? 'text-white font-bold'
+                        ? 'bg-[#0f172a] text-white font-bold'
                         : 'text-slate-400 hover:text-slate-200'
                     }`}
                     aria-pressed={isModeActive}

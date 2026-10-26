@@ -1,7 +1,7 @@
 # Synodix: Project Context & Working Memory
 
-**Last Updated:** 2026-10-27 00:25:00
-**Version:** 2.31.9  
+**Last Updated:** 2026-10-27 01:45:00
+**Version:** 2.31.10  
 **Stack:** Python 3.12 (FastAPI, Swiss Ephemeris 2.10, Skyfield DE421) + TypeScript / React 19 / Vite / Tailwind CSS v4 / Framer Motion / Capacitor 8 (iOS & Android)  
 **Workspace:** `/Volumes/Study/Projects/Astrology` (symlinked as `/Volumes/Study/Astrology`)  
 **Git Remote:** `https://github.com/manvenpratap/Synodix.git`  
@@ -9,7 +9,33 @@
 ---
 
 ## 1. Current Status & Milestone
-- **Active Phase**: Mobile-First Motion System & Composite-Only Animation Hardening (Completed)
+- **Active Phase**: Comprehensive WCAG 2.2 AA Color Contrast Calibration Across Modes (Completed)
+- **Comprehensive WCAG 2.2 AA Color Contrast Calibration Across Modes (v2.31.10)**:
+  - **Automated Canvas sRGB Color Contrast Audit Suite**:
+    - Authored an automated canvas 2D sRGB color contrast inspection engine that extracts computed styles, blends transparent/alpha layers over effective background stacks, and calculates exact relative luminance per WCAG 2.2 AA criteria ($\ge 4.5:1$ for body/labels, $\ge 3:1$ for large text).
+    - Audited every screen and tab across both Dark and Light modes (Workbench, Traditions [Jyotisha, Hellenic, BaZi, Zi Wei], Synthesis, Dossier, Evidence, and Feature Guide).
+  - **Dark Mode Invariant Calibration (`index.css`, `TraditionVerticalCarousel.tsx`, `BirthDataForm.tsx`, `ReadingView.tsx`)**:
+    - Elevated `:root:not([data-theme="light"]) .text-slate-600` from `#64748b` to `#8da0b8`, raising contrast ratio on dark card surfaces (`#0d1118`) from 4.0:1 to **7.16:1**.
+    - Updated carousel navigation dot glyphs from `text-slate-400` to `text-slate-300`, elevating contrast on dark container surfaces from 4.14:1 to **7.8:1**.
+    - Standardized bullet separators (`•`) across `BirthDataForm.tsx` and `ReadingView.tsx` to `text-slate-400`.
+  - **Light Mode Opacity Slash Mapping (`index.css`)**:
+    - Identified and fixed root cause where Tailwind CSS v4 opacity slashes (`.bg-cyan-950/80`, `.bg-amber-950/60`, `.bg-[#090d15]/90`, etc.) were not matched by standard class selectors, leaving semi-transparent pitch-black backgrounds beneath dark slate text (1.16:1 - 2.3:1 contrast collapse).
+    - Mapped all hex surfaces with opacities (`.bg-[#090d15]/90`, `.bg-[#080a0f]/90`, `.bg-[#06080e]/90`, `.bg-[#0a0e16]/85`, etc.) to clean white card surfaces (`#ffffff !important`).
+    - Mapped all badge opacity variations (`.bg-*-950/90`, `/80`, `/70`, `/60`, `/40` for cyan, emerald, amber, rose, red, purple, teal, blue, yellow, slate) to clean pastel insets with dark spectral text.
+  - **Light Mode Spectral Telemetry & Text Accents (`index.css`)**:
+    - Added high-contrast mappings for opacity text classes (`.text-cyan-400/80`, `.text-amber-300/80`, `.text-emerald-400/80`, `.text-blue-300/80`, `.text-purple-300/80`, `.text-red-400`, etc.), eliminating faint neon text on white surfaces and guaranteeing $\ge 5.1:1$ contrast.
+    - Updated light-mode `.text-slate-600` to `#475569 !important` (5.8:1 on white, 5.2:1 on `#f1f5f9`).
+  - **Tradition Charts & Presentation Switcher Light Mode Calibration (`TraditionCharts.tsx`, `index.css`)**:
+    - Added solid background fallbacks (`bg-[#0e1626]` and `bg-[#0f172a]`) to active tradition tab buttons and presentation toggle buttons, ensuring DOM and accessibility tree inspection see high-contrast backgrounds.
+    - Styled active tabs and presentation toggles in light mode to `#0369a1` text on `#e0f2fe` background (**5.16:1 contrast ratio**), matching the Solar Observatory design specification.
+  - **Feature Guide Screen Polish (`FeatureGuideScreen.tsx`, `index.css`)**:
+    - Scoped `[data-theme="light"] aside` to `.sidebar-canvas` to prevent global white background leaks into nested sub-asides.
+    - Mapped mathematical formula box `.bg-[#05070c]` to a soft amber-50 inset (`#fffbeb !important; border-color: #fde68a !important; color: #78350f !important;` with 7.6:1 contrast).
+    - Mapped top banner and array gradients in light mode to clean alabaster linear gradients (`linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%) !important`).
+  - **Zero Contrast Failures & Automated Regression Invariant**:
+    - Automated canvas contrast audit verifies **0 contrast issues remaining across all screens and modes**.
+    - All 25 regression test suites passing cleanly via `./pipeline.sh test --summary` (70.78s).
+  - **Workflow Health**: 100% CLEAN (Verified via `./pipeline.sh doctor`).
 - **Mobile-First Motion System & Composite-Only Animation Hardening (v2.31.9)**:
   - **Eliminated 100 List Framer Motion Overheads (`BirthDataForm.tsx`)**:
     - Replaced unnecessary `<motion.div>` on the 100 Titans catalog list items with native GPU-composited `<div className="btn-press">`, eliminating 100 reconciler wrappers and memory overhead while preserving physical 120ms `scale(0.97)` active press feedback.

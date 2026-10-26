@@ -434,7 +434,7 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
             <span className="text-[11px] font-mono uppercase tracking-wider text-cyan-400 font-semibold">
               01 / Astrometric Calibration & Input
             </span>
-            <span className="text-slate-600 hidden sm:inline">•</span>
+            <span className="text-slate-400 hidden sm:inline">•</span>
             <span className="text-xs text-slate-400 font-mono">
               {activeMode === 'custom' ? 'Clean Independent Workspace' : '100 Verified Historical Records'}
             </span>
@@ -523,7 +523,7 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
               <span className="text-xs font-mono font-medium text-slate-200">
                 Astrometric Telemetry Studio
               </span>
-              <span className="text-slate-600 hidden md:inline">•</span>
+              <span className="text-slate-400 hidden md:inline">•</span>
               <span className="text-xs font-mono text-slate-400 hidden md:inline">
                 WGS-84 Standards & Dual-Engine Verification
               </span>
