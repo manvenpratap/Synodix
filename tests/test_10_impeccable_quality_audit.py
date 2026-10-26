@@ -196,10 +196,13 @@ def test_impeccable_light_mode_contrast_and_tooltip_bounds():
             theme_btn.click()
             page.wait_for_timeout(200)
 
+        # Navigate to Feature Guide screen to inspect the functional civilization array buttons
+        page.locator("button:has-text('Feature Guide')").first.click()
+        page.wait_for_timeout(300)
+
         contrast_results = page.evaluate("""() => {
-            const aside = document.querySelector("aside");
-            const pers = aside.querySelector("[data-tooltip='Persian (Almuten)']");
-            const egypt = aside.querySelector("[data-tooltip='Egyptian (Decans)']");
+            const pers = document.querySelector("[data-tooltip='Persian (Almuten)']");
+            const egypt = document.querySelector("[data-tooltip='Egyptian (Decans)']");
 
             // Simple relative luminance parser for rgb(r, g, b)
             function getLuminance(rgbStr) {

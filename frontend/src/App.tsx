@@ -31,6 +31,7 @@ import { TraditionCharts } from './components/TraditionCharts';
 import { SynthesisMatrix } from './components/SynthesisMatrix';
 import { ReadingView } from './components/ReadingView';
 import { MathematicalEvidenceCard } from './components/MathematicalEvidenceCard';
+import { FeatureGuideScreen } from './components/FeatureGuideScreen';
 import { getPrimaryProfile } from './utils/vault';
 import { ExplainerProvider } from './context/ExplainerContext';
 import { useExplainer } from './context/useExplainer';
@@ -46,7 +47,8 @@ export type AppScreen =
   | 'synthesis'
   | 'dossier'
   | 'verification'
-  | 'evidence';
+  | 'evidence'
+  | 'guide';
 
 interface NavItem {
   id: AppScreen;
@@ -95,6 +97,13 @@ const NAV_ITEMS: NavItem[] = [
     badge: '100 Titans',
     description: 'Double-Blind Monte Carlo Benchmark',
     icon: FlaskConical
+  },
+  {
+    id: 'guide',
+    label: 'Feature Guide',
+    badge: '50 Topics',
+    description: 'Astronomical & Cultural Knowledge Base',
+    icon: BookOpen
   }
 ];
 
@@ -377,47 +386,6 @@ function AppContent() {
                 </div>
               </div>
             )}
-          </div>
-        </div>
-
-        {/* Canonical Traditions Alignment Status (Astrometric Array) */}
-        <div className="px-3 pt-2 shrink-0">
-          <div className="p-2.5 rounded-xl bg-gradient-to-b from-[#090e17] to-[#070b12] border border-[#1a2332]">
-            <div className="flex items-center justify-between mb-1.5 px-0.5">
-              <span className="text-[11px] uppercase font-mono text-slate-400 font-semibold tracking-wider">
-                CIVILIZATIONAL ARRAY (9)
-              </span>
-              <span className="text-[11px] font-mono text-cyan-400/90 font-medium">9 / 9 ACTIVE</span>
-            </div>
-            <div className="grid grid-cols-3 gap-1 text-[11px] font-mono text-center">
-              <div className="px-1 py-1 rounded bg-[#0d131f] border border-[#1e2a3a] text-amber-300 font-medium flex items-center justify-center gap-1 hover:border-amber-500/50 transition-colors min-w-0" data-tooltip="Jyotisha (Vedic)">
-                <span className="shrink-0">🕉️</span> <span className="truncate">JYOT</span>
-              </div>
-              <div className="px-1 py-1 rounded bg-[#0d131f] border border-[#1e2a3a] text-cyan-300 font-medium flex items-center justify-center gap-1 hover:border-cyan-500/50 transition-colors min-w-0" data-tooltip="Western (Hellenistic)">
-                <span className="shrink-0">🏛️</span> <span className="truncate">HELL</span>
-              </div>
-              <div className="px-1 py-1 rounded bg-[#0d131f] border border-[#1e2a3a] text-rose-300 font-medium flex items-center justify-center gap-1 hover:border-rose-500/50 transition-colors min-w-0" data-tooltip="BaZi (Four Pillars)">
-                <span className="shrink-0">☯️</span> <span className="truncate">BAZI</span>
-              </div>
-              <div className="px-1 py-1 rounded bg-[#0d131f] border border-[#1e2a3a] text-purple-300 font-medium flex items-center justify-center gap-1 hover:border-purple-500/50 transition-colors min-w-0" data-tooltip="Zi Wei Dou Shu">
-                <span className="shrink-0">👑</span> <span className="truncate">ZIWEI</span>
-              </div>
-              <div className="px-1 py-1 rounded bg-[#0d131f] border border-[#1e2a3a] text-emerald-300 font-medium flex items-center justify-center gap-1 hover:border-emerald-500/50 transition-colors min-w-0" data-tooltip="Maya (Tzolk'in)">
-                <span className="shrink-0">☀️</span> <span className="truncate">MAYA</span>
-              </div>
-              <div className="px-1 py-1 rounded bg-[#0d131f] border border-[#1e2a3a] text-amber-400 font-medium flex items-center justify-center gap-1 hover:border-amber-500/50 transition-colors min-w-0" data-tooltip="Tibetan (Phugpa)">
-                <span className="shrink-0">☸️</span> <span className="truncate">TIBET</span>
-              </div>
-              <div className="px-1 py-1 rounded bg-[#0d131f] border border-[#1e2a3a] text-teal-300 font-medium flex items-center justify-center gap-1 hover:border-teal-500/50 transition-colors min-w-0" data-tooltip="Persian (Almuten)">
-                <span className="shrink-0">🕌</span> <span className="truncate">PERS</span>
-              </div>
-              <div className="px-1 py-1 rounded bg-[#0d131f] border border-[#1e2a3a] text-yellow-300 font-medium flex items-center justify-center gap-1 hover:border-yellow-500/50 transition-colors min-w-0" data-tooltip="Egyptian (Decans)">
-                <span className="shrink-0">𓋹</span> <span className="truncate">EGYPT</span>
-              </div>
-              <div className="px-1 py-1 rounded bg-[#0d131f] border border-[#1e2a3a] text-emerald-400 font-medium flex items-center justify-center gap-1 hover:border-emerald-500/50 transition-colors min-w-0" data-tooltip="Māori (Maramataka)">
-                <span className="shrink-0">🌊</span> <span className="truncate">MARA</span>
-              </div>
-            </div>
           </div>
         </div>
 
@@ -734,10 +702,16 @@ function AppContent() {
 
           {/* Quick Header Actions */}
           <div className="flex items-center gap-1.5 sm:gap-2.5 font-mono text-xs shrink-0">
-            {/* Feature Guide & Glossary Modal Trigger */}
+            {/* Feature Guide Trigger: navigates to 'guide' screen on desktop, or opens modal on mobile */}
             <button
               type="button"
-              onClick={openGlossary}
+              onClick={() => {
+                if (typeof window !== 'undefined' && window.innerWidth < 768) {
+                  openGlossary();
+                } else {
+                  navigateTo('guide');
+                }
+              }}
               className="inline-flex items-center justify-center gap-1.5 p-2 sm:px-3 sm:py-1.5 min-w-[40px] min-h-[40px] sm:min-h-[34px] text-xs rounded border border-[#1b2331] bg-[#10151f] hover:bg-[#161d2a] text-cyan-400 hover:text-cyan-200 transition-colors cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
               data-tooltip="Browse all 50 astronomical & cultural feature explainers"
               aria-label="Browse Feature Explainers & Astrometric Glossary"
@@ -779,7 +753,9 @@ function AppContent() {
               Epistemic Journey
             </span>
             <span className="text-[11px] text-slate-300 font-mono">
-              Step {JOURNEY_STEPS.findIndex((s) => s.id === currentScreen) + 1} of 5
+              {JOURNEY_STEPS.findIndex((s) => s.id === currentScreen) >= 0
+                ? `Step ${JOURNEY_STEPS.findIndex((s) => s.id === currentScreen) + 1} of 5`
+                : 'Reference'}
             </span>
           </div>
           <div className="grid grid-cols-5 gap-1 py-0.5 w-full">
@@ -821,13 +797,23 @@ function AppContent() {
           <div className="w-full bg-[#16202e] h-0.5 mt-2 rounded-full overflow-hidden">
             <div
               className="h-full bg-cyan-400 transition-all duration-300 rounded-full shadow-[0_0_6px_#38bdf8]"
-              style={{ width: `${((JOURNEY_STEPS.findIndex((s) => s.id === currentScreen) + 1) / 5) * 100}%` }}
+              style={{
+                width: `${
+                  JOURNEY_STEPS.findIndex((s) => s.id === currentScreen) >= 0
+                    ? ((JOURNEY_STEPS.findIndex((s) => s.id === currentScreen) + 1) / 5) * 100
+                    : 100
+                }%`
+              }}
             />
           </div>
         </nav>
 
         {/* Main Content Viewport */}
-        <main className="flex-1 p-4 sm:p-6 lg:p-8 max-w-7xl w-full mx-auto pb-[calc(5rem+env(safe-area-inset-bottom,0px))] md:pb-8">
+        <main
+          className={`flex-1 p-4 sm:p-6 lg:p-8 w-full mx-auto pb-[calc(5rem+env(safe-area-inset-bottom,0px))] md:pb-8 ${
+            currentScreen === 'guide' ? 'max-w-full lg:px-8' : 'max-w-7xl'
+          }`}
+        >
           {/* Error Banner */}
           {error && (
             <div className="mb-4 p-3.5 rounded bg-rose-950/60 border border-rose-800 text-rose-300 text-xs font-mono">
@@ -921,6 +907,13 @@ function AppContent() {
               {currentScreen === 'evidence' && (
                 <div>
                   <MathematicalEvidenceCard onNavigate={navigateTo} />
+                </div>
+              )}
+
+              {/* SCREEN 7: Astrometric & Cultural Feature Guide */}
+              {currentScreen === 'guide' && (
+                <div>
+                  <FeatureGuideScreen onNavigate={navigateTo} />
                 </div>
               )}
             </motion.div>

@@ -1,7 +1,7 @@
 # Synodix: Project Context & Working Memory
 
-**Last Updated:** 2026-10-26 10:14:31
-**Version:** 2.31.7  
+**Last Updated:** 2026-10-26 10:29:48
+**Version:** 2.31.8  
 **Stack:** Python 3.12 (FastAPI, Swiss Ephemeris 2.10, Skyfield DE421) + TypeScript / React 19 / Vite / Tailwind CSS v4 / Framer Motion / Capacitor 8 (iOS & Android)  
 **Workspace:** `/Volumes/Study/Projects/Astrology` (symlinked as `/Volumes/Study/Astrology`)  
 **Git Remote:** `https://github.com/manvenpratap/Synodix.git`  
@@ -9,8 +9,31 @@
 ---
 
 ## 1. Current Status & Milestone
-- **Active Phase**: Architectural UI/UX Restructuring of Custom Birth Chart Calibration Form (Completed)
-- **Architectural UI/UX Restructuring of Custom Birth Chart Calibration Form (v2.31.7)**:
+- **Active Phase**: Full-Width Feature Guide Screen & Functional Civilizational Array Relocation (Completed)
+- **Full-Width Feature Guide Screen & Functional Civilizational Array Relocation (v2.31.8)**:
+  - **Full-Fledged Astrometric Knowledge Base Screen (`FeatureGuideScreen.tsx`)**:
+    - Converted the Feature Guide into a dedicated first-class workspace screen (`guide`) accessible via desktop sidebar, top header, and mobile navigation drawer.
+    - Utilizes the full width of the main canvas (`max-w-full lg:px-8`), eliminating cramped modal constraints and providing a distraction-free, academic research environment.
+    - Structured as a high-density 2-column layout: Left sub-sidebar for multi-modal topic filtering and Right master reading canvas featuring 4 bento telemetry cards:
+      1. **Concept Overview & Astrometric Phenomenon** (clean typography, astronomical context).
+      2. **Astronomical & Mathematical Algorithm** (syntax-highlighted formula code box and numbered execution pipeline).
+      3. **Role in Epistemic Triangulation & Consensus** (how tradition aligns or diverges within multi-system synthesis).
+      4. **Historical Lineage & Original Treatises** (classical primary-source lineage and historical treatises).
+    - Added Chapter Navigation footer with Previous and Next topic controls, topic counters (`Topic X of Y`), and direct deep-links to tradition visualizers and Monte Carlo whitepaper.
+  - **Relocated & Fully Functional Civilizational Array (`FeatureGuideScreen.tsx`, `App.tsx`)**:
+    - Permanently removed the non-functional 9-badge `CIVILIZATIONAL ARRAY (9)` card from the main workspace sidebar (`App.tsx`), freeing ~130px of vertical space and eliminating sidebar flexbox squeeze on smaller laptop viewports.
+    - Re-implemented the Civilizational Array in the Feature Guide sub-sidebar as an interactive 9-button filter grid (`🕉️ JYOT`, `🏛️ HELL`, `☯️ BAZI`, `👑 ZIWEI`, `☀️ MAYA`, `☸️ TIBET`, `🕌 PERS`, `𓋹 EGYPT`, `🌊 MARA`):
+      - Toggles single-culture filtering across all 50 explainers in `FEATURE_EXPLAINERS` with instant reactive keyword indexing.
+      - Provides direct deep-link CTA (`Visualizer ->`) jumping straight to the corresponding 3D interactive chart on the Cultural Traditions screen.
+      - Fully accessible with `aria-pressed`, `aria-label`, and `data-tooltip` contextual tooltips.
+  - **Header & Mobile Ergonomics Preservation (`App.tsx`)**:
+    - Top header "Feature Guide" trigger navigates to the full screen on desktop (`window.innerWidth >= 768`) while retaining modal opening behavior on narrow viewports (`< 768px`) for compact touch interaction.
+    - Preserved `FeatureExplainerModal` for contextual inline tooltips throughout the app (`ExplainerTrigger`).
+  - **Automated Regression Invariant (`test_10_impeccable_quality_audit.py`, `test_04_mobile_viewport.py`)**:
+    - Updated `test_10_impeccable_quality_audit.py` to assert light-mode contrast $\ge 4.5:1$ on `PERS` and `EGYPT` buttons in their new functional home on `FeatureGuideScreen`.
+    - Verified `test_04_mobile_viewport.py` touch target compliance ($\ge 40\times 40\text{px}$) and zero console errors.
+    - All 25 regression test suites passing cleanly via `./pipeline.sh test --summary` (61.98s).
+  - **Workflow Health**: 100% CLEAN (Verified via `./pipeline.sh doctor`).
   - **Cohesive 3-Module Instrument Hierarchy (`BirthDataForm.tsx`)**:
     - Re-architected the Custom Manual Input calibration form from a flat, fragmented field dump into 3 semantic astrometric instrument modules adhering to `/frontend-design` and `/ui-ux-pro-max` principles.
     - **Module 01: Subject Identity & Natal Cycle**: Reunited the person's dossier name with Gender / Cycle polarity (which directs BaZi Da Yun luck pillar trajectory & Tibetan Rabjung cycle polarity), permanently removing it from the geographic location row. Integrated draft restore and form reset controls ergonomically.
