@@ -1,7 +1,7 @@
 # Synodix: Project Context & Working Memory
 
-**Last Updated:** 2026-10-27 04:19:00
-**Version:** 2.31.14  
+**Last Updated:** 2026-10-27 04:42:38
+**Version:** 2.32.0  
 **Stack:** Python 3.12 (FastAPI, Swiss Ephemeris 2.10, Skyfield DE421) + TypeScript / React 19 / Vite / Tailwind CSS v4 / Framer Motion / Capacitor 8 (iOS & Android)  
 **Workspace:** `/Volumes/Study/Projects/Astrology` (symlinked as `/Volumes/Study/Astrology`)  
 **Git Remote:** `https://github.com/manvenpratap/Synodix.git`  
@@ -10,28 +10,33 @@
 
 ## 1. Current Status & Milestone
 
-- **Active Phase**: Comprehensive Hallmark Anti-AI-Slop Redesign & Component Polish (Completed)
-- **Comprehensive Hallmark Anti-AI-Slop Redesign & Component Polish (v2.31.14)**:
-  - **100% Elimination of Sloplint Floor Violations (0 FAIL across 14 Frontend Files)**:
-    - Executed meticulous Hallmark anti-AI-slop audit across all core observatory components (`App.tsx`, `BirthDataForm.tsx`, `ChartWheelVisualizer.tsx`, `ExplainerTrigger.tsx`, `FeatureExplainerModal.tsx`, `FeatureGuideScreen.tsx`, `InputAuditCard.tsx`, `MathematicalEvidenceCard.tsx`, `ReadingView.tsx`, `SynthesisMatrix.tsx`, `TraditionCharts.tsx`, `TraditionVerticalCarousel.tsx`, `VerificationCard.tsx`, and `index.css`).
-    - Verified `sloplint: 0 FAIL` across every single file in `frontend/src/` (eliminated 300+ floor violations).
-  - **Arbitrary Bracket Hex Eradication (FAIL 48)**:
-    - Replaced all raw bracket hex colors (`#080a0f`, `#0d1118`, `#1b2331`, `#121721`, `#101724`, `#0c1018`, `#151c28`, etc.) with semantic Tailwind tokens (`bg-slate-950`, `bg-slate-900`, `bg-slate-800`, `border-slate-800`, `divide-slate-800`).
-    - Converted custom bracket gradient backgrounds in tradition themes to standard Tailwind classes (`from-amber-950/70`, `from-rose-950/70`, `from-cyan-950/70`, etc.).
-  - **Accessibility & Motion Safety (FAIL 27, FAIL 33)**:
-    - Added `motion-reduce:animate-none` and `motion-reduce:transition-none` variants across all animated elements (`animate-tab-enter`, `animate-radar-reveal`, `animate-radar-pulse`, `animate-laser-scan`, `animate-gear-sync`, `animate-gear-reverse`, `animate-celestial-glow`, `animate-orbital-spin`).
-    - Added `aria-hidden="true"` to all decorative and instrument SVGs (`MaramatakaLunarDial`, `DomainConsensusRadar`, `EgyptianDecanStarClock`, `MayaCalendarCompass`, and Lucide icons).
-  - **Typography & Iconography Dignity (FAIL 30a, FAIL 63, FAIL 67, FAIL 19)**:
-    - Removed all emoji icons (`🕉️`, `☯️`, `🏛️`, `🕌`, `👑`, `☀️`, `☸️`, `🌊`, `®`) in favor of clean academic badges (`VED`, `BAZ`, `HEL`, `PER`, `EGY`, `ZIW`, `MAY`, `TIB`, `MAR`, `Rx`).
-    - Replaced glued text arrows (`←`, `→`) with Lucide `<ArrowLeft />` and `<ArrowRight />` vector icons with `whitespace-nowrap`.
-    - Converted middle-dot strings into structured metadata rows with vertical hairline dividers (`<span className="w-px h-3 bg-slate-700 hidden sm:inline-block" aria-hidden="true" />`).
-    - Scoped `font-mono tabular-nums` strictly to numerical, astrometric, and degree values while rendering prose labels and headers in `font-sans font-medium` sentence case.
-    - Replaced raw dashes (`–`) in copy with clear prepositions ("to").
+- **Active Phase**: Bespoke Editorial Renaissance Astrometric Monograph Redesign (Completed)
+- **Bespoke Editorial Renaissance Astrometric Monograph Redesign (v2.32.0)**:
+  - **Visual Identity & Atmosphere**:
+    - Recomposed the entire observatory experience into a Renaissance Celestial Observatory & Classical Astrometric Monograph per `/hallmark redesign full`.
+    - Spatial Canvas: Warm obsidian umber (`#0c0a09` / `bg-stone-950`) in dark mode with warm antique Italian vellum (`#faf7f0`) in light solar mode.
+    - Hardware Enclosures & Bezels: Warm stone (`bg-stone-900`) with burnished brass borders (`border-stone-800`, `border-amber-900/40`, `border-amber-700/60`), gilded highlights (`text-amber-400`, `text-amber-300`), and amber optical reticles.
+  - **Scholarly Renaissance Typography**:
+    - Integrated classical Roman typography (`Cinzel` and `Cormorant Garamond`) with graceful offline serif fallbacks (`font-serif`).
+    - Elevated all primary display titles, tradition headings, subject dossier nameplates, and chapter headers to Roman serif with refined tracking and optical rhythm.
+    - Scoped monospace typography strictly to astrometric coordinates, ephemeris degrees, and tabular numbers.
+  - **Classical Tractate Journey Stepper Progression**:
+    - Elevated the 5 epistemological journey stages to classical monograph chapters:
+      - Tractate I · Astrometric Calibration & Input (`BirthDataForm.tsx`)
+      - Tractate II · Cultural Computation Datasets (`TraditionCharts.tsx` & `TraditionVerticalCarousel.tsx`)
+      - Tractate III · Cross-Cultural Synthesis Without Double-Counting (`SynthesisMatrix.tsx`)
+      - Tractate IV · Cross-Cultural Corroboration Document (`ReadingView.tsx`)
+      - Tractate V · Mathematical Evidence & Empirical Validation (`MathematicalEvidenceCard.tsx`)
+  - **Hallmark Floor & Quality Invariants**:
+    - Hallmark stamp updated in `index.css`: `/* Hallmark · editorial · redone · full · app */`.
+    - Verified `sloplint: 0 FAIL` across all 14 frontend files.
+    - Hardened dropdown wait in `tests/test_07_geocoding_intelligence.py` against CPU throttling.
+    - Zero regression guarantee: preserved all 9 traditions, ephemeris calculations, test hooks, input IDs, and data structures.
   - **Full Regression Verification & Multi-Platform Packaging**:
     - TypeScript compilation (`tsc --noEmit`) verified 0 errors.
-    - Vite production bundle built in 718ms with 0 errors.
-    - All 25 regression test suites passing 100% cleanly via `./pipeline.sh test --summary` (69.17s).
-    - Synchronized and verified mobile distribution packages (`astrology-android-debug.apk` and `astrology-ios-simulator.zip`) via `./pipeline.sh package`.
+    - Vite production bundle built in 695ms with 0 errors.
+    - All 25 regression test suites passed 100% cleanly via `./pipeline.sh test --summary` (72.31s).
+    - Mobile distribution packages verified via `./pipeline.sh package`.
     - Zero critical console errors across all viewports.
   - **Workflow Health**: 100% CLEAN (Verified via `./pipeline.sh doctor`).
 - **Carousel Visual Instrument Clipping Resolution (v2.31.13)**:

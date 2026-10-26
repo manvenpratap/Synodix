@@ -113,11 +113,11 @@ export const ReadingView: React.FC<Props> = ({ data, subjectName, onNavigate }) 
               </span>
             </div>
 
-            <h2 className="text-xl sm:text-2xl font-bold text-slate-100 tracking-tight flex items-center gap-2">
-              <BookOpen className="w-5 h-5 text-cyan-400 shrink-0" />
-              <span>Cross-Cultural Corroboration Document</span>
+            <h2 className="text-xl sm:text-2xl font-serif font-bold text-stone-100 tracking-tight flex items-center gap-2">
+              <BookOpen className="w-5 h-5 text-amber-400 shrink-0" />
+              <span>Tractate IV · Cross-Cultural Corroboration Document</span>
             </h2>
-            <p className="text-xs text-slate-400 mt-1 font-sans hidden sm:block">
+            <p className="text-xs text-stone-400 mt-1 font-sans hidden sm:block">
               Autonomous cross-system corroboration and divergence synthesis across independent classical civilizational traditions.
             </p>
           </div>

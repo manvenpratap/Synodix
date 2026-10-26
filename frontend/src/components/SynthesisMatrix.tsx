@@ -55,18 +55,18 @@ export const SynthesisMatrix: React.FC<Props> = ({ synthesis, onNavigate }) => {
       <div className="reticle-corner-br" />
 
       {/* Header & Divergence Metric */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between pb-3.5 border-b border-slate-800 gap-3">
+      <div className="flex flex-col md:flex-row md:items-center justify-between pb-3.5 border-b border-stone-800 gap-3">
         <div>
-          <span className="text-xs text-purple-400 font-medium block">
-            Section 5 · Cross-Cultural Synthesis Without Double-Counting
+          <span className="text-xs text-amber-400 font-serif font-medium block">
+            Tractate III · Cross-Cultural Synthesis Without Double-Counting
           </span>
           <div className="flex flex-wrap items-center gap-2 mt-0.5">
-            <h3 className="text-base font-semibold text-slate-100">
+            <h3 className="text-base font-serif font-semibold text-stone-100">
               Cross-Cultural Convergence & Divergence Matrix
             </h3>
             <ExplainerTrigger id="three_cluster_consensus" label="Consensus Protocol" variant="badge" />
           </div>
-          <p className="text-xs text-slate-400 mt-0.5">
+          <p className="text-xs text-stone-400 mt-0.5">
             3 primary votes: Jyotisha (1), Western (1), Sinic (1). Maya & Tibetan contribute as non-voting symbolic overlays.
           </p>
         </div>
@@ -414,7 +414,7 @@ export const SynthesisMatrix: React.FC<Props> = ({ synthesis, onNavigate }) => {
           <button
             type="button"
             onClick={() => onNavigate('dossier')}
-            className="inline-flex items-center justify-center gap-2 px-4 py-2.5 min-h-[44px] text-xs font-medium rounded-lg bg-cyan-700 hover:bg-cyan-600 disabled:opacity-50 disabled:cursor-not-allowed text-white cursor-pointer transition-colors duration-150 border border-cyan-500/80 shadow-xs active:scale-[0.98] whitespace-nowrap"
+            className="inline-flex items-center justify-center gap-2 px-4 py-2.5 min-h-[44px] text-xs font-serif font-semibold rounded-lg bg-amber-600 hover:bg-amber-500 disabled:opacity-50 disabled:cursor-not-allowed text-stone-950 cursor-pointer transition-colors duration-150 border border-amber-300 shadow-xs active:scale-[0.98] whitespace-nowrap"
           >
             <span className="whitespace-nowrap">Read Full Corroboration Dossier</span>
             <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" />

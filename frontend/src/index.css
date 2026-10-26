@@ -1,5 +1,5 @@
-/* Hallmark · atmospheric · redone · full · app */
-/* critique: High-precision astrometric observatory; human-crafted scholarly typography, composite-only transitions, and zero AI tropes */
+/* Hallmark · editorial · redone · full · app */
+/* critique: Renaissance Astrometric Monograph & Classical Celestial Observatory; rich Roman serif headers, warm obsidian umber and antique Italian vellum, gilded brass instruments, composite-only transitions, and zero AI tropes */
 /* waive: 30a (domain astronomical unicode glyphs in wheel visualizer) */
 /* waive: 48 (legacy Tailwind v4 color class compatibility during migration) */
 
@@ -30,18 +30,18 @@ body {
 
 :root {
   color-scheme: dark;
-  --bg-space: #07090e;
-  --surface-ground: #0a0e16;
-  --surface-card: #0d121c;
-  --surface-card-subtle: #111824;
-  --surface-inset: #090d15;
-  --border-subtle: #1a2433;
-  --border-active: #29384f;
-  --border-focus: #38bdf8;
-  --text-primary: #f8fafc;
-  --text-secondary: #94a3b8;
-  --text-tertiary: #64748b;
-  --brass-accent: #d4a373;
+  --bg-space: #0c0a09;
+  --surface-ground: #141210;
+  --surface-card: #1c1917;
+  --surface-card-subtle: #292524;
+  --surface-inset: #12100e;
+  --border-subtle: #2e2823;
+  --border-active: #443c33;
+  --border-focus: #f59e0b;
+  --text-primary: #f5f5f4;
+  --text-secondary: #d6d3d1;
+  --text-tertiary: #a8a29e;
+  --brass-accent: #d97706;
   --cyan-accent: #38bdf8;
   --emerald-accent: #34d399;
   --rose-accent: #fb7185;
@@ -64,18 +64,18 @@ body {
 :root[data-theme="light"],
 html[data-theme="light"] {
   color-scheme: light;
-  --bg-space: #f8fafc;
-  --surface-card: #fafbfd;
-  --surface-card-subtle: #f1f5f9;
-  --border-subtle: #e2e8f0;
-  --border-active: #cbd5e1;
+  --bg-space: #faf7f0;
+  --surface-card: #fffdfa;
+  --surface-card-subtle: #f5efe6;
+  --border-subtle: #e7e0d3;
+  --border-active: #d6cbba;
   --brass-accent: #b45309;
   --cyan-accent: #0284c7;
 }
 
 [data-theme="light"] body {
   background-color: var(--bg-space);
-  color: #1e293b;
+  color: #1c1917;
 }
 
 /* =========================================================================
@@ -944,6 +944,13 @@ body {
   font-variant-numeric: tabular-nums;
 }
 
+/* Classical Roman & Renaissance Astrometric Monograph Typography */
+.font-serif,
+.font-editorial,
+h1, h2, h3, h4 {
+  font-family: "Cinzel", "Cormorant Garamond", "Palatino Linotype", "Book Antiqua", Palatino, Georgia, serif;
+}
+
 /* Typographic legibility & balanced wrapping (modern-web-guidance: improve-text-layout-and-legibility) */
 h1, h2, h3, h4, h5, h6 {
   text-wrap: balance;
@@ -1238,44 +1245,44 @@ html[data-theme="light"] {
   animation: gearRotateReverse 30s linear infinite;
 }
 
-/* Spatial Observatory Atmosphere */
+/* Spatial Observatory Atmosphere - Renaissance Celestial Monograph */
 .celestial-observatory-canvas {
-  background-color: #06080e;
+  background-color: #0c0a09;
   background-image: 
-    radial-gradient(ellipse 70% 45% at 50% 0%, rgba(14, 116, 144, 0.12), transparent 70%),
-    radial-gradient(circle at 10% 20%, rgba(56, 189, 248, 0.03) 0%, transparent 40%),
-    radial-gradient(circle at 90% 80%, rgba(192, 132, 252, 0.02) 0%, transparent 40%),
-    radial-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px);
-  background-size: 100% 100%, 100% 100%, 100% 100%, 32px 32px;
+    radial-gradient(ellipse 70% 45% at 50% 0%, rgba(217, 119, 6, 0.08), transparent 70%),
+    radial-gradient(circle at 15% 25%, rgba(180, 83, 9, 0.04) 0%, transparent 45%),
+    radial-gradient(circle at 85% 75%, rgba(251, 191, 36, 0.03) 0%, transparent 45%),
+    radial-gradient(rgba(245, 158, 11, 0.04) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 100% 100%, 36px 36px;
 }
 
 [data-theme="light"] .celestial-observatory-canvas {
-  background-color: #f8fafc !important;
+  background-color: #faf7f0 !important;
   background-image: 
-    radial-gradient(ellipse 70% 45% at 50% 0%, rgba(2, 132, 199, 0.08), transparent 70%),
-    radial-gradient(rgba(15, 23, 42, 0.04) 1px, transparent 1px) !important;
-  background-size: 100% 100%, 32px 32px !important;
+    radial-gradient(ellipse 75% 50% at 50% 0%, rgba(180, 83, 9, 0.06), transparent 70%),
+    radial-gradient(rgba(120, 53, 15, 0.03) 1px, transparent 1px) !important;
+  background-size: 100% 100%, 36px 36px !important;
 }
 
-/* Machined Doppelrand Hardware Enclosure */
+/* Machined Doppelrand Hardware Enclosure & Burnished Brass Framing */
 .machined-bezel {
   position: relative;
   border-radius: 1rem;
-  background-color: #0c1018;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background-color: #14110e;
+  border: 1px solid rgba(217, 119, 6, 0.25);
   box-shadow: 
-    0 0 0 3px rgba(255, 255, 255, 0.025),
-    0 0 0 4px rgba(255, 255, 255, 0.06),
-    0 16px 40px -10px rgba(0, 0, 0, 0.5);
+    0 0 0 1px rgba(180, 83, 9, 0.15),
+    0 0 0 4px rgba(28, 25, 23, 0.6),
+    0 20px 48px -12px rgba(0, 0, 0, 0.6);
 }
 
 [data-theme="light"] .machined-bezel {
-  background-color: #fafbfd !important;
-  border: 1px solid #cbd5e1 !important;
+  background-color: #fffdfa !important;
+  border: 1px solid #d6cbba !important;
   box-shadow: 
-    0 0 0 3px #f1f5f9,
-    0 0 0 4px #e2e8f0,
-    0 12px 32px -8px rgba(15, 23, 42, 0.08) !important;
+    0 0 0 1px rgba(180, 83, 9, 0.1),
+    0 0 0 4px #f5efe6,
+    0 16px 36px -10px rgba(120, 53, 15, 0.08) !important;
 }
 
 .machined-core {
@@ -1287,12 +1294,12 @@ html[data-theme="light"] {
 }
 
 .sidebar-canvas {
-  background-color: #0a0d15;
+  background-color: #12100e;
 }
 
 [data-theme="light"] .sidebar-canvas {
-  background-color: #fafbfd !important;
-  border-color: #e2e8f0 !important;
+  background-color: #fffdfa !important;
+  border-color: #e7e0d3 !important;
 }
 
 [data-theme="light"] .from-\[\#0e1422\],
@@ -1307,30 +1314,30 @@ html[data-theme="light"] {
 [data-theme="light"] [class*="bg-gradient-to-r"][class*="from-\[#"],
 [data-theme="light"] [class*="bg-gradient-to-b"][class*="from-\[#"],
 [data-theme="light"] [class*="bg-gradient-to-br"][class*="from-\[#"] {
-  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%) !important;
-  background-image: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%) !important;
-  border-color: #cbd5e1 !important;
+  background: linear-gradient(135deg, #faf7f0 0%, #f5efe6 100%) !important;
+  background-image: linear-gradient(135deg, #faf7f0 0%, #f5efe6 100%) !important;
+  border-color: #e7e0d3 !important;
 }
 
 [data-theme="light"] .border-\[\#1e293b\],
 [data-theme="light"] .border-\[\#1a2332\],
 [data-theme="light"] .border-\[\#1e2a3a\],
 [data-theme="light"] .border-\[\#1a2333\] {
-  border-color: #e2e8f0 !important;
+  border-color: #e7e0d3 !important;
 }
 
 [data-theme="light"] .bg-\[\#0d131f\] {
-  background-color: #fafbfd !important;
-  border-color: #e2e8f0 !important;
+  background-color: #fffdfa !important;
+  border-color: #e7e0d3 !important;
 }
 
 .header-canvas {
-  background-color: rgba(11, 14, 20, 0.92);
+  background-color: rgba(18, 16, 14, 0.94);
 }
 
 [data-theme="light"] .header-canvas {
-  background-color: rgba(255, 255, 255, 0.94) !important;
-  border-color: #e2e8f0 !important;
+  background-color: rgba(255, 253, 250, 0.96) !important;
+  border-color: #e7e0d3 !important;
 }
 
 /* Optical Telemetry Reticles */
@@ -1347,8 +1354,8 @@ html[data-theme="light"] {
   left: 4px;
   width: 6px;
   height: 6px;
-  border-top: 1px solid rgba(56, 189, 248, 0.4);
-  border-left: 1px solid rgba(56, 189, 248, 0.4);
+  border-top: 1px solid rgba(245, 158, 11, 0.45);
+  border-left: 1px solid rgba(245, 158, 11, 0.45);
   pointer-events: none;
 }
 .reticle-corner-tr {
@@ -1357,8 +1364,8 @@ html[data-theme="light"] {
   right: 4px;
   width: 6px;
   height: 6px;
-  border-top: 1px solid rgba(56, 189, 248, 0.4);
-  border-right: 1px solid rgba(56, 189, 248, 0.4);
+  border-top: 1px solid rgba(245, 158, 11, 0.45);
+  border-right: 1px solid rgba(245, 158, 11, 0.45);
   pointer-events: none;
 }
 .reticle-corner-bl {
@@ -1367,8 +1374,8 @@ html[data-theme="light"] {
   left: 4px;
   width: 6px;
   height: 6px;
-  border-bottom: 1px solid rgba(56, 189, 248, 0.4);
-  border-left: 1px solid rgba(56, 189, 248, 0.4);
+  border-bottom: 1px solid rgba(245, 158, 11, 0.45);
+  border-left: 1px solid rgba(245, 158, 11, 0.45);
   pointer-events: none;
 }
 .reticle-corner-br {
@@ -1377,8 +1384,8 @@ html[data-theme="light"] {
   right: 4px;
   width: 6px;
   height: 6px;
-  border-bottom: 1px solid rgba(56, 189, 248, 0.4);
-  border-right: 1px solid rgba(56, 189, 248, 0.4);
+  border-bottom: 1px solid rgba(245, 158, 11, 0.45);
+  border-right: 1px solid rgba(245, 158, 11, 0.45);
   pointer-events: none;
 }
 

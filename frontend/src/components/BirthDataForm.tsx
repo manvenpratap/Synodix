@@ -428,18 +428,18 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
       <div className="reticle-corner-br" />
 
         {/* Top Header & Independent Experience Mode Switcher */}
-        <div className="flex flex-col md:flex-row md:items-center justify-between pb-4 border-b border-slate-800 gap-3">
+        <div className="flex flex-col md:flex-row md:items-center justify-between pb-4 border-b border-stone-800 gap-3">
         <div>
           <div className="flex flex-wrap items-center gap-x-2 gap-y-0.5">
-            <span className="text-xs text-cyan-400 font-medium">
-              Section 1 · Astrometric Calibration & Input
+            <span className="text-xs text-amber-400 font-serif font-medium">
+              Tractate I · Astrometric Calibration & Input
             </span>
-            <span className="text-slate-400 hidden sm:inline">•</span>
-            <span className="text-xs text-slate-400 font-sans">
+            <span className="text-stone-400 hidden sm:inline">•</span>
+            <span className="text-xs text-stone-400 font-sans">
               {activeMode === 'custom' ? 'Clean Independent Workspace' : '100 Verified Historical Records'}
             </span>
           </div>
-          <h2 className="text-base sm:text-lg font-semibold text-slate-100 mt-2.5 sm:mt-3">
+          <h2 className="text-base sm:text-lg font-serif font-semibold text-stone-100 mt-2.5 sm:mt-3">
             {activeMode === 'custom' ? 'Custom Birth Chart Calibration' : 'Historical Titan Benchmark Library'}
           </h2>
         </div>
@@ -448,7 +448,7 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
         <div
           role="tablist"
           aria-label="Input Experience Switcher"
-          className="relative flex items-center bg-slate-900 p-1 rounded-lg border border-slate-800 w-full sm:w-auto"
+          className="relative flex items-center bg-stone-900 p-1 rounded-lg border border-stone-800 w-full sm:w-auto"
         >
           <button
             type="button"
@@ -457,16 +457,16 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
             aria-selected={activeMode === 'custom'}
             aria-controls="panel-custom-mode"
             onClick={() => setActiveMode('custom')}
-            className={`relative flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-3 sm:px-3.5 py-2.5 sm:py-1.5 min-h-[44px] sm:min-h-[38px] text-xs rounded-md font-medium transition-colors cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 ${
+            className={`relative flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-3 sm:px-3.5 py-2.5 sm:py-1.5 min-h-[44px] sm:min-h-[38px] text-xs rounded-md font-medium transition-colors cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 ${
               activeMode === 'custom'
-                ? 'text-cyan-300 font-semibold'
-                : 'text-slate-400 hover:text-slate-200'
+                ? 'text-amber-200 font-semibold'
+                : 'text-stone-400 hover:text-stone-200'
             }`}
           >
             {activeMode === 'custom' && (
               <motion.div
                 layoutId="active-experience-pill"
-                className="absolute inset-0 bg-cyan-950/90 border border-cyan-700/80 rounded-md shadow-xs pointer-events-none"
+                className="absolute inset-0 bg-amber-950/80 border border-amber-700/80 rounded-md shadow-xs pointer-events-none"
                 transition={{ type: 'spring', stiffness: 500, damping: 35 }}
               />
             )}
@@ -483,16 +483,16 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
             aria-selected={activeMode === 'archive'}
             aria-controls="panel-archive-mode"
             onClick={() => setActiveMode('archive')}
-            className={`relative flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-3 sm:px-3.5 py-2.5 sm:py-1.5 min-h-[44px] sm:min-h-[38px] text-xs rounded-md font-medium transition-colors cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 ${
+            className={`relative flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-3 sm:px-3.5 py-2.5 sm:py-1.5 min-h-[44px] sm:min-h-[38px] text-xs rounded-md font-medium transition-colors cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 ${
               activeMode === 'archive'
-                ? 'text-cyan-300 font-semibold'
-                : 'text-slate-400 hover:text-slate-200'
+                ? 'text-amber-200 font-semibold'
+                : 'text-stone-400 hover:text-stone-200'
             }`}
           >
             {activeMode === 'archive' && (
               <motion.div
                 layoutId="active-experience-pill"
-                className="absolute inset-0 bg-cyan-950/90 border border-cyan-700/80 rounded-md shadow-xs pointer-events-none"
+                className="absolute inset-0 bg-amber-950/80 border border-amber-700/80 rounded-md shadow-xs pointer-events-none"
                 transition={{ type: 'spring', stiffness: 500, damping: 35 }}
               />
             )}
@@ -877,7 +877,7 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
                     <div
                       role="listbox"
                       aria-label="City suggestions"
-                      className="absolute left-0 right-0 top-full mt-1.5 z-50 bg-slate-900 border border-cyan-800/80 rounded-lg shadow-2xl overflow-hidden max-h-64 overflow-y-auto divide-y divide-slate-800 font-sans overscroll-contain"
+                      className="absolute left-0 right-0 top-full mt-1.5 z-50 bg-stone-900 border border-stone-800 rounded-lg shadow-lg overflow-hidden max-h-64 overflow-y-auto divide-y divide-stone-800 font-sans overscroll-contain"
                     >
                       <div className="px-2.5 py-1.5 bg-slate-950 border-b border-slate-800 flex items-center justify-between text-[11px] font-sans text-slate-400">
                         <span>Suggested Cities & Coordinates</span>
@@ -1144,7 +1144,7 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
               <button
                 type="submit"
                 disabled={isLoading}
-                className="relative overflow-hidden px-6 py-2.5 min-h-[44px] bg-gradient-to-r from-cyan-700 via-cyan-600 to-sky-700 hover:from-cyan-600 hover:to-sky-600 active:scale-[0.98] text-white font-medium text-xs rounded-lg border border-cyan-400/60 transition-colors duration-150 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-1 focus-visible:ring-offset-slate-950 shadow-md shadow-cyan-950/40 whitespace-nowrap"
+                className="relative overflow-hidden px-6 py-2.5 min-h-[44px] bg-gradient-to-r from-amber-600 via-amber-500 to-amber-600 hover:from-amber-500 hover:to-amber-400 active:scale-[0.98] text-stone-950 font-serif font-semibold text-xs rounded-lg border border-amber-300 transition-colors duration-150 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:ring-offset-1 focus-visible:ring-offset-stone-950 shadow-md shadow-amber-950/40 whitespace-nowrap"
               >
                 {isLoading && (
                   <div className="absolute inset-0 pointer-events-none">
@@ -1153,16 +1153,16 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
                 )}
                 {isLoading ? (
                   <>
-                    <svg className="motion-safe:animate-spin h-3.5 w-3.5 text-white" viewBox="0 0 24 24" fill="none">
+                    <svg className="motion-safe:animate-spin h-3.5 w-3.5 text-stone-950" viewBox="0 0 24 24" fill="none">
                       <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                       <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                     </svg>
-                    <span className="relative z-10 font-sans tracking-wide whitespace-nowrap">Evaluating Dual Engines & Uncertainty Ensemble…</span>
+                    <span className="relative z-10 font-serif tracking-wide whitespace-nowrap">Evaluating Dual Engines & Uncertainty Ensemble…</span>
                   </>
                 ) : (
                   <>
-                    <Compass className="w-4 h-4 text-cyan-200" />
-                    <span className="font-semibold tracking-wide whitespace-nowrap">Compute, Verify & Synthesize Chart</span>
+                    <Compass className="w-4 h-4 text-stone-950" />
+                    <span className="font-serif font-bold tracking-wide whitespace-nowrap">Compute, Verify & Synthesize Chart</span>
                   </>
                 )}
               </button>

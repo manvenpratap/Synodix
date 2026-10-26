@@ -543,7 +543,7 @@ export const TraditionVerticalCarousel: React.FC<Props> = ({
                     <span className="text-2xl select-none">{theme.glyph}</span>
                     <div>
                       <div className="flex items-center gap-2">
-                        <h4 className={`text-base font-bold tracking-wide font-sans ${theme.accentText}`}>
+                        <h4 className={`text-base font-bold tracking-wide font-serif ${theme.accentText}`}>
                           {theme.nativeTitle}
                         </h4>
                         <span className={`px-2 py-0.5 rounded text-[10px] font-sans border font-medium ${theme.accentBadge}`}>
