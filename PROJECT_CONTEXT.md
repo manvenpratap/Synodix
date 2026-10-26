@@ -1,7 +1,7 @@
 # Synodix: Project Context & Working Memory
 
-**Last Updated:** 2026-10-26 09:57:29
-**Version:** 2.31.5  
+**Last Updated:** 2026-10-26 10:02:35
+**Version:** 2.31.6  
 **Stack:** Python 3.12 (FastAPI, Swiss Ephemeris 2.10, Skyfield DE421) + TypeScript / React 19 / Vite / Tailwind CSS v4 / Framer Motion / Capacitor 8 (iOS & Android)  
 **Workspace:** `/Volumes/Study/Projects/Astrology` (symlinked as `/Volumes/Study/Astrology`)  
 **Git Remote:** `https://github.com/manvenpratap/Synodix.git`  
@@ -9,7 +9,15 @@
 ---
 
 ## 1. Current Status & Milestone
-- **Active Phase**: 3D Vertical Carousel Deck for Cultural Traditions & Light Theme Calibration (Completed)
+- **Active Phase**: Elimination of Redundant Top-Bar "SYNODIX" Breadcrumb (Completed)
+- **Elimination of Redundant Top-Bar "SYNODIX" Breadcrumb (v2.31.6)**:
+  - **Top Bar Header Layout Simplification (`App.tsx`)**:
+    - Removed the redundant `SYNODIX /` breadcrumb prefix from the sticky top workspace header bar.
+    - Preserved the authoritative brand logo, armilla geometric icon, and version pill in the desktop sidebar (`aside`) and mobile navigation drawer, avoiding visual duplication.
+    - Cleaned up the top-bar title hierarchy so the active screen title (`h1`) stands prominently without extraneous prefix clutter.
+  - **Automated Regression Invariant**:
+    - All 25 regression test suites passing cleanly via `./pipeline.sh test --summary` (61.94s).
+  - **Workflow Health**: 100% CLEAN (Verified via `./pipeline.sh doctor`).
 - **3D Vertical Carousel Deck for Cultural Traditions & Light Theme Calibration (v2.31.5)**:
   - **Authored 3D Vertical Carousel Deck (`TraditionVerticalCarousel.tsx`)**:
     - Built a physics-based, 3D vertical stacked carousel deck for navigating across all 9 deterministic astrological tradition calculators (Jyotisha, BaZi, Western, Zi Wei, Maya, Tibetan, Persian, Egyptian, Maramataka).

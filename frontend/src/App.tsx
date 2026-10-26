@@ -685,13 +685,8 @@ function AppContent() {
               <Menu className="w-5 h-5" />
             </button>
 
-            {/* Breadcrumb Screen Title */}
+            {/* Screen Title */}
             <div className="flex items-center gap-1.5 sm:gap-2 min-w-0">
-              <span className="text-xs font-mono text-cyan-400 font-semibold tracking-wider hidden sm:inline flex items-center gap-1.5">
-                <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 inline-block"></span>
-                SYNODIX
-              </span>
-              <span className="text-slate-600 hidden sm:inline">/</span>
               <h1 className="text-xl sm:text-2xl font-bold text-slate-100 flex items-center gap-2 min-w-0">
                 <span className="truncate max-w-[140px] sm:max-w-none">
                   {NAV_ITEMS.find((n) => n.id === currentScreen)?.label}

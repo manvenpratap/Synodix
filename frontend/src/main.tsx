@@ -16,7 +16,7 @@ if ('serviceWorker' in navigator) {
     if (typeof caches !== 'undefined') {
       caches.keys().then((keys) => {
         for (const key of keys) {
-          if (key !== 'synodix-v2.31.5') {
+          if (key !== 'synodix-v2.31.6') {
             caches.delete(key);
           }
         }
