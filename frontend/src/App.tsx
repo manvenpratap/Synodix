@@ -290,7 +290,7 @@ function AppContent() {
       {/* 1. Desktop Fixed Sidebar Navigation (>=md) */}
       <aside className="hidden md:flex flex-col w-64 lg:w-72 sidebar-canvas border-r border-[#1a2333] shrink-0 h-[100dvh] sticky top-0 overflow-y-auto overflow-x-hidden select-none z-40 scrollbar-thin">
         {/* Brand Logo & Header */}
-        <div className="p-4 border-b border-[#1a2333]/80 relative overflow-hidden">
+        <div className="p-4 border-b border-[#1a2333]/80 relative overflow-hidden shrink-0">
           <div className="flex items-center gap-3">
             {/* Nonagon Armilla Geometric Logo Mark with slow orbital spin ring */}
             <div className="relative w-10 h-10 rounded-xl bg-gradient-to-br from-[#101826] to-[#090d14] border border-cyan-800/80 flex items-center justify-center shrink-0 shadow-md ring-1 ring-cyan-500/20 group">
@@ -321,7 +321,7 @@ function AppContent() {
         </div>
 
         {/* Active Subject Context Pill — Engraved Instrument Plate */}
-        <div className="px-3 pt-3">
+        <div className="px-3 pt-3 shrink-0">
           <div className="p-3 rounded-xl bg-gradient-to-b from-[#0e1422] to-[#0a0d16] border border-[#1e293b] shadow-xs flex flex-col gap-1.5 relative overflow-hidden group">
             <div className="flex items-center justify-between">
               <span className="text-[11px] uppercase font-mono text-slate-400 font-semibold tracking-wider flex items-center gap-1.5">
@@ -381,7 +381,7 @@ function AppContent() {
         </div>
 
         {/* Canonical Traditions Alignment Status (Astrometric Array) */}
-        <div className="px-3 pt-2">
+        <div className="px-3 pt-2 shrink-0">
           <div className="p-2.5 rounded-xl bg-gradient-to-b from-[#090e17] to-[#070b12] border border-[#1a2332]">
             <div className="flex items-center justify-between mb-1.5 px-0.5">
               <span className="text-[11px] uppercase font-mono text-slate-400 font-semibold tracking-wider">
@@ -422,7 +422,7 @@ function AppContent() {
         </div>
 
         {/* Navigation Screen Links */}
-        <nav aria-label="Workspace Screens" className="flex-1 p-3 space-y-1">
+        <nav aria-label="Workspace Screens" className="p-3 space-y-1 shrink-0">
           <span className="px-2 text-[11px] font-mono text-slate-400 uppercase tracking-wider block mb-1.5 font-semibold">
             WORKSPACE SCREENS
           </span>
@@ -472,7 +472,7 @@ function AppContent() {
 
         {/* Calibration Inset Box (Stitch Observatory Style) */}
         {chartData && (
-          <div className="px-3 pb-2">
+          <div className="px-3 pb-2 shrink-0">
             <div className="p-2 rounded bg-[#06090e] border border-[#1b2331] font-mono text-[11px] space-y-0.5 text-slate-400">
               <div className="flex items-center justify-between text-slate-400 uppercase tracking-wider font-semibold mb-1">
                 <span>ASTROMETRIC CALIBRATION</span>
@@ -486,7 +486,7 @@ function AppContent() {
         )}
 
         {/* Sidebar Footer with Engine Diagnostics */}
-        <div className="p-3 border-t border-[#1b2331] bg-[#090c12] text-[11px] font-mono space-y-2">
+        <div className="p-3 border-t border-[#1b2331] bg-[#090c12] text-[11px] font-mono space-y-2 shrink-0">
           <div className="flex items-center justify-between text-slate-400">
             <span className="flex items-center gap-1.5">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 shadow-[0_0_4px_#10b981] inline-block"></span>

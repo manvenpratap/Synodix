@@ -152,15 +152,26 @@ def test_impeccable_light_mode_contrast_and_tooltip_bounds():
         aside_status = page.evaluate("""() => {
             const aside = document.querySelector("aside");
             const style = window.getComputedStyle(aside);
+            const header = aside.querySelector("div:first-child");
+            const logo = aside.querySelector("svg.animate-orbital-spin");
+            const headerRect = header ? header.getBoundingClientRect() : null;
+            const logoRect = logo ? logo.getBoundingClientRect() : null;
             return {
                 overflowX: style.overflowX,
                 scrollLeft: aside.scrollLeft,
                 scrollWidth: aside.scrollWidth,
-                clientWidth: aside.clientWidth
+                clientWidth: aside.clientWidth,
+                headerHeight: headerRect ? headerRect.height : 0,
+                logoWidth: logoRect ? logoRect.width : 0,
+                logoHeight: logoRect ? logoRect.height : 0,
+                logoX: logoRect ? logoRect.x : 0
             };
         }""")
         assert aside_status["overflowX"] == "hidden", f"Sidebar overflow-x should be hidden, got {aside_status['overflowX']}"
         assert aside_status["scrollLeft"] == 0, f"Sidebar scrollLeft should be 0, got {aside_status['scrollLeft']}"
+        assert aside_status["headerHeight"] >= 65, f"Sidebar header height crushed ({aside_status['headerHeight']}px < 65px), logo half-hidden"
+        assert aside_status["logoHeight"] >= 20, f"Sidebar logo height crushed ({aside_status['logoHeight']}px < 20px)"
+        assert aside_status["logoX"] >= 10, f"Sidebar logo shifted left or cut off ({aside_status['logoX']}px < 10px)"
 
         # 2. Header Tooltip Downward Orientation (Does not clip into browser menu)
         theme_btn = page.locator("header button:has-text('Mode')")

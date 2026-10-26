@@ -1,7 +1,7 @@
 # Synodix: Project Context & Working Memory
 
-**Last Updated:** 2026-10-26 09:02:29
-**Version:** 2.31.2  
+**Last Updated:** 2026-10-26 09:25:20
+**Version:** 2.31.3  
 **Stack:** Python 3.12 (FastAPI, Swiss Ephemeris 2.10, Skyfield DE421) + TypeScript / React 19 / Vite / Tailwind CSS v4 / Framer Motion / Capacitor 8 (iOS & Android)  
 **Workspace:** `/Volumes/Study/Projects/Astrology` (symlinked as `/Volumes/Study/Astrology`)  
 **Git Remote:** `https://github.com/manvenpratap/Synodix.git`  
@@ -9,7 +9,16 @@
 ---
 
 ## 1. Current Status & Milestone
-- **Active Phase**: Light Theme Color Contrast, Tooltip Orientation & Sidebar Ergonomics (Completed)
+- **Active Phase**: Sidebar Flexbox Shrink Lock & Complete Brand Logo Visibility (Completed)
+- **Sidebar Flexbox Shrink Lock & Complete Brand Logo Visibility (v2.31.3)**:
+  - **Sidebar Logo Vertical Crushing Prevention (`App.tsx`, `index.css`)**:
+    - Identified the root cause of the half-hidden sidebar logo: inside `<aside className="... flex flex-col h-[100dvh] ...">`, flex items without explicit `shrink-0` were squeezed by flexbox when the viewport height was smaller than total content height (squeezing the header container down from 73px to 33px and cutting off the lower half of the orbital logo).
+    - Added `shrink-0` across all structural sidebar sections in `App.tsx`: Brand Header, Active Subject Dossier, Civilizational Array, Navigation Links, Astrometric Calibration, and Engine Diagnostics Footer.
+    - Added strict CSS protection in `index.css`: `aside > div:first-child { flex-shrink: 0 !important; min-height: 72px; }` ensuring the logo header retains full height and breathing room under any viewport height or flexbox pressure.
+  - **Automated Regression Invariant (`test_10_impeccable_quality_audit.py`)**:
+    - Added bounding-box assertions in `test_impeccable_light_mode_contrast_and_tooltip_bounds`: verifies `headerHeight >= 65px`, `logoHeight >= 20px`, and `logoX >= 10px` across both default and compact laptop viewports (1024x665).
+    - All 25 regression test suites passing cleanly via `./pipeline.sh test --summary`.
+  - **Workflow Health**: 100% CLEAN (Verified via `./pipeline.sh doctor`).
 - **Light Theme Color Contrast, Tooltip Orientation & Sidebar Ergonomics (v2.31.2)**:
   - **Downward Top-Bar Tooltip Anchoring (`index.css`)**:
     - Re-architected `[data-tooltip]` CSS pseudo-elements for elements within `header`: positioned tooltips downwards (`top: calc(100% + 8px); bottom: auto;`) instead of upwards, completely preventing tooltips on the Dark Mode toggle and Feature Guide from clipping into the browser toolbar or native window controls.
