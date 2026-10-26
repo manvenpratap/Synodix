@@ -230,5 +230,66 @@ def test_impeccable_light_mode_contrast_and_tooltip_bounds():
         assert contrast_results["persContrast"] >= 4.5, f"PERS pill contrast should be >= 4.5, got {contrast_results['persContrast']:.2f}"
         assert contrast_results["egyptContrast"] >= 4.5, f"EGYPT pill contrast should be >= 4.5, got {contrast_results['egyptContrast']:.2f}"
 
+        # 4. Mathematical Evidence Screen Light Theme & Hover Contrast
+        evidence_nav = page.locator("button:has-text('Mathematical Evid')").first
+        evidence_nav.click()
+        page.wait_for_timeout(300)
+
+        # Hover over H6 row
+        row_h6 = page.locator("tr:has-text('H6')")
+        row_h6.hover()
+        page.wait_for_timeout(100)
+
+        evidence_contrast = page.evaluate("""() => {
+            function getLuminance(rgbStr) {
+                const match = rgbStr.match(/\\d+/g);
+                if (!match || match.length < 3) return 1;
+                const [r, g, b] = match.map(Number).map(v => {
+                    const c = v / 255;
+                    return c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4);
+                });
+                return 0.2126 * r + 0.7152 * g + 0.0722 * b;
+            }
+            function getContrast(rgb1, rgb2) {
+                const l1 = getLuminance(rgb1);
+                const l2 = getLuminance(rgb2);
+                return (Math.max(l1, l2) + 0.05) / (Math.min(l1, l2) + 0.05);
+            }
+
+            const rows = Array.from(document.querySelectorAll("tbody tr"));
+            const r6 = rows.find(r => r.innerText.includes("H6"));
+            const r1 = rows.find(r => r.innerText.includes("H1"));
+            const r4 = rows.find(r => r.innerText.includes("H4"));
+
+            const r6Bg = window.getComputedStyle(r6).backgroundColor;
+            const r6ClaimColor = window.getComputedStyle(r6.querySelector("td:nth-child(2)")).color;
+
+            const h1Badge = r1.querySelector("td:last-child span");
+            const h1BadgeBg = window.getComputedStyle(h1Badge).backgroundColor;
+            const h1BadgeColor = window.getComputedStyle(h1Badge).color;
+
+            const h6Badge = r6.querySelector("td:last-child span");
+            const h6BadgeBg = window.getComputedStyle(h6Badge).backgroundColor;
+            const h6BadgeColor = window.getComputedStyle(h6Badge).color;
+
+            const h4Badge = r4.querySelector("td:last-child span");
+            const h4BadgeBg = window.getComputedStyle(h4Badge).backgroundColor;
+            const h4BadgeColor = window.getComputedStyle(h4Badge).color;
+
+            return {
+                r6Luminance: getLuminance(r6Bg),
+                r6ClaimContrast: getContrast(r6ClaimColor, r6Bg),
+                h1EnrichedContrast: getContrast(h1BadgeColor, h1BadgeBg),
+                h6SignificantContrast: getContrast(h6BadgeColor, h6BadgeBg),
+                h4DisprovenContrast: getContrast(h4BadgeColor, h4BadgeBg),
+            };
+        }""")
+
+        assert evidence_contrast["r6Luminance"] > 0.8, f"H6 hover background should be light in light mode, got luminance {evidence_contrast['r6Luminance']}"
+        assert evidence_contrast["r6ClaimContrast"] >= 4.5, f"H6 claim contrast should be >= 4.5, got {evidence_contrast['r6ClaimContrast']:.2f}"
+        assert evidence_contrast["h1EnrichedContrast"] >= 4.5, f"H1 Enriched badge contrast should be >= 4.5, got {evidence_contrast['h1EnrichedContrast']:.2f}"
+        assert evidence_contrast["h6SignificantContrast"] >= 4.5, f"H6 Significant badge contrast should be >= 4.5, got {evidence_contrast['h6SignificantContrast']:.2f}"
+        assert evidence_contrast["h4DisprovenContrast"] >= 4.5, f"H4 Disproven badge contrast should be >= 4.5, got {evidence_contrast['h4DisprovenContrast']:.2f}"
+
         assert_no_critical_errors(page)
         browser.close()

@@ -1,7 +1,7 @@
 # Synodix: Project Context & Working Memory
 
-**Last Updated:** 2026-10-26 09:25:20
-**Version:** 2.31.3  
+**Last Updated:** 2026-10-26 09:36:16
+**Version:** 2.31.4  
 **Stack:** Python 3.12 (FastAPI, Swiss Ephemeris 2.10, Skyfield DE421) + TypeScript / React 19 / Vite / Tailwind CSS v4 / Framer Motion / Capacitor 8 (iOS & Android)  
 **Workspace:** `/Volumes/Study/Projects/Astrology` (symlinked as `/Volumes/Study/Astrology`)  
 **Git Remote:** `https://github.com/manvenpratap/Synodix.git`  
@@ -9,7 +9,24 @@
 ---
 
 ## 1. Current Status & Milestone
-- **Active Phase**: Sidebar Flexbox Shrink Lock & Complete Brand Logo Visibility (Completed)
+- **Active Phase**: Light Theme Empirical Scorecard Contrast & Hover State Hardening (Completed)
+- **Light Theme Empirical Scorecard Contrast & Hover State Hardening (v2.31.4)**:
+  - **Table Hover Dark Inversion Root Cause & Fix (`index.css`)**:
+    - Identified root cause of blacked-out table rows on hover (row H6 in `MathematicalEvidenceCard.tsx`): Tailwind `.hover\:bg-\[\#111723\]:hover` triggered a pitch-black background on hover that lacked a light-theme override, rendering `#111723` with dark slate text (0.1:1 contrast).
+    - Added universal light-theme hover mapping: `tr:hover`, `tr.hover\:bg-\[\#111723\]:hover`, `td.sticky` on hover to `#f1f5f9` with deep slate `#1e293b` text (contrast ratio > 13:1).
+    - Mapped all dark interactive hover classes (`.hover\:bg-[#...]`) to `#f1f5f9 !important`.
+  - **Empirical Verdict Badges Light Theme Calibration (`index.css`)**:
+    - Mapped `.bg-amber-950` to `#fffbeb` background with `#92400e` text and `#fde68a` border ("Enriched (x.xx)", contrast 8.6:1).
+    - Mapped `.bg-emerald-950` to `#ecfdf5` background with `#065f46` text and `#a7f3d0` border ("Extremely Significant", contrast 7.8:1).
+    - Mapped `.bg-rose-950` to `#fff1f2` background with `#9f1239` text and `#fecdd3` border ("Disproven (Baseline)", contrast 7.2:1).
+  - **Navigation Tabs, Filters & KPI Card Metrics (`index.css`)**:
+    - Mapped active scorecard tabs (`.bg-[#141b27]`) to `#e0f2fe` with `#0369a1` text and `#0284c7` border.
+    - Mapped top KPI card metrics (Titan Cohort, Domain Concordance, Divergence Rate, Orbital Constraint) to high-contrast WCAG 2.2 AA compliant spectral tokens (`#0369a1`, `#047857`, `#b45309`, `#be123c`).
+    - Styled table column headers in light mode to `#334155 font-bold` with `#f8fafc` background and `#e2e8f0` borders.
+  - **Automated Regression Invariant (`test_10_impeccable_quality_audit.py`)**:
+    - Added automated Playwright test asserting `r6Luminance > 0.8`, `r6ClaimContrast >= 4.5`, and badge contrast >= 4.5:1 across `Enriched`, `Extremely Significant`, and `Disproven`.
+    - All 25 regression test suites passing cleanly via `./pipeline.sh test --summary`.
+  - **Workflow Health**: 100% CLEAN (Verified via `./pipeline.sh doctor`).
 - **Sidebar Flexbox Shrink Lock & Complete Brand Logo Visibility (v2.31.3)**:
   - **Sidebar Logo Vertical Crushing Prevention (`App.tsx`, `index.css`)**:
     - Identified the root cause of the half-hidden sidebar logo: inside `<aside className="... flex flex-col h-[100dvh] ...">`, flex items without explicit `shrink-0` were squeezed by flexbox when the viewport height was smaller than total content height (squeezing the header container down from 73px to 33px and cutting off the lower half of the orbital logo).
