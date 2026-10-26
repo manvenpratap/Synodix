@@ -1264,7 +1264,7 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
               displayedTitans.map((p) => {
                 const isSelected = selectedTitan?.id === p.id;
                 return (
-                  <motion.div
+                  <div
                     key={p.id}
                     role="button"
                     tabIndex={0}
@@ -1276,7 +1276,7 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
                         handleSelectTitan(p, false);
                       }
                     }}
-                    className={`flex flex-col text-left p-2.5 rounded-lg border transition-all cursor-pointer relative group min-h-[58px] active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-1 focus-visible:ring-offset-[#080a0f] ${
+                    className={`btn-press flex flex-col text-left p-2.5 rounded-lg border transition-all cursor-pointer relative group min-h-[58px] active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-1 focus-visible:ring-offset-[#080a0f] ${
                       isSelected
                         ? 'bg-cyan-950/70 border-cyan-500/80 shadow-sm shadow-cyan-950 text-slate-100 ring-1 ring-cyan-500/40'
                         : 'bg-[#10151f] hover:bg-[#151c2a] border-[#1b2331] text-slate-300 hover:border-slate-700'
@@ -1304,7 +1304,7 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
                     <span className="text-[11px] text-slate-400 font-mono mt-0.5 truncate">
                       {p.birth_date} • {p.city_name}
                     </span>
-                  </motion.div>
+                  </div>
                 );
               })
             )}

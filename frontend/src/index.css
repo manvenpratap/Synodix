@@ -836,15 +836,13 @@ html[data-theme="light"] {
   }
 }
 
-/* 2. Celestial Visualizer Motion */
+/* 2. Celestial Visualizer Motion (Composite-Only / GPU-Accelerated) */
 @keyframes celestialGlow {
   0%, 100% {
-    opacity: 0.9;
-    filter: drop-shadow(0 0 4px rgba(245, 158, 11, 0.35));
+    opacity: 0.75;
   }
   50% {
     opacity: 1;
-    filter: drop-shadow(0 0 10px rgba(245, 158, 11, 0.7));
   }
 }
 
@@ -866,7 +864,9 @@ html[data-theme="light"] {
 }
 
 .animate-celestial-glow {
+  filter: drop-shadow(0 0 6px rgba(245, 158, 11, 0.55));
   animation: celestialGlow 3.5s ease-in-out infinite;
+  will-change: opacity;
 }
 
 .animate-cycle-flow {
@@ -957,15 +957,26 @@ html[data-theme="light"] {
 
 @keyframes auraBreathe {
   0%, 100% {
-    box-shadow: 0 0 10px -2px rgba(168, 85, 247, 0.25);
+    opacity: 0.3;
   }
   50% {
-    box-shadow: 0 0 22px 2px rgba(168, 85, 247, 0.55);
+    opacity: 0.85;
   }
 }
 
 .animate-aura-breathe {
+  position: relative;
+}
+
+.animate-aura-breathe::after {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  box-shadow: 0 0 14px 2px currentColor;
+  pointer-events: none;
   animation: auraBreathe 3s ease-in-out infinite;
+  will-change: opacity;
 }
 
 @keyframes eclipseSpin {
@@ -1266,6 +1277,7 @@ textarea {
   }
 
   .animate-celestial-glow,
+  .animate-aura-breathe::after,
   .animate-cycle-flow {
     animation: none !important;
     opacity: 1 !important;

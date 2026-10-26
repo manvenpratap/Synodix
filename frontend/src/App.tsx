@@ -821,14 +821,12 @@ function AppContent() {
             </div>
           )}
 
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={currentScreen}
-              initial={{ opacity: 0, y: 8 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -6 }}
-              transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
-            >
+          <motion.div
+            key={currentScreen}
+            initial={{ opacity: 0, y: 4 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.15, ease: [0.16, 1, 0.3, 1] }}
+          >
               {/* SCREEN 1: Workbench & Profile Vault */}
               {currentScreen === 'workbench' && (
                 <div className="space-y-6">
@@ -917,7 +915,6 @@ function AppContent() {
                 </div>
               )}
             </motion.div>
-          </AnimatePresence>
         </main>
       </div>
 

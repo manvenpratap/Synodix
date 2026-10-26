@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { Layers, Sliders } from 'lucide-react';
 import type { ChartResponse } from '../types';
 import { ExplainerTrigger } from './ExplainerTrigger';
@@ -259,6 +259,15 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
   const [activeTab, setActiveTab] = useState<TraditionKey>('jyotisha');
   const [chartViewMode, setChartViewMode] = useState<'both' | 'chart' | 'table'>('both');
   const [layoutMode, setLayoutMode] = useState<'carousel' | 'inspector'>('carousel');
+  const [isSingleRow, setIsSingleRow] = useState(() =>
+    typeof window !== 'undefined' ? window.innerWidth >= 1536 : false
+  );
+
+  React.useEffect(() => {
+    const handleResize = () => setIsSingleRow(window.innerWidth >= 1536);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const { jyotisha, bazi, western, ziwei, mayan, tibetan, persian, egyptian, maramataka } = data.traditions;
   const currentTheme = CULTURE_THEMES[activeTab] || CULTURE_THEMES.jyotisha;
@@ -345,9 +354,16 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
               >
                 {isActive && (
                   <motion.div
-                    layoutId="active-tradition-indicator"
+                    {...(isSingleRow ? { layoutId: 'active-tradition-indicator' } : {})}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
                     className={`absolute inset-0 rounded-lg pointer-events-none ${t.activeTabClass}`}
-                    transition={{ type: 'spring', stiffness: 480, damping: 36, mass: 0.8 }}
+                    transition={
+                      isSingleRow
+                        ? { type: 'spring', stiffness: 480, damping: 36, mass: 0.8 }
+                        : { duration: 0.15 }
+                    }
                   />
                 )}
                 <span className="relative z-10 text-sm select-none shrink-0">{t.glyph}</span>
