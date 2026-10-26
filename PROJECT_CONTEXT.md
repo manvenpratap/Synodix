@@ -9,6 +9,7 @@
 ---
 
 ## 1. Current Status & Milestone
+
 - **Active Phase**: Carousel Visual Instrument Clipping Resolution (Completed)
 - **Carousel Visual Instrument Clipping Resolution (v2.31.13)**:
   - **Root Cause Resolution**:
@@ -536,6 +537,7 @@
 ---
 
 ## 2. Implemented Traditions & Engines
+
 - [x] **Vedic (Jyotisha)**: Diamond Kundali visualizer, 27 Nakshatras, Vimshottari Mahadasha & Antardasha, Shadbala dignities, Gandanta zones, Graha Yuddha planetary war, Graha Drishti, Classical Yogas, Parashari Ashtakavarga (337 bindus), 7 Jaimini Chara Karakas.
 - [x] **Western / Hellenistic**: 360° circular aspect wheel, major/minor aspects, antiscia/contra-antiscia, mutual receptions, essential dignities, annual profections, active transits engine.
 - [x] **BaZi (Four Pillars)**: Wu Xing pentagram visualizer, 10 Heavenly Stems, 12 Earthly Branches, 10 Gods, Na Yin elements, 6 Clashes, 6 Harmonies, 3 Harmonies, 3 Punishments, Shen Sha symbolic stars, Yong Shen Useful God engine, Liu Nian annual pillar.
@@ -549,6 +551,7 @@
 ---
 
 ## 3. Mathematical Verification & Simulation
+
 - [x] **Dual-Engine Ephemeris Validation**: Real-time cross-validation between Swiss Ephemeris 2.10 and Skyfield JPL DE421; $\Delta\lambda < 0.01^\circ$ tolerance.
 - [x] **Rodden-Rated Benchmark Dataset**: 100 verified historical titans indexed with AA/A birth certificate records.
 - [x] **Global Consensus Matrix**: Cross-cultural synthesis across evaluated life domains with divergence rates ($\bar{d} \approx 31.8\%$, $\sigma \approx 0.04$).
@@ -559,6 +562,7 @@
 ---
 
 ## 4. Autonomous Workflow & Pipeline Commands
+
 - `./pipeline.sh doctor`: Diagnostic invariant verification across stack, git hygiene, test runner, and context docs.
 - `./pipeline.sh heal`: Automated self-healing for distribution drift, missing test harness, or git exclusions.
 - `./pipeline.sh test --summary`: Low-token compact test verification (95%+ token reduction).
