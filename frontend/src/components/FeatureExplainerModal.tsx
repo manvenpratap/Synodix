@@ -58,15 +58,15 @@ export const FeatureExplainerModal: React.FC = () => {
       role="dialog"
       aria-modal="true"
       aria-labelledby="explainer-modal-title"
-      className="fixed inset-0 z-[70] flex items-center justify-center p-3 sm:p-6 bg-black/80 backdrop-blur-md overscroll-contain pt-[max(0.75rem,env(safe-area-inset-top,0px))] pb-[max(0.75rem,env(safe-area-inset-bottom,0px))]"
+      className="fixed inset-0 z-[70] flex items-center justify-center p-3 sm:p-6 bg-slate-950/80 overscroll-contain pt-[max(0.75rem,env(safe-area-inset-top,0px))] pb-[max(0.75rem,env(safe-area-inset-bottom,0px))]"
       onClick={closeExplainer}
     >
       <div
-        className="bg-[#0b0f17] border border-[#1e293b] text-slate-200 rounded-2xl w-full max-w-3xl max-h-[90vh] flex flex-col shadow-2xl overflow-hidden relative animate-screen-enter"
+        className="bg-slate-950 border border-slate-800 text-slate-200 rounded-2xl w-full max-w-3xl max-h-[90vh] flex flex-col overflow-hidden relative motion-safe:animate-screen-enter motion-reduce:animate-none"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Top Header Bar */}
-        <div className="flex items-center justify-between px-5 py-4 border-b border-[#1b2331] bg-[#0d121c]/90">
+        <div className="flex items-center justify-between px-5 py-4 border-b border-slate-800 bg-slate-900/90">
           <div className="flex items-center gap-2.5">
             <div className="w-8 h-8 rounded-lg bg-cyan-950/80 border border-cyan-800/80 flex items-center justify-center text-cyan-300 shrink-0">
               {activeExplainer ? <BookOpen className="w-4 h-4" /> : <Layers className="w-4 h-4" />}
@@ -89,7 +89,7 @@ export const FeatureExplainerModal: React.FC = () => {
               <button
                 type="button"
                 onClick={openGlossary}
-                className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-mono rounded-lg bg-[#121824] hover:bg-[#1a2334] text-slate-300 hover:text-white border border-[#232e42] transition-colors cursor-pointer"
+                className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-sans font-medium rounded-lg bg-slate-900 hover:bg-slate-800 text-slate-300 hover:text-white border border-slate-800 transition-colors cursor-pointer"
                 title="Browse All 50 Astrometric Explainers"
               >
                 <Search className="w-3.5 h-3.5 text-cyan-400" />
@@ -115,11 +115,11 @@ export const FeatureExplainerModal: React.FC = () => {
             <div className="space-y-5">
               {/* Badges & Meta */}
               <div className="flex flex-wrap items-center gap-2">
-                <span className="px-2.5 py-0.5 rounded text-[11px] font-mono font-medium bg-cyan-950/80 text-cyan-200 border border-cyan-800/80">
+                <span className="px-2.5 py-0.5 rounded text-xs font-sans font-medium bg-cyan-950/80 text-cyan-200 border border-cyan-800/80">
                   {activeExplainer.category}
                 </span>
                 {activeExplainer.culturalTradition && (
-                  <span className="px-2.5 py-0.5 rounded text-[11px] font-mono font-medium bg-amber-950/80 text-amber-200 border border-amber-800/80">
+                  <span className="px-2.5 py-0.5 rounded text-xs font-sans font-medium bg-amber-950/80 text-amber-200 border border-amber-800/80">
                     {activeExplainer.culturalTradition}
                   </span>
                 )}
@@ -131,7 +131,7 @@ export const FeatureExplainerModal: React.FC = () => {
               </div>
 
               {/* Quick Summary Card */}
-              <div className="p-4 rounded-xl bg-gradient-to-r from-[#0d1624] via-[#09101c] to-[#070b14] border border-cyan-900/60 shadow-inner">
+              <div className="p-4 rounded-xl bg-gradient-to-r from-slate-900 via-slate-950 to-slate-900 border border-cyan-900/60 shadow-inner">
                 <div className="flex items-start gap-3">
                   <Compass className="w-5 h-5 text-cyan-300 shrink-0 mt-0.5" />
                   <div>
@@ -146,7 +146,7 @@ export const FeatureExplainerModal: React.FC = () => {
               </div>
 
               {/* Step-by-Step Breakdown */}
-              <div className="p-4 rounded-xl bg-[#080d16] border border-[#1b2537]">
+              <div className="p-4 rounded-xl bg-slate-900 border border-slate-800">
                 <div className="flex items-center gap-2 mb-3">
                   <Compass className="w-4 h-4 text-amber-400" />
                   <h3 className="text-xs font-semibold text-slate-200">
@@ -156,7 +156,7 @@ export const FeatureExplainerModal: React.FC = () => {
                 <ul className="space-y-2.5">
                   {activeExplainer.howItWorks.map((step, idx) => (
                     <li key={idx} className="flex items-start gap-2.5 text-xs text-slate-300 leading-relaxed font-sans">
-                      <span className="w-5 h-5 rounded-full bg-[#131c2d] text-cyan-400 font-mono text-[11px] font-bold flex items-center justify-center shrink-0 border border-[#223049] mt-0.5">
+                      <span className="w-5 h-5 rounded-full bg-slate-800 text-cyan-400 font-mono text-xs font-bold flex items-center justify-center shrink-0 border border-slate-700 mt-0.5">
                         {idx + 1}
                       </span>
                       <span>{step}</span>
@@ -167,7 +167,7 @@ export const FeatureExplainerModal: React.FC = () => {
 
               {/* Mathematical / Astronomical Formula Box */}
               {activeExplainer.astronomicalFormula && (
-                <div className="p-4 rounded-xl bg-[#06080e] border border-[#192334]">
+                <div className="p-4 rounded-xl bg-slate-950 border border-slate-800">
                   <div className="flex items-center justify-between mb-2">
                     <div className="flex items-center gap-2">
                       <Calculator className="w-4 h-4 text-emerald-400" />
@@ -175,16 +175,16 @@ export const FeatureExplainerModal: React.FC = () => {
                         Astronomical Formula & Algorithm
                       </h3>
                     </div>
-                    <span className="text-[11px] font-mono text-slate-400">Deterministic JPL / Ephemeris Code</span>
+                    <span className="text-xs font-sans text-slate-400">Deterministic JPL / Ephemeris Code</span>
                   </div>
-                  <div className="p-3 rounded-lg bg-[#0a0f19] border border-[#1f2c42] font-mono text-xs text-cyan-200 overflow-x-auto selection:bg-cyan-900 selection:text-white">
+                  <div className="p-3 rounded-lg bg-slate-900 border border-slate-800 font-mono text-xs text-cyan-200 overflow-x-auto selection:bg-cyan-900 selection:text-white">
                     <code>{activeExplainer.astronomicalFormula}</code>
                   </div>
                 </div>
               )}
 
               {/* Why It Matters */}
-              <div className="p-4 rounded-xl bg-[#080d16] border border-[#1b2537]">
+              <div className="p-4 rounded-xl bg-slate-900 border border-slate-800">
                 <div className="flex items-center gap-2 mb-2">
                   <Lightbulb className="w-4 h-4 text-amber-400" />
                   <h3 className="text-xs font-semibold text-slate-200">
@@ -197,7 +197,7 @@ export const FeatureExplainerModal: React.FC = () => {
               </div>
 
               {/* Historical Lineage & Texts */}
-              <div className="p-3.5 rounded-xl bg-[#090e18] border border-[#172132] flex items-center justify-between flex-wrap gap-2">
+              <div className="p-3.5 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-between flex-wrap gap-2">
                 <div className="flex items-center gap-2">
                   <History className="w-4 h-4 text-purple-400 shrink-0" />
                   <div>
@@ -213,7 +213,7 @@ export const FeatureExplainerModal: React.FC = () => {
                 <button
                   type="button"
                   onClick={openGlossary}
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-mono text-cyan-300 hover:text-white bg-[#111928] hover:bg-[#182338] border border-cyan-800/80 rounded-lg transition-colors cursor-pointer"
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-sans font-medium text-cyan-300 hover:text-white bg-slate-900 hover:bg-slate-800 border border-cyan-800/80 rounded-lg transition-colors cursor-pointer"
                 >
                   <span>Explore Other Features</span>
                   <ChevronRight className="w-3.5 h-3.5" />
@@ -233,13 +233,13 @@ export const FeatureExplainerModal: React.FC = () => {
                     onChange={(e) => setSearchQuery(e.target.value)}
                     placeholder="Search explainers (e.g., Ayanamsha, Day Master, Sect, Decans, Mewa, Consensus)..."
                     enterKeyHint="search"
-                    className="w-full bg-[#080d16] border border-[#1b2537] rounded-lg pl-9 pr-3 py-2 text-xs text-slate-200 font-mono placeholder:text-slate-500 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500"
+                    className="w-full bg-slate-900 border border-slate-800 rounded-lg pl-9 pr-3 py-2 text-xs text-slate-200 font-sans placeholder:text-slate-500 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500"
                   />
                   {searchQuery && (
                     <button
                       type="button"
                       onClick={() => setSearchQuery('')}
-                      className="absolute right-2.5 top-1/2 -translate-y-1/2 px-2 py-1 text-slate-400 hover:text-white text-xs font-mono cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 rounded"
+                      className="absolute right-2.5 top-1/2 -translate-y-1/2 px-2 py-1 text-slate-400 hover:text-white text-xs font-sans cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 rounded"
                       aria-label="Clear explainer search"
                     >
                       Clear
@@ -251,7 +251,7 @@ export const FeatureExplainerModal: React.FC = () => {
                 <select
                   value={selectedCategory}
                   onChange={(e) => setSelectedCategory(e.target.value)}
-                  className="bg-[#080d16] border border-[#1b2537] rounded-lg px-3 py-2 text-xs text-slate-300 font-mono focus:outline-none focus:border-cyan-500 focus-visible:ring-2 focus-visible:ring-cyan-400 cursor-pointer"
+                  className="bg-slate-900 border border-slate-800 rounded-lg px-3 py-2 text-xs text-slate-300 font-sans focus:outline-none focus:border-cyan-500 focus-visible:ring-2 focus-visible:ring-cyan-400 cursor-pointer"
                 >
                   <option value="all">All Categories ({Object.keys(FEATURE_EXPLAINERS).length})</option>
                   {EXPLAINER_CATEGORIES.map((c) => (
@@ -269,15 +269,15 @@ export const FeatureExplainerModal: React.FC = () => {
                     key={item.id}
                     type="button"
                     onClick={() => openExplainer(item.id)}
-                    className="p-3.5 rounded-xl bg-[#080d16] hover:bg-[#0f1725] border border-[#1b2537] hover:border-cyan-700/80 text-left transition-colors duration-150 group flex flex-col justify-between cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
+                    className="p-3.5 rounded-xl bg-slate-900 hover:bg-slate-800/80 border border-slate-800 hover:border-cyan-700/80 text-left transition-colors duration-150 group flex flex-col justify-between cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
                   >
                     <div>
                       <div className="flex items-center justify-between mb-1.5">
-                        <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-[#101827] text-cyan-300 border border-[#1f2b40]">
+                        <span className="text-xs font-sans font-medium px-2 py-0.5 rounded bg-slate-800 text-cyan-300 border border-slate-700">
                           {item.category}
                         </span>
                         {item.culturalTradition && (
-                          <span className="text-[11px] font-mono text-amber-300">
+                          <span className="text-xs font-sans text-amber-300">
                             {item.culturalTradition}
                           </span>
                         )}
@@ -290,17 +290,17 @@ export const FeatureExplainerModal: React.FC = () => {
                       </p>
                     </div>
 
-                    <div className="mt-3 pt-2 border-t border-white/5 flex items-center justify-between text-[11px] font-mono text-slate-400 group-hover:text-cyan-300">
-                      <span>Click for deep explanation</span>
-                      <ChevronRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
+                    <div className="mt-3 pt-2 border-t border-slate-800 flex items-center justify-between text-xs font-sans text-slate-400 group-hover:text-cyan-300">
+                      <span className="whitespace-nowrap">Inspect explanation</span>
+                      <ChevronRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform shrink-0" />
                     </div>
                   </button>
                 ))}
               </div>
 
               {filteredExplainers.length === 0 && (
-                <div className="text-center py-10 bg-[#080d16] rounded-xl border border-[#1b2537]">
-                  <p className="text-xs text-slate-400 font-mono">
+                <div className="text-center py-10 bg-slate-900 rounded-xl border border-slate-800">
+                  <p className="text-xs text-slate-400 font-sans">
                     No explainers found matching &ldquo;{searchQuery}&rdquo;.
                   </p>
                   <button
@@ -309,7 +309,7 @@ export const FeatureExplainerModal: React.FC = () => {
                       setSearchQuery('');
                       setSelectedCategory('all');
                     }}
-                    className="mt-2 text-xs font-mono text-cyan-400 hover:text-cyan-300 underline cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 rounded px-2 py-1"
+                    className="mt-2 text-xs font-sans text-cyan-400 hover:text-cyan-300 underline cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 rounded px-2 py-1"
                   >
                     Reset filters
                   </button>

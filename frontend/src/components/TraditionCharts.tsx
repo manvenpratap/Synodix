@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Layers, Sliders } from 'lucide-react';
+import { Layers, Sliders, ArrowLeft, ArrowRight } from 'lucide-react';
 import type { ChartResponse } from '../types';
 import { ExplainerTrigger } from './ExplainerTrigger';
 import { TraditionVerticalCarousel, TraditionKey } from './TraditionVerticalCarousel';
@@ -60,21 +60,21 @@ const CULTURE_THEMES: Record<string, {
     name: 'Jyotisha (Vedic)',
     shortName: 'Vedic',
     nativeTitle: 'ज्योतिष • Vedic Astrometry',
-    glyph: '🕉️',
+    glyph: 'VED',
     lineage: 'Maharishi Parashara • Bṛhat Parāśara Horāśāstra & Lahiri Sidereal Ephemeris',
     motto: 'यथा पिण्डे तथा ब्रह्माण्डे — As is the microcosm within, so is the cosmic universe without',
     badge: 'Sacred Saffron & Vedic Brass',
     instrumentName: 'Parashari Diamond Kundali (D1 Lagna & D9 Navamsha)',
-    containerBg: 'bg-gradient-to-b from-[#181105]/70 via-[#0d0a04] to-[#080703]',
+    containerBg: 'bg-gradient-to-b from-amber-950/70 via-stone-950 to-neutral-950',
     containerBorder: 'border-amber-700/60 shadow-lg shadow-amber-950/20',
-    headerBg: 'bg-gradient-to-r from-[#241707] via-[#1a1105] to-[#100a03]',
+    headerBg: 'bg-gradient-to-r from-amber-950 via-stone-950 to-neutral-950',
     headerBorder: 'border-amber-600/60',
     accentText: 'text-amber-400',
     accentBadge: 'bg-amber-950/90 text-amber-200 border-amber-600/80',
     activeTabClass: 'bg-gradient-to-r from-amber-950 via-amber-900/80 to-amber-950 text-amber-200 border-amber-600 shadow-sm shadow-amber-950/60 font-semibold ring-1 ring-amber-500/40',
     presentationToggleActive: 'bg-gradient-to-r from-amber-900 to-amber-950 text-amber-200 font-bold border border-amber-600 shadow-xs',
     presentationToggleInactive: 'text-slate-400 hover:text-amber-200 hover:bg-amber-950/30',
-    frameBg: 'bg-[#120d04]/90',
+    frameBg: 'bg-amber-950/30',
     frameBorder: 'border-amber-800/60',
   },
   bazi: {
@@ -82,21 +82,21 @@ const CULTURE_THEMES: Record<string, {
     name: 'BaZi (Four Pillars)',
     shortName: 'BaZi',
     nativeTitle: '八字命理 • Four Pillars of Destiny',
-    glyph: '☯️',
+    glyph: 'BAZ',
     lineage: 'Master Xu Ziping • Wu Xing Five Elements Harmonization & Solar Jie Qi Terms',
     motto: '天地陰陽，五行生剋 — Heavenly Stems and Earthly Branches harmonizing the cosmic breath',
     badge: 'Imperial Cinnabar & Jade',
     instrumentName: 'Wu Xing Dynamic Elemental Pentagram (Generating & Overcoming Cycles)',
-    containerBg: 'bg-gradient-to-b from-[#180808]/70 via-[#0e0505] to-[#080303]',
+    containerBg: 'bg-gradient-to-b from-rose-950/70 via-stone-950 to-neutral-950',
     containerBorder: 'border-red-800/60 shadow-lg shadow-red-950/20',
-    headerBg: 'bg-gradient-to-r from-[#240b0b] via-[#1a0707] to-[#100404]',
+    headerBg: 'bg-gradient-to-r from-rose-950 via-stone-950 to-neutral-950',
     headerBorder: 'border-red-600/60',
     accentText: 'text-red-400',
     accentBadge: 'bg-red-950/90 text-red-200 border-red-600/80',
     activeTabClass: 'bg-gradient-to-r from-red-950 via-red-900/80 to-rose-950 text-red-200 border-red-600 shadow-sm shadow-red-950/60 font-semibold ring-1 ring-red-500/40',
     presentationToggleActive: 'bg-gradient-to-r from-red-900 to-red-950 text-red-200 font-bold border border-red-600 shadow-xs',
     presentationToggleInactive: 'text-slate-400 hover:text-red-200 hover:bg-red-950/30',
-    frameBg: 'bg-[#120505]/90',
+    frameBg: 'bg-rose-950/30',
     frameBorder: 'border-red-800/60',
   },
   western: {
@@ -104,21 +104,21 @@ const CULTURE_THEMES: Record<string, {
     name: 'Western (Hellenistic)',
     shortName: 'Hellenic',
     nativeTitle: 'Ἑλληνιστικὴ Ἀστρολογία • Hellenistic Astrologia',
-    glyph: '🏛️',
+    glyph: 'HEL',
     lineage: 'Claudius Ptolemy (Tetrabiblos) & Vettius Valens • Tropical Whole-Sign Houses',
     motto: 'Sicut superius, sic inferius — That which is below is like that which is above',
     badge: 'Aegean Lapis & Grecian Bronze',
     instrumentName: 'Ptolemaic 360° Circular Aspect Wheel & Essential Dignities',
-    containerBg: 'bg-gradient-to-b from-[#09152b]/70 via-[#060e1d] to-[#040812]',
+    containerBg: 'bg-gradient-to-b from-blue-950/70 via-slate-950 to-neutral-950',
     containerBorder: 'border-blue-700/60 shadow-lg shadow-blue-950/20',
-    headerBg: 'bg-gradient-to-r from-[#0d1d3d] via-[#09142a] to-[#050c1b]',
+    headerBg: 'bg-gradient-to-r from-blue-950 via-slate-950 to-neutral-950',
     headerBorder: 'border-blue-500/60',
     accentText: 'text-blue-300',
     accentBadge: 'bg-blue-950/90 text-blue-200 border-blue-500/80',
     activeTabClass: 'bg-gradient-to-r from-blue-950 via-blue-900/80 to-indigo-950 text-blue-200 border-blue-500 shadow-sm shadow-blue-950/60 font-semibold ring-1 ring-blue-400/40',
     presentationToggleActive: 'bg-gradient-to-r from-blue-900 to-blue-950 text-blue-200 font-bold border border-blue-500 shadow-xs',
     presentationToggleInactive: 'text-slate-400 hover:text-blue-200 hover:bg-blue-950/30',
-    frameBg: 'bg-[#060f20]/90',
+    frameBg: 'bg-blue-950/30',
     frameBorder: 'border-blue-800/60',
   },
   persian: {
@@ -126,21 +126,21 @@ const CULTURE_THEMES: Record<string, {
     name: 'Persian (Almuten)',
     shortName: 'Persian',
     nativeTitle: 'علم النجوم • ‘Ilm al-Nujūm',
-    glyph: '🕌',
+    glyph: 'PER',
     lineage: 'Abu Ma’shar al-Balkhi & Al-Qabisi • Baghdad House of Wisdom Tradition',
     motto: 'The Supreme Almuten guides the celestial soul through weighted accidental dignity',
     badge: 'Isfahan Turquoise & Damascened Gold',
     instrumentName: 'Almuten Figuris Comparative Dignity & 75-Year Firdaria Timeline',
-    containerBg: 'bg-gradient-to-b from-[#051a24]/70 via-[#031118] to-[#020a0f]',
+    containerBg: 'bg-gradient-to-b from-cyan-950/70 via-slate-950 to-neutral-950',
     containerBorder: 'border-cyan-700/60 shadow-lg shadow-cyan-950/20',
-    headerBg: 'bg-gradient-to-r from-[#072535] via-[#051a25] to-[#031018]',
+    headerBg: 'bg-gradient-to-r from-cyan-950 via-slate-950 to-neutral-950',
     headerBorder: 'border-cyan-500/60',
     accentText: 'text-cyan-300',
     accentBadge: 'bg-cyan-950/90 text-cyan-200 border-cyan-500/80',
     activeTabClass: 'bg-gradient-to-r from-cyan-950 via-cyan-900/80 to-teal-950 text-cyan-200 border-cyan-500 shadow-sm shadow-cyan-950/60 font-semibold ring-1 ring-cyan-400/40',
     presentationToggleActive: 'bg-gradient-to-r from-cyan-900 to-cyan-950 text-cyan-200 font-bold border border-cyan-500 shadow-xs',
     presentationToggleInactive: 'text-slate-400 hover:text-cyan-200 hover:bg-cyan-950/30',
-    frameBg: 'bg-[#03131c]/90',
+    frameBg: 'bg-cyan-950/30',
     frameBorder: 'border-cyan-800/60',
   },
   egyptian: {
@@ -148,21 +148,21 @@ const CULTURE_THEMES: Record<string, {
     name: 'Egyptian (Decans)',
     shortName: 'Egyptian',
     nativeTitle: '𓇹𓇳𓏤 • Seba’ut & Bakhtiu Star Watchers',
-    glyph: '𓋹',
+    glyph: 'EGY',
     lineage: 'Dendera Astronomical Zodiac & Senenmut Tomb Ceiling (c. 1473 BCE)',
     motto: 'Ra navigates the celestial Nile through the 36 hourly Decanic Star Gates of Heaven',
     badge: 'Pharaonic Sun Gold & Nile Basalt',
     instrumentName: '36-Decan Star Compass & Sothic Civil Calendar Clock',
-    containerBg: 'bg-gradient-to-b from-[#1c1605]/70 via-[#110d03] to-[#090702]',
+    containerBg: 'bg-gradient-to-b from-yellow-950/70 via-stone-950 to-neutral-950',
     containerBorder: 'border-yellow-700/60 shadow-lg shadow-yellow-950/20',
-    headerBg: 'bg-gradient-to-r from-[#281f07] via-[#1a1404] to-[#100c02]',
+    headerBg: 'bg-gradient-to-r from-yellow-950 via-stone-950 to-neutral-950',
     headerBorder: 'border-yellow-600/60',
     accentText: 'text-yellow-400',
     accentBadge: 'bg-yellow-950/90 text-yellow-200 border-yellow-600/80',
     activeTabClass: 'bg-gradient-to-r from-yellow-950 via-amber-900/80 to-yellow-950 text-yellow-200 border-yellow-500 shadow-sm shadow-yellow-950/60 font-semibold ring-1 ring-yellow-400/40',
     presentationToggleActive: 'bg-gradient-to-r from-yellow-900 to-yellow-950 text-yellow-200 font-bold border border-yellow-500 shadow-xs',
     presentationToggleInactive: 'text-slate-400 hover:text-yellow-200 hover:bg-yellow-950/30',
-    frameBg: 'bg-[#120e03]/90',
+    frameBg: 'bg-yellow-950/30',
     frameBorder: 'border-yellow-800/60',
   },
   ziwei: {
@@ -170,21 +170,21 @@ const CULTURE_THEMES: Record<string, {
     name: 'Zi Wei Dou Shu',
     shortName: 'Zi Wei',
     nativeTitle: '紫微斗數 • Imperial Polar Constellations',
-    glyph: '👑',
+    glyph: 'ZIW',
     lineage: 'Grandmaster Chen Tuan • Lao-tzu Hermitage on Mount Hua (c. 980 CE)',
     motto: '紫微至尊，儀錄百神 — The North Celestial Pole Emperor presides over the Twelve Palaces',
     badge: 'Forbidden City Imperial Purple',
     instrumentName: 'Authentic 4x4 Imperial Courtyard Palace Matrix (14 Major & Auxiliary Stars)',
-    containerBg: 'bg-gradient-to-b from-[#1c0926]/70 via-[#110518] to-[#0a030f]',
+    containerBg: 'bg-gradient-to-b from-purple-950/70 via-slate-950 to-neutral-950',
     containerBorder: 'border-purple-800/60 shadow-lg shadow-purple-950/20',
-    headerBg: 'bg-gradient-to-r from-[#2a0e3a] via-[#1c0827] to-[#12051a]',
+    headerBg: 'bg-gradient-to-r from-purple-950 via-slate-950 to-neutral-950',
     headerBorder: 'border-purple-600/60',
     accentText: 'text-purple-300',
     accentBadge: 'bg-purple-950/90 text-purple-200 border-purple-600/80',
-    activeTabClass: 'bg-[#2a0e3c] text-purple-200 border-purple-500 shadow-sm shadow-[#1a0526]/60 font-semibold ring-1 ring-purple-400/40',
-    presentationToggleActive: 'bg-[#341249] text-purple-200 font-bold border border-purple-500 shadow-xs',
+    activeTabClass: 'bg-purple-950 text-purple-200 border-purple-500 shadow-sm shadow-purple-950/60 font-semibold ring-1 ring-purple-400/40',
+    presentationToggleActive: 'bg-purple-900 text-purple-200 font-bold border border-purple-500 shadow-xs',
     presentationToggleInactive: 'text-slate-400 hover:text-purple-200 hover:bg-purple-950/30',
-    frameBg: 'bg-[#13061c]/90',
+    frameBg: 'bg-purple-950/30',
     frameBorder: 'border-purple-800/60',
   },
   mayan: {
@@ -192,21 +192,21 @@ const CULTURE_THEMES: Record<string, {
     name: 'Maya Calendar',
     shortName: 'Maya',
     nativeTitle: 'Chol Q’ij & Haab’ • Maya Sacred Calendar',
-    glyph: '☀️',
+    glyph: 'MAY',
     lineage: 'Classic Maya Skywatchers of Copán & Palenque • GMT Correlation (584283)',
     motto: 'The sacred 260-day Tzolk’in and 365-day solar Haab’ mesh into the 52-year Calendar Round',
     badge: 'Mesoamerican Jadeite & Rainforest Obsidian',
     instrumentName: 'Tzolk’in & Haab’ Interlocking Stele Gear Compass',
-    containerBg: 'bg-gradient-to-b from-[#071a11]/70 via-[#04110a] to-[#020a06]',
+    containerBg: 'bg-gradient-to-b from-emerald-950/70 via-stone-950 to-neutral-950',
     containerBorder: 'border-emerald-700/60 shadow-lg shadow-emerald-950/20',
-    headerBg: 'bg-gradient-to-r from-[#0a2719] via-[#061c12] to-[#03110a]',
+    headerBg: 'bg-gradient-to-r from-emerald-950 via-stone-950 to-neutral-950',
     headerBorder: 'border-emerald-500/60',
     accentText: 'text-emerald-300',
     accentBadge: 'bg-emerald-950/90 text-emerald-200 border-emerald-500/80',
     activeTabClass: 'bg-gradient-to-r from-emerald-950 via-emerald-900/80 to-teal-950 text-emerald-200 border-emerald-500 shadow-sm shadow-emerald-950/60 font-semibold ring-1 ring-emerald-400/40',
     presentationToggleActive: 'bg-gradient-to-r from-emerald-900 to-emerald-950 text-emerald-200 font-bold border border-emerald-500 shadow-xs',
     presentationToggleInactive: 'text-slate-400 hover:text-emerald-200 hover:bg-emerald-950/30',
-    frameBg: 'bg-[#03130b]/90',
+    frameBg: 'bg-emerald-950/30',
     frameBorder: 'border-emerald-800/60',
   },
   tibetan: {
@@ -214,21 +214,21 @@ const CULTURE_THEMES: Record<string, {
     name: 'Tibetan Elemental',
     shortName: 'Tibetan',
     nativeTitle: 'དཀར་རྩིས་ • Kar-tsi & Jung-tsi',
-    glyph: '☸️',
+    glyph: 'TIB',
     lineage: 'Phugpa Lhundrup Gyatso • Pema Karpo Five Personal Forces & Lo Shu Mewa',
     motto: 'Sog, Lu, Wang, Lungta, and La flowing through the 9 Magic Mewa and 8 Parkha Trigrams',
     badge: 'Himalayan Yak Maroon & Saffron Robe',
     instrumentName: '3x3 Lo Shu Mewa Magic Square & 8 Parkha Trigram Mandala',
-    containerBg: 'bg-gradient-to-b from-[#1c0810]/70 via-[#120409] to-[#0a0205]',
+    containerBg: 'bg-gradient-to-b from-rose-950/70 via-stone-950 to-neutral-950',
     containerBorder: 'border-rose-800/60 shadow-lg shadow-rose-950/20',
-    headerBg: 'bg-gradient-to-r from-[#2c0b18] via-[#1e0710] to-[#120309]',
+    headerBg: 'bg-gradient-to-r from-rose-950 via-stone-950 to-neutral-950',
     headerBorder: 'border-rose-600/60',
     accentText: 'text-rose-300',
     accentBadge: 'bg-rose-950/90 text-rose-200 border-rose-600/80',
     activeTabClass: 'bg-gradient-to-r from-rose-950 via-rose-900/80 to-orange-950 text-rose-200 border-rose-600 shadow-sm shadow-rose-950/60 font-semibold ring-1 ring-rose-400/40',
     presentationToggleActive: 'bg-gradient-to-r from-rose-900 to-rose-950 text-rose-200 font-bold border border-rose-600 shadow-xs',
     presentationToggleInactive: 'text-slate-400 hover:text-rose-200 hover:bg-rose-950/30',
-    frameBg: 'bg-[#130309]/90',
+    frameBg: 'bg-rose-950/30',
     frameBorder: 'border-rose-800/60',
   },
   maramataka: {
@@ -236,21 +236,21 @@ const CULTURE_THEMES: Record<string, {
     name: 'Polynesian Maramataka',
     shortName: 'Māori',
     nativeTitle: 'Te Maramataka • Oceanic Lunar Wayfinding',
-    glyph: '🌊',
+    glyph: 'MAR',
     lineage: 'Tohunga Kōkōrangi of Aotearoa & Polynesian Voyaging Ancestors',
     motto: 'Nā te pō i hua mai te ao — Aligning with the 30 lunar nights and tidal Mauri currents',
     badge: 'Pacific Deep Indigo & Pounamu Green',
     instrumentName: '30-Phase Oceanic Lunar Dial & Vitality Energy Gauge',
-    containerBg: 'bg-gradient-to-b from-[#051726]/70 via-[#030f19] to-[#02080d]',
+    containerBg: 'bg-gradient-to-b from-teal-950/70 via-slate-950 to-neutral-950',
     containerBorder: 'border-teal-700/60 shadow-lg shadow-teal-950/20',
-    headerBg: 'bg-gradient-to-r from-[#07243c] via-[#04192b] to-[#020e19]',
+    headerBg: 'bg-gradient-to-r from-teal-950 via-slate-950 to-neutral-950',
     headerBorder: 'border-teal-500/60',
     accentText: 'text-teal-300',
     accentBadge: 'bg-teal-950/90 text-teal-200 border-teal-500/80',
     activeTabClass: 'bg-gradient-to-r from-teal-950 via-teal-900/80 to-cyan-950 text-teal-200 border-teal-500 shadow-sm shadow-teal-950/60 font-semibold ring-1 ring-teal-400/40',
     presentationToggleActive: 'bg-gradient-to-r from-teal-900 to-teal-950 text-teal-200 font-bold border border-teal-500 shadow-xs',
     presentationToggleInactive: 'text-slate-400 hover:text-teal-200 hover:bg-teal-950/30',
-    frameBg: 'bg-[#03111d]/90',
+    frameBg: 'bg-teal-950/30',
     frameBorder: 'border-teal-800/60',
   },
 };
@@ -292,7 +292,7 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
           </div>
           <div className="flex items-center gap-2">
             {/* View Mode Toggle: Vertical Carousel vs Full Inspector */}
-            <div className="flex items-center p-0.5 rounded-lg bg-[#06080e]/90 border border-white/10 text-xs font-mono">
+            <div className="flex items-center p-0.5 rounded-lg bg-slate-950/90 border border-white/10 text-xs font-mono">
               <button
                 type="button"
                 onClick={() => setLayoutMode('carousel')}
@@ -346,10 +346,10 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
                 type="button"
                 onClick={() => setActiveTab(t.id as any)}
                 whileTap={{ scale: 0.96 }}
-                className={`relative inline-flex items-center justify-center sm:justify-start gap-1 sm:gap-1.5 px-2 sm:px-2.5 py-2 min-h-[44px] text-[11px] sm:text-xs font-mono font-medium rounded-lg cursor-pointer transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-1 focus-visible:ring-offset-[#080a0f] truncate ${
+                className={`relative inline-flex items-center justify-center sm:justify-start gap-1 sm:gap-1.5 px-2 sm:px-2.5 py-2 min-h-[44px] text-[11px] sm:text-xs font-mono font-medium rounded-lg cursor-pointer transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-1 focus-visible:ring-offset-slate-950 truncate ${
                   isActive
-                    ? 'bg-[#0e1626] text-white font-semibold border border-cyan-500/50'
-                    : 'text-slate-400 hover:text-slate-200 hover:bg-[#121721] border border-transparent'
+                    ? 'bg-slate-900 text-white font-semibold border border-cyan-500/50'
+                    : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800 border border-transparent'
                 }`}
               >
                 {isActive && (
@@ -366,7 +366,7 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
                     }
                   />
                 )}
-                <span className="relative z-10 text-sm select-none shrink-0">{t.glyph}</span>
+                <span className="relative z-10 font-mono text-[10px] font-bold px-1 py-0.5 rounded bg-slate-800 text-slate-300 select-none shrink-0">{t.glyph}</span>
                 <span className="relative z-10 hidden 2xl:inline whitespace-nowrap">{t.name}</span>
                 <span className="relative z-10 2xl:hidden truncate">{t.shortName || t.name}</span>
               </motion.button>
@@ -385,7 +385,7 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
             transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
           >
             <div className="flex flex-wrap items-center gap-2">
-              <span className="text-lg select-none">{currentTheme.glyph}</span>
+              <span className="font-mono text-xs font-bold px-1.5 py-0.5 rounded bg-slate-800 text-slate-300 select-none">{currentTheme.glyph}</span>
               <h4 className={`text-sm sm:text-base font-semibold tracking-wide font-sans ${currentTheme.accentText}`}>
                 {currentTheme.nativeTitle}
               </h4>
@@ -411,7 +411,7 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
           {/* Culture-Themed Display Presentation Switcher */}
           <div className="flex flex-col sm:flex-row sm:items-center gap-2.5 self-start 2xl:self-auto shrink-0 w-full sm:w-auto pt-2.5 2xl:pt-0 border-t border-white/10 2xl:border-t-0">
             <span className="text-[11px] font-mono text-slate-400 font-medium shrink-0">Display Presentation:</span>
-            <div className="flex items-center gap-1 p-1 rounded-lg bg-[#06080e]/90 border border-white/10 backdrop-blur-xs w-full sm:w-auto relative">
+            <div className="flex items-center gap-1 p-1 rounded-lg bg-slate-950/90 border border-white/10 w-full sm:w-auto relative">
               {(['both', 'chart', 'table'] as const).map((mode) => {
                 const isModeActive = chartViewMode === mode;
                 const labels = {
@@ -427,7 +427,7 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
                     whileTap={{ scale: 0.96 }}
                     className={`relative flex-1 sm:flex-initial px-2.5 sm:px-3 py-2 sm:py-1.5 min-h-[44px] sm:min-h-[36px] text-xs font-mono rounded-md cursor-pointer transition-colors text-center focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 ${
                       isModeActive
-                        ? 'bg-[#0f172a] text-white font-bold'
+                        ? 'bg-slate-900 text-white font-bold'
                         : 'text-slate-400 hover:text-slate-200'
                     }`}
                     aria-pressed={isModeActive}
@@ -477,11 +477,11 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
           role="tabpanel"
           aria-labelledby="tradition-tab-jyotisha"
           tabIndex={0}
-          className="mt-4 space-y-4 animate-tab-enter focus:outline-none"
+          className="mt-4 space-y-4 motion-safe:animate-tab-enter motion-reduce:animate-none focus:outline-none"
         >
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between bg-[#080a0f] p-3.5 rounded-md border border-[#1b2331] gap-3">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between bg-slate-950 p-3.5 rounded-md border border-slate-800 gap-3">
             <div>
-              <span className="text-[10px] text-amber-400 font-mono font-semibold uppercase tracking-wider">
+              <span className="text-[10px] text-amber-400 font-mono font-semibold font-medium">
                 Sidereal Zodiac • Lahiri (Chitra Paksha) Ayanamsha
               </span>
               <h4 className="text-sm font-semibold text-slate-100 mt-0.5">
@@ -492,7 +492,7 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
               </p>
             </div>
             <div className="flex flex-wrap items-center gap-2">
-              <span className="px-2.5 py-1 text-xs font-mono rounded bg-[#121721] text-amber-300 border border-amber-900/60">
+              <span className="px-2.5 py-1 text-xs font-mono rounded bg-slate-800 text-amber-300 border border-amber-900/60">
                 Ayanamsha: {data.astronomical_base.ayanamsha.degrees.toFixed(4)}°
               </span>
               <ExplainerTrigger id="lahiri_ayanamsha" label="Ayanamsha" variant="badge" />
@@ -501,10 +501,10 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
 
           {/* Visual Kundali Instrument */}
           {chartViewMode !== 'table' && (
-            <div className={`p-4 rounded-xl border ${currentTheme.frameBorder} ${currentTheme.frameBg} shadow-inner animate-instrument-focus`}>
+            <div className={`p-4 rounded-xl border ${currentTheme.frameBorder} ${currentTheme.frameBg} shadow-inner motion-safe:animate-instrument-focus motion-reduce:animate-none`}>
               <div className="flex items-center justify-between pb-2 mb-3 border-b border-white/10">
                 <div className="flex items-center gap-2">
-                  <span className="text-base select-none">{currentTheme.glyph}</span>
+                  <span className="font-mono text-[11px] font-bold px-1 py-0.5 rounded bg-slate-800 text-slate-300 select-none">{currentTheme.glyph}</span>
                   <h5 className={`text-xs font-mono font-semibold ${currentTheme.accentText}`}>
                     {currentTheme.instrumentName}
                   </h5>
@@ -522,7 +522,7 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
               {/* Grahas Table with Complete Divisional Subdivisions */}
               <div className="space-y-1.5">
                 <div className="flex items-center justify-between px-0.5">
-                  <span className="text-[10px] font-mono text-slate-400 uppercase tracking-wider">
+                  <span className="text-[10px] font-mono text-slate-400 font-medium">
                     Grahas & Divisional Harmonics (Vargas)
                   </span>
                   <div className="flex items-center gap-1.5">
@@ -534,12 +534,12 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
                   tabIndex={0}
                   role="region"
                   aria-label="Jyotisha planetary positions and dignities"
-                  className="rounded border border-[#1b2331] focus:outline-none focus-visible:ring-1 focus-visible:ring-cyan-500 overflow-hidden"
+                  className="rounded border border-slate-800 focus:outline-none focus-visible:ring-1 focus-visible:ring-cyan-500 overflow-hidden"
                 >
                   {/* Mobile-first stacked cards (<sm) */}
-                  <div className="sm:hidden space-y-2 p-2 bg-[#0c1018]">
+                  <div className="sm:hidden space-y-2 p-2 bg-slate-900">
                     {Object.entries(jyotisha.grahas).map(([name, g]: [string, any]) => (
-                      <div key={name} className="p-2.5 rounded bg-[#080a0f] border border-[#1b2331] space-y-1.5">
+                      <div key={name} className="p-2.5 rounded bg-slate-950 border border-slate-800 space-y-1.5">
                         <div className="flex items-center justify-between">
                           <span className="font-sans font-semibold text-slate-100 flex items-center gap-1.5 text-xs">
                             {name}
@@ -560,7 +560,7 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
                             {g.dignity}
                           </span>
                         </div>
-                        <div className="flex items-center justify-between text-[11px] font-mono text-slate-300 pt-0.5 border-t border-[#1b2331]/60">
+                        <div className="flex items-center justify-between text-[11px] font-mono text-slate-300 pt-0.5 border-t border-slate-800/60">
                           <span>{g.sign} <strong className="text-cyan-300">{g.degree_in_sign.toFixed(2)}°</strong></span>
                           <span className="text-slate-400">House <strong className="text-slate-200">H{g.house}</strong></span>
                         </div>
@@ -568,12 +568,12 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
                           <span>Nakshatra: <span className="text-slate-200">{g.nakshatra?.name}</span></span>
                           <span>Pada <span className="text-slate-200">{g.nakshatra?.pada}</span> ({g.nakshatra?.lord})</span>
                         </div>
-                        <div className="flex items-center gap-1 text-[10px] font-mono text-slate-400 pt-1 border-t border-[#1b2331]/40 flex-wrap">
-                          <span className="px-1 py-0.5 rounded bg-[#101724] border border-[#1b2331]">D9: {g.navamsha_sign}</span>
-                          <span className="px-1 py-0.5 rounded bg-[#101724] border border-[#1b2331]">D10: {g.dashamsha_sign}</span>
-                          {g.drekkana_sign && <span className="px-1 py-0.5 rounded bg-[#101724] border border-[#1b2331]">D3: {g.drekkana_sign}</span>}
-                          {g.saptamsha_sign && <span className="px-1 py-0.5 rounded bg-[#101724] border border-[#1b2331]">D7: {g.saptamsha_sign}</span>}
-                          {g.dwadashamsha_sign && <span className="px-1 py-0.5 rounded bg-[#101724] border border-[#1b2331]">D12: {g.dwadashamsha_sign}</span>}
+                        <div className="flex items-center gap-1 text-[10px] font-mono text-slate-400 pt-1 border-t border-slate-800/40 flex-wrap">
+                          <span className="px-1 py-0.5 rounded bg-slate-800 border border-slate-800">D9: {g.navamsha_sign}</span>
+                          <span className="px-1 py-0.5 rounded bg-slate-800 border border-slate-800">D10: {g.dashamsha_sign}</span>
+                          {g.drekkana_sign && <span className="px-1 py-0.5 rounded bg-slate-800 border border-slate-800">D3: {g.drekkana_sign}</span>}
+                          {g.saptamsha_sign && <span className="px-1 py-0.5 rounded bg-slate-800 border border-slate-800">D7: {g.saptamsha_sign}</span>}
+                          {g.dwadashamsha_sign && <span className="px-1 py-0.5 rounded bg-slate-800 border border-slate-800">D12: {g.dwadashamsha_sign}</span>}
                         </div>
                       </div>
                     ))}
@@ -583,8 +583,8 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
                   <div className="hidden sm:block overflow-x-auto">
                     <table className="w-full text-left text-xs border-collapse">
                       <thead>
-                        <tr className="bg-[#080a0f] text-slate-400 border-b border-[#1b2331] font-mono uppercase tracking-wider text-[10px]">
-                          <th className="py-2 px-3 sticky left-0 bg-[#080a0f] z-10 border-r border-[#1b2331]">Graha</th>
+                        <tr className="bg-slate-950 text-slate-400 border-b border-slate-800 font-mono font-medium text-[10px]">
+                          <th className="py-2 px-3 sticky left-0 bg-slate-950 z-10 border-r border-slate-800">Graha</th>
                           <th className="py-2 px-3">Sign</th>
                           <th className="py-2 px-3 font-mono">Degree</th>
                           <th className="py-2 px-3">House</th>
@@ -597,10 +597,10 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
                           <th className="py-2 px-3">D12 Dwad</th>
                         </tr>
                       </thead>
-                      <tbody className="divide-y divide-[#1b2331] bg-[#0d1118] font-mono text-[11px] tabular-nums">
+                      <tbody className="divide-y divide-slate-800 bg-slate-900 font-mono text-[11px] tabular-nums">
                         {Object.entries(jyotisha.grahas).map(([name, g]: [string, any]) => (
-                          <tr key={name} className="hover:bg-[#121721] transition-colors">
-                            <td className="py-2 px-3 font-sans font-medium text-slate-100 flex items-center gap-1.5 whitespace-nowrap sticky left-0 bg-[#0d1118] z-10 border-r border-[#1b2331]">
+                          <tr key={name} className="hover:bg-slate-800 transition-colors">
+                            <td className="py-2 px-3 font-sans font-medium text-slate-100 flex items-center gap-1.5 whitespace-nowrap sticky left-0 bg-slate-900 z-10 border-r border-slate-800">
                               {name}
                               {g.is_retrograde && <span className="text-[10px] text-amber-400 font-mono" title="Retrograde">(R)</span>}
                               {g.is_combust && <span className="text-[10px] text-rose-400 font-mono" title="Combust">(C)</span>}
@@ -641,9 +641,9 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
 
           {/* Planetary War Alert if Occurring */}
           {jyotisha.graha_yuddha && jyotisha.graha_yuddha.length > 0 && (
-            <div className="bg-[#191013] p-3 rounded-md border border-rose-900/80">
+            <div className="bg-rose-950/30 p-3 rounded-md border border-rose-900/80">
               <div className="flex items-center justify-between mb-1">
-                <span className="text-[10px] font-mono font-semibold text-rose-400 uppercase tracking-wider">
+                <span className="text-[10px] font-mono font-semibold text-rose-400 font-medium">
                   Graha Yuddha (Planetary War within 1.0° Longitude)
                 </span>
                 <ExplainerTrigger id="graha_yuddha" label="War Mechanics" variant="badge" />
@@ -663,13 +663,13 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
 
           {/* Classical Yogas Whitelist */}
           {jyotisha.yogas && jyotisha.yogas.length > 0 && (
-            <div className="bg-[#080a0f] p-3.5 rounded-md border border-[#1b2331]">
-              <span className="text-[10px] font-mono font-semibold text-slate-400 uppercase tracking-wider block mb-2">
+            <div className="bg-slate-950 p-3.5 rounded-md border border-slate-800">
+              <span className="text-[10px] font-mono font-semibold text-slate-400 font-medium block mb-2">
                 Classical Yogas Whitelist ({jyotisha.yogas.length} Formed)
               </span>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-2.5">
                 {jyotisha.yogas.map((y: any, idx: number) => (
-                  <div key={idx} className="p-2.5 rounded bg-[#0d1118] border border-[#1b2331] text-xs">
+                  <div key={idx} className="p-2.5 rounded bg-slate-900 border border-slate-800 text-xs">
                     <div className="flex justify-between items-center mb-1">
                       <span className="font-semibold text-amber-300 font-mono">{y.name}</span>
                       <span className="px-1.5 py-0.2 rounded text-[10px] font-mono bg-emerald-950 text-emerald-300 border border-emerald-800">
@@ -686,13 +686,13 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
 
           {/* Graha Drishti (Aspects) Collapsible / Compact Grid */}
           {jyotisha.graha_drishti && jyotisha.graha_drishti.length > 0 && (
-            <div className="bg-[#080a0f] p-3.5 rounded-md border border-[#1b2331]">
-              <span className="text-[10px] font-mono font-semibold text-slate-400 uppercase tracking-wider block mb-2">
+            <div className="bg-slate-950 p-3.5 rounded-md border border-slate-800">
+              <span className="text-[10px] font-mono font-semibold text-slate-400 font-medium block mb-2">
                 Parashari Graha Drishti (Full-Strength Aspects)
               </span>
               <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2 text-xs font-mono">
                 {jyotisha.graha_drishti.slice(0, 12).map((asp: any, idx: number) => (
-                  <div key={idx} className="p-2 rounded bg-[#0d1118] border border-[#1b2331]">
+                  <div key={idx} className="p-2 rounded bg-slate-900 border border-slate-800">
                     <span className="text-amber-400 font-medium block">{asp.graha} (H{asp.source_house})</span>
                     <span className="text-slate-300 text-[11px] block">→ H{asp.target_house} ({asp.target_sign.slice(0, 3)})</span>
                     <span className="text-[9px] text-slate-500 block truncate">{asp.aspect_type.split(' ')[0]}</span>
@@ -703,19 +703,19 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
           )}
 
           {/* Vimshottari Mahadasha Sequence */}
-          <div className="bg-[#080a0f] p-3.5 rounded-md border border-[#1b2331]">
+          <div className="bg-slate-950 p-3.5 rounded-md border border-slate-800">
             <div className="flex items-center justify-between mb-2">
-              <span className="text-[10px] font-mono font-semibold text-slate-400 uppercase tracking-wider">
+              <span className="text-[10px] font-mono font-semibold text-slate-400 font-medium">
                 Vimshottari Mahadashas (120-Year Full Cycle)
               </span>
               <ExplainerTrigger id="vimshottari_dasha" label="Dasha Formula" variant="badge" />
             </div>
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-9 gap-2 text-xs font-mono">
               {jyotisha.vimshottari_dashas.map((d: any, idx: number) => (
-                <div key={idx} className="p-2 rounded bg-[#0d1118] border border-[#1b2331] text-center">
+                <div key={idx} className="p-2 rounded bg-slate-900 border border-slate-800 text-center">
                   <span className="font-semibold text-amber-400 text-xs block">{d.lord}</span>
                   <span className="text-[10px] text-slate-400">{d.total_span_years}y</span>
-                  <span className="text-[9px] text-slate-500 block mt-0.5">{d.start_date.slice(0, 4)}–{d.end_date.slice(0, 4)}</span>
+                  <span className="text-[9px] text-slate-500 block mt-0.5">{d.start_date.slice(0, 4)} to {d.end_date.slice(0, 4)}</span>
                 </div>
               ))}
             </div>
@@ -732,11 +732,11 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
           role="tabpanel"
           aria-labelledby="tradition-tab-bazi"
           tabIndex={0}
-          className="mt-4 space-y-4 animate-tab-enter focus:outline-none"
+          className="mt-4 space-y-4 motion-safe:animate-tab-enter motion-reduce:animate-none focus:outline-none"
         >
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between bg-[#080a0f] p-3.5 rounded-md border border-[#1b2331] gap-3">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between bg-slate-950 p-3.5 rounded-md border border-slate-800 gap-3">
             <div>
-              <span className="text-[10px] text-red-400 font-mono font-semibold uppercase tracking-wider">
+              <span className="text-[10px] text-red-400 font-mono font-semibold font-medium">
                 Solar Term (Jie Qi) • Four Pillars of Destiny
               </span>
               <h4 className="text-sm font-semibold text-slate-100 mt-0.5">
@@ -747,7 +747,7 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
               </p>
             </div>
             <div className="flex flex-wrap items-center gap-2">
-              <span className="px-2.5 py-1 text-xs font-mono rounded bg-[#121721] text-red-300 border border-red-900/60">
+              <span className="px-2.5 py-1 text-xs font-mono rounded bg-slate-800 text-red-300 border border-red-900/60">
                 Pillars: {bazi.pillars.year?.stem}{bazi.pillars.year?.branch} • {bazi.pillars.month?.stem}{bazi.pillars.month?.branch} • {bazi.pillars.day?.stem}{bazi.pillars.day?.branch} • {bazi.pillars.hour?.stem}{bazi.pillars.hour?.branch}
               </span>
               <ExplainerTrigger id="bazi_four_pillars" label="Four Pillars" variant="badge" />
@@ -756,10 +756,10 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
 
           {/* Wu Xing Element Pentagram Diagram */}
           {chartViewMode !== 'table' && (
-            <div className={`p-4 rounded-xl border ${currentTheme.frameBorder} ${currentTheme.frameBg} shadow-inner animate-instrument-focus`}>
+            <div className={`p-4 rounded-xl border ${currentTheme.frameBorder} ${currentTheme.frameBg} shadow-inner motion-safe:animate-instrument-focus motion-reduce:animate-none`}>
               <div className="flex items-center justify-between pb-2 mb-3 border-b border-white/10">
                 <div className="flex items-center gap-2">
-                  <span className="text-base select-none">{currentTheme.glyph}</span>
+                  <span className="font-mono text-[11px] font-bold px-1 py-0.5 rounded bg-slate-800 text-slate-300 select-none">{currentTheme.glyph}</span>
                   <h5 className={`text-xs font-mono font-semibold ${currentTheme.accentText}`}>
                     {currentTheme.instrumentName}
                   </h5>
@@ -784,10 +784,10 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
                 <div
                   key={pKey}
                   className={`p-3.5 rounded-md border ${
-                    isDay ? 'bg-[#0f1715] border-emerald-800/80' : 'bg-[#080a0f] border-[#1b2331]'
+                    isDay ? 'bg-emerald-950/30 border-emerald-800/80' : 'bg-slate-950 border-slate-800'
                   }`}
                 >
-                  <span className="text-[10px] font-mono font-semibold uppercase tracking-wider text-slate-400 block mb-1">
+                  <span className="text-[10px] font-mono font-semibold font-medium text-slate-400 block mb-1">
                     {p.name} {isDay ? '(Day Master)' : 'Pillar'}
                   </span>
                   <div className="text-2xl font-serif text-white my-1.5 flex justify-center gap-2">
@@ -797,7 +797,7 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
                   <div className="text-[11px] font-mono text-slate-300">
                     {p.stem_element} {p.stem_polarity} / {p.branch_element}
                   </div>
-                  <div className="mt-1.5 text-[10px] text-cyan-300 font-mono py-0.5 px-1.5 rounded bg-[#121721] border border-[#1b2331]">
+                  <div className="mt-1.5 text-[10px] text-cyan-300 font-mono py-0.5 px-1.5 rounded bg-slate-800 border border-slate-800">
                     {p.ten_god_stem}
                   </div>
                   {bazi.all_nayin && bazi.all_nayin[pKey] && (
@@ -821,9 +821,9 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
 
           {/* Day Master & Five Elements Balance */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5">
-            <div className="bg-[#080a0f] p-3.5 rounded-md border border-[#1b2331]">
+            <div className="bg-slate-950 p-3.5 rounded-md border border-slate-800">
               <div className="flex items-center justify-between mb-2">
-                <span className="text-[10px] font-mono text-slate-400 uppercase tracking-wider">
+                <span className="text-[10px] font-mono text-slate-400 font-medium">
                   Day Master Assessment
                 </span>
                 <ExplainerTrigger id="bazi_day_master" label="Day Master" variant="badge" />
@@ -852,9 +852,9 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
               </div>
             </div>
 
-            <div className="bg-[#080a0f] p-3.5 rounded-md border border-[#1b2331]">
+            <div className="bg-slate-950 p-3.5 rounded-md border border-slate-800">
               <div className="flex items-center justify-between mb-2">
-                <span className="text-[10px] font-mono text-slate-400 uppercase tracking-wider">
+                <span className="text-[10px] font-mono text-slate-400 font-medium">
                   Five Elements Distribution
                 </span>
                 <ExplainerTrigger id="wu_xing_pentagram" label="Wu Xing Cycles" variant="badge" />
@@ -885,16 +885,16 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
 
           {/* Branch & Stem Interactions (Combinations, Clashes, Harms, Punishments) */}
           {bazi.branch_interactions && (
-            <div className="bg-[#080a0f] p-3.5 rounded-md border border-[#1b2331]">
+            <div className="bg-slate-950 p-3.5 rounded-md border border-slate-800">
               <div className="flex items-center justify-between mb-2">
-                <span className="text-[10px] font-mono text-slate-400 uppercase tracking-wider">
+                <span className="text-[10px] font-mono text-slate-400 font-medium">
                   Pillar Interactions & Combinations (He / Chong / Xing / Hai)
                 </span>
                 <ExplainerTrigger id="bazi_branch_interactions" label="He / Chong Rules" variant="badge" />
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-2.5 text-xs font-mono">
                 {/* Harmonies & Combinations */}
-                <div className="p-2.5 rounded bg-[#0d1118] border border-[#1b2331]">
+                <div className="p-2.5 rounded bg-slate-900 border border-slate-800">
                   <span className="text-emerald-400 font-semibold block mb-1">Harmonies & Transformations:</span>
                   {bazi.branch_interactions.six_harmonies.length === 0 &&
                    bazi.branch_interactions.three_harmonies.length === 0 &&
@@ -922,7 +922,7 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
                 </div>
 
                 {/* Clashes, Punishments & Harms */}
-                <div className="p-2.5 rounded bg-[#0d1118] border border-[#1b2331]">
+                <div className="p-2.5 rounded bg-slate-900 border border-slate-800">
                   <span className="text-rose-400 font-semibold block mb-1">Clashes, Harms & Punishments:</span>
                   {bazi.branch_interactions.six_clashes.length === 0 &&
                    bazi.branch_interactions.punishments.length === 0 &&
@@ -954,21 +954,21 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
 
           {/* Shen Sha (Symbolic Stars) */}
           {bazi.shen_sha && bazi.shen_sha.length > 0 && (
-            <div className="bg-[#080a0f] p-3.5 rounded-md border border-[#1b2331]">
-              <span className="text-[10px] font-mono text-slate-400 uppercase tracking-wider block mb-2">
+            <div className="bg-slate-950 p-3.5 rounded-md border border-slate-800">
+              <span className="text-[10px] font-mono text-slate-400 font-medium block mb-2">
                 Shen Sha (Symbolic & Auxiliary Spirits)
               </span>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 text-xs font-mono">
                 {bazi.shen_sha.map((star: any, idx: number) => (
                   <div key={idx} className={`p-2.5 rounded border ${
-                    star.present ? 'bg-[#0d1118] border-cyan-900/60' : 'bg-[#080a0f] border-[#1b2331] opacity-60'
+                    star.present ? 'bg-slate-900 border-cyan-900/60' : 'bg-slate-950 border-slate-800 opacity-60'
                   }`}>
                     <div className="flex justify-between items-center mb-1">
                       <span className={`font-semibold ${star.present ? 'text-cyan-300' : 'text-slate-400'}`}>
                         {star.name}
                       </span>
                       <span className={`px-1.5 py-0.2 rounded text-[9px] ${
-                        star.present ? 'bg-cyan-950 text-cyan-300 border border-cyan-800' : 'text-slate-300 border border-[#1b2331]'
+                        star.present ? 'bg-cyan-950 text-cyan-300 border border-cyan-800' : 'text-slate-300 border border-slate-800'
                       }`}>
                         {star.present ? 'ACTIVE' : 'INACTIVE'}
                       </span>
@@ -986,13 +986,13 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
           )}
 
           {/* Da Yun Decades */}
-          <div className="bg-[#080a0f] p-3.5 rounded-md border border-[#1b2331]">
-            <span className="text-[10px] font-mono text-slate-400 uppercase tracking-wider block mb-2">
+          <div className="bg-slate-950 p-3.5 rounded-md border border-slate-800">
+            <span className="text-[10px] font-mono text-slate-400 font-medium block mb-2">
               Da Yun (10-Year Luck Pillars Progression)
             </span>
             <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-2 text-center text-xs font-mono">
               {bazi.da_yun_luck_pillars.map((dy: any) => (
-                <div key={dy.step} className="p-2 rounded bg-[#0d1118] border border-[#1b2331]">
+                <div key={dy.step} className="p-2 rounded bg-slate-900 border border-slate-800">
                   <span className="text-[10px] text-slate-500 block">Age {dy.start_age}</span>
                   <span className="text-base font-serif text-white my-0.5 block">
                     {dy.stem}{dy.branch}
@@ -1015,24 +1015,28 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
           role="tabpanel"
           aria-labelledby="tradition-tab-western"
           tabIndex={0}
-          className="mt-4 space-y-4 animate-tab-enter focus:outline-none"
+          className="mt-4 space-y-4 motion-safe:animate-tab-enter motion-reduce:animate-none focus:outline-none"
         >
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between bg-[#080a0f] p-3.5 rounded-md border border-[#1b2331] gap-3">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between bg-slate-950 p-3.5 rounded-md border border-slate-800 gap-3">
             <div>
-              <span className="text-[10px] text-blue-400 font-mono font-semibold uppercase tracking-wider">
+              <span className="text-[10px] text-blue-400 font-mono font-semibold font-medium">
                 Tropical Zodiac • Whole-Sign Houses
               </span>
               <h4 className="text-sm font-semibold text-slate-100 mt-0.5">
                 Ascendant: {western.ascendant.sign} ({western.ascendant.degree}°)
               </h4>
-              <p className="text-xs text-slate-400 mt-0.5">
-                Sect: <strong className="text-white font-mono">{western.sect.label}</strong> • Benefic: <span className="text-emerald-400 font-mono">{western.sect.sect_benefic}</span> • Malefic: <span className="text-rose-400 font-mono">{western.sect.sect_malefic}</span>
-              </p>
+              <div className="text-xs text-slate-400 mt-0.5 flex flex-wrap items-center gap-2">
+                <span>Sect: <strong className="text-white font-mono">{western.sect.label}</strong></span>
+                <span className="w-px h-3 bg-slate-700 hidden sm:inline-block" aria-hidden="true" />
+                <span>Benefic: <span className="text-emerald-400 font-mono">{western.sect.sect_benefic}</span></span>
+                <span className="w-px h-3 bg-slate-700 hidden sm:inline-block" aria-hidden="true" />
+                <span>Malefic: <span className="text-rose-400 font-mono">{western.sect.sect_malefic}</span></span>
+              </div>
             </div>
             <div className="flex flex-wrap items-center gap-2">
               <ExplainerTrigger id="western_sect" label="Sect Framework" variant="badge" />
               {western.lots.lot_of_fortune && (
-                <div className="text-xs font-mono text-slate-300 bg-[#121721] p-2.5 rounded border border-[#1b2331]">
+                <div className="text-xs font-mono text-slate-300 bg-slate-800 p-2.5 rounded border border-slate-800">
                   <div>Lot of Fortune: {western.lots.lot_of_fortune.sign} {western.lots.lot_of_fortune.degree}° (H{western.lots.lot_of_fortune.house})</div>
                   <div>Lot of Spirit: {western.lots.lot_of_spirit.sign} {western.lots.lot_of_spirit.degree}° (H{western.lots.lot_of_spirit.house})</div>
                 </div>
@@ -1042,10 +1046,10 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
 
           {/* Visual Western Wheel */}
           {chartViewMode !== 'table' && (
-            <div className={`p-4 rounded-xl border ${currentTheme.frameBorder} ${currentTheme.frameBg} shadow-inner animate-instrument-focus`}>
+            <div className={`p-4 rounded-xl border ${currentTheme.frameBorder} ${currentTheme.frameBg} shadow-inner motion-safe:animate-instrument-focus motion-reduce:animate-none`}>
               <div className="flex items-center justify-between pb-2 mb-3 border-b border-white/10">
                 <div className="flex items-center gap-2">
-                  <span className="text-base select-none">{currentTheme.glyph}</span>
+                  <span className="font-mono text-[11px] font-bold px-1 py-0.5 rounded bg-slate-800 text-slate-300 select-none">{currentTheme.glyph}</span>
                   <h5 className={`text-xs font-mono font-semibold ${currentTheme.accentText}`}>
                     {currentTheme.instrumentName}
                   </h5>
@@ -1063,7 +1067,7 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
               {/* Planets & Essential Dignities Table */}
               <div className="space-y-1.5">
                 <div className="flex items-center justify-between px-0.5">
-                  <span className="text-[10px] font-mono text-slate-400 uppercase tracking-wider">
+                  <span className="text-[10px] font-mono text-slate-400 font-medium">
                     Planetary Dignities & Angularity
                   </span>
                   <ExplainerTrigger id="essential_dignities_score" label="Dignity Matrix" variant="badge" />
@@ -1072,12 +1076,12 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
                   tabIndex={0}
                   role="region"
                   aria-label="Western planetary positions and dignities"
-                  className="rounded border border-[#1b2331] focus:outline-none focus-visible:ring-1 focus-visible:ring-cyan-500 overflow-hidden"
+                  className="rounded border border-slate-800 focus:outline-none focus-visible:ring-1 focus-visible:ring-cyan-500 overflow-hidden"
                 >
                   {/* Mobile-first stacked cards (<sm) */}
-                  <div className="sm:hidden space-y-2 p-2 bg-[#0c1018]">
+                  <div className="sm:hidden space-y-2 p-2 bg-slate-900">
                     {Object.entries(western.planets).map(([name, p]: [string, any]) => (
-                      <div key={name} className="p-2.5 rounded bg-[#080a0f] border border-[#1b2331] space-y-1.5">
+                      <div key={name} className="p-2.5 rounded bg-slate-950 border border-slate-800 space-y-1.5">
                         <div className="flex items-center justify-between">
                           <span className="font-sans font-semibold text-slate-200 flex items-center gap-1.5 text-xs">
                             {name}
@@ -1087,7 +1091,7 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
                             <span className={`px-1.5 py-0.5 rounded text-[10px] font-mono font-semibold ${
                               p.dignity_score > 0 ? 'bg-emerald-950 text-emerald-300 border border-emerald-800' :
                               p.dignity_score < 0 ? 'bg-rose-950 text-rose-300 border border-rose-800' :
-                              'bg-[#101724] text-slate-400 border border-[#1b2331]'
+                              'bg-slate-800 text-slate-400 border border-slate-800'
                             }`}>
                               Score: {p.dignity_score > 0 ? `+${p.dignity_score}` : p.dignity_score}
                             </span>
@@ -1095,15 +1099,15 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
                             <span className="text-[10px] text-slate-400 font-mono">Modern</span>
                           )}
                         </div>
-                        <div className="flex items-center justify-between text-[11px] font-mono text-slate-300 pt-0.5 border-t border-[#1b2331]/60">
+                        <div className="flex items-center justify-between text-[11px] font-mono text-slate-300 pt-0.5 border-t border-slate-800/60">
                           <span>{p.sign} <strong className="text-cyan-300">{p.degree_in_sign?.toFixed(2)}°</strong></span>
                           <span>House <strong className="text-slate-200">H{p.house}</strong></span>
                           <span className="text-slate-400">{p.angularity}</span>
                         </div>
                         {p.dignity_breakdown && p.dignity_breakdown.length > 0 && (
-                          <div className="text-[10px] font-mono text-slate-400 pt-1 border-t border-[#1b2331]/40 flex flex-wrap gap-1">
+                          <div className="text-[10px] font-mono text-slate-400 pt-1 border-t border-slate-800/40 flex flex-wrap gap-1">
                             {p.dignity_breakdown.map((d: string, idx: number) => (
-                              <span key={idx} className="px-1 py-0.2 rounded bg-[#101724] border border-[#1b2331] text-slate-300">
+                              <span key={idx} className="px-1 py-0.2 rounded bg-slate-800 border border-slate-800 text-slate-300">
                                 {d}
                               </span>
                             ))}
@@ -1117,8 +1121,8 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
                   <div className="hidden sm:block overflow-x-auto">
                     <table className="w-full text-left text-xs border-collapse">
                       <thead>
-                        <tr className="bg-[#080a0f] text-slate-400 border-b border-[#1b2331] font-mono uppercase tracking-wider text-[10px]">
-                          <th className="py-2 px-3 sticky left-0 bg-[#080a0f] z-10 border-r border-[#1b2331]">Planet</th>
+                        <tr className="bg-slate-950 text-slate-400 border-b border-slate-800 font-mono font-medium text-[10px]">
+                          <th className="py-2 px-3 sticky left-0 bg-slate-950 z-10 border-r border-slate-800">Planet</th>
                           <th className="py-2 px-3">Sign</th>
                           <th className="py-2 px-3 font-mono">Degree</th>
                           <th className="py-2 px-3">House</th>
@@ -1127,10 +1131,10 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
                           <th className="py-2 px-3">Essential Breakdown</th>
                         </tr>
                       </thead>
-                      <tbody className="divide-y divide-[#1b2331] bg-[#0d1118] font-mono text-[11px] tabular-nums">
+                      <tbody className="divide-y divide-slate-800 bg-slate-900 font-mono text-[11px] tabular-nums">
                         {Object.entries(western.planets).map(([name, p]: [string, any]) => (
-                          <tr key={name} className="hover:bg-[#121721] transition-colors">
-                            <td className="py-2 px-3 font-sans font-medium text-slate-200 flex items-center gap-1.5 sticky left-0 bg-[#0d1118] z-10 border-r border-[#1b2331] whitespace-nowrap">
+                          <tr key={name} className="hover:bg-slate-800 transition-colors">
+                            <td className="py-2 px-3 font-sans font-medium text-slate-200 flex items-center gap-1.5 sticky left-0 bg-slate-900 z-10 border-r border-slate-800 whitespace-nowrap">
                               {name}
                               {p.is_retrograde && <span className="text-[10px] text-amber-400 font-mono">(R)</span>}
                             </td>
@@ -1158,8 +1162,8 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
 
           {/* Mutual Reception Banner if Present */}
           {western.mutual_receptions && western.mutual_receptions.length > 0 && (
-            <div className="bg-[#0f1715] p-3 rounded-md border border-emerald-800/80">
-              <span className="text-[10px] font-mono font-semibold text-emerald-400 uppercase tracking-wider block mb-1">
+            <div className="bg-emerald-950/30 p-3 rounded-md border border-emerald-800/80">
+              <span className="text-[10px] font-mono font-semibold text-emerald-400 font-medium block mb-1">
                 Mutual Reception by Domicile
               </span>
               <div className="space-y-1 text-xs font-mono text-slate-300">
@@ -1173,13 +1177,13 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
           )}
 
           {/* Major Ptolemaic Aspects Grid */}
-          <div className="bg-[#080a0f] p-3.5 rounded-md border border-[#1b2331]">
-            <span className="text-[10px] font-mono font-semibold text-slate-400 uppercase tracking-wider block mb-2">
+          <div className="bg-slate-950 p-3.5 rounded-md border border-slate-800">
+            <span className="text-[10px] font-mono font-semibold text-slate-400 font-medium block mb-2">
               Major Ptolemaic Aspects ({western.aspects.length} Active • Dynamic Motion)
             </span>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 text-xs font-mono">
               {western.aspects.map((asp: any, idx: number) => (
-                <div key={idx} className="p-2.5 rounded bg-[#0d1118] border border-[#1b2331] flex justify-between items-center">
+                <div key={idx} className="p-2.5 rounded bg-slate-900 border border-slate-800 flex justify-between items-center">
                   <div>
                     <span className="text-slate-200">{asp.planet_1} {asp.aspect} {asp.planet_2}</span>
                     <span className={`text-[10px] block ${
@@ -1194,13 +1198,13 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
 
           {/* Minor Aspects Grid */}
           {western.minor_aspects && western.minor_aspects.length > 0 && (
-            <div className="bg-[#080a0f] p-3.5 rounded-md border border-[#1b2331]">
-              <span className="text-[10px] font-mono font-semibold text-slate-400 uppercase tracking-wider block mb-2">
+            <div className="bg-slate-950 p-3.5 rounded-md border border-slate-800">
+              <span className="text-[10px] font-mono font-semibold text-slate-400 font-medium block mb-2">
                 Minor Harmonics & Keplarian Aspects (Quincunx, Semi-Sextile, Semi-Square, Sesquiquadrate)
               </span>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 text-xs font-mono">
                 {western.minor_aspects.map((asp: any, idx: number) => (
-                  <div key={idx} className="p-2.5 rounded bg-[#0d1118] border border-[#1b2331] flex justify-between items-center">
+                  <div key={idx} className="p-2.5 rounded bg-slate-900 border border-slate-800 flex justify-between items-center">
                     <div>
                       <span className="text-slate-300">{asp.planet_1} {asp.aspect} {asp.planet_2}</span>
                       <span className={`text-[10px] block ${
@@ -1217,22 +1221,22 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
           {/* Antiscia and Contra-Antiscia Reflections */}
           {((western.antiscia_pairs && western.antiscia_pairs.length > 0) ||
             (western.contra_antiscia_pairs && western.contra_antiscia_pairs.length > 0)) && (
-            <div className="bg-[#080a0f] p-3.5 rounded-md border border-[#1b2331]">
+            <div className="bg-slate-950 p-3.5 rounded-md border border-slate-800">
               <div className="flex items-center justify-between mb-2">
-                <span className="text-[10px] font-mono font-semibold text-slate-400 uppercase tracking-wider">
+                <span className="text-[10px] font-mono font-semibold text-slate-400 font-medium">
                   Solstitial & Equinoctial Reflections (Antiscia & Contra-Antiscia)
                 </span>
                 <ExplainerTrigger id="antiscia_contra_antiscia" label="Solstice Mirrors" variant="badge" />
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs font-mono">
                 {western.antiscia_pairs?.map((p: any, idx: number) => (
-                  <div key={`ant-${idx}`} className="p-2 rounded bg-[#0d1118] border border-[#1b2331] flex justify-between items-center">
+                  <div key={`ant-${idx}`} className="p-2 rounded bg-slate-900 border border-slate-800 flex justify-between items-center">
                     <span className="text-slate-200">{p.planet_1} ☌ {p.planet_2} (Antiscia)</span>
                     <span className="text-cyan-400 text-[11px] tabular-nums">{p.orb_deg}° orb</span>
                   </div>
                 ))}
                 {western.contra_antiscia_pairs?.map((p: any, idx: number) => (
-                  <div key={`contra-${idx}`} className="p-2 rounded bg-[#0d1118] border border-[#1b2331] flex justify-between items-center">
+                  <div key={`contra-${idx}`} className="p-2 rounded bg-slate-900 border border-slate-800 flex justify-between items-center">
                     <span className="text-slate-200">{p.planet_1} ☍ {p.planet_2} (Contra-Antiscia)</span>
                     <span className="text-amber-400 text-[11px] tabular-nums">{p.orb_deg}° orb</span>
                   </div>
@@ -1252,11 +1256,11 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
           role="tabpanel"
           aria-labelledby="tradition-tab-ziwei"
           tabIndex={0}
-          className="mt-4 space-y-4 animate-tab-enter focus:outline-none"
+          className="mt-4 space-y-4 motion-safe:animate-tab-enter motion-reduce:animate-none focus:outline-none"
         >
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between bg-[#080a0f] p-3.5 rounded-md border border-[#1b2331] gap-3">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between bg-slate-950 p-3.5 rounded-md border border-slate-800 gap-3">
             <div>
-              <span className="text-[10px] text-purple-400 font-mono font-semibold uppercase tracking-wider">
+              <span className="text-[10px] text-purple-400 font-mono font-semibold font-medium">
                 Zi Wei Dou Shu • Twelve Palaces & 14 Major Stars
               </span>
               <h4 className="text-sm font-semibold text-slate-100 mt-0.5">
@@ -1267,7 +1271,7 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
               </p>
             </div>
             <div className="flex flex-wrap items-center gap-2">
-              <div className="text-xs font-mono text-purple-300 bg-[#121721] p-2.5 rounded border border-[#1b2331]">
+              <div className="text-xs font-mono text-purple-300 bg-slate-800 p-2.5 rounded border border-slate-800">
                 <span className="font-semibold text-amber-400 block mb-0.5">Si Hua Transformations:</span>
                 <div>Lu: {ziwei.si_hua_transformations.Lu} | Quan: {ziwei.si_hua_transformations.Quan}</div>
                 <div>Ke: {ziwei.si_hua_transformations.Ke} | Ji: {ziwei.si_hua_transformations.Ji}</div>
@@ -1278,9 +1282,9 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
 
           {/* Ming Palace Star Quality Assessment */}
           {ziwei.ming_star_quality && (
-            <div className="bg-[#080a0f] p-3.5 rounded-md border border-[#1b2331] flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div className="bg-slate-950 p-3.5 rounded-md border border-slate-800 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
               <div>
-                <span className="text-[10px] font-mono uppercase tracking-wider text-purple-400 font-semibold block">
+                <span className="text-[10px] font-mono font-medium text-purple-400 font-semibold block">
                   Ming Palace Star Dynamics
                 </span>
                 <span className="text-sm font-semibold text-slate-200 mt-0.5 block">
@@ -1306,10 +1310,10 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
 
           {/* Zi Wei Authentic 4x4 Courtyard Grid Visual Instrument */}
           {chartViewMode !== 'table' && (
-            <div className={`p-4 rounded-xl border ${currentTheme.frameBorder} ${currentTheme.frameBg} shadow-inner animate-instrument-focus`}>
+            <div className={`p-4 rounded-xl border ${currentTheme.frameBorder} ${currentTheme.frameBg} shadow-inner motion-safe:animate-instrument-focus motion-reduce:animate-none`}>
               <div className="flex items-center justify-between pb-2 mb-3 border-b border-white/10">
                 <div className="flex items-center gap-2">
-                  <span className="text-base select-none">{currentTheme.glyph}</span>
+                  <span className="font-mono text-[11px] font-bold px-1 py-0.5 rounded bg-slate-800 text-slate-300 select-none">{currentTheme.glyph}</span>
                   <h5 className={`text-xs font-mono font-semibold ${currentTheme.accentText}`}>
                     {currentTheme.instrumentName}
                   </h5>
@@ -1331,10 +1335,10 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
                 key={p.name}
                 className={`p-3 rounded-md border ${
                   p.is_ming
-                    ? 'bg-[#14121f] border-purple-800'
+                    ? 'bg-purple-950/30 border-purple-800'
                     : p.is_shen
-                    ? 'bg-[#0f171b] border-cyan-800'
-                    : 'bg-[#080a0f] border-[#1b2331]'
+                    ? 'bg-cyan-950/30 border-cyan-800'
+                    : 'bg-slate-950 border-slate-800'
                 }`}
               >
                 <div className="flex justify-between items-center mb-1">
@@ -1354,8 +1358,8 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
                           key={sIdx}
                           className={`inline-block text-[10px] font-mono font-medium px-1.5 py-0.5 rounded mr-1 mb-1 border ${
                             isAux
-                              ? 'bg-[#0b1622] border-cyan-900/60 text-cyan-300'
-                              : 'bg-[#121721] border-[#1b2331] text-amber-300'
+                              ? 'bg-cyan-950/30 border-cyan-900/60 text-cyan-300'
+                              : 'bg-slate-800 border-slate-800 text-amber-300'
                           }`}
                         >
                           {s}
@@ -1379,10 +1383,10 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
           role="tabpanel"
           aria-labelledby="tradition-tab-mayan"
           tabIndex={0}
-          className="mt-4 space-y-4 animate-tab-enter focus:outline-none"
+          className="mt-4 space-y-4 motion-safe:animate-tab-enter motion-reduce:animate-none focus:outline-none"
         >
-          <div className="bg-[#080a0f] p-3.5 rounded-md border border-[#1b2331]">
-            <span className="text-[10px] text-cyan-400 font-mono font-semibold uppercase tracking-wider">
+          <div className="bg-slate-950 p-3.5 rounded-md border border-slate-800">
+            <span className="text-[10px] text-cyan-400 font-mono font-semibold font-medium">
               Classic Maya Long Count & Calendar Round • GMT Correlation (584283)
             </span>
             <div className="flex flex-col sm:flex-row sm:items-center justify-between mt-2 gap-4">
@@ -1405,10 +1409,10 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
 
           {/* Maya Sacred Calendar Round Dial Visual Instrument */}
           {chartViewMode !== 'table' && (
-            <div className={`p-4 rounded-xl border ${currentTheme.frameBorder} ${currentTheme.frameBg} shadow-inner animate-instrument-focus`}>
+            <div className={`p-4 rounded-xl border ${currentTheme.frameBorder} ${currentTheme.frameBg} shadow-inner motion-safe:animate-instrument-focus motion-reduce:animate-none`}>
               <div className="flex items-center justify-between pb-2 mb-3 border-b border-white/10">
                 <div className="flex items-center gap-2">
-                  <span className="text-base select-none">{currentTheme.glyph}</span>
+                  <span className="font-mono text-[11px] font-bold px-1 py-0.5 rounded bg-slate-800 text-slate-300 select-none">{currentTheme.glyph}</span>
                   <h5 className={`text-xs font-mono font-semibold ${currentTheme.accentText}`}>
                     {currentTheme.instrumentName}
                   </h5>
@@ -1424,8 +1428,8 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
           {chartViewMode !== 'chart' && (
             <>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5">
-            <div className="bg-[#080a0f] p-3.5 rounded-md border border-[#1b2331]">
-              <span className="text-[10px] text-slate-400 font-mono uppercase tracking-wider block">Tzolk'in 260-Day Sacred Cycle</span>
+            <div className="bg-slate-950 p-3.5 rounded-md border border-slate-800">
+              <span className="text-[10px] text-slate-400 font-mono font-medium block">Tzolk’in 260-Day Sacred Cycle</span>
               <h4 className="text-lg font-mono font-semibold text-slate-100 mt-1">
                 {mayan.tzolkin.formatted}
               </h4>
@@ -1437,8 +1441,8 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
               </p>
             </div>
 
-            <div className="bg-[#080a0f] p-3.5 rounded-md border border-[#1b2331]">
-              <span className="text-[10px] text-slate-400 font-mono uppercase tracking-wider block">Haab' 365-Day Solar Cycle</span>
+            <div className="bg-slate-950 p-3.5 rounded-md border border-slate-800">
+              <span className="text-[10px] text-slate-400 font-mono font-medium block">Haab' 365-Day Solar Cycle</span>
               <h4 className="text-lg font-mono font-semibold text-slate-100 mt-1">
                 {mayan.haab.formatted}
               </h4>
@@ -1462,10 +1466,10 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
           role="tabpanel"
           aria-labelledby="tradition-tab-tibetan"
           tabIndex={0}
-          className="mt-4 space-y-4 animate-tab-enter focus:outline-none"
+          className="mt-4 space-y-4 motion-safe:animate-tab-enter motion-reduce:animate-none focus:outline-none"
         >
-          <div className="bg-[#080a0f] p-3.5 rounded-md border border-[#1b2331]">
-            <span className="text-[10px] text-rose-400 font-mono font-semibold uppercase tracking-wider">
+          <div className="bg-slate-950 p-3.5 rounded-md border border-slate-800">
+            <span className="text-[10px] text-rose-400 font-mono font-semibold font-medium">
               Tibetan Elemental Astrology (Jungtsi / འབྱུང་རྩིས)
             </span>
             <div className="mt-1.5 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
@@ -1477,7 +1481,7 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
                   Rabjung Cycle {tibetan.rabjung_cycle.rabjung_number}, Year {tibetan.rabjung_cycle.year_in_cycle} (Base 1027 CE)
                 </p>
               </div>
-              <div className="text-xs font-mono text-slate-300 bg-[#121721] p-2.5 rounded border border-[#1b2331]">
+              <div className="text-xs font-mono text-slate-300 bg-slate-800 p-2.5 rounded border border-slate-800">
                 <div>Year Mewa: <strong className="text-amber-400">{tibetan.mewa.formatted}</strong></div>
                 <div>Natal Parkha: <strong className="text-cyan-400">{tibetan.parkha.name} ({tibetan.parkha.element})</strong></div>
               </div>
@@ -1486,10 +1490,10 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
 
           {/* Tibetan Mewa Magic Square & Parkha Visual Instrument */}
           {chartViewMode !== 'table' && (
-            <div className={`p-4 rounded-xl border ${currentTheme.frameBorder} ${currentTheme.frameBg} shadow-inner animate-instrument-focus`}>
+            <div className={`p-4 rounded-xl border ${currentTheme.frameBorder} ${currentTheme.frameBg} shadow-inner motion-safe:animate-instrument-focus motion-reduce:animate-none`}>
               <div className="flex items-center justify-between pb-2 mb-3 border-b border-white/10">
                 <div className="flex items-center gap-2">
-                  <span className="text-base select-none">{currentTheme.glyph}</span>
+                  <span className="font-mono text-[11px] font-bold px-1 py-0.5 rounded bg-slate-800 text-slate-300 select-none">{currentTheme.glyph}</span>
                   <h5 className={`text-xs font-mono font-semibold ${currentTheme.accentText}`}>
                     {currentTheme.instrumentName}
                   </h5>
@@ -1505,32 +1509,32 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
           {chartViewMode !== 'chart' && (
             <>
               {/* Five Personal Forces */}
-              <div className="bg-[#080a0f] p-3.5 rounded-md border border-[#1b2331]">
+              <div className="bg-slate-950 p-3.5 rounded-md border border-slate-800">
                 <div className="flex items-center justify-between mb-2.5">
-                  <span className="text-[10px] font-mono font-semibold text-slate-400 uppercase tracking-wider">
+                  <span className="text-[10px] font-mono font-semibold text-slate-400 font-medium">
                     Five Personal Forces (Khams Lnga)
                   </span>
                   <ExplainerTrigger id="tibetan_mewa_parkha" label="Lo Shu & Forces" variant="badge" />
                 </div>
                 <div className="grid grid-cols-2 sm:grid-cols-5 gap-2.5 text-center text-xs font-mono">
-              <div className="p-2.5 rounded bg-[#0d1118] border border-[#1b2331]">
-                <span className="text-[10px] text-slate-500 uppercase block">Sog (Life)</span>
+              <div className="p-2.5 rounded bg-slate-900 border border-slate-800">
+                <span className="text-[10px] text-slate-400 font-sans font-medium block">Sog (Life)</span>
                 <span className="text-xs font-semibold text-emerald-400 mt-0.5 block">{tibetan.five_personal_forces.sog_life_force}</span>
               </div>
-              <div className="p-2.5 rounded bg-[#0d1118] border border-[#1b2331]">
-                <span className="text-[10px] text-slate-500 uppercase block">Lu (Body)</span>
+              <div className="p-2.5 rounded bg-slate-900 border border-slate-800">
+                <span className="text-[10px] text-slate-400 font-sans font-medium block">Lu (Body)</span>
                 <span className="text-xs font-semibold text-blue-400 mt-0.5 block">{tibetan.five_personal_forces.lu_body_health}</span>
               </div>
-              <div className="p-2.5 rounded bg-[#0d1118] border border-[#1b2331]">
-                <span className="text-[10px] text-slate-500 uppercase block">Wang (Power)</span>
+              <div className="p-2.5 rounded bg-slate-900 border border-slate-800">
+                <span className="text-[10px] text-slate-400 font-sans font-medium block">Wang (Power)</span>
                 <span className="text-xs font-semibold text-amber-400 mt-0.5 block">{tibetan.five_personal_forces.wang_power_status}</span>
               </div>
-              <div className="p-2.5 rounded bg-[#0d1118] border border-[#1b2331]">
-                <span className="text-[10px] text-slate-500 uppercase block">Lungta (Fortune)</span>
+              <div className="p-2.5 rounded bg-slate-900 border border-slate-800">
+                <span className="text-[10px] text-slate-400 font-sans font-medium block">Lungta (Fortune)</span>
                 <span className="text-xs font-semibold text-purple-400 mt-0.5 block">{tibetan.five_personal_forces.lungta_wind_horse_fortune}</span>
               </div>
-              <div className="p-2.5 rounded bg-[#0d1118] border border-[#1b2331]">
-                <span className="text-[10px] text-slate-500 uppercase block">La (Soul)</span>
+              <div className="p-2.5 rounded bg-slate-900 border border-slate-800">
+                <span className="text-[10px] text-slate-400 font-sans font-medium block">La (Soul)</span>
                 <span className="text-xs font-semibold text-cyan-400 mt-0.5 block">{tibetan.five_personal_forces.la_soul_vitality}</span>
               </div>
             </div>
@@ -1547,11 +1551,11 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
           role="tabpanel"
           aria-labelledby="tradition-tab-persian"
           tabIndex={0}
-          className="mt-4 space-y-4 animate-tab-enter focus:outline-none"
+          className="mt-4 space-y-4 motion-safe:animate-tab-enter motion-reduce:animate-none focus:outline-none"
         >
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between bg-[#080a0f] p-3.5 rounded-md border border-[#1b2331] gap-3">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between bg-slate-950 p-3.5 rounded-md border border-slate-800 gap-3">
             <div>
-              <span className="text-[10px] text-amber-400 font-mono font-semibold uppercase tracking-wider">
+              <span className="text-[10px] text-amber-400 font-mono font-semibold font-medium">
                 Persian & Medieval Arabic • Ilm al-Nujūm (علم النجوم)
               </span>
               <h4 className="text-sm font-semibold text-slate-100 mt-0.5">
@@ -1562,7 +1566,7 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
               </p>
             </div>
             <div className="flex items-center gap-2">
-              <span className="px-2.5 py-1 text-xs font-mono rounded bg-[#121721] text-amber-300 border border-amber-900/60">
+              <span className="px-2.5 py-1 text-xs font-mono rounded bg-slate-800 text-amber-300 border border-amber-900/60">
                 Almuten: {persian.almuten_figuris.victor}
               </span>
             </div>
@@ -1570,10 +1574,10 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
 
           {/* Almuten Comparative Dignity Bar Visual Instrument */}
           {chartViewMode !== 'table' && (
-            <div className={`p-4 rounded-xl border ${currentTheme.frameBorder} ${currentTheme.frameBg} shadow-inner animate-instrument-focus`}>
+            <div className={`p-4 rounded-xl border ${currentTheme.frameBorder} ${currentTheme.frameBg} shadow-inner motion-safe:animate-instrument-focus motion-reduce:animate-none`}>
               <div className="flex items-center justify-between pb-2 mb-3 border-b border-white/10">
                 <div className="flex items-center gap-2">
-                  <span className="text-base select-none">{currentTheme.glyph}</span>
+                  <span className="font-mono text-[11px] font-bold px-1 py-0.5 rounded bg-slate-800 text-slate-300 select-none">{currentTheme.glyph}</span>
                   <h5 className={`text-xs font-mono font-semibold ${currentTheme.accentText}`}>
                     {currentTheme.instrumentName}
                   </h5>
@@ -1589,9 +1593,9 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
           {chartViewMode !== 'chart' && (
             <>
               {/* Almuten Figuris Dignity Leaderboard */}
-              <div className="bg-[#080a0f] p-3.5 rounded-md border border-[#1b2331]">
+              <div className="bg-slate-950 p-3.5 rounded-md border border-slate-800">
                 <div className="flex items-center justify-between mb-2">
-                  <span className="text-[10px] font-mono font-semibold text-slate-400 uppercase tracking-wider">
+                  <span className="text-[10px] font-mono font-semibold text-slate-400 font-medium">
                     Weighted Dignity Leaderboard (Abu Ma'shar / Al-Qabisi Point System)
                   </span>
                   <ExplainerTrigger id="almuten_figuris" label="Almuten Math" variant="badge" />
@@ -1600,17 +1604,17 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
                   tabIndex={0}
                   role="region"
                   aria-label="Persian almuten figuris leaderboard"
-                  className="rounded border border-[#1b2331] focus:outline-none focus-visible:ring-1 focus-visible:ring-cyan-500 overflow-hidden"
+                  className="rounded border border-slate-800 focus:outline-none focus-visible:ring-1 focus-visible:ring-cyan-500 overflow-hidden"
                 >
                   {/* Mobile-first stacked cards (<sm) */}
-                  <div className="sm:hidden space-y-2 p-2 bg-[#0c1018]">
+                  <div className="sm:hidden space-y-2 p-2 bg-slate-900">
                     {persian.almuten_figuris.leaderboard.map((item: any, idx: number) => (
                       <div
                         key={item.planet}
                         className={`p-2.5 rounded border space-y-1.5 font-mono ${
                           idx === 0
-                            ? 'bg-[#141d2b] border-amber-600/70 shadow-xs'
-                            : 'bg-[#080a0f] border-[#1b2331]'
+                            ? 'bg-slate-800 border-amber-600/70 shadow-xs'
+                            : 'bg-slate-950 border-slate-800'
                         }`}
                       >
                         <div className="flex items-center justify-between">
@@ -1625,7 +1629,7 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
                             <span className="text-slate-500 text-[10px]">Candidate</span>
                           )}
                         </div>
-                        <div className="flex items-center justify-between text-[11px] text-slate-300 pt-0.5 border-t border-[#1b2331]/60">
+                        <div className="flex items-center justify-between text-[11px] text-slate-300 pt-0.5 border-t border-slate-800/60">
                           <span className="text-slate-400">Essential: <strong className="text-slate-200">+{item.essential_dignity}</strong></span>
                           <span className="text-slate-400">Accidental: <strong className="text-slate-200">+{item.accidental_dignity}</strong></span>
                           <span className="text-cyan-300 font-bold">Total: {item.total_score} pts</span>
@@ -1638,18 +1642,18 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
                   <div className="hidden sm:block overflow-x-auto">
                     <table className="w-full text-left text-xs border-collapse font-mono">
                       <thead>
-                        <tr className="bg-[#0d1118] text-slate-400 border-b border-[#1b2331] uppercase text-[10px]">
-                          <th className="py-2 px-3 sticky left-0 bg-[#0d1118] z-10 border-r border-[#1b2331]">Rank & Planet</th>
+                        <tr className="bg-slate-900 text-slate-400 border-b border-slate-800 font-sans text-xs">
+                          <th className="py-2 px-3 sticky left-0 bg-slate-900 z-10 border-r border-slate-800">Rank & Planet</th>
                           <th className="py-2 px-3 text-right">Essential Pts</th>
                           <th className="py-2 px-3 text-right">Accidental Pts</th>
                           <th className="py-2 px-3 text-right">Total Score</th>
                           <th className="py-2 px-3">Status</th>
                         </tr>
                       </thead>
-                      <tbody className="divide-y divide-[#1b2331] text-[11px] tabular-nums">
+                      <tbody className="divide-y divide-slate-800 text-[11px] tabular-nums">
                         {persian.almuten_figuris.leaderboard.map((item: any, idx: number) => (
-                          <tr key={item.planet} className={idx === 0 ? 'bg-[#141d2b] font-bold text-amber-300' : 'hover:bg-[#121721]'}>
-                            <td className="py-2 px-3 text-slate-200 sticky left-0 bg-[#0d1118] z-10 border-r border-[#1b2331] whitespace-nowrap">
+                          <tr key={item.planet} className={idx === 0 ? 'bg-slate-800 font-bold text-amber-300' : 'hover:bg-slate-800'}>
+                            <td className="py-2 px-3 text-slate-200 sticky left-0 bg-slate-900 z-10 border-r border-slate-800 whitespace-nowrap">
                               #{idx + 1} {item.planet}
                             </td>
                             <td className="py-2 px-3 text-right text-slate-400">+{item.essential_dignity}</td>
@@ -1673,13 +1677,13 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
           </div>
 
           {/* Hermetic Arabic Parts (Lots) */}
-          <div className="bg-[#080a0f] p-3.5 rounded-md border border-[#1b2331]">
-            <span className="text-[10px] font-mono font-semibold text-slate-400 uppercase tracking-wider block mb-2">
+          <div className="bg-slate-950 p-3.5 rounded-md border border-slate-800">
+            <span className="text-[10px] font-mono font-semibold text-slate-400 font-medium block mb-2">
               Hermetic Arabic Lots (Exact Mathematical Reflections)
             </span>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5 font-mono text-xs">
               {Object.entries(persian.hermetic_lots).map(([lotName, lot]: [string, any]) => (
-                <div key={lotName} className="p-2.5 rounded bg-[#0d1118] border border-[#1b2331]">
+                <div key={lotName} className="p-2.5 rounded bg-slate-900 border border-slate-800">
                   <span className="text-cyan-300 font-semibold block truncate text-[11px]">{lotName}</span>
                   <div className="text-slate-300 mt-1">
                     {lot.sign} {lot.degree.toFixed(2)}° <span className="text-slate-500">(H{lot.house})</span>
@@ -1690,20 +1694,20 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
           </div>
 
           {/* Firdaria 75-Year Planetary Chronocrator Timeline */}
-          <div className="bg-[#080a0f] p-3.5 rounded-md border border-[#1b2331]">
+          <div className="bg-slate-950 p-3.5 rounded-md border border-slate-800">
             <div className="flex items-center justify-between mb-2">
-              <span className="text-[10px] font-mono font-semibold text-slate-400 uppercase tracking-wider">
+              <span className="text-[10px] font-mono font-semibold text-slate-400 font-medium">
                 Firdaria Lifespan Timeline (75-Year Planetary Era Cycle)
               </span>
               <ExplainerTrigger id="firdaria_periods" label="Firdaria Timeline" variant="badge" />
             </div>
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-9 gap-2 text-center text-xs font-mono">
               {persian.firdaria.timeline.map((f: any, idx: number) => (
-                <div key={idx} className="p-2 rounded bg-[#0d1118] border border-[#1b2331]">
-                  <span className="text-[10px] text-slate-500 block">Ages {f.start_age}–{f.end_age}</span>
+                <div key={idx} className="p-2 rounded bg-slate-900 border border-slate-800">
+                  <span className="text-[10px] text-slate-500 block">Ages {f.start_age} to {f.end_age}</span>
                   <span className="font-semibold text-amber-400 text-xs my-0.5 block">{f.planet}</span>
                   <span className="text-[9px] text-cyan-300 block">{f.duration_years} Years</span>
-                  <span className="text-[9px] text-slate-500 block">{f.start_year}–{f.end_year}</span>
+                  <span className="text-[9px] text-slate-500 block">{f.start_year} to {f.end_year}</span>
                 </div>
               ))}
             </div>
@@ -1720,11 +1724,11 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
           role="tabpanel"
           aria-labelledby="tradition-tab-egyptian"
           tabIndex={0}
-          className="mt-4 space-y-4 animate-tab-enter focus:outline-none"
+          className="mt-4 space-y-4 motion-safe:animate-tab-enter motion-reduce:animate-none focus:outline-none"
         >
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between bg-[#080a0f] p-3.5 rounded-md border border-[#1b2331] gap-3">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between bg-slate-950 p-3.5 rounded-md border border-slate-800 gap-3">
             <div>
-              <span className="text-[10px] text-cyan-400 font-mono font-semibold uppercase tracking-wider">
+              <span className="text-[10px] text-cyan-400 font-mono font-semibold font-medium">
                 Ancient Egyptian Temple Horoscopy • Dendera & Senenmut Decans
               </span>
               <h4 className="text-sm font-semibold text-slate-100 mt-0.5">
@@ -1735,7 +1739,7 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
               </p>
             </div>
             <div className="flex items-center gap-2">
-              <span className="px-2.5 py-1 text-xs font-mono rounded bg-[#121721] text-cyan-300 border border-cyan-800">
+              <span className="px-2.5 py-1 text-xs font-mono rounded bg-slate-800 text-cyan-300 border border-cyan-800">
                 Hour {egyptian.chronocrator_watch.temporal_hour_number} of 12
               </span>
             </div>
@@ -1743,10 +1747,10 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
 
           {/* Ra's Cosmic Barque 36-Decan Star Clock Visual Instrument */}
           {chartViewMode !== 'table' && (
-            <div className={`p-4 rounded-xl border ${currentTheme.frameBorder} ${currentTheme.frameBg} shadow-inner animate-instrument-focus`}>
+            <div className={`p-4 rounded-xl border ${currentTheme.frameBorder} ${currentTheme.frameBg} shadow-inner motion-safe:animate-instrument-focus motion-reduce:animate-none`}>
               <div className="flex items-center justify-between pb-2 mb-3 border-b border-white/10">
                 <div className="flex items-center gap-2">
-                  <span className="text-base select-none">{currentTheme.glyph}</span>
+                  <span className="font-mono text-[11px] font-bold px-1 py-0.5 rounded bg-slate-800 text-slate-300 select-none">{currentTheme.glyph}</span>
                   <h5 className={`text-xs font-mono font-semibold ${currentTheme.accentText}`}>
                     {currentTheme.instrumentName}
                   </h5>
@@ -1762,17 +1766,17 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
           {chartViewMode !== 'chart' && (
             <>
               {/* 36 Decan Guardians */}
-              <div className="bg-[#080a0f] p-3.5 rounded-md border border-[#1b2331]">
+              <div className="bg-slate-950 p-3.5 rounded-md border border-slate-800">
                 <div className="flex items-center justify-between mb-2.5">
-                  <span className="text-[10px] font-mono font-semibold text-slate-400 uppercase tracking-wider">
+                  <span className="text-[10px] font-mono font-semibold text-slate-400 font-medium">
                     Decanic Guardians of Ra's Cosmic Barque (10° Sky Segments)
                   </span>
                   <ExplainerTrigger id="egyptian_decan_clock" label="36 Decan Gates" variant="badge" />
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 font-mono text-xs">
               {Object.entries(egyptian.decan_guardians).map(([pointKey, decan]: [string, any]) => (
-                <div key={pointKey} className="p-3 rounded bg-[#0d1118] border border-[#1b2331]">
-                  <span className="text-[10px] text-slate-500 uppercase tracking-wider block">
+                <div key={pointKey} className="p-3 rounded bg-slate-900 border border-slate-800">
+                  <span className="text-[10px] text-slate-500 font-medium block">
                     {pointKey.replace('_', ' ')}
                   </span>
                   <h5 className="font-semibold text-amber-300 text-sm mt-0.5">
@@ -1793,8 +1797,8 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
           </div>
 
           {/* Sothic Calendar & Epagomenal Day */}
-          <div className="bg-[#080a0f] p-3.5 rounded-md border border-[#1b2331]">
-            <span className="text-[10px] font-mono font-semibold text-slate-400 uppercase tracking-wider block mb-1">
+          <div className="bg-slate-950 p-3.5 rounded-md border border-slate-800">
+            <span className="text-[10px] font-mono font-semibold text-slate-400 font-medium block mb-1">
               Sothic Year Civil Alignment
             </span>
             <p className="text-xs text-slate-300 font-mono mt-1">
@@ -1818,11 +1822,11 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
           role="tabpanel"
           aria-labelledby="tradition-tab-maramataka"
           tabIndex={0}
-          className="mt-4 space-y-4 animate-tab-enter focus:outline-none"
+          className="mt-4 space-y-4 motion-safe:animate-tab-enter motion-reduce:animate-none focus:outline-none"
         >
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between bg-[#080a0f] p-3.5 rounded-md border border-[#1b2331] gap-3">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between bg-slate-950 p-3.5 rounded-md border border-slate-800 gap-3">
             <div>
-              <span className="text-[10px] text-emerald-400 font-mono font-semibold uppercase tracking-wider">
+              <span className="text-[10px] text-emerald-400 font-mono font-semibold font-medium">
                 Polynesian & Māori Maramataka • Oceanic Lunar Phase Archetype
               </span>
               <h4 className="text-sm font-semibold text-slate-100 mt-0.5">
@@ -1833,7 +1837,7 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
               </p>
             </div>
             <div className="flex items-center gap-2">
-              <span className="px-2.5 py-1 text-xs font-mono rounded bg-[#121721] text-emerald-300 border border-emerald-800">
+              <span className="px-2.5 py-1 text-xs font-mono rounded bg-slate-800 text-emerald-300 border border-emerald-800">
                 Elongation: {maramataka.lunar_night.elongation_degrees}°
               </span>
             </div>
@@ -1841,10 +1845,10 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
 
           {/* Oceanic 30-Night Lunar Dial Visual Instrument */}
           {chartViewMode !== 'table' && (
-            <div className={`p-4 rounded-xl border ${currentTheme.frameBorder} ${currentTheme.frameBg} shadow-inner animate-instrument-focus`}>
+            <div className={`p-4 rounded-xl border ${currentTheme.frameBorder} ${currentTheme.frameBg} shadow-inner motion-safe:animate-instrument-focus motion-reduce:animate-none`}>
               <div className="flex items-center justify-between pb-2 mb-3 border-b border-white/10">
                 <div className="flex items-center gap-2">
-                  <span className="text-base select-none">{currentTheme.glyph}</span>
+                  <span className="font-mono text-[11px] font-bold px-1 py-0.5 rounded bg-slate-800 text-slate-300 select-none">{currentTheme.glyph}</span>
                   <h5 className={`text-xs font-mono font-semibold ${currentTheme.accentText}`}>
                     {currentTheme.instrumentName}
                   </h5>
@@ -1861,9 +1865,9 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
             <>
               {/* Behavioral & Vitality Profile */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5">
-            <div className="bg-[#080a0f] p-3.5 rounded-md border border-[#1b2331]">
+            <div className="bg-slate-950 p-3.5 rounded-md border border-slate-800">
               <div className="flex items-center justify-between mb-2">
-                <span className="text-[10px] font-mono text-slate-400 uppercase tracking-wider">
+                <span className="text-[10px] font-mono text-slate-400 font-medium">
                   Biological & Behavioral Rhythm Profile
                 </span>
                 <ExplainerTrigger id="maramataka_lunar_dial" label="30 Oceanic Nights" variant="badge" />
@@ -1873,8 +1877,8 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
               </p>
             </div>
 
-            <div className="bg-[#080a0f] p-3.5 rounded-md border border-[#1b2331]">
-              <span className="text-[10px] font-mono text-slate-400 uppercase tracking-wider block mb-2">
+            <div className="bg-slate-950 p-3.5 rounded-md border border-slate-800">
+              <span className="text-[10px] font-mono text-slate-400 font-medium block mb-2">
                 Oceanic Archetype & Action Guidance
               </span>
               <div className="space-y-2 text-xs font-mono">
@@ -1902,16 +1906,18 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
           <button
             type="button"
             onClick={() => onNavigate('workbench')}
-            className="inline-flex items-center justify-center gap-2 px-4 py-2.5 min-h-[44px] text-xs font-mono rounded-lg bg-[#101520] hover:bg-[#161d2c] text-slate-300 border border-[#1b2331] cursor-pointer transition-colors active:scale-[0.98]"
+            className="inline-flex items-center justify-center gap-2 px-4 py-2.5 min-h-[44px] text-xs font-sans rounded-lg bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-800 cursor-pointer transition-colors active:scale-[0.98]"
           >
-            <span>← Back to Workbench</span>
+            <ArrowLeft className="w-3.5 h-3.5 shrink-0" aria-hidden="true" />
+            <span className="whitespace-nowrap">Back to Workbench</span>
           </button>
           <button
             type="button"
             onClick={() => onNavigate('synthesis')}
-            className="inline-flex items-center justify-center gap-2 px-4 py-2.5 min-h-[44px] text-xs font-mono rounded-lg bg-cyan-700 hover:bg-cyan-600 text-white font-semibold cursor-pointer transition-colors duration-150 border border-cyan-500/80 shadow-xs active:scale-[0.98]"
+            className="inline-flex items-center justify-center gap-2 px-4 py-2.5 min-h-[44px] text-xs font-sans rounded-lg bg-cyan-700 hover:bg-cyan-600 text-white font-semibold cursor-pointer transition-colors duration-150 border border-cyan-500/80 shadow-xs active:scale-[0.98] whitespace-nowrap"
           >
-            <span>Explore Cross-Cultural Synthesis Matrix →</span>
+            <span className="whitespace-nowrap">Explore Cross-Cultural Synthesis Matrix</span>
+            <ArrowRight className="w-3.5 h-3.5 shrink-0" aria-hidden="true" />
           </button>
         </div>
       )}

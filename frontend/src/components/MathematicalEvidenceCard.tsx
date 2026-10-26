@@ -14,7 +14,9 @@ import {
   AlertTriangle,
   Globe,
   Compass,
-  XCircle
+  XCircle,
+  ArrowLeft,
+  RotateCcw
 } from 'lucide-react';
 import { EVIDENCE_REPORT_MARKDOWN, EVIDENCE_STATS } from '../data/mathematicalEvidenceData';
 
@@ -183,28 +185,28 @@ export const MathematicalEvidenceCard: React.FC<Props> = ({ onNavigate }) => {
   });
 
   return (
-    <div className="machined-bezel rounded-2xl shadow-2xl relative overflow-hidden font-sans border border-cyan-800/60">
+    <div className="machined-bezel rounded-2xl relative overflow-hidden font-sans border border-cyan-800/60">
       <div className="reticle-corner-tl" />
       <div className="reticle-corner-tr" />
       <div className="reticle-corner-bl" />
       <div className="reticle-corner-br" />
 
       {/* ==================== 1. ACADEMIC HEADER BAR ==================== */}
-      <div className="bg-[#0d121c] border-b border-[#1b2331] p-4 sm:p-5">
+      <div className="bg-slate-900 border-b border-slate-800 p-4 sm:p-5">
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
           <div>
             <div className="flex flex-wrap items-center gap-2 mb-1.5">
-              <span className="px-2 py-0.5 text-[11px] font-mono font-bold tracking-wider rounded bg-cyan-950 text-cyan-300 border border-cyan-700/60 flex items-center gap-1.5">
+              <span className="px-2 py-0.5 text-xs font-sans font-medium rounded bg-cyan-950 text-cyan-300 border border-cyan-700/60 flex items-center gap-1.5">
                 <ShieldCheck className="w-3 h-3 text-cyan-400" />
-                PEER-GRADE EMPIRICAL AUDIT
+                Peer-Grade Empirical Audit
               </span>
-              <span className="px-2 py-0.5 text-[11px] font-mono rounded bg-[#151c28] text-slate-300 border border-[#222e42]">
+              <span className="px-2 py-0.5 text-xs font-sans rounded bg-slate-800 text-slate-300 border border-slate-700">
                 N=100 Certified Titans (Rodden AA/A)
               </span>
-              <span className="px-2 py-0.5 text-[11px] font-mono rounded bg-[#151c28] text-slate-300 border border-[#222e42]">
+              <span className="px-2 py-0.5 text-xs font-sans rounded bg-slate-800 text-slate-300 border border-slate-700">
                 N=1,000 Monte Carlo Controls
               </span>
-              <span className="px-2 py-0.5 text-[11px] font-mono rounded bg-emerald-950 text-emerald-300 border border-emerald-800/60 font-semibold">
+              <span className="px-2 py-0.5 text-xs font-mono rounded bg-emerald-950 text-emerald-300 border border-emerald-800/60 font-semibold">
                 p &lt; 0.0001
               </span>
             </div>
@@ -214,7 +216,7 @@ export const MathematicalEvidenceCard: React.FC<Props> = ({ onNavigate }) => {
               </h2>
               <ExplainerTrigger id="epistemic_humility_framework" label="Epistemic Humility" variant="badge" />
             </div>
-            <p className="text-xs text-slate-400 mt-0.5 font-mono">
+            <p className="text-xs text-slate-400 mt-0.5 font-sans">
               A Large-Scale Double-Cohort Statistical Study on Classical Yogas, Gauquelin Diurnal Sectors, and 6-Culture Triangulation.
             </p>
           </div>
@@ -222,13 +224,13 @@ export const MathematicalEvidenceCard: React.FC<Props> = ({ onNavigate }) => {
           {/* Action Toolbar */}
           <div className="flex flex-wrap items-center gap-2">
             {/* View Mode Toggle */}
-            <div className="flex items-center rounded-lg bg-[#090c12] p-1 border border-[#1b2331]">
+            <div className="flex items-center rounded-lg bg-slate-950 p-1 border border-slate-800">
               <button
                 type="button"
                 onClick={() => setViewMode('interactive')}
-                className={`flex items-center gap-1.5 px-3 py-2 sm:py-1.5 min-h-[44px] sm:min-h-[36px] text-xs font-mono rounded transition-colors cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 ${
+                className={`flex items-center gap-1.5 px-3 py-2 sm:py-1.5 min-h-[44px] sm:min-h-[36px] text-xs font-sans font-medium rounded transition-colors cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 ${
                   viewMode === 'interactive'
-                    ? 'bg-[#182333] text-cyan-300 font-semibold border border-cyan-800/80 shadow-xs'
+                    ? 'bg-slate-800 text-cyan-300 font-semibold border border-cyan-800/80 shadow-xs'
                     : 'text-slate-400 hover:text-slate-200'
                 }`}
                 title="Interactive Visualizer & Exploratory Dashboards"
@@ -239,9 +241,9 @@ export const MathematicalEvidenceCard: React.FC<Props> = ({ onNavigate }) => {
               <button
                 type="button"
                 onClick={() => setViewMode('whitepaper')}
-                className={`flex items-center gap-1.5 px-3 py-2 sm:py-1.5 min-h-[44px] sm:min-h-[36px] text-xs font-mono rounded transition-colors cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 ${
+                className={`flex items-center gap-1.5 px-3 py-2 sm:py-1.5 min-h-[44px] sm:min-h-[36px] text-xs font-sans font-medium rounded transition-colors cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 ${
                   viewMode === 'whitepaper'
-                    ? 'bg-[#182333] text-cyan-300 font-semibold border border-cyan-800/80 shadow-xs'
+                    ? 'bg-slate-800 text-cyan-300 font-semibold border border-cyan-800/80 shadow-xs'
                     : 'text-slate-400 hover:text-slate-200'
                 }`}
                 title="Full Academic Whitepaper (All 7 Sections)"
@@ -252,9 +254,9 @@ export const MathematicalEvidenceCard: React.FC<Props> = ({ onNavigate }) => {
               <button
                 type="button"
                 onClick={() => setViewMode('markdown')}
-                className={`flex items-center gap-1.5 px-3 py-2 sm:py-1.5 min-h-[44px] sm:min-h-[36px] text-xs font-mono rounded transition-colors cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 ${
+                className={`flex items-center gap-1.5 px-3 py-2 sm:py-1.5 min-h-[44px] sm:min-h-[36px] text-xs font-sans font-medium rounded transition-colors cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 ${
                   viewMode === 'markdown'
-                    ? 'bg-[#182333] text-cyan-300 font-semibold border border-cyan-800/80 shadow-xs'
+                    ? 'bg-slate-800 text-cyan-300 font-semibold border border-cyan-800/80 shadow-xs'
                     : 'text-slate-400 hover:text-slate-200'
                 }`}
                 title="Raw Markdown Source"
@@ -269,7 +271,7 @@ export const MathematicalEvidenceCard: React.FC<Props> = ({ onNavigate }) => {
               <button
                 type="button"
                 onClick={handleCopy}
-                className="p-2 min-h-[44px] min-w-[44px] sm:min-h-[38px] sm:min-w-[38px] flex items-center justify-center rounded-md bg-[#101622] hover:bg-[#182233] text-slate-300 hover:text-cyan-300 border border-[#1b2331] transition-colors cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
+                className="p-2 min-h-[44px] min-w-[44px] sm:min-h-[38px] sm:min-w-[38px] flex items-center justify-center rounded-md bg-slate-900 hover:bg-slate-800 text-slate-300 hover:text-cyan-300 border border-slate-800 transition-colors cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
                 data-tooltip="Copy Full Report Markdown to Clipboard"
                 aria-label="Copy Full Report Markdown to Clipboard"
               >
@@ -278,7 +280,7 @@ export const MathematicalEvidenceCard: React.FC<Props> = ({ onNavigate }) => {
               <button
                 type="button"
                 onClick={handleExportMarkdown}
-                className="p-2 min-h-[44px] min-w-[44px] sm:min-h-[38px] sm:min-w-[38px] flex items-center justify-center rounded-md bg-[#101622] hover:bg-[#182233] text-slate-300 hover:text-cyan-300 border border-[#1b2331] transition-colors cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
+                className="p-2 min-h-[44px] min-w-[44px] sm:min-h-[38px] sm:min-w-[38px] flex items-center justify-center rounded-md bg-slate-900 hover:bg-slate-800 text-slate-300 hover:text-cyan-300 border border-slate-800 transition-colors cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
                 data-tooltip="Download Study Report (.md)"
                 aria-label="Download Study Report (.md)"
               >
@@ -287,7 +289,7 @@ export const MathematicalEvidenceCard: React.FC<Props> = ({ onNavigate }) => {
               <button
                 type="button"
                 onClick={handleExportJSON}
-                className="px-2.5 py-1.5 min-h-[44px] sm:min-h-[38px] min-w-[44px] text-[11px] font-mono rounded-md bg-[#101622] hover:bg-[#182233] text-slate-300 hover:text-cyan-300 border border-[#1b2331] transition-colors cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 flex items-center justify-center"
+                className="px-2.5 py-1.5 min-h-[44px] sm:min-h-[38px] min-w-[44px] text-xs font-sans font-medium rounded-md bg-slate-900 hover:bg-slate-800 text-slate-300 hover:text-cyan-300 border border-slate-800 transition-colors cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 flex items-center justify-center"
                 data-tooltip="Export Raw Statistics Dataset (.json)"
                 aria-label="Export Raw Statistics Dataset (.json)"
               >
@@ -296,7 +298,7 @@ export const MathematicalEvidenceCard: React.FC<Props> = ({ onNavigate }) => {
               <button
                 type="button"
                 onClick={handlePrint}
-                className="p-2 min-h-[44px] min-w-[44px] sm:min-h-[38px] sm:min-w-[38px] flex items-center justify-center rounded-md bg-[#101622] hover:bg-[#182233] text-slate-300 hover:text-cyan-300 border border-[#1b2331] transition-colors cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
+                className="p-2 min-h-[44px] min-w-[44px] sm:min-h-[38px] sm:min-w-[38px] flex items-center justify-center rounded-md bg-slate-900 hover:bg-slate-800 text-slate-300 hover:text-cyan-300 border border-slate-800 transition-colors cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
                 data-tooltip="Print or Save PDF"
                 aria-label="Print or Save PDF"
               >
@@ -308,35 +310,35 @@ export const MathematicalEvidenceCard: React.FC<Props> = ({ onNavigate }) => {
 
         {/* Live Top KPI Scorecard */}
         <div className="grid grid-cols-2 sm:grid-cols-5 gap-2.5 mt-4">
-          <div className="bg-[#090c12] border border-[#1b2331] rounded-lg p-2.5">
+          <div className="bg-slate-950 border border-slate-800 rounded-lg p-2.5">
             <div className="flex items-center justify-between">
               <span className="text-xs font-medium text-slate-300">Titan Cohort</span>
               <ExplainerTrigger id="rodden_titan_benchmark" size="xs" variant="icon" />
             </div>
-            <span className="text-lg font-mono font-bold text-cyan-300">100 Records</span>
+            <span className="text-lg font-mono tabular-nums font-bold text-cyan-300">100 Records</span>
             <span className="text-xs text-slate-400 block mt-0.5">100% Rodden Rating AA/A</span>
           </div>
-          <div className="bg-[#090c12] border border-[#1b2331] rounded-lg p-2.5">
+          <div className="bg-slate-950 border border-slate-800 rounded-lg p-2.5">
             <span className="text-xs font-medium text-slate-300 block">Null Baseline</span>
-            <span className="text-lg font-mono font-bold text-slate-200">1,000 Controls</span>
+            <span className="text-lg font-mono tabular-nums font-bold text-slate-200">1,000 Controls</span>
             <span className="text-xs text-slate-400 block mt-0.5">Epoch 1500 to 2000 Uniform</span>
           </div>
-          <div className="bg-[#090c12] border border-[#1b2331] rounded-lg p-2.5">
+          <div className="bg-slate-950 border border-slate-800 rounded-lg p-2.5">
             <span className="text-xs font-medium text-slate-300 block">Domain Concordance</span>
-            <span className="text-lg font-mono font-bold text-emerald-400">68.2%</span>
-            <span className="text-xs font-mono text-emerald-400 block mt-0.5 font-semibold">Exceeds Noise (p &lt; 10⁻⁴)</span>
+            <span className="text-lg font-mono tabular-nums font-bold text-emerald-400">68.2%</span>
+            <span className="text-xs font-sans text-emerald-400 block mt-0.5 font-medium">Exceeds Noise (p &lt; 10⁻⁴)</span>
           </div>
-          <div className="bg-[#090c12] border border-[#1b2331] rounded-lg p-2.5">
+          <div className="bg-slate-950 border border-slate-800 rounded-lg p-2.5">
             <div className="flex items-center justify-between">
               <span className="text-xs font-medium text-slate-300">Divergence Rate</span>
               <ExplainerTrigger id="honest_divergence_rate" size="xs" variant="icon" />
             </div>
-            <span className="text-lg font-mono font-bold text-amber-400">31.8%</span>
+            <span className="text-lg font-mono tabular-nums font-bold text-amber-400">31.8%</span>
             <span className="text-xs text-slate-400 block mt-0.5">Honest Disagreements</span>
           </div>
-          <div className="bg-[#090c12] border border-[#1b2331] rounded-lg p-2.5">
+          <div className="bg-slate-950 border border-slate-800 rounded-lg p-2.5">
             <span className="text-xs font-medium text-slate-300 block">Orbital Constraint</span>
-            <span className="text-lg font-mono font-bold text-rose-300">28° Mercury</span>
+            <span className="text-lg font-mono tabular-nums font-bold text-rose-300">28° Mercury</span>
             <span className="text-xs text-slate-400 block mt-0.5">29.6% Baseline Debunked</span>
           </div>
         </div>
@@ -348,9 +350,9 @@ export const MathematicalEvidenceCard: React.FC<Props> = ({ onNavigate }) => {
       {viewMode === 'interactive' && (
         <div className="p-4 sm:p-6 space-y-6">
           {/* Section Navigation Pills */}
-          <div className="flex flex-wrap border-b border-[#1b2331] gap-1.5 pb-2 text-xs font-mono">
+          <div className="flex flex-wrap border-b border-slate-800 gap-1.5 pb-2 text-xs font-sans">
             {[
-              { id: 'hypotheses', label: '1. Hypotheses Scorecard (H1–H7)' },
+              { id: 'hypotheses', label: '1. Hypotheses Scorecard (H1-H7)' },
               { id: 'debiasing', label: '2. Astronomical De-Biasing Analysis' },
               { id: 'pillars', label: '3. Three Mathematical Pillars' },
               { id: 'moat', label: '4. Commercial & Ethical Moat' },
@@ -362,8 +364,8 @@ export const MathematicalEvidenceCard: React.FC<Props> = ({ onNavigate }) => {
                 onClick={() => setActiveTab(tab.id as any)}
                 className={`px-3 py-1.5 rounded-md font-medium whitespace-normal sm:whitespace-nowrap cursor-pointer transition-colors border ${
                   activeTab === tab.id
-                    ? 'border-cyan-700/80 text-cyan-300 bg-[#141b27] shadow-xs'
-                    : 'border-transparent text-slate-400 hover:text-slate-200 hover:bg-[#10141d]'
+                    ? 'border-cyan-700/80 text-cyan-300 bg-slate-800 shadow-xs'
+                    : 'border-transparent text-slate-400 hover:text-slate-200 hover:bg-slate-900'
                 }`}
               >
                 {tab.label}
@@ -374,11 +376,11 @@ export const MathematicalEvidenceCard: React.FC<Props> = ({ onNavigate }) => {
           {/* TAB 1: Hypotheses Scorecard */}
           {activeTab === 'hypotheses' && (
             <div className="space-y-4">
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 bg-[#090c12] p-3 rounded-lg border border-[#1b2331]">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 bg-slate-950 p-3 rounded-lg border border-slate-800">
                 <div className="text-xs text-slate-300">
                   <span className="text-cyan-300 font-semibold">Testing Protocol:</span> Experimental Cohort (100 Historical Titans) vs. Null Model (1,000 Monte Carlo Controls).
                 </div>
-                <div className="flex flex-wrap items-center gap-1.5 text-[11px] font-mono">
+                <div className="flex flex-wrap items-center gap-1.5 text-xs font-sans">
                   <span className="text-slate-400 mr-1">Filter:</span>
                   {(['all', 'significant', 'enriched', 'disproven'] as const).map((cat) => (
                     <button
@@ -388,7 +390,7 @@ export const MathematicalEvidenceCard: React.FC<Props> = ({ onNavigate }) => {
                       className={`px-2.5 py-1 min-h-[36px] sm:min-h-[28px] rounded-md capitalize cursor-pointer transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 ${
                         hypothesisFilter === cat
                           ? 'bg-cyan-950 text-cyan-300 border border-cyan-700/80'
-                          : 'text-slate-400 hover:text-slate-200 border border-[#1b2331]'
+                          : 'text-slate-400 hover:text-slate-200 border border-slate-800'
                       }`}
                     >
                       {cat}
@@ -401,40 +403,40 @@ export const MathematicalEvidenceCard: React.FC<Props> = ({ onNavigate }) => {
                 tabIndex={0}
                 role="region"
                 aria-label="Empirical hypothesis testing results table"
-                className="rounded-lg border border-[#1b2331] focus:outline-none focus-visible:ring-1 focus-visible:ring-cyan-500 overflow-hidden"
+                className="rounded-lg border border-slate-800 focus:outline-none focus-visible:ring-1 focus-visible:ring-cyan-500 overflow-hidden"
               >
                 {/* Mobile-first stacked cards (<sm) */}
-                <div className="sm:hidden space-y-2.5 p-2.5 bg-[#0c1018]">
+                <div className="sm:hidden space-y-2.5 p-2.5 bg-slate-900">
                   {filteredHypotheses.map((h) => (
-                    <div key={h.id} className="p-3 rounded-lg bg-[#080a0f] border border-[#1b2331] space-y-2 font-mono text-xs">
+                    <div key={h.id} className="p-3 rounded-lg bg-slate-950 border border-slate-800 space-y-2 text-xs">
                       <div className="flex items-center justify-between">
-                        <span className="font-bold text-cyan-400">{h.id}</span>
+                        <span className="font-mono font-bold text-cyan-400">{h.id}</span>
                         {h.status === 'significant' && (
-                          <span className="px-2 py-0.5 rounded text-[11px] bg-emerald-950 text-emerald-300 border border-emerald-700 font-bold">
-                            ✓ EXTREMELY SIGNIFICANT
+                          <span className="px-2 py-0.5 rounded text-xs font-sans font-medium bg-emerald-950 text-emerald-300 border border-emerald-700">
+                            ✓ Extremely Significant
                           </span>
                         )}
                         {h.status === 'trend' && (
-                          <span className="px-2 py-0.5 rounded text-[11px] bg-amber-950 text-amber-300 border border-amber-700">
+                          <span className="px-2 py-0.5 rounded text-xs font-sans font-medium bg-amber-950 text-amber-300 border border-amber-700">
                             Enriched ({h.oddsRatio})
                           </span>
                         )}
                         {h.status === 'disproven' && (
-                          <span className="px-2 py-0.5 rounded text-[11px] bg-rose-950 text-rose-300 border border-rose-800">
-                            ✕ DISPROVEN (Baseline)
+                          <span className="px-2 py-0.5 rounded text-xs font-sans font-medium bg-rose-950 text-rose-300 border border-rose-800">
+                            ✕ Disproven (Baseline)
                           </span>
                         )}
                       </div>
                       <p className="font-sans text-slate-200 text-xs font-semibold leading-snug">{h.claim}</p>
-                      <div className="text-[11px] text-slate-400">
+                      <div className="text-xs text-slate-400">
                         Cohort: <span className="text-cyan-300">{h.subgroup}</span>
                       </div>
-                      <div className="grid grid-cols-2 gap-1.5 pt-1.5 border-t border-[#1b2331] text-[11px] tabular-nums">
-                        <div>Titans: <strong className="text-slate-100">{h.observed}</strong></div>
-                        <div>Controls: <strong className="text-slate-400">{h.baseline}</strong></div>
-                        <div>Odds Ratio: <strong className={parseFloat(h.oddsRatio) >= 2.0 ? 'text-emerald-400' : 'text-slate-300'}>{h.oddsRatio}</strong></div>
-                        <div>Z-Score: <strong className="text-slate-300">{h.zScore}</strong></div>
-                        <div className="col-span-2">p-value: <strong className={h.pValue.includes('0.0001') ? 'text-emerald-400' : 'text-slate-400'}>{h.pValue}</strong></div>
+                      <div className="grid grid-cols-2 gap-1.5 pt-1.5 border-t border-slate-800 text-xs font-sans">
+                        <div>Titans: <strong className="text-slate-100 font-mono tabular-nums">{h.observed}</strong></div>
+                        <div>Controls: <strong className="text-slate-400 font-mono tabular-nums">{h.baseline}</strong></div>
+                        <div>Odds Ratio: <strong className={`font-mono tabular-nums ${parseFloat(h.oddsRatio) >= 2.0 ? 'text-emerald-400' : 'text-slate-300'}`}>{h.oddsRatio}</strong></div>
+                        <div>Z-Score: <strong className="text-slate-300 font-mono tabular-nums">{h.zScore}</strong></div>
+                        <div className="col-span-2">p-value: <strong className={`font-mono tabular-nums ${h.pValue.includes('0.0001') ? 'text-emerald-400' : 'text-slate-400'}`}>{h.pValue}</strong></div>
                       </div>
                     </div>
                   ))}
@@ -442,10 +444,10 @@ export const MathematicalEvidenceCard: React.FC<Props> = ({ onNavigate }) => {
 
                 {/* Desktop tabular view (>=sm) */}
                 <div className="hidden sm:block overflow-x-auto">
-                  <table className="w-full text-left text-xs font-mono border-collapse bg-[#0c1018]">
+                  <table className="w-full text-left text-xs font-sans border-collapse bg-slate-900">
                     <thead>
-                      <tr className="border-b border-[#1b2331] text-[11px] text-slate-400 uppercase bg-[#080b11]">
-                        <th className="py-2.5 px-3 sticky left-0 bg-[#080b11] z-10 border-r border-[#1b2331]">Test</th>
+                      <tr className="border-b border-slate-800 text-xs font-medium text-slate-400 bg-slate-950">
+                        <th className="py-2.5 px-3 sticky left-0 bg-slate-950 z-10 border-r border-slate-800">Test</th>
                         <th className="py-2.5 px-3">Formal Astrological Claim</th>
                         <th className="py-2.5 px-3">Cohort</th>
                         <th className="py-2.5 px-3 text-right">Titans %</th>
@@ -456,37 +458,37 @@ export const MathematicalEvidenceCard: React.FC<Props> = ({ onNavigate }) => {
                         <th className="py-2.5 px-3 text-center">Empirical Verdict</th>
                       </tr>
                     </thead>
-                    <tbody className="divide-y divide-[#1b2331]/70">
+                    <tbody className="divide-y divide-slate-800">
                       {filteredHypotheses.map((h) => (
-                        <tr key={h.id} className="hover:bg-[#111723] transition-colors">
-                          <td className="py-2.5 px-3 font-bold text-cyan-400 sticky left-0 bg-[#0c1018] z-10 border-r border-[#1b2331]">{h.id}</td>
+                        <tr key={h.id} className="hover:bg-slate-800/60 transition-colors">
+                          <td className="py-2.5 px-3 font-mono font-bold text-cyan-400 sticky left-0 bg-slate-900 z-10 border-r border-slate-800">{h.id}</td>
                           <td className="py-2.5 px-3 font-sans text-slate-200">
                             <span className="font-semibold">{h.claim}</span>
                           </td>
-                          <td className="py-2.5 px-3 text-cyan-300 text-[11px] whitespace-nowrap">{h.subgroup}</td>
-                          <td className="py-2.5 px-3 text-right font-bold text-slate-100">{h.observed}</td>
-                          <td className="py-2.5 px-3 text-right text-slate-400">{h.baseline}</td>
-                          <td className={`py-2.5 px-3 text-right font-bold ${parseFloat(h.oddsRatio) >= 2.0 ? 'text-emerald-400' : 'text-slate-300'}`}>
+                          <td className="py-2.5 px-3 text-cyan-300 text-xs whitespace-nowrap">{h.subgroup}</td>
+                          <td className="py-2.5 px-3 text-right font-mono tabular-nums font-bold text-slate-100">{h.observed}</td>
+                          <td className="py-2.5 px-3 text-right font-mono tabular-nums text-slate-400">{h.baseline}</td>
+                          <td className={`py-2.5 px-3 text-right font-mono tabular-nums font-bold ${parseFloat(h.oddsRatio) >= 2.0 ? 'text-emerald-400' : 'text-slate-300'}`}>
                             {h.oddsRatio}
                           </td>
-                          <td className="py-2.5 px-3 text-right text-slate-300">{h.zScore}</td>
-                          <td className={`py-2.5 px-3 text-right font-bold ${h.pValue.includes('0.0001') ? 'text-emerald-400' : 'text-slate-400'}`}>
+                          <td className="py-2.5 px-3 text-right font-mono tabular-nums text-slate-300">{h.zScore}</td>
+                          <td className={`py-2.5 px-3 text-right font-mono tabular-nums font-bold ${h.pValue.includes('0.0001') ? 'text-emerald-400' : 'text-slate-400'}`}>
                             {h.pValue}
                           </td>
                           <td className="py-2.5 px-3 text-center">
                             {h.status === 'significant' && (
-                              <span className="px-2 py-0.5 rounded text-[11px] bg-emerald-950 text-emerald-300 border border-emerald-700 font-bold whitespace-nowrap">
-                                ✓ EXTREMELY SIGNIFICANT
+                              <span className="px-2 py-0.5 rounded text-xs font-sans font-medium bg-emerald-950 text-emerald-300 border border-emerald-700 whitespace-nowrap">
+                                ✓ Extremely Significant
                               </span>
                             )}
                             {h.status === 'trend' && (
-                              <span className="px-2 py-0.5 rounded text-[11px] bg-amber-950 text-amber-300 border border-amber-700 whitespace-nowrap">
+                              <span className="px-2 py-0.5 rounded text-xs font-sans font-medium bg-amber-950 text-amber-300 border border-amber-700 whitespace-nowrap">
                                 Enriched ({h.oddsRatio})
                               </span>
                             )}
                             {h.status === 'disproven' && (
-                              <span className="px-2 py-0.5 rounded text-[11px] bg-rose-950 text-rose-300 border border-rose-800 whitespace-nowrap">
-                                ✕ DISPROVEN (Baseline)
+                              <span className="px-2 py-0.5 rounded text-xs font-sans font-medium bg-rose-950 text-rose-300 border border-rose-800 whitespace-nowrap">
+                                ✕ Disproven (Baseline)
                               </span>
                             )}
                           </td>
@@ -503,50 +505,50 @@ export const MathematicalEvidenceCard: React.FC<Props> = ({ onNavigate }) => {
           {activeTab === 'debiasing' && (
             <div className="space-y-4">
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div className="bg-[#090d15] p-4 rounded-lg border border-[#1b2331] space-y-2">
+                <div className="bg-slate-900 p-4 rounded-lg border border-slate-800 space-y-2">
                   <div className="flex items-center gap-2 text-rose-400 font-bold text-sm">
                     <AlertTriangle className="w-4 h-4 shrink-0" />
                     <h4>1. The Orbital Mechanics Trap</h4>
                   </div>
-                  <span className="text-[11px] font-mono text-slate-400 uppercase block">Budhaditya Yoga (Sun-Mercury Conjunction)</span>
+                  <span className="text-xs font-sans font-medium text-slate-400 block">Budhaditya Yoga (Sun-Mercury Conjunction)</span>
                   <p className="text-xs text-slate-300 leading-relaxed">
-                    Popular astrologers cite Mercury conjunct Sun in Einstein, Jobs, and Obama as "proof of genius."
-                    In celestial reality, Mercury's maximum elongation from the Sun is only <strong className="text-slate-100">28°</strong>. 
-                    Therefore, Mercury is geometrically locked to the Sun's sign <strong className="text-rose-400 font-mono">29.6% of the time</strong> in the general world population.
+                    Popular astrologers cite Mercury conjunct Sun in Einstein, Jobs, and Obama as “proof of genius.”
+                    In celestial reality, Mercury’s maximum elongation from the Sun is only <strong className="text-slate-100 font-mono tabular-nums">28°</strong>. 
+                    Therefore, Mercury is geometrically locked to the Sun’s sign <strong className="text-rose-400 font-mono tabular-nums">29.6% of the time</strong> in the general world population.
                   </p>
-                  <div className="bg-[#06080e] p-2 rounded text-[11px] font-mono text-slate-400 border border-[#18202c]">
-                    Observed in Science Titans: 22.2% | Natural Baseline: 29.6% → <span className="text-rose-300 font-bold">Texas Sharpshooter Fallacy</span>
+                  <div className="bg-slate-950 p-2 rounded text-xs font-sans text-slate-400 border border-slate-800">
+                    Observed in Science Titans: <span className="font-mono tabular-nums text-slate-200">22.2%</span> | Natural Baseline: <span className="font-mono tabular-nums text-slate-200">29.6%</span> → <span className="text-rose-300 font-medium">Texas Sharpshooter Fallacy</span>
                   </div>
                 </div>
 
-                <div className="bg-[#090d15] p-4 rounded-lg border border-[#1b2331] space-y-2">
+                <div className="bg-slate-900 p-4 rounded-lg border border-slate-800 space-y-2">
                   <div className="flex items-center gap-2 text-amber-400 font-bold text-sm">
                     <Globe className="w-4 h-4 shrink-0" />
                     <h4>2. Short Ascension Geometry</h4>
                   </div>
-                  <span className="text-[11px] font-mono text-slate-400 uppercase block">Pisces Ascendant Scarcity</span>
+                  <span className="text-xs font-sans font-medium text-slate-400 block">Pisces Ascendant Scarcity</span>
                   <p className="text-xs text-slate-300 leading-relaxed">
                     Among 100 historical titans, only 1 had a Pisces Ascendant (p = 0.0080).
                     Naive researchers claim Pisces rising people "cannot become famous." 
                     In reality, the 23.4° tilt of the ecliptic causes Pisces to cross the horizon in only <strong className="text-slate-100">~75 mins</strong> (short ascension) vs. <strong className="text-slate-100">~160 mins</strong> for Virgo/Libra in the Northern Hemisphere.
                   </p>
-                  <div className="bg-[#06080e] p-2 rounded text-[11px] font-mono text-slate-400 border border-[#18202c]">
+                  <div className="bg-slate-950 p-2 rounded text-xs font-sans text-slate-400 border border-slate-800">
                     Spherical Geometry effect, not metaphysical fate.
                   </div>
                 </div>
 
-                <div className="bg-[#090d15] p-4 rounded-lg border border-[#1b2331] space-y-2">
+                <div className="bg-slate-900 p-4 rounded-lg border border-slate-800 space-y-2">
                   <div className="flex items-center gap-2 text-cyan-400 font-bold text-sm">
                     <Compass className="w-4 h-4 shrink-0" />
                     <h4>3. Dusthana Lord Probability</h4>
                   </div>
-                  <span className="text-[11px] font-mono text-slate-400 uppercase block">Viparita Raja Yoga (Crisis to Triumph)</span>
+                  <span className="text-xs font-sans font-medium text-slate-400 block">Viparita Raja Yoga (Crisis to Triumph)</span>
                   <p className="text-xs text-slate-300 leading-relaxed">
                     Astrologers claim Viparita Raja Yoga (lords of 6, 8, 12 placed in houses 6, 8, 12) is the secret of resilience in titans.
                     Mathematical probability of at least one lord placed in these houses is:
                   </p>
-                  <div className="bg-[#06080e] p-2 rounded text-[11px] font-mono text-cyan-300 text-center border border-[#18202c]">
-                    P = 1 - (9/12)³ = 1 - 0.4218 = <strong className="text-emerald-400 font-bold">57.8%</strong>
+                  <div className="bg-slate-950 p-2 rounded text-xs font-mono text-cyan-300 text-center border border-slate-800">
+                    P = 1 - (9/12)³ = 1 - 0.4218 = <strong className="text-emerald-400 font-bold tabular-nums">57.8%</strong>
                   </div>
                   <p className="text-xs text-slate-400">
                     58% of all human beings naturally have this yoga. Its presence in 61% of titans is completely expected.
@@ -560,10 +562,10 @@ export const MathematicalEvidenceCard: React.FC<Props> = ({ onNavigate }) => {
           {activeTab === 'pillars' && (
             <div className="space-y-4">
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div className="bg-[#0a0e17] p-4 rounded-lg border border-cyan-800/60 space-y-3">
-                  <div className="flex items-center justify-between border-b border-[#1b2331] pb-2">
-                    <span className="text-xs font-mono font-bold text-cyan-400">PILLAR 1</span>
-                    <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-emerald-950 text-emerald-300 border border-emerald-700">
+                <div className="bg-slate-900 p-4 rounded-lg border border-cyan-800/60 space-y-3">
+                  <div className="flex items-center justify-between border-b border-slate-800 pb-2">
+                    <span className="text-xs font-sans font-semibold text-cyan-400">Pillar 1</span>
+                    <span className="text-xs font-mono tabular-nums px-2 py-0.5 rounded bg-emerald-950 text-emerald-300 border border-emerald-700">
                       p &lt; 0.0001
                     </span>
                   </div>
@@ -571,29 +573,29 @@ export const MathematicalEvidenceCard: React.FC<Props> = ({ onNavigate }) => {
                   <p className="text-xs text-slate-300 leading-relaxed">
                     6 culturally isolated calendars (Sidereal Jyotisha, Tropical Western, BaZi Solar, Zi Wei Lunar, Mayan Tzolk'in, Tibetan Rabjung) evaluate life domains independently.
                   </p>
-                  <div className="space-y-1.5 text-xs font-mono bg-[#06080e] p-2.5 rounded border border-[#151c28]">
+                  <div className="space-y-1.5 text-xs font-sans bg-slate-950 p-2.5 rounded border border-slate-800">
                     <div className="flex justify-between">
                       <span className="text-slate-400">D9 Life Purpose:</span>
-                      <strong className="text-emerald-400">75.0% Concordance</strong>
+                      <strong className="text-emerald-400 font-mono tabular-nums">75.0% Concordance</strong>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-slate-400">D1 Vitality:</span>
-                      <strong className="text-emerald-400">72.0% Concordance</strong>
+                      <strong className="text-emerald-400 font-mono tabular-nums">72.0% Concordance</strong>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-slate-400">D2 Career/Status:</span>
-                      <strong className="text-emerald-400">71.0% Concordance</strong>
+                      <strong className="text-emerald-400 font-mono tabular-nums">71.0% Concordance</strong>
                     </div>
                   </div>
-                  <p className="text-[11px] text-slate-400">
+                  <p className="text-xs text-slate-400">
                     Z-Scores exceed +7.98. Cannot be generated by independent random noise.
                   </p>
                 </div>
 
-                <div className="bg-[#0a0e17] p-4 rounded-lg border border-cyan-800/60 space-y-3">
-                  <div className="flex items-center justify-between border-b border-[#1b2331] pb-2">
-                    <span className="text-xs font-mono font-bold text-cyan-400">PILLAR 2</span>
-                    <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-amber-950 text-amber-300 border border-amber-700">
+                <div className="bg-slate-900 p-4 rounded-lg border border-cyan-800/60 space-y-3">
+                  <div className="flex items-center justify-between border-b border-slate-800 pb-2">
+                    <span className="text-xs font-sans font-semibold text-cyan-400">Pillar 2</span>
+                    <span className="text-xs font-sans font-medium px-2 py-0.5 rounded bg-amber-950 text-amber-300 border border-amber-700">
                       Odds Ratio 2.0x
                     </span>
                   </div>
@@ -601,29 +603,29 @@ export const MathematicalEvidenceCard: React.FC<Props> = ({ onNavigate }) => {
                   <p className="text-xs text-slate-300 leading-relaxed">
                     Replication of Michel Gauquelin's 30-year archival study on planetary positions immediately following rise and culmination (Houses 9, 10, 12, 1).
                   </p>
-                  <div className="space-y-1.5 text-xs font-mono bg-[#06080e] p-2.5 rounded border border-[#151c28]">
+                  <div className="space-y-1.5 text-xs font-sans bg-slate-950 p-2.5 rounded border border-slate-800">
                     <div className="flex justify-between">
                       <span className="text-slate-400">Saturn in Scientists:</span>
-                      <strong className="text-emerald-400">50.0% Observed</strong>
+                      <strong className="text-emerald-400 font-mono tabular-nums">50.0% Observed</strong>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-slate-400">Control Baseline:</span>
-                      <strong className="text-slate-300">33.3% Expected</strong>
+                      <strong className="text-slate-300 font-mono tabular-nums">33.3% Expected</strong>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-slate-400">Odds Ratio:</span>
-                      <strong className="text-cyan-300">2.00x Enrichment</strong>
+                      <strong className="text-cyan-300 font-mono tabular-nums">2.00x Enrichment</strong>
                     </div>
                   </div>
-                  <p className="text-[11px] text-slate-400">
+                  <p className="text-xs text-slate-400">
                     Heuristic enrichment confirmed across Einstein, Newton, Curie, Heisenberg, and Planck.
                   </p>
                 </div>
 
-                <div className="bg-[#0a0e17] p-4 rounded-lg border border-cyan-800/60 space-y-3">
-                  <div className="flex items-center justify-between border-b border-[#1b2331] pb-2">
-                    <span className="text-xs font-mono font-bold text-cyan-400">PILLAR 3</span>
-                    <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-cyan-950 text-cyan-300 border border-cyan-700">
+                <div className="bg-slate-900 p-4 rounded-lg border border-cyan-800/60 space-y-3">
+                  <div className="flex items-center justify-between border-b border-slate-800 pb-2">
+                    <span className="text-xs font-sans font-semibold text-cyan-400">Pillar 3</span>
+                    <span className="text-xs font-sans font-medium px-2 py-0.5 rounded bg-cyan-950 text-cyan-300 border border-cyan-700">
                       87.5% Timing Alignment
                     </span>
                   </div>
@@ -631,10 +633,10 @@ export const MathematicalEvidenceCard: React.FC<Props> = ({ onNavigate }) => {
                   <p className="text-xs text-slate-300 leading-relaxed">
                     Synchronization of Vimshottari Mahadashas and Hellenistic Annual Profections with biographical historical events.
                   </p>
-                  <div className="space-y-1.5 text-xs font-mono bg-[#06080e] p-2.5 rounded border border-[#151c28]">
+                  <div className="space-y-1.5 text-xs font-sans bg-slate-950 p-2.5 rounded border border-slate-800">
                     <div className="flex justify-between">
                       <span className="text-slate-400">Inflection Points:</span>
-                      <strong className="text-cyan-300">87.5% in Kendra Years</strong>
+                      <strong className="text-cyan-300 font-mono tabular-nums">87.5% in Kendra Years</strong>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-slate-400">Profection Houses:</span>
@@ -642,10 +644,10 @@ export const MathematicalEvidenceCard: React.FC<Props> = ({ onNavigate }) => {
                     </div>
                     <div className="flex justify-between">
                       <span className="text-slate-400">Turnaround Rate:</span>
-                      <strong className="text-emerald-400">High Predictive Density</strong>
+                      <strong className="text-emerald-400 font-medium">High Predictive Density</strong>
                     </div>
                   </div>
-                  <p className="text-[11px] text-slate-400">
+                  <p className="text-xs text-slate-400">
                     Company foundings, exile, breakthrough publications align with dasha boundaries.
                   </p>
                 </div>
@@ -655,15 +657,15 @@ export const MathematicalEvidenceCard: React.FC<Props> = ({ onNavigate }) => {
 
           {/* TAB 4: Commercial & Ethical Moat */}
           {activeTab === 'moat' && (
-            <div className="space-y-4 text-xs text-slate-300">
+            <div className="space-y-4 text-xs text-slate-300 font-sans">
               <div
                 tabIndex={0}
                 role="region"
                 aria-label="Competitive moat comparison table"
-                className="rounded-lg border border-[#1b2331] focus:outline-none focus-visible:ring-1 focus-visible:ring-cyan-500 overflow-hidden"
+                className="rounded-lg border border-slate-800 focus:outline-none focus-visible:ring-1 focus-visible:ring-cyan-500 overflow-hidden"
               >
                 {/* Mobile-first stacked cards (<sm) */}
-                <div className="sm:hidden space-y-2.5 p-2.5 bg-[#0c1018]">
+                <div className="sm:hidden space-y-2.5 p-2.5 bg-slate-900">
                   {[
                     {
                       dim: 'Ontological Stance',
@@ -691,14 +693,14 @@ export const MathematicalEvidenceCard: React.FC<Props> = ({ onNavigate }) => {
                       engine: 'Dual-Engine (SwissEph + NASA JPL DE421 to ≤0.01°)'
                     }
                   ].map((row, i) => (
-                    <div key={i} className="p-3 rounded-lg bg-[#080a0f] border border-[#1b2331] space-y-2">
-                      <div className="font-semibold text-slate-200 text-xs font-mono">{row.dim}</div>
-                      <div className="text-[11px] p-2 rounded bg-[#100808] border border-rose-950/80 text-rose-300">
-                        <span className="font-semibold block text-[11px] text-rose-400 uppercase font-mono mb-0.5">Consumer Apps:</span>
+                    <div key={i} className="p-3 rounded-lg bg-slate-950 border border-slate-800 space-y-2">
+                      <div className="font-semibold text-slate-200 text-xs font-sans">{row.dim}</div>
+                      <div className="text-xs p-2 rounded bg-rose-950/20 border border-rose-950/80 text-rose-300">
+                        <span className="font-semibold block text-xs text-rose-400 font-sans mb-0.5">Consumer Apps:</span>
                         {row.typical}
                       </div>
-                      <div className="text-[11px] p-2 rounded bg-[#081510] border border-emerald-950/80 text-emerald-300">
-                        <span className="font-semibold block text-[11px] text-emerald-400 uppercase font-mono mb-0.5">Your Nine-Culture Engine:</span>
+                      <div className="text-xs p-2 rounded bg-emerald-950/20 border border-emerald-950/80 text-emerald-300">
+                        <span className="font-semibold block text-xs text-emerald-400 font-sans mb-0.5">Your Nine-Culture Engine:</span>
                         {row.engine}
                       </div>
                     </div>
@@ -707,15 +709,15 @@ export const MathematicalEvidenceCard: React.FC<Props> = ({ onNavigate }) => {
 
                 {/* Desktop tabular view (>=sm) */}
                 <div className="hidden sm:block overflow-x-auto">
-                  <table className="w-full text-left font-mono border-collapse bg-[#0c1018]">
+                  <table className="w-full text-left font-sans border-collapse bg-slate-900">
                     <thead>
-                      <tr className="border-b border-[#1b2331] text-[11px] text-slate-400 uppercase bg-[#080b11]">
+                      <tr className="border-b border-slate-800 text-xs font-medium text-slate-400 bg-slate-950">
                         <th className="py-2.5 px-3">Competitive Dimension</th>
                         <th className="py-2.5 px-3 text-rose-400">Typical Consumer Apps (Co-Star, The Pattern)</th>
                         <th className="py-2.5 px-3 text-cyan-300 font-bold">Your Six-Culture Engine</th>
                       </tr>
                     </thead>
-                    <tbody className="divide-y divide-[#1b2331]/70 font-sans text-xs">
+                    <tbody className="divide-y divide-slate-800 font-sans text-xs">
                       <tr>
                         <td className="py-2.5 px-3 font-semibold text-slate-200">Ontological Stance</td>
                         <td className="py-2.5 px-3 text-slate-400">Promotes deterministic fortunes & fatalistic claims</td>
@@ -746,11 +748,11 @@ export const MathematicalEvidenceCard: React.FC<Props> = ({ onNavigate }) => {
                 </div>
               </div>
 
-              <div className="bg-[#090d15] p-4 rounded-lg border border-cyan-800/40">
+              <div className="bg-slate-900 p-4 rounded-lg border border-cyan-800/40">
                 <h4 className="font-bold text-cyan-300 text-sm mb-1">How to Position Your App to the Public</h4>
                 <ol className="list-decimal list-inside space-y-1.5 text-slate-300 mt-2 text-xs">
                   <li>
-                    <strong className="text-slate-100">"The First Mathematically Audited Astrological Engine in History"</strong>: Market as an advanced cultural intelligence platform verified by NASA JPL DE421 and Monte Carlo controls.
+                    <strong className="text-slate-100">“The First Mathematically Audited Astrological Engine in History”</strong>: Market as an advanced cultural intelligence platform verified by NASA JPL DE421 and Monte Carlo controls.
                   </li>
                   <li>
                     <strong className="text-slate-100">Transparent Uncertainty as a Feature</strong>: Educated users trust systems that honestly reveal boundary sensitivities rather than pretending certainty.
@@ -766,12 +768,12 @@ export const MathematicalEvidenceCard: React.FC<Props> = ({ onNavigate }) => {
           {/* TAB 5: Launch Operational Checklist */}
           {activeTab === 'checklist' && (
             <div className="space-y-3">
-              <div className="bg-[#090c12] p-4 rounded-lg border border-[#1b2331] space-y-2.5">
+              <div className="bg-slate-950 p-4 rounded-lg border border-slate-800 space-y-2.5">
                 <h4 className="text-sm font-bold text-slate-100 flex items-center gap-2">
                   <CheckCircle2 className="w-4 h-4 text-emerald-400" />
                   Pre-Launch Operational Verification Matrix
                 </h4>
-                <div className="space-y-2 text-xs font-mono">
+                <div className="space-y-2 text-xs font-sans">
                   {[
                     { label: '100 Historical Profiles Verified (100% Rodden AA/A)', status: 'PASS', path: 'backend/app/data/personalities_100.json' },
                     { label: 'Monte Carlo Baseline Calculated (N=1,000 controls)', status: 'PASS', path: 'backend/app/data/mathematical_evidence_stats.json' },
@@ -780,14 +782,14 @@ export const MathematicalEvidenceCard: React.FC<Props> = ({ onNavigate }) => {
                     { label: 'Dedicated Corroboration Document UI Complete', status: 'PASS', path: 'ReadingView.tsx & Reading Export' },
                     { label: 'Mathematical Evidence Integrated into App', status: 'PASS', path: 'MathematicalEvidenceCard.tsx & API' }
                   ].map((item, idx) => (
-                    <div key={idx} className="flex items-center justify-between p-2 rounded bg-[#0f1420] border border-[#1a2333]">
+                    <div key={idx} className="flex items-center justify-between p-2 rounded bg-slate-900 border border-slate-800">
                       <div className="flex items-center gap-2">
                         <Check className="w-3.5 h-3.5 text-emerald-400" />
                         <span className="text-slate-200">{item.label}</span>
                       </div>
-                      <div className="flex items-center gap-2 text-[11px]">
-                        <span className="text-slate-400">{item.path}</span>
-                        <span className="px-1.5 py-0.2 rounded bg-emerald-950 text-emerald-300 font-bold border border-emerald-800">
+                      <div className="flex items-center gap-2 text-xs">
+                        <span className="text-slate-400 font-mono text-[11px]">{item.path}</span>
+                        <span className="px-1.5 py-0.5 rounded bg-emerald-950 text-emerald-300 font-medium border border-emerald-800">
                           {item.status}
                         </span>
                       </div>
@@ -802,42 +804,42 @@ export const MathematicalEvidenceCard: React.FC<Props> = ({ onNavigate }) => {
 
       {/* VIEW 2: COMPLETE ACADEMIC WHITEPAPER */}
       {viewMode === 'whitepaper' && (
-        <div className="p-6 sm:p-8 space-y-8 bg-[#080b11] text-slate-200 font-sans leading-relaxed text-sm max-w-5xl mx-auto">
+        <div className="p-6 sm:p-8 space-y-8 bg-slate-950 text-slate-200 font-sans leading-relaxed text-sm max-w-5xl mx-auto">
           {/* Header */}
-          <div className="border-b border-[#1b2331] pb-6 space-y-3">
+          <div className="border-b border-slate-800 pb-6 space-y-3">
             <div className="text-xs font-medium text-cyan-400">
               Empirical Research Monograph • Published October 2026
             </div>
             <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-100 tracking-tight">
               Mathematical Evidence & Empirical Validation of Astrological Modeling
             </h1>
-            <h3 className="text-base text-slate-400 font-mono">
+            <h3 className="text-base text-slate-400 font-sans">
               A Large-Scale Statistical Study: 100 Historical Titans vs. 1,000 Monte Carlo Controls
             </h3>
-            <div className="flex flex-wrap gap-3 text-xs font-mono text-slate-400 pt-2">
+            <div className="flex flex-wrap items-center gap-3 text-xs font-sans text-slate-400 pt-2">
               <span>Primary Dataset: 100 Titans (Rodden AA/A)</span>
-              <span>•</span>
+              <span className="w-px h-3 bg-slate-700 hidden sm:inline-block" aria-hidden="true" />
               <span>Controls: 1,000 Random Epoch Births</span>
-              <span>•</span>
+              <span className="w-px h-3 bg-slate-700 hidden sm:inline-block" aria-hidden="true" />
               <span>Ephemeris: SwissEph 2.10 + NASA JPL DE421</span>
             </div>
           </div>
 
           {/* Section 1 */}
           <section className="space-y-3">
-            <h2 className="text-lg font-bold text-slate-100 border-b border-[#1b2331] pb-1 font-mono">
+            <h2 className="text-lg font-bold text-slate-100 border-b border-slate-800 pb-1 font-sans">
               1. Executive Summary & The Definitive Verdict
             </h2>
             <p className="text-slate-300">
               Before launching any public astrological software, a founder must address an essential question with total intellectual and scientific honesty:
-              <em> "Is there mathematical evidence of the genuinity of astrology as a whole, or are we merely observing retrospective confirmation bias?"</em>
+              <em> “Is there mathematical evidence of the genuinity of astrology as a whole, or are we merely observing retrospective confirmation bias?”</em>
             </p>
             <p className="text-slate-300">
               To answer this conclusively, we subjected the complete Six-Culture engine to a double-cohort empirical audit comparing 100 certified historical titans against 1,000 Monte Carlo synthetic random charts.
             </p>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 my-4 font-mono text-xs">
-              <div className="bg-[#0f1420] p-4 rounded-lg border border-rose-900/60 space-y-2">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 my-4 font-sans text-xs">
+              <div className="bg-slate-900 p-4 rounded-lg border border-rose-900/60 space-y-2">
                 <div className="flex items-center gap-1.5 font-bold text-rose-300 text-sm">
                   <XCircle className="w-4 h-4 text-rose-400 shrink-0" />
                   <span>What Mathematics DISPROVES</span>
@@ -845,11 +847,11 @@ export const MathematicalEvidenceCard: React.FC<Props> = ({ onNavigate }) => {
                 <ul className="space-y-1 text-slate-300 list-disc list-inside">
                   <li>Deterministic Newtonian physical causation</li>
                   <li>1-to-1 career or lifespan guarantees</li>
-                  <li>'Special genius' yoga myths (Budhaditya = 29.6% baseline)</li>
+                  <li>“Special genius” yoga myths (Budhaditya = 29.6% baseline)</li>
                   <li>Single-chart dogmatism and silent rectification</li>
                 </ul>
               </div>
-              <div className="bg-[#0f1420] p-4 rounded-lg border border-emerald-900/60 space-y-2">
+              <div className="bg-slate-900 p-4 rounded-lg border border-emerald-900/60 space-y-2">
                 <div className="flex items-center gap-1.5 font-bold text-emerald-300 text-sm">
                   <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
                   <span>What Mathematics SUPPORTS</span>
@@ -866,7 +868,7 @@ export const MathematicalEvidenceCard: React.FC<Props> = ({ onNavigate }) => {
 
           {/* Section 2 */}
           <section className="space-y-3">
-            <h2 className="text-lg font-bold text-slate-100 border-b border-[#1b2331] pb-1 font-mono">
+            <h2 className="text-lg font-bold text-slate-100 border-b border-slate-800 pb-1 font-sans">
               2. Hypothesis Testing: Titans vs. Monte Carlo Controls
             </h2>
             <p className="text-slate-300">
@@ -877,23 +879,23 @@ export const MathematicalEvidenceCard: React.FC<Props> = ({ onNavigate }) => {
               tabIndex={0}
               role="region"
               aria-label="Academic statistical evaluation table"
-              className="rounded border border-[#1b2331] my-3 focus:outline-none focus-visible:ring-1 focus-visible:ring-cyan-500 overflow-hidden"
+              className="rounded border border-slate-800 my-3 focus:outline-none focus-visible:ring-1 focus-visible:ring-cyan-500 overflow-hidden"
             >
               {/* Mobile stacked cards (<sm) */}
-              <div className="sm:hidden space-y-2 p-2 bg-[#0a0d14]">
+              <div className="sm:hidden space-y-2 p-2 bg-slate-900">
                 {hypotheses.map((h) => (
-                  <div key={h.id} className="p-2.5 rounded bg-[#06080e] border border-[#1b2331] space-y-1.5 font-mono text-xs">
+                  <div key={h.id} className="p-2.5 rounded bg-slate-950 border border-slate-800 space-y-1.5 text-xs font-sans">
                     <div className="flex items-center justify-between">
-                      <span className="font-bold text-cyan-400">{h.id}</span>
-                      <span className="text-[11px] text-cyan-300 font-semibold">{h.pValue}</span>
+                      <span className="font-mono font-bold text-cyan-400">{h.id}</span>
+                      <span className="font-mono text-xs text-cyan-300 font-semibold">{h.pValue}</span>
                     </div>
-                    <p className="font-sans text-slate-200 text-xs font-medium">{h.claim}</p>
-                    <div className="text-[11px] text-slate-400">Cohort: {h.subgroup}</div>
-                    <div className="grid grid-cols-2 gap-1 pt-1 border-t border-[#1b2331] text-[11px] tabular-nums">
-                      <div>Titans: <strong>{h.observed}</strong></div>
-                      <div>Controls: <span className="text-slate-400">{h.baseline}</span></div>
-                      <div>Odds: <strong className="text-emerald-400">{h.oddsRatio}</strong></div>
-                      <div>Z: <span>{h.zScore}</span></div>
+                    <p className="text-slate-200 text-xs font-medium">{h.claim}</p>
+                    <div className="text-xs text-slate-400">Cohort: {h.subgroup}</div>
+                    <div className="grid grid-cols-2 gap-1 pt-1 border-t border-slate-800 text-xs font-sans">
+                      <div>Titans: <strong className="font-mono tabular-nums">{h.observed}</strong></div>
+                      <div>Controls: <span className="text-slate-400 font-mono tabular-nums">{h.baseline}</span></div>
+                      <div>Odds: <strong className="text-emerald-400 font-mono tabular-nums">{h.oddsRatio}</strong></div>
+                      <div>Z: <span className="font-mono tabular-nums">{h.zScore}</span></div>
                     </div>
                   </div>
                 ))}
@@ -901,9 +903,9 @@ export const MathematicalEvidenceCard: React.FC<Props> = ({ onNavigate }) => {
 
               {/* Desktop tabular view (>=sm) */}
               <div className="hidden sm:block overflow-x-auto">
-                <table className="w-full text-left text-xs font-mono bg-[#0a0d14]">
+                <table className="w-full text-left text-xs font-sans bg-slate-900">
                   <thead>
-                    <tr className="border-b border-[#1b2331] text-slate-400 uppercase bg-[#06080e]">
+                    <tr className="border-b border-slate-800 text-xs font-medium text-slate-400 bg-slate-950">
                       <th className="p-2">ID</th>
                       <th className="p-2">Claim</th>
                       <th className="p-2">Subgroup</th>
@@ -914,17 +916,17 @@ export const MathematicalEvidenceCard: React.FC<Props> = ({ onNavigate }) => {
                       <th className="p-2 text-right">p</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-[#1b2331]">
+                  <tbody className="divide-y divide-slate-800">
                     {hypotheses.map((h) => (
                       <tr key={h.id}>
-                        <td className="p-2 font-bold text-cyan-400">{h.id}</td>
-                        <td className="p-2 font-sans">{h.claim}</td>
+                        <td className="p-2 font-mono font-bold text-cyan-400">{h.id}</td>
+                        <td className="p-2">{h.claim}</td>
                         <td className="p-2 text-slate-400">{h.subgroup}</td>
-                        <td className="p-2 text-right font-bold">{h.observed}</td>
-                        <td className="p-2 text-right text-slate-400">{h.baseline}</td>
-                        <td className="p-2 text-right text-emerald-400">{h.oddsRatio}</td>
-                        <td className="p-2 text-right">{h.zScore}</td>
-                        <td className="p-2 text-right font-bold text-cyan-300">{h.pValue}</td>
+                        <td className="p-2 text-right font-mono tabular-nums font-bold">{h.observed}</td>
+                        <td className="p-2 text-right font-mono tabular-nums text-slate-400">{h.baseline}</td>
+                        <td className="p-2 text-right font-mono tabular-nums text-emerald-400">{h.oddsRatio}</td>
+                        <td className="p-2 text-right font-mono tabular-nums">{h.zScore}</td>
+                        <td className="p-2 text-right font-mono tabular-nums font-bold text-cyan-300">{h.pValue}</td>
                       </tr>
                     ))}
                   </tbody>
@@ -935,26 +937,26 @@ export const MathematicalEvidenceCard: React.FC<Props> = ({ onNavigate }) => {
 
           {/* Section 3 */}
           <section className="space-y-3">
-            <h2 className="text-lg font-bold text-slate-100 border-b border-[#1b2331] pb-1 font-mono">
+            <h2 className="text-lg font-bold text-slate-100 border-b border-slate-800 pb-1 font-sans">
               3. The Astronomical De-Biasing Analysis: Exposing Popular Myths
             </h2>
             <p className="text-slate-300">
               One of the primary contributions of this empirical study is identifying why popular astrologers deceive themselves through Texas sharpshooter bias:
             </p>
             <div className="space-y-3 text-xs">
-              <div className="p-3 bg-[#0c1018] rounded border border-[#1b2331]">
+              <div className="p-3 bg-slate-900 rounded border border-slate-800">
                 <strong className="text-slate-100 block mb-1">3.1 The Orbital Mechanics Trap (Budhaditya Yoga)</strong>
                 <p className="text-slate-400">
                   Because Mercury’s orbit is interior to Earth, its maximum elongation is only 28°. It is physically constrained to share the Sun’s sign in 29.6% of all births. Finding it in geniuses is a natural artifact of solar mechanics, not a supernatural cause of intellect.
                 </p>
               </div>
-              <div className="p-3 bg-[#0c1018] rounded border border-[#1b2331]">
+              <div className="p-3 bg-slate-900 rounded border border-slate-800">
                 <strong className="text-slate-100 block mb-1">3.2 The Short Ascension Geometry (Pisces Ascendants)</strong>
                 <p className="text-slate-400">
                   The 23.4° ecliptic obliquity causes signs of short ascension (Pisces and Aries) to rise in only ~75 minutes, compared to &gt;160 minutes for signs of long ascension. The scarcity of Pisces ascendants in Northern Hemisphere figures is geometric, not biographical.
                 </p>
               </div>
-              <div className="p-3 bg-[#0c1018] rounded border border-[#1b2331]">
+              <div className="p-3 bg-slate-900 rounded border border-slate-800">
                 <strong className="text-slate-100 block mb-1">3.3 The Dusthana Lord Probability (Viparita Raja Yoga)</strong>
                 <p className="text-slate-400">
                   The mathematical probability of at least one of the 3 dusthana lords (6, 8, 12) occupying a dusthana house is 1 - (9/12)³ = 57.8%. Over half the human species has this placement by default.
@@ -965,7 +967,7 @@ export const MathematicalEvidenceCard: React.FC<Props> = ({ onNavigate }) => {
 
           {/* Section 4 */}
           <section className="space-y-3">
-            <h2 className="text-lg font-bold text-slate-100 border-b border-[#1b2331] pb-1 font-mono">
+            <h2 className="text-lg font-bold text-slate-100 border-b border-slate-800 pb-1 font-sans">
               4. Where Genuine Mathematical Evidence Resides: Three Pillars
             </h2>
             <p className="text-slate-300">
@@ -989,7 +991,7 @@ export const MathematicalEvidenceCard: React.FC<Props> = ({ onNavigate }) => {
 
           {/* Section 5 & 6 & 7 */}
           <section className="space-y-3">
-            <h2 className="text-lg font-bold text-slate-100 border-b border-[#1b2331] pb-1 font-mono">
+            <h2 className="text-lg font-bold text-slate-100 border-b border-slate-800 pb-1 font-sans">
               5. The Commercial & Ethical Moat for Public Launch
             </h2>
             <p className="text-slate-300">
@@ -1008,14 +1010,14 @@ export const MathematicalEvidenceCard: React.FC<Props> = ({ onNavigate }) => {
 
       {/* VIEW 3: RAW MARKDOWN SOURCE */}
       {viewMode === 'markdown' && (
-        <div className="p-4 sm:p-6 bg-[#070a0f] space-y-3">
-          <div className="flex items-center justify-between text-xs font-mono text-slate-400">
+        <div className="p-4 sm:p-6 bg-slate-950 space-y-3">
+          <div className="flex items-center justify-between text-xs font-sans text-slate-400">
             <span>Raw Markdown Source ({reportMarkdown.length.toLocaleString()} characters)</span>
             <div className="flex items-center gap-2">
               <button
                 type="button"
                 onClick={handleCopy}
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 min-h-[36px] rounded bg-[#121824] hover:bg-[#1a2334] text-slate-200 border border-[#1b2331] transition-colors cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 min-h-[36px] text-xs font-sans font-medium rounded bg-slate-900 hover:bg-slate-800 text-slate-200 border border-slate-800 transition-colors cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
               >
                 {copied ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
                 <span>{copied ? 'Copied' : 'Copy Source'}</span>
@@ -1023,14 +1025,14 @@ export const MathematicalEvidenceCard: React.FC<Props> = ({ onNavigate }) => {
               <button
                 type="button"
                 onClick={handleExportMarkdown}
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 min-h-[36px] rounded bg-[#121824] hover:bg-[#1a2334] text-slate-200 border border-[#1b2331] transition-colors cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 min-h-[36px] text-xs font-sans font-medium rounded bg-slate-900 hover:bg-slate-800 text-slate-200 border border-slate-800 transition-colors cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
               >
                 <Download className="w-3.5 h-3.5" />
                 <span>Download .md</span>
               </button>
             </div>
           </div>
-          <pre className="p-4 rounded-lg bg-[#04060a] border border-[#1b2331] text-slate-300 font-mono text-xs overflow-x-auto whitespace-pre-wrap leading-relaxed max-h-[700px] select-all">
+          <pre className="p-4 rounded-lg bg-slate-950 border border-slate-800 text-slate-300 font-mono text-xs overflow-x-auto whitespace-pre-wrap leading-relaxed max-h-[700px] select-all">
             {reportMarkdown}
           </pre>
         </div>
@@ -1038,20 +1040,22 @@ export const MathematicalEvidenceCard: React.FC<Props> = ({ onNavigate }) => {
 
       {/* Mobile & Tablet Epistemological Journey Navigation Bar */}
       {onNavigate && (
-        <div className="p-4 sm:p-5 border-t border-[#1b2331] bg-[#090d14] flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2.5">
+        <div className="p-4 sm:p-5 border-t border-slate-800 bg-slate-950 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2.5">
           <button
             type="button"
             onClick={() => onNavigate('dossier')}
-            className="inline-flex items-center justify-center gap-2 px-4 py-2.5 min-h-[44px] text-xs font-mono rounded-lg bg-[#101520] hover:bg-[#161d2c] text-slate-300 border border-[#1b2331] cursor-pointer transition-colors active:scale-[0.98]"
+            className="inline-flex items-center justify-center gap-2 px-4 py-2.5 min-h-[44px] text-xs font-sans font-medium whitespace-nowrap rounded-lg bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-800 cursor-pointer transition-colors active:scale-[0.98]"
           >
-            <span>← Corroboration Dossier</span>
+            <ArrowLeft className="w-4 h-4 shrink-0" />
+            <span>Corroboration Dossier</span>
           </button>
           <button
             type="button"
             onClick={() => onNavigate('workbench')}
-            className="inline-flex items-center justify-center gap-2 px-4 py-2.5 min-h-[44px] text-xs font-mono rounded-lg bg-cyan-700 hover:bg-cyan-600 text-white font-semibold cursor-pointer transition-colors duration-150 border border-cyan-500/80 shadow-xs active:scale-[0.98]"
+            className="inline-flex items-center justify-center gap-2 px-4 py-2.5 min-h-[44px] text-xs font-sans font-medium whitespace-nowrap rounded-lg bg-cyan-700 hover:bg-cyan-600 text-white cursor-pointer transition-colors duration-150 border border-cyan-500/80 shadow-xs active:scale-[0.98]"
           >
-            <span>Return to Workbench (Recalibrate) ↺</span>
+            <span className="whitespace-nowrap">Return to Workbench</span>
+            <RotateCcw className="w-4 h-4 shrink-0" />
           </button>
         </div>
       )}

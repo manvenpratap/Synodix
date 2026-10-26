@@ -19,7 +19,10 @@ import {
   MapPin,
   Cpu,
   Briefcase,
-  Heart
+  Heart,
+  ArrowLeft,
+  ArrowRight,
+  ChevronDown
 } from 'lucide-react';
 
 interface Props {
@@ -92,7 +95,7 @@ export const ReadingView: React.FC<Props> = ({ data, subjectName, onNavigate }) 
       <div className="reticle-corner-br" />
 
       {/* ==================== 1. DOCUMENT TOP BANNER & ACTION BAR ==================== */}
-      <div className="bg-[#0d121c] border-b border-[#1b2331] p-5 sm:p-6">
+      <div className="bg-slate-900 border-b border-slate-800 p-5 sm:p-6">
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
           <div>
             <div className="flex flex-wrap items-center gap-2 mb-1.5">
@@ -100,12 +103,12 @@ export const ReadingView: React.FC<Props> = ({ data, subjectName, onNavigate }) 
                 <ShieldCheck className="w-3 h-3 text-emerald-400" />
                 Audited Epistemological Document
               </span>
-              <span className="text-slate-400 hidden sm:inline">•</span>
-              <span className="text-[11px] text-cyan-400 font-mono">
+              <span className="w-px h-3 bg-slate-700 hidden sm:inline-block" aria-hidden="true" />
+              <span className="text-xs text-cyan-400 font-sans">
                 Standard v2.0
               </span>
-              <span className="text-slate-400 hidden sm:inline">•</span>
-              <span className="text-[11px] text-slate-400 font-mono">
+              <span className="w-px h-3 bg-slate-700 hidden sm:inline-block" aria-hidden="true" />
+              <span className="text-xs text-slate-400 font-sans">
                 Synodix Corroboration Engine
               </span>
             </div>
@@ -122,7 +125,7 @@ export const ReadingView: React.FC<Props> = ({ data, subjectName, onNavigate }) 
           {/* Action Toolbar */}
           <div className="flex flex-wrap items-center gap-2">
             {/* View Mode Toggle */}
-            <div className="bg-[#121722] p-0.5 rounded-lg border border-[#1b2331] flex items-center">
+            <div className="bg-slate-950 p-0.5 rounded-lg border border-slate-800 flex items-center">
               <button
                 type="button"
                 onClick={() => setViewMode('interactive')}
@@ -153,10 +156,10 @@ export const ReadingView: React.FC<Props> = ({ data, subjectName, onNavigate }) 
             <button
               type="button"
               onClick={handleCopy}
-              className={`px-3 py-2 min-h-[44px] sm:min-h-[38px] text-xs font-mono rounded bg-[#121721] hover:bg-[#18202c] border transition-colors duration-150 cursor-pointer flex items-center gap-1.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 active:scale-95 ${
+              className={`px-3 py-2 min-h-[44px] sm:min-h-[38px] text-xs font-sans rounded bg-slate-800 hover:bg-slate-700 border transition-colors duration-150 cursor-pointer flex items-center gap-1.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 active:scale-95 ${
                 copied
                   ? 'border-emerald-500 text-emerald-300 bg-emerald-950/40 shadow-xs'
-                  : 'text-slate-300 border-[#1b2331]'
+                  : 'text-slate-300 border-slate-700'
               }`}
               data-tooltip="Copy Full Document Markdown"
               aria-label="Copy Full Document Markdown"
@@ -167,7 +170,7 @@ export const ReadingView: React.FC<Props> = ({ data, subjectName, onNavigate }) 
             <button
               type="button"
               onClick={handleDownloadMarkdown}
-              className="px-3 py-2 min-h-[44px] sm:min-h-[38px] text-xs font-mono rounded bg-[#121721] hover:bg-[#18202c] text-slate-300 border border-[#1b2331] transition-colors cursor-pointer flex items-center gap-1.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
+              className="px-3 py-2 min-h-[44px] sm:min-h-[38px] text-xs font-sans rounded bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 transition-colors cursor-pointer flex items-center gap-1.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
               data-tooltip="Download Markdown Document (.md)"
               aria-label="Download Markdown Document (.md)"
             >
@@ -177,7 +180,7 @@ export const ReadingView: React.FC<Props> = ({ data, subjectName, onNavigate }) 
             <button
               type="button"
               onClick={handleDownloadJSON}
-              className="px-3 py-2 min-h-[44px] sm:min-h-[38px] text-xs font-mono rounded bg-[#121721] hover:bg-[#18202c] text-slate-300 border border-[#1b2331] transition-colors cursor-pointer flex items-center gap-1.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
+              className="px-3 py-2 min-h-[44px] sm:min-h-[38px] text-xs font-sans rounded bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 transition-colors cursor-pointer flex items-center gap-1.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
               data-tooltip="Download Raw Master Dataset (.json)"
               aria-label="Download Raw Master Dataset (.json)"
             >
@@ -187,7 +190,7 @@ export const ReadingView: React.FC<Props> = ({ data, subjectName, onNavigate }) 
             <button
               type="button"
               onClick={handlePrint}
-              className="px-3 py-2 min-h-[44px] sm:min-h-[38px] text-xs font-mono rounded bg-[#121721] hover:bg-[#18202c] text-slate-300 border border-[#1b2331] transition-colors cursor-pointer flex items-center gap-1.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
+              className="px-3 py-2 min-h-[44px] sm:min-h-[38px] text-xs font-sans rounded bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 transition-colors cursor-pointer flex items-center gap-1.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
               data-tooltip="Print or Save PDF"
               aria-label="Print or Save PDF"
             >
@@ -198,9 +201,9 @@ export const ReadingView: React.FC<Props> = ({ data, subjectName, onNavigate }) 
         </div>
 
         {/* Document Metadata Badges */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2 mt-4 pt-4 border-t border-[#1b2331]/80 text-[11px] font-mono">
-          <div className="bg-[#080b11] px-2.5 py-1.5 rounded border border-[#1b2331] min-w-0">
-            <span className="text-slate-500 text-[9px] uppercase flex items-center gap-1">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2 mt-4 pt-4 border-t border-slate-800 text-[11px] font-sans">
+          <div className="bg-slate-950 px-2.5 py-1.5 rounded border border-slate-800 min-w-0">
+            <span className="text-slate-400 text-[10px] font-medium flex items-center gap-1">
               <User className="w-2.5 h-2.5 text-cyan-400 shrink-0" />
               Subject
             </span>
@@ -208,8 +211,8 @@ export const ReadingView: React.FC<Props> = ({ data, subjectName, onNavigate }) 
               {inferences.subject_name}
             </span>
           </div>
-          <div className="bg-[#080b11] px-2.5 py-1.5 rounded border border-[#1b2331] min-w-0">
-            <span className="text-slate-500 text-[9px] uppercase flex items-center gap-1">
+          <div className="bg-slate-950 px-2.5 py-1.5 rounded border border-slate-800 min-w-0">
+            <span className="text-slate-400 text-[10px] font-medium flex items-center gap-1">
               <MapPin className="w-2.5 h-2.5 text-amber-400 shrink-0" />
               Birthplace
             </span>
@@ -217,28 +220,28 @@ export const ReadingView: React.FC<Props> = ({ data, subjectName, onNavigate }) 
               {inferences.birthplace}
             </span>
           </div>
-          <div className="bg-[#080b11] px-2.5 py-1.5 rounded border border-[#1b2331] min-w-0">
-            <span className="text-slate-500 block text-[9px] uppercase">Civil Instant</span>
+          <div className="bg-slate-950 px-2.5 py-1.5 rounded border border-slate-800 min-w-0">
+            <span className="text-slate-400 block text-[10px] font-medium">Civil Instant</span>
             <span className="font-semibold text-slate-200 truncate block mt-0.5">
               {audit.civil_date} {audit.civil_time}
             </span>
           </div>
-          <div className="bg-[#080b11] px-2.5 py-1.5 rounded border border-[#1b2331] min-w-0">
-            <span className="text-slate-500 block text-[9px] uppercase">Core Archetype</span>
+          <div className="bg-slate-950 px-2.5 py-1.5 rounded border border-slate-800 min-w-0">
+            <span className="text-slate-400 block text-[10px] font-medium">Core Archetype</span>
             <span className="font-semibold text-amber-300 truncate block mt-0.5" title={inferences.core_archetype.archetype_title}>
               {inferences.core_archetype.archetype_title}
             </span>
           </div>
-          <div className="bg-[#080b11] px-2.5 py-1.5 rounded border border-[#1b2331] min-w-0">
-            <span className="text-slate-500 block text-[9px] uppercase">Verification Status</span>
+          <div className="bg-slate-950 px-2.5 py-1.5 rounded border border-slate-800 min-w-0">
+            <span className="text-slate-400 block text-[10px] font-medium">Verification Status</span>
             <span className="font-semibold text-emerald-400 flex items-center gap-1 truncate mt-0.5">
               <CheckCircle2 className="w-3 h-3 text-emerald-400 shrink-0" />
               {verification.overall_verification_status} ({verification.overall_confidence})
             </span>
           </div>
-          <div className="bg-[#080b11] px-2.5 py-1.5 rounded border border-[#1b2331] min-w-0">
-            <span className="text-slate-500 block text-[9px] uppercase">Multi-System Divergence</span>
-            <span className={`font-bold truncate block mt-0.5 ${synthesis.divergence_metrics.divergence_rate_percent > 30 ? 'text-amber-400' : 'text-emerald-400'}`}>
+          <div className="bg-slate-950 px-2.5 py-1.5 rounded border border-slate-800 min-w-0">
+            <span className="text-slate-400 block text-[10px] font-medium">Multi-System Divergence</span>
+            <span className={`font-bold font-mono truncate block mt-0.5 ${synthesis.divergence_metrics.divergence_rate_percent > 30 ? 'text-amber-400' : 'text-emerald-400'}`}>
               {synthesis.divergence_metrics.divergence_rate_percent}% ({synthesis.divergence_metrics.divergent_domains}/9 Divergent)
             </span>
           </div>
@@ -249,7 +252,7 @@ export const ReadingView: React.FC<Props> = ({ data, subjectName, onNavigate }) 
       {viewMode === 'interactive' ? (
         <div className="p-5 sm:p-6 space-y-6">
           {/* Legal / Scientific Caution Banner */}
-          <div className="p-3.5 rounded-lg bg-[#140e0a] border border-amber-900/60 text-xs font-mono text-amber-200/90 flex items-start gap-2.5">
+          <div className="p-3.5 rounded-lg bg-amber-950/40 border border-amber-900/60 text-xs font-sans text-amber-200/90 flex items-start gap-2.5">
             <AlertTriangle className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
             <div>
               <strong className="text-amber-300">Epistemological & Scientific Integrity Standard: </strong>
@@ -259,70 +262,70 @@ export const ReadingView: React.FC<Props> = ({ data, subjectName, onNavigate }) 
           </div>
 
           {/* Section 1: Executive Input & Astronomical Dossier */}
-          <section className="bg-[#0d1118] border border-[#1b2331] rounded-lg p-4 space-y-3">
-            <div className="flex items-center justify-between border-b border-[#1b2331] pb-2.5">
+          <section className="bg-slate-900 border border-slate-800 rounded-lg p-4 space-y-3">
+            <div className="flex items-center justify-between border-b border-slate-800 pb-2.5">
               <div className="flex items-center gap-2">
                 <span className="w-2 h-2 rounded-full bg-cyan-400"></span>
-                <h3 className="text-sm font-semibold text-slate-100">
+                <h3 className="text-sm font-semibold text-slate-100 font-sans">
                   1. Astronomical & Geodetic Input Dossier
                 </h3>
               </div>
-              <span className="text-[11px] font-mono text-slate-500">
+              <span className="text-xs font-sans text-slate-400">
                 Zero Silent Rectification Standard
               </span>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs font-mono">
-              <div className="bg-[#090c12] p-3 rounded border border-[#1b2331]">
-                <span className="text-slate-500 text-[11px] block uppercase mb-1">Subject & Civil Coordinates</span>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs font-sans">
+              <div className="bg-slate-950 p-3 rounded border border-slate-800">
+                <span className="text-slate-400 text-xs font-medium block mb-1">Subject & Civil Coordinates</span>
                 <div className="space-y-1 text-slate-300">
-                  <div>Subject: <strong className="text-cyan-300">{inferences.subject_name}</strong></div>
-                  <div>Birthplace: <strong className="text-slate-100">{inferences.birthplace}</strong></div>
-                  <div>Date: <strong className="text-slate-100">{audit.civil_date}</strong> ({audit.weekday})</div>
-                  <div>Civil Time: <strong className="text-slate-100">{audit.civil_time}</strong> (UTC {audit.utc_offset_hours >= 0 ? `+${audit.utc_offset_hours}` : audit.utc_offset_hours}h)</div>
-                  <div>Coordinates: <span className="text-slate-200">{audit.latitude}°, {audit.longitude}°</span></div>
-                  <div>Timezone: <span className="text-cyan-400">{audit.timezone_name}</span></div>
+                  <div>Subject: <strong className="text-cyan-300 font-sans">{inferences.subject_name}</strong></div>
+                  <div>Birthplace: <strong className="text-slate-100 font-sans">{inferences.birthplace}</strong></div>
+                  <div>Date: <strong className="text-slate-100 font-mono">{audit.civil_date}</strong> ({audit.weekday})</div>
+                  <div>Civil Time: <strong className="text-slate-100 font-mono">{audit.civil_time}</strong> (UTC <span className="font-mono">{audit.utc_offset_hours >= 0 ? `+${audit.utc_offset_hours}` : audit.utc_offset_hours}</span>h)</div>
+                  <div>Coordinates: <span className="text-slate-200 font-mono">{audit.latitude}°, {audit.longitude}°</span></div>
+                  <div>Timezone: <span className="text-cyan-400 font-mono">{audit.timezone_name}</span></div>
                 </div>
               </div>
 
-              <div className="bg-[#090c12] p-3 rounded border border-[#1b2331]">
+              <div className="bg-slate-950 p-3 rounded border border-slate-800">
                 <div className="flex items-center justify-between mb-1">
-                  <span className="text-slate-500 text-[11px] uppercase">True Astronomical Solar Times</span>
+                  <span className="text-slate-400 text-xs font-medium">True Astronomical Solar Times</span>
                   <ExplainerTrigger id="time_normalization_eot" size="xs" variant="icon" />
                 </div>
                 <div className="space-y-1 text-slate-300">
-                  <div>Local Mean Solar Time (LMST): <span className="text-slate-100">{audit.lmst}</span></div>
-                  <div>Local Apparent Solar Time (LAST): <span className="text-slate-100">{audit.last}</span></div>
-                  <div>Equation of Time: <span className="text-slate-100">{audit.equation_of_time_minutes >= 0 ? `+${audit.equation_of_time_minutes.toFixed(2)}` : audit.equation_of_time_minutes.toFixed(2)} mins</span></div>
-                  <div>Sunrise / Sunset: <span className="text-slate-100">{audit.sunrise} / {audit.sunset}</span></div>
+                  <div>Local Mean Solar Time (LMST): <span className="text-slate-100 font-mono">{audit.lmst}</span></div>
+                  <div>Local Apparent Solar Time (LAST): <span className="text-slate-100 font-mono">{audit.last}</span></div>
+                  <div>Equation of Time: <span className="text-slate-100 font-mono">{audit.equation_of_time_minutes >= 0 ? `+${audit.equation_of_time_minutes.toFixed(2)}` : audit.equation_of_time_minutes.toFixed(2)}</span> mins</div>
+                  <div>Sunrise / Sunset: <span className="text-slate-100 font-mono">{audit.sunrise} / {audit.sunset}</span></div>
                 </div>
               </div>
 
-              <div className="bg-[#090c12] p-3 rounded border border-[#1b2331]">
+              <div className="bg-slate-950 p-3 rounded border border-slate-800">
                 <div className="flex items-center justify-between mb-1">
-                  <span className="text-slate-500 text-[11px] uppercase">Boundary Proximity & Sensitivity</span>
+                  <span className="text-slate-400 text-xs font-medium">Boundary Proximity & Sensitivity</span>
                   <ExplainerTrigger id="cusp_proximity_audit" size="xs" variant="icon" />
                 </div>
                 <div className="space-y-1 text-slate-300">
                   <div>
-                    Ascendant to Sign Cusp: <strong className="text-slate-100">{data.astronomical_base.boundary_distances.tropical_asc_to_cusp_deg.toFixed(2)}°</strong>
+                    Ascendant to Sign Cusp: <strong className="text-slate-100 font-mono">{data.astronomical_base.boundary_distances.tropical_asc_to_cusp_deg.toFixed(2)}°</strong>
                   </div>
                   <div>
                     Boundary Sensitivity: {data.astronomical_base.boundary_distances.is_asc_boundary_sensitive ? (
-                      <span className="text-amber-400 font-bold inline-flex items-center gap-1">
-                        <AlertTriangle className="w-3.5 h-3.5" /> SENSITIVE (&lt;1.5°)
+                      <span className="text-amber-400 font-medium inline-flex items-center gap-1 font-sans">
+                        <AlertTriangle className="w-3.5 h-3.5" /> Sensitive (&lt;1.5°)
                       </span>
                     ) : (
-                      <span className="text-emerald-400 font-bold inline-flex items-center gap-1">
-                        <CheckCircle2 className="w-3.5 h-3.5" /> STABLE (&gt;1.5°)
+                      <span className="text-emerald-400 font-medium inline-flex items-center gap-1 font-sans">
+                        <CheckCircle2 className="w-3.5 h-3.5" /> Stable (&gt;1.5°)
                       </span>
                     )}
                   </div>
                   <div>
-                    BaZi 2-Hour Branch Distance: <span className="text-slate-100">{data.birth_input_audit.boundary_audit.bazi_two_hour_boundary_distance_mins} mins</span>
+                    BaZi 2-Hour Branch Distance: <span className="text-slate-100 font-mono">{data.birth_input_audit.boundary_audit.bazi_two_hour_boundary_distance_mins}</span> mins
                   </div>
                   <div>
-                    Julian Day (UT): <span className="text-cyan-300">{audit.jd_ut.toFixed(4)}</span>
+                    Julian Day (UT): <span className="text-cyan-300 font-mono">{audit.jd_ut.toFixed(4)}</span>
                   </div>
                 </div>
               </div>
@@ -330,38 +333,38 @@ export const ReadingView: React.FC<Props> = ({ data, subjectName, onNavigate }) 
           </section>
 
           {/* Section 2: Synthesized Astrological Inferences & Personality Profile */}
-          <section className="bg-[#0d1118] border border-[#1b2331] rounded-lg p-4 sm:p-5 space-y-4">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-[#1b2331] pb-3 gap-2">
+          <section className="bg-slate-900 border border-slate-800 rounded-lg p-4 sm:p-5 space-y-4">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-slate-800 pb-3 gap-2">
               <div className="flex flex-wrap items-center gap-2">
                 <span className="w-2 h-2 rounded-full bg-cyan-400"></span>
-                <h3 className="text-sm font-semibold text-slate-100">
+                <h3 className="text-sm font-semibold text-slate-100 font-sans">
                   2. Synthesized Astrological Inferences & Personality Profile
                 </h3>
-                <span className="px-2 py-0.5 rounded text-[11px] font-mono bg-cyan-950 text-cyan-300 border border-cyan-800 font-semibold uppercase">
+                <span className="px-2 py-0.5 rounded text-xs font-sans bg-cyan-950 text-cyan-300 border border-cyan-800 font-medium">
                   9-System Deductive Profile
                 </span>
               </div>
-              <span className="text-[11px] font-mono text-slate-400">
+              <span className="text-xs font-sans text-slate-400">
                 Archetype: <strong className="text-amber-300">{inferences.core_archetype.archetype_title}</strong>
               </span>
             </div>
 
             {/* Archetype Hero Spotlight */}
-            <div className="bg-gradient-to-r from-[#0d1624] via-[#09101b] to-[#080d15] p-4 sm:p-5 rounded-lg border border-cyan-900/50 relative overflow-hidden">
+            <div className="bg-gradient-to-r from-slate-900 via-slate-950 to-slate-900 p-4 sm:p-5 rounded-lg border border-cyan-900/50 relative overflow-hidden">
               <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 pb-3 border-b border-cyan-900/40">
                 <div>
-                  <span className="text-[11px] font-mono text-cyan-400 uppercase tracking-widest block mb-0.5">
+                  <span className="text-xs font-sans text-cyan-400 font-medium block mb-0.5">
                     Primary Civilizational Archetype
                   </span>
                   <h4 className="text-base sm:text-lg font-bold text-slate-100 tracking-wide font-sans">
                     {inferences.core_archetype.archetype_title}
                   </h4>
                 </div>
-                <div className="flex items-center gap-2 self-start md:self-auto shrink-0 font-mono text-xs">
-                  <span className="px-2.5 py-1 rounded bg-[#0b121d] text-cyan-300 border border-cyan-800/80 text-[11px]">
+                <div className="flex items-center gap-2 self-start md:self-auto shrink-0 font-sans text-xs">
+                  <span className="px-2.5 py-1 rounded bg-slate-950 text-cyan-300 border border-cyan-800/80 text-xs">
                     Subject: <strong className="text-white">{inferences.subject_name}</strong>
                   </span>
-                  <span className="px-2.5 py-1 rounded bg-[#0b121d] text-slate-300 border border-[#1b2331] text-[11px]">
+                  <span className="px-2.5 py-1 rounded bg-slate-950 text-slate-300 border border-slate-800 text-xs">
                     Birthplace: <strong className="text-slate-100">{inferences.birthplace}</strong>
                   </span>
                 </div>
@@ -379,16 +382,16 @@ export const ReadingView: React.FC<Props> = ({ data, subjectName, onNavigate }) 
 
             {/* Five Civilizational Foundations */}
             <div className="space-y-2">
-              <span className="text-[11px] font-mono text-slate-400 uppercase tracking-wider block">
+              <span className="text-xs font-sans font-medium text-slate-400 block">
                 Foundational Planetary Anchors Across Traditions
               </span>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-2.5 text-xs font-mono">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-2.5 text-xs font-sans">
                 {/* Vedic */}
-                <div className="bg-[#090d15] p-3 rounded-lg border border-[#1b2331] space-y-1.5 flex flex-col justify-between">
+                <div className="bg-slate-950 p-3 rounded-lg border border-slate-800 space-y-1.5 flex flex-col justify-between">
                   <div>
                     <div className="flex items-center justify-between mb-1">
-                      <span className="text-[11px] uppercase font-bold text-amber-400">Vedic Jyotisha</span>
-                      <span className="text-[11px] px-1.5 py-0.5 rounded bg-amber-950/60 text-amber-300 border border-amber-800/40">D1 / D9</span>
+                      <span className="text-xs font-semibold text-amber-400">Vedic Jyotisha</span>
+                      <span className="text-xs font-mono px-1.5 py-0.5 rounded bg-amber-950/60 text-amber-300 border border-amber-800/40">D1 / D9</span>
                     </div>
                     <p className="text-xs text-slate-300 font-sans leading-relaxed">
                       {inferences.core_archetype.civilizational_pillars.vedic_core}
@@ -397,11 +400,11 @@ export const ReadingView: React.FC<Props> = ({ data, subjectName, onNavigate }) 
                 </div>
 
                 {/* Western */}
-                <div className="bg-[#090d15] p-3 rounded-lg border border-[#1b2331] space-y-1.5 flex flex-col justify-between">
+                <div className="bg-slate-950 p-3 rounded-lg border border-slate-800 space-y-1.5 flex flex-col justify-between">
                   <div>
                     <div className="flex items-center justify-between mb-1">
-                      <span className="text-[11px] uppercase font-bold text-cyan-400">Hellenistic Western</span>
-                      <span className="text-[11px] px-1.5 py-0.5 rounded bg-cyan-950/60 text-cyan-300 border border-cyan-800/40">Tropical</span>
+                      <span className="text-xs font-semibold text-cyan-400">Hellenistic Western</span>
+                      <span className="text-xs font-sans px-1.5 py-0.5 rounded bg-cyan-950/60 text-cyan-300 border border-cyan-800/40">Tropical</span>
                     </div>
                     <p className="text-xs text-slate-300 font-sans leading-relaxed">
                       {inferences.core_archetype.civilizational_pillars.western_core}
@@ -410,11 +413,11 @@ export const ReadingView: React.FC<Props> = ({ data, subjectName, onNavigate }) 
                 </div>
 
                 {/* BaZi */}
-                <div className="bg-[#090d15] p-3 rounded-lg border border-[#1b2331] space-y-1.5 flex flex-col justify-between">
+                <div className="bg-slate-950 p-3 rounded-lg border border-slate-800 space-y-1.5 flex flex-col justify-between">
                   <div>
                     <div className="flex items-center justify-between mb-1">
-                      <span className="text-[11px] uppercase font-bold text-emerald-400">BaZi Four Pillars</span>
-                      <span className="text-[11px] px-1.5 py-0.5 rounded bg-emerald-950/60 text-emerald-300 border border-emerald-800/40">Wu Xing</span>
+                      <span className="text-xs font-semibold text-emerald-400">BaZi Four Pillars</span>
+                      <span className="text-xs font-sans px-1.5 py-0.5 rounded bg-emerald-950/60 text-emerald-300 border border-emerald-800/40">Wu Xing</span>
                     </div>
                     <p className="text-xs text-slate-300 font-sans leading-relaxed">
                       {inferences.core_archetype.civilizational_pillars.bazi_core}
@@ -423,11 +426,11 @@ export const ReadingView: React.FC<Props> = ({ data, subjectName, onNavigate }) 
                 </div>
 
                 {/* Zi Wei */}
-                <div className="bg-[#090d15] p-3 rounded-lg border border-[#1b2331] space-y-1.5 flex flex-col justify-between">
+                <div className="bg-slate-950 p-3 rounded-lg border border-slate-800 space-y-1.5 flex flex-col justify-between">
                   <div>
                     <div className="flex items-center justify-between mb-1">
-                      <span className="text-[11px] uppercase font-bold text-purple-400">Zi Wei Dou Shu</span>
-                      <span className="text-[11px] px-1.5 py-0.5 rounded bg-purple-950/60 text-purple-300 border border-purple-800/40">Polar Stars</span>
+                      <span className="text-xs font-semibold text-purple-400">Zi Wei Dou Shu</span>
+                      <span className="text-xs font-sans px-1.5 py-0.5 rounded bg-purple-950/60 text-purple-300 border border-purple-800/40">Polar Stars</span>
                     </div>
                     <p className="text-xs text-slate-300 font-sans leading-relaxed">
                       {inferences.core_archetype.civilizational_pillars.ziwei_core}
@@ -436,11 +439,11 @@ export const ReadingView: React.FC<Props> = ({ data, subjectName, onNavigate }) 
                 </div>
 
                 {/* Persian Almuten */}
-                <div className="bg-[#090d15] p-3 rounded-lg border border-[#1b2331] space-y-1.5 flex flex-col justify-between sm:col-span-2 lg:col-span-1">
+                <div className="bg-slate-950 p-3 rounded-lg border border-slate-800 space-y-1.5 flex flex-col justify-between sm:col-span-2 lg:col-span-1">
                   <div>
                     <div className="flex items-center justify-between mb-1">
-                      <span className="text-[11px] uppercase font-bold text-teal-400">Persian Almuten</span>
-                      <span className="text-[11px] px-1.5 py-0.5 rounded bg-teal-950/60 text-teal-300 border border-teal-800/40">Ibn Ezra</span>
+                      <span className="text-xs font-semibold text-teal-400">Persian Almuten</span>
+                      <span className="text-xs font-sans px-1.5 py-0.5 rounded bg-teal-950/60 text-teal-300 border border-teal-800/40">Ibn Ezra</span>
                     </div>
                     <p className="text-xs text-slate-300 font-sans leading-relaxed">
                       {inferences.core_archetype.civilizational_pillars.persian_almuten}
@@ -453,52 +456,52 @@ export const ReadingView: React.FC<Props> = ({ data, subjectName, onNavigate }) 
             {/* 3-Column Analytical Triad */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-3.5 pt-1">
               {/* Column 1: Cognitive Wiring */}
-              <div className="bg-[#090c12] p-4 rounded-lg border border-[#1b2331] space-y-3 flex flex-col">
-                <div className="flex items-center gap-2 border-b border-[#1b2331] pb-2">
+              <div className="bg-slate-950 p-4 rounded-lg border border-slate-800 space-y-3 flex flex-col">
+                <div className="flex items-center gap-2 border-b border-slate-800 pb-2">
                   <Cpu className="w-4 h-4 text-cyan-400 shrink-0" />
-                  <h4 className="text-xs font-semibold text-slate-100">
+                  <h4 className="text-xs font-semibold text-slate-100 font-sans">
                     Cognitive Architecture
                   </h4>
                 </div>
-                <div className="space-y-2 text-xs text-slate-300 flex-1">
+                <div className="space-y-2 text-xs text-slate-300 flex-1 font-sans">
                   <div>
-                    <span className="text-[11px] font-mono text-slate-400 uppercase block">Mental Style</span>
+                    <span className="text-xs font-medium text-slate-400 block">Mental Style</span>
                     <p className="text-slate-200 mt-0.5">{inferences.cognitive_inferences.mental_style}</p>
                   </div>
                   <div>
-                    <span className="text-[11px] font-mono text-slate-400 uppercase block">Intellectual Strengths</span>
+                    <span className="text-xs font-medium text-slate-400 block">Intellectual Strengths</span>
                     <ul className="list-disc list-inside mt-1 space-y-1 text-slate-300 text-xs">
                       {inferences.cognitive_inferences.intellectual_strengths.map((str, idx) => (
                         <li key={idx} className="leading-snug">{str}</li>
                       ))}
                     </ul>
                   </div>
-                  <div className="pt-1 border-t border-[#1b2331]/80">
-                    <span className="text-[11px] font-mono text-slate-400 uppercase block">Rhetorical Style</span>
+                  <div className="pt-1 border-t border-slate-800">
+                    <span className="text-xs font-medium text-slate-400 block">Rhetorical Style</span>
                     <p className="text-slate-300 text-xs mt-0.5">{inferences.cognitive_inferences.communication_vector}</p>
                   </div>
                 </div>
               </div>
 
               {/* Column 2: Vocation & Executive Ambition */}
-              <div className="bg-[#090c12] p-4 rounded-lg border border-[#1b2331] space-y-3 flex flex-col">
-                <div className="flex items-center gap-2 border-b border-[#1b2331] pb-2">
+              <div className="bg-slate-950 p-4 rounded-lg border border-slate-800 space-y-3 flex flex-col">
+                <div className="flex items-center gap-2 border-b border-slate-800 pb-2">
                   <Briefcase className="w-4 h-4 text-amber-400 shrink-0" />
-                  <h4 className="text-xs font-semibold text-slate-100">
+                  <h4 className="text-xs font-semibold text-slate-100 font-sans">
                     Vocation & Executive Drive
                   </h4>
                 </div>
-                <div className="space-y-2 text-xs text-slate-300 flex-1">
+                <div className="space-y-2 text-xs text-slate-300 flex-1 font-sans">
                   <div>
-                    <span className="text-[11px] font-mono text-slate-400 uppercase block">Career Vector</span>
+                    <span className="text-xs font-medium text-slate-400 block">Career Vector</span>
                     <p className="text-slate-200 mt-0.5">{inferences.vocational_inferences.career_vector}</p>
                   </div>
                   <div>
-                    <span className="text-[11px] font-mono text-slate-400 uppercase block">Leadership Posture</span>
+                    <span className="text-xs font-medium text-slate-400 block">Leadership Posture</span>
                     <p className="text-slate-300 mt-0.5">{inferences.vocational_inferences.leadership_style}</p>
                   </div>
-                  <div className="pt-1 border-t border-[#1b2331]/80">
-                    <span className="text-[11px] font-mono text-slate-400 uppercase block">Primary Ambitions</span>
+                  <div className="pt-1 border-t border-slate-800">
+                    <span className="text-xs font-medium text-slate-400 block">Primary Ambitions</span>
                     <ul className="list-disc list-inside mt-1 space-y-1 text-slate-300 text-xs">
                       {inferences.vocational_inferences.key_drives.map((drv, idx) => (
                         <li key={idx} className="leading-snug">{drv}</li>
@@ -509,24 +512,24 @@ export const ReadingView: React.FC<Props> = ({ data, subjectName, onNavigate }) 
               </div>
 
               {/* Column 3: Relational Dynamics & Karmic Evolution */}
-              <div className="bg-[#090c12] p-4 rounded-lg border border-[#1b2331] space-y-3 flex flex-col">
-                <div className="flex items-center gap-2 border-b border-[#1b2331] pb-2">
+              <div className="bg-slate-950 p-4 rounded-lg border border-slate-800 space-y-3 flex flex-col">
+                <div className="flex items-center gap-2 border-b border-slate-800 pb-2">
                   <Heart className="w-4 h-4 text-rose-400 shrink-0" />
-                  <h4 className="text-xs font-semibold text-slate-100">
+                  <h4 className="text-xs font-semibold text-slate-100 font-sans">
                     Relational & Karmic Blueprint
                   </h4>
                 </div>
-                <div className="space-y-2 text-xs text-slate-300 flex-1">
+                <div className="space-y-2 text-xs text-slate-300 flex-1 font-sans">
                   <div>
-                    <span className="text-[11px] font-mono text-slate-400 uppercase block">Emotional Temperament</span>
+                    <span className="text-xs font-medium text-slate-400 block">Emotional Temperament</span>
                     <p className="text-slate-200 mt-0.5">{inferences.relational_inferences.emotional_temperament}</p>
                   </div>
                   <div>
-                    <span className="text-[11px] font-mono text-slate-400 uppercase block">Relational Dynamics</span>
+                    <span className="text-xs font-medium text-slate-400 block">Relational Dynamics</span>
                     <p className="text-slate-300 mt-0.5">{inferences.relational_inferences.relational_dynamics}</p>
                   </div>
-                  <div className="pt-1 border-t border-[#1b2331]/80">
-                    <span className="text-[11px] font-mono text-slate-400 uppercase block">Growth Edges & Blind Spots</span>
+                  <div className="pt-1 border-t border-slate-800">
+                    <span className="text-xs font-medium text-slate-400 block">Growth Edges & Blind Spots</span>
                     <ul className="list-disc list-inside mt-1 space-y-1 text-amber-300/90 text-xs">
                       {inferences.karmic_inferences.growth_edges.map((edge, idx) => (
                         <li key={idx} className="leading-snug">{edge}</li>
@@ -538,11 +541,11 @@ export const ReadingView: React.FC<Props> = ({ data, subjectName, onNavigate }) 
             </div>
 
             {/* Active Life Chapter & Strategic Timing Banner */}
-            <div className="p-3.5 rounded-lg bg-[#090d15] border border-cyan-900/60 font-mono text-xs flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div className="p-3.5 rounded-lg bg-slate-950 border border-cyan-900/60 font-sans text-xs flex flex-col sm:flex-row sm:items-center justify-between gap-3">
               <div className="space-y-1">
                 <div className="flex items-center gap-2">
                   <Clock className="w-3.5 h-3.5 text-cyan-400" />
-                  <span className="font-bold text-cyan-300 uppercase tracking-wider text-[11px]">
+                  <span className="font-semibold text-cyan-300 text-xs">
                     Current Timing Chapter:
                   </span>
                   <span className="text-slate-200">{inferences.timing_inferences.active_chapter_theme}</span>
@@ -552,7 +555,7 @@ export const ReadingView: React.FC<Props> = ({ data, subjectName, onNavigate }) 
                 </p>
               </div>
               <div className="shrink-0">
-                <span className="px-2.5 py-1 rounded bg-[#0d1624] text-emerald-400 border border-emerald-800/60 text-[11px] uppercase font-bold tracking-wider inline-flex items-center gap-1">
+                <span className="px-2.5 py-1 rounded bg-slate-900 text-emerald-400 border border-emerald-800/60 text-xs font-medium inline-flex items-center gap-1">
                   <CheckCircle2 className="w-3 h-3" />
                   Quad-Cycle Synchronized
                 </span>
@@ -561,11 +564,11 @@ export const ReadingView: React.FC<Props> = ({ data, subjectName, onNavigate }) 
           </section>
 
           {/* Section 3: The Cross-Cultural Corroboration Matrix */}
-          <section className="bg-[#0d1118] border border-[#1b2331] rounded-lg p-4 space-y-4">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-[#1b2331] pb-3 gap-2">
+          <section className="bg-slate-900 border border-slate-800 rounded-lg p-4 space-y-4">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-slate-800 pb-3 gap-2">
               <div className="flex flex-wrap items-center gap-2">
                 <span className="w-2 h-2 rounded-full bg-emerald-400"></span>
-                <h3 className="text-sm font-semibold text-slate-100">
+                <h3 className="text-sm font-semibold text-slate-100 font-sans">
                   3. Cross-Cultural Corroboration Matrix (Life Domains)
                 </h3>
                 <ExplainerTrigger id="three_cluster_consensus" label="Consensus Protocol" variant="badge" />
@@ -573,15 +576,15 @@ export const ReadingView: React.FC<Props> = ({ data, subjectName, onNavigate }) 
               </div>
 
               {/* Filter Pills */}
-              <div className="flex items-center gap-1.5 font-mono text-xs flex-wrap">
-                <span className="text-[11px] text-slate-500 uppercase mr-1">Filter:</span>
+              <div className="flex items-center gap-1.5 font-sans text-xs flex-wrap">
+                <span className="text-xs text-slate-400 font-medium mr-1">Filter:</span>
                 <button
                   type="button"
                   onClick={() => setDomainFilter('all')}
-                  className={`px-3 py-1.5 min-h-[38px] sm:min-h-[32px] rounded text-[11px] cursor-pointer transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 ${
+                  className={`px-3 py-1.5 min-h-[38px] sm:min-h-[32px] rounded text-xs cursor-pointer transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 ${
                     domainFilter === 'all'
                       ? 'bg-cyan-950 text-cyan-300 border border-cyan-700/80'
-                      : 'text-slate-400 hover:text-slate-200 border border-[#1b2331]'
+                      : 'text-slate-400 hover:text-slate-200 border border-slate-800'
                   }`}
                 >
                   All Domains
@@ -589,10 +592,10 @@ export const ReadingView: React.FC<Props> = ({ data, subjectName, onNavigate }) 
                 <button
                   type="button"
                   onClick={() => setDomainFilter('consensus')}
-                  className={`px-3 py-1.5 min-h-[38px] sm:min-h-[32px] rounded text-[11px] cursor-pointer transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 ${
+                  className={`px-3 py-1.5 min-h-[38px] sm:min-h-[32px] rounded text-xs cursor-pointer transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 ${
                     domainFilter === 'consensus'
                       ? 'bg-emerald-950 text-emerald-300 border border-emerald-700/80'
-                      : 'text-slate-400 hover:text-slate-200 border border-[#1b2331]'
+                      : 'text-slate-400 hover:text-slate-200 border border-slate-800'
                   }`}
                 >
                   Consensus Only ({synthesis.divergence_metrics.strong_domains + synthesis.divergence_metrics.moderate_domains})
@@ -600,10 +603,10 @@ export const ReadingView: React.FC<Props> = ({ data, subjectName, onNavigate }) 
                 <button
                   type="button"
                   onClick={() => setDomainFilter('divergent')}
-                  className={`px-3 py-1.5 min-h-[38px] sm:min-h-[32px] rounded text-[11px] cursor-pointer transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 ${
+                  className={`px-3 py-1.5 min-h-[38px] sm:min-h-[32px] rounded text-xs cursor-pointer transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 ${
                     domainFilter === 'divergent'
                       ? 'bg-amber-950 text-amber-300 border border-amber-700/80'
-                      : 'text-slate-400 hover:text-slate-200 border border-[#1b2331]'
+                      : 'text-slate-400 hover:text-slate-200 border border-slate-800'
                   }`}
                 >
                   Divergent Only ({synthesis.divergence_metrics.divergent_domains})
@@ -623,10 +626,10 @@ export const ReadingView: React.FC<Props> = ({ data, subjectName, onNavigate }) 
                     key={dom.domain_id}
                     className={`rounded-lg border transition-colors duration-150 ${
                       isDivergent
-                        ? 'bg-[#120f14] border-amber-900/50 hover:border-amber-700/80'
+                        ? 'bg-amber-950/20 border-amber-900/50 hover:border-amber-700/80'
                         : isStrong
-                        ? 'bg-[#0b1313] border-emerald-900/50 hover:border-emerald-700/80'
-                        : 'bg-[#0d121c] border-[#1b2331] hover:border-slate-700'
+                        ? 'bg-emerald-950/20 border-emerald-900/50 hover:border-emerald-700/80'
+                        : 'bg-slate-950 border-slate-800 hover:border-slate-700'
                     }`}
                   >
                     {/* Domain Card Header */}
@@ -635,10 +638,10 @@ export const ReadingView: React.FC<Props> = ({ data, subjectName, onNavigate }) 
                       onClick={() => setExpandedDomainId(isExpanded ? null : dom.domain_id)}
                       aria-expanded={isExpanded}
                       aria-controls={`reading-domain-${dom.domain_id}`}
-                      className="w-full text-left p-3.5 flex flex-col md:flex-row md:items-center justify-between gap-3 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-2 focus-visible:ring-offset-[#080a0f] rounded-lg"
+                      className="w-full text-left p-3.5 flex flex-col md:flex-row md:items-center justify-between gap-3 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950 rounded-lg"
                     >
                       <div className="flex items-center gap-3">
-                        <span className="font-mono text-xs font-bold text-slate-300 px-1.5 py-0.5 rounded bg-[#101520] border border-[#1b2331]">
+                        <span className="font-mono text-xs font-bold text-slate-300 px-1.5 py-0.5 rounded bg-slate-900 border border-slate-800">
                           {dom.domain_id}
                         </span>
                         <div>
@@ -652,14 +655,14 @@ export const ReadingView: React.FC<Props> = ({ data, subjectName, onNavigate }) 
                       </div>
 
                       {/* Right Side: Grade Badge & Tri-Cluster Polarities */}
-                      <div className="flex items-center gap-2 font-mono text-xs self-start md:self-auto shrink-0">
+                      <div className="flex items-center gap-2 font-sans text-xs self-start md:self-auto shrink-0">
                         {/* Grade */}
                         <span
-                          className={`px-2 py-0.5 rounded text-[11px] font-bold uppercase tracking-wider ${
+                          className={`px-2 py-0.5 rounded text-xs font-medium ${
                             isStrong
                               ? 'bg-emerald-950 text-emerald-300 border border-emerald-800'
                               : isDivergent
-                              ? 'bg-amber-950 text-amber-300 border border-amber-800 animate-pulse'
+                              ? 'bg-amber-950 text-amber-300 border border-amber-800 motion-safe:animate-pulse motion-reduce:animate-none'
                               : 'bg-cyan-950 text-cyan-300 border border-cyan-800'
                           }`}
                         >
@@ -667,7 +670,7 @@ export const ReadingView: React.FC<Props> = ({ data, subjectName, onNavigate }) 
                         </span>
 
                         {/* Tri-Cluster Badges */}
-                        <div className="flex items-center gap-1 text-[11px]">
+                        <div className="flex items-center gap-1 text-xs">
                           <span
                             className={`px-1.5 py-0.5 rounded border ${
                               dom.evaluations.jyotisha.polarity === 'Positive'
@@ -706,72 +709,70 @@ export const ReadingView: React.FC<Props> = ({ data, subjectName, onNavigate }) 
                           </span>
                         </div>
 
-                        <span className="text-slate-400 text-xs ml-1">
-                          {isExpanded ? '▲' : '▼'}
-                        </span>
+                        <ChevronDown className={`w-3.5 h-3.5 text-slate-400 motion-safe:transition-transform motion-reduce:transition-none duration-200 ${isExpanded ? 'rotate-180' : 'rotate-0'}`} />
                       </div>
                     </button>
 
                     {/* Expandable Drill-Down Details */}
                     {isExpanded && (
-                      <div id={`reading-domain-${dom.domain_id}`} className="px-4 pb-4 pt-2 border-t border-[#1b2331]/80 space-y-3 text-xs">
+                      <div id={`reading-domain-${dom.domain_id}`} className="px-4 pb-4 pt-2 border-t border-slate-800/80 space-y-3 text-xs">
                         {/* Narrative Synthesis */}
-                        <div className="p-3 rounded bg-[#080b11] border border-[#1b2331] text-slate-200 leading-relaxed font-sans">
-                          <strong className="text-cyan-300 font-mono text-[11px] block uppercase mb-1">
+                        <div className="p-3 rounded bg-slate-950 border border-slate-800 text-slate-200 leading-relaxed font-sans">
+                          <strong className="text-cyan-300 font-sans text-xs font-semibold block mb-1">
                             Corroboration Synthesis:
                           </strong>
                           {dom.consensus_theme}
                         </div>
 
                         {/* Tri-Cluster Astronomical Evidence Grid */}
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-2.5 font-mono text-[11px]">
-                          <div className="bg-[#090d15] p-2.5 rounded border border-[#1b2331]">
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-2.5 text-xs font-sans">
+                          <div className="bg-slate-900 p-2.5 rounded border border-slate-800">
                             <div className="flex items-center gap-1.5 mb-1">
-                              <span className="px-1 py-0.2 rounded text-[9px] font-mono bg-cyan-950 text-cyan-300 border border-cyan-800 font-semibold">
+                              <span className="px-1.5 py-0.5 rounded text-[10px] font-sans bg-cyan-950 text-cyan-300 border border-cyan-800 font-medium">
                                 IND
                               </span>
-                              <span className="text-cyan-400 font-semibold">
+                              <span className="text-cyan-400 font-semibold font-sans">
                                 Jyotisha (Sidereal Vedic)
                               </span>
                             </div>
-                            <div className="text-slate-300">
+                            <div className="text-slate-300 font-sans">
                               Polarity: <strong className={dom.evaluations.jyotisha.polarity === 'Positive' ? 'text-emerald-400' : dom.evaluations.jyotisha.polarity === 'Challenging' ? 'text-rose-400' : 'text-slate-300'}>{dom.evaluations.jyotisha.polarity}</strong>
                             </div>
-                            <div className="text-slate-400 mt-1">
+                            <div className="text-slate-400 mt-1 font-sans">
                               {dom.evaluations.jyotisha.basis}
                             </div>
                           </div>
 
-                          <div className="bg-[#090d15] p-2.5 rounded border border-[#1b2331]">
+                          <div className="bg-slate-900 p-2.5 rounded border border-slate-800">
                             <div className="flex items-center gap-1.5 mb-1">
-                              <span className="px-1 py-0.2 rounded text-[9px] font-mono bg-cyan-950 text-cyan-300 border border-cyan-800 font-semibold">
+                              <span className="px-1.5 py-0.5 rounded text-[10px] font-sans bg-cyan-950 text-cyan-300 border border-cyan-800 font-medium">
                                 GRC
                               </span>
-                              <span className="text-cyan-400 font-semibold">
+                              <span className="text-cyan-400 font-semibold font-sans">
                                 Western (Hellenistic)
                               </span>
                             </div>
-                            <div className="text-slate-300">
+                            <div className="text-slate-300 font-sans">
                               Polarity: <strong className={dom.evaluations.western.polarity === 'Positive' ? 'text-emerald-400' : dom.evaluations.western.polarity === 'Challenging' ? 'text-rose-400' : 'text-slate-300'}>{dom.evaluations.western.polarity}</strong>
                             </div>
-                            <div className="text-slate-400 mt-1">
+                            <div className="text-slate-400 mt-1 font-sans">
                               {dom.evaluations.western.basis}
                             </div>
                           </div>
 
-                          <div className="bg-[#090d15] p-2.5 rounded border border-[#1b2331]">
+                          <div className="bg-slate-900 p-2.5 rounded border border-slate-800">
                             <div className="flex items-center gap-1.5 mb-1">
-                              <span className="px-1 py-0.2 rounded text-[9px] font-mono bg-cyan-950 text-cyan-300 border border-cyan-800 font-semibold">
+                              <span className="px-1.5 py-0.5 rounded text-[10px] font-sans bg-cyan-950 text-cyan-300 border border-cyan-800 font-medium">
                                 SNC
                               </span>
-                              <span className="text-cyan-400 font-semibold">
+                              <span className="text-cyan-400 font-semibold font-sans">
                                 Sinic (BaZi + Zi Wei)
                               </span>
                             </div>
-                            <div className="text-slate-300">
+                            <div className="text-slate-300 font-sans">
                               Polarity: <strong className={dom.evaluations.sinic.polarity === 'Positive' ? 'text-emerald-400' : dom.evaluations.sinic.polarity === 'Challenging' ? 'text-rose-400' : 'text-slate-300'}>{dom.evaluations.sinic.polarity}</strong>
                             </div>
-                            <div className="text-slate-400 mt-1">
+                            <div className="text-slate-400 mt-1 font-sans">
                               {dom.evaluations.sinic.basis}
                             </div>
                           </div>
@@ -785,98 +786,98 @@ export const ReadingView: React.FC<Props> = ({ data, subjectName, onNavigate }) 
           </section>
 
           {/* Section 4: Chronological Timing Synchronization */}
-          <section className="bg-[#0d1118] border border-[#1b2331] rounded-lg p-4 space-y-3">
-            <div className="flex items-center justify-between border-b border-[#1b2331] pb-2.5">
+          <section className="bg-slate-900 border border-slate-800 rounded-lg p-4 space-y-3">
+            <div className="flex items-center justify-between border-b border-slate-800 pb-2.5">
               <div className="flex items-center gap-2">
                 <Clock className="w-4 h-4 text-cyan-400" />
-                <h3 className="text-sm font-semibold text-slate-100">
+                <h3 className="text-sm font-semibold text-slate-100 font-sans">
                   4. Quad-System Chronological Synchronization
                 </h3>
               </div>
-              <span className="text-[11px] font-mono text-slate-500">
+              <span className="text-xs font-sans text-slate-400">
                 Multi-Decadal Period Alignment
               </span>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 font-mono text-xs">
-              <div className="bg-[#090c12] p-3 rounded border border-[#1b2331]">
-                <span className="text-slate-500 text-[11px] block uppercase">Vimshottari Dasha</span>
-                <span className="text-sm font-bold text-cyan-300 block mt-1">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 text-xs font-sans">
+              <div className="bg-slate-950 p-3 rounded border border-slate-800">
+                <span className="text-slate-400 text-xs block font-medium">Vimshottari Dasha</span>
+                <span className="text-sm font-bold text-cyan-300 block mt-1 font-sans">
                   {chronology.jyotisha_vimshottari.active_mahadasha || 'Active Period'}
                   {chronology.jyotisha_vimshottari.active_antardasha && (
                     <span className="text-amber-300/80 font-normal text-xs"> / {chronology.jyotisha_vimshottari.active_antardasha}</span>
                   )}
                 </span>
-                <span className="text-[11px] text-slate-400 block mt-0.5">
-                  Span: {chronology.jyotisha_vimshottari.span || 'Current'}
+                <span className="text-xs text-slate-400 block mt-0.5 font-sans">
+                  Span: <span className="font-mono">{chronology.jyotisha_vimshottari.span || 'Current'}</span>
                 </span>
-                <span className="text-[11px] text-slate-500 block mt-1">
+                <span className="text-xs text-slate-400 block mt-1 font-sans">
                   Focus: {chronology.jyotisha_vimshottari.activated_domain}
                 </span>
               </div>
 
-              <div className="bg-[#090c12] p-3 rounded border border-[#1b2331]">
-                <span className="text-slate-500 text-[11px] block uppercase">BaZi Da Yun Pillar</span>
-                <span className="text-sm font-bold text-cyan-300 block mt-1">
+              <div className="bg-slate-950 p-3 rounded border border-slate-800">
+                <span className="text-slate-400 text-xs block font-medium">BaZi Da Yun Pillar</span>
+                <span className="text-sm font-bold text-cyan-300 block mt-1 font-sans">
                   {chronology.bazi_da_yun.active_pillar || 'Pillar'}
                 </span>
-                <span className="text-[11px] text-slate-400 block mt-0.5">
+                <span className="text-xs text-slate-400 block mt-0.5 font-sans">
                   Ten God: {chronology.bazi_da_yun.ten_god || 'Direct Officer'}
                 </span>
                 {chronology.bazi_da_yun.current_liu_nian ? (
-                  <span className="text-[11px] text-emerald-400/90 block mt-1">
+                  <span className="text-xs text-emerald-400/90 block mt-1 font-mono">
                     Annual: {chronology.bazi_da_yun.current_liu_nian.year} {chronology.bazi_da_yun.current_liu_nian.pillar} ({chronology.bazi_da_yun.current_liu_nian.ten_god})
                   </span>
                 ) : (
-                  <span className="text-[11px] text-slate-500 block mt-1">
+                  <span className="text-xs text-slate-400 block mt-1 font-sans">
                     Start Age: {chronology.bazi_da_yun.start_age || 'Active'}
                   </span>
                 )}
               </div>
 
-              <div className="bg-[#090c12] p-3 rounded border border-[#1b2331]">
-                <span className="text-slate-500 text-[11px] block uppercase">Hellenistic Profection</span>
-                <span className="text-sm font-bold text-cyan-300 block mt-1">
+              <div className="bg-slate-950 p-3 rounded border border-slate-800">
+                <span className="text-slate-400 text-xs block font-medium">Hellenistic Profection</span>
+                <span className="text-sm font-bold text-cyan-300 block mt-1 font-sans">
                   House {chronology.western_profection.activated_house}
                 </span>
-                <span className="text-[11px] text-slate-400 block mt-0.5">
+                <span className="text-xs text-slate-400 block mt-0.5 font-sans">
                   Lord of Year: {chronology.western_profection.lord_of_year}
                 </span>
                 {chronology.western_profection.active_transits_summary && chronology.western_profection.active_transits_summary.length > 0 ? (
-                  <span className="text-[11px] text-blue-300/80 block mt-1 truncate" title={chronology.western_profection.active_transits_summary[0]}>
-                    Transit: {chronology.western_profection.active_transits_summary[0]}
+                  <span className="text-xs text-blue-300/80 block mt-1 truncate font-sans" title={chronology.western_profection.active_transits_summary[0]}>
+                    Transit: <span className="font-mono">{chronology.western_profection.active_transits_summary[0]}</span>
                   </span>
                 ) : (
-                  <span className="text-[11px] text-slate-500 block mt-1">
+                  <span className="text-xs text-slate-400 block mt-1 font-sans">
                     Domain: {chronology.western_profection.activated_domain}
                   </span>
                 )}
               </div>
 
-              <div className="bg-[#090c12] p-3 rounded border border-[#1b2331]">
-                <span className="text-slate-500 text-[11px] block uppercase">
+              <div className="bg-slate-950 p-3 rounded border border-slate-800">
+                <span className="text-slate-400 text-xs block font-medium">
                   {chronology.persian_firdaria ? "Zi Wei & Firdaria" : "Zi Wei Da Xian (Decade)"}
                 </span>
-                <span className="text-sm font-bold text-cyan-300 block mt-1">
+                <span className="text-sm font-bold text-cyan-300 block mt-1 font-sans">
                   {chronology.ziwei_da_xian.active_palace || 'Palace'}
                 </span>
-                <span className="text-[11px] text-slate-400 block mt-0.5">
-                  Decadal Span: {chronology.ziwei_da_xian.age_span || 'Active'}
+                <span className="text-xs text-slate-400 block mt-0.5 font-sans">
+                  Decadal Span: <span className="font-mono">{chronology.ziwei_da_xian.age_span || 'Active'}</span>
                 </span>
                 {chronology.persian_firdaria ? (
-                  <span className="text-[11px] text-purple-300/80 block mt-1">
-                    Firdaria: {chronology.persian_firdaria.active_ruler} ({chronology.persian_firdaria.years_span})
+                  <span className="text-xs text-purple-300/80 block mt-1 font-sans">
+                    Firdaria: <span className="font-mono">{chronology.persian_firdaria.active_ruler} ({chronology.persian_firdaria.years_span})</span>
                   </span>
                 ) : (
-                  <span className="text-[11px] text-slate-500 block mt-1">
+                  <span className="text-xs text-slate-400 block mt-1 font-sans">
                     10-Year Major Palace Shift
                   </span>
                 )}
               </div>
             </div>
 
-            <div className="p-3 rounded bg-[#090d15] border border-[#1b2331] text-xs text-slate-300 font-sans leading-relaxed">
-              <strong className="text-cyan-300 font-mono text-[11px] uppercase block mb-1">
+            <div className="p-3 rounded bg-slate-950 border border-slate-800 text-xs text-slate-300 font-sans leading-relaxed">
+              <strong className="text-cyan-300 font-sans text-xs font-semibold block mb-1">
                 Convergence Assessment:
               </strong>
               {chronology.convergence_status}
@@ -884,35 +885,35 @@ export const ReadingView: React.FC<Props> = ({ data, subjectName, onNavigate }) 
           </section>
 
           {/* Section 5: Attributed Temperament Overlays (Maya & Tibetan) */}
-          <section className="bg-[#0d1118] border border-[#1b2331] rounded-lg p-4 space-y-3">
-            <div className="flex items-center justify-between border-b border-[#1b2331] pb-2.5">
+          <section className="bg-slate-900 border border-slate-800 rounded-lg p-4 space-y-3">
+            <div className="flex items-center justify-between border-b border-slate-800 pb-2.5">
               <div className="flex flex-wrap items-center gap-2">
                 <BookOpen className="w-4 h-4 text-cyan-400" />
-                <h3 className="text-sm font-semibold text-slate-100">
+                <h3 className="text-sm font-semibold text-slate-100 font-sans">
                   5. Attributed Temperament Overlays (Maya & Tibetan)
                 </h3>
                 <ExplainerTrigger id="epistemic_humility_framework" label="Non-Causal Overlays" variant="badge" />
               </div>
-              <span className="text-[11px] font-mono text-slate-500">
+              <span className="text-xs font-sans text-slate-400">
                 Non-Causal Symbolic Harmonics
               </span>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 text-xs">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 text-xs font-sans">
               {synthesis.temperament_axes.map((ax) => (
-                <div key={ax.axis_id} className="bg-[#090c12] p-3 rounded border border-[#1b2331] space-y-1.5">
-                  <div className="flex items-center justify-between font-mono">
-                    <span className="font-semibold text-slate-100 text-xs">{ax.name}</span>
-                    <span className="text-[11px] text-cyan-400 px-1 py-0.2 rounded bg-cyan-950/60 border border-cyan-800/60">
+                <div key={ax.axis_id} className="bg-slate-950 p-3 rounded border border-slate-800 space-y-1.5">
+                  <div className="flex items-center justify-between">
+                    <span className="font-semibold text-slate-100 text-xs font-sans">{ax.name}</span>
+                    <span className="text-xs font-mono text-cyan-400 px-1.5 py-0.5 rounded bg-cyan-950/60 border border-cyan-800/60">
                       {ax.axis_id}
                     </span>
                   </div>
                   <p className="text-slate-400 text-xs font-sans">
                     {ax.expression}
                   </p>
-                  <div className="pt-1.5 border-t border-[#1b2331]/80 text-[11px] font-mono space-y-0.5 text-slate-400">
-                    <div>Base: <span className="text-slate-300">{ax.computed_base}</span></div>
-                    <div>Overlay: <span className="text-amber-300/90">{ax.symbolic_overlay}</span></div>
+                  <div className="pt-1.5 border-t border-slate-800 text-xs font-sans space-y-0.5 text-slate-400">
+                    <div>Base: <span className="text-slate-300 font-mono">{ax.computed_base}</span></div>
+                    <div>Overlay: <span className="text-amber-300/90 font-mono">{ax.symbolic_overlay}</span></div>
                   </div>
                 </div>
               ))}
@@ -920,49 +921,49 @@ export const ReadingView: React.FC<Props> = ({ data, subjectName, onNavigate }) 
           </section>
 
           {/* Section 6: Invariants & Astronomical Verification Checklist */}
-          <section className="bg-[#0d1118] border border-[#1b2331] rounded-lg p-4 space-y-3">
-            <div className="flex items-center justify-between border-b border-[#1b2331] pb-2.5">
+          <section className="bg-slate-900 border border-slate-800 rounded-lg p-4 space-y-3">
+            <div className="flex items-center justify-between border-b border-slate-800 pb-2.5">
               <div className="flex flex-wrap items-center gap-2">
                 <ShieldCheck className="w-4 h-4 text-emerald-400" />
-                <h3 className="text-sm font-semibold text-slate-100">
+                <h3 className="text-sm font-semibold text-slate-100 font-sans">
                   6. Dual-Engine Verification & Invariant Proofs
                 </h3>
                 <ExplainerTrigger id="dual_engine_validation" label="Dual-Engine Proof" variant="badge" />
               </div>
-              <span className="text-[11px] font-mono text-emerald-400">
+              <span className="text-xs font-sans text-emerald-400 font-medium">
                 All Astronomical Invariants Passed
               </span>
             </div>
 
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 font-mono text-xs">
-              <div className="bg-[#090c12] p-2.5 rounded border border-emerald-900/40 flex items-center justify-between">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 text-xs font-sans">
+              <div className="bg-slate-950 p-2.5 rounded border border-emerald-900/40 flex items-center justify-between">
                 <div>
-                  <span className="text-slate-500 text-[11px] block">Rahu–Ketu Invariant</span>
-                  <span className="text-xs font-bold text-emerald-400">Exact 180° Nodal Axis</span>
+                  <span className="text-slate-400 text-xs block font-medium">Rahu / Ketu Invariant</span>
+                  <span className="text-xs font-semibold text-emerald-400 font-sans">Exact 180° Nodal Axis</span>
                 </div>
                 <Check className="w-4 h-4 text-emerald-400" />
               </div>
 
-              <div className="bg-[#090c12] p-2.5 rounded border border-emerald-900/40 flex items-center justify-between">
+              <div className="bg-slate-950 p-2.5 rounded border border-emerald-900/40 flex items-center justify-between">
                 <div>
-                  <span className="text-slate-500 text-[11px] block">Vimshottari Cycle</span>
-                  <span className="text-xs font-bold text-emerald-400">Exact 120-Year Sum</span>
+                  <span className="text-slate-400 text-xs block font-medium">Vimshottari Cycle</span>
+                  <span className="text-xs font-semibold text-emerald-400 font-sans">Exact 120-Year Sum</span>
                 </div>
                 <Check className="w-4 h-4 text-emerald-400" />
               </div>
 
-              <div className="bg-[#090c12] p-2.5 rounded border border-emerald-900/40 flex items-center justify-between">
+              <div className="bg-slate-950 p-2.5 rounded border border-emerald-900/40 flex items-center justify-between">
                 <div>
-                  <span className="text-slate-500 text-[11px] block">Zi Wei Palaces</span>
-                  <span className="text-xs font-bold text-emerald-400">12 Unique Branches</span>
+                  <span className="text-slate-400 text-xs block font-medium">Zi Wei Palaces</span>
+                  <span className="text-xs font-semibold text-emerald-400 font-sans">12 Unique Branches</span>
                 </div>
                 <Check className="w-4 h-4 text-emerald-400" />
               </div>
 
-              <div className="bg-[#090c12] p-2.5 rounded border border-emerald-900/40 flex items-center justify-between">
+              <div className="bg-slate-950 p-2.5 rounded border border-emerald-900/40 flex items-center justify-between">
                 <div>
-                  <span className="text-slate-500 text-[11px] block">Maya Long Count</span>
-                  <span className="text-xs font-bold text-emerald-400">Exact Round-Trip</span>
+                  <span className="text-slate-400 text-xs block font-medium">Maya Long Count</span>
+                  <span className="text-xs font-semibold text-emerald-400 font-sans">Exact Round-Trip</span>
                 </div>
                 <Check className="w-4 h-4 text-emerald-400" />
               </div>
@@ -972,17 +973,17 @@ export const ReadingView: React.FC<Props> = ({ data, subjectName, onNavigate }) 
       ) : (
         /* Raw Markdown View */
         <div className="p-5 sm:p-6 space-y-3">
-          <div className="flex items-center justify-between text-xs font-mono text-slate-400 pb-2 border-b border-[#1b2331]">
+          <div className="flex items-center justify-between text-xs font-sans text-slate-400 pb-2 border-b border-slate-800">
             <span>Raw Markdown Source (Academic Formatting)</span>
             <button
               type="button"
               onClick={handleCopy}
-              className="px-3 py-1.5 min-h-[36px] rounded bg-[#121721] hover:bg-[#18202c] text-cyan-300 border border-[#1b2331] transition-colors cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
+              className="px-3 py-1.5 min-h-[36px] rounded bg-slate-800 hover:bg-slate-700 text-cyan-300 border border-slate-700 transition-colors cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
             >
               {copied ? 'Copied to Clipboard!' : 'Copy Raw Text'}
             </button>
           </div>
-          <div className="p-4 rounded-lg bg-[#080a0f] border border-[#1b2331] font-mono text-xs text-slate-300 whitespace-pre-wrap leading-relaxed max-h-[700px] overflow-y-auto">
+          <div className="p-4 rounded-lg bg-slate-950 border border-slate-800 font-mono text-xs text-slate-300 whitespace-pre-wrap leading-relaxed max-h-[700px] overflow-y-auto">
             {markdownText}
           </div>
         </div>
@@ -990,20 +991,22 @@ export const ReadingView: React.FC<Props> = ({ data, subjectName, onNavigate }) 
 
       {/* Mobile & Tablet Epistemological Journey Navigation Bar */}
       {onNavigate && (
-        <div className="p-4 sm:p-5 border-t border-[#1b2331] bg-[#090d14] flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2.5">
+        <div className="p-4 sm:p-5 border-t border-slate-800 bg-slate-950 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2.5">
           <button
             type="button"
             onClick={() => onNavigate('synthesis')}
-            className="inline-flex items-center justify-center gap-2 px-4 py-2.5 min-h-[44px] text-xs font-mono rounded-lg bg-[#101520] hover:bg-[#161d2c] text-slate-300 border border-[#1b2331] cursor-pointer transition-colors active:scale-[0.98]"
+            className="inline-flex items-center justify-center gap-2 px-4 py-2.5 min-h-[44px] text-xs font-sans font-medium rounded-lg bg-slate-900 hover:bg-slate-800 text-slate-200 border border-slate-800 cursor-pointer transition-colors motion-safe:active:scale-[0.98] motion-reduce:active:scale-100 whitespace-nowrap"
           >
-            <span>← Synthesis Matrix</span>
+            <ArrowLeft className="w-3.5 h-3.5 text-slate-400" />
+            <span>Synthesis Matrix</span>
           </button>
           <button
             type="button"
             onClick={() => onNavigate('evidence')}
-            className="inline-flex items-center justify-center gap-2 px-4 py-2.5 min-h-[44px] text-xs font-mono rounded-lg bg-cyan-700 hover:bg-cyan-600 text-white font-semibold cursor-pointer transition-colors duration-150 border border-cyan-500/80 shadow-xs active:scale-[0.98]"
+            className="inline-flex items-center justify-center gap-2 px-4 py-2.5 min-h-[44px] text-xs font-sans font-medium rounded-lg bg-cyan-700 hover:bg-cyan-600 text-white cursor-pointer transition-colors duration-150 border border-cyan-500/80 shadow-xs motion-safe:active:scale-[0.98] motion-reduce:active:scale-100 whitespace-nowrap"
           >
-            <span>View Mathematical Evidence Whitepaper →</span>
+            <span className="whitespace-nowrap">Mathematical Evidence</span>
+            <ArrowRight className="w-3.5 h-3.5 text-cyan-100" />
           </button>
         </div>
       )}
