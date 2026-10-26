@@ -1,7 +1,7 @@
 # Synodix: Project Context & Working Memory
 
-**Last Updated:** 2026-10-26 10:02:35
-**Version:** 2.31.6  
+**Last Updated:** 2026-10-26 10:14:31
+**Version:** 2.31.7  
 **Stack:** Python 3.12 (FastAPI, Swiss Ephemeris 2.10, Skyfield DE421) + TypeScript / React 19 / Vite / Tailwind CSS v4 / Framer Motion / Capacitor 8 (iOS & Android)  
 **Workspace:** `/Volumes/Study/Projects/Astrology` (symlinked as `/Volumes/Study/Astrology`)  
 **Git Remote:** `https://github.com/manvenpratap/Synodix.git`  
@@ -9,7 +9,19 @@
 ---
 
 ## 1. Current Status & Milestone
-- **Active Phase**: Elimination of Redundant Top-Bar "SYNODIX" Breadcrumb (Completed)
+- **Active Phase**: Architectural UI/UX Restructuring of Custom Birth Chart Calibration Form (Completed)
+- **Architectural UI/UX Restructuring of Custom Birth Chart Calibration Form (v2.31.7)**:
+  - **Cohesive 3-Module Instrument Hierarchy (`BirthDataForm.tsx`)**:
+    - Re-architected the Custom Manual Input calibration form from a flat, fragmented field dump into 3 semantic astrometric instrument modules adhering to `/frontend-design` and `/ui-ux-pro-max` principles.
+    - **Module 01: Subject Identity & Natal Cycle**: Reunited the person's dossier name with Gender / Cycle polarity (which directs BaZi Da Yun luck pillar trajectory & Tibetan Rabjung cycle polarity), permanently removing it from the geographic location row. Integrated draft restore and form reset controls ergonomically.
+    - **Module 02: Temporal Coordinates & Ephemeris Epoch**: Clean 3-column layout grouping Gregorian Civil Birth Date, 24-Hour Civil Birth Time, and Record Certainty (Rodden rating / ±2m to unknown ensemble calibration) with Julian Day (UT) badge.
+    - **Module 03: Geographic Origin & Spatial Observer**: High-precision observer location card pairing City of Birth (with auto-suggest offline gazetteer) and Country, backed by a dedicated WGS-84 Decimal Coordinates panel with individual hemisphere inversion buttons (`°N`/`°S`, `°E`/`°W`), live formatted readouts, and a prominent GPS satellite detection trigger.
+  - **Ergonomics & Visual Polish**:
+    - Generous touch targets ($\ge 44\text{px}$ on mobile, $\ge 40\text{px}$ on desktop), visible focus rings (`focus-visible:ring-2 focus-visible:ring-cyan-400`), and dark/light contrast compliance ($\ge 4.5:1$).
+    - Upgraded primary calculation button to a prominent, high-impact gradient CTA with subtle laser-scan telemetry animation on compute.
+  - **Automated Regression Invariant**:
+    - All 25 regression test suites passing cleanly via `./pipeline.sh test --summary` (62.47s), including `test_07_geocoding_intelligence.py` and `test_08_independent_input_experience.py`.
+  - **Workflow Health**: 100% CLEAN (Verified via `./pipeline.sh doctor`).
 - **Elimination of Redundant Top-Bar "SYNODIX" Breadcrumb (v2.31.6)**:
   - **Top Bar Header Layout Simplification (`App.tsx`)**:
     - Removed the redundant `SYNODIX /` breadcrumb prefix from the sticky top workspace header bar.
