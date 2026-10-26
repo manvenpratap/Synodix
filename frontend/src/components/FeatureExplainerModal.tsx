@@ -72,15 +72,15 @@ export const FeatureExplainerModal: React.FC = () => {
               {activeExplainer ? <BookOpen className="w-4 h-4" /> : <Layers className="w-4 h-4" />}
             </div>
             <div>
-              <span className="text-[11px] font-mono uppercase tracking-wider text-cyan-400 font-semibold block">
-                Synodix Astronomical & Cultural Knowledge Guide
-              </span>
               <h2
                 id="explainer-modal-title"
-                className="text-base font-semibold text-slate-100 flex items-center gap-2 mt-0.5"
+                className="text-base font-semibold text-slate-100 flex items-center gap-2"
               >
                 {activeExplainer ? activeExplainer.title : 'Comprehensive Astrometric Glossary'}
               </h2>
+              <p className="text-xs text-slate-400 mt-0.5">
+                Synodix astronomical & cultural knowledge guide
+              </p>
             </div>
           </div>
 
@@ -135,7 +135,7 @@ export const FeatureExplainerModal: React.FC = () => {
                 <div className="flex items-start gap-3">
                   <Compass className="w-5 h-5 text-cyan-300 shrink-0 mt-0.5" />
                   <div>
-                    <h3 className="text-xs font-mono font-semibold text-cyan-300 uppercase tracking-wider mb-1">
+                    <h3 className="text-xs font-semibold text-cyan-300 mb-1">
                       Concept Overview
                     </h3>
                     <p className="text-sm text-slate-200 leading-relaxed font-sans">
@@ -149,7 +149,7 @@ export const FeatureExplainerModal: React.FC = () => {
               <div className="p-4 rounded-xl bg-[#080d16] border border-[#1b2537]">
                 <div className="flex items-center gap-2 mb-3">
                   <Compass className="w-4 h-4 text-amber-400" />
-                  <h3 className="text-xs font-mono font-semibold uppercase tracking-wider text-slate-200">
+                  <h3 className="text-xs font-semibold text-slate-200">
                     How It Works in Celestial Mechanics
                   </h3>
                 </div>
@@ -171,7 +171,7 @@ export const FeatureExplainerModal: React.FC = () => {
                   <div className="flex items-center justify-between mb-2">
                     <div className="flex items-center gap-2">
                       <Calculator className="w-4 h-4 text-emerald-400" />
-                      <h3 className="text-xs font-mono font-semibold uppercase tracking-wider text-emerald-400">
+                      <h3 className="text-xs font-semibold text-emerald-400">
                         Astronomical Formula & Algorithm
                       </h3>
                     </div>
@@ -187,7 +187,7 @@ export const FeatureExplainerModal: React.FC = () => {
               <div className="p-4 rounded-xl bg-[#080d16] border border-[#1b2537]">
                 <div className="flex items-center gap-2 mb-2">
                   <Lightbulb className="w-4 h-4 text-amber-400" />
-                  <h3 className="text-xs font-mono font-semibold uppercase tracking-wider text-slate-200">
+                  <h3 className="text-xs font-semibold text-slate-200">
                     Why It Matters in Your Astrometric Dossier
                   </h3>
                 </div>
@@ -201,7 +201,7 @@ export const FeatureExplainerModal: React.FC = () => {
                 <div className="flex items-center gap-2">
                   <History className="w-4 h-4 text-purple-400 shrink-0" />
                   <div>
-                    <span className="text-[11px] font-mono text-slate-400 uppercase tracking-wider block">
+                    <span className="text-xs font-medium text-slate-400 block">
                       Historical Skywatcher Lineage & Foundational Texts
                     </span>
                     <span className="text-xs font-medium text-slate-200 font-sans mt-0.5 block">
@@ -269,7 +269,7 @@ export const FeatureExplainerModal: React.FC = () => {
                     key={item.id}
                     type="button"
                     onClick={() => openExplainer(item.id)}
-                    className="p-3.5 rounded-xl bg-[#080d16] hover:bg-[#0f1725] border border-[#1b2537] hover:border-cyan-700/80 text-left transition-all group flex flex-col justify-between cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
+                    className="p-3.5 rounded-xl bg-[#080d16] hover:bg-[#0f1725] border border-[#1b2537] hover:border-cyan-700/80 text-left transition-colors duration-150 group flex flex-col justify-between cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
                   >
                     <div>
                       <div className="flex items-center justify-between mb-1.5">

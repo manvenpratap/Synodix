@@ -273,7 +273,7 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
   const currentTheme = CULTURE_THEMES[activeTab] || CULTURE_THEMES.jyotisha;
 
   return (
-    <div className={`machined-bezel p-4 sm:p-6 rounded-2xl shadow-2xl relative transition-all duration-500 overflow-hidden backdrop-blur-xl ${currentTheme.containerBg} ${currentTheme.containerBorder}`}>
+    <div className={`machined-bezel p-4 sm:p-6 rounded-2xl shadow-2xl relative transition-colors duration-300 overflow-hidden backdrop-blur-xl ${currentTheme.containerBg} ${currentTheme.containerBorder}`}>
       <div className="reticle-corner-tl" />
       <div className="reticle-corner-tr" />
       <div className="reticle-corner-bl" />
@@ -283,12 +283,12 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
       <div className="flex flex-col gap-3 pb-3.5 border-b border-white/10">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
           <div>
-            <span className="text-[11px] font-mono uppercase tracking-wider text-cyan-400 font-semibold block">
-              Deterministic Tradition Calculators
-            </span>
-            <h3 className="text-base font-semibold text-slate-100 mt-0.5">
+            <h3 className="text-base font-semibold text-slate-100">
               Cultural Computation Datasets
             </h3>
+            <p className="text-xs text-slate-400 mt-0.5">
+              Deterministic tradition calculations and astrometric mappings
+            </p>
           </div>
           <div className="flex items-center gap-2">
             {/* View Mode Toggle: Vertical Carousel vs Full Inspector */}
@@ -1909,7 +1909,7 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
           <button
             type="button"
             onClick={() => onNavigate('synthesis')}
-            className="inline-flex items-center justify-center gap-2 px-4 py-2.5 min-h-[44px] text-xs font-mono rounded-lg bg-cyan-700 hover:bg-cyan-600 text-white font-semibold cursor-pointer transition-all border border-cyan-500/80 shadow-xs active:scale-[0.98]"
+            className="inline-flex items-center justify-center gap-2 px-4 py-2.5 min-h-[44px] text-xs font-mono rounded-lg bg-cyan-700 hover:bg-cyan-600 text-white font-semibold cursor-pointer transition-colors duration-150 border border-cyan-500/80 shadow-xs active:scale-[0.98]"
           >
             <span>Explore Cross-Cultural Synthesis Matrix →</span>
           </button>

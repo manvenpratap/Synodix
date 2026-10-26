@@ -1,18 +1,22 @@
+/* Hallmark · atmospheric · redone · full · app */
+/* critique: High-precision astrometric observatory; human-crafted scholarly typography, composite-only transitions, and zero AI tropes */
+/* waive: 30a (domain astronomical unicode glyphs in wheel visualizer) */
+/* waive: 48 (legacy Tailwind v4 color class compatibility during migration) */
+
 @import "tailwindcss";
 
 /* =========================================================================
-   MOBILE ANTI-SIDE-SCROLL & VIEWPORT PANNING INVARIANTS
-   Eradicates horizontal scrolling, side-swiping, and rubber-banding
+   VIEWPORT MECHANICS: CLIP OVERFLOW & CLEAN SCROLL
+   Prevents horizontal scrolling while preserving native sticky headers
    ========================================================================= */
 html {
-  overflow-x: hidden;
+  overflow-x: clip;
   overflow-y: auto;
-  max-width: 100vw;
   width: 100%;
 }
 
 body {
-  overflow-x: hidden;
+  overflow-x: clip;
   overflow-y: visible;
   min-height: 100vh;
   width: 100%;
@@ -26,13 +30,27 @@ body {
 
 :root {
   color-scheme: dark;
-  --bg-space: #080a0f;
-  --surface-card: #0d1118;
-  --surface-card-subtle: #121721;
-  --border-subtle: #1b2331;
-  --border-active: #2a364a;
+  --bg-space: #07090e;
+  --surface-ground: #0a0e16;
+  --surface-card: #0d121c;
+  --surface-card-subtle: #111824;
+  --surface-inset: #090d15;
+  --border-subtle: #1a2433;
+  --border-active: #29384f;
+  --border-focus: #38bdf8;
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --text-tertiary: #64748b;
   --brass-accent: #d4a373;
   --cyan-accent: #38bdf8;
+  --emerald-accent: #34d399;
+  --rose-accent: #fb7185;
+}
+
+/* Focus visible universal standard */
+:focus-visible {
+  outline: 2px solid var(--border-focus);
+  outline-offset: 2px;
 }
 
 /* WCAG 2.2 AA Contrast: elevate dark-mode slate-500/600 to pass >= 4.5:1 ratio */
@@ -743,9 +761,11 @@ aside > div:first-child {
   border-color: #cbd5e1 !important;
 }
 
-[data-theme="light"] input:focus,
-[data-theme="light"] select:focus,
-[data-theme="light"] textarea:focus {
+[data-theme="light"] input:focus-visible,
+[data-theme="light"] select:focus-visible,
+[data-theme="light"] textarea:focus-visible {
+  outline: 2px solid #0284c7 !important;
+  outline-offset: 1px !important;
   border-color: #0284c7 !important;
   background-color: #ffffff !important;
 }

@@ -12,8 +12,8 @@ export const VerificationCard: React.FC<Props> = ({ report }) => {
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-center justify-between pb-3.5 border-b border-[#1b2331] gap-3">
         <div>
-          <span className="text-[11px] font-mono uppercase tracking-wider text-emerald-400 font-semibold block">
-            03 / Dual-Engine Astronomical Verification & Invariants
+          <span className="text-xs text-emerald-400 font-medium block">
+            Section 3 · Dual-Engine Astronomical Verification & Invariants
           </span>
           <div className="flex flex-wrap items-center gap-2 mt-0.5">
             <h3 className="text-base font-semibold text-slate-100">
@@ -37,11 +37,11 @@ export const VerificationCard: React.FC<Props> = ({ report }) => {
         {report.invariants.map((inv, idx) => (
           <div
             key={idx}
-            className="bg-[#080a0f] p-3 rounded-md border border-[#1b2331] flex flex-col justify-between hover:border-cyan-800/80 hover:-translate-y-0.5 transition-all duration-200 cursor-pointer shadow-xs"
+            className="bg-[#080a0f] p-3 rounded-md border border-[#1b2331] flex flex-col justify-between hover:border-cyan-800/80 hover:-translate-y-0.5 transition-colors transition-transform duration-150 cursor-pointer shadow-xs"
           >
             <div>
               <div className="flex items-center justify-between">
-                <span className="text-[11px] text-cyan-400 font-mono font-semibold uppercase tracking-wider">
+                <span className="text-xs text-cyan-400 font-medium font-sans">
                   {inv.system}
                 </span>
                 <span className={`px-2 py-0.5 text-[11px] font-mono font-bold rounded ${
@@ -68,7 +68,7 @@ export const VerificationCard: React.FC<Props> = ({ report }) => {
       <div className="mt-4">
         <div className="flex items-center justify-between mb-2">
           <div className="flex items-center gap-1.5">
-            <span className="text-[11px] font-mono text-slate-400 uppercase tracking-wider">
+            <span className="text-xs font-medium text-slate-300">
               Planetary Longitude Verification (Threshold: 0.0100°)
             </span>
             <ExplainerTrigger id="dual_engine_validation" variant="icon" size="xs" />
@@ -86,13 +86,13 @@ export const VerificationCard: React.FC<Props> = ({ report }) => {
         >
           <table className="w-full text-left text-xs border-collapse">
             <thead>
-              <tr className="bg-[#080a0f] text-slate-400 border-b border-[#1b2331] font-mono uppercase tracking-wider text-[11px]">
-                <th className="py-2 px-3 sticky left-0 bg-[#080a0f] z-10 border-r border-[#1b2331]">Celestial Body</th>
-                <th className="py-2 px-3 font-mono">SwissEph (deg)</th>
-                <th className="py-2 px-3 font-mono">Skyfield JPL (deg)</th>
-                <th className="py-2 px-3 font-mono">Delta (deg)</th>
-                <th className="py-2 px-3 font-mono">Delta (arcsec)</th>
-                <th className="py-2 px-3 text-right">Verification</th>
+              <tr className="bg-[#080a0f] text-slate-300 border-b border-[#1b2331] font-medium text-xs">
+                <th className="py-2.5 px-3 sticky left-0 bg-[#080a0f] z-10 border-r border-[#1b2331]">Celestial Body</th>
+                <th className="py-2.5 px-3">SwissEph (deg)</th>
+                <th className="py-2.5 px-3">Skyfield JPL (deg)</th>
+                <th className="py-2.5 px-3">Delta (deg)</th>
+                <th className="py-2.5 px-3">Delta (arcsec)</th>
+                <th className="py-2.5 px-3 text-right">Verification</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-[#1b2331] bg-[#0d1118] font-mono text-[11px] tabular-nums">

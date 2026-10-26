@@ -310,32 +310,32 @@ export const MathematicalEvidenceCard: React.FC<Props> = ({ onNavigate }) => {
         <div className="grid grid-cols-2 sm:grid-cols-5 gap-2.5 mt-4">
           <div className="bg-[#090c12] border border-[#1b2331] rounded-lg p-2.5">
             <div className="flex items-center justify-between">
-              <span className="text-[11px] font-mono text-slate-500 uppercase tracking-wider">Titan Cohort</span>
+              <span className="text-xs font-medium text-slate-300">Titan Cohort</span>
               <ExplainerTrigger id="rodden_titan_benchmark" size="xs" variant="icon" />
             </div>
             <span className="text-lg font-mono font-bold text-cyan-300">100 Records</span>
             <span className="text-xs text-slate-400 block mt-0.5">100% Rodden Rating AA/A</span>
           </div>
           <div className="bg-[#090c12] border border-[#1b2331] rounded-lg p-2.5">
-            <span className="text-[11px] font-mono text-slate-500 uppercase tracking-wider block">Null Baseline</span>
+            <span className="text-xs font-medium text-slate-300 block">Null Baseline</span>
             <span className="text-lg font-mono font-bold text-slate-200">1,000 Controls</span>
-            <span className="text-xs text-slate-400 block mt-0.5">Epoch 1500–2000 Uniform</span>
+            <span className="text-xs text-slate-400 block mt-0.5">Epoch 1500 to 2000 Uniform</span>
           </div>
           <div className="bg-[#090c12] border border-[#1b2331] rounded-lg p-2.5">
-            <span className="text-[11px] font-mono text-slate-500 uppercase tracking-wider block">Domain Concordance</span>
+            <span className="text-xs font-medium text-slate-300 block">Domain Concordance</span>
             <span className="text-lg font-mono font-bold text-emerald-400">68.2%</span>
             <span className="text-xs font-mono text-emerald-400 block mt-0.5 font-semibold">Exceeds Noise (p &lt; 10⁻⁴)</span>
           </div>
           <div className="bg-[#090c12] border border-[#1b2331] rounded-lg p-2.5">
             <div className="flex items-center justify-between">
-              <span className="text-[11px] font-mono text-slate-500 uppercase tracking-wider">Divergence Rate</span>
+              <span className="text-xs font-medium text-slate-300">Divergence Rate</span>
               <ExplainerTrigger id="honest_divergence_rate" size="xs" variant="icon" />
             </div>
             <span className="text-lg font-mono font-bold text-amber-400">31.8%</span>
             <span className="text-xs text-slate-400 block mt-0.5">Honest Disagreements</span>
           </div>
           <div className="bg-[#090c12] border border-[#1b2331] rounded-lg p-2.5">
-            <span className="text-[11px] font-mono text-slate-500 uppercase tracking-wider block">Orbital Constraint</span>
+            <span className="text-xs font-medium text-slate-300 block">Orbital Constraint</span>
             <span className="text-lg font-mono font-bold text-rose-300">28° Mercury</span>
             <span className="text-xs text-slate-400 block mt-0.5">29.6% Baseline Debunked</span>
           </div>
@@ -805,7 +805,7 @@ export const MathematicalEvidenceCard: React.FC<Props> = ({ onNavigate }) => {
         <div className="p-6 sm:p-8 space-y-8 bg-[#080b11] text-slate-200 font-sans leading-relaxed text-sm max-w-5xl mx-auto">
           {/* Header */}
           <div className="border-b border-[#1b2331] pb-6 space-y-3">
-            <div className="text-xs font-mono text-cyan-400 uppercase tracking-widest">
+            <div className="text-xs font-medium text-cyan-400">
               Empirical Research Monograph • Published October 2026
             </div>
             <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-100 tracking-tight">
@@ -1049,7 +1049,7 @@ export const MathematicalEvidenceCard: React.FC<Props> = ({ onNavigate }) => {
           <button
             type="button"
             onClick={() => onNavigate('workbench')}
-            className="inline-flex items-center justify-center gap-2 px-4 py-2.5 min-h-[44px] text-xs font-mono rounded-lg bg-cyan-700 hover:bg-cyan-600 text-white font-semibold cursor-pointer transition-all border border-cyan-500/80 shadow-xs active:scale-[0.98]"
+            className="inline-flex items-center justify-center gap-2 px-4 py-2.5 min-h-[44px] text-xs font-mono rounded-lg bg-cyan-700 hover:bg-cyan-600 text-white font-semibold cursor-pointer transition-colors duration-150 border border-cyan-500/80 shadow-xs active:scale-[0.98]"
           >
             <span>Return to Workbench (Recalibrate) ↺</span>
           </button>

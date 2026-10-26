@@ -296,7 +296,7 @@ function AppContent() {
             {/* Nonagon Armilla Geometric Logo Mark with slow orbital spin ring */}
             <div className="relative w-10 h-10 rounded-xl bg-gradient-to-br from-[#101826] to-[#090d14] border border-cyan-800/80 flex items-center justify-center shrink-0 shadow-md ring-1 ring-cyan-500/20 group">
               <div className="absolute inset-0 rounded-xl bg-cyan-400/5 group-hover:bg-cyan-400/10 transition-colors" />
-              <svg viewBox="0 0 40 40" className="w-6 h-6 animate-orbital-spin" fill="none">
+              <svg viewBox="0 0 40 40" className="w-6 h-6 animate-orbital-spin" fill="none" aria-hidden="true">
                 <circle cx="20" cy="20" r="16" stroke="#1e293b" strokeWidth="1.2" strokeDasharray="3 3" />
                 <polygon points="20,6 32,27 8,27" stroke="#38bdf8" strokeWidth="1.5" strokeLinejoin="round" />
                 <polygon points="29,10 25,32 5,18" stroke="#f59e0b" strokeWidth="1" strokeOpacity="0.85" strokeLinejoin="round" />
@@ -306,15 +306,15 @@ function AppContent() {
             </div>
             <div>
               <div className="flex items-center gap-1.5">
-                <span className="font-bold tracking-tight text-slate-100 text-sm font-sans tracking-wider">
+                <span className="font-bold tracking-tight text-slate-100 text-sm font-sans">
                   SYNODIX
                 </span>
                 <span className="px-1.5 py-0.2 rounded text-[11px] font-mono bg-cyan-950 text-cyan-300 border border-cyan-800 font-medium">
                   {APP_VERSION_LABEL}
                 </span>
               </div>
-              <p className="text-xs text-slate-400 font-mono mt-0.5 tracking-tight flex items-center gap-1">
-                <span className="w-1.5 h-1.5 rounded-full bg-cyan-400/80 inline-block shadow-[0_0_4px_#38bdf8]"></span>
+              <p className="text-xs text-slate-400 font-sans mt-0.5 flex items-center gap-1.5">
+                <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 inline-block"></span>
                 Astrometric Observatory
               </p>
             </div>
@@ -325,12 +325,12 @@ function AppContent() {
         <div className="px-3 pt-3 shrink-0">
           <div className="p-3 rounded-xl bg-gradient-to-b from-[#0e1422] to-[#0a0d16] border border-[#1e293b] shadow-xs flex flex-col gap-1.5 relative overflow-hidden group">
             <div className="flex items-center justify-between">
-              <span className="text-[11px] uppercase font-mono text-slate-400 font-semibold tracking-wider flex items-center gap-1.5">
+              <span className="text-xs font-medium text-slate-400 flex items-center gap-1.5">
                 <User className="w-3 h-3 text-cyan-400" />
                 Subject Dossier
               </span>
-              <span className="text-[11px] font-mono text-cyan-400/80 font-medium">
-                ACTIVE
+              <span className="text-xs font-sans text-cyan-400 font-medium">
+                Active
               </span>
             </div>
             <AnimatePresence mode="wait">
@@ -368,7 +368,7 @@ function AppContent() {
                 {/* Divergence Mini Gauge Bar */}
                 <div className="w-full h-1 bg-[#151c28] rounded-full overflow-hidden">
                   <div
-                    className={`h-full transition-all duration-500 rounded-full ${
+                    className={`h-full transition-[width] duration-300 rounded-full ${
                       chartData.synthesis.divergence_metrics.divergence_rate_percent > 40
                         ? 'bg-gradient-to-r from-amber-500 to-rose-500'
                         : 'bg-gradient-to-r from-cyan-500 to-emerald-400'
@@ -383,8 +383,8 @@ function AppContent() {
 
         {/* Navigation Screen Links */}
         <nav aria-label="Workspace Screens" className="p-3 space-y-1 shrink-0">
-          <span className="px-2 text-[11px] font-mono text-slate-400 uppercase tracking-wider block mb-1.5 font-semibold">
-            WORKSPACE SCREENS
+          <span className="px-2 text-xs font-medium text-slate-400 block mb-1.5">
+            Workspace Screens
           </span>
 
           {NAV_ITEMS.map((item) => {
@@ -396,7 +396,7 @@ function AppContent() {
                 type="button"
                 onClick={() => navigateTo(item.id)}
                 aria-current={isActive ? 'page' : undefined}
-                className={`w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-left transition-all cursor-pointer group relative focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-1 focus-visible:ring-offset-[#080a0f] ${
+                className={`w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-left transition-colors duration-150 cursor-pointer group relative focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-1 focus-visible:ring-offset-[#080a0f] ${
                   isActive
                     ? 'bg-[#121a28] text-cyan-300 font-medium border border-cyan-500/60 shadow-xs ring-1 ring-cyan-500/20 translate-x-0.5'
                     : 'text-slate-300 hover:text-slate-100 hover:bg-[#101622]/80 border border-transparent hover:border-[#1b2535]'
@@ -410,7 +410,7 @@ function AppContent() {
                   </div>
                   <div className="truncate">
                     <span className="text-xs block font-sans truncate font-medium">{item.label}</span>
-                    <span className="text-[11px] text-slate-400 block truncate font-mono">
+                    <span className="text-[11px] text-slate-400 block truncate font-sans">
                       {item.description}
                     </span>
                   </div>
@@ -434,13 +434,13 @@ function AppContent() {
         {chartData && (
           <div className="px-3 pb-2 shrink-0">
             <div className="p-2 rounded bg-[#06090e] border border-[#1b2331] font-mono text-[11px] space-y-0.5 text-slate-400">
-              <div className="flex items-center justify-between text-slate-400 uppercase tracking-wider font-semibold mb-1">
-                <span>ASTROMETRIC CALIBRATION</span>
+              <div className="flex items-center justify-between text-slate-300 font-medium mb-1">
+                <span>Astrometric Calibration</span>
                 <ExplainerTrigger id="time_normalization_eot" variant="icon" size="xs" />
               </div>
-              <div className="flex justify-between"><span>EPOCH:</span> <span className="text-slate-200">J2000.0</span></div>
-              <div className="flex justify-between"><span>JULIAN DAY:</span> <span className="text-cyan-300">{chartData.astronomical_base?.julian_day_ut?.toFixed(2) || '2451545.00'}</span></div>
-              <div className="flex justify-between"><span>TOPOCENTRIC:</span> <span className="text-emerald-400">IAU 2000B</span></div>
+              <div className="flex justify-between"><span>Epoch:</span> <span className="text-slate-200">J2000.0</span></div>
+              <div className="flex justify-between"><span>Julian Day:</span> <span className="text-cyan-300">{chartData.astronomical_base?.julian_day_ut?.toFixed(2) || '2451545.00'}</span></div>
+              <div className="flex justify-between"><span>Topocentric:</span> <span className="text-emerald-400">IAU 2000B</span></div>
             </div>
           </div>
         )}
@@ -599,7 +599,7 @@ function AppContent() {
                     type="button"
                     onClick={() => navigateTo(item.id)}
                     aria-current={isActive ? 'page' : undefined}
-                    className={`w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-left transition-all cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 ${
+                    className={`w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-left transition-colors duration-150 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 ${
                       isActive
                         ? 'bg-[#141d2b] text-cyan-300 font-semibold border border-cyan-800'
                         : 'text-slate-300 hover:bg-[#101520]'
@@ -740,7 +740,7 @@ function AppContent() {
           className="md:hidden px-3 py-2 bg-[#0c1018]/90 backdrop-blur-md border-b border-[#1b2331]/80 select-none sticky top-[calc(3.75rem+env(safe-area-inset-top,0px))] z-20"
         >
           <div className="flex items-center justify-between text-[11px] font-mono mb-1.5 text-slate-400">
-            <span className="uppercase tracking-wider font-semibold text-[11px] text-cyan-400 flex items-center gap-1.5">
+            <span className="font-medium text-xs text-cyan-400 flex items-center gap-1.5">
               <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 inline-block"></span>
               Epistemic Journey
             </span>
@@ -761,7 +761,7 @@ function AppContent() {
                   onClick={() => navigateTo(s.id)}
                   aria-current={isActive ? 'step' : undefined}
                   aria-label={`Step ${s.step}: ${s.label}${isActive ? ' (current step)' : isPassed ? ' (completed)' : ''}`}
-                  className={`flex flex-col min-[380px]:flex-row items-center justify-center gap-0.5 min-[380px]:gap-1 px-1 py-1.5 min-h-[38px] rounded-lg text-center font-mono cursor-pointer transition-all active:scale-95 touch-manipulation focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 ${
+                  className={`flex flex-col min-[380px]:flex-row items-center justify-center gap-0.5 min-[380px]:gap-1 px-1 py-1.5 min-h-[38px] rounded-lg text-center font-mono cursor-pointer transition-colors active:scale-95 duration-150 touch-manipulation focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 ${
                     isActive
                       ? 'bg-cyan-950 text-cyan-300 border border-cyan-700 font-bold shadow-xs ring-1 ring-cyan-500/50'
                       : isPassed
@@ -770,7 +770,7 @@ function AppContent() {
                   }`}
                 >
                   <span
-                    className={`w-4 h-4 rounded-full flex items-center justify-center text-[11px] transition-all shrink-0 ${
+                    className={`w-4 h-4 rounded-full flex items-center justify-center text-[11px] transition-colors duration-150 shrink-0 ${
                       isActive
                         ? 'bg-cyan-400 text-slate-950 font-bold ring-2 ring-cyan-300/40'
                         : isPassed
@@ -788,7 +788,7 @@ function AppContent() {
           {/* Ambient Progress Conduit */}
           <div className="w-full bg-[#16202e] h-0.5 mt-2 rounded-full overflow-hidden">
             <div
-              className="h-full bg-cyan-400 transition-all duration-300 rounded-full shadow-[0_0_6px_#38bdf8]"
+              className="h-full bg-cyan-400 transition-[width] duration-300 rounded-full"
               style={{
                 width: `${
                   JOURNEY_STEPS.findIndex((s) => s.id === currentScreen) >= 0
@@ -932,14 +932,14 @@ function AppContent() {
               data-tooltip={`Navigate to ${item.label} (Step ${item.step})`}
               aria-label={item.label}
               aria-current={isActive ? 'page' : undefined}
-              className={`relative flex flex-col items-center justify-center p-1 min-w-[56px] min-h-[44px] rounded-lg transition-all cursor-pointer active:scale-[0.94] touch-manipulation focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 ${
+              className={`relative flex flex-col items-center justify-center p-1 min-w-[56px] min-h-[44px] rounded-lg transition-colors active:scale-[0.94] duration-150 cursor-pointer touch-manipulation focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 ${
                 isActive
                   ? 'text-cyan-300 font-bold bg-[#141c28]'
                   : 'text-slate-400 hover:text-slate-200 hover:bg-[#10151f]'
               }`}
             >
               {isActive && (
-                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-7 h-0.5 bg-cyan-400 rounded-full shadow-[0_0_8px_#38bdf8]" />
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-7 h-0.5 bg-cyan-400 rounded-full" />
               )}
               <div className="relative">
                 <Icon className={`w-4 h-4 mb-0.5 ${isActive ? 'text-cyan-300' : 'text-slate-400'}`} />
@@ -1078,7 +1078,7 @@ function EmptyChartState({ onOpenWorkbench }: { onOpenWorkbench: () => void }) {
         No Subject Chart Loaded
       </h3>
       <p className="text-xs text-slate-400 mt-1.5 max-w-sm mx-auto leading-relaxed">
-        Select a subject from the 100 historical titans gallery or calculate a custom birth record in the Workbench to unlock this view.
+        Select a subject from the 100 historical titans gallery or calculate a custom birth record in the Workbench to render this view.
       </p>
       <button
         type="button"

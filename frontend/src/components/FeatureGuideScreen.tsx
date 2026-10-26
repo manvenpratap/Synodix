@@ -247,7 +247,7 @@ export const FeatureGuideScreen: React.FC<Props> = ({ onNavigate, initialExplain
           <div>
             <div className="flex items-center gap-2">
               <span
-                className={`text-[11px] font-mono uppercase tracking-wider font-bold px-2 py-0.5 rounded border ${
+                className={`text-xs font-medium px-2 py-0.5 rounded border ${
                   activeSection === 'evidence'
                     ? 'text-amber-400 bg-amber-950/60 border-amber-800/60'
                     : 'text-cyan-400 bg-cyan-950/60 border-cyan-800/60'
@@ -255,8 +255,8 @@ export const FeatureGuideScreen: React.FC<Props> = ({ onNavigate, initialExplain
               >
                 {activeSection === 'evidence' ? 'Empirical Statistical Validation' : 'Astrometric Knowledge Base'}
               </span>
-              <span className="text-xs text-slate-400 font-mono hidden sm:inline">
-                {activeSection === 'evidence' ? '• 100 Titans Monte Carlo Benchmark' : '• 50 Authoritative Topics'}
+              <span className="text-xs text-slate-400 font-sans hidden sm:inline">
+                {activeSection === 'evidence' ? '100 Titans Monte Carlo Benchmark' : '50 Authoritative Topics'}
               </span>
             </div>
             <h1 className="text-lg sm:text-xl font-bold text-slate-100 tracking-tight mt-1">
@@ -285,9 +285,9 @@ export const FeatureGuideScreen: React.FC<Props> = ({ onNavigate, initialExplain
               role="tab"
               aria-selected={activeSection === 'topics'}
               onClick={() => setActiveSection('topics')}
-              className={`flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-mono font-medium transition-all cursor-pointer min-h-[34px] ${
+              className={`flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-sans font-medium transition-colors duration-150 cursor-pointer min-h-[34px] ${
                 activeSection === 'topics'
-                  ? 'bg-cyan-950 text-cyan-300 border border-cyan-700 font-bold shadow-xs'
+                  ? 'bg-cyan-950 text-cyan-300 border border-cyan-700 font-semibold shadow-xs'
                   : 'text-slate-400 hover:text-slate-200'
               }`}
             >
@@ -299,9 +299,9 @@ export const FeatureGuideScreen: React.FC<Props> = ({ onNavigate, initialExplain
               role="tab"
               aria-selected={activeSection === 'evidence'}
               onClick={() => setActiveSection('evidence')}
-              className={`flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-mono font-medium transition-all cursor-pointer min-h-[34px] ${
+              className={`flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-sans font-medium transition-colors duration-150 cursor-pointer min-h-[34px] ${
                 activeSection === 'evidence'
-                  ? 'bg-amber-950 text-amber-300 border border-amber-700 font-bold shadow-xs'
+                  ? 'bg-amber-950 text-amber-300 border border-amber-700 font-semibold shadow-xs'
                   : 'text-slate-400 hover:text-slate-200'
               }`}
             >
@@ -350,20 +350,20 @@ export const FeatureGuideScreen: React.FC<Props> = ({ onNavigate, initialExplain
           {/* 1. Functional Civilizational Array (9) */}
           <div className="p-3.5 rounded-xl bg-gradient-to-b from-[#090e17] to-[#070b12] border border-[#1a2332] shadow-sm space-y-2.5">
             <div className="flex items-center justify-between pb-1.5 border-b border-[#1b2331]/80">
-              <span className="text-[11px] uppercase font-mono text-slate-400 font-bold tracking-wider">
-                CIVILIZATIONAL ARRAY (9)
+              <span className="text-xs font-semibold text-slate-300">
+                Civilizational Traditions (9)
               </span>
               <div className="flex items-center gap-1.5">
                 {activeCivilization ? (
                   <button
                     type="button"
                     onClick={() => setActiveCivilization(null)}
-                    className="text-[10px] font-mono text-cyan-400 hover:text-cyan-200 underline cursor-pointer"
+                    className="text-xs text-cyan-400 hover:text-cyan-200 underline cursor-pointer"
                   >
                     Reset Filter
                   </button>
                 ) : (
-                  <span className="text-[10px] font-mono text-cyan-400 font-medium">9 / 9 ACTIVE</span>
+                  <span className="text-xs text-cyan-400 font-medium">9 of 9 Active</span>
                 )}
               </div>
             </div>
@@ -380,9 +380,9 @@ export const FeatureGuideScreen: React.FC<Props> = ({ onNavigate, initialExplain
                     data-tooltip={civ.tooltip}
                     aria-label={`Filter by ${civ.label}`}
                     aria-pressed={isSelected}
-                    className={`px-1.5 py-1.5 rounded-lg border text-[11px] font-mono font-medium flex items-center justify-center gap-1 transition-all cursor-pointer min-w-0 ${
+                    className={`px-1.5 py-1.5 rounded-lg border text-xs font-medium flex items-center justify-center gap-1 transition-colors duration-150 cursor-pointer min-w-0 ${
                       isSelected
-                        ? `${civ.activeBorder} ${civ.colorClass} shadow-md ring-1 ring-cyan-400 scale-[1.03]`
+                        ? `${civ.activeBorder} ${civ.colorClass} shadow-sm ring-1 ring-cyan-400`
                         : `bg-[#0d131f] border-[#1e2a3a] ${civ.colorClass} hover:border-cyan-500/50 hover:bg-[#121a2b]`
                     }`}
                   >
@@ -437,21 +437,21 @@ export const FeatureGuideScreen: React.FC<Props> = ({ onNavigate, initialExplain
 
             {/* Category Filter Pills */}
             <div className="space-y-1">
-              <span className="text-[10px] font-mono text-slate-400 uppercase tracking-wider block font-semibold mb-1">
-                KNOWLEDGE DOMAINS
+              <span className="text-xs font-semibold text-slate-300 block mb-1">
+                Knowledge Domains
               </span>
               <div className="flex flex-col gap-1">
                 <button
                   type="button"
                   onClick={() => setSelectedCategory('all')}
-                  className={`w-full text-left px-2.5 py-1.5 rounded-md text-xs font-mono transition-colors flex items-center justify-between cursor-pointer ${
+                  className={`w-full text-left px-2.5 py-1.5 rounded-md text-xs font-sans transition-colors flex items-center justify-between cursor-pointer ${
                     selectedCategory === 'all'
                       ? 'bg-cyan-950/80 text-cyan-300 font-semibold border border-cyan-800'
                       : 'text-slate-400 hover:text-slate-200 hover:bg-[#10151f]'
                   }`}
                 >
                   <span>All Knowledge Domains</span>
-                  <span className="text-[10px] font-mono text-slate-500">50</span>
+                  <span className="text-xs font-mono text-slate-500">50</span>
                 </button>
 
                 {EXPLAINER_CATEGORIES.map((cat) => {
@@ -480,15 +480,15 @@ export const FeatureGuideScreen: React.FC<Props> = ({ onNavigate, initialExplain
           {/* 3. Filtered Topic Explorer List */}
           <div className="p-3.5 rounded-xl bg-[#090d15]/90 border border-[#1b2331] space-y-2 shadow-xs">
             <div className="flex items-center justify-between pb-1.5 border-b border-[#1b2331]/80">
-              <span className="text-[11px] uppercase font-mono text-slate-400 font-bold tracking-wider">
-                TOPICS ({filteredExplainers.length})
+              <span className="text-xs font-semibold text-slate-300">
+                Topics ({filteredExplainers.length})
               </span>
-              <span className="text-[10px] font-mono text-slate-500">Select to inspect</span>
+              <span className="text-xs text-slate-500 font-sans">Select to inspect</span>
             </div>
 
             <div className="max-h-[380px] overflow-y-auto space-y-1 pr-1 overscroll-contain">
               {filteredExplainers.length === 0 ? (
-                <div className="p-4 text-center text-xs font-mono text-slate-500">
+                <div className="p-4 text-center text-xs text-slate-500">
                   No matching topics found for active filters.
                 </div>
               ) : (
@@ -499,7 +499,7 @@ export const FeatureGuideScreen: React.FC<Props> = ({ onNavigate, initialExplain
                       key={item.id}
                       type="button"
                       onClick={() => setSelectedExplainerId(item.id)}
-                      className={`w-full text-left p-2 rounded-lg transition-all cursor-pointer flex items-center justify-between gap-2 ${
+                      className={`w-full text-left p-2 rounded-lg transition-colors duration-150 cursor-pointer flex items-center justify-between gap-2 ${
                         isSelected
                           ? 'bg-[#141d2b] border border-cyan-500/70 text-cyan-200 shadow-sm'
                           : 'hover:bg-[#10151f] text-slate-300 border border-transparent'
@@ -581,7 +581,7 @@ export const FeatureGuideScreen: React.FC<Props> = ({ onNavigate, initialExplain
             <div className="p-5 sm:p-6 rounded-2xl bg-[#0a0e17] border border-[#1b2331] space-y-2.5 shadow-xs">
               <div className="flex items-center gap-2 text-cyan-400">
                 <Compass className="w-4 h-4" />
-                <h3 className="text-xs font-mono font-bold uppercase tracking-wider text-cyan-300">
+                <h3 className="text-xs font-semibold text-cyan-300">
                   Concept Overview & Astrometric Phenomenon
                 </h3>
               </div>
@@ -594,14 +594,14 @@ export const FeatureGuideScreen: React.FC<Props> = ({ onNavigate, initialExplain
             <div className="p-5 sm:p-6 rounded-2xl bg-[#0a0e17] border border-[#1b2331] space-y-4 shadow-xs">
               <div className="flex items-center gap-2 text-amber-400">
                 <Calculator className="w-4 h-4" />
-                <h3 className="text-xs font-mono font-bold uppercase tracking-wider text-amber-300">
+                <h3 className="text-xs font-semibold text-amber-300">
                   Astronomical & Mathematical Algorithm
                 </h3>
               </div>
 
               {/* Formula Display Box */}
               <div className="p-3.5 sm:p-4 rounded-xl bg-[#05070c] border border-amber-900/40 font-mono text-xs sm:text-sm text-amber-200/95 overflow-x-auto select-all shadow-inner">
-                <span className="text-[10px] text-slate-500 uppercase tracking-wider block mb-1 font-sans">
+                <span className="text-[11px] text-slate-400 block mb-1 font-medium">
                   Governing Formula / Mathematical Invariant
                 </span>
                 <code>{currentExplainer.astronomicalFormula}</code>
@@ -609,7 +609,7 @@ export const FeatureGuideScreen: React.FC<Props> = ({ onNavigate, initialExplain
 
               {/* Step-by-Step Breakdown */}
               <div className="space-y-2.5 pt-2">
-                <h4 className="text-xs font-mono font-semibold text-slate-300 uppercase tracking-wider">
+                <h4 className="text-xs font-medium text-slate-300">
                   Algorithmic Execution Pipeline:
                 </h4>
                 <div className="grid grid-cols-1 gap-2">
@@ -634,7 +634,7 @@ export const FeatureGuideScreen: React.FC<Props> = ({ onNavigate, initialExplain
             <div className="p-5 sm:p-6 rounded-2xl bg-[#0a0e17] border border-[#1b2331] space-y-2.5 shadow-xs">
               <div className="flex items-center gap-2 text-emerald-400">
                 <Lightbulb className="w-4 h-4" />
-                <h3 className="text-xs font-mono font-bold uppercase tracking-wider text-emerald-300">
+                <h3 className="text-xs font-semibold text-emerald-300">
                   Role in Epistemic Triangulation & Consensus
                 </h3>
               </div>
@@ -647,7 +647,7 @@ export const FeatureGuideScreen: React.FC<Props> = ({ onNavigate, initialExplain
             <div className="p-5 sm:p-6 rounded-2xl bg-[#0a0e17] border border-[#1b2331] space-y-2.5 shadow-xs">
               <div className="flex items-center gap-2 text-indigo-400">
                 <History className="w-4 h-4" />
-                <h3 className="text-xs font-mono font-bold uppercase tracking-wider text-indigo-300">
+                <h3 className="text-xs font-semibold text-indigo-300">
                   Historical Lineage & Original Treatises
                 </h3>
               </div>

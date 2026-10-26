@@ -431,8 +431,8 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
         <div className="flex flex-col md:flex-row md:items-center justify-between pb-4 border-b border-[#1b2331] gap-3">
         <div>
           <div className="flex flex-wrap items-center gap-x-2 gap-y-0.5">
-            <span className="text-[11px] font-mono uppercase tracking-wider text-cyan-400 font-semibold">
-              01 / Astrometric Calibration & Input
+            <span className="text-xs text-cyan-400 font-medium">
+              Section 1 · Astrometric Calibration & Input
             </span>
             <span className="text-slate-400 hidden sm:inline">•</span>
             <span className="text-xs text-slate-400 font-mono">
@@ -532,7 +532,7 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
             {/* My Vault Quick Load Bar */}
             {savedProfiles.length > 0 && (
               <div className="flex items-center gap-1.5 flex-wrap">
-                <span className="text-[11px] font-mono uppercase tracking-wider text-slate-400 flex items-center gap-1">
+                <span className="text-xs font-medium text-slate-300 flex items-center gap-1">
                   <Bookmark className="w-3 h-3 text-cyan-400" />
                   Vault ({savedProfiles.length}):
                 </span>
@@ -577,10 +577,10 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
                   </div>
                   <div>
                     <div className="flex items-center gap-2">
-                      <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-cyan-400 bg-cyan-950/60 px-1.5 py-0.2 rounded border border-cyan-800/60">
-                        Module 01
+                      <span className="text-xs font-medium text-cyan-400 bg-cyan-950/60 px-1.5 py-0.5 rounded border border-cyan-800/60">
+                        Module 1
                       </span>
-                      <h3 className="text-xs sm:text-sm font-mono font-bold uppercase tracking-wider text-slate-100">
+                      <h3 className="text-xs sm:text-sm font-medium text-slate-100">
                         Subject Identity & Natal Cycle
                       </h3>
                     </div>
@@ -682,10 +682,10 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
                   </div>
                   <div>
                     <div className="flex items-center gap-2">
-                      <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-amber-400 bg-amber-950/60 px-1.5 py-0.2 rounded border border-amber-800/60">
-                        Module 02
+                      <span className="text-xs font-medium text-amber-400 bg-amber-950/60 px-1.5 py-0.5 rounded border border-amber-800/60">
+                        Module 2
                       </span>
-                      <h3 className="text-xs sm:text-sm font-mono font-bold uppercase tracking-wider text-slate-100">
+                      <h3 className="text-xs sm:text-sm font-medium text-slate-100">
                         Temporal Coordinates & Ephemeris Epoch
                       </h3>
                     </div>
@@ -786,10 +786,10 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
                   </div>
                   <div>
                     <div className="flex items-center gap-2">
-                      <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-emerald-400 bg-emerald-950/60 px-1.5 py-0.2 rounded border border-emerald-800/60">
-                        Module 03
+                      <span className="text-xs font-medium text-emerald-400 bg-emerald-950/60 px-1.5 py-0.5 rounded border border-emerald-800/60">
+                        Module 3
                       </span>
-                      <h3 className="text-xs sm:text-sm font-mono font-bold uppercase tracking-wider text-slate-100">
+                      <h3 className="text-xs sm:text-sm font-medium text-slate-100">
                         Geographic Origin & Spatial Observer
                       </h3>
                     </div>
@@ -804,7 +804,7 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
                   type="button"
                   onClick={handleDetectLocation}
                   disabled={isLocating}
-                  className="relative shrink-0 inline-flex items-center gap-1.5 min-h-[36px] sm:min-h-[32px] px-3 py-1.5 text-[11px] font-mono text-cyan-400 hover:text-cyan-200 bg-[#0d121c] border border-cyan-800/60 rounded-lg transition-all cursor-pointer disabled:opacity-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 overflow-hidden shadow-xs hover:border-cyan-500 self-start sm:self-auto"
+                  className="relative shrink-0 inline-flex items-center gap-1.5 min-h-[36px] sm:min-h-[32px] px-3 py-1.5 text-[11px] font-mono text-cyan-400 hover:text-cyan-200 bg-[#0d121c] border border-cyan-800/60 rounded-lg transition-colors duration-150 cursor-pointer disabled:opacity-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 overflow-hidden shadow-xs hover:border-cyan-500 self-start sm:self-auto"
                   data-tooltip="Detect current device GPS coordinates"
                   aria-label="Detect GPS coordinates"
                 >
@@ -900,7 +900,7 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
                           >
                             <div className="min-w-0">
                               <div className="font-medium text-slate-100 flex items-center gap-1.5 truncate">
-                                {isSelected && <span className="text-cyan-400 font-mono text-[11px]">▶</span>}
+                                {isSelected && <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 inline-block shrink-0" />}
                                 <span>{s.city}</span>
                                 {s.adminCode && (
                                   <span className="text-[11px] text-slate-400">({s.adminCode})</span>
@@ -1144,7 +1144,7 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
               <button
                 type="submit"
                 disabled={isLoading}
-                className="relative overflow-hidden px-6 py-2.5 min-h-[44px] bg-gradient-to-r from-cyan-700 via-cyan-600 to-sky-700 hover:from-cyan-600 hover:to-sky-600 active:scale-[0.98] text-white font-medium text-xs rounded-lg border border-cyan-400/60 transition-all cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-1 focus-visible:ring-offset-[#080a0f] shadow-md shadow-cyan-950/40"
+                className="relative overflow-hidden px-6 py-2.5 min-h-[44px] bg-gradient-to-r from-cyan-700 via-cyan-600 to-sky-700 hover:from-cyan-600 hover:to-sky-600 active:scale-[0.98] text-white font-medium text-xs rounded-lg border border-cyan-400/60 transition-colors duration-150 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-1 focus-visible:ring-offset-[#080a0f] shadow-md shadow-cyan-950/40"
               >
                 {isLoading && (
                   <div className="absolute inset-0 pointer-events-none">
@@ -1276,7 +1276,7 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
                         handleSelectTitan(p, false);
                       }
                     }}
-                    className={`btn-press flex flex-col text-left p-2.5 rounded-lg border transition-all cursor-pointer relative group min-h-[58px] active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-1 focus-visible:ring-offset-[#080a0f] ${
+                    className={`btn-press flex flex-col text-left p-2.5 rounded-lg border transition-colors duration-150 cursor-pointer relative group min-h-[58px] active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-1 focus-visible:ring-offset-[#080a0f] ${
                       isSelected
                         ? 'bg-cyan-950/70 border-cyan-500/80 shadow-sm shadow-cyan-950 text-slate-100 ring-1 ring-cyan-500/40'
                         : 'bg-[#10151f] hover:bg-[#151c2a] border-[#1b2331] text-slate-300 hover:border-slate-700'

@@ -66,7 +66,7 @@ export const NorthIndianChart: React.FC<VedicChartProps> = ({ jyotisha }) => {
   return (
     <div className="flex flex-col items-center justify-center p-3 bg-[#080a0f] rounded-lg border border-[#1b2331]">
       <div className="flex items-center justify-between w-full max-w-[400px] mb-2 px-1">
-        <span className="text-[11px] font-mono uppercase tracking-wider text-amber-400 font-semibold">
+        <span className="text-xs font-medium text-amber-400">
           North Indian Kundaḷī (Lagna: {jyotisha.lagna.sign})
         </span>
         <span className="text-[11px] font-mono text-slate-400">Fixed House Geometry</span>
@@ -76,6 +76,7 @@ export const NorthIndianChart: React.FC<VedicChartProps> = ({ jyotisha }) => {
         viewBox="0 0 400 400"
         className="w-full max-w-[360px] h-auto select-none"
         style={{ filter: 'drop-shadow(0 4px 12px rgba(0,0,0,0.5))' }}
+        aria-hidden="true"
       >
         {/* Outer Square */}
         <rect x="10" y="10" width="380" height="380" fill="#0d1118" stroke="#1b2331" strokeWidth="2" />
@@ -248,7 +249,7 @@ export const WesternCircularWheel: React.FC<WesternWheelProps> = ({ western }) =
   return (
     <div className="flex flex-col items-center justify-center p-3 bg-[#080a0f] rounded-lg border border-[#1b2331]">
       <div className="flex items-center justify-between w-full max-w-[420px] mb-2 px-1">
-        <span className="text-[11px] font-mono uppercase tracking-wider text-cyan-400 font-semibold">
+        <span className="text-xs font-medium text-cyan-400">
           Western 360° Circular Wheel (Asc: {western.ascendant.sign} {western.ascendant.degree}°)
         </span>
         <span className="text-[11px] font-mono text-slate-400">Whole Sign Houses</span>
@@ -329,7 +330,7 @@ export const WesternCircularWheel: React.FC<WesternWheelProps> = ({ western }) =
               strokeWidth="0.8"
               strokeOpacity="0.45"
               strokeDasharray={asp.aspect === 'Sextile' ? '3,2' : undefined}
-              className="animate-beam-pulse hover:stroke-opacity-100 hover:stroke-[1.6] transition-all cursor-pointer"
+              className="animate-beam-pulse hover:stroke-opacity-100 hover:stroke-[1.6] transition-[stroke,stroke-width,stroke-opacity] duration-150 cursor-pointer"
             />
           );
         })}
@@ -440,7 +441,7 @@ export const BaZiElementPentagram: React.FC<BaZiPentagramProps> = ({ bazi }) => 
   return (
     <div className="flex flex-col items-center justify-center p-3 bg-[#080a0f] rounded-lg border border-[#1b2331]">
       <div className="flex items-center justify-between w-full max-w-[360px] mb-2 px-1">
-        <span className="text-[11px] font-mono uppercase tracking-wider text-emerald-400 font-semibold">
+        <span className="text-xs font-medium text-emerald-400">
           Wu Xing Five Elements Flow (五行生克)
         </span>
         <span className="text-[11px] font-mono text-slate-400">Day Master: {bazi.day_master?.stem} ({dayMasterElement})</span>
@@ -488,7 +489,7 @@ export const BaZiElementPentagram: React.FC<BaZiPentagramProps> = ({ bazi }) => 
               strokeWidth="1"
               strokeDasharray="4 3"
               strokeOpacity="0.45"
-              className="animate-beam-pulse hover:stroke-opacity-90 hover:stroke-[1.8] transition-all cursor-pointer"
+              className="animate-beam-pulse hover:stroke-opacity-90 hover:stroke-[1.8] transition-[stroke,stroke-width,stroke-opacity] duration-150 cursor-pointer"
             />
           );
         })}
@@ -598,7 +599,7 @@ export const ZiWeiPalaceGrid: React.FC<ZiWeiGridProps> = ({ ziwei }) => {
     return (
       <div
         key={branch}
-        className={`p-2 rounded border flex flex-col justify-between text-left transition-all hover:-translate-y-0.5 hover:shadow-md cursor-pointer ${
+        className={`p-2 rounded border flex flex-col justify-between text-left transition-colors duration-150 cursor-pointer ${
           p.is_ming
             ? 'bg-[#182335] border-cyan-500 shadow-xs animate-aura-breathe'
             : p.is_shen
@@ -647,7 +648,7 @@ export const ZiWeiPalaceGrid: React.FC<ZiWeiGridProps> = ({ ziwei }) => {
   return (
     <div className="flex flex-col items-center justify-center p-3 bg-[#080a0f] rounded-lg border border-[#1b2331]">
       <div className="flex items-center justify-between w-full max-w-[560px] mb-2 px-1">
-        <span className="text-[11px] font-mono uppercase tracking-wider text-purple-400 font-semibold">
+        <span className="text-xs font-medium text-purple-400">
           Zi Wei Dou Shu 12-Palace Heavenly Grid (紫微斗数命盘)
         </span>
         <span className="text-[11px] font-mono text-slate-400">Bureau: {ziwei.five_elements_bureau?.name}</span>
@@ -722,7 +723,7 @@ export const AlmutenDignityBarChart: React.FC<AlmutenBarProps> = ({ persian }) =
   return (
     <div className="flex flex-col p-3 bg-[#080a0f] rounded-lg border border-[#1b2331]">
       <div className="flex items-center justify-between mb-3 px-1">
-        <span className="text-[11px] font-mono uppercase tracking-wider text-amber-400 font-semibold">
+        <span className="text-xs font-medium text-amber-400">
           Almuten Figuris Point Distribution (Weighted Scoring)
         </span>
         <span className="text-[11px] font-mono text-slate-400">Victor: {persian.almuten_figuris?.victor}</span>
@@ -751,12 +752,12 @@ export const AlmutenDignityBarChart: React.FC<AlmutenBarProps> = ({ persian }) =
               {/* Stacked Bar */}
               <div className="h-2 w-full bg-[#121721] rounded overflow-hidden flex border border-[#1b2331]">
                 <div
-                  className="h-full bg-cyan-500 transition-all duration-500 ease-out"
+                  className="h-full bg-cyan-500 transition-[width] duration-300 ease-out"
                   style={{ width: `${essentialPct}%` }}
                   title={`Essential: +${item.essential_dignity}`}
                 />
                 <div
-                  className="h-full bg-amber-500 transition-all duration-500 ease-out"
+                  className="h-full bg-amber-500 transition-[width] duration-300 ease-out"
                   style={{ width: `${accidentalPct}%` }}
                   title={`Accidental: +${item.accidental_dignity}`}
                 />
@@ -797,7 +798,7 @@ export const MaramatakaLunarDial: React.FC<MaramatakaDialProps> = ({ maramataka 
   return (
     <div className="flex flex-col items-center justify-center p-3 bg-[#080a0f] rounded-lg border border-[#1b2331]">
       <div className="flex items-center justify-between w-full max-w-[320px] mb-2 px-1">
-        <span className="text-[11px] font-mono uppercase tracking-wider text-emerald-400 font-semibold">
+        <span className="text-xs font-medium text-emerald-400">
           Maramataka 30-Night Oceanic Dial
         </span>
         <span className="text-[11px] font-mono text-slate-400">Night #{currentNightNum}</span>
@@ -907,7 +908,7 @@ export const DomainConsensusRadar: React.FC<RadarProps> = ({ synthesis }) => {
   return (
     <div className="flex flex-col items-center justify-center p-3 bg-[#080a0f] rounded-lg border border-[#1b2331]">
       <div className="flex items-center justify-between w-full max-w-[440px] mb-2 px-1">
-        <span className="text-[11px] font-mono uppercase tracking-wider text-purple-400 font-semibold">
+        <span className="text-xs font-medium text-purple-400">
           9-Domain Consensus Radar Matrix (D1–D9)
         </span>
         <span className="text-[11px] font-mono text-slate-400">
@@ -1066,7 +1067,7 @@ export const TibetanMewaGrid: React.FC<TibetanMewaProps> = ({ tibetan }) => {
   return (
     <div className="flex flex-col items-center justify-center p-3 bg-[#080a0f] rounded-lg border border-[#1b2331]">
       <div className="flex items-center justify-between w-full max-w-[400px] mb-2 px-1">
-        <span className="text-[11px] font-mono uppercase tracking-wider text-rose-400 font-semibold">
+        <span className="text-xs font-medium text-rose-400">
           Tibetan Mewa Magic Square & Parkha (Luoshu Matrix)
         </span>
         <span className="text-[11px] font-mono text-slate-400">Sum = 15</span>
@@ -1080,7 +1081,7 @@ export const TibetanMewaGrid: React.FC<TibetanMewaProps> = ({ tibetan }) => {
             return (
               <div
                 key={`${rIdx}-${num}`}
-                className={`p-3 rounded-md border flex flex-col items-center justify-center text-center transition-all ${
+                className={`p-3 rounded-md border flex flex-col items-center justify-center text-center transition-colors duration-150 ${
                   isNatal
                     ? 'border-amber-400 bg-[#1e2230] shadow-[0_0_12px_rgba(251,191,36,0.25)] animate-celestial-glow'
                     : 'border-[#1b2331] bg-[#0d1118]'
@@ -1146,7 +1147,7 @@ export const EgyptianDecanStarClock: React.FC<EgyptianClockProps> = ({ egyptian 
   return (
     <div className="flex flex-col items-center justify-center p-3 bg-[#080a0f] rounded-lg border border-[#1b2331]">
       <div className="flex items-center justify-between w-full max-w-[360px] mb-2 px-1">
-        <span className="text-[11px] font-mono uppercase tracking-wider text-cyan-400 font-semibold">
+        <span className="text-xs font-medium text-cyan-400">
           Ra's Cosmic Barque 36-Decan Star Clock
         </span>
         <span className="text-[11px] font-mono text-slate-400">10° Segments</span>
@@ -1228,7 +1229,7 @@ export const MayaCalendarCompass: React.FC<MayanCompassProps> = ({ mayan }) => {
   return (
     <div className="flex flex-col items-center justify-center p-3 bg-[#080a0f] rounded-lg border border-[#1b2331]">
       <div className="flex items-center justify-between w-full max-w-[340px] mb-2 px-1">
-        <span className="text-[11px] font-mono uppercase tracking-wider text-cyan-400 font-semibold">
+        <span className="text-xs font-medium text-cyan-400">
           Maya Calendar Round Interlocking Wheels
         </span>
         <span className="text-[11px] font-mono text-slate-400">52-Year Cycle</span>

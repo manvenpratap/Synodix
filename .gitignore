@@ -27,3 +27,6 @@ graphify-out/.rebuild.lock
 
 # Root test screenshots
 /*.png
+
+# Hallmark audit artifacts
+.hallmark/

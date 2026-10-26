@@ -56,8 +56,8 @@ export const SynthesisMatrix: React.FC<Props> = ({ synthesis, onNavigate }) => {
       {/* Header & Divergence Metric */}
       <div className="flex flex-col md:flex-row md:items-center justify-between pb-3.5 border-b border-[#1b2331] gap-3">
         <div>
-          <span className="text-[11px] font-mono uppercase tracking-wider text-purple-400 font-semibold block">
-            05 / Cross-Cultural Synthesis Without Double-Counting
+          <span className="text-xs text-purple-400 font-medium block">
+            Section 5 · Cross-Cultural Synthesis Without Double-Counting
           </span>
           <div className="flex flex-wrap items-center gap-2 mt-0.5">
             <h3 className="text-base font-semibold text-slate-100">
@@ -74,7 +74,7 @@ export const SynthesisMatrix: React.FC<Props> = ({ synthesis, onNavigate }) => {
         <div className="flex items-center gap-3 bg-[#080a0f] px-3 py-2 rounded-md border border-[#1b2331]">
           <div className="text-right">
             <div className="flex items-center justify-end gap-1.5">
-              <span className="text-[11px] text-slate-400 uppercase tracking-wider font-mono block">
+              <span className="text-xs text-slate-300 font-medium block">
                 Divergence Rate
               </span>
               <ExplainerTrigger id="honest_divergence_rate" size="xs" variant="icon" />
@@ -101,12 +101,12 @@ export const SynthesisMatrix: React.FC<Props> = ({ synthesis, onNavigate }) => {
           <div className="flex items-center gap-3">
             <div className="w-12 h-12 rounded-lg bg-[#0d121c] border border-[#1e2738] flex flex-col items-center justify-center font-mono">
               <span className="text-sm font-bold text-cyan-300">{consensusPercent}%</span>
-              <span className="text-[11px] text-slate-500 uppercase font-semibold">INDEX</span>
+              <span className="text-[10px] text-slate-400 font-medium">Index</span>
             </div>
             <div>
               <div className="flex flex-wrap items-center gap-2">
-                <span className="text-[11px] font-mono uppercase tracking-wider text-slate-400 font-semibold block">
-                  GLOBAL TRIANGULATION CONSENSUS
+                <span className="text-xs text-slate-300 font-medium block">
+                  Global Triangulation Consensus
                 </span>
                 <ExplainerTrigger id="three_cluster_consensus" label="Triangulation Math" variant="badge" />
               </div>
@@ -174,7 +174,7 @@ export const SynthesisMatrix: React.FC<Props> = ({ synthesis, onNavigate }) => {
       {/* Life Domains Table */}
       <div className="space-y-2.5">
         <div className="flex items-center justify-between">
-          <span className="text-[11px] font-mono font-semibold text-slate-400 uppercase tracking-wider block">
+          <span className="text-xs font-medium text-slate-300 block">
             Life Domains ({filteredDomains.length} Shown)
           </span>
           <button
@@ -222,15 +222,15 @@ export const SynthesisMatrix: React.FC<Props> = ({ synthesis, onNavigate }) => {
 
                   <div className="flex items-center gap-2.5 self-end sm:self-auto">
                     {/* Polarities summary */}
-                    <div className="flex items-center gap-1.5 text-xs font-mono bg-[#121721] px-2 py-0.5 rounded border border-[#1b2331]">
+                    <div className="flex items-center gap-2 text-xs font-mono bg-[#121721] px-2 py-0.5 rounded border border-[#1b2331]">
                       <span title="Jyotisha">J: <span className={getPolarityColor(dom.evaluations.jyotisha.polarity)}>{dom.evaluations.jyotisha.polarity[0]}</span></span>
-                      <span className="text-slate-400">•</span>
+                      <span className="w-px h-2.5 bg-[#223049]" aria-hidden="true" />
                       <span title="Western">W: <span className={getPolarityColor(dom.evaluations.western.polarity)}>{dom.evaluations.western.polarity[0]}</span></span>
-                      <span className="text-slate-400">•</span>
+                      <span className="w-px h-2.5 bg-[#223049]" aria-hidden="true" />
                       <span title="Sinic">S: <span className={getPolarityColor(dom.evaluations.sinic.polarity)}>{dom.evaluations.sinic.polarity[0]}</span></span>
                     </div>
 
-                    <span className={`px-2 py-1 text-[11px] font-mono font-semibold rounded border uppercase tracking-wider ${getGradeBadge(dom.grade)}`}>
+                    <span className={`px-2 py-0.5 text-xs font-mono font-medium rounded border ${getGradeBadge(dom.grade)}`}>
                       {dom.grade}
                     </span>
 
@@ -301,7 +301,7 @@ export const SynthesisMatrix: React.FC<Props> = ({ synthesis, onNavigate }) => {
 
       {/* Temperament Axes */}
       <div className="pt-3 border-t border-[#1b2331]">
-        <span className="text-[11px] font-mono font-semibold text-slate-400 uppercase tracking-wider block mb-2.5">
+        <span className="text-xs font-medium text-slate-300 block mb-2.5">
           Temperament Axes (Computed Base + Attributed Overlays)
         </span>
 
@@ -325,14 +325,14 @@ export const SynthesisMatrix: React.FC<Props> = ({ synthesis, onNavigate }) => {
 
       {/* Chronological Overlap */}
       <div className="pt-3 border-t border-[#1b2331]">
-        <span className="text-[11px] font-mono font-semibold text-slate-400 uppercase tracking-wider block mb-2.5">
+        <span className="text-xs font-medium text-slate-300 block mb-2.5">
           Unified Chronology Alignment (Active Timing Cycles)
         </span>
 
         <div className="p-3.5 rounded-md bg-[#080a0f] border border-[#1b2331]">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5 text-xs">
             <div className="p-2.5 rounded bg-[#0d1118] border border-[#1b2331]">
-              <span className="text-[11px] font-mono uppercase text-amber-400 font-semibold block">Vimshottari Dasha</span>
+              <span className="text-xs text-amber-400 font-medium block">Vimshottari Dasha</span>
               <p className="font-semibold text-slate-200 mt-0.5">
                 {synthesis.chronology.jyotisha_vimshottari.active_mahadasha}
                 {synthesis.chronology.jyotisha_vimshottari.active_antardasha && (
@@ -348,7 +348,7 @@ export const SynthesisMatrix: React.FC<Props> = ({ synthesis, onNavigate }) => {
             </div>
 
             <div className="p-2.5 rounded bg-[#0d1118] border border-[#1b2331]">
-              <span className="text-[11px] font-mono uppercase text-emerald-400 font-semibold block">BaZi Da Yun</span>
+              <span className="text-xs text-emerald-400 font-medium block">BaZi Da Yun</span>
               <p className="font-semibold text-slate-200 mt-0.5 font-serif">
                 {synthesis.chronology.bazi_da_yun.active_pillar}
               </p>
@@ -363,7 +363,7 @@ export const SynthesisMatrix: React.FC<Props> = ({ synthesis, onNavigate }) => {
             </div>
 
             <div className="p-2.5 rounded bg-[#0d1118] border border-[#1b2331]">
-              <span className="text-[11px] font-mono uppercase text-blue-400 font-semibold block">Annual Profection</span>
+              <span className="text-xs text-blue-400 font-medium block">Annual Profection</span>
               <p className="font-semibold text-slate-200 mt-0.5">
                 House {synthesis.chronology.western_profection.activated_house}
               </p>
@@ -378,7 +378,7 @@ export const SynthesisMatrix: React.FC<Props> = ({ synthesis, onNavigate }) => {
             </div>
 
             <div className="p-2.5 rounded bg-[#0d1118] border border-[#1b2331]">
-              <span className="text-[11px] font-mono uppercase text-purple-400 font-semibold block">
+              <span className="text-xs text-purple-400 font-medium block">
                 {synthesis.chronology.persian_firdaria ? "Zi Wei & Firdaria" : "Zi Wei Decadal"}
               </span>
               <p className="font-semibold text-slate-200 mt-0.5">
@@ -407,16 +407,18 @@ export const SynthesisMatrix: React.FC<Props> = ({ synthesis, onNavigate }) => {
           <button
             type="button"
             onClick={() => onNavigate('traditions')}
-            className="inline-flex items-center justify-center gap-2 px-4 py-2.5 min-h-[44px] text-xs font-mono rounded-lg bg-[#101520] hover:bg-[#161d2c] text-slate-300 border border-[#1b2331] cursor-pointer transition-colors active:scale-[0.98]"
+            className="inline-flex items-center justify-center gap-2 px-4 py-2.5 min-h-[44px] text-xs font-medium rounded-lg bg-[#101520] hover:bg-[#161d2c] text-slate-300 border border-[#1b2331] cursor-pointer transition-colors active:scale-[0.98]"
           >
-            <span>← View Traditions</span>
+            <span aria-hidden="true">←</span>
+            <span>View Traditions</span>
           </button>
           <button
             type="button"
             onClick={() => onNavigate('dossier')}
-            className="inline-flex items-center justify-center gap-2 px-4 py-2.5 min-h-[44px] text-xs font-mono rounded-lg bg-cyan-700 hover:bg-cyan-600 text-white font-semibold cursor-pointer transition-all border border-cyan-500/80 shadow-xs active:scale-[0.98]"
+            className="inline-flex items-center justify-center gap-2 px-4 py-2.5 min-h-[44px] text-xs font-medium rounded-lg bg-cyan-700 hover:bg-cyan-600 text-white cursor-pointer transition-colors duration-150 border border-cyan-500/80 shadow-xs active:scale-[0.98]"
           >
-            <span>Read Full Corroboration Dossier →</span>
+            <span>Read Full Corroboration Dossier</span>
+            <span aria-hidden="true">→</span>
           </button>
         </div>
       )}

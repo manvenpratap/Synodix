@@ -1,7 +1,7 @@
 # Synodix: Project Context & Working Memory
 
-**Last Updated:** 2026-10-27 02:05:00
-**Version:** 2.31.11  
+**Last Updated:** 2026-10-27 02:48:00
+**Version:** 2.31.12  
 **Stack:** Python 3.12 (FastAPI, Swiss Ephemeris 2.10, Skyfield DE421) + TypeScript / React 19 / Vite / Tailwind CSS v4 / Framer Motion / Capacitor 8 (iOS & Android)  
 **Workspace:** `/Volumes/Study/Projects/Astrology` (symlinked as `/Volumes/Study/Astrology`)  
 **Git Remote:** `https://github.com/manvenpratap/Synodix.git`  
@@ -9,7 +9,29 @@
 ---
 
 ## 1. Current Status & Milestone
-- **Active Phase**: Mathematical Evidence Feature Guide Integration & Sidebar Streamlining (Completed)
+- **Active Phase**: Hallmark Anti-AI-Slop Redesign & Scholarly Instrument Typography (Completed)
+- **Hallmark Anti-AI-Slop Redesign & Scholarly Instrument Typography (v2.31.12)**:
+  - **100% Elimination of `transition-all` Layout Thrashing (Floor FAIL 10a)**:
+    - Replaced all 34 `transition-all` occurrences across 13 core files with explicit composite-only transitions (`transition-colors duration-150`, `transition-[width] duration-300`, `transition-transform duration-150`).
+    - Verified 0 remaining `transition-all` instances across the entire codebase, eliminating layout reflows during hover and tab switching.
+  - **Viewport Overflow Hardening (Floor FAIL 34)**:
+    - Upgraded `html` and `body` from `overflow-x: hidden; max-width: 100vw;` to `overflow-x: clip;` in `index.css`.
+    - Preserves native sticky headers (`sticky top-0`) while eliminating horizontal viewport jitter.
+  - **Eradication of AI Slop Reflexes & Generic Tropes**:
+    - Removed pervasive uppercase tracked mono labels across all visual instruments (`ChartWheelVisualizer.tsx`), carousel decks (`TraditionVerticalCarousel.tsx`), synthesis matrix (`SynthesisMatrix.tsx`), reading view dossier (`ReadingView.tsx`), verification checklist (`VerificationCard.tsx`), and research monograph (`MathematicalEvidenceCard.tsx`).
+    - Replaced artificial section eyebrows ("01 /", "02 /", etc.) with natural, scholarly section labels ("Section 1 · Astrometric Calibration & Input").
+    - Replaced raw emoji icons (`▶`) with accessible SVG glyphs.
+    - Stripped artificial neon glow shadows (`shadow-[0_0_8px_#38bdf8]`) in favor of understated, calibrated depth.
+    - Removed marketing buzzwords ("unlock this view" -> "render this view").
+    - Split glued arrows and middle-dot metadata chains into structured, accessible markup.
+  - **Semantic Tokens & Focus Rings (Floor FAIL 39a, 48)**:
+    - Established Hallmark tokens (`--surface-ground`, `--surface-card`, `--border-subtle`, `--text-primary`, etc.) across dark and light modes.
+    - Standardized `:focus-visible` outline rings with offset across all interactive components.
+  - **Zero Regressions & 100% Green Status**:
+    - TypeScript compilation and Capacitor synchronization verified clean.
+    - All 25 regression test suites passing cleanly via `./pipeline.sh test --summary` (68.51s).
+    - Zero critical console errors.
+  - **Workflow Health**: 100% CLEAN (Verified via `./pipeline.sh doctor`).
 - **Mathematical Evidence Feature Guide Integration & Sidebar Streamlining (v2.31.11)**:
   - **Embedded Mathematical Evidence into Feature Guide (`FeatureGuideScreen.tsx`)**:
     - Integrated `MathematicalEvidenceCard` directly inside `FeatureGuideScreen` with a dual-section switcher pill: `50 Knowledge Topics` (`BookOpen`) vs `Mathematical Evidence` (`FlaskConical`).

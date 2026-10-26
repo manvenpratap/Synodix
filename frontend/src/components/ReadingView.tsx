@@ -96,7 +96,7 @@ export const ReadingView: React.FC<Props> = ({ data, subjectName, onNavigate }) 
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
           <div>
             <div className="flex flex-wrap items-center gap-2 mb-1.5">
-              <span className="px-2 py-0.5 rounded bg-emerald-950 text-emerald-300 border border-emerald-800/60 font-mono text-[11px] font-semibold uppercase tracking-wider flex items-center gap-1">
+              <span className="px-2 py-0.5 rounded bg-emerald-950 text-emerald-300 border border-emerald-800/60 text-xs font-medium flex items-center gap-1">
                 <ShieldCheck className="w-3 h-3 text-emerald-400" />
                 Audited Epistemological Document
               </span>
@@ -153,7 +153,7 @@ export const ReadingView: React.FC<Props> = ({ data, subjectName, onNavigate }) 
             <button
               type="button"
               onClick={handleCopy}
-              className={`px-3 py-2 min-h-[44px] sm:min-h-[38px] text-xs font-mono rounded bg-[#121721] hover:bg-[#18202c] border transition-all cursor-pointer flex items-center gap-1.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 active:scale-95 ${
+              className={`px-3 py-2 min-h-[44px] sm:min-h-[38px] text-xs font-mono rounded bg-[#121721] hover:bg-[#18202c] border transition-colors duration-150 cursor-pointer flex items-center gap-1.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 active:scale-95 ${
                 copied
                   ? 'border-emerald-500 text-emerald-300 bg-emerald-950/40 shadow-xs'
                   : 'text-slate-300 border-[#1b2331]'
@@ -263,7 +263,7 @@ export const ReadingView: React.FC<Props> = ({ data, subjectName, onNavigate }) 
             <div className="flex items-center justify-between border-b border-[#1b2331] pb-2.5">
               <div className="flex items-center gap-2">
                 <span className="w-2 h-2 rounded-full bg-cyan-400"></span>
-                <h3 className="text-sm font-semibold text-slate-100 uppercase tracking-wider font-mono">
+                <h3 className="text-sm font-semibold text-slate-100">
                   1. Astronomical & Geodetic Input Dossier
                 </h3>
               </div>
@@ -334,7 +334,7 @@ export const ReadingView: React.FC<Props> = ({ data, subjectName, onNavigate }) 
             <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-[#1b2331] pb-3 gap-2">
               <div className="flex flex-wrap items-center gap-2">
                 <span className="w-2 h-2 rounded-full bg-cyan-400"></span>
-                <h3 className="text-sm font-semibold text-slate-100 uppercase tracking-wider font-mono">
+                <h3 className="text-sm font-semibold text-slate-100">
                   2. Synthesized Astrological Inferences & Personality Profile
                 </h3>
                 <span className="px-2 py-0.5 rounded text-[11px] font-mono bg-cyan-950 text-cyan-300 border border-cyan-800 font-semibold uppercase">
@@ -456,7 +456,7 @@ export const ReadingView: React.FC<Props> = ({ data, subjectName, onNavigate }) 
               <div className="bg-[#090c12] p-4 rounded-lg border border-[#1b2331] space-y-3 flex flex-col">
                 <div className="flex items-center gap-2 border-b border-[#1b2331] pb-2">
                   <Cpu className="w-4 h-4 text-cyan-400 shrink-0" />
-                  <h4 className="text-xs font-bold text-slate-100 uppercase tracking-wider font-mono">
+                  <h4 className="text-xs font-semibold text-slate-100">
                     Cognitive Architecture
                   </h4>
                 </div>
@@ -484,7 +484,7 @@ export const ReadingView: React.FC<Props> = ({ data, subjectName, onNavigate }) 
               <div className="bg-[#090c12] p-4 rounded-lg border border-[#1b2331] space-y-3 flex flex-col">
                 <div className="flex items-center gap-2 border-b border-[#1b2331] pb-2">
                   <Briefcase className="w-4 h-4 text-amber-400 shrink-0" />
-                  <h4 className="text-xs font-bold text-slate-100 uppercase tracking-wider font-mono">
+                  <h4 className="text-xs font-semibold text-slate-100">
                     Vocation & Executive Drive
                   </h4>
                 </div>
@@ -512,7 +512,7 @@ export const ReadingView: React.FC<Props> = ({ data, subjectName, onNavigate }) 
               <div className="bg-[#090c12] p-4 rounded-lg border border-[#1b2331] space-y-3 flex flex-col">
                 <div className="flex items-center gap-2 border-b border-[#1b2331] pb-2">
                   <Heart className="w-4 h-4 text-rose-400 shrink-0" />
-                  <h4 className="text-xs font-bold text-slate-100 uppercase tracking-wider font-mono">
+                  <h4 className="text-xs font-semibold text-slate-100">
                     Relational & Karmic Blueprint
                   </h4>
                 </div>
@@ -565,7 +565,7 @@ export const ReadingView: React.FC<Props> = ({ data, subjectName, onNavigate }) 
             <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-[#1b2331] pb-3 gap-2">
               <div className="flex flex-wrap items-center gap-2">
                 <span className="w-2 h-2 rounded-full bg-emerald-400"></span>
-                <h3 className="text-sm font-semibold text-slate-100 uppercase tracking-wider font-mono">
+                <h3 className="text-sm font-semibold text-slate-100">
                   3. Cross-Cultural Corroboration Matrix (Life Domains)
                 </h3>
                 <ExplainerTrigger id="three_cluster_consensus" label="Consensus Protocol" variant="badge" />
@@ -621,7 +621,7 @@ export const ReadingView: React.FC<Props> = ({ data, subjectName, onNavigate }) 
                 return (
                   <div
                     key={dom.domain_id}
-                    className={`rounded-lg border transition-all ${
+                    className={`rounded-lg border transition-colors duration-150 ${
                       isDivergent
                         ? 'bg-[#120f14] border-amber-900/50 hover:border-amber-700/80'
                         : isStrong
@@ -789,7 +789,7 @@ export const ReadingView: React.FC<Props> = ({ data, subjectName, onNavigate }) 
             <div className="flex items-center justify-between border-b border-[#1b2331] pb-2.5">
               <div className="flex items-center gap-2">
                 <Clock className="w-4 h-4 text-cyan-400" />
-                <h3 className="text-sm font-semibold text-slate-100 uppercase tracking-wider font-mono">
+                <h3 className="text-sm font-semibold text-slate-100">
                   4. Quad-System Chronological Synchronization
                 </h3>
               </div>
@@ -888,7 +888,7 @@ export const ReadingView: React.FC<Props> = ({ data, subjectName, onNavigate }) 
             <div className="flex items-center justify-between border-b border-[#1b2331] pb-2.5">
               <div className="flex flex-wrap items-center gap-2">
                 <BookOpen className="w-4 h-4 text-cyan-400" />
-                <h3 className="text-sm font-semibold text-slate-100 uppercase tracking-wider font-mono">
+                <h3 className="text-sm font-semibold text-slate-100">
                   5. Attributed Temperament Overlays (Maya & Tibetan)
                 </h3>
                 <ExplainerTrigger id="epistemic_humility_framework" label="Non-Causal Overlays" variant="badge" />
@@ -924,7 +924,7 @@ export const ReadingView: React.FC<Props> = ({ data, subjectName, onNavigate }) 
             <div className="flex items-center justify-between border-b border-[#1b2331] pb-2.5">
               <div className="flex flex-wrap items-center gap-2">
                 <ShieldCheck className="w-4 h-4 text-emerald-400" />
-                <h3 className="text-sm font-semibold text-slate-100 uppercase tracking-wider font-mono">
+                <h3 className="text-sm font-semibold text-slate-100">
                   6. Dual-Engine Verification & Invariant Proofs
                 </h3>
                 <ExplainerTrigger id="dual_engine_validation" label="Dual-Engine Proof" variant="badge" />
@@ -1001,7 +1001,7 @@ export const ReadingView: React.FC<Props> = ({ data, subjectName, onNavigate }) 
           <button
             type="button"
             onClick={() => onNavigate('evidence')}
-            className="inline-flex items-center justify-center gap-2 px-4 py-2.5 min-h-[44px] text-xs font-mono rounded-lg bg-cyan-700 hover:bg-cyan-600 text-white font-semibold cursor-pointer transition-all border border-cyan-500/80 shadow-xs active:scale-[0.98]"
+            className="inline-flex items-center justify-center gap-2 px-4 py-2.5 min-h-[44px] text-xs font-mono rounded-lg bg-cyan-700 hover:bg-cyan-600 text-white font-semibold cursor-pointer transition-colors duration-150 border border-cyan-500/80 shadow-xs active:scale-[0.98]"
           >
             <span>View Mathematical Evidence Whitepaper →</span>
           </button>

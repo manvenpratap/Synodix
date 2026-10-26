@@ -22,8 +22,8 @@ export const InputAuditCard: React.FC<Props> = ({ data }) => {
         {/* Header */}
         <div className="flex flex-col md:flex-row md:items-center justify-between pb-3.5 border-b border-[#1b2331] gap-3">
           <div>
-            <span className="text-[11px] font-mono uppercase tracking-wider text-amber-400 font-semibold block">
-              02 / Time Normalization & Boundary Proximity Audit
+            <span className="text-xs text-amber-400 font-medium block">
+              Section 2 · Time Normalization & Boundary Proximity Audit
             </span>
             <div className="flex flex-wrap items-center gap-2 mt-2">
               <h3 className="text-base font-semibold text-slate-100">
@@ -47,7 +47,7 @@ export const InputAuditCard: React.FC<Props> = ({ data }) => {
               aria-expanded={isMobileOpen}
               aria-controls="input-audit-collapsible-content"
               aria-label={isMobileOpen ? 'Hide Input Audit Invariants' : 'Expand Input Audit Invariants'}
-              className="md:hidden text-xs font-mono text-cyan-300 hover:text-cyan-200 font-medium cursor-pointer py-1.5 px-3 rounded-lg bg-[#121824] border border-cyan-800/80 min-h-[44px] flex items-center justify-center active:scale-95 transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
+              className="md:hidden text-xs font-mono text-cyan-300 hover:text-cyan-200 font-medium cursor-pointer py-1.5 px-3 rounded-lg bg-[#121824] border border-cyan-800/80 min-h-[44px] flex items-center justify-center active:scale-95 transition-colors duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
             >
               {isMobileOpen ? 'Hide Full Audit ▲' : 'Audit Invariants (4) ▼'}
             </button>
