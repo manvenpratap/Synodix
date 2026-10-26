@@ -24,11 +24,13 @@ import {
   FeatureExplainer
 } from '../data/featureExplainers';
 import { useExplainer } from '../context/useExplainer';
+import { MathematicalEvidenceCard } from './MathematicalEvidenceCard';
 import type { AppScreen } from '../App';
 
 interface Props {
   onNavigate: (screen: AppScreen) => void;
   initialExplainerId?: string;
+  initialTab?: 'topics' | 'evidence';
 }
 
 interface CivilizationFilter {
@@ -145,9 +147,11 @@ const CIVILIZATIONS: CivilizationFilter[] = [
   }
 ];
 
-export const FeatureGuideScreen: React.FC<Props> = ({ onNavigate, initialExplainerId }) => {
+export const FeatureGuideScreen: React.FC<Props> = ({ onNavigate, initialExplainerId, initialTab = 'topics' }) => {
   const { activeExplainer } = useExplainer();
   const allExplainers = useMemo(() => Object.values(FEATURE_EXPLAINERS), []);
+
+  const [activeSection, setActiveSection] = useState<'topics' | 'evidence'>(initialTab);
 
   const [selectedExplainerId, setSelectedExplainerId] = useState<string>(() => {
     return initialExplainerId || activeExplainer?.id || allExplainers[0]?.id || 'time_normalization_eot';
@@ -157,10 +161,18 @@ export const FeatureGuideScreen: React.FC<Props> = ({ onNavigate, initialExplain
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [activeCivilization, setActiveCivilization] = useState<string | null>(null);
 
+  // Synchronize when initialTab prop changes
+  useEffect(() => {
+    if (initialTab) {
+      setActiveSection(initialTab);
+    }
+  }, [initialTab]);
+
   // Synchronize when external explainer changes
   useEffect(() => {
     if (activeExplainer?.id) {
       setSelectedExplainerId(activeExplainer.id);
+      setActiveSection('topics');
     }
   }, [activeExplainer]);
 
@@ -226,62 +238,115 @@ export const FeatureGuideScreen: React.FC<Props> = ({ onNavigate, initialExplain
       <div className="flex flex-col lg:flex-row lg:items-center justify-between p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-[#0d1624] via-[#09101c] to-[#070b14] border border-cyan-900/60 shadow-md gap-4">
         <div className="flex items-start gap-3.5">
           <div className="w-10 h-10 rounded-xl bg-cyan-950/90 border border-cyan-800 flex items-center justify-center text-cyan-300 shrink-0 shadow-xs">
-            <BookOpen className="w-5 h-5" />
+            {activeSection === 'evidence' ? (
+              <FlaskConical className="w-5 h-5 text-amber-400" />
+            ) : (
+              <BookOpen className="w-5 h-5 text-cyan-300" />
+            )}
           </div>
           <div>
             <div className="flex items-center gap-2">
-              <span className="text-[11px] font-mono uppercase tracking-wider text-cyan-400 font-bold bg-cyan-950/60 px-2 py-0.5 rounded border border-cyan-800/60">
-                Astrometric Knowledge Base
+              <span
+                className={`text-[11px] font-mono uppercase tracking-wider font-bold px-2 py-0.5 rounded border ${
+                  activeSection === 'evidence'
+                    ? 'text-amber-400 bg-amber-950/60 border-amber-800/60'
+                    : 'text-cyan-400 bg-cyan-950/60 border-cyan-800/60'
+                }`}
+              >
+                {activeSection === 'evidence' ? 'Empirical Statistical Validation' : 'Astrometric Knowledge Base'}
               </span>
-              <span className="text-xs text-slate-400 font-mono hidden sm:inline">• 50 Authoritative Topics</span>
+              <span className="text-xs text-slate-400 font-mono hidden sm:inline">
+                {activeSection === 'evidence' ? '• 100 Titans Monte Carlo Benchmark' : '• 50 Authoritative Topics'}
+              </span>
             </div>
             <h1 className="text-lg sm:text-xl font-bold text-slate-100 tracking-tight mt-1">
-              Multi-Tradition Astrometric & Cultural Feature Guide
+              {activeSection === 'evidence'
+                ? 'Empirical Mathematical Evidence & Statistical Validation'
+                : 'Multi-Tradition Astrometric & Cultural Feature Guide'}
             </h1>
             <p className="text-xs text-slate-300 font-sans mt-0.5 leading-relaxed">
-              Exhaustive documentation of celestial mechanics, ancient calibration lineages, mathematical formulas, and triangulation invariants.
+              {activeSection === 'evidence'
+                ? 'Peer-reviewed style statistical whitepaper, double-blind permutation null controls, and rigorous p-value benchmarks.'
+                : 'Exhaustive documentation of celestial mechanics, ancient calibration lineages, mathematical formulas, and triangulation invariants.'}
             </p>
           </div>
         </div>
 
-        {/* Global Action Anchors */}
-        <div className="flex items-center gap-2 flex-wrap">
-          <button
-            type="button"
-            onClick={() => onNavigate('traditions')}
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 min-h-[36px] text-xs font-mono rounded-lg bg-[#10151f] hover:bg-[#182233] text-cyan-300 hover:text-cyan-200 border border-cyan-800/60 transition-colors cursor-pointer"
+        {/* Section Switcher & Global Action Anchors */}
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+          {/* Dual-Section Switcher Pill */}
+          <div
+            role="tablist"
+            aria-label="Feature Guide Sections"
+            className="flex items-center p-1 rounded-xl bg-[#090d15] border border-[#1b2331] shadow-inner"
           >
-            <Compass className="w-3.5 h-3.5 text-cyan-400" />
-            <span>3D Traditions Deck</span>
-          </button>
-          <button
-            type="button"
-            onClick={() => onNavigate('workbench')}
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 min-h-[36px] text-xs font-mono rounded-lg bg-[#10151f] hover:bg-[#182233] text-slate-300 hover:text-white border border-[#1b2331] transition-colors cursor-pointer"
-          >
-            <Sliders className="w-3.5 h-3.5 text-slate-400" />
-            <span>Workbench</span>
-          </button>
-          <button
-            type="button"
-            onClick={() => onNavigate('evidence')}
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 min-h-[36px] text-xs font-mono rounded-lg bg-[#10151f] hover:bg-[#182233] text-amber-300 hover:text-amber-200 border border-amber-900/60 transition-colors cursor-pointer"
-          >
-            <FlaskConical className="w-3.5 h-3.5 text-amber-400" />
-            <span>Monte Carlo Whitepaper</span>
-          </button>
+            <button
+              type="button"
+              role="tab"
+              aria-selected={activeSection === 'topics'}
+              onClick={() => setActiveSection('topics')}
+              className={`flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-mono font-medium transition-all cursor-pointer min-h-[34px] ${
+                activeSection === 'topics'
+                  ? 'bg-cyan-950 text-cyan-300 border border-cyan-700 font-bold shadow-xs'
+                  : 'text-slate-400 hover:text-slate-200'
+              }`}
+            >
+              <BookOpen className="w-3.5 h-3.5 text-cyan-400" />
+              <span>50 Knowledge Topics</span>
+            </button>
+            <button
+              type="button"
+              role="tab"
+              aria-selected={activeSection === 'evidence'}
+              onClick={() => setActiveSection('evidence')}
+              className={`flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-mono font-medium transition-all cursor-pointer min-h-[34px] ${
+                activeSection === 'evidence'
+                  ? 'bg-amber-950 text-amber-300 border border-amber-700 font-bold shadow-xs'
+                  : 'text-slate-400 hover:text-slate-200'
+              }`}
+            >
+              <FlaskConical className="w-3.5 h-3.5 text-amber-400" />
+              <span>Mathematical Evidence</span>
+            </button>
+          </div>
+
+          {/* Quick Links */}
+          <div className="flex items-center gap-2">
+            <button
+              type="button"
+              onClick={() => onNavigate('traditions')}
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 min-h-[36px] text-xs font-mono rounded-lg bg-[#10151f] hover:bg-[#182233] text-cyan-300 hover:text-cyan-200 border border-cyan-800/60 transition-colors cursor-pointer"
+            >
+              <Compass className="w-3.5 h-3.5 text-cyan-400" />
+              <span className="hidden sm:inline">Traditions</span>
+            </button>
+            <button
+              type="button"
+              onClick={() => onNavigate('workbench')}
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 min-h-[36px] text-xs font-mono rounded-lg bg-[#10151f] hover:bg-[#182233] text-slate-300 hover:text-white border border-[#1b2331] transition-colors cursor-pointer"
+            >
+              <Sliders className="w-3.5 h-3.5 text-slate-400" />
+              <span className="hidden sm:inline">Workbench</span>
+            </button>
+          </div>
         </div>
       </div>
 
-      {/* Main Full-Width Split Layout */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start w-full max-w-full">
-        {/* ========================================================================= */}
-        {/* LEFT SUB-NAVIGATION SIDEBAR: Functional Civilizations, Search & Topics    */}
-        {/* ========================================================================= */}
-        <aside
-          aria-label="Feature Guide Navigation"
-          className="lg:col-span-4 xl:col-span-3 space-y-4"
-        >
+      {/* Main Content Viewport: Mathematical Evidence OR 50 Knowledge Topics */}
+      {activeSection === 'evidence' ? (
+        <div className="w-full max-w-full">
+          <MathematicalEvidenceCard onNavigate={onNavigate} />
+        </div>
+      ) : (
+        /* Main Full-Width Split Layout */
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start w-full max-w-full">
+          {/* ========================================================================= */}
+          {/* LEFT SUB-NAVIGATION SIDEBAR: Functional Civilizations, Search & Topics    */}
+          {/* ========================================================================= */}
+          <aside
+            aria-label="Feature Guide Navigation"
+            className="lg:col-span-4 xl:col-span-3 space-y-4"
+          >
           {/* 1. Functional Civilizational Array (9) */}
           <div className="p-3.5 rounded-xl bg-gradient-to-b from-[#090e17] to-[#070b12] border border-[#1a2332] shadow-sm space-y-2.5">
             <div className="flex items-center justify-between pb-1.5 border-b border-[#1b2331]/80">
@@ -626,6 +691,7 @@ export const FeatureGuideScreen: React.FC<Props> = ({ onNavigate, initialExplain
           </div>
         </section>
       </div>
+      )}
     </div>
   );
 };

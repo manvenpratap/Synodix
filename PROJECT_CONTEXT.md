@@ -1,7 +1,7 @@
 # Synodix: Project Context & Working Memory
 
-**Last Updated:** 2026-10-27 01:45:00
-**Version:** 2.31.10  
+**Last Updated:** 2026-10-27 02:05:00
+**Version:** 2.31.11  
 **Stack:** Python 3.12 (FastAPI, Swiss Ephemeris 2.10, Skyfield DE421) + TypeScript / React 19 / Vite / Tailwind CSS v4 / Framer Motion / Capacitor 8 (iOS & Android)  
 **Workspace:** `/Volumes/Study/Projects/Astrology` (symlinked as `/Volumes/Study/Astrology`)  
 **Git Remote:** `https://github.com/manvenpratap/Synodix.git`  
@@ -9,7 +9,23 @@
 ---
 
 ## 1. Current Status & Milestone
-- **Active Phase**: Comprehensive WCAG 2.2 AA Color Contrast Calibration Across Modes (Completed)
+- **Active Phase**: Mathematical Evidence Feature Guide Integration & Sidebar Streamlining (Completed)
+- **Mathematical Evidence Feature Guide Integration & Sidebar Streamlining (v2.31.11)**:
+  - **Embedded Mathematical Evidence into Feature Guide (`FeatureGuideScreen.tsx`)**:
+    - Integrated `MathematicalEvidenceCard` directly inside `FeatureGuideScreen` with a dual-section switcher pill: `50 Knowledge Topics` (`BookOpen`) vs `Mathematical Evidence` (`FlaskConical`).
+    - Dynamic header banner updates its iconography, status badges (`Astrometric Knowledge Base` vs `Empirical Statistical Validation`), headline, and descriptive subtitles based on the active section.
+    - Synchronized `initialTab` (`topics` | `evidence`) prop and external `activeExplainer` state changes so opening an explainer from anywhere in the app immediately focuses the topics view.
+  - **Sidebar Streamlining (`App.tsx`)**:
+    - Removed `Feature Guide` from desktop `NAV_ITEMS`, reducing the sidebar to exactly 6 core analytical items and relieving vertical layout crowding.
+    - Preserved top header `Feature Guide` button for rapid access to the 50 knowledge topics.
+    - Configured sidebar `Mathematical Evidence` (`evidence`) to render `FeatureGuideScreen` with `initialTab="evidence"`, seamlessly unifying the whitepaper and knowledge base under a unified research hub.
+    - Updated main viewport layout width so both `guide` and `evidence` screens leverage `max-w-full lg:px-8`.
+  - **Test Suite Robustness (`tests/test_07_geocoding_intelligence.py`)**:
+    - Increased `wait_for_function` blur detection timeout to 10000ms, ensuring 100% deterministic green passes under full 25-suite parallel CPU load.
+  - **Zero Regressions & 100% Passing Status**:
+    - All 25 regression test suites passing cleanly via `./pipeline.sh test --summary` (70.43s).
+    - 0 WCAG 2.2 AA contrast issues across all screens and modes.
+  - **Workflow Health**: 100% CLEAN (Verified via `./pipeline.sh doctor`).
 - **Comprehensive WCAG 2.2 AA Color Contrast Calibration Across Modes (v2.31.10)**:
   - **Automated Canvas sRGB Color Contrast Audit Suite**:
     - Authored an automated canvas 2D sRGB color contrast inspection engine that extracts computed styles, blends transparent/alpha layers over effective background stacks, and calculates exact relative luminance per WCAG 2.2 AA criteria ($\ge 4.5:1$ for body/labels, $\ge 3:1$ for large text).

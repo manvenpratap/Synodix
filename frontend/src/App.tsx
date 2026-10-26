@@ -30,7 +30,6 @@ import { VerificationCard } from './components/VerificationCard';
 import { TraditionCharts } from './components/TraditionCharts';
 import { SynthesisMatrix } from './components/SynthesisMatrix';
 import { ReadingView } from './components/ReadingView';
-import { MathematicalEvidenceCard } from './components/MathematicalEvidenceCard';
 import { FeatureGuideScreen } from './components/FeatureGuideScreen';
 import { getPrimaryProfile } from './utils/vault';
 import { ExplainerProvider } from './context/ExplainerContext';
@@ -97,13 +96,6 @@ const NAV_ITEMS: NavItem[] = [
     badge: '100 Titans',
     description: 'Double-Blind Monte Carlo Benchmark',
     icon: FlaskConical
-  },
-  {
-    id: 'guide',
-    label: 'Feature Guide',
-    badge: '50 Topics',
-    description: 'Astronomical & Cultural Knowledge Base',
-    icon: BookOpen
   }
 ];
 
@@ -657,7 +649,7 @@ function AppContent() {
             <div className="flex items-center gap-1.5 sm:gap-2 min-w-0">
               <h1 className="text-xl sm:text-2xl font-bold text-slate-100 flex items-center gap-2 min-w-0">
                 <span className="truncate max-w-[140px] sm:max-w-none">
-                  {NAV_ITEMS.find((n) => n.id === currentScreen)?.label}
+                  {NAV_ITEMS.find((n) => n.id === currentScreen)?.label || (currentScreen === 'guide' ? 'Feature Guide' : '')}
                 </span>
               </h1>
               {/* Mobile Active Subject Chip */}
@@ -811,7 +803,7 @@ function AppContent() {
         {/* Main Content Viewport */}
         <main
           className={`flex-1 p-4 sm:p-6 lg:p-8 w-full mx-auto pb-[calc(5rem+env(safe-area-inset-bottom,0px))] md:pb-8 ${
-            currentScreen === 'guide' ? 'max-w-full lg:px-8' : 'max-w-7xl'
+            currentScreen === 'guide' || currentScreen === 'evidence' ? 'max-w-full lg:px-8' : 'max-w-7xl'
           }`}
         >
           {/* Error Banner */}
@@ -901,17 +893,17 @@ function AppContent() {
                 </div>
               )}
 
-              {/* SCREEN 6: Mathematical Evidence & Whitepaper */}
+              {/* SCREEN 6: Mathematical Evidence (Part of Feature Guide) */}
               {currentScreen === 'evidence' && (
                 <div>
-                  <MathematicalEvidenceCard onNavigate={navigateTo} />
+                  <FeatureGuideScreen onNavigate={navigateTo} initialTab="evidence" />
                 </div>
               )}
 
               {/* SCREEN 7: Astrometric & Cultural Feature Guide */}
               {currentScreen === 'guide' && (
                 <div>
-                  <FeatureGuideScreen onNavigate={navigateTo} />
+                  <FeatureGuideScreen onNavigate={navigateTo} initialTab="topics" />
                 </div>
               )}
             </motion.div>

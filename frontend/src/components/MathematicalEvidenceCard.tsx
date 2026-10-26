@@ -19,7 +19,7 @@ import {
 import { EVIDENCE_REPORT_MARKDOWN, EVIDENCE_STATS } from '../data/mathematicalEvidenceData';
 
 interface Props {
-  onNavigate?: (screen: 'workbench' | 'traditions' | 'synthesis' | 'dossier' | 'verification' | 'evidence') => void;
+  onNavigate?: (screen: any) => void;
 }
 
 export const MathematicalEvidenceCard: React.FC<Props> = ({ onNavigate }) => {
