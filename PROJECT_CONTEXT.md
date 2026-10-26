@@ -1,7 +1,7 @@
 # Synodix: Project Context & Working Memory
 
-**Last Updated:** 2026-10-27 02:48:00
-**Version:** 2.31.12  
+**Last Updated:** 2026-10-27 03:10:00
+**Version:** 2.31.13  
 **Stack:** Python 3.12 (FastAPI, Swiss Ephemeris 2.10, Skyfield DE421) + TypeScript / React 19 / Vite / Tailwind CSS v4 / Framer Motion / Capacitor 8 (iOS & Android)  
 **Workspace:** `/Volumes/Study/Projects/Astrology` (symlinked as `/Volumes/Study/Astrology`)  
 **Git Remote:** `https://github.com/manvenpratap/Synodix.git`  
@@ -9,7 +9,28 @@
 ---
 
 ## 1. Current Status & Milestone
-- **Active Phase**: Hallmark Anti-AI-Slop Redesign & Scholarly Instrument Typography (Completed)
+- **Active Phase**: Carousel Visual Instrument Clipping Resolution (Completed)
+- **Carousel Visual Instrument Clipping Resolution (v2.31.13)**:
+  - **Root Cause Resolution**:
+    - Identified that `TraditionVerticalCarousel.tsx` constrained the instrument wrapper with `max-h-[220px] sm:max-h-[240px] overflow-hidden` and vertically centered the child SVGs via `items-center`, clipping ~80px off the top and bottom of visual charts (such as the Parashari Diamond Kundali where houses 4, 5, 6, 7, 8 and vertices were sliced off).
+    - Removed `max-h-[240px] overflow-hidden` in favor of natural vertical clearance (`py-1`).
+    - Removed artificial `maxHeight: '520px'` on `motion.div` card wrappers and expanded the vertical carousel stage to `min-h-[620px] sm:min-h-[660px] lg:min-h-[680px]` with `min-h-[540px] sm:min-h-[580px]` card containers.
+  - **Architectural `compact?: boolean` Prop Across All 9 Visual Instruments (`ChartWheelVisualizer.tsx`)**:
+    - `NorthIndianChart`: added `compact` prop; renders clean SVG (`max-w-[270px] sm:max-w-[290px] h-auto`) without redundant double headers/borders inside the carousel card.
+    - `WesternCircularWheel`: added `compact` prop; returns clean circular wheel SVG scaled for carousel cards.
+    - `BaZiElementPentagram`: added `compact` prop; returns Wu Xing flow diagram scaled for carousel framing.
+    - `ZiWeiPalaceGrid`: added `compact` prop; renders compact 4x4 palace cells (`min-h-[220px] sm:min-h-[240px]`) with compact courtyard.
+    - `AlmutenDignityBarChart`: added `compact` prop; displays top 5 planets with compact stacked bars and legend.
+    - `MaramatakaLunarDial`: added `compact` prop; returns 30-night oceanic dial SVG with compact footer.
+    - `TibetanMewaGrid`: added `compact` prop; renders 3x3 Luoshu magic square in compact format (`max-w-[260px]`).
+    - `EgyptianDecanStarClock`: added `compact` prop; scales 36-decan star clock SVG for carousel display.
+    - `MayaCalendarCompass`: added `compact` prop; scales interlocking gear dials cleanly for carousel framing.
+  - **Zero Regressions & Full Verification**:
+    - Verified visual rendering via live browser subagent inspection (all 12 houses and diamond geometry 100% visible).
+    - TypeScript compilation and Vite production build verified clean (0 errors).
+    - All 25 regression test suites passing cleanly via `./pipeline.sh test --summary` (70.73s).
+    - Zero critical console errors.
+  - **Workflow Health**: 100% CLEAN (Verified via `./pipeline.sh doctor`).
 - **Hallmark Anti-AI-Slop Redesign & Scholarly Instrument Typography (v2.31.12)**:
   - **100% Elimination of `transition-all` Layout Thrashing (Floor FAIL 10a)**:
     - Replaced all 34 `transition-all` occurrences across 13 core files with explicit composite-only transitions (`transition-colors duration-150`, `transition-[width] duration-300`, `transition-transform duration-150`).

@@ -136,26 +136,27 @@ export const TraditionVerticalCarousel: React.FC<Props> = ({
     data.traditions;
 
   // Render cultural instrument component
-  const renderInstrument = (key: TraditionKey, theme: any) => {
+  const renderInstrument = (key: TraditionKey, _theme: any) => {
+    const isCompact = chartViewMode !== 'chart';
     switch (key) {
       case 'jyotisha':
-        return jyotisha ? <NorthIndianChart jyotisha={jyotisha} /> : null;
+        return jyotisha ? <NorthIndianChart jyotisha={jyotisha} compact={isCompact} /> : null;
       case 'bazi':
-        return bazi ? <BaZiElementPentagram bazi={bazi} /> : null;
+        return bazi ? <BaZiElementPentagram bazi={bazi} compact={isCompact} /> : null;
       case 'western':
-        return western ? <WesternCircularWheel western={western} /> : null;
+        return western ? <WesternCircularWheel western={western} compact={isCompact} /> : null;
       case 'ziwei':
-        return ziwei ? <ZiWeiPalaceGrid ziwei={ziwei} /> : null;
+        return ziwei ? <ZiWeiPalaceGrid ziwei={ziwei} compact={isCompact} /> : null;
       case 'mayan':
-        return mayan ? <MayaCalendarCompass mayan={mayan} /> : null;
+        return mayan ? <MayaCalendarCompass mayan={mayan} compact={isCompact} /> : null;
       case 'tibetan':
-        return tibetan ? <TibetanMewaGrid tibetan={tibetan} /> : null;
+        return tibetan ? <TibetanMewaGrid tibetan={tibetan} compact={isCompact} /> : null;
       case 'persian':
-        return persian ? <AlmutenDignityBarChart persian={persian} /> : null;
+        return persian ? <AlmutenDignityBarChart persian={persian} compact={isCompact} /> : null;
       case 'egyptian':
-        return egyptian ? <EgyptianDecanStarClock egyptian={egyptian} /> : null;
+        return egyptian ? <EgyptianDecanStarClock egyptian={egyptian} compact={isCompact} /> : null;
       case 'maramataka':
-        return maramataka ? <MaramatakaLunarDial maramataka={maramataka} /> : null;
+        return maramataka ? <MaramatakaLunarDial maramataka={maramataka} compact={isCompact} /> : null;
       default:
         return null;
     }
@@ -442,7 +443,7 @@ export const TraditionVerticalCarousel: React.FC<Props> = ({
       </div>
 
       {/* Main 3D Stage */}
-      <div className="relative min-h-[580px] sm:min-h-[620px] lg:min-h-[640px] flex items-center justify-center p-2 sm:p-4 overflow-hidden [perspective:1400px]">
+      <div className="relative min-h-[620px] sm:min-h-[660px] lg:min-h-[680px] flex items-center justify-center p-2 sm:p-4 overflow-hidden [perspective:1400px]">
         {/* Floating Vertical Navigation Rail */}
         <div className="absolute right-2 sm:right-4 z-40 flex flex-col items-center gap-1.5 p-1.5 rounded-full bg-black/60 backdrop-blur-md border border-white/15 shadow-xl">
           <button
@@ -492,7 +493,7 @@ export const TraditionVerticalCarousel: React.FC<Props> = ({
         </div>
 
         {/* Stacked Vertical Carousel Cards */}
-        <div className="relative w-full max-w-4xl h-[520px] sm:h-[560px] flex items-center justify-center">
+        <div className="relative w-full max-w-4xl min-h-[540px] sm:min-h-[580px] flex items-center justify-center">
           {TRADITION_ORDER.map((key, index) => {
             const diff = index - activeIndex;
             const theme = cultureThemes[key] || cultureThemes.jyotisha;
@@ -534,7 +535,6 @@ export const TraditionVerticalCarousel: React.FC<Props> = ({
                 }`}
                 style={{
                   transformOrigin: 'center center',
-                  maxHeight: '520px',
                 }}
               >
                 {/* Cultural Card Header */}
@@ -604,7 +604,7 @@ export const TraditionVerticalCarousel: React.FC<Props> = ({
                             Deterministic Engine
                           </span>
                         </div>
-                        <div className="w-full flex items-center justify-center max-h-[220px] sm:max-h-[240px] overflow-hidden">
+                        <div className="w-full flex items-center justify-center py-1">
                           {renderInstrument(key, theme)}
                         </div>
                       </div>

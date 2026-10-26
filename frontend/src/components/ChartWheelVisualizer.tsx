@@ -2,6 +2,7 @@ import React from 'react';
 
 interface VedicChartProps {
   jyotisha: any;
+  compact?: boolean;
 }
 
 /**
@@ -22,7 +23,7 @@ interface VedicChartProps {
  * Upper-right triangle: House 11
  * Top-right triangle: House 12
  */
-export const NorthIndianChart: React.FC<VedicChartProps> = ({ jyotisha }) => {
+export const NorthIndianChart: React.FC<VedicChartProps> = ({ jyotisha, compact }) => {
   // Map signs to 1-12
   const signOrder = [
     'Aries', 'Taurus', 'Gemini', 'Cancer',
@@ -63,23 +64,15 @@ export const NorthIndianChart: React.FC<VedicChartProps> = ({ jyotisha }) => {
     12: { x: 300, y: 55 },
   };
 
-  return (
-    <div className="flex flex-col items-center justify-center p-3 bg-[#080a0f] rounded-lg border border-[#1b2331]">
-      <div className="flex items-center justify-between w-full max-w-[400px] mb-2 px-1">
-        <span className="text-xs font-medium text-amber-400">
-          North Indian Kundaḷī (Lagna: {jyotisha.lagna.sign})
-        </span>
-        <span className="text-[11px] font-mono text-slate-400">Fixed House Geometry</span>
-      </div>
-
-      <svg
-        viewBox="0 0 400 400"
-        className="w-full max-w-[360px] h-auto select-none"
-        style={{ filter: 'drop-shadow(0 4px 12px rgba(0,0,0,0.5))' }}
-        aria-hidden="true"
-      >
-        {/* Outer Square */}
-        <rect x="10" y="10" width="380" height="380" fill="#0d1118" stroke="#1b2331" strokeWidth="2" />
+  const svgContent = (
+    <svg
+      viewBox="0 0 400 400"
+      className={`w-full select-none ${compact ? 'max-w-[270px] sm:max-w-[290px] h-auto' : 'max-w-[360px] h-auto'}`}
+      style={{ filter: 'drop-shadow(0 4px 12px rgba(0,0,0,0.5))' }}
+      aria-hidden="true"
+    >
+      {/* Outer Square */}
+      <rect x="10" y="10" width="380" height="380" fill="#0d1118" stroke="#1b2331" strokeWidth="2" />
 
         {/* Diagonal Cross */}
         <line x1="10" y1="10" x2="390" y2="390" stroke="#2a3649" strokeWidth="1.5" className="animate-kundali-draw" />
@@ -170,7 +163,25 @@ export const NorthIndianChart: React.FC<VedicChartProps> = ({ jyotisha }) => {
           );
         })}
       </svg>
+  );
 
+  if (compact) {
+    return (
+      <div className="flex items-center justify-center w-full py-0.5">
+        {svgContent}
+      </div>
+    );
+  }
+
+  return (
+    <div className="flex flex-col items-center justify-center p-3 bg-[#080a0f] rounded-lg border border-[#1b2331]">
+      <div className="flex items-center justify-between w-full max-w-[400px] mb-2 px-1">
+        <span className="text-xs font-medium text-amber-400">
+          North Indian Kundaḷī (Lagna: {jyotisha.lagna.sign})
+        </span>
+        <span className="text-[11px] font-mono text-slate-400">Fixed House Geometry</span>
+      </div>
+      {svgContent}
       <div className="mt-2 text-[11px] text-slate-400 font-mono text-center">
         Numbers indicate Zodiac Signs (1=Aries ... 12=Pisces) • H1-H4-H7-H10 highlighted Kendras
       </div>
@@ -180,13 +191,14 @@ export const NorthIndianChart: React.FC<VedicChartProps> = ({ jyotisha }) => {
 
 interface WesternWheelProps {
   western: any;
+  compact?: boolean;
 }
 
 /**
  * Western 360° Circular Wheel Chart
  * Shows 12 zodiac signs, house cusps, planet locations, and aspect chords.
  */
-export const WesternCircularWheel: React.FC<WesternWheelProps> = ({ western }) => {
+export const WesternCircularWheel: React.FC<WesternWheelProps> = ({ western, compact }) => {
   const size = 420;
   const center = size / 2;
   const radius = 180;
@@ -246,22 +258,14 @@ export const WesternCircularWheel: React.FC<WesternWheelProps> = ({ western }) =
     }
   });
 
-  return (
-    <div className="flex flex-col items-center justify-center p-3 bg-[#080a0f] rounded-lg border border-[#1b2331]">
-      <div className="flex items-center justify-between w-full max-w-[420px] mb-2 px-1">
-        <span className="text-xs font-medium text-cyan-400">
-          Western 360° Circular Wheel (Asc: {western.ascendant.sign} {western.ascendant.degree}°)
-        </span>
-        <span className="text-[11px] font-mono text-slate-400">Whole Sign Houses</span>
-      </div>
-
-      <svg
-        viewBox={`0 0 ${size} ${size}`}
-        className="w-full max-w-[380px] h-auto select-none"
-        style={{ filter: 'drop-shadow(0 4px 12px rgba(0,0,0,0.5))' }}
-      >
-        {/* Background Circle */}
-        <circle cx={center} cy={center} r={radius} fill="#0d1118" stroke="#1b2331" strokeWidth="2" />
+  const svgContent = (
+    <svg
+      viewBox={`0 0 ${size} ${size}`}
+      className={`w-full select-none ${compact ? 'max-w-[270px] sm:max-w-[290px] h-auto' : 'max-w-[380px] h-auto'}`}
+      style={{ filter: 'drop-shadow(0 4px 12px rgba(0,0,0,0.5))' }}
+    >
+      {/* Background Circle */}
+      <circle cx={center} cy={center} r={radius} fill="#0d1118" stroke="#1b2331" strokeWidth="2" />
 
         {/* 12 Sign Sectors */}
         {signs.map((s) => {
@@ -397,7 +401,25 @@ export const WesternCircularWheel: React.FC<WesternWheelProps> = ({ western }) =
           {western.sect.label.toUpperCase()} SECT
         </text>
       </svg>
+  );
 
+  if (compact) {
+    return (
+      <div className="flex items-center justify-center w-full py-0.5">
+        {svgContent}
+      </div>
+    );
+  }
+
+  return (
+    <div className="flex flex-col items-center justify-center p-3 bg-[#080a0f] rounded-lg border border-[#1b2331]">
+      <div className="flex items-center justify-between w-full max-w-[420px] mb-2 px-1">
+        <span className="text-xs font-medium text-cyan-400">
+          Western 360° Circular Wheel (Asc: {western.ascendant.sign} {western.ascendant.degree}°)
+        </span>
+        <span className="text-[11px] font-mono text-slate-400">Whole Sign Houses</span>
+      </div>
+      {svgContent}
       <div className="mt-2 text-[11px] text-slate-400 font-mono text-center">
         Aspect Chords: <span className="text-emerald-400">Green = Trine/Sextile</span> • <span className="text-rose-400">Rose = Square/Opposition</span> • <span className="text-amber-400">® = Retrograde</span>
       </div>
@@ -407,13 +429,14 @@ export const WesternCircularWheel: React.FC<WesternWheelProps> = ({ western }) =
 
 interface BaZiPentagramProps {
   bazi: any;
+  compact?: boolean;
 }
 
 /**
  * Wu Xing (Five Elements) Interactive Pentagram Flow Diagram
  * Shows Generating (Sheng) and Controlling (Ke) cycles with active percentages.
  */
-export const BaZiElementPentagram: React.FC<BaZiPentagramProps> = ({ bazi }) => {
+export const BaZiElementPentagram: React.FC<BaZiPentagramProps> = ({ bazi, compact }) => {
   const size = 360;
   const center = size / 2;
   const radius = 115;
@@ -438,20 +461,12 @@ export const BaZiElementPentagram: React.FC<BaZiPentagramProps> = ({ bazi }) => 
 
   const dayMasterElement = bazi.day_master?.element;
 
-  return (
-    <div className="flex flex-col items-center justify-center p-3 bg-[#080a0f] rounded-lg border border-[#1b2331]">
-      <div className="flex items-center justify-between w-full max-w-[360px] mb-2 px-1">
-        <span className="text-xs font-medium text-emerald-400">
-          Wu Xing Five Elements Flow (五行生克)
-        </span>
-        <span className="text-[11px] font-mono text-slate-400">Day Master: {bazi.day_master?.stem} ({dayMasterElement})</span>
-      </div>
-
-      <svg
-        viewBox={`0 0 ${size} ${size}`}
-        className="w-full max-w-[340px] h-auto select-none"
-        style={{ filter: 'drop-shadow(0 4px 12px rgba(0,0,0,0.5))' }}
-      >
+  const svgContent = (
+    <svg
+      viewBox={`0 0 ${size} ${size}`}
+      className={`w-full select-none ${compact ? 'max-w-[250px] sm:max-w-[270px] h-auto' : 'max-w-[340px] h-auto'}`}
+      style={{ filter: 'drop-shadow(0 4px 12px rgba(0,0,0,0.5))' }}
+    >
         {/* Background Subtle Disc */}
         <circle cx={center} cy={center} r={radius + 35} fill="#0d1118" stroke="#1b2331" strokeWidth="1" />
 
@@ -561,7 +576,25 @@ export const BaZiElementPentagram: React.FC<BaZiPentagramProps> = ({ bazi }) => 
           );
         })}
       </svg>
+  );
 
+  if (compact) {
+    return (
+      <div className="flex items-center justify-center w-full py-0.5">
+        {svgContent}
+      </div>
+    );
+  }
+
+  return (
+    <div className="flex flex-col items-center justify-center p-3 bg-[#080a0f] rounded-lg border border-[#1b2331]">
+      <div className="flex items-center justify-between w-full max-w-[360px] mb-2 px-1">
+        <span className="text-xs font-medium text-emerald-400">
+          Wu Xing Five Elements Flow (五行生克)
+        </span>
+        <span className="text-[11px] font-mono text-slate-400">Day Master: {bazi.day_master?.stem} ({dayMasterElement})</span>
+      </div>
+      {svgContent}
       <div className="mt-2 text-[11px] text-slate-400 font-mono text-center flex items-center justify-center gap-3">
         <span><strong className="text-emerald-400">Green Ring:</strong> Generating (生)</span>
         <span>•</span>
@@ -575,13 +608,14 @@ export const BaZiElementPentagram: React.FC<BaZiPentagramProps> = ({ bazi }) => 
 
 interface ZiWeiGridProps {
   ziwei: any;
+  compact?: boolean;
 }
 
 /**
  * Traditional Chinese 12-Palace Heavenly Grid (4x4 Perimeter Square)
  * Features the 12 branch perimeter boxes surrounding the Central Courtyard.
  */
-export const ZiWeiPalaceGrid: React.FC<ZiWeiGridProps> = ({ ziwei }) => {
+export const ZiWeiPalaceGrid: React.FC<ZiWeiGridProps> = ({ ziwei, compact }) => {
   // Traditional branch positions in the 4x4 square:
   // Row 1 (top): 巳 (Si), 午 (Wu), 未 (Wei), 申 (Shen)
   // Row 2: 辰 (Chen) [left], [center 2x2], 酉 (You) [right]
@@ -599,7 +633,9 @@ export const ZiWeiPalaceGrid: React.FC<ZiWeiGridProps> = ({ ziwei }) => {
     return (
       <div
         key={branch}
-        className={`p-2 rounded border flex flex-col justify-between text-left transition-colors duration-150 cursor-pointer ${
+        className={`rounded border flex flex-col justify-between text-left transition-colors duration-150 cursor-pointer ${
+          compact ? 'p-1' : 'p-2'
+        } ${
           p.is_ming
             ? 'bg-[#182335] border-cyan-500 shadow-xs animate-aura-breathe'
             : p.is_shen
@@ -608,24 +644,24 @@ export const ZiWeiPalaceGrid: React.FC<ZiWeiGridProps> = ({ ziwei }) => {
         }`}
       >
         {/* Header: Name + Branch + Badges */}
-        <div className="flex items-center justify-between border-b border-[#1b2331] pb-1">
-          <span className="font-semibold text-[11px] text-slate-100 flex items-center gap-1">
+        <div className="flex items-center justify-between border-b border-[#1b2331] pb-0.5">
+          <span className={`font-semibold ${compact ? 'text-[10px]' : 'text-[11px]'} text-slate-100 flex items-center gap-1`}>
             {p.name}
-            {p.is_ming && <span className="text-[9px] px-1 rounded bg-cyan-950 text-cyan-300 border border-cyan-800">MING</span>}
-            {p.is_shen && <span className="text-[9px] px-1 rounded bg-purple-950 text-purple-300 border border-purple-800">SHEN</span>}
+            {p.is_ming && <span className="text-[8px] px-0.5 rounded bg-cyan-950 text-cyan-300 border border-cyan-800">M</span>}
+            {p.is_shen && <span className="text-[8px] px-0.5 rounded bg-purple-950 text-purple-300 border border-purple-800">S</span>}
           </span>
-          <span className="text-[11px] font-mono text-slate-500">{p.branch}</span>
+          <span className={`${compact ? 'text-[9px]' : 'text-[11px]'} font-mono text-slate-500`}>{p.branch}</span>
         </div>
 
         {/* Major Stars */}
-        <div className="my-1 space-y-0.5">
+        <div className={`${compact ? 'my-0.5 space-y-0' : 'my-1 space-y-0.5'}`}>
           {p.stars.length === 0 ? (
-            <span className="text-[11px] text-slate-400 block">Empty Palace</span>
+            <span className={`${compact ? 'text-[9px]' : 'text-[11px]'} text-slate-400 block truncate`}>Empty</span>
           ) : (
-            p.stars.slice(0, 3).map((s: string, sIdx: number) => (
+            p.stars.slice(0, compact ? 1 : 3).map((s: string, sIdx: number) => (
               <div
                 key={sIdx}
-                className={`text-[11px] font-mono truncate ${
+                className={`${compact ? 'text-[9px]' : 'text-[11px]'} font-mono truncate ${
                   s.startsWith('[A]')
                     ? 'text-cyan-400/90'
                     : 'text-amber-300 font-semibold'
@@ -638,12 +674,65 @@ export const ZiWeiPalaceGrid: React.FC<ZiWeiGridProps> = ({ ziwei }) => {
         </div>
 
         {/* Footer: Decade Decennial Span */}
-        <div className="text-[9px] text-slate-500 font-mono text-right">
-          Age {p.decennial_span || '—'}
+        <div className="text-[8px] sm:text-[9px] text-slate-500 font-mono text-right">
+          {compact ? `${p.decennial_span || '—'}` : `Age ${p.decennial_span || '—'}`}
         </div>
       </div>
     );
   };
+
+  const gridContent = (
+    <div className={`w-full max-w-[560px] grid grid-cols-4 grid-rows-4 gap-1 sm:gap-1.5 ${compact ? 'min-h-[220px] sm:min-h-[240px]' : 'min-h-[380px]'}`}>
+      {/* Row 1 (Top): 巳, 午, 未, 申 */}
+      {getPalaceCell('巳')}
+      {getPalaceCell('午')}
+      {getPalaceCell('未')}
+      {getPalaceCell('申')}
+
+      {/* Row 2: 辰 (Left), Courtyard (Center 2x2), 酉 (Right) */}
+      {getPalaceCell('辰')}
+      <div className={`col-span-2 row-span-2 bg-[#090d15] rounded border border-purple-900/40 ${compact ? 'p-1.5' : 'p-3'} flex flex-col justify-between text-center select-none`}>
+        <div className="border-b border-[#1b2331] pb-1">
+          <span className={`${compact ? 'text-[9px]' : 'text-[11px]'} font-mono uppercase text-purple-400 block tracking-wider font-semibold`}>
+            Central Courtyard
+          </span>
+          <h4 className={`${compact ? 'text-xs' : 'text-sm'} font-bold text-slate-100 mt-0.5`}>
+            {ziwei.five_elements_bureau?.name}
+          </h4>
+        </div>
+
+        <div className={`${compact ? 'text-[10px] space-y-0.5' : 'text-xs space-y-1'} font-mono text-slate-300 my-auto`}>
+          <div>Ming: <strong className="text-cyan-300">{ziwei.ming_palace_branch}</strong> • Shen: <strong className="text-purple-300">{ziwei.shen_palace_branch}</strong></div>
+          <div className="text-[10px] text-slate-400">
+            Lunar: Year {ziwei.lunar_date?.year}, M{ziwei.lunar_date?.month}, D{ziwei.lunar_date?.day}
+          </div>
+        </div>
+
+        <div className="text-[9px] font-mono text-slate-500 pt-0.5 border-t border-[#1b2331]">
+          14 Major Stars
+        </div>
+      </div>
+      {getPalaceCell('酉')}
+
+      {/* Row 3: 卯 (Left), Courtyard spanned, 戌 (Right) */}
+      {getPalaceCell('卯')}
+      {getPalaceCell('戌')}
+
+      {/* Row 4 (Bottom): 寅, 丑, 子, 亥 */}
+      {getPalaceCell('寅')}
+      {getPalaceCell('丑')}
+      {getPalaceCell('子')}
+      {getPalaceCell('亥')}
+    </div>
+  );
+
+  if (compact) {
+    return (
+      <div className="flex flex-col items-center justify-center w-full py-0.5">
+        {gridContent}
+      </div>
+    );
+  }
 
   return (
     <div className="flex flex-col items-center justify-center p-3 bg-[#080a0f] rounded-lg border border-[#1b2331]">
@@ -654,53 +743,7 @@ export const ZiWeiPalaceGrid: React.FC<ZiWeiGridProps> = ({ ziwei }) => {
         <span className="text-[11px] font-mono text-slate-400">Bureau: {ziwei.five_elements_bureau?.name}</span>
       </div>
 
-      <div className="w-full max-w-[560px] grid grid-cols-4 grid-rows-4 gap-1.5 min-h-[380px]">
-        {/* Row 1 (Top): 巳, 午, 未, 申 */}
-        {getPalaceCell('巳')}
-        {getPalaceCell('午')}
-        {getPalaceCell('未')}
-        {getPalaceCell('申')}
-
-        {/* Row 2: 辰 (Left), Courtyard (Center 2x2), 酉 (Right) */}
-        {getPalaceCell('辰')}
-        <div className="col-span-2 row-span-2 bg-[#090d15] rounded border border-purple-900/40 p-3 flex flex-col justify-between text-center select-none">
-          <div className="border-b border-[#1b2331] pb-1.5">
-            <span className="text-[11px] font-mono uppercase text-purple-400 block tracking-wider font-semibold">
-              Central Courtyard (中天命盘)
-            </span>
-            <h4 className="text-sm font-bold text-slate-100 mt-0.5">
-              {ziwei.five_elements_bureau?.name}
-            </h4>
-          </div>
-
-          <div className="text-xs font-mono space-y-1 text-slate-300 my-auto">
-            <div>Ming Palace: <strong className="text-cyan-300">{ziwei.ming_palace_branch}</strong> • Shen: <strong className="text-purple-300">{ziwei.shen_palace_branch}</strong></div>
-            <div className="text-[11px] text-slate-400">
-              Lunar: Year {ziwei.lunar_date?.year}, M{ziwei.lunar_date?.month}, D{ziwei.lunar_date?.day}
-            </div>
-            {ziwei.ming_star_quality && (
-              <div className="text-[11px] text-amber-300">
-                Evaluation: {ziwei.ming_star_quality.assessment}
-              </div>
-            )}
-          </div>
-
-          <div className="text-[9px] font-mono text-slate-500 pt-1 border-t border-[#1b2331]">
-            14 Major Stars + 10 Auxiliary Auspicious/Malefics
-          </div>
-        </div>
-        {getPalaceCell('酉')}
-
-        {/* Row 3: 卯 (Left), Courtyard spanned, 戌 (Right) */}
-        {getPalaceCell('卯')}
-        {getPalaceCell('戌')}
-
-        {/* Row 4 (Bottom): 寅, 丑, 子, 亥 */}
-        {getPalaceCell('寅')}
-        {getPalaceCell('丑')}
-        {getPalaceCell('子')}
-        {getPalaceCell('亥')}
-      </div>
+      {gridContent}
 
       <div className="mt-2 text-[11px] text-slate-400 font-mono text-center">
         Traditional clockwise layout • <span className="text-cyan-300">Cyan Border = Ming (Life)</span> • <span className="text-purple-300">Purple Border = Shen (Body)</span>
@@ -711,14 +754,68 @@ export const ZiWeiPalaceGrid: React.FC<ZiWeiGridProps> = ({ ziwei }) => {
 
 interface AlmutenBarProps {
   persian: any;
+  compact?: boolean;
 }
 
 /**
  * Almuten Figuris Dignity Comparative Bar Visualizer
  */
-export const AlmutenDignityBarChart: React.FC<AlmutenBarProps> = ({ persian }) => {
+export const AlmutenDignityBarChart: React.FC<AlmutenBarProps> = ({ persian, compact }) => {
   const leaderboard = persian.almuten_figuris?.leaderboard || [];
   const maxScore = Math.max(...leaderboard.map((item: any) => item.total_score), 40);
+  const displayedItems = compact ? leaderboard.slice(0, 5) : leaderboard;
+
+  const barContent = (
+    <div className={`w-full ${compact ? 'max-w-[320px] space-y-1.5' : 'space-y-2'}`}>
+      {displayedItems.map((item: any, idx: number) => {
+        const isVictor = idx === 0;
+        const essentialPct = (item.essential_dignity / maxScore) * 100;
+        const accidentalPct = (item.accidental_dignity / maxScore) * 100;
+
+        return (
+          <div key={item.planet} className="space-y-0.5">
+            <div className="flex items-center justify-between text-xs font-mono">
+              <span className={`flex items-center gap-1.5 ${isVictor ? 'text-amber-400 font-bold' : 'text-slate-300'}`}>
+                {isVictor ? '★' : `#${idx + 1}`} {item.planet}
+              </span>
+              <span className="tabular-nums font-bold text-slate-200">
+                {item.total_score} pts{' '}
+                <span className="text-[11px] font-normal text-slate-500">
+                  ({item.essential_dignity} ess + {item.accidental_dignity} acc)
+                </span>
+              </span>
+            </div>
+
+            {/* Stacked Bar */}
+            <div className={`${compact ? 'h-1.5' : 'h-2'} w-full bg-[#121721] rounded overflow-hidden flex border border-[#1b2331]`}>
+              <div
+                className="h-full bg-cyan-500 transition-[width] duration-300 ease-out"
+                style={{ width: `${essentialPct}%` }}
+                title={`Essential: +${item.essential_dignity}`}
+              />
+              <div
+                className="h-full bg-amber-500 transition-[width] duration-300 ease-out"
+                style={{ width: `${accidentalPct}%` }}
+                title={`Accidental: +${item.accidental_dignity}`}
+              />
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  );
+
+  if (compact) {
+    return (
+      <div className="flex flex-col items-center justify-center w-full py-0.5">
+        {barContent}
+        <div className="mt-2 text-[10px] text-slate-400 font-mono flex items-center justify-center gap-3">
+          <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-sm bg-cyan-500"></span> Essential</span>
+          <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-sm bg-amber-500"></span> Accidental</span>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="flex flex-col p-3 bg-[#080a0f] rounded-lg border border-[#1b2331]">
@@ -729,43 +826,7 @@ export const AlmutenDignityBarChart: React.FC<AlmutenBarProps> = ({ persian }) =
         <span className="text-[11px] font-mono text-slate-400">Victor: {persian.almuten_figuris?.victor}</span>
       </div>
 
-      <div className="space-y-2">
-        {leaderboard.map((item: any, idx: number) => {
-          const isVictor = idx === 0;
-          const essentialPct = (item.essential_dignity / maxScore) * 100;
-          const accidentalPct = (item.accidental_dignity / maxScore) * 100;
-
-          return (
-            <div key={item.planet} className="space-y-0.5">
-              <div className="flex items-center justify-between text-xs font-mono">
-                <span className={`flex items-center gap-1.5 ${isVictor ? 'text-amber-400 font-bold' : 'text-slate-300'}`}>
-                  {isVictor ? '★' : `#${idx + 1}`} {item.planet}
-                </span>
-                <span className="tabular-nums font-bold text-slate-200">
-                  {item.total_score} pts{' '}
-                  <span className="text-[11px] font-normal text-slate-500">
-                    ({item.essential_dignity} ess + {item.accidental_dignity} acc)
-                  </span>
-                </span>
-              </div>
-
-              {/* Stacked Bar */}
-              <div className="h-2 w-full bg-[#121721] rounded overflow-hidden flex border border-[#1b2331]">
-                <div
-                  className="h-full bg-cyan-500 transition-[width] duration-300 ease-out"
-                  style={{ width: `${essentialPct}%` }}
-                  title={`Essential: +${item.essential_dignity}`}
-                />
-                <div
-                  className="h-full bg-amber-500 transition-[width] duration-300 ease-out"
-                  style={{ width: `${accidentalPct}%` }}
-                  title={`Accidental: +${item.accidental_dignity}`}
-                />
-              </div>
-            </div>
-          );
-        })}
-      </div>
+      {barContent}
 
       <div className="mt-3 text-[11px] text-slate-400 font-mono flex items-center justify-center gap-4">
         <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-sm bg-cyan-500"></span> Essential Dignity (Domicile, Exaltation, Bounds)</span>
@@ -777,12 +838,13 @@ export const AlmutenDignityBarChart: React.FC<AlmutenBarProps> = ({ persian }) =
 
 interface MaramatakaDialProps {
   maramataka: any;
+  compact?: boolean;
 }
 
 /**
  * Polynesian Maramataka Lunar Phase & Oceanic Dial
  */
-export const MaramatakaLunarDial: React.FC<MaramatakaDialProps> = ({ maramataka }) => {
+export const MaramatakaLunarDial: React.FC<MaramatakaDialProps> = ({ maramataka, compact }) => {
   const night = maramataka.lunar_night;
   const currentNightNum = night.number || 1; // 1 to 30
   const size = 300;
@@ -795,6 +857,66 @@ export const MaramatakaLunarDial: React.FC<MaramatakaDialProps> = ({ maramataka 
   const pointerX = center + dialRadius * Math.cos(activeRad);
   const pointerY = center + dialRadius * Math.sin(activeRad);
 
+  const svgContent = (
+    <svg
+      viewBox={`0 0 ${size} ${size}`}
+      className={`w-full select-none ${compact ? 'max-w-[220px] sm:max-w-[240px] h-auto' : 'max-w-[280px] h-auto'}`}
+      style={{ filter: 'drop-shadow(0 4px 12px rgba(0,0,0,0.5))' }}
+    >
+      {/* Outer Dial Track */}
+      <circle cx={center} cy={center} r={dialRadius} fill="#0d1118" stroke="#1b2331" strokeWidth="2" />
+
+      {/* 30 Lunar Night Tick Marks */}
+      {Array.from({ length: 30 }).map((_, i) => {
+        const ang = (i / 30) * 360 - 90;
+        const rad = (ang * Math.PI) / 180;
+        const r1 = dialRadius - 8;
+        const r2 = dialRadius;
+        const isQuarter = i % 7 === 0;
+
+        return (
+          <line
+            key={i}
+            x1={center + r1 * Math.cos(rad)}
+            y1={center + r1 * Math.sin(rad)}
+            x2={center + r2 * Math.cos(rad)}
+            y2={center + r2 * Math.sin(rad)}
+            stroke={isQuarter ? '#38bdf8' : '#2a3649'}
+            strokeWidth={isQuarter ? 2 : 1}
+          />
+        );
+      })}
+
+      {/* Center Moon Illumination Globe */}
+      <circle cx={center} cy={center} r={45} fill="#0b0e14" stroke="#1b2331" strokeWidth="1.5" />
+      <circle cx={center} cy={center} r={42} fill="#182232" opacity={night.illumination_percent / 100} />
+
+      <text x={center} y={center - 8} textAnchor="middle" fill="#f1f5f9" fontSize="12" fontFamily="sans-serif" fontWeight="bold">
+        {night.name}
+      </text>
+      <text x={center} y={center + 8} textAnchor="middle" fill="#10b981" fontSize="9" fontFamily="monospace">
+        {night.vitality_index.slice(0, 10)}
+      </text>
+      <text x={center} y={center + 20} textAnchor="middle" fill="#94a3b8" fontSize="8" fontFamily="monospace">
+        {night.illumination_percent}% Lit
+      </text>
+
+      {/* Active Night Pointer */}
+      <circle cx={pointerX} cy={pointerY} r={6} fill="#10b981" stroke="#f1f5f9" strokeWidth="1.5" />
+    </svg>
+  );
+
+  if (compact) {
+    return (
+      <div className="flex flex-col items-center justify-center w-full py-0.5">
+        {svgContent}
+        <div className="mt-1 text-[10px] text-slate-400 font-mono text-center">
+          {maramataka.oceanic_archetype?.optimal_action} • {night.elongation_degrees}° Elongation
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="flex flex-col items-center justify-center p-3 bg-[#080a0f] rounded-lg border border-[#1b2331]">
       <div className="flex items-center justify-between w-full max-w-[320px] mb-2 px-1">
@@ -804,52 +926,7 @@ export const MaramatakaLunarDial: React.FC<MaramatakaDialProps> = ({ maramataka 
         <span className="text-[11px] font-mono text-slate-400">Night #{currentNightNum}</span>
       </div>
 
-      <svg
-        viewBox={`0 0 ${size} ${size}`}
-        className="w-full max-w-[280px] h-auto select-none"
-        style={{ filter: 'drop-shadow(0 4px 12px rgba(0,0,0,0.5))' }}
-      >
-        {/* Outer Dial Track */}
-        <circle cx={center} cy={center} r={dialRadius} fill="#0d1118" stroke="#1b2331" strokeWidth="2" />
-
-        {/* 30 Lunar Night Tick Marks */}
-        {Array.from({ length: 30 }).map((_, i) => {
-          const ang = (i / 30) * 360 - 90;
-          const rad = (ang * Math.PI) / 180;
-          const r1 = dialRadius - 8;
-          const r2 = dialRadius;
-          const isQuarter = i % 7 === 0;
-
-          return (
-            <line
-              key={i}
-              x1={center + r1 * Math.cos(rad)}
-              y1={center + r1 * Math.sin(rad)}
-              x2={center + r2 * Math.cos(rad)}
-              y2={center + r2 * Math.sin(rad)}
-              stroke={isQuarter ? '#38bdf8' : '#2a3649'}
-              strokeWidth={isQuarter ? 2 : 1}
-            />
-          );
-        })}
-
-        {/* Center Moon Illumination Globe */}
-        <circle cx={center} cy={center} r={45} fill="#0b0e14" stroke="#1b2331" strokeWidth="1.5" />
-        <circle cx={center} cy={center} r={42} fill="#182232" opacity={night.illumination_percent / 100} />
-
-        <text x={center} y={center - 8} textAnchor="middle" fill="#f1f5f9" fontSize="12" fontFamily="sans-serif" fontWeight="bold">
-          {night.name}
-        </text>
-        <text x={center} y={center + 8} textAnchor="middle" fill="#10b981" fontSize="9" fontFamily="monospace">
-          {night.vitality_index.slice(0, 10)}
-        </text>
-        <text x={center} y={center + 20} textAnchor="middle" fill="#94a3b8" fontSize="8" fontFamily="monospace">
-          {night.illumination_percent}% Lit
-        </text>
-
-        {/* Active Night Pointer */}
-        <circle cx={pointerX} cy={pointerY} r={6} fill="#10b981" stroke="#f1f5f9" strokeWidth="1.5" />
-      </svg>
+      {svgContent}
 
       <div className="mt-2 text-[11px] text-slate-400 font-mono text-center">
         {maramataka.oceanic_archetype?.optimal_action} • {night.elongation_degrees}° Elongation
@@ -1033,12 +1110,13 @@ export const DomainConsensusRadar: React.FC<RadarProps> = ({ synthesis }) => {
 
 interface TibetanMewaProps {
   tibetan: any;
+  compact?: boolean;
 }
 
 /**
  * Tibetan Mewa 3x3 Magic Square (Luoshu) & Eight Parkha Trigram Ring
  */
-export const TibetanMewaGrid: React.FC<TibetanMewaProps> = ({ tibetan }) => {
+export const TibetanMewaGrid: React.FC<TibetanMewaProps> = ({ tibetan, compact }) => {
   const natalMewa = tibetan.mewa?.number || 1;
   const natalParkha = tibetan.parkha?.name || 'Li';
 
@@ -1064,6 +1142,53 @@ export const TibetanMewaGrid: React.FC<TibetanMewaProps> = ({ tibetan }) => {
     9: { name: '9 Maroon', color: '#fb7185', element: 'Fire', bg: '#881337' },
   };
 
+  const gridCells = (
+    <div className={`w-full ${compact ? 'max-w-[240px] sm:max-w-[260px] gap-1.5' : 'max-w-[340px] gap-2'} grid grid-cols-3`}>
+      {square.map((row, rIdx) =>
+        row.map((num) => {
+          const isNatal = num === natalMewa;
+          const meta = mewaMeta[num];
+          return (
+            <div
+              key={`${rIdx}-${num}`}
+              className={`${compact ? 'p-1.5 rounded' : 'p-3 rounded-md'} border flex flex-col items-center justify-center text-center transition-colors duration-150 ${
+                isNatal
+                  ? 'border-amber-400 bg-[#1e2230] shadow-[0_0_8px_rgba(251,191,36,0.25)] animate-celestial-glow'
+                  : 'border-[#1b2331] bg-[#0d1118]'
+              }`}
+            >
+              <span
+                className={`${compact ? 'text-lg leading-tight' : 'text-2xl'} font-bold font-mono`}
+                style={{ color: meta?.color || '#cbd5e1' }}
+              >
+                {num}
+              </span>
+              <span className={`${compact ? 'text-[9px]' : 'text-[11px] mt-1'} font-mono font-medium text-slate-300`}>
+                {meta?.element}
+              </span>
+              {isNatal && (
+                <span className={`${compact ? 'mt-0.5 px-1 py-0.2 text-[7px]' : 'mt-1 px-1.5 py-0.2 text-[8px]'} font-mono font-bold uppercase rounded bg-amber-950 text-amber-300 border border-amber-600`}>
+                  {compact ? 'NATAL' : 'NATAL MEWA'}
+                </span>
+              )}
+            </div>
+          );
+        })
+      )}
+    </div>
+  );
+
+  if (compact) {
+    return (
+      <div className="flex flex-col items-center justify-center w-full py-0.5">
+        {gridCells}
+        <div className="mt-2 text-[10px] font-mono text-slate-400">
+          Parkha: <strong className="text-cyan-300">{natalParkha}</strong> ({tibetan.parkha?.element})
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="flex flex-col items-center justify-center p-3 bg-[#080a0f] rounded-lg border border-[#1b2331]">
       <div className="flex items-center justify-between w-full max-w-[400px] mb-2 px-1">
@@ -1073,39 +1198,7 @@ export const TibetanMewaGrid: React.FC<TibetanMewaProps> = ({ tibetan }) => {
         <span className="text-[11px] font-mono text-slate-400">Sum = 15</span>
       </div>
 
-      <div className="w-full max-w-[340px] grid grid-cols-3 gap-2">
-        {square.map((row, rIdx) =>
-          row.map((num) => {
-            const isNatal = num === natalMewa;
-            const meta = mewaMeta[num];
-            return (
-              <div
-                key={`${rIdx}-${num}`}
-                className={`p-3 rounded-md border flex flex-col items-center justify-center text-center transition-colors duration-150 ${
-                  isNatal
-                    ? 'border-amber-400 bg-[#1e2230] shadow-[0_0_12px_rgba(251,191,36,0.25)] animate-celestial-glow'
-                    : 'border-[#1b2331] bg-[#0d1118]'
-                }`}
-              >
-                <span
-                  className="text-2xl font-bold font-mono"
-                  style={{ color: meta?.color || '#cbd5e1' }}
-                >
-                  {num}
-                </span>
-                <span className="text-[11px] font-mono font-medium text-slate-300 mt-1">
-                  {meta?.element}
-                </span>
-                {isNatal && (
-                  <span className="mt-1 px-1.5 py-0.2 text-[8px] font-mono font-bold uppercase rounded bg-amber-950 text-amber-300 border border-amber-600">
-                    NATAL MEWA
-                  </span>
-                )}
-              </div>
-            );
-          })
-        )}
-      </div>
+      {gridCells}
 
       <div className="mt-3 p-2 bg-[#0d1118] border border-[#1b2331] rounded w-full max-w-[340px] flex items-center justify-between text-xs font-mono">
         <span className="text-slate-400">Natal Parkha Trigram:</span>
@@ -1119,12 +1212,13 @@ export const TibetanMewaGrid: React.FC<TibetanMewaProps> = ({ tibetan }) => {
 
 interface EgyptianClockProps {
   egyptian: any;
+  compact?: boolean;
 }
 
 /**
  * Ancient Egyptian 36-Decan Cosmic Barque Star Clock
  */
-export const EgyptianDecanStarClock: React.FC<EgyptianClockProps> = ({ egyptian }) => {
+export const EgyptianDecanStarClock: React.FC<EgyptianClockProps> = ({ egyptian, compact }) => {
   const guardians = egyptian.decan_guardians || {};
   const hourWatch = egyptian.chronocrator_watch;
   const size = 340;
@@ -1144,6 +1238,70 @@ export const EgyptianDecanStarClock: React.FC<EgyptianClockProps> = ({ egyptian 
     };
   });
 
+  const svgContent = (
+    <svg
+      viewBox={`0 0 ${size} ${size}`}
+      className={`w-full select-none ${compact ? 'max-w-[220px] sm:max-w-[240px] h-auto' : 'max-w-[300px] h-auto'}`}
+      style={{ filter: 'drop-shadow(0 4px 12px rgba(0,0,0,0.5))' }}
+    >
+      {/* Outer Dial Track */}
+      <circle cx={center} cy={center} r={radius} fill="#0d1118" stroke="#1b2331" strokeWidth="2" />
+      <circle cx={center} cy={center} r={radius - 16} fill="none" stroke="#182335" strokeWidth="1" strokeDasharray="3 3" />
+
+      {/* 36 Decan Radial Ticks */}
+      {decans.map((d) => {
+        const r1 = radius - (d.index % 3 === 1 ? 12 : 6);
+        const r2 = radius;
+        return (
+          <line
+            key={d.index}
+            x1={center + r1 * Math.cos(d.rad)}
+            y1={center + r1 * Math.sin(d.rad)}
+            x2={center + r2 * Math.cos(d.rad)}
+            y2={center + r2 * Math.sin(d.rad)}
+            stroke={d.index % 3 === 1 ? '#38bdf8' : '#2a3649'}
+            strokeWidth={d.index % 3 === 1 ? 1.5 : 1}
+          />
+        );
+      })}
+
+      {/* Center Barque Wheel */}
+      <circle cx={center} cy={center} r={52} fill="#090d15" stroke="#38bdf8" strokeWidth="1.5" strokeOpacity="0.6" />
+      <text x={center} y={center - 14} textAnchor="middle" fill="#38bdf8" fontSize="10" fontFamily="monospace" fontWeight="bold">
+        TEMPORAL HOUR
+      </text>
+      <text x={center} y={center + 4} textAnchor="middle" fill="#f1f5f9" fontSize="14" fontFamily="serif" fontWeight="bold">
+        {hourWatch?.hour_ruler_chronocrator}
+      </text>
+      <text x={center} y={center + 18} textAnchor="middle" fill="#94a3b8" fontSize="9" fontFamily="monospace">
+        Hour #{hourWatch?.temporal_hour_number} ({hourWatch?.period})
+      </text>
+
+      {/* Key Decan Markers */}
+      {guardians.ascendant_decan && (
+        <circle
+          cx={decans[(guardians.ascendant_decan.overall_decan_number - 1) % 36]?.x || center}
+          cy={decans[(guardians.ascendant_decan.overall_decan_number - 1) % 36]?.y || center}
+          r="5"
+          fill="#38bdf8"
+          stroke="#f1f5f9"
+          strokeWidth="1.5"
+        />
+      )}
+    </svg>
+  );
+
+  if (compact) {
+    return (
+      <div className="flex flex-col items-center justify-center w-full py-0.5">
+        {svgContent}
+        <div className="mt-1 text-[10px] text-slate-400 font-mono text-center">
+          Ascendant Decan: <span className="text-amber-300">{guardians.ascendant_decan?.decan_name}</span>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="flex flex-col items-center justify-center p-3 bg-[#080a0f] rounded-lg border border-[#1b2331]">
       <div className="flex items-center justify-between w-full max-w-[360px] mb-2 px-1">
@@ -1153,56 +1311,7 @@ export const EgyptianDecanStarClock: React.FC<EgyptianClockProps> = ({ egyptian 
         <span className="text-[11px] font-mono text-slate-400">10° Segments</span>
       </div>
 
-      <svg
-        viewBox={`0 0 ${size} ${size}`}
-        className="w-full max-w-[300px] h-auto select-none"
-        style={{ filter: 'drop-shadow(0 4px 12px rgba(0,0,0,0.5))' }}
-      >
-        {/* Outer Dial Track */}
-        <circle cx={center} cy={center} r={radius} fill="#0d1118" stroke="#1b2331" strokeWidth="2" />
-        <circle cx={center} cy={center} r={radius - 16} fill="none" stroke="#182335" strokeWidth="1" strokeDasharray="3 3" />
-
-        {/* 36 Decan Radial Ticks */}
-        {decans.map((d) => {
-          const r1 = radius - (d.index % 3 === 1 ? 12 : 6);
-          const r2 = radius;
-          return (
-            <line
-              key={d.index}
-              x1={center + r1 * Math.cos(d.rad)}
-              y1={center + r1 * Math.sin(d.rad)}
-              x2={center + r2 * Math.cos(d.rad)}
-              y2={center + r2 * Math.sin(d.rad)}
-              stroke={d.index % 3 === 1 ? '#38bdf8' : '#2a3649'}
-              strokeWidth={d.index % 3 === 1 ? 1.5 : 1}
-            />
-          );
-        })}
-
-        {/* Center Barque Wheel */}
-        <circle cx={center} cy={center} r={52} fill="#090d15" stroke="#38bdf8" strokeWidth="1.5" strokeOpacity="0.6" />
-        <text x={center} y={center - 14} textAnchor="middle" fill="#38bdf8" fontSize="10" fontFamily="monospace" fontWeight="bold">
-          TEMPORAL HOUR
-        </text>
-        <text x={center} y={center + 4} textAnchor="middle" fill="#f1f5f9" fontSize="14" fontFamily="serif" fontWeight="bold">
-          {hourWatch?.hour_ruler_chronocrator}
-        </text>
-        <text x={center} y={center + 18} textAnchor="middle" fill="#94a3b8" fontSize="9" fontFamily="monospace">
-          Hour #{hourWatch?.temporal_hour_number} ({hourWatch?.period})
-        </text>
-
-        {/* Key Decan Markers */}
-        {guardians.ascendant_decan && (
-          <circle
-            cx={decans[(guardians.ascendant_decan.overall_decan_number - 1) % 36]?.x || center}
-            cy={decans[(guardians.ascendant_decan.overall_decan_number - 1) % 36]?.y || center}
-            r="5"
-            fill="#38bdf8"
-            stroke="#f1f5f9"
-            strokeWidth="1.5"
-          />
-        )}
-      </svg>
+      {svgContent}
 
       <div className="mt-2 text-[11px] text-slate-400 font-mono text-center">
         Ascendant Decan: <span className="text-amber-300">{guardians.ascendant_decan?.decan_name}</span> (Deity: {guardians.ascendant_decan?.presiding_deity})
@@ -1213,18 +1322,90 @@ export const EgyptianDecanStarClock: React.FC<EgyptianClockProps> = ({ egyptian 
 
 interface MayanCompassProps {
   mayan: any;
+  compact?: boolean;
 }
 
 /**
  * Maya Tzolk'in (260-day) and Haab' (365-day) Sacred Calendar Dial
  */
-export const MayaCalendarCompass: React.FC<MayanCompassProps> = ({ mayan }) => {
+export const MayaCalendarCompass: React.FC<MayanCompassProps> = ({ mayan, compact }) => {
   const tzolkin = mayan.tzolkin;
   const haab = mayan.haab;
   const size = 320;
   const center = size / 2;
   const outerR = 115;
   const innerR = 75;
+
+  const svgContent = (
+    <svg
+      viewBox={`0 0 ${size} ${size}`}
+      className={`w-full select-none ${compact ? 'max-w-[220px] sm:max-w-[240px] h-auto' : 'max-w-[280px] h-auto'}`}
+      style={{ filter: 'drop-shadow(0 4px 12px rgba(0,0,0,0.5))' }}
+    >
+      {/* Outer Haab' Ring (365 days / 18 months + Wayeb) */}
+      <circle cx={center} cy={center} r={outerR} fill="#0d1118" stroke="#1b2331" strokeWidth="2" />
+      <g className="animate-gear-sync" style={{ transformOrigin: `${center}px ${center}px` }}>
+        {Array.from({ length: 19 }).map((_, i) => {
+          const ang = (i / 19) * 360 - 90;
+          const rad = (ang * Math.PI) / 180;
+          return (
+            <line
+              key={i}
+              x1={center + (outerR - 10) * Math.cos(rad)}
+              y1={center + (outerR - 10) * Math.sin(rad)}
+              x2={center + outerR * Math.cos(rad)}
+              y2={center + outerR * Math.sin(rad)}
+              stroke="#0284c7"
+              strokeWidth="1.5"
+            />
+          );
+        })}
+      </g>
+
+      {/* Inner Tzolk'in Ring (260 days / 20 day signs x 13 numbers) */}
+      <circle cx={center} cy={center} r={innerR} fill="#090d15" stroke="#0284c7" strokeWidth="1.5" />
+      <g className="animate-gear-reverse" style={{ transformOrigin: `${center}px ${center}px` }}>
+        {Array.from({ length: 20 }).map((_, i) => {
+          const ang = (i / 20) * 360 - 90;
+          const rad = (ang * Math.PI) / 180;
+          return (
+            <line
+              key={i}
+              x1={center + (innerR - 8) * Math.cos(rad)}
+              y1={center + (innerR - 8) * Math.sin(rad)}
+              x2={center + innerR * Math.cos(rad)}
+              y2={center + innerR * Math.sin(rad)}
+              stroke="#38bdf8"
+              strokeWidth="1"
+            />
+          );
+        })}
+      </g>
+
+      {/* Hub: Kin & Calendar Round */}
+      <circle cx={center} cy={center} r={44} fill="#080a0f" stroke="#38bdf8" strokeWidth="2" />
+      <text x={center} y={center - 10} textAnchor="middle" fill="#38bdf8" fontSize="12" fontFamily="monospace" fontWeight="bold">
+        {tzolkin?.formatted}
+      </text>
+      <text x={center} y={center + 6} textAnchor="middle" fill="#f1f5f9" fontSize="11" fontFamily="sans-serif">
+        {haab?.formatted}
+      </text>
+      <text x={center} y={center + 20} textAnchor="middle" fill="#fbbf24" fontSize="8" fontFamily="monospace">
+        Glyph: {tzolkin?.symbol}
+      </text>
+    </svg>
+  );
+
+  if (compact) {
+    return (
+      <div className="flex flex-col items-center justify-center w-full py-0.5">
+        {svgContent}
+        <div className="mt-1 text-[10px] text-slate-400 font-mono text-center">
+          Long Count: <span className="text-cyan-300">{mayan.long_count?.formatted}</span>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="flex flex-col items-center justify-center p-3 bg-[#080a0f] rounded-lg border border-[#1b2331]">
@@ -1235,63 +1416,7 @@ export const MayaCalendarCompass: React.FC<MayanCompassProps> = ({ mayan }) => {
         <span className="text-[11px] font-mono text-slate-400">52-Year Cycle</span>
       </div>
 
-      <svg
-        viewBox={`0 0 ${size} ${size}`}
-        className="w-full max-w-[280px] h-auto select-none"
-        style={{ filter: 'drop-shadow(0 4px 12px rgba(0,0,0,0.5))' }}
-      >
-        {/* Outer Haab' Ring (365 days / 18 months + Wayeb) */}
-        <circle cx={center} cy={center} r={outerR} fill="#0d1118" stroke="#1b2331" strokeWidth="2" />
-        <g className="animate-gear-sync" style={{ transformOrigin: `${center}px ${center}px` }}>
-          {Array.from({ length: 19 }).map((_, i) => {
-            const ang = (i / 19) * 360 - 90;
-            const rad = (ang * Math.PI) / 180;
-            return (
-              <line
-                key={i}
-                x1={center + (outerR - 10) * Math.cos(rad)}
-                y1={center + (outerR - 10) * Math.sin(rad)}
-                x2={center + outerR * Math.cos(rad)}
-                y2={center + outerR * Math.sin(rad)}
-                stroke="#0284c7"
-                strokeWidth="1.5"
-              />
-            );
-          })}
-        </g>
-
-        {/* Inner Tzolk'in Ring (260 days / 20 day signs x 13 numbers) */}
-        <circle cx={center} cy={center} r={innerR} fill="#090d15" stroke="#0284c7" strokeWidth="1.5" />
-        <g className="animate-gear-reverse" style={{ transformOrigin: `${center}px ${center}px` }}>
-          {Array.from({ length: 20 }).map((_, i) => {
-            const ang = (i / 20) * 360 - 90;
-            const rad = (ang * Math.PI) / 180;
-            return (
-              <line
-                key={i}
-                x1={center + (innerR - 8) * Math.cos(rad)}
-                y1={center + (innerR - 8) * Math.sin(rad)}
-                x2={center + innerR * Math.cos(rad)}
-                y2={center + innerR * Math.sin(rad)}
-                stroke="#38bdf8"
-                strokeWidth="1"
-              />
-            );
-          })}
-        </g>
-
-        {/* Hub: Kin & Calendar Round */}
-        <circle cx={center} cy={center} r={44} fill="#080a0f" stroke="#38bdf8" strokeWidth="2" />
-        <text x={center} y={center - 10} textAnchor="middle" fill="#38bdf8" fontSize="12" fontFamily="monospace" fontWeight="bold">
-          {tzolkin?.formatted}
-        </text>
-        <text x={center} y={center + 6} textAnchor="middle" fill="#f1f5f9" fontSize="11" fontFamily="sans-serif">
-          {haab?.formatted}
-        </text>
-        <text x={center} y={center + 20} textAnchor="middle" fill="#fbbf24" fontSize="8" fontFamily="monospace">
-          Glyph: {tzolkin?.symbol}
-        </text>
-      </svg>
+      {svgContent}
 
       <div className="mt-2 text-[11px] text-slate-400 font-mono text-center">
         Long Count: <span className="text-cyan-300">{mayan.long_count?.formatted}</span> • Kin #{mayan.long_count?.total_kin}
