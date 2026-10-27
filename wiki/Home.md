@@ -17,6 +17,7 @@ Synodix unifies high-precision modern astrometry (Swiss Ephemeris 2.10 and NASA 
 | **[API Reference](API-Reference)** | REST API endpoints, schemas, and sequence flow | `POST /api/compute-chart`, Invariant guarantees |
 | **[Data Pipelines](Data-Pipelines)** | Ingestion, transformation, and distribution pipeline | Ingest $ightarrow$ Audit $ightarrow$ Core $ightarrow$ Synthesis $ightarrow$ UI |
 | **[State Lifecycle](State-Lifecycle)** | Verification state transitions and failure modes | Telemetry $ightarrow$ Ephemeris $ightarrow$ Cusp Sweep $ightarrow$ Verified |
+| **[Feature Guide](Feature-Guide)** | 50 Astrometric & Cultural Feature Explainers | Math, Lineages, Mechanics, Worldviews |
 | **[Runbooks & Operations](Runbooks)** | Developer quickstart, pipeline automation, deployment | `./pipeline.sh`, Docker, Testing, Release gates |
 
 ---

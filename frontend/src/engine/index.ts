@@ -136,3 +136,6 @@ export async function calculateChartLocally(input: BirthInput): Promise<ChartRes
 
   return chartResponse;
 }
+
+export * from './synastry';
+

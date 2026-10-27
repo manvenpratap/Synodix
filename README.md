@@ -113,6 +113,11 @@ Complete documentation is maintained in the [`wiki/`](wiki/) directory:
 - **Universal Display Presentation Switcher**: Instantly toggle between `Comprehensive` (full instrument + data), `Visual Instrument` (focused astrolabe / dial presentation), and `Telemetry Tables` (granular data breakdown).
 - **Culturally Framed Astronomical Visualizers**: 10 interactive SVG wheels and visual instruments framed in museum-grade, culture-accented borders and title bars (Parashari Diamond Kundali, Wu Xing Dynamic Pentagram, Ptolemaic 360° Wheel, Zi Wei Imperial Courtyard, Maya Stele Compass, Lo Shu Magic Square, Abu Ma'shar Almuten Bar Gauge, Ra's Cosmic Barque Star Clock, Oceanic 30-Night Lunar Dial).
 
+### 5. Astrometric & Cultural Feature Guide Encyclopedia (50 Topics)
+- **50 Comprehensive Explainers**: Deep technical and historical profiles covering astronomical math, algorithms, mechanics, lineages, and cultural worldviews across all 9 world traditions and precision astrometry.
+- **Dedicated Interactive Browser**: Categorized navigation, real-time query filtering, reading time estimates, related topic linking, and deep-dive technical modals.
+- **Inline Contextual Explainer Triggers**: Accessible inline modal triggers throughout every screen allowing researchers to inspect the exact math and history behind any card, metric, or calculation without losing context.
+
 ---
 
 ## 🚀 Quickstart & Pipeline Execution

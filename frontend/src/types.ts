@@ -226,3 +226,99 @@ export interface ChartResponse {
   synthesis: Synthesis;
   calculation_manifest: any;
 }
+
+export interface SynastryAspect {
+  planetA: string;
+  planetB: string;
+  aspect: string;
+  symbol: string;
+  orb: number;
+  exactAngle: number;
+  actualAngle: number;
+  nature: 'harmonic' | 'challenging' | 'magnetic' | 'stabilizing';
+  description: string;
+}
+
+export interface CompositePlanet {
+  name: string;
+  longitude: number;
+  sign: string;
+  sign_degree: number;
+  house: number;
+}
+
+export interface CompositeChart {
+  planets: Record<string, CompositePlanet>;
+  angles: {
+    ascendant: number;
+    ascendant_sign: string;
+    midheaven: number;
+    midheaven_sign: string;
+  };
+  aspects: Array<{
+    planet1: string;
+    planet2: string;
+    aspect: string;
+    symbol: string;
+    orb: number;
+    nature: 'harmonic' | 'dynamic' | 'binding';
+  }>;
+}
+
+export interface AshtakootaKuta {
+  name: string;
+  sanskrit: string;
+  category: string;
+  maxScore: number;
+  obtainedScore: number;
+  partnerAAttribute: string;
+  partnerBAttribute: string;
+  verdict: 'Excellent' | 'Favorable' | 'Neutral' | 'Challenging';
+  interpretation: string;
+}
+
+export interface AshtakootaScore {
+  totalScore: number;
+  maxScore: 36;
+  percentage: number;
+  status: 'Utkrisht (Exceptional)' | 'Madhyam (Favorable)' | 'Ashubh (Challenging)';
+  kutas: AshtakootaKuta[];
+  kujaDosha: {
+    partnerA: { hasDosha: boolean; placements: string[] };
+    partnerB: { hasDosha: boolean; placements: string[] };
+    isCancelled: boolean;
+    analysis: string;
+  };
+}
+
+export interface TraditionRelationalAnalysis {
+  traditionId: string;
+  traditionName: string;
+  culture: string;
+  affinityScore: number; // 0 - 100
+  affinityGrade: 'Divine Synergy' | 'High Concordance' | 'Harmonic Complement' | 'Creative Friction' | 'Polar Dynamic';
+  headline: string;
+  metrics: Array<{ label: string; value: string; detail?: string }>;
+  coreDynamic: string;
+  karmicGrowthEdge: string;
+}
+
+export interface SynastryReport {
+  partnerAName: string;
+  partnerBName: string;
+  overallConcordanceScore: number;
+  concordanceVerdict: string;
+  compositeChart: CompositeChart;
+  synastryAspects: SynastryAspect[];
+  ashtakoota: AshtakootaScore;
+  traditionAnalyses: Record<string, TraditionRelationalAnalysis>;
+  dossier: {
+    executiveSummary: string;
+    emotionalPsychologicalBond: string;
+    intellectualCommunicationAlignment: string;
+    sexualVitalityChemistry: string;
+    karmicEvolutionaryPurpose: string;
+    pragmaticLongevityFactors: string;
+  };
+}
+

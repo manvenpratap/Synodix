@@ -18,7 +18,8 @@ import {
   Server,
   CheckCircle2,
   AlertCircle,
-  BookOpen
+  BookOpen,
+  HeartHandshake
 } from 'lucide-react';
 import { apiUrl, getApiBaseUrl, setApiBaseUrl, DEFAULT_DEV_API_URL } from './utils/api';
 import { getBundledTitanChart } from './data/bundledTitans';
@@ -31,6 +32,7 @@ import { TraditionCharts } from './components/TraditionCharts';
 import { SynthesisMatrix } from './components/SynthesisMatrix';
 import { ReadingView } from './components/ReadingView';
 import { FeatureGuideScreen } from './components/FeatureGuideScreen';
+import { SynastryScreen } from './components/SynastryScreen';
 import { getPrimaryProfile } from './utils/vault';
 import { ExplainerProvider } from './context/ExplainerContext';
 import { useExplainer } from './context/useExplainer';
@@ -45,6 +47,7 @@ export type AppScreen =
   | 'traditions'
   | 'synthesis'
   | 'dossier'
+  | 'synastry'
   | 'verification'
   | 'evidence'
   | 'guide';
@@ -84,6 +87,13 @@ const NAV_ITEMS: NavItem[] = [
     icon: FileText
   },
   {
+    id: 'synastry',
+    label: 'Relational Synastry',
+    badge: 'Dual-Chart',
+    description: 'Cross-Chart Aspects, Composite & Kutas',
+    icon: HeartHandshake
+  },
+  {
     id: 'verification',
     label: 'Astronomical Audit',
     badge: 'JPL DE421',
@@ -96,6 +106,13 @@ const NAV_ITEMS: NavItem[] = [
     badge: '100 Titans',
     description: 'Double-Blind Monte Carlo Benchmark',
     icon: FlaskConical
+  },
+  {
+    id: 'guide',
+    label: 'Feature Guide',
+    badge: '50 Topics',
+    description: 'Astrometric & Cultural Explainers',
+    icon: BookOpen
   }
 ];
 
@@ -884,6 +901,17 @@ function AppContent() {
                   ) : (
                     <EmptyChartState onOpenWorkbench={() => navigateTo('workbench')} />
                   )}
+                </div>
+              )}
+
+              {/* SCREEN: Relational Synastry & Composite */}
+              {currentScreen === 'synastry' && (
+                <div>
+                  <SynastryScreen
+                    currentChart={chartData}
+                    currentSubjectName={activeSubjectName}
+                    onNavigate={navigateTo}
+                  />
                 </div>
               )}
 

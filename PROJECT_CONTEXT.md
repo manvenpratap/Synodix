@@ -1,7 +1,7 @@
 # Synodix: Project Context & Working Memory
 
-**Last Updated:** 2026-10-27 04:42:38
-**Version:** 2.32.0  
+**Last Updated:** 2026-10-27 09:49:07
+**Version:** 2.33.0  
 **Stack:** Python 3.12 (FastAPI, Swiss Ephemeris 2.10, Skyfield DE421) + TypeScript / React 19 / Vite / Tailwind CSS v4 / Framer Motion / Capacitor 8 (iOS & Android)  
 **Workspace:** `/Volumes/Study/Projects/Astrology` (symlinked as `/Volumes/Study/Astrology`)  
 **Git Remote:** `https://github.com/manvenpratap/Synodix.git`  
@@ -10,7 +10,27 @@
 
 ## 1. Current Status & Milestone
 
-- **Active Phase**: Bespoke Editorial Renaissance Astrometric Monograph Redesign (Completed)
+- **Active Phase**: Astrometric & Cultural Feature Guide & Explainer Encyclopedia (50 Topics) (Completed)
+- **Astrometric & Cultural Feature Guide & Explainer Encyclopedia (v2.33.0)**:
+  - **Comprehensive Explainer Knowledge Base (`src/data/featureExplainers.ts`)**:
+    - Created 50 authoritative, high-density feature explainers covering all 9 civilizational traditions and precision astrometry.
+    - Each topic structured with: `title`, `category`, `subtitle`, `tradition`, `summary`, `astronomicalMath`, `mechanics`, `historicalLineage`, `civilizationalSignificance`, `readingTime`, and `relatedFeatureIds`.
+    - Spans: Precision Astrometry (DE421, Equation of Time, Topocentric parallax, Nutation, Delta T, Speed of Light aberration, Precession), Vedic/Jyotisha (Lahiri Ayanamsha, 27 Nakshatras, Vimshottari Dasha, Parashari Ashtakavarga, Jaimini Chara Karakas, Varga Divisional Charts, Bhavas, Shadbala), Western Classical (Hellenistic Essential Dignities, Dorothean Triplicity, Ptolemaic Egyptian Terms, Almuten Figuris, Placidus vs Whole Sign, Sect, Major Aspects, Harmonic Overtones), BaZi & Chinese (Wu Xing 5 Elements, Heavenly Stems & Earthly Branches, 10 Gods, Zi Wei Dou Shu 12 Palaces, 14 Major Stars), Mesoamerican/Maya (Tzolk'in 260-Day Sacred Calendar, 20 Day Signs & 13 Tones, Haab' 365-Day Solar Count, Calendar Round 52-Year Synodic Alignment), Oceanic/Polynesian (Maramataka 30 Lunar Phases, Tangaroa & Rongo Navigational Tides), Egyptian (36 Decans Star Clock), Persian (Lots & Arabic Parts), Tibetan (Mewa 9-Square Magic Numerology, Lo-Gkor 12-Year Animal Cycle), Epistemology & Cross-Cultural Synthesis (Independent Cultural Lineages, Monte Carlo Double-Blind Benchmark, Cross-Tradition Consensus, Epistemic Humility).
+  - **Dedicated Feature Guide Screen (`src/components/FeatureGuideScreen.tsx`)**:
+    - Implemented dedicated screen with real-time fuzzy search, 9 category filters, reading time tags, and direct one-click access to technical deep dives.
+    - Integrated with `App.tsx` navigation bar, mobile drawer, and header quick actions.
+  - **Contextual Explainer Modal & Triggers (`src/components/ExplainerModal.tsx`, `src/components/ExplainerTrigger.tsx`)**:
+    - Accessible inline modal triggers across the entire application interface allowing users to learn the exact math and history behind any card, metric, or calculation without leaving context.
+  - **Relational Synastry & Midpoint Composite Screen (`SynastryScreen.tsx`, `engine/synastry.ts`)**:
+    - Integrated dual-subject relational analysis engine comparing charts across 9 civilizational traditions.
+    - Multi-tab relational workspace: 9 Traditions Bento, Inter-Chart Planetary Aspects with harmonic filtering, Midpoint Composite Chart calculation with internal aspects, Vedic Ashtakavarga & Ashtakoota 36-Point Guna Milan with Kuja Dosha analysis, and Relational Corroboration Dossier.
+    - Added as first-class screen in `App.tsx` navigation items with accessible `ExplainerTrigger` contextual modals.
+  - **Regression Test Suite (`tests/test_11_feature_guide.py`)**:
+    - End-to-end Playwright automated test verifying direct navigation, topic counts, query search filtering, topic selection, math formula display, and escape dismissal.
+  - **Full Regression Verification & Multi-Platform Packaging**:
+    - All 26 regression test suites passed 100% cleanly via `./pipeline.sh test --summary` (74.65s).
+    - Mobile distribution packages verified via `./pipeline.sh package` (Android APK `astrology-android-debug.apk` 8.07MB, iOS App `astrology-ios-simulator.zip` 5.70MB).
+    - Zero critical console errors across all viewports.
 - **Bespoke Editorial Renaissance Astrometric Monograph Redesign (v2.32.0)**:
   - **Visual Identity & Atmosphere**:
     - Recomposed the entire observatory experience into a Renaissance Celestial Observatory & Classical Astrometric Monograph per `/hallmark redesign full`.
