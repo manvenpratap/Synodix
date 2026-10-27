@@ -60,6 +60,12 @@ body {
 :root:not([data-theme="light"]) .text-slate-600 {
   color: #8da0b8;
 }
+:root:not([data-theme="light"]) .text-stone-500 {
+  color: #a8a29e;
+}
+:root:not([data-theme="light"]) .text-stone-600 {
+  color: #a8a29e;
+}
 
 :root[data-theme="light"],
 html[data-theme="light"] {
@@ -80,8 +86,104 @@ html[data-theme="light"] {
 
 /* =========================================================================
    SOLAR / DAY OBSERVATORY LIGHT THEME SPECIFICATION
-   High-contrast alabaster/slate palette with calibrated spectral accents
+   High-contrast alabaster/slate & Renaissance stone palette with calibrated spectral accents
    ========================================================================= */
+
+/* Renaissance Astrometric Monograph: Warm Stone Palette in Solar Day */
+[data-theme="light"] .bg-stone-950,
+[data-theme="light"] .bg-stone-950\/95,
+[data-theme="light"] .bg-stone-950\/90,
+[data-theme="light"] .bg-stone-950\/80,
+[data-theme="light"] .bg-stone-950\/60 {
+  background-color: #faf7f0 !important;
+}
+
+[data-theme="light"] .bg-stone-900,
+[data-theme="light"] .bg-stone-900\/95,
+[data-theme="light"] .bg-stone-900\/90,
+[data-theme="light"] .bg-stone-900\/80,
+[data-theme="light"] .bg-stone-900\/60,
+[data-theme="light"] .bg-stone-850,
+[data-theme="light"] .bg-stone-800 {
+  background-color: #fffdfa !important;
+}
+
+[data-theme="light"] .bg-stone-950\/40,
+[data-theme="light"] .bg-stone-900\/40,
+[data-theme="light"] .bg-stone-900\/50,
+[data-theme="light"] .bg-stone-800\/40,
+[data-theme="light"] .bg-stone-800\/60 {
+  background-color: #f5efe6 !important;
+}
+
+[data-theme="light"] .hover\:bg-stone-800:hover,
+[data-theme="light"] .hover\:bg-stone-850:hover,
+[data-theme="light"] .hover\:bg-stone-900:hover,
+[data-theme="light"] .hover\:bg-stone-900\/80:hover {
+  background-color: #f5efe6 !important;
+}
+
+[data-theme="light"] .border-stone-900,
+[data-theme="light"] .border-stone-850,
+[data-theme="light"] .border-stone-800,
+[data-theme="light"] .border-stone-800\/80,
+[data-theme="light"] .border-stone-800\/60,
+[data-theme="light"] .border-stone-700 {
+  border-color: #e7e0d3 !important;
+}
+
+[data-theme="light"] .divide-stone-800,
+[data-theme="light"] .divide-stone-800\/60 {
+  border-color: #e7e0d3 !important;
+}
+
+/* Stone Typography Scale in Solar Day (High-Contrast WCAG 2.2 AA compliant >= 4.5:1) */
+[data-theme="light"] .text-stone-100 {
+  color: #1c1917 !important; /* 15.2:1 contrast against #faf7f0 */
+}
+
+[data-theme="light"] .text-stone-200 {
+  color: #292524 !important; /* 12.4:1 contrast against #faf7f0 */
+}
+
+[data-theme="light"] .text-stone-300 {
+  color: #44403c !important; /* 8.5:1 contrast against #faf7f0 */
+}
+
+[data-theme="light"] .text-stone-400 {
+  color: #57534e !important; /* 6.1:1 contrast against #faf7f0 */
+}
+
+[data-theme="light"] .text-stone-500 {
+  color: #57534e !important; /* 6.1:1 contrast against #faf7f0 */
+}
+
+[data-theme="light"] .hover\:text-stone-100:hover,
+[data-theme="light"] .hover\:text-stone-200:hover {
+  color: #0c0a09 !important;
+}
+
+[data-theme="light"] .hover\:text-stone-300:hover {
+  color: #292524 !important;
+}
+
+[data-theme="light"] .border-amber-700\/60,
+[data-theme="light"] .border-amber-800\/60,
+[data-theme="light"] .border-amber-900\/40,
+[data-theme="light"] .border-amber-900\/60 {
+  border-color: #d6cbba !important;
+}
+
+[data-theme="light"] input,
+[data-theme="light"] select,
+[data-theme="light"] textarea {
+  color: #1c1917 !important;
+}
+
+[data-theme="light"] input::placeholder,
+[data-theme="light"] textarea::placeholder {
+  color: #78716c !important;
+}
 
 /* Canvas backgrounds */
 [data-theme="light"] .bg-\[\#04060a\],
@@ -447,12 +549,39 @@ aside > div:first-child {
   border-color: #fef08a !important;
 }
 
+[data-theme="light"] .bg-slate-950,
+[data-theme="light"] .bg-slate-950\/95,
+[data-theme="light"] .bg-slate-950\/90,
+[data-theme="light"] .bg-slate-950\/80,
+[data-theme="light"] .bg-slate-950\/60 {
+  background-color: #faf7f0 !important;
+}
+
 [data-theme="light"] .bg-slate-900,
+[data-theme="light"] .bg-slate-900\/95,
+[data-theme="light"] .bg-slate-900\/90,
 [data-theme="light"] .bg-slate-900\/80,
-[data-theme="light"] .bg-slate-900\/60 {
-  background-color: #f1f5f9 !important;
-  color: #334155 !important;
-  border-color: #cbd5e1 !important;
+[data-theme="light"] .bg-slate-900\/60,
+[data-theme="light"] .bg-slate-850,
+[data-theme="light"] .bg-slate-800,
+[data-theme="light"] .bg-slate-800\/80,
+[data-theme="light"] .bg-slate-800\/60 {
+  background-color: #fffdfa !important;
+  color: #1c1917 !important;
+}
+
+[data-theme="light"] .border-slate-900,
+[data-theme="light"] .border-slate-850,
+[data-theme="light"] .border-slate-800,
+[data-theme="light"] .border-slate-800\/80,
+[data-theme="light"] .border-slate-800\/60,
+[data-theme="light"] .border-slate-700 {
+  border-color: #e7e0d3 !important;
+}
+
+[data-theme="light"] .divide-slate-800,
+[data-theme="light"] .divide-slate-800\/60 {
+  border-color: #e7e0d3 !important;
 }
 
 [data-theme="light"] .border-emerald-700,

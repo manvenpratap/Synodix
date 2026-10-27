@@ -1,7 +1,7 @@
 # Synodix: Project Context & Working Memory
 
-**Last Updated:** 2026-10-27 09:49:07
-**Version:** 2.33.0  
+**Last Updated:** 2026-10-27 10:09:10
+**Version:** 2.33.1  
 **Stack:** Python 3.12 (FastAPI, Swiss Ephemeris 2.10, Skyfield DE421) + TypeScript / React 19 / Vite / Tailwind CSS v4 / Framer Motion / Capacitor 8 (iOS & Android)  
 **Workspace:** `/Volumes/Study/Projects/Astrology` (symlinked as `/Volumes/Study/Astrology`)  
 **Git Remote:** `https://github.com/manvenpratap/Synodix.git`  
@@ -10,7 +10,20 @@
 
 ## 1. Current Status & Milestone
 
-- **Active Phase**: Astrometric & Cultural Feature Guide & Explainer Encyclopedia (50 Topics) (Completed)
+- **Active Phase**: Frontend Theme Color Consistency & WCAG 2.2 AA Contrast Hardening (Completed)
+- **Frontend Theme Color Consistency & Contrast Hardening (v2.33.1)**:
+  - **Full Palette Harmonization to Renaissance Astrometric Monograph (`stone-*` & `amber-*`)**:
+    - Replaced all lingering cool `slate-*` surfaces (`slate-950`, `slate-900`, `slate-800`) and cyan micro-accents in `App.tsx` (mobile bottom navigation bar, Server Connection modal, EmptyChartState), `FeatureExplainerModal.tsx` (modal shell, badges, step breakdown, formula containers, glossary cards), and `FeatureGuideScreen.tsx` (top banner, knowledge category filters, topic list, master reading canvas).
+    - Harmonized active navigation and selection states with warm Renaissance gilded brass (`text-amber-400`, `bg-stone-900`, `border-amber-700/60`, `ring-amber-400`).
+    - Elevated Roman serif typography (`font-serif`, `Cinzel`/`Cormorant Garamond`) across modal headers, concept titles, algorithmic section headings, and category titles.
+  - **Comprehensive Light Mode Token Specifications & Contrast Floors (`index.css`)**:
+    - Added dark mode contrast floors for `:root:not([data-theme="light"]) .text-stone-500` and `.text-stone-600` (`#a8a29e`, $\ge 5.0:1$ ratio).
+    - Implemented comprehensive `[data-theme="light"]` token rules for all `stone-*` classes (`bg-stone-950`, `bg-stone-900`, `bg-stone-850`, `bg-stone-800`, borders, divides, and text scale `text-stone-100` $\rightarrow$ `#1c1917` [15.2:1], `text-stone-200` $\rightarrow$ `#292524` [12.4:1], `text-stone-300` $\rightarrow$ `#44403c` [8.5:1], `text-stone-400`/`500` $\rightarrow$ `#57534e` [6.1:1], input and placeholder contrast).
+    - Added fallback mappings for residual `slate-*` classes in light mode (`bg-slate-950` $\rightarrow$ `#faf7f0`, `bg-slate-900/800` $\rightarrow$ `#fffdfa`, `border-slate-800` $\rightarrow$ `#e7e0d3`), eliminating unstyled dark cards in light mode.
+  - **Full Regression Verification & Multi-Platform Packaging**:
+    - All 26 regression test suites passed 100% cleanly via `./pipeline.sh test --summary` (80.46s).
+    - TypeScript compilation (`tsc -b`) & Vite production bundle built with 0 errors.
+    - Zero critical console errors across all viewports.
 - **Astrometric & Cultural Feature Guide & Explainer Encyclopedia (v2.33.0)**:
   - **Comprehensive Explainer Knowledge Base (`src/data/featureExplainers.ts`)**:
     - Created 50 authoritative, high-density feature explainers covering all 9 civilizational traditions and precision astrometry.

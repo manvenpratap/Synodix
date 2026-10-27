@@ -225,36 +225,36 @@ export const FeatureGuideScreen: React.FC<Props> = ({ onNavigate, initialExplain
   return (
     <div className="w-full max-w-full space-y-6 motion-safe:animate-screen-enter motion-reduce:animate-none">
       {/* Top Banner & Knowledge Base Headline */}
-      <div className="flex flex-col lg:flex-row lg:items-center justify-between p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-slate-900 via-slate-950 to-slate-900 border border-cyan-900/60 shadow-md gap-4">
+      <div className="flex flex-col lg:flex-row lg:items-center justify-between p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-stone-900 via-stone-950 to-stone-900 border border-amber-900/60 shadow-md gap-4">
         <div className="flex items-start gap-3.5">
-          <div className="w-10 h-10 rounded-xl bg-cyan-950/90 border border-cyan-800 flex items-center justify-center text-cyan-300 shrink-0 shadow-xs">
+          <div className="w-10 h-10 rounded-xl bg-amber-950/90 border border-amber-800 flex items-center justify-center text-amber-300 shrink-0 shadow-xs">
             {activeSection === 'evidence' ? (
               <FlaskConical className="w-5 h-5 text-amber-400" />
             ) : (
-              <BookOpen className="w-5 h-5 text-cyan-300" />
+              <BookOpen className="w-5 h-5 text-amber-300" />
             )}
           </div>
           <div>
             <div className="flex items-center gap-2">
               <span
-                className={`text-xs font-medium px-2 py-0.5 rounded border ${
+                className={`text-xs font-serif font-medium px-2 py-0.5 rounded border ${
                   activeSection === 'evidence'
-                    ? 'text-amber-400 bg-amber-950/60 border-amber-800/60'
-                    : 'text-cyan-400 bg-cyan-950/60 border-cyan-800/60'
+                    ? 'text-amber-300 bg-amber-950/60 border-amber-800/60'
+                    : 'text-amber-300 bg-amber-950/60 border-amber-800/60'
                 }`}
               >
                 {activeSection === 'evidence' ? 'Empirical Statistical Validation' : 'Astrometric Knowledge Base'}
               </span>
-              <span className="text-xs text-slate-400 font-sans hidden sm:inline">
+              <span className="text-xs text-stone-400 font-sans hidden sm:inline">
                 {activeSection === 'evidence' ? '100 Titans Monte Carlo Benchmark' : '50 Authoritative Topics'}
               </span>
             </div>
-            <h1 className="text-lg sm:text-xl font-bold text-slate-100 tracking-tight mt-1">
+            <h1 className="text-lg sm:text-xl font-serif font-bold text-stone-100 tracking-tight mt-1">
               {activeSection === 'evidence'
                 ? 'Empirical Mathematical Evidence & Statistical Validation'
                 : 'Multi-Tradition Astrometric & Cultural Feature Guide'}
             </h1>
-            <p className="text-xs text-slate-300 font-sans mt-0.5 leading-relaxed">
+            <p className="text-xs text-stone-300 font-sans mt-0.5 leading-relaxed">
               {activeSection === 'evidence'
                 ? 'Peer-reviewed style statistical whitepaper, double-blind permutation null controls, and rigorous p-value benchmarks.'
                 : 'Exhaustive documentation of celestial mechanics, ancient calibration lineages, mathematical formulas, and triangulation invariants.'}
@@ -268,20 +268,20 @@ export const FeatureGuideScreen: React.FC<Props> = ({ onNavigate, initialExplain
           <div
             role="tablist"
             aria-label="Feature Guide Sections"
-            className="flex items-center p-1 rounded-xl bg-slate-950 border border-slate-800 shadow-inner"
+            className="flex items-center p-1 rounded-xl bg-stone-950 border border-stone-800 shadow-inner"
           >
             <button
               type="button"
               role="tab"
               aria-selected={activeSection === 'topics'}
               onClick={() => setActiveSection('topics')}
-              className={`flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-sans font-medium transition-colors duration-150 cursor-pointer min-h-[34px] ${
+              className={`flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-serif font-medium transition-colors duration-150 cursor-pointer min-h-[34px] ${
                 activeSection === 'topics'
-                  ? 'bg-cyan-950 text-cyan-300 border border-cyan-700 font-semibold shadow-xs'
-                  : 'text-slate-400 hover:text-slate-200'
+                  ? 'bg-stone-900 text-amber-300 border border-amber-700/80 font-semibold shadow-xs'
+                  : 'text-stone-400 hover:text-stone-200'
               }`}
             >
-              <BookOpen className="w-3.5 h-3.5 text-cyan-400" />
+              <BookOpen className="w-3.5 h-3.5 text-amber-400" />
               <span>50 Knowledge Topics</span>
             </button>
             <button
@@ -289,10 +289,10 @@ export const FeatureGuideScreen: React.FC<Props> = ({ onNavigate, initialExplain
               role="tab"
               aria-selected={activeSection === 'evidence'}
               onClick={() => setActiveSection('evidence')}
-              className={`flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-sans font-medium transition-colors duration-150 cursor-pointer min-h-[34px] ${
+              className={`flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-serif font-medium transition-colors duration-150 cursor-pointer min-h-[34px] ${
                 activeSection === 'evidence'
-                  ? 'bg-amber-950 text-amber-300 border border-amber-700 font-semibold shadow-xs'
-                  : 'text-slate-400 hover:text-slate-200'
+                  ? 'bg-stone-900 text-amber-300 border border-amber-700/80 font-semibold shadow-xs'
+                  : 'text-stone-400 hover:text-stone-200'
               }`}
             >
               <FlaskConical className="w-3.5 h-3.5 text-amber-400" />
@@ -305,17 +305,17 @@ export const FeatureGuideScreen: React.FC<Props> = ({ onNavigate, initialExplain
             <button
               type="button"
               onClick={() => onNavigate('traditions')}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 min-h-[36px] text-xs font-sans font-medium rounded-lg bg-slate-900 hover:bg-slate-800 text-cyan-300 hover:text-cyan-200 border border-cyan-800/60 transition-colors cursor-pointer"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 min-h-[36px] text-xs font-serif font-medium rounded-lg bg-stone-900 hover:bg-stone-850 text-amber-300 hover:text-amber-200 border border-amber-800/60 transition-colors cursor-pointer"
             >
-              <Compass className="w-3.5 h-3.5 text-cyan-400" />
+              <Compass className="w-3.5 h-3.5 text-amber-400" />
               <span className="hidden sm:inline">Traditions</span>
             </button>
             <button
               type="button"
               onClick={() => onNavigate('workbench')}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 min-h-[36px] text-xs font-sans font-medium rounded-lg bg-slate-900 hover:bg-slate-800 text-slate-300 hover:text-white border border-slate-800 transition-colors cursor-pointer"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 min-h-[36px] text-xs font-serif font-medium rounded-lg bg-stone-900 hover:bg-stone-850 text-stone-300 hover:text-white border border-stone-800 transition-colors cursor-pointer"
             >
-              <Sliders className="w-3.5 h-3.5 text-slate-400" />
+              <Sliders className="w-3.5 h-3.5 text-stone-400" />
               <span className="hidden sm:inline">Workbench</span>
             </button>
           </div>
@@ -338,9 +338,9 @@ export const FeatureGuideScreen: React.FC<Props> = ({ onNavigate, initialExplain
             className="lg:col-span-4 xl:col-span-3 space-y-4"
           >
           {/* 1. Functional Civilizational Array (9) */}
-          <div className="p-3.5 rounded-xl bg-gradient-to-b from-slate-900 to-slate-950 border border-slate-800 shadow-sm space-y-2.5">
-            <div className="flex items-center justify-between pb-1.5 border-b border-slate-800">
-              <span className="text-xs font-semibold text-slate-300">
+          <div className="p-3.5 rounded-xl bg-gradient-to-b from-stone-900 to-stone-950 border border-stone-800 shadow-sm space-y-2.5">
+            <div className="flex items-center justify-between pb-1.5 border-b border-stone-800">
+              <span className="text-xs font-serif font-semibold text-stone-300">
                 Civilizational Traditions (9)
               </span>
               <div className="flex items-center gap-1.5">
@@ -348,12 +348,12 @@ export const FeatureGuideScreen: React.FC<Props> = ({ onNavigate, initialExplain
                   <button
                     type="button"
                     onClick={() => setActiveCivilization(null)}
-                    className="text-xs text-cyan-400 hover:text-cyan-200 underline cursor-pointer"
+                    className="text-xs font-sans text-amber-400 hover:text-amber-200 underline cursor-pointer"
                   >
                     Reset Filter
                   </button>
                 ) : (
-                  <span className="text-xs text-cyan-400 font-medium">9 of 9 Active</span>
+                  <span className="text-xs font-sans text-amber-400 font-medium">9 of 9 Active</span>
                 )}
               </div>
             </div>
@@ -372,8 +372,8 @@ export const FeatureGuideScreen: React.FC<Props> = ({ onNavigate, initialExplain
                     aria-pressed={isSelected}
                     className={`px-1.5 py-1.5 rounded-lg border text-xs font-medium flex items-center justify-center transition-colors duration-150 cursor-pointer min-w-0 ${
                       isSelected
-                        ? `${civ.activeBorder} ${civ.colorClass} shadow-sm ring-1 ring-cyan-400`
-                        : `bg-slate-900 border-slate-800 ${civ.colorClass} hover:border-cyan-500/50 hover:bg-slate-800`
+                        ? `${civ.activeBorder} ${civ.colorClass} shadow-sm ring-1 ring-amber-400`
+                        : `bg-stone-900 border-stone-800 ${civ.colorClass} hover:border-amber-500/50 hover:bg-stone-850`
                     }`}
                   >
                     <span className="truncate font-mono">{civ.code}</span>
@@ -384,14 +384,14 @@ export const FeatureGuideScreen: React.FC<Props> = ({ onNavigate, initialExplain
 
             {/* Active Civilization Jump Link */}
             {activeCivObj && (
-              <div className="pt-2 border-t border-slate-800 flex items-center justify-between text-xs font-sans">
-                <span className="text-slate-300 truncate">
+              <div className="pt-2 border-t border-stone-800 flex items-center justify-between text-xs font-sans">
+                <span className="text-stone-300 truncate">
                   Filtered: <strong className={activeCivObj.colorClass}>{activeCivObj.label}</strong>
                 </span>
                 <button
                   type="button"
                   onClick={() => onNavigate('traditions')}
-                  className="text-cyan-400 hover:text-cyan-200 inline-flex items-center gap-1 hover:underline shrink-0 font-medium"
+                  className="text-amber-400 hover:text-amber-200 inline-flex items-center gap-1 hover:underline shrink-0 font-medium"
                 >
                   <span>Visualizer</span>
                   <ArrowRight className="w-3 h-3" />
@@ -401,7 +401,7 @@ export const FeatureGuideScreen: React.FC<Props> = ({ onNavigate, initialExplain
           </div>
 
           {/* 2. Search & Category Filters */}
-          <div className="p-3.5 rounded-xl bg-slate-950/90 border border-slate-800 space-y-3 shadow-xs">
+          <div className="p-3.5 rounded-xl bg-stone-950/90 border border-stone-800 space-y-3 shadow-xs">
             {/* Search Input */}
             <div className="relative">
               <input
@@ -409,14 +409,14 @@ export const FeatureGuideScreen: React.FC<Props> = ({ onNavigate, initialExplain
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Search formulas, concepts..."
-                className="w-full bg-slate-950 border border-slate-800 rounded-lg pl-8 pr-8 py-2 text-xs font-sans text-slate-100 placeholder-slate-500 focus:outline-none focus:border-cyan-500 focus-visible:ring-2 focus-visible:ring-cyan-400"
+                className="w-full bg-stone-900 border border-stone-800 rounded-lg pl-8 pr-8 py-2 text-xs font-sans text-stone-100 placeholder:text-stone-500 focus:outline-none focus:border-amber-500 focus-visible:ring-2 focus-visible:ring-amber-400"
               />
-              <Search className="w-3.5 h-3.5 text-slate-400 absolute left-2.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+              <Search className="w-3.5 h-3.5 text-stone-400 absolute left-2.5 top-1/2 -translate-y-1/2 pointer-events-none" />
               {searchQuery && (
                 <button
                   type="button"
                   onClick={() => setSearchQuery('')}
-                  className="absolute right-2 top-1/2 -translate-y-1/2 text-slate-400 hover:text-white"
+                  className="absolute right-2 top-1/2 -translate-y-1/2 text-stone-400 hover:text-white"
                   aria-label="Clear search"
                 >
                   <X className="w-3 h-3" />
@@ -426,7 +426,7 @@ export const FeatureGuideScreen: React.FC<Props> = ({ onNavigate, initialExplain
 
             {/* Category Filter Pills */}
             <div className="space-y-1">
-              <span className="text-xs font-semibold text-slate-300 block mb-1">
+              <span className="text-xs font-serif font-semibold text-stone-300 block mb-1">
                 Knowledge Domains
               </span>
               <div className="flex flex-col gap-1">
@@ -435,12 +435,12 @@ export const FeatureGuideScreen: React.FC<Props> = ({ onNavigate, initialExplain
                   onClick={() => setSelectedCategory('all')}
                   className={`w-full text-left px-2.5 py-1.5 rounded-md text-xs font-sans transition-colors flex items-center justify-between cursor-pointer ${
                     selectedCategory === 'all'
-                      ? 'bg-cyan-950/80 text-cyan-300 font-semibold border border-cyan-800'
-                      : 'text-slate-400 hover:text-slate-200 hover:bg-slate-900'
+                      ? 'bg-amber-950/80 text-amber-300 font-semibold border border-amber-800/80'
+                      : 'text-stone-400 hover:text-stone-200 hover:bg-stone-900'
                   }`}
                 >
                   <span>All Knowledge Domains</span>
-                  <span className="text-xs font-mono text-slate-400">50</span>
+                  <span className="text-xs font-mono text-stone-400">50</span>
                 </button>
 
                 {EXPLAINER_CATEGORIES.map((cat) => {
@@ -453,12 +453,12 @@ export const FeatureGuideScreen: React.FC<Props> = ({ onNavigate, initialExplain
                       onClick={() => setSelectedCategory(cat.name)}
                       className={`w-full text-left px-2.5 py-1.5 rounded-md text-xs font-sans transition-colors flex items-center justify-between cursor-pointer ${
                         isSelected
-                          ? 'bg-cyan-950/80 text-cyan-300 font-semibold border border-cyan-800'
-                          : 'text-slate-400 hover:text-slate-200 hover:bg-slate-900'
+                          ? 'bg-amber-950/80 text-amber-300 font-semibold border border-amber-800/80'
+                          : 'text-stone-400 hover:text-stone-200 hover:bg-stone-900'
                       }`}
                     >
                       <span className="truncate">{cat.name}</span>
-                      <span className="text-[10px] font-mono text-slate-400">{count}</span>
+                      <span className="text-[10px] font-mono text-stone-400">{count}</span>
                     </button>
                   );
                 })}
@@ -467,17 +467,17 @@ export const FeatureGuideScreen: React.FC<Props> = ({ onNavigate, initialExplain
           </div>
 
           {/* 3. Filtered Topic Explorer List */}
-          <div className="p-3.5 rounded-xl bg-slate-950/90 border border-slate-800 space-y-2 shadow-xs">
-            <div className="flex items-center justify-between pb-1.5 border-b border-slate-800">
-              <span className="text-xs font-semibold text-slate-300">
+          <div className="p-3.5 rounded-xl bg-stone-950/90 border border-stone-800 space-y-2 shadow-xs">
+            <div className="flex items-center justify-between pb-1.5 border-b border-stone-800">
+              <span className="text-xs font-serif font-semibold text-stone-300">
                 Topics ({filteredExplainers.length})
               </span>
-              <span className="text-xs text-slate-400 font-sans">Select to inspect</span>
+              <span className="text-xs text-stone-400 font-sans">Select to inspect</span>
             </div>
 
             <div className="max-h-[380px] overflow-y-auto space-y-1 pr-1 overscroll-contain">
               {filteredExplainers.length === 0 ? (
-                <div className="p-4 text-center text-xs text-slate-500">
+                <div className="p-4 text-center text-xs text-stone-400 font-sans">
                   No matching topics found for active filters.
                 </div>
               ) : (
@@ -490,22 +490,22 @@ export const FeatureGuideScreen: React.FC<Props> = ({ onNavigate, initialExplain
                       onClick={() => setSelectedExplainerId(item.id)}
                       className={`w-full text-left p-2 rounded-lg transition-colors duration-150 cursor-pointer flex items-center justify-between gap-2 ${
                         isSelected
-                          ? 'bg-slate-900 border border-cyan-500/70 text-cyan-200 shadow-sm'
-                          : 'hover:bg-slate-900 text-slate-300 border border-transparent'
+                          ? 'bg-stone-900 border border-amber-500/70 text-amber-200 shadow-sm'
+                          : 'hover:bg-stone-900 text-stone-300 border border-transparent'
                       }`}
                     >
                       <div className="min-w-0">
-                        <h4 className="text-xs font-medium text-slate-100 truncate">
+                        <h4 className="text-xs font-serif font-semibold text-stone-100 truncate">
                           {item.title}
                         </h4>
                         <div className="flex items-center gap-1.5 mt-0.5">
-                          <span className="text-[10px] font-sans text-slate-400 truncate">
+                          <span className="text-[10px] font-sans text-stone-400 truncate">
                             {item.culturalTradition || item.category}
                           </span>
                         </div>
                       </div>
                       {isSelected && (
-                        <ChevronRight className="w-3.5 h-3.5 text-cyan-400 shrink-0" />
+                        <ChevronRight className="w-3.5 h-3.5 text-amber-400 shrink-0" />
                       )}
                     </button>
                   );
@@ -523,18 +523,18 @@ export const FeatureGuideScreen: React.FC<Props> = ({ onNavigate, initialExplain
           className="lg:col-span-8 xl:col-span-9 space-y-5"
         >
           {/* Header Card with Meta Badges */}
-          <div className="p-5 sm:p-6 rounded-2xl bg-gradient-to-br from-slate-900 to-slate-950 border border-slate-800 shadow-sm space-y-3.5">
-            <div className="flex flex-wrap items-center justify-between gap-2.5 pb-3 border-b border-slate-800">
+          <div className="p-5 sm:p-6 rounded-2xl bg-gradient-to-br from-stone-900 to-stone-950 border border-stone-800 shadow-sm space-y-3.5">
+            <div className="flex flex-wrap items-center justify-between gap-2.5 pb-3 border-b border-stone-800">
               <div className="flex flex-wrap items-center gap-2">
-                <span className="px-2.5 py-0.5 rounded text-xs font-sans font-medium bg-cyan-950/80 text-cyan-300 border border-cyan-800">
+                <span className="px-2.5 py-0.5 rounded text-xs font-sans font-medium bg-amber-950/80 text-amber-300 border border-amber-800">
                   {currentExplainer.category}
                 </span>
                 {currentExplainer.culturalTradition && (
-                  <span className="px-2.5 py-0.5 rounded text-xs font-sans font-medium bg-amber-950/80 text-amber-300 border border-amber-800">
+                  <span className="px-2.5 py-0.5 rounded text-xs font-sans font-medium bg-stone-900 text-stone-300 border border-stone-700">
                     {currentExplainer.culturalTradition}
                   </span>
                 )}
-                <span className="text-xs font-sans text-slate-400 hidden sm:inline">
+                <span className="text-xs font-sans text-stone-400 hidden sm:inline">
                   Topic ID: <span className="font-mono">{currentExplainer.id}</span>
                 </span>
               </div>
@@ -544,7 +544,7 @@ export const FeatureGuideScreen: React.FC<Props> = ({ onNavigate, initialExplain
                 <button
                   type="button"
                   onClick={() => onNavigate('traditions')}
-                  className="inline-flex items-center gap-1 px-3 py-1 text-xs font-sans font-medium text-cyan-300 hover:text-cyan-100 bg-slate-900 hover:bg-slate-800 border border-cyan-700/60 rounded-md transition-colors cursor-pointer"
+                  className="inline-flex items-center gap-1 px-3 py-1 text-xs font-serif font-medium text-amber-300 hover:text-amber-100 bg-stone-900 hover:bg-stone-850 border border-amber-700/60 rounded-md transition-colors cursor-pointer"
                 >
                   <span>Open in Traditions</span>
                   <ArrowRight className="w-3 h-3" />
@@ -553,11 +553,11 @@ export const FeatureGuideScreen: React.FC<Props> = ({ onNavigate, initialExplain
             </div>
 
             <div>
-              <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold tracking-tight text-slate-100 font-sans">
+              <h2 className="text-xl sm:text-2xl lg:text-3xl font-serif font-bold tracking-tight text-stone-100">
                 {currentExplainer.title}
               </h2>
               {currentExplainer.subtitle && (
-                <p className="text-xs sm:text-sm text-cyan-400 font-sans mt-1">
+                <p className="text-xs sm:text-sm text-amber-400 font-serif italic mt-1">
                   {currentExplainer.subtitle}
                 </p>
               )}
@@ -567,30 +567,30 @@ export const FeatureGuideScreen: React.FC<Props> = ({ onNavigate, initialExplain
           {/* Master Content Bento Grid */}
           <div className="space-y-4">
             {/* 1. Concept Overview Card */}
-            <div className="p-5 sm:p-6 rounded-2xl bg-slate-950 border border-slate-800 space-y-2.5 shadow-xs">
-              <div className="flex items-center gap-2 text-cyan-400">
+            <div className="p-5 sm:p-6 rounded-2xl bg-stone-950 border border-stone-800 space-y-2.5 shadow-xs">
+              <div className="flex items-center gap-2 text-amber-400">
                 <Compass className="w-4 h-4" />
-                <h3 className="text-xs font-semibold text-cyan-300 font-sans">
+                <h3 className="text-xs font-serif font-semibold text-amber-300">
                   Concept Overview & Astrometric Phenomenon
                 </h3>
               </div>
-              <p className="text-sm sm:text-base text-slate-200 leading-relaxed font-sans">
+              <p className="text-sm sm:text-base text-stone-200 leading-relaxed font-sans">
                 {currentExplainer.shortSummary}
               </p>
             </div>
 
             {/* 2. Mathematical Formulation & Algorithmic Steps */}
-            <div className="p-5 sm:p-6 rounded-2xl bg-slate-950 border border-slate-800 space-y-4 shadow-xs">
+            <div className="p-5 sm:p-6 rounded-2xl bg-stone-950 border border-stone-800 space-y-4 shadow-xs">
               <div className="flex items-center gap-2 text-amber-400">
                 <Calculator className="w-4 h-4" />
-                <h3 className="text-xs font-semibold text-amber-300 font-sans">
+                <h3 className="text-xs font-serif font-semibold text-amber-300">
                   Astronomical & Mathematical Algorithm
                 </h3>
               </div>
 
               {/* Formula Display Box */}
-              <div className="p-3.5 sm:p-4 rounded-xl bg-slate-950 border border-amber-900/40 text-xs sm:text-sm text-amber-200/95 overflow-x-auto select-all shadow-inner">
-                <span className="text-xs text-slate-400 block mb-1 font-sans font-medium">
+              <div className="p-3.5 sm:p-4 rounded-xl bg-stone-900 border border-amber-900/40 text-xs sm:text-sm text-amber-200/95 overflow-x-auto select-all shadow-inner">
+                <span className="text-xs text-stone-400 block mb-1 font-serif font-medium">
                   Governing Formula / Mathematical Invariant
                 </span>
                 <code className="font-mono block">{currentExplainer.astronomicalFormula}</code>
@@ -598,19 +598,19 @@ export const FeatureGuideScreen: React.FC<Props> = ({ onNavigate, initialExplain
 
               {/* Step-by-Step Breakdown */}
               <div className="space-y-2.5 pt-2">
-                <h4 className="text-xs font-medium text-slate-300 font-sans">
+                <h4 className="text-xs font-serif font-semibold text-stone-300">
                   Algorithmic Execution Pipeline:
                 </h4>
                 <div className="grid grid-cols-1 gap-2">
                   {currentExplainer.howItWorks.map((step, idx) => (
                     <div
                       key={idx}
-                      className="p-3 rounded-lg bg-slate-900 border border-slate-800 flex items-start gap-3"
+                      className="p-3 rounded-lg bg-stone-900 border border-stone-800 flex items-start gap-3"
                     >
-                      <div className="w-5 h-5 rounded-full bg-cyan-950 border border-cyan-800 text-cyan-400 flex items-center justify-center text-[10px] font-mono shrink-0 font-bold mt-0.5">
+                      <div className="w-5 h-5 rounded-full bg-stone-800 border border-stone-700 text-amber-400 flex items-center justify-center text-[10px] font-mono shrink-0 font-bold mt-0.5">
                         {idx + 1}
                       </div>
-                      <p className="text-xs sm:text-sm text-slate-300 font-sans leading-relaxed">
+                      <p className="text-xs sm:text-sm text-stone-300 font-sans leading-relaxed">
                         {step}
                       </p>
                     </div>
@@ -620,48 +620,48 @@ export const FeatureGuideScreen: React.FC<Props> = ({ onNavigate, initialExplain
             </div>
 
             {/* 3. Why It Matters for Multi-Tradition Triangulation */}
-            <div className="p-5 sm:p-6 rounded-2xl bg-slate-950 border border-slate-800 space-y-2.5 shadow-xs">
+            <div className="p-5 sm:p-6 rounded-2xl bg-stone-950 border border-stone-800 space-y-2.5 shadow-xs">
               <div className="flex items-center gap-2 text-emerald-400">
                 <Lightbulb className="w-4 h-4" />
-                <h3 className="text-xs font-semibold text-emerald-300 font-sans">
+                <h3 className="text-xs font-serif font-semibold text-emerald-300">
                   Role in Epistemic Triangulation & Consensus
                 </h3>
               </div>
-              <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-sans">
+              <p className="text-xs sm:text-sm text-stone-300 leading-relaxed font-sans">
                 {currentExplainer.whyItMatters}
               </p>
             </div>
 
             {/* 4. Epistemological & Historical Lineage */}
-            <div className="p-5 sm:p-6 rounded-2xl bg-slate-950 border border-slate-800 space-y-2.5 shadow-xs">
-              <div className="flex items-center gap-2 text-indigo-400">
+            <div className="p-5 sm:p-6 rounded-2xl bg-stone-950 border border-stone-800 space-y-2.5 shadow-xs">
+              <div className="flex items-center gap-2 text-purple-400">
                 <History className="w-4 h-4" />
-                <h3 className="text-xs font-semibold text-indigo-300 font-sans">
+                <h3 className="text-xs font-serif font-semibold text-purple-300">
                   Historical Lineage & Original Treatises
                 </h3>
               </div>
-              <p className="text-xs sm:text-sm text-slate-300 italic font-serif leading-relaxed">
+              <p className="text-xs sm:text-sm text-stone-300 italic font-serif leading-relaxed">
                 {currentExplainer.historicalLineage}
               </p>
             </div>
           </div>
 
           {/* Chapter Navigation Footer */}
-          <div className="p-4 rounded-xl bg-slate-950 border border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-3">
+          <div className="p-4 rounded-xl bg-stone-950 border border-stone-800 flex flex-col sm:flex-row items-center justify-between gap-3">
             {prevExplainer ? (
               <button
                 type="button"
                 onClick={() => setSelectedExplainerId(prevExplainer.id)}
-                className="w-full sm:w-auto inline-flex items-center gap-2 px-3.5 py-2 text-xs font-sans font-medium text-slate-300 hover:text-white bg-slate-900 hover:bg-slate-800 border border-slate-800 rounded-lg transition-colors cursor-pointer"
+                className="w-full sm:w-auto inline-flex items-center gap-2 px-3.5 py-2 text-xs font-serif font-medium text-stone-300 hover:text-white bg-stone-900 hover:bg-stone-850 border border-stone-800 rounded-lg transition-colors cursor-pointer"
               >
-                <ChevronLeft className="w-4 h-4 text-cyan-400" />
+                <ChevronLeft className="w-4 h-4 text-amber-400" />
                 <span className="truncate max-w-[200px]">Prev: {prevExplainer.title}</span>
               </button>
             ) : (
               <div />
             )}
 
-            <span className="text-xs font-sans text-slate-400">
+            <span className="text-xs font-sans text-stone-400">
               Topic <span className="font-mono">{currentIndex + 1}</span> of <span className="font-mono">{filteredExplainers.length}</span>
             </span>
 
@@ -669,10 +669,10 @@ export const FeatureGuideScreen: React.FC<Props> = ({ onNavigate, initialExplain
               <button
                 type="button"
                 onClick={() => setSelectedExplainerId(nextExplainer.id)}
-                className="w-full sm:w-auto inline-flex items-center justify-end gap-2 px-3.5 py-2 text-xs font-sans font-medium text-slate-300 hover:text-white bg-slate-900 hover:bg-slate-800 border border-slate-800 rounded-lg transition-colors cursor-pointer text-right"
+                className="w-full sm:w-auto inline-flex items-center justify-end gap-2 px-3.5 py-2 text-xs font-serif font-medium text-stone-300 hover:text-white bg-stone-900 hover:bg-stone-850 border border-stone-800 rounded-lg transition-colors cursor-pointer text-right"
               >
                 <span className="truncate max-w-[200px]">Next: {nextExplainer.title}</span>
-                <ChevronRight className="w-4 h-4 text-cyan-400" />
+                <ChevronRight className="w-4 h-4 text-amber-400" />
               </button>
             ) : (
               <div />

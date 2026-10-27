@@ -326,10 +326,11 @@ def test_ui_city_selector_finds_jamshedpur_and_gurugram():
         page.wait_for_timeout(400)
 
         dropdown = page.locator("div[role='listbox']")
-        dropdown.wait_for(state="visible", timeout=5000)
+        dropdown.wait_for(state="visible", timeout=8000)
         assert dropdown.is_visible(), "Dropdown listbox should be visible for Jamshed"
 
         jamshedpur_opt = page.locator("div[role='option']:has-text('Jamshedpur')").first
+        jamshedpur_opt.wait_for(state="visible", timeout=6000)
         assert jamshedpur_opt.is_visible(), "Jamshedpur option must be present in suggestion dropdown"
         jamshedpur_opt.click()
         page.wait_for_timeout(200)

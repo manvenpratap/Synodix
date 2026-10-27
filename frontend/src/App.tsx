@@ -946,7 +946,7 @@ function AppContent() {
       {/* 4. Mobile Bottom Navigation Bar (<md) */}
       <nav
         aria-label="Mobile Navigation"
-        className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-slate-950/95 backdrop-blur-md border-t border-slate-800 px-1 py-1 pb-[max(0.75rem,env(safe-area-inset-bottom,0px))] flex items-center justify-around text-[11px] font-mono font-medium tracking-tight shadow-2xl"
+        className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-stone-950/95 backdrop-blur-md border-t border-stone-800 px-1 py-1 pb-[max(0.75rem,env(safe-area-inset-bottom,0px))] flex items-center justify-around text-[11px] font-mono font-medium tracking-tight shadow-2xl"
       >
         {[
           { id: 'workbench', label: 'Workbench', step: '1', icon: Sliders },
@@ -965,22 +965,22 @@ function AppContent() {
               data-tooltip={`Navigate to ${item.label} (Step ${item.step})`}
               aria-label={item.label}
               aria-current={isActive ? 'page' : undefined}
-              className={`relative flex flex-col items-center justify-center p-1 min-w-[56px] min-h-[44px] rounded-lg transition-colors active:scale-[0.94] duration-150 cursor-pointer touch-manipulation focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 ${
+              className={`relative flex flex-col items-center justify-center p-1 min-w-[56px] min-h-[44px] rounded-lg transition-colors active:scale-[0.94] duration-150 cursor-pointer touch-manipulation focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 ${
                 isActive
-                  ? 'text-cyan-300 font-bold bg-slate-800'
-                  : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800'
+                  ? 'text-amber-400 font-bold bg-stone-900 border border-amber-700/60 shadow-xs'
+                  : 'text-stone-400 hover:text-stone-200 hover:bg-stone-900'
               }`}
             >
               {isActive && (
-                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-7 h-0.5 bg-cyan-400 rounded-full" />
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-7 h-0.5 bg-amber-400 rounded-full" />
               )}
               <div className="relative">
-                <Icon className={`w-4 h-4 mb-0.5 ${isActive ? 'text-cyan-300' : 'text-slate-400'}`} />
+                <Icon className={`w-4 h-4 mb-0.5 ${isActive ? 'text-amber-400' : 'text-stone-400'}`} />
                 <span
                   className={`absolute -top-1 -right-2 text-[11px] font-mono w-3.5 h-3.5 rounded-full flex items-center justify-center select-none leading-none ${
                     isActive
-                      ? 'bg-cyan-400 text-slate-950 font-bold'
-                      : 'bg-slate-800 text-slate-400 border border-slate-800'
+                      ? 'bg-amber-400 text-stone-950 font-bold'
+                      : 'bg-stone-850 text-stone-400 border border-stone-800'
                   }`}
                 >
                   {item.step}
@@ -993,17 +993,17 @@ function AppContent() {
       </nav>
       {/* 5. Server Connection Modal (for Sideloaded Mobile Devices & Remote Hosts) */}
       {isServerModalOpen && (
-        <div className="fixed inset-0 z-50 bg-black/80  flex items-center justify-center p-4 overscroll-contain">
-          <div className="w-full max-w-md bg-slate-950 border border-slate-800 rounded-xl p-5 shadow-2xl animate-screen-enter">
-            <div className="flex items-center justify-between pb-3 border-b border-slate-800">
+        <div className="fixed inset-0 z-50 bg-black/80 flex items-center justify-center p-4 overscroll-contain">
+          <div className="w-full max-w-md bg-stone-950 border border-stone-800 rounded-xl p-5 shadow-2xl animate-screen-enter">
+            <div className="flex items-center justify-between pb-3 border-b border-stone-800">
               <div className="flex items-center gap-2">
-                <Server className="w-4 h-4 text-cyan-400" />
-                <h3 className="text-sm font-semibold text-slate-100">API Server Connection</h3>
+                <Server className="w-4 h-4 text-amber-400" />
+                <h3 className="text-sm font-serif font-semibold text-stone-100">API Server Connection</h3>
               </div>
               <button
                 type="button"
                 onClick={() => setIsServerModalOpen(false)}
-                className="min-w-[44px] min-h-[44px] flex items-center justify-center -mr-2 text-slate-400 hover:text-slate-100 cursor-pointer"
+                className="min-w-[44px] min-h-[44px] flex items-center justify-center -mr-2 text-stone-400 hover:text-stone-100 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 rounded"
                 aria-label="Close server dialog"
                 data-tooltip="Close server dialog"
               >
@@ -1012,12 +1012,12 @@ function AppContent() {
             </div>
 
             <div className="py-4 space-y-3">
-              <p className="text-xs text-slate-400 leading-relaxed">
+              <p className="text-xs text-stone-300 leading-relaxed font-sans">
                 When running on a physical sideloaded iOS or Android device, specify the host IP or domain of your running Synodix backend daemon.
               </p>
 
               <div>
-                <label className="block text-xs font-sans text-slate-400 mb-1 font-medium">
+                <label className="block text-xs font-sans text-stone-300 mb-1 font-medium">
                   Backend Host URL
                 </label>
                 <input
@@ -1025,14 +1025,14 @@ function AppContent() {
                   value={serverUrlInput}
                   onChange={(e) => setServerUrlInput(e.target.value)}
                   placeholder="e.g. http://192.168.1.11:8000"
-                  className="w-full px-3 py-2 text-xs font-mono rounded bg-slate-900 border border-slate-800 text-slate-100 focus:outline-none focus:border-cyan-500"
+                  className="w-full px-3 py-2 text-xs font-mono rounded bg-stone-900 border border-stone-800 text-stone-100 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500"
                 />
-                <div className="flex items-center justify-between mt-1.5 text-[11px] text-slate-400">
-                  <span>Local Wi-Fi: <code className="text-cyan-400">http://192.168.1.11:8000</code></span>
+                <div className="flex items-center justify-between mt-1.5 text-[11px] text-stone-400 font-sans">
+                  <span>Local Wi-Fi: <code className="text-amber-400 font-mono">http://192.168.1.11:8000</code></span>
                   <button
                     type="button"
                     onClick={() => setServerUrlInput(DEFAULT_DEV_API_URL)}
-                    className="text-cyan-400 hover:underline cursor-pointer"
+                    className="text-amber-400 hover:underline cursor-pointer"
                   >
                     Set Local Wi-Fi
                   </button>
@@ -1043,13 +1043,13 @@ function AppContent() {
                 <div
                   className={`p-2.5 rounded text-xs font-mono flex items-center gap-2 ${
                     testStatus === 'testing'
-                      ? 'bg-sky-950/40 text-sky-300 border border-sky-800'
+                      ? 'bg-amber-950/40 text-amber-300 border border-amber-800'
                       : testStatus === 'success'
                       ? 'bg-emerald-950/40 text-emerald-300 border border-emerald-800'
                       : 'bg-rose-950/40 text-rose-300 border border-rose-800'
                   }`}
                 >
-                  {testStatus === 'testing' && <span className="w-2 h-2 rounded-full bg-sky-400 animate-ping" />}
+                  {testStatus === 'testing' && <span className="w-2 h-2 rounded-full bg-amber-400 animate-ping" />}
                   {testStatus === 'success' && <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 shrink-0" />}
                   {testStatus === 'error' && <AlertCircle className="w-3.5 h-3.5 text-rose-400 shrink-0" />}
                   <span className="break-all">{testMessage}</span>
@@ -1057,11 +1057,11 @@ function AppContent() {
               )}
             </div>
 
-            <div className="pt-3 border-t border-slate-800 flex items-center justify-between gap-2">
+            <div className="pt-3 border-t border-stone-800 flex items-center justify-between gap-2">
               <button
                 type="button"
                 onClick={() => testServerConnection(serverUrlInput)}
-                className="px-3 py-2 min-h-[44px] rounded bg-slate-800 hover:bg-slate-800 border border-slate-800 text-slate-300 text-xs font-medium cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
+                className="px-3 py-2 min-h-[44px] rounded bg-stone-900 hover:bg-stone-850 border border-stone-800 text-stone-300 text-xs font-medium cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
               >
                 Test Ping
               </button>
@@ -1069,14 +1069,14 @@ function AppContent() {
                 <button
                   type="button"
                   onClick={() => setIsServerModalOpen(false)}
-                  className="px-3 py-2 min-h-[44px] rounded text-slate-400 hover:text-slate-200 text-xs cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-400"
+                  className="px-3 py-2 min-h-[44px] rounded text-stone-400 hover:text-stone-200 text-xs cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-stone-400"
                 >
                   Cancel
                 </button>
                 <button
                   type="button"
                   onClick={saveServerUrl}
-                  className="px-4 py-2 min-h-[44px] rounded bg-cyan-700 hover:bg-cyan-600 text-white text-xs font-semibold cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-1 focus-visible:ring-offset-slate-950"
+                  className="px-4 py-2 min-h-[44px] rounded bg-amber-700 hover:bg-amber-600 text-stone-950 text-xs font-bold cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:ring-offset-1 focus-visible:ring-offset-stone-950"
                 >
                   Save & Apply
                 </button>
@@ -1103,20 +1103,20 @@ export default function App() {
  */
 function EmptyChartState({ onOpenWorkbench }: { onOpenWorkbench: () => void }) {
   return (
-    <div className="py-16 px-4 text-center bg-slate-900 border border-dashed border-slate-800 rounded-xl max-w-lg mx-auto">
-      <div className="w-12 h-12 rounded-full bg-slate-800 border border-slate-700 flex items-center justify-center mx-auto mb-3 text-cyan-400">
+    <div className="py-16 px-4 text-center bg-stone-900/90 border border-dashed border-stone-800 rounded-xl max-w-lg mx-auto">
+      <div className="w-12 h-12 rounded-full bg-stone-850 border border-stone-700 flex items-center justify-center mx-auto mb-3 text-amber-400">
         <Compass className="w-6 h-6" />
       </div>
-      <h3 className="text-base font-semibold text-slate-100">
+      <h3 className="text-base font-serif font-semibold text-stone-100">
         No Subject Chart Loaded
       </h3>
-      <p className="text-xs text-slate-400 mt-1.5 max-w-sm mx-auto leading-relaxed">
+      <p className="text-xs text-stone-300 mt-1.5 max-w-sm mx-auto leading-relaxed font-sans">
         Select a subject from the 100 historical titans gallery or calculate a custom birth record in the Workbench to render this view.
       </p>
       <button
         type="button"
         onClick={onOpenWorkbench}
-        className="mt-5 inline-flex items-center gap-2 px-4 py-2.5 min-h-[44px] rounded-lg bg-cyan-700 hover:bg-cyan-600 text-white font-medium text-xs transition-colors cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-1 focus-visible:ring-offset-slate-950"
+        className="mt-5 inline-flex items-center gap-2 px-4 py-2.5 min-h-[44px] rounded-lg bg-amber-700 hover:bg-amber-600 text-stone-950 font-bold text-xs transition-colors cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:ring-offset-1 focus-visible:ring-offset-stone-950"
       >
         <span className="whitespace-nowrap">Open Workbench & Profile Vault</span>
         <ChevronRight className="w-4 h-4" />
