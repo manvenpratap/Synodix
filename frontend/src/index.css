@@ -1522,7 +1522,7 @@ html[data-theme="light"] {
 [data-theme="light"] .reticle-corner-tr,
 [data-theme="light"] .reticle-corner-bl,
 [data-theme="light"] .reticle-corner-br {
-  border-color: rgba(2, 132, 199, 0.45) !important;
+  border-color: rgba(180, 83, 9, 0.45) !important;
 }
 
 /* 3. Accordion Fluid Disclosure */

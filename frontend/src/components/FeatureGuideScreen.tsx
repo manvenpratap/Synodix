@@ -14,7 +14,6 @@ import {
   Layers,
   FlaskConical,
   ExternalLink,
-  Sparkles,
   Filter,
   CheckCircle2
 } from 'lucide-react';

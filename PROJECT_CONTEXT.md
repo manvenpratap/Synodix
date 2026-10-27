@@ -1,7 +1,7 @@
 # Synodix: Project Context & Working Memory
 
-**Last Updated:** 2026-10-27 10:09:10
-**Version:** 2.33.1  
+**Last Updated:** 2026-10-27 10:24:45
+**Version:** 2.33.2  
 **Stack:** Python 3.12 (FastAPI, Swiss Ephemeris 2.10, Skyfield DE421) + TypeScript / React 19 / Vite / Tailwind CSS v4 / Framer Motion / Capacitor 8 (iOS & Android)  
 **Workspace:** `/Volumes/Study/Projects/Astrology` (symlinked as `/Volumes/Study/Astrology`)  
 **Git Remote:** `https://github.com/manvenpratap/Synodix.git`  
@@ -10,7 +10,21 @@
 
 ## 1. Current Status & Milestone
 
-- **Active Phase**: Frontend Theme Color Consistency & WCAG 2.2 AA Contrast Hardening (Completed)
+- **Active Phase**: Anti-AI-Slop Comprehensive Audit & Remediation (Completed)
+- **Anti-AI-Slop Comprehensive Audit & Remediation (v2.33.2)**:
+  - **30-Point Audit Matrix (`ANTI_AI_SLOP_PLAN.md`)**:
+    - Conducted comprehensive audit across all 30 AI slop patterns: 28 patterns verified clean/absent, 2 remediated.
+    - Verified absence of floating gradient orbs, gradient text headlines, fake terminal windows, stock photos, fake metrics, generic purple SaaS palettes, and toy emojis.
+  - **Iconography & Copy De-Slopping (`SynastryScreen.tsx`, `synastry.ts`)**:
+    - Replaced generic AI "Sparkles" (✨) with domain-authentic `Orbit` and `Compass` astronomical instruments across Conjunction Resonator, sub-tabs, and evolutionary vector callouts.
+    - Purged dead `Sparkles` imports from `TraditionVerticalCarousel.tsx` and `FeatureGuideScreen.tsx`.
+    - Replaced AI buzzword "seamless domestic lifestyle integration" with domain-accurate "concordant domestic lifestyle integration".
+  - **Color Palette & Reticle Harmonization (`index.css`, `TraditionVerticalCarousel.tsx`)**:
+    - Aligned light theme optical corner reticles (`.reticle-corner-*`) to burnished brass `rgba(180, 83, 9, 0.45)`.
+    - Harmonized tradition carousel card deck borders and rings to warm stone (`stone-950/85`, `border-stone-800`, `ring-amber-500/30`).
+  - **Verification & Multi-Platform Packaging**:
+    - 26/26 test suites passed cleanly via `./pipeline.sh test --summary` (80.78s).
+    - Production build (`tsc -b && vite build`) built in 743ms with 0 errors.
 - **Frontend Theme Color Consistency & Contrast Hardening (v2.33.1)**:
   - **Full Palette Harmonization to Renaissance Astrometric Monograph (`stone-*` & `amber-*`)**:
     - Replaced all lingering cool `slate-*` surfaces (`slate-950`, `slate-900`, `slate-800`) and cyan micro-accents in `App.tsx` (mobile bottom navigation bar, Server Connection modal, EmptyChartState), `FeatureExplainerModal.tsx` (modal shell, badges, step breakdown, formula containers, glossary cards), and `FeatureGuideScreen.tsx` (top banner, knowledge category filters, topic list, master reading canvas).

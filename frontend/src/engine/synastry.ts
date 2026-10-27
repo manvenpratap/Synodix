@@ -480,7 +480,7 @@ export function computeAshtakoota(
     partnerBAttribute: GANA_LABELS[ganaB],
     verdict: ganaScore >= 5 ? 'Excellent' : ganaScore >= 1 ? 'Neutral' : 'Challenging',
     interpretation: ganaScore >= 5
-      ? 'Harmonious social instincts, shared moral code, and seamless domestic lifestyle integration.'
+      ? 'Harmonious social instincts, shared moral code, and concordant domestic lifestyle integration.'
       : 'Temperamental contrast (idealist vs realist) calling for deliberate patience and mutual humor.'
   });
 

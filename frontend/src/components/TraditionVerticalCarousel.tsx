@@ -5,7 +5,6 @@ import {
   ChevronDown,
   Compass,
   ArrowRight,
-  Sparkles,
   Layers,
   Info
 } from 'lucide-react';
@@ -530,8 +529,8 @@ export const TraditionVerticalCarousel: React.FC<Props> = ({
                 }}
                 className={`absolute w-full rounded-2xl border p-4 sm:p-5 shadow-2xl backdrop-blur-xl transition-shadow ${
                   isCenter
-                    ? `${theme.containerBg} ${theme.containerBorder} shadow-2xl cursor-default ring-1 ring-cyan-500/20`
-                    : 'bg-slate-950/85 border-white/10 cursor-pointer hover:border-cyan-500/40'
+                    ? `${theme.containerBg} ${theme.containerBorder} shadow-2xl cursor-default ring-1 ring-amber-500/30`
+                    : 'bg-stone-950/85 border-stone-800 cursor-pointer hover:border-amber-500/40'
                 }`}
                 style={{
                   transformOrigin: 'center center',

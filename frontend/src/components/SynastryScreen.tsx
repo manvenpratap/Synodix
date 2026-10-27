@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import {
   Users,
   HeartHandshake,
-  Sparkles,
+  Orbit,
   ArrowRightLeft,
   Compass,
   Layers,
@@ -429,7 +429,7 @@ export const SynastryScreen: React.FC<Props> = ({
           {/* Central Conjunction Resonator */}
           <div className="lg:col-span-1 flex flex-col items-center justify-center py-2 lg:py-0">
             <div className="w-12 h-12 rounded-full bg-stone-900 border border-amber-700/60 flex items-center justify-center shadow-lg relative group">
-              <Sparkles className="w-5 h-5 text-amber-400 group-hover:scale-110 transition-transform" />
+              <Orbit className="w-5 h-5 text-amber-400 group-hover:rotate-45 transition-transform" />
               <div className="absolute -bottom-6 whitespace-nowrap text-[10px] font-mono text-amber-300/80">
                 {synastryReport?.overallConcordanceScore ?? 0}%
               </div>
@@ -609,7 +609,7 @@ export const SynastryScreen: React.FC<Props> = ({
       <div className="flex items-center gap-1.5 overflow-x-auto pb-1 border-b border-stone-800 select-none">
         {[
           { id: 'traditions', label: '9 Traditions Bento', icon: Compass, badge: '9 Systems' },
-          { id: 'aspects', label: 'Inter-Chart Aspects', icon: Sparkles, badge: `${synastryReport?.synastryAspects.length || 0} Aspects` },
+          { id: 'aspects', label: 'Inter-Chart Aspects', icon: Orbit, badge: `${synastryReport?.synastryAspects.length || 0} Aspects` },
           { id: 'composite', label: 'Midpoint Composite Chart', icon: Layers, badge: 'Unified Entity' },
           { id: 'ashtakoota', label: 'Vedic Ashtakoota Milan', icon: Scale, badge: `${synastryReport?.ashtakoota.totalScore || 0}/36 Pts` },
           { id: 'dossier', label: 'Relational Dossier', icon: FileText, badge: 'Narrative' },
@@ -701,7 +701,7 @@ export const SynastryScreen: React.FC<Props> = ({
                     </div>
 
                     <div className="pt-2 border-t border-stone-800/60 text-[11px] font-serif text-stone-400 flex items-start gap-1.5">
-                      <Sparkles className="w-3.5 h-3.5 text-amber-400 shrink-0 mt-0.5" />
+                      <Compass className="w-3.5 h-3.5 text-amber-400 shrink-0 mt-0.5" />
                       <span><strong className="text-stone-300">Evolutionary Vector:</strong> {trad.karmicGrowthEdge}</span>
                     </div>
                   </div>
