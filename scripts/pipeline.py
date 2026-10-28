@@ -93,15 +93,22 @@ class StackDetector:
             info["package_targets"].append("go-build")
 
         # 4. Node / TypeScript / Frontend
-        if (self.root / "package.json").exists():
+        node_pkg_path = None
+        for candidate in [self.root / "package.json", self.root / "frontend" / "package.json"]:
+            if candidate.exists():
+                node_pkg_path = candidate
+                break
+
+        if node_pkg_path:
             info["stacks"].append("node-ts")
+            info["node_dir"] = str(node_pkg_path.parent.relative_to(self.root)) if node_pkg_path.parent != self.root else "."
             try:
-                with open(self.root / "package.json", "r", encoding="utf-8") as f:
+                with open(node_pkg_path, "r", encoding="utf-8") as f:
                     pkg = json.load(f)
                     scripts = pkg.get("scripts", {})
-                    if "test" in scripts:
+                    if "test" in scripts and "npm-test" not in info["test_frameworks"]:
                         info["test_frameworks"].append("npm-test")
-                    if "build" in scripts:
+                    if "build" in scripts and "npm-build" not in info["package_targets"]:
                         info["package_targets"].append("npm-build")
             except Exception:
                 pass
@@ -300,8 +307,15 @@ class ProjectDoctor:
 
         # Check 3: UI Tooltips & Accessibility Health
         if "single-file-web" in self.stack_info["stacks"] or "node-ts" in self.stack_info["stacks"]:
-            has_tooltip_js = (self.root / "tooltip.js").exists() or (self.root / "src" / "tooltip.js").exists()
-            if not has_tooltip_js:
+            has_tooltips = any([
+                (self.root / "tooltip.js").exists(),
+                (self.root / "src" / "tooltip.js").exists(),
+                (self.root / "tooltip.css").exists(),
+                (self.root / "frontend" / "src" / "index.css").exists(),
+                (self.root / "src" / "index.css").exists(),
+                (self.root / "styles" / "tooltips.css").exists(),
+            ])
+            if not has_tooltips:
                 diagnosis["discrepancies"].append({
                     "category": "ui-tooltips",
                     "issue": "Missing accessible auto-flip tooltip component (tooltip.js / tooltip.css).",
@@ -733,16 +747,40 @@ class MobileAppManager:
 
     def sync_web_assets(self) -> bool:
         """Syncs web build (dist) into Capacitor or native mobile asset folders before compilation."""
-        dist_dir = self.root / "dist"
-        if not dist_dir.exists():
+        # 1. Prefer native Capacitor CLI sync if configured
+        for cap_dir in [self.root / "frontend", self.root]:
+            if (cap_dir / "capacitor.config.ts").exists() or (cap_dir / "capacitor.config.json").exists():
+                cap_cli = cap_dir / "node_modules" / "@capacitor" / "cli"
+                if cap_cli.exists() or shutil.which("npx"):
+                    log_step(f"Executing Capacitor web assets sync in {cap_dir.relative_to(self.root) if cap_dir != self.root else '.'}...")
+                    res = subprocess.run(["npx", "cap", "copy"], cwd=str(cap_dir), capture_output=True, text=True)
+                    if res.returncode == 0:
+                        log_success("Capacitor copy synchronized web assets into native mobile bundles (iOS & Android)")
+                        return True
+                    else:
+                        log_warn(f"Capacitor copy returned warning: {res.stderr.strip()[:200]}")
+
+        # 2. Fallback: Determine genuine web distribution directory containing index.html
+        dist_candidates = [
+            self.root / "frontend" / "dist",
+            self.root / "dist",
+        ]
+        dist_dir = None
+        for candidate in dist_candidates:
+            if candidate.exists() and (candidate / "index.html").exists():
+                dist_dir = candidate
+                break
+        if not dist_dir:
             if (self.root / "frontend" / "dist").exists():
                 dist_dir = self.root / "frontend" / "dist"
-        if not dist_dir.exists() and (self.root / "index.html").exists():
-            dist_dir = self.root / "dist"
-            dist_dir.mkdir(parents=True, exist_ok=True)
-            shutil.copyfile(self.root / "index.html", dist_dir / "index.html")
+            elif (self.root / "dist").exists():
+                dist_dir = self.root / "dist"
+            elif (self.root / "index.html").exists():
+                dist_dir = self.root / "dist"
+                dist_dir.mkdir(parents=True, exist_ok=True)
+                shutil.copyfile(self.root / "index.html", dist_dir / "index.html")
 
-        if not dist_dir.exists():
+        if not dist_dir or not dist_dir.exists():
             return False
 
         synced = False
@@ -951,8 +989,9 @@ class PackagingManager:
 
         # 2. Node / Vite bundling
         if "npm-build" in targets and not ("dist-sync" in targets and "rust-tauri" in self.stack_info["stacks"]):
-            log_step("Executing npm run build...")
-            res = subprocess.run(["npm", "run", "build"], cwd=str(self.root), capture_output=True, text=True)
+            node_dir = self.root / self.stack_info.get("node_dir", ".")
+            log_step(f"Executing npm run build in {node_dir.relative_to(self.root) if node_dir != self.root else '.'}...")
+            res = subprocess.run(["npm", "run", "build"], cwd=str(node_dir), capture_output=True, text=True)
             if res.returncode == 0:
                 log_success("NPM build completed successfully.")
                 synced = True

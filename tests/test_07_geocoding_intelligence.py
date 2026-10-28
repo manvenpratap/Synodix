@@ -321,8 +321,10 @@ def test_ui_city_selector_finds_jamshedpur_and_gurugram():
         lon_input = page.locator("input#longitude")
 
         # 1. Test searching "Jamshed"
+        city_input.click()
         city_input.fill("")
-        city_input.press_sequentially("Jamshed", delay=40)
+        page.wait_for_timeout(200)
+        city_input.press_sequentially("Jamshed", delay=50)
         page.wait_for_timeout(400)
 
         dropdown = page.locator("div[role='listbox']")
@@ -360,13 +362,16 @@ def test_ui_city_selector_finds_jamshedpur_and_gurugram():
         assert abs(float(lon_input.input_value()) - 77.0266) < 0.1
 
         # 3. Test typing and blur auto-resolution
+        city_input.click()
         city_input.fill("")
         country_input.fill("United States") # simulate stale country from preset
         lat_input.fill("0")
         lon_input.fill("0")
-        city_input.press_sequentially("Jamshedpur", delay=40)
-        page.wait_for_timeout(400)
-        # Blur the input by clicking birth_date input to dispatch pointer and focusout events
+        city_input.click()
+        city_input.press_sequentially("Jamshedpur", delay=50)
+        page.wait_for_timeout(500)
+        # Blur the input by dispatching blur and clicking birth_date input
+        city_input.evaluate("el => el.blur()")
         page.locator("input#birth_date").click()
         page.wait_for_function("() => document.querySelector('input#country_name')?.value === 'India'", timeout=15000)
 

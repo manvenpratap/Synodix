@@ -1,7 +1,7 @@
 # Synodix: Project Context & Working Memory
 
-**Last Updated:** 2026-10-28 11:10:03
-**Version:** 2.33.8  
+**Last Updated:** 2026-10-28 11:41:45
+**Version:** 2.33.9  
 **Stack:** Python 3.12 (FastAPI, Swiss Ephemeris 2.10, Skyfield DE421) + TypeScript / React 19 / Vite / Tailwind CSS v4 / Framer Motion / Capacitor 8 (iOS & Android)  
 **Workspace:** `/Volumes/Study/Projects/Astrology` (symlinked as `/Volumes/Study/Astrology`)  
 **Git Remote:** `https://github.com/manvenpratap/Synodix.git`  
@@ -10,7 +10,17 @@
 
 ## 1. Current Status & Milestone
 
-- **Active Phase**: Tractate II Cultural Computation Interface Streamlining (Completed)
+- **Active Phase**: Mobile Delivery Pipeline & Native iOS Asset Sync Hardening (Completed)
+- **Mobile Delivery Pipeline & Native iOS Asset Sync Hardening (v2.33.9)**:
+  - **Capacitor CLI Native Sync Integration (`scripts/pipeline.py`)**:
+    - Identified root cause of stale iOS app: `scripts/pipeline.py` previously checked for `self.root / "dist"`, which already existed to host `dist/mobile`, preventing fallback resolution to `frontend/dist` where Vite actually compiles client assets.
+    - Integrated native `npx cap copy` directly into the mobile delivery pipeline whenever `@capacitor/cli` is present.
+    - Added fallback candidate search ensuring any directory containing a real `index.html` (`frontend/dist/index.html` or `dist/index.html`) is prioritized over empty or mobile-only directories.
+    - Added `frontend/package.json` detection to `StackDetector` so `npm-build` automatically bundles `frontend/` during `./pipeline.sh package`.
+  - **iOS & Android Artifact Verification**:
+    - Re-synchronized `frontend/ios/App/App/public` and `frontend/android/app/src/main/assets/public` with latest Vite production build (`dist/index.html`, `bundledTitans-*.js`, `index-*.js`, `index-*.css`).
+    - Recompiled iOS native Xcode simulator build via `xcodebuild` and verified fresh assets in `dist/mobile/astrology-ios-simulator.zip`.
+    - Regenerated Android native debug APK (`dist/mobile/astrology-android-debug.apk` and `Synodix-debug.apk`).
 - **Tractate II Cultural Carousel & Inspector Streamlining (v2.33.8)**:
   - **De-duplicated Tradition Navigation Controls (`TraditionCharts.tsx`)**:
     - Eliminated redundant top-level 9-tab row that duplicated the 3D Vertical Carousel Deck navigation rail.
