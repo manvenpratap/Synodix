@@ -69,11 +69,11 @@ def test_cultural_traditions_theming_and_presentations():
             # Assert tab is selected
             assert tab_btn.get_attribute("aria-selected") == "true", f"Tab {tid} should be selected"
 
-            # Assert cultural immersion banner displays native title
-            banner = page.locator("div.mt-4.p-4.rounded-xl.border")
-            assert banner.is_visible(), f"Cultural immersion header for {tid} should be visible"
-            banner_text = banner.inner_text()
-            assert expected_native in banner_text, f"Expected '{expected_native}' in banner for {tid}"
+            # Assert active card displays native title
+            card = page.locator(f"div[data-tradition='{tid}'][data-tradition-card='active']")
+            assert card.is_visible(), f"Active carousel card for {tid} should be visible"
+            card_text = card.inner_text()
+            assert expected_native in card_text, f"Expected '{expected_native}' in active card for {tid}"
 
             # Verify display presentation switching
             # 1. Visual Instrument mode
@@ -128,7 +128,7 @@ def test_cultural_traditions_theming_and_presentations():
         assert not carousel_deck.is_visible(), "Carousel deck must be hidden in Inspector Matrix mode"
 
         # Switch back to Carousel Deck mode
-        deck_btn = page.locator("button:has-text('Carousel Deck')")
+        deck_btn = page.locator("button:has-text('Carousel Deck')").first
         assert deck_btn.is_visible(), "Carousel Deck mode button must be visible"
         deck_btn.click()
         page.wait_for_timeout(250)

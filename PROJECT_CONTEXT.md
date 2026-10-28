@@ -1,7 +1,7 @@
 # Synodix: Project Context & Working Memory
 
-**Last Updated:** 2026-10-28 10:45:32
-**Version:** 2.33.7  
+**Last Updated:** 2026-10-28 11:10:03
+**Version:** 2.33.8  
 **Stack:** Python 3.12 (FastAPI, Swiss Ephemeris 2.10, Skyfield DE421) + TypeScript / React 19 / Vite / Tailwind CSS v4 / Framer Motion / Capacitor 8 (iOS & Android)  
 **Workspace:** `/Volumes/Study/Projects/Astrology` (symlinked as `/Volumes/Study/Astrology`)  
 **Git Remote:** `https://github.com/manvenpratap/Synodix.git`  
@@ -10,7 +10,18 @@
 
 ## 1. Current Status & Milestone
 
-- **Active Phase**: Interior Astrometric Theme Harmonization (Completed)
+- **Active Phase**: Tractate II Cultural Computation Interface Streamlining (Completed)
+- **Tractate II Cultural Carousel & Inspector Streamlining (v2.33.8)**:
+  - **De-duplicated Tradition Navigation Controls (`TraditionCharts.tsx`)**:
+    - Eliminated redundant top-level 9-tab row that duplicated the 3D Vertical Carousel Deck navigation rail.
+    - Promoted Display Presentation Switcher (`Comprehensive`, `Visual Instrument`, `Telemetry Tables`) and View Mode Toggle (`Carousel Deck`, `Inspector Matrix`) directly to the Tractate II header bar.
+    - In Inspector Matrix mode, added an ergonomic return banner with previous/next tradition steppers and active cultural glyph indicator.
+  - **Carousel Tablist & Semantics (`TraditionVerticalCarousel.tsx`)**:
+    - Added accessible `role="tablist"` and `role="tab"` attributes with `id="tradition-tab-${key}"` to the vertical rail.
+    - Added `id="tradition-card-${key}"`, `role="tabpanel"`, `data-tradition={key}`, and `data-tradition-card="active|stacked"` to the 3D card deck for semantic accessibility and test automation resilience.
+  - **Test Suite Alignment (`test_06_cultural_themes.py`)**:
+    - Updated cultural themes test suite to assert against accessible card dataset attributes.
+    - Verified all 26 test suites pass cleanly with 0 critical errors via `./pipeline.sh test --summary`.
 - **Renaissance Astrometric Monograph: Universal Stone & Amber Theme Harmonization (v2.33.7)**:
   - **Universal Dark-Mode Slate-to-Stone Mapping (`index.css`)**:
     - Added comprehensive dark-mode fallback rules mapping all `.bg-slate-950`, `.bg-slate-900`, `.bg-slate-850`, `.bg-slate-800`, and `.border-slate-800` classes to warm obsidian umber and stone tokens (`#0c0a09`, `#141210`, `#1c1917`, `#292524`).

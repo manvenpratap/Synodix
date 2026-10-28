@@ -67,6 +67,7 @@ export const TraditionVerticalCarousel: React.FC<Props> = ({
   const activeIndex = TRADITION_ORDER.indexOf(activeTab);
   const containerRef = useRef<HTMLDivElement>(null);
   const lastScrollTime = useRef<number>(0);
+  const touchStartY = useRef<number | null>(null);
 
   const goToIndex = useCallback(
     (index: number) => {
@@ -129,6 +130,24 @@ export const TraditionVerticalCarousel: React.FC<Props> = ({
         goPrev();
       }
     }
+  };
+
+  // Touch swipe support for mobile
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartY.current = e.touches[0].clientY;
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartY.current === null) return;
+    const deltaY = e.changedTouches[0].clientY - touchStartY.current;
+    if (Math.abs(deltaY) > 40) {
+      if (deltaY < 0) {
+        goNext();
+      } else {
+        goPrev();
+      }
+    }
+    touchStartY.current = null;
   };
 
   const { jyotisha, bazi, western, ziwei, mayan, tibetan, persian, egyptian, maramataka } =
@@ -419,32 +438,38 @@ export const TraditionVerticalCarousel: React.FC<Props> = ({
     <div
       ref={containerRef}
       onWheel={handleWheel}
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
       tabIndex={0}
       role="region"
       aria-label="Tradition Cards Vertical Carousel Deck"
-      className="relative w-full rounded-2xl overflow-hidden py-4 select-none focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
+      className="relative w-full rounded-2xl overflow-hidden py-3 select-none focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
     >
       {/* Top Deck Telemetry Bar */}
-      <div className="flex items-center justify-between px-3 sm:px-6 pb-3 border-b border-white/10 text-xs">
+      <div className="flex items-center justify-between px-3 sm:px-6 pb-2.5 border-b border-white/10 text-xs">
         <div className="flex items-center gap-2">
-          <span className="w-2 h-2 rounded-full bg-amber-400 inline-block" />
-          <span className="text-amber-300 font-medium">
+          <span className="w-2 h-2 rounded-full bg-amber-400 inline-block shadow-xs shadow-amber-400/50" />
+          <span className="text-amber-300 font-serif font-semibold">
             Vertical Carousel Deck
           </span>
-          <span className="text-stone-400 hidden sm:inline">• 9 Civilizational Lenses</span>
+          <span className="text-stone-400 hidden sm:inline font-mono">• 9 Astrometric Traditions</span>
         </div>
-        <div className="flex items-center gap-2 text-slate-400 text-[11px]">
-          <span>Card {activeIndex + 1} of 9</span>
-          <span className="hidden md:inline px-1.5 py-0.5 rounded bg-white/5 border border-white/10 text-[10px]">
-            ↑ / ↓ to Browse
+        <div className="flex items-center gap-2 text-stone-400 text-[11px] font-mono">
+          <span className="text-stone-300 font-semibold">Card {activeIndex + 1} of 9</span>
+          <span className="hidden md:inline px-1.5 py-0.5 rounded bg-stone-900 border border-stone-800 text-[10px] text-stone-400">
+            ↑ / ↓ or Scroll
           </span>
         </div>
       </div>
 
       {/* Main 3D Stage */}
-      <div className="relative min-h-[620px] sm:min-h-[660px] lg:min-h-[680px] flex items-center justify-center p-2 sm:p-4 overflow-hidden [perspective:1400px]">
+      <div className="relative min-h-[620px] sm:min-h-[660px] lg:min-h-[680px] flex items-center justify-center p-2 sm:p-4 pr-12 sm:pr-16 overflow-hidden [perspective:1400px]">
         {/* Floating Vertical Navigation Rail */}
-        <div className="absolute right-2 sm:right-4 z-40 flex flex-col items-center gap-1.5 p-1.5 rounded-full bg-black/60 backdrop-blur-md border border-white/15 shadow-xl">
+        <div
+          role="tablist"
+          aria-label="Astrological tradition cards"
+          className="absolute right-2 sm:right-4 z-40 flex flex-col items-center gap-1 p-1.5 rounded-full bg-stone-950/85 backdrop-blur-md border border-stone-700/60 shadow-xl"
+        >
           <button
             type="button"
             onClick={goPrev}
@@ -456,24 +481,28 @@ export const TraditionVerticalCarousel: React.FC<Props> = ({
             <ChevronUp className="w-4 h-4" />
           </button>
 
-          <div className="flex flex-col gap-1 py-1">
+          <div className="flex flex-col gap-1.5 py-1">
             {TRADITION_ORDER.map((key, idx) => {
               const theme = cultureThemes[key];
               const isSelected = activeIndex === idx;
               return (
                 <button
                   key={key}
+                  id={`tradition-tab-${key}`}
+                  role="tab"
+                  aria-selected={isSelected}
+                  aria-controls={`tradition-card-${key}`}
                   type="button"
                   onClick={() => goToIndex(idx)}
                   data-tooltip={`${theme?.name || key} (${idx + 1}/9)`}
                   aria-label={`Jump to ${theme?.name || key}`}
-                  className={`w-6 h-6 rounded-full flex items-center justify-center text-xs transition-colors motion-safe:transition-transform motion-reduce:transition-none duration-150 cursor-pointer ${
+                  className={`w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center text-xs transition-all motion-safe:transition-transform motion-reduce:transition-none duration-150 cursor-pointer ${
                     isSelected
-                      ? 'bg-amber-400 text-stone-950 font-bold scale-110'
+                      ? 'bg-amber-400 text-stone-950 font-bold scale-110 shadow-md shadow-amber-500/30 ring-2 ring-amber-300'
                       : 'text-stone-300 hover:text-white hover:bg-white/15'
                   }`}
                 >
-                  <span className="text-[10px] select-none">{theme?.glyph || '•'}</span>
+                  <span className="text-[10px] font-mono font-bold select-none">{theme?.glyph || '•'}</span>
                 </button>
               );
             })}
@@ -511,6 +540,12 @@ export const TraditionVerticalCarousel: React.FC<Props> = ({
             return (
               <motion.div
                 key={key}
+                id={`tradition-card-${key}`}
+                data-tradition={key}
+                data-tradition-card={isCenter ? 'active' : 'stacked'}
+                role="tabpanel"
+                aria-labelledby={`tradition-tab-${key}`}
+                tabIndex={isCenter ? 0 : -1}
                 onClick={() => {
                   if (!isCenter) goToIndex(index);
                 }}

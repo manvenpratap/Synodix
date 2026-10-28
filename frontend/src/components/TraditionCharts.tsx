@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { Layers, Sliders, ArrowLeft, ArrowRight } from 'lucide-react';
 import type { ChartResponse } from '../types';
 import { ExplainerTrigger } from './ExplainerTrigger';
-import { TraditionVerticalCarousel, TraditionKey } from './TraditionVerticalCarousel';
+import { TraditionVerticalCarousel, TraditionKey, TRADITION_ORDER } from './TraditionVerticalCarousel';
 import {
   NorthIndianChart,
   WesternCircularWheel,
@@ -259,15 +259,6 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
   const [activeTab, setActiveTab] = useState<TraditionKey>('jyotisha');
   const [chartViewMode, setChartViewMode] = useState<'both' | 'chart' | 'table'>('both');
   const [layoutMode, setLayoutMode] = useState<'carousel' | 'inspector'>('carousel');
-  const [isSingleRow, setIsSingleRow] = useState(() =>
-    typeof window !== 'undefined' ? window.innerWidth >= 1536 : false
-  );
-
-  React.useEffect(() => {
-    const handleResize = () => setIsSingleRow(window.innerWidth >= 1536);
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
 
   const { jyotisha, bazi, western, ziwei, mayan, tibetan, persian, egyptian, maramataka } = data.traditions;
   const currentTheme = CULTURE_THEMES[activeTab] || CULTURE_THEMES.jyotisha;
@@ -279,179 +270,84 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
       <div className="reticle-corner-bl" />
       <div className="reticle-corner-br" />
 
-      {/* Tradition Selector Tabs */}
-      <div className="flex flex-col gap-3 pb-3.5 border-b border-white/10">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-          <div>
-            <h3 className="text-base font-serif font-semibold text-stone-100">
-              Tractate II · Cultural Computation Datasets
-            </h3>
-            <p className="text-xs text-stone-400 mt-0.5">
-              Deterministic tradition calculations and astrometric mappings
-            </p>
-          </div>
-          <div className="flex items-center gap-2">
-            {/* View Mode Toggle: Vertical Carousel vs Full Inspector */}
-            <div className="flex items-center p-0.5 rounded-lg bg-stone-900 border border-stone-800 text-xs font-mono">
-              <button
-                type="button"
-                onClick={() => setLayoutMode('carousel')}
-                className={`flex items-center gap-1.5 px-2.5 py-1 min-h-[32px] rounded cursor-pointer transition-colors font-serif ${
-                  layoutMode === 'carousel'
-                    ? 'bg-amber-950 text-amber-300 border border-amber-700/80 font-bold'
-                    : 'text-stone-400 hover:text-stone-200'
-                }`}
-                data-tooltip="View traditions as an animated 3D vertical carousel deck"
-                aria-label="Vertical Carousel Deck view"
-              >
-                <Layers className="w-3.5 h-3.5" />
-                <span>Carousel Deck</span>
-              </button>
-              <button
-                type="button"
-                onClick={() => setLayoutMode('inspector')}
-                className={`flex items-center gap-1.5 px-2.5 py-1 min-h-[32px] rounded cursor-pointer transition-colors font-serif ${
-                  layoutMode === 'inspector'
-                    ? 'bg-amber-950 text-amber-300 border border-amber-700/80 font-bold'
-                    : 'text-stone-400 hover:text-stone-200'
-                }`}
-                data-tooltip="View detailed telemetry inspector and analytical tables"
-                aria-label="Detailed Inspector view"
-              >
-                <Sliders className="w-3.5 h-3.5" />
-                <span>Inspector Matrix</span>
-              </button>
-            </div>
-            <span className="text-[11px] font-mono text-slate-400 hidden xl:inline">
-              9 Ephemerides
-            </span>
-          </div>
+      {/* Tractate II Header Bar: Title + Display Presentation Switcher + View Mode Toggle */}
+      <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-3 pb-3.5 border-b border-white/10">
+        <div>
+          <h3 className="text-base font-serif font-semibold text-stone-100">
+            Tractate II · Cultural Computation Datasets
+          </h3>
+          <p className="text-xs text-stone-400 mt-0.5 font-sans">
+            Deterministic tradition calculations and astrometric mappings across 9 civilizational lenses
+          </p>
         </div>
 
-        {/* Clean Typographic Tabs with Cultural Glyphs & Theming */}
-        <div
-          role="tablist"
-          aria-label="Astrological tradition charts"
-          className="grid grid-cols-3 sm:grid-cols-3 lg:grid-cols-5 2xl:flex 2xl:flex-wrap items-center gap-1.5 w-full relative"
-        >
-          {Object.values(CULTURE_THEMES).map((t) => {
-            const isActive = activeTab === t.id;
-            return (
-              <motion.button
-                key={t.id}
-                id={`tradition-tab-${t.id}`}
-                role="tab"
-                aria-selected={isActive}
-                aria-controls={`tradition-panel-${t.id}`}
-                type="button"
-                onClick={() => setActiveTab(t.id as any)}
-                whileTap={{ scale: 0.96 }}
-                className={`relative inline-flex items-center justify-center sm:justify-start gap-1 sm:gap-1.5 px-2 sm:px-2.5 py-2 min-h-[44px] text-[11px] sm:text-xs font-mono font-medium rounded-lg cursor-pointer transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-1 focus-visible:ring-offset-slate-950 truncate ${
-                  isActive
-                    ? 'bg-slate-900 text-white font-semibold border border-cyan-500/50'
-                    : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800 border border-transparent'
-                }`}
-              >
-                {isActive && (
-                  <motion.div
-                    {...(isSingleRow ? { layoutId: 'active-tradition-indicator' } : {})}
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    className={`absolute inset-0 rounded-lg pointer-events-none ${t.activeTabClass}`}
-                    transition={
-                      isSingleRow
-                        ? { type: 'spring', stiffness: 480, damping: 36, mass: 0.8 }
-                        : { duration: 0.15 }
-                    }
-                  />
-                )}
-                <span className="relative z-10 font-mono text-[10px] font-bold px-1 py-0.5 rounded bg-slate-800 text-slate-300 select-none shrink-0">{t.glyph}</span>
-                <span className="relative z-10 hidden 2xl:inline whitespace-nowrap">{t.name}</span>
-                <span className="relative z-10 2xl:hidden truncate">{t.shortName || t.name}</span>
-              </motion.button>
-            );
-          })}
-        </div>
-      </div>
+        <div className="flex flex-wrap items-center gap-2 sm:gap-3">
+          {/* Display Presentation Switcher: Comprehensive / Visual Instrument / Telemetry Tables */}
+          <div className="flex items-center gap-1 p-1 rounded-lg bg-stone-900/90 border border-stone-800 text-xs font-mono">
+            {(['both', 'chart', 'table'] as const).map((mode) => {
+              const isModeActive = chartViewMode === mode;
+              const labels = {
+                both: { full: 'Comprehensive', short: 'All' },
+                chart: { full: 'Visual Instrument', short: 'Visual' },
+                table: { full: 'Telemetry Tables', short: 'Tables' },
+              };
+              return (
+                <button
+                  key={mode}
+                  type="button"
+                  onClick={() => setChartViewMode(mode)}
+                  className={`relative px-2.5 py-1 min-h-[32px] text-xs font-mono rounded cursor-pointer transition-colors ${
+                    isModeActive
+                      ? 'bg-amber-950 text-amber-200 font-bold border border-amber-700/80 shadow-xs'
+                      : 'text-stone-400 hover:text-stone-200'
+                  }`}
+                  aria-pressed={isModeActive}
+                  data-tooltip={`Switch presentation to ${labels[mode].full}`}
+                >
+                  <span className="hidden sm:inline">{labels[mode].full}</span>
+                  <span className="sm:hidden">{labels[mode].short}</span>
+                </button>
+              );
+            })}
+          </div>
 
-      {/* Culturally Themed Display Presentation & Heritage Banner */}
-      <div className={`mt-4 p-4 rounded-xl border ${currentTheme.headerBorder} ${currentTheme.headerBg} relative overflow-hidden transition-colors duration-300 shadow-sm`}>
-        <div className="flex flex-col 2xl:flex-row 2xl:items-center justify-between gap-3 sm:gap-4 relative z-10">
-          <motion.div
-            key={activeTab}
-            initial={{ opacity: 0, x: -4 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
-          >
-            <div className="flex flex-wrap items-center gap-2">
-              <span className="font-mono text-xs font-bold px-1.5 py-0.5 rounded bg-slate-800 text-slate-300 select-none">{currentTheme.glyph}</span>
-              <h4 className={`text-sm sm:text-base font-semibold tracking-wide font-sans ${currentTheme.accentText}`}>
-                {currentTheme.nativeTitle}
-              </h4>
-              <span className={`px-2 py-0.5 rounded text-[10px] font-mono font-medium border ${currentTheme.accentBadge}`}>
-                {currentTheme.badge}
-              </span>
-              {TRADITION_PRIMARY_EXPLAINER[activeTab] && (
-                <ExplainerTrigger
-                  id={TRADITION_PRIMARY_EXPLAINER[activeTab].id}
-                  label={TRADITION_PRIMARY_EXPLAINER[activeTab].label}
-                  variant="button"
-                />
-              )}
-            </div>
-            <p className="text-xs text-slate-300 mt-1 font-sans hidden sm:block">
-              {currentTheme.lineage}
-            </p>
-            <p className="text-xs text-slate-400 italic mt-0.5 font-serif hidden sm:block">
-              &ldquo;{currentTheme.motto}&rdquo;
-            </p>
-          </motion.div>
-
-          {/* Culture-Themed Display Presentation Switcher */}
-          <div className="flex flex-col sm:flex-row sm:items-center gap-2.5 self-start 2xl:self-auto shrink-0 w-full sm:w-auto pt-2.5 2xl:pt-0 border-t border-white/10 2xl:border-t-0">
-            <span className="text-[11px] font-mono text-slate-400 font-medium shrink-0">Display Presentation:</span>
-            <div className="flex items-center gap-1 p-1 rounded-lg bg-slate-950/90 border border-white/10 w-full sm:w-auto relative">
-              {(['both', 'chart', 'table'] as const).map((mode) => {
-                const isModeActive = chartViewMode === mode;
-                const labels = {
-                  both: { full: 'Comprehensive', short: 'All' },
-                  chart: { full: 'Visual Instrument', short: 'Visual' },
-                  table: { full: 'Telemetry Tables', short: 'Tables' },
-                };
-                return (
-                  <motion.button
-                    key={mode}
-                    type="button"
-                    onClick={() => setChartViewMode(mode)}
-                    whileTap={{ scale: 0.96 }}
-                    className={`relative flex-1 sm:flex-initial px-2.5 sm:px-3 py-2 sm:py-1.5 min-h-[44px] sm:min-h-[36px] text-xs font-mono rounded-md cursor-pointer transition-colors text-center focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 ${
-                      isModeActive
-                        ? 'bg-slate-900 text-white font-bold'
-                        : 'text-slate-400 hover:text-slate-200'
-                    }`}
-                    aria-pressed={isModeActive}
-                  >
-                    {isModeActive && (
-                      <motion.div
-                        layoutId="presentation-mode-indicator"
-                        className={`absolute inset-0 rounded-md pointer-events-none ${currentTheme.presentationToggleActive}`}
-                        transition={{ type: 'spring', stiffness: 500, damping: 35 }}
-                      />
-                    )}
-                    <span className="relative z-10 hidden sm:inline">{labels[mode].full}</span>
-                    <span className="relative z-10 sm:hidden">{labels[mode].short}</span>
-                  </motion.button>
-                );
-              })}
-            </div>
+          {/* View Mode Toggle: Vertical Carousel vs Full Inspector */}
+          <div className="flex items-center p-1 rounded-lg bg-stone-900/90 border border-stone-800 text-xs font-mono">
+            <button
+              type="button"
+              onClick={() => setLayoutMode('carousel')}
+              className={`flex items-center gap-1.5 px-2.5 py-1 min-h-[32px] rounded cursor-pointer transition-colors font-serif ${
+                layoutMode === 'carousel'
+                  ? 'bg-amber-950 text-amber-300 border border-amber-700/80 font-bold'
+                  : 'text-stone-400 hover:text-stone-200'
+              }`}
+              data-tooltip="View traditions as an animated 3D vertical carousel deck"
+              aria-label="Vertical Carousel Deck view"
+            >
+              <Layers className="w-3.5 h-3.5" />
+              <span>Carousel Deck</span>
+            </button>
+            <button
+              type="button"
+              onClick={() => setLayoutMode('inspector')}
+              className={`flex items-center gap-1.5 px-2.5 py-1 min-h-[32px] rounded cursor-pointer transition-colors font-serif ${
+                layoutMode === 'inspector'
+                  ? 'bg-amber-950 text-amber-300 border border-amber-700/80 font-bold'
+                  : 'text-stone-400 hover:text-stone-200'
+              }`}
+              data-tooltip="View detailed telemetry inspector and analytical tables"
+              aria-label="Detailed Inspector view"
+            >
+              <Sliders className="w-3.5 h-3.5" />
+              <span>Inspector Matrix</span>
+            </button>
           </div>
         </div>
       </div>
 
       {/* 1. Vertical Carousel Deck Presentation Mode */}
       {layoutMode === 'carousel' && (
-        <div className="mt-4">
+        <div className="mt-2">
           <TraditionVerticalCarousel
             data={data}
             activeTab={activeTab}
@@ -469,7 +365,58 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
 
       {/* 2. Full Detailed Inspector Matrix Mode */}
       {layoutMode === 'inspector' && (
-        <>
+        <div className="mt-4 space-y-4">
+          {/* Top Bar for Inspector Matrix: Return to Carousel Deck & Tradition Stepper */}
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-3.5 rounded-xl bg-stone-900/90 border border-stone-800 text-xs shadow-sm">
+            <div className="flex flex-wrap items-center gap-3">
+              <button
+                type="button"
+                onClick={() => setLayoutMode('carousel')}
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-amber-950 hover:bg-amber-900 text-amber-200 border border-amber-700/80 font-sans font-semibold cursor-pointer transition-colors"
+                data-tooltip="Return to the 3D Vertical Carousel Deck"
+              >
+                <ArrowLeft className="w-3.5 h-3.5" />
+                <span>Return to Carousel Deck</span>
+              </button>
+              <div className="flex items-center gap-2">
+                <span className="font-mono text-xs font-bold px-1.5 py-0.5 rounded bg-stone-800 text-stone-200">{currentTheme.glyph}</span>
+                <span className="font-serif font-bold text-stone-200">{currentTheme.name}</span>
+                <span className="text-stone-400 font-sans text-xs hidden md:inline">• {currentTheme.nativeTitle}</span>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-2 self-start sm:self-auto">
+              <span className="text-[11px] text-stone-400 font-mono">
+                Tradition {TRADITION_ORDER.indexOf(activeTab) + 1} of 9
+              </span>
+              <button
+                type="button"
+                disabled={TRADITION_ORDER.indexOf(activeTab) === 0}
+                onClick={() => {
+                  const prevIdx = TRADITION_ORDER.indexOf(activeTab) - 1;
+                  if (prevIdx >= 0) setActiveTab(TRADITION_ORDER[prevIdx]);
+                }}
+                className="px-2.5 py-1 rounded bg-stone-800 hover:bg-stone-700 disabled:opacity-30 disabled:pointer-events-none text-stone-300 font-mono text-xs transition-colors cursor-pointer"
+                data-tooltip="Previous Tradition [Inspector]"
+                aria-label="Previous Tradition"
+              >
+                ← Prev
+              </button>
+              <button
+                type="button"
+                disabled={TRADITION_ORDER.indexOf(activeTab) === TRADITION_ORDER.length - 1}
+                onClick={() => {
+                  const nextIdx = TRADITION_ORDER.indexOf(activeTab) + 1;
+                  if (nextIdx < TRADITION_ORDER.length) setActiveTab(TRADITION_ORDER[nextIdx]);
+                }}
+                className="px-2.5 py-1 rounded bg-stone-800 hover:bg-stone-700 disabled:opacity-30 disabled:pointer-events-none text-stone-300 font-mono text-xs transition-colors cursor-pointer"
+                data-tooltip="Next Tradition [Inspector]"
+                aria-label="Next Tradition"
+              >
+                Next →
+              </button>
+            </div>
+          </div>
       {/* Tab 1: Jyotisha */}
       {activeTab === 'jyotisha' && (
         <div
@@ -1897,7 +1844,7 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
           )}
         </div>
       )}
-        </>
+        </div>
       )}
 
       {/* Mobile & Tablet Epistemological Journey Navigation Bar */}
