@@ -251,21 +251,21 @@ export const TraditionVerticalCarousel: React.FC<Props> = ({
           <div className="grid grid-cols-2 gap-2 text-xs font-mono">
             <div className="p-2 rounded bg-black/40 border border-white/10">
               <span className="text-xs text-slate-400 block font-medium">Five Elements Bureau</span>
-              <strong className="text-purple-300 font-bold">
+              <strong className="text-amber-300 font-bold">
                 {ziwei?.five_elements_bureau?.name || 'Water 2 Bureau'}
               </strong>
             </div>
             <div className="p-2 rounded bg-black/40 border border-white/10">
               <span className="text-xs text-slate-400 block font-medium">Ming Palace (命宮)</span>
-              <strong className="text-purple-200">{ziwei?.ming_palace_branch || 'Zi (子)'}</strong>
+              <strong className="text-amber-200">{ziwei?.ming_palace_branch || 'Zi (子)'}</strong>
             </div>
             <div className="p-2 rounded bg-black/40 border border-white/10">
               <span className="text-xs text-slate-400 block font-medium">Shen Palace (身宮)</span>
-              <strong className="text-purple-400">{ziwei?.shen_palace_branch || 'Wu (午)'}</strong>
+              <strong className="text-amber-400">{ziwei?.shen_palace_branch || 'Wu (午)'}</strong>
             </div>
             <div className="p-2 rounded bg-black/40 border border-white/10">
               <span className="text-xs text-slate-400 block font-medium">Si Hua (四化)</span>
-              <strong className="text-purple-300">
+              <strong className="text-amber-300">
                 {ziwei?.si_hua_transformations ? `Lu: ${ziwei.si_hua_transformations.Lu}` : 'Imperial Stars'}
               </strong>
             </div>

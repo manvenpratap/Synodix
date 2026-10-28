@@ -648,7 +648,7 @@ export const ZiWeiPalaceGrid: React.FC<ZiWeiGridProps> = ({ ziwei, compact }) =>
           p.is_ming
             ? 'bg-slate-900 border-cyan-500 shadow-xs motion-safe:animate-aura-breathe motion-reduce:animate-none'
             : p.is_shen
-            ? 'bg-slate-900 border-purple-500 motion-safe:animate-aura-breathe motion-reduce:animate-none'
+            ? 'bg-slate-900 border-amber-400 motion-safe:animate-aura-breathe motion-reduce:animate-none'
             : 'bg-slate-950 border-slate-800 hover:bg-slate-900 hover:border-slate-700'
         }`}
       >
@@ -657,7 +657,7 @@ export const ZiWeiPalaceGrid: React.FC<ZiWeiGridProps> = ({ ziwei, compact }) =>
           <span className={`font-semibold ${compact ? 'text-[10px]' : 'text-[11px]'} text-slate-100 flex items-center gap-1`}>
             {p.name}
             {p.is_ming && <span className="text-[8px] px-0.5 rounded bg-cyan-950 text-cyan-300 border border-cyan-800">M</span>}
-            {p.is_shen && <span className="text-[8px] px-0.5 rounded bg-purple-950 text-purple-300 border border-purple-800">S</span>}
+            {p.is_shen && <span className="text-[8px] px-0.5 rounded bg-amber-950 text-amber-300 border border-amber-800">S</span>}
           </span>
           <span className={`${compact ? 'text-[9px]' : 'text-[11px]'} font-mono text-slate-500`}>{p.branch}</span>
         </div>
@@ -700,9 +700,9 @@ export const ZiWeiPalaceGrid: React.FC<ZiWeiGridProps> = ({ ziwei, compact }) =>
 
       {/* Row 2: 辰 (Left), Courtyard (Center 2x2), 酉 (Right) */}
       {getPalaceCell('辰')}
-      <div className={`col-span-2 row-span-2 bg-slate-900 rounded border border-purple-900/40 ${compact ? 'p-1.5' : 'p-3'} flex flex-col justify-between text-center select-none`}>
+      <div className={`col-span-2 row-span-2 bg-slate-900 rounded border border-amber-900/40 ${compact ? 'p-1.5' : 'p-3'} flex flex-col justify-between text-center select-none`}>
         <div className="border-b border-slate-800 pb-1">
-          <span className={`${compact ? 'text-[9px]' : 'text-xs'} font-sans text-purple-400 block font-semibold`}>
+          <span className={`${compact ? 'text-[9px]' : 'text-xs'} font-sans text-amber-400 block font-semibold`}>
             Central Courtyard
           </span>
           <h4 className={`${compact ? 'text-xs' : 'text-sm'} font-bold text-slate-100 mt-0.5`}>
@@ -714,7 +714,7 @@ export const ZiWeiPalaceGrid: React.FC<ZiWeiGridProps> = ({ ziwei, compact }) =>
           <div>
             <span className="text-slate-400">Ming:</span> <strong className="text-cyan-300 font-mono">{ziwei.ming_palace_branch}</strong>
             <span className="mx-1.5 text-slate-600" aria-hidden="true">•</span>
-            <span className="text-slate-400">Shen:</span> <strong className="text-purple-300 font-mono">{ziwei.shen_palace_branch}</strong>
+            <span className="text-slate-400">Shen:</span> <strong className="text-amber-300 font-mono">{ziwei.shen_palace_branch}</strong>
           </div>
           <div className="text-[10px] text-slate-400">
             Lunar: Year <span className="font-mono tabular-nums">{ziwei.lunar_date?.year}</span>, M<span className="font-mono tabular-nums">{ziwei.lunar_date?.month}</span>, D<span className="font-mono tabular-nums">{ziwei.lunar_date?.day}</span>
@@ -750,7 +750,7 @@ export const ZiWeiPalaceGrid: React.FC<ZiWeiGridProps> = ({ ziwei, compact }) =>
   return (
     <div className="flex flex-col items-center justify-center p-3 bg-slate-950 rounded-lg border border-slate-800">
       <div className="flex items-center justify-between w-full max-w-[560px] mb-2 px-1">
-        <span className="text-xs font-medium text-purple-400">
+        <span className="text-xs font-medium text-amber-400">
           Zi Wei Dou Shu 12-Palace Heavenly Grid (紫微斗数命盘)
         </span>
         <span className="text-xs font-sans text-slate-400">Bureau: {ziwei.five_elements_bureau?.name}</span>
@@ -763,7 +763,7 @@ export const ZiWeiPalaceGrid: React.FC<ZiWeiGridProps> = ({ ziwei, compact }) =>
         <span className="w-px h-3 bg-slate-700 hidden sm:inline-block" aria-hidden="true" />
         <span className="text-cyan-300">Cyan Border = Ming (Life)</span>
         <span className="w-px h-3 bg-slate-700 hidden sm:inline-block" aria-hidden="true" />
-        <span className="text-purple-300">Purple Border = Shen (Body)</span>
+        <span className="text-amber-300">Amber Border = Shen (Body)</span>
       </div>
     </div>
   );
@@ -1009,7 +1009,7 @@ export const DomainConsensusRadar: React.FC<RadarProps> = ({ synthesis }) => {
   return (
     <div className="flex flex-col items-center justify-center p-3 bg-slate-950 rounded-lg border border-slate-800">
       <div className="flex items-center justify-between w-full max-w-[440px] mb-2 px-1 font-sans">
-        <span className="text-xs font-medium text-purple-400">
+        <span className="text-xs font-medium text-amber-400">
           9-Domain Consensus Radar Matrix (D1 to D9)
         </span>
         <span className="text-[11px] text-slate-400">

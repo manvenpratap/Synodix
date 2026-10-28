@@ -119,7 +119,7 @@ export const InputAuditCard: React.FC<Props> = ({ data }) => {
               </span>
               <ExplainerTrigger id="cusp_proximity_audit" variant="icon" size="xs" />
             </div>
-            <p className="text-xs font-sans font-semibold text-purple-300 mt-1">
+            <p className="text-xs font-sans font-semibold text-amber-300 mt-1">
               Asc Cusp: <span className="font-mono tabular-nums">{data.astronomical_base.boundary_distances.tropical_asc_to_cusp_deg}°</span>
             </p>
             <span className="text-xs text-slate-500 font-sans block mt-0.5">

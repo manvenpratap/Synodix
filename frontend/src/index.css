@@ -400,14 +400,6 @@ aside > div:first-child {
   color: #b91c1c !important;
 }
 
-[data-theme="light"] .text-purple-300,
-[data-theme="light"] .text-purple-400,
-[data-theme="light"] .text-purple-400\/80,
-[data-theme="light"] .text-purple-300\/80,
-[data-theme="light"] .text-purple-500 {
-  color: #6d28d9 !important;
-}
-
 [data-theme="light"] .text-blue-300,
 [data-theme="light"] .text-blue-400,
 [data-theme="light"] .text-blue-400\/80,
@@ -446,14 +438,6 @@ aside > div:first-child {
 [data-theme="light"] .text-indigo-300\/80,
 [data-theme="light"] .text-indigo-500 {
   color: #4338ca !important;
-}
-
-[data-theme="light"] .text-violet-300,
-[data-theme="light"] .text-violet-400,
-[data-theme="light"] .text-violet-400\/80,
-[data-theme="light"] .text-violet-300\/80,
-[data-theme="light"] .text-violet-500 {
-  color: #6d28d9 !important;
 }
 
 /* Badge Pills & Insets */
@@ -507,16 +491,6 @@ aside > div:first-child {
   background-color: #fef2f2 !important;
   color: #b91c1c !important;
   border-color: #fecaca !important;
-}
-
-[data-theme="light"] .bg-purple-950,
-[data-theme="light"] .bg-purple-950\/90,
-[data-theme="light"] .bg-purple-950\/80,
-[data-theme="light"] .bg-purple-950\/60,
-[data-theme="light"] .bg-purple-950\/40 {
-  background-color: #f5f3ff !important;
-  color: #6d28d9 !important;
-  border-color: #ddd6fe !important;
 }
 
 [data-theme="light"] .bg-teal-950,

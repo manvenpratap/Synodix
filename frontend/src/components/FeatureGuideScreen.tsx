@@ -80,8 +80,8 @@ const CIVILIZATIONS: CivilizationFilter[] = [
     label: 'Zi Wei Dou Shu',
     tooltip: 'Zi Wei Dou Shu',
     traditionNavId: 'ziwei',
-    colorClass: 'text-purple-300',
-    activeBorder: 'border-purple-500 bg-purple-950/40',
+    colorClass: 'text-amber-300',
+    activeBorder: 'border-amber-500 bg-amber-950/40',
     keywords: ['zi wei', 'purple star', 'palace', 'emperor', 'tian fu', 'si hua', 'lunar calendar']
   },
   {

@@ -315,7 +315,7 @@ export const SynthesisMatrix: React.FC<Props> = ({ synthesis, onNavigate }) => {
               </p>
               <div className="mt-2 text-[11px] space-y-0.5 text-slate-400 pt-1.5 border-t border-slate-800 font-sans">
                 <div><span className="text-slate-500">Base:</span> <span className="font-mono text-slate-300">{ax.computed_base}</span></div>
-                <div><span className="text-purple-400">Overlay:</span> <span className="font-mono text-purple-300">{ax.symbolic_overlay}</span></div>
+                <div><span className="text-amber-400">Overlay:</span> <span className="font-mono text-amber-300">{ax.symbolic_overlay}</span></div>
               </div>
             </div>
           ))}
@@ -377,7 +377,7 @@ export const SynthesisMatrix: React.FC<Props> = ({ synthesis, onNavigate }) => {
             </div>
 
             <div className="p-2.5 rounded bg-slate-900 border border-slate-800">
-              <span className="text-xs text-purple-400 font-medium block">
+              <span className="text-xs text-amber-400 font-medium block">
                 {synthesis.chronology.persian_firdaria ? "Zi Wei & Firdaria" : "Zi Wei Decadal"}
               </span>
               <p className="font-semibold text-slate-200 mt-0.5">
@@ -387,7 +387,7 @@ export const SynthesisMatrix: React.FC<Props> = ({ synthesis, onNavigate }) => {
                 Age: <span className="font-mono">{synthesis.chronology.ziwei_da_xian.age_span}</span>
               </span>
               {synthesis.chronology.persian_firdaria && (
-                <span className="text-[11px] text-purple-300/80 font-sans block mt-1">
+                <span className="text-[11px] text-amber-300/80 font-sans block mt-1">
                   Firdaria: {synthesis.chronology.persian_firdaria.active_ruler} (<span className="font-mono">{synthesis.chronology.persian_firdaria.years_span}</span>)
                 </span>
               )}

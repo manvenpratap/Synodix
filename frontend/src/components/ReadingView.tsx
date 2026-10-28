@@ -429,8 +429,8 @@ export const ReadingView: React.FC<Props> = ({ data, subjectName, onNavigate }) 
                 <div className="bg-slate-950 p-3 rounded-lg border border-slate-800 space-y-1.5 flex flex-col justify-between">
                   <div>
                     <div className="flex items-center justify-between mb-1">
-                      <span className="text-xs font-semibold text-purple-400">Zi Wei Dou Shu</span>
-                      <span className="text-xs font-sans px-1.5 py-0.5 rounded bg-purple-950/60 text-purple-300 border border-purple-800/40">Polar Stars</span>
+                      <span className="text-xs font-semibold text-amber-400">Zi Wei Dou Shu</span>
+                      <span className="text-xs font-sans px-1.5 py-0.5 rounded bg-stone-900 text-amber-300 border border-amber-800/60 font-serif">Polar Stars</span>
                     </div>
                     <p className="text-xs text-slate-300 font-sans leading-relaxed">
                       {inferences.core_archetype.civilizational_pillars.ziwei_core}
@@ -865,7 +865,7 @@ export const ReadingView: React.FC<Props> = ({ data, subjectName, onNavigate }) 
                   Decadal Span: <span className="font-mono">{chronology.ziwei_da_xian.age_span || 'Active'}</span>
                 </span>
                 {chronology.persian_firdaria ? (
-                  <span className="text-xs text-purple-300/80 block mt-1 font-sans">
+                  <span className="text-xs text-amber-300/90 block mt-1 font-sans">
                     Firdaria: <span className="font-mono">{chronology.persian_firdaria.active_ruler} ({chronology.persian_firdaria.years_span})</span>
                   </span>
                 ) : (

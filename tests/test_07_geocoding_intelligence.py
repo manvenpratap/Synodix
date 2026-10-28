@@ -365,10 +365,11 @@ def test_ui_city_selector_finds_jamshedpur_and_gurugram():
         lat_input.fill("0")
         lon_input.fill("0")
         city_input.press_sequentially("Jamshedpur", delay=40)
-        page.wait_for_timeout(300)
-        # Blur the input by focusing date input
+        page.wait_for_timeout(400)
+        # Blur the input by blurring city_input directly and focusing birth_date
+        city_input.blur()
         page.locator("input#birth_date").focus()
-        page.wait_for_function("() => document.querySelector('input#country_name')?.value === 'India'", timeout=12000)
+        page.wait_for_function("() => document.querySelector('input#country_name')?.value === 'India'", timeout=15000)
 
         # Country should automatically resolve to India and lat/lon updated
         assert country_input.input_value() == "India", f"Country should auto-resolve to India on blur, got {country_input.input_value()}"

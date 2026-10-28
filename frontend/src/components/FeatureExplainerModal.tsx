@@ -199,7 +199,7 @@ export const FeatureExplainerModal: React.FC = () => {
               {/* Historical Lineage & Texts */}
               <div className="p-3.5 rounded-xl bg-stone-900 border border-stone-800 flex items-center justify-between flex-wrap gap-2">
                 <div className="flex items-center gap-2">
-                  <History className="w-4 h-4 text-purple-400 shrink-0" />
+                  <History className="w-4 h-4 text-amber-400 shrink-0" />
                   <div>
                     <span className="text-xs font-medium text-stone-400 block font-sans">
                       Historical Skywatcher Lineage & Foundational Texts

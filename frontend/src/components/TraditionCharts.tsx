@@ -173,19 +173,19 @@ const CULTURE_THEMES: Record<string, {
     glyph: 'ZIW',
     lineage: 'Grandmaster Chen Tuan • Lao-tzu Hermitage on Mount Hua (c. 980 CE)',
     motto: '紫微至尊，儀錄百神 — The North Celestial Pole Emperor presides over the Twelve Palaces',
-    badge: 'Forbidden City Imperial Purple',
+    badge: 'Imperial Polar Star Enclosure',
     instrumentName: 'Authentic 4x4 Imperial Courtyard Palace Matrix (14 Major & Auxiliary Stars)',
-    containerBg: 'bg-gradient-to-b from-purple-950/70 via-slate-950 to-neutral-950',
-    containerBorder: 'border-purple-800/60 shadow-lg shadow-purple-950/20',
-    headerBg: 'bg-gradient-to-r from-purple-950 via-slate-950 to-neutral-950',
-    headerBorder: 'border-purple-600/60',
-    accentText: 'text-purple-300',
-    accentBadge: 'bg-purple-950/90 text-purple-200 border-purple-600/80',
-    activeTabClass: 'bg-purple-950 text-purple-200 border-purple-500 shadow-sm shadow-purple-950/60 font-semibold ring-1 ring-purple-400/40',
-    presentationToggleActive: 'bg-purple-900 text-purple-200 font-bold border border-purple-500 shadow-xs',
-    presentationToggleInactive: 'text-slate-400 hover:text-purple-200 hover:bg-purple-950/30',
-    frameBg: 'bg-purple-950/30',
-    frameBorder: 'border-purple-800/60',
+    containerBg: 'bg-gradient-to-b from-amber-950/50 via-slate-950 to-neutral-950',
+    containerBorder: 'border-amber-800/60 shadow-lg shadow-amber-950/20',
+    headerBg: 'bg-gradient-to-r from-amber-950/80 via-slate-950 to-neutral-950',
+    headerBorder: 'border-amber-600/60',
+    accentText: 'text-amber-300',
+    accentBadge: 'bg-amber-950/90 text-amber-200 border-amber-600/80',
+    activeTabClass: 'bg-amber-950 text-amber-200 border-amber-500 shadow-sm shadow-amber-950/60 font-semibold ring-1 ring-amber-400/40',
+    presentationToggleActive: 'bg-amber-900 text-amber-200 font-bold border border-amber-500 shadow-xs',
+    presentationToggleInactive: 'text-slate-400 hover:text-amber-200 hover:bg-amber-950/30',
+    frameBg: 'bg-amber-950/20',
+    frameBorder: 'border-amber-800/60',
   },
   mayan: {
     id: 'mayan',
@@ -627,7 +627,7 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
                               {g.nakshatra?.name} P{g.nakshatra?.pada} ({g.nakshatra?.lord})
                             </td>
                             <td className="py-2 px-3 text-amber-300">{g.navamsha_sign}</td>
-                            <td className="py-2 px-3 text-purple-300">{g.dashamsha_sign}</td>
+                            <td className="py-2 px-3 text-cyan-300">{g.dashamsha_sign}</td>
                             <td className="py-2 px-3 text-slate-300">{g.drekkana_sign || '-'}</td>
                             <td className="py-2 px-3 text-slate-400">{g.saptamsha_sign || '-'}</td>
                             <td className="py-2 px-3 text-slate-400">{g.dwadashamsha_sign || '-'}</td>
@@ -1260,7 +1260,7 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
         >
           <div className="flex flex-col sm:flex-row sm:items-center justify-between bg-slate-950 p-3.5 rounded-md border border-slate-800 gap-3">
             <div>
-              <span className="text-[10px] text-purple-400 font-mono font-semibold font-medium">
+              <span className="text-[10px] text-amber-400 font-mono font-semibold font-medium">
                 Zi Wei Dou Shu • Twelve Palaces & 14 Major Stars
               </span>
               <h4 className="text-sm font-semibold text-slate-100 mt-0.5">
@@ -1271,7 +1271,7 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
               </p>
             </div>
             <div className="flex flex-wrap items-center gap-2">
-              <div className="text-xs font-mono text-purple-300 bg-slate-800 p-2.5 rounded border border-slate-800">
+              <div className="text-xs font-mono text-amber-300 bg-slate-800 p-2.5 rounded border border-slate-800">
                 <span className="font-semibold text-amber-400 block mb-0.5">Si Hua Transformations:</span>
                 <div>Lu: {ziwei.si_hua_transformations.Lu} | Quan: {ziwei.si_hua_transformations.Quan}</div>
                 <div>Ke: {ziwei.si_hua_transformations.Ke} | Ji: {ziwei.si_hua_transformations.Ji}</div>
@@ -1284,7 +1284,7 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
           {ziwei.ming_star_quality && (
             <div className="bg-slate-950 p-3.5 rounded-md border border-slate-800 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
               <div>
-                <span className="text-[10px] font-mono font-medium text-purple-400 font-semibold block">
+                <span className="text-[10px] font-mono font-medium text-amber-400 font-semibold block">
                   Ming Palace Star Dynamics
                 </span>
                 <span className="text-sm font-semibold text-slate-200 mt-0.5 block">
@@ -1300,7 +1300,7 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
                     ? 'bg-emerald-950 text-emerald-300 border-emerald-800'
                     : ziwei.ming_star_quality.assessment.includes('Frictional')
                     ? 'bg-rose-950 text-rose-300 border-rose-800'
-                    : 'bg-purple-950 text-purple-300 border-purple-800'
+                    : 'bg-amber-950 text-amber-300 border-amber-800'
                 }`}>
                   {ziwei.ming_star_quality.assessment}
                 </span>
@@ -1335,9 +1335,9 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
                 key={p.name}
                 className={`p-3 rounded-md border ${
                   p.is_ming
-                    ? 'bg-purple-950/30 border-purple-800'
-                    : p.is_shen
                     ? 'bg-cyan-950/30 border-cyan-800'
+                    : p.is_shen
+                    ? 'bg-amber-950/30 border-amber-800'
                     : 'bg-slate-950 border-slate-800'
                 }`}
               >
@@ -1531,7 +1531,7 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
               </div>
               <div className="p-2.5 rounded bg-slate-900 border border-slate-800">
                 <span className="text-[10px] text-slate-400 font-sans font-medium block">Lungta (Fortune)</span>
-                <span className="text-xs font-semibold text-purple-400 mt-0.5 block">{tibetan.five_personal_forces.lungta_wind_horse_fortune}</span>
+                <span className="text-xs font-semibold text-amber-300 mt-0.5 block">{tibetan.five_personal_forces.lungta_wind_horse_fortune}</span>
               </div>
               <div className="p-2.5 rounded bg-slate-900 border border-slate-800">
                 <span className="text-[10px] text-slate-400 font-sans font-medium block">La (Soul)</span>
