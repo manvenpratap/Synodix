@@ -8,15 +8,15 @@ interface Props {
 
 export const VerificationCard: React.FC<Props> = ({ report }) => {
   return (
-    <div className="bg-slate-900 border border-slate-800 rounded-lg p-5">
+    <div className="bg-stone-900 border border-stone-800 rounded-lg p-5">
       {/* Header */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between pb-3.5 border-b border-slate-800 gap-3">
+      <div className="flex flex-col md:flex-row md:items-center justify-between pb-3.5 border-b border-stone-800 gap-3">
         <div>
           <span className="text-xs text-emerald-400 font-medium block">
             Section 3 · Dual-Engine Astronomical Verification & Invariants
           </span>
           <div className="flex flex-wrap items-center gap-2 mt-0.5">
-            <h3 className="text-base font-semibold text-slate-100">
+            <h3 className="text-base font-semibold text-stone-100">
               Swiss Ephemeris (pyswisseph) vs NASA/JPL DE421 (Skyfield)
             </h3>
             <ExplainerTrigger id="dual_engine_validation" label="Dual Engine Math" />
@@ -37,7 +37,7 @@ export const VerificationCard: React.FC<Props> = ({ report }) => {
         {report.invariants.map((inv, idx) => (
           <div
             key={idx}
-            className="bg-slate-950 p-3 rounded-md border border-slate-800 flex flex-col justify-between hover:border-cyan-800/80 hover:-translate-y-0.5 transition-colors motion-safe:transition-transform motion-reduce:transition-none duration-150 cursor-pointer shadow-xs"
+            className="bg-stone-950 p-3 rounded-md border border-stone-800 flex flex-col justify-between hover:border-amber-700/80 hover:-translate-y-0.5 transition-colors motion-safe:transition-transform motion-reduce:transition-none duration-150 cursor-pointer shadow-xs"
           >
             <div>
               <div className="flex items-center justify-between">
@@ -52,11 +52,11 @@ export const VerificationCard: React.FC<Props> = ({ report }) => {
                   {inv.status}
                 </span>
               </div>
-              <p className="text-xs text-slate-300 font-normal mt-1 line-clamp-2">
+              <p className="text-xs text-stone-300 font-normal mt-1 line-clamp-2">
                 {inv.description}
               </p>
             </div>
-            <div className="mt-2 text-[11px] font-sans text-slate-400 pt-1.5 border-t border-slate-800 flex justify-between">
+            <div className="mt-2 text-[11px] font-sans text-stone-400 pt-1.5 border-t border-stone-800 flex justify-between">
               <span>Actual:</span>
               <span className="text-emerald-300 font-semibold font-mono">{inv.actual}</span>
             </div>
@@ -68,12 +68,12 @@ export const VerificationCard: React.FC<Props> = ({ report }) => {
       <div className="mt-4">
         <div className="flex items-center justify-between mb-2">
           <div className="flex items-center gap-1.5">
-            <span className="text-xs font-medium text-slate-300">
+            <span className="text-xs font-medium text-stone-300">
               Planetary Longitude Verification (Threshold: 0.0100°)
             </span>
             <ExplainerTrigger id="dual_engine_validation" variant="icon" size="xs" />
           </div>
-          <span className="text-[11px] text-slate-400 font-sans">
+          <span className="text-[11px] text-stone-400 font-sans">
             Max Observed Delta: <strong className="text-emerald-400 font-mono tabular-nums">{report.max_planetary_difference_deg}°</strong>
           </span>
         </div>
@@ -82,12 +82,12 @@ export const VerificationCard: React.FC<Props> = ({ report }) => {
           tabIndex={0}
           role="region"
           aria-label="Dual-Engine Ephemeris Cross-Validation Table"
-          className="overflow-x-auto rounded border border-slate-800 focus:outline-none focus-visible:ring-1 focus-visible:ring-cyan-500"
+          className="overflow-x-auto rounded border border-stone-800 focus:outline-none focus-visible:ring-1 focus-visible:ring-amber-500"
         >
           <table className="w-full text-left text-xs border-collapse">
             <thead>
-              <tr className="bg-slate-950 text-slate-300 border-b border-slate-800 font-medium text-xs">
-                <th className="py-2.5 px-3 sticky left-0 bg-slate-950 z-10 border-r border-slate-800">Celestial Body</th>
+              <tr className="bg-stone-950 text-stone-300 border-b border-stone-800 font-medium text-xs">
+                <th className="py-2.5 px-3 sticky left-0 bg-stone-950 z-10 border-r border-stone-800">Celestial Body</th>
                 <th className="py-2.5 px-3">SwissEph (deg)</th>
                 <th className="py-2.5 px-3">Skyfield JPL (deg)</th>
                 <th className="py-2.5 px-3">Delta (deg)</th>
@@ -95,16 +95,16 @@ export const VerificationCard: React.FC<Props> = ({ report }) => {
                 <th className="py-2.5 px-3 text-right">Verification</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-800 bg-slate-900 font-sans text-[11px]">
+            <tbody className="divide-y divide-stone-800 bg-stone-900 font-sans text-[11px]">
               {report.dual_engine_diffs.map((diff) => (
-                <tr key={diff.body} className="hover:bg-slate-800 transition-colors">
-                  <td className="py-2 px-3 font-sans font-medium text-slate-200 sticky left-0 bg-slate-900 z-10 border-r border-slate-800 whitespace-nowrap">
+                <tr key={diff.body} className="hover:bg-stone-800 transition-colors">
+                  <td className="py-2 px-3 font-sans font-medium text-stone-200 sticky left-0 bg-stone-900 z-10 border-r border-stone-800 whitespace-nowrap">
                     {diff.body}
                   </td>
-                  <td className="py-2 px-3 text-slate-400 font-mono tabular-nums">
+                  <td className="py-2 px-3 text-stone-400 font-mono tabular-nums">
                     {diff.primary_value_deg?.toFixed(4)}°
                   </td>
-                  <td className="py-2 px-3 text-slate-400 font-mono tabular-nums">
+                  <td className="py-2 px-3 text-stone-400 font-mono tabular-nums">
                     {diff.validator_value_deg?.toFixed(4)}°
                   </td>
                   <td className="py-2 px-3 text-emerald-400 font-medium font-mono tabular-nums">

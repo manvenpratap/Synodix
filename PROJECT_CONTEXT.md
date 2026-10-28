@@ -1,7 +1,7 @@
 # Synodix: Project Context & Working Memory
 
-**Last Updated:** 2026-10-28 09:59:23
-**Version:** 2.33.6  
+**Last Updated:** 2026-10-28 10:45:32
+**Version:** 2.33.7  
 **Stack:** Python 3.12 (FastAPI, Swiss Ephemeris 2.10, Skyfield DE421) + TypeScript / React 19 / Vite / Tailwind CSS v4 / Framer Motion / Capacitor 8 (iOS & Android)  
 **Workspace:** `/Volumes/Study/Projects/Astrology` (symlinked as `/Volumes/Study/Astrology`)  
 **Git Remote:** `https://github.com/manvenpratap/Synodix.git`  
@@ -10,7 +10,30 @@
 
 ## 1. Current Status & Milestone
 
-- **Active Phase**: Epistemic Journey Refinement (Completed)
+- **Active Phase**: Interior Astrometric Theme Harmonization (Completed)
+- **Renaissance Astrometric Monograph: Universal Stone & Amber Theme Harmonization (v2.33.7)**:
+  - **Universal Dark-Mode Slate-to-Stone Mapping (`index.css`)**:
+    - Added comprehensive dark-mode fallback rules mapping all `.bg-slate-950`, `.bg-slate-900`, `.bg-slate-850`, `.bg-slate-800`, and `.border-slate-800` classes to warm obsidian umber and stone tokens (`#0c0a09`, `#141210`, `#1c1917`, `#292524`).
+    - Eliminates any possibility of un-themed cool blue-gray surfaces appearing across any screen or visualizer.
+  - **Workbench & Vault Harmonization (`BirthDataForm.tsx`)**:
+    - Migrated all module cards, telemetry strips, inputs, and selects from cool `slate-*` to warm `stone-*` surfaces.
+    - Harmonized Module 1 icon, badge, and draft controls from neon cyan to authentic gilded brass (`amber-400`, `amber-950/80`, `border-amber-800/80`).
+    - Replaced input focus rings with `focus:border-amber-500 focus-visible:ring-amber-400 focus-visible:ring-offset-stone-950`.
+    - Aligned GPS Detect button, city auto-suggestions dropdown, vault buttons, and historical titans archive to burnished amber and stone.
+    - Synchronized `version.ts` to `v2.33.7`.
+  - **Synthesis Matrix Harmonization (`SynthesisMatrix.tsx`, `ChartWheelVisualizer.tsx`)**:
+    - Converted Divergence Rate card and Global Triangulation Consensus strip to warm `stone-950` and `stone-900`.
+    - Harmonized consensus index box to `text-amber-300` and active filter pill ("All Domains") to `bg-amber-950 text-amber-200 border-amber-700/80`.
+    - Updated DomainConsensusRadar background to `bg-stone-950 border-stone-800` and radar polygon gradient stop from `#818cf8` to gilded `#f59e0b`.
+  - **Corroboration Dossier Harmonization (`ReadingView.tsx`)**:
+    - Migrated all 7 tractate sections and subcards from `slate-*` to `stone-900` and `stone-950`.
+    - Aligned view mode toggle ("Document UI" / "Raw Markdown") to `bg-amber-950 text-amber-200 border-amber-700/80`.
+    - Harmonized document metadata badges, section headers, bullet indicators, and Julian Day telemetry to `amber-400` and `amber-300`.
+  - **Evidence, Verification & Tradition Cards (`MathematicalEvidenceCard.tsx`, `VerificationCard.tsx`, `TraditionVerticalCarousel.tsx`, `InputAuditCard.tsx`)**:
+    - Converted view toggles, scorecard section pills, carousel telemetry bars, and inspect buttons to warm stone and amber.
+  - **Verification & Zero Regressions**:
+    - `npx impeccable detect --json frontend/src/components` returned 0 findings (`[]`).
+    - Full pytest suite: 26 passed in 78.12s.
 - **Epistemic Journey Refinement: Decoupling Evidence (v2.33.6)**:
   - **Decoupled Empirical Evidence from Natal Journey Stepper (`App.tsx`, `ReadingView.tsx`)**:
     - Removed Mathematical Evidence from `JOURNEY_STEPS`, focusing the Epistemic Journey purely on the 4 core natal analysis tractates: Tractate I (Input), Tractate II (Traditions), Tractate III (Synthesis), and Tractate IV (Dossier).

@@ -422,16 +422,16 @@ export const TraditionVerticalCarousel: React.FC<Props> = ({
       tabIndex={0}
       role="region"
       aria-label="Tradition Cards Vertical Carousel Deck"
-      className="relative w-full rounded-2xl overflow-hidden py-4 select-none focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
+      className="relative w-full rounded-2xl overflow-hidden py-4 select-none focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
     >
       {/* Top Deck Telemetry Bar */}
       <div className="flex items-center justify-between px-3 sm:px-6 pb-3 border-b border-white/10 text-xs">
         <div className="flex items-center gap-2">
-          <span className="w-2 h-2 rounded-full bg-cyan-400 inline-block" />
-          <span className="text-cyan-300 font-medium">
+          <span className="w-2 h-2 rounded-full bg-amber-400 inline-block" />
+          <span className="text-amber-300 font-medium">
             Vertical Carousel Deck
           </span>
-          <span className="text-slate-400 hidden sm:inline">• 9 Civilizational Lenses</span>
+          <span className="text-stone-400 hidden sm:inline">• 9 Civilizational Lenses</span>
         </div>
         <div className="flex items-center gap-2 text-slate-400 text-[11px]">
           <span>Card {activeIndex + 1} of 9</span>
@@ -451,7 +451,7 @@ export const TraditionVerticalCarousel: React.FC<Props> = ({
             disabled={activeIndex === 0}
             data-tooltip="Previous tradition card [↑]"
             aria-label="Previous tradition card"
-            className="w-8 h-8 rounded-full flex items-center justify-center text-slate-300 hover:text-cyan-300 hover:bg-white/10 disabled:opacity-30 disabled:pointer-events-none transition-colors cursor-pointer"
+            className="w-8 h-8 rounded-full flex items-center justify-center text-stone-300 hover:text-amber-300 hover:bg-white/10 disabled:opacity-30 disabled:pointer-events-none transition-colors cursor-pointer"
           >
             <ChevronUp className="w-4 h-4" />
           </button>
@@ -469,8 +469,8 @@ export const TraditionVerticalCarousel: React.FC<Props> = ({
                   aria-label={`Jump to ${theme?.name || key}`}
                   className={`w-6 h-6 rounded-full flex items-center justify-center text-xs transition-colors motion-safe:transition-transform motion-reduce:transition-none duration-150 cursor-pointer ${
                     isSelected
-                      ? 'bg-cyan-400 text-slate-950 font-bold scale-110'
-                      : 'text-slate-300 hover:text-white hover:bg-white/15'
+                      ? 'bg-amber-400 text-stone-950 font-bold scale-110'
+                      : 'text-stone-300 hover:text-white hover:bg-white/15'
                   }`}
                 >
                   <span className="text-[10px] select-none">{theme?.glyph || '•'}</span>
@@ -485,7 +485,7 @@ export const TraditionVerticalCarousel: React.FC<Props> = ({
             disabled={activeIndex === TRADITION_ORDER.length - 1}
             data-tooltip="Next tradition card [↓]"
             aria-label="Next tradition card"
-            className="w-8 h-8 rounded-full flex items-center justify-center text-slate-300 hover:text-cyan-300 hover:bg-white/10 disabled:opacity-30 disabled:pointer-events-none transition-colors cursor-pointer"
+            className="w-8 h-8 rounded-full flex items-center justify-center text-stone-300 hover:text-amber-300 hover:bg-white/10 disabled:opacity-30 disabled:pointer-events-none transition-colors cursor-pointer"
           >
             <ChevronDown className="w-4 h-4" />
           </button>
@@ -556,7 +556,7 @@ export const TraditionVerticalCarousel: React.FC<Props> = ({
                   </div>
 
                   <div className="flex items-center gap-2">
-                    <span className="text-xs font-mono text-cyan-400 font-bold px-2 py-1 rounded bg-black/40 border border-white/10">
+                    <span className="text-xs font-mono text-amber-300 font-bold px-2 py-1 rounded bg-black/40 border border-white/10">
                       {String(index + 1).padStart(2, '0')} / 09
                     </span>
                   </div>
@@ -594,7 +594,7 @@ export const TraditionVerticalCarousel: React.FC<Props> = ({
                       <div className={`w-full p-2.5 sm:p-3 rounded-xl border ${theme.frameBorder} ${theme.frameBg} shadow-inner`}>
                         <div className="flex items-center justify-between pb-1.5 mb-2 border-b border-white/10">
                           <div className="flex items-center gap-1.5">
-                            <Compass className="w-3.5 h-3.5 text-cyan-400" />
+                            <Compass className="w-3.5 h-3.5 text-amber-400" />
                             <h5 className={`text-xs font-sans font-semibold ${theme.accentText}`}>
                               {theme.instrumentName}
                             </h5>
@@ -623,7 +623,7 @@ export const TraditionVerticalCarousel: React.FC<Props> = ({
                       e.stopPropagation();
                       onOpenInspector(key);
                     }}
-                    className="inline-flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-lg bg-cyan-950 hover:bg-cyan-900/80 disabled:opacity-50 disabled:cursor-not-allowed text-cyan-200 border border-cyan-700/80 text-xs font-sans font-semibold transition-colors active:scale-[0.98] duration-150 cursor-pointer shadow-sm whitespace-nowrap"
+                    className="inline-flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-lg bg-amber-950 hover:bg-amber-900/80 disabled:opacity-50 disabled:cursor-not-allowed text-amber-200 border border-amber-700/80 text-xs font-sans font-semibold transition-colors active:scale-[0.98] duration-150 cursor-pointer shadow-xs whitespace-nowrap"
                   >
                     <span className="whitespace-nowrap">Inspect Full Telemetry & Tables</span>
                     <ArrowRight className="w-3.5 h-3.5" />

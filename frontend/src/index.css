@@ -67,6 +67,56 @@ body {
   color: #a8a29e;
 }
 
+/* =========================================================================
+   RENAISSANCE ASTROMETRIC MONOGRAPH: UNIVERSAL DARK-MODE SLATE-TO-STONE
+   Ensures any slate container, surface, or border automatically reflects
+   the authentic warm stone/obsidian (#0c0a09, #141210, #1c1917, #292524) palette.
+   ========================================================================= */
+:root:not([data-theme="light"]) .bg-slate-950,
+:root:not([data-theme="light"]) .bg-slate-950\/95,
+:root:not([data-theme="light"]) .bg-slate-950\/90,
+:root:not([data-theme="light"]) .bg-slate-950\/80,
+:root:not([data-theme="light"]) .bg-slate-950\/70,
+:root:not([data-theme="light"]) .bg-slate-950\/60,
+:root:not([data-theme="light"]) .bg-slate-950\/50,
+:root:not([data-theme="light"]) .bg-slate-950\/40 {
+  background-color: #0c0a09 !important;
+}
+
+:root:not([data-theme="light"]) .bg-slate-900,
+:root:not([data-theme="light"]) .bg-slate-900\/95,
+:root:not([data-theme="light"]) .bg-slate-900\/90,
+:root:not([data-theme="light"]) .bg-slate-900\/80,
+:root:not([data-theme="light"]) .bg-slate-900\/70,
+:root:not([data-theme="light"]) .bg-slate-900\/60,
+:root:not([data-theme="light"]) .bg-slate-900\/50,
+:root:not([data-theme="light"]) .bg-slate-900\/40,
+:root:not([data-theme="light"]) .bg-slate-850,
+:root:not([data-theme="light"]) .bg-slate-800,
+:root:not([data-theme="light"]) .bg-slate-800\/80,
+:root:not([data-theme="light"]) .bg-slate-800\/60 {
+  background-color: #141210 !important;
+}
+
+:root:not([data-theme="light"]) .hover\:bg-slate-800:hover,
+:root:not([data-theme="light"]) .hover\:bg-slate-700:hover {
+  background-color: #1c1917 !important;
+}
+
+:root:not([data-theme="light"]) .border-slate-900,
+:root:not([data-theme="light"]) .border-slate-850,
+:root:not([data-theme="light"]) .border-slate-800,
+:root:not([data-theme="light"]) .border-slate-800\/80,
+:root:not([data-theme="light"]) .border-slate-800\/60,
+:root:not([data-theme="light"]) .border-slate-700 {
+  border-color: #292524 !important;
+}
+
+:root:not([data-theme="light"]) .divide-slate-800 > :not([hidden]) ~ :not([hidden]),
+:root:not([data-theme="light"]) .divide-slate-800\/60 > :not([hidden]) ~ :not([hidden]) {
+  border-color: #292524 !important;
+}
+
 :root[data-theme="light"],
 html[data-theme="light"] {
   color-scheme: light;

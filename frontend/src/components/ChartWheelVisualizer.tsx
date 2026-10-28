@@ -1007,12 +1007,12 @@ export const DomainConsensusRadar: React.FC<RadarProps> = ({ synthesis }) => {
   const rings = [0.25, 0.50, 0.75, 1.0];
 
   return (
-    <div className="flex flex-col items-center justify-center p-3 bg-slate-950 rounded-lg border border-slate-800">
+    <div className="flex flex-col items-center justify-center p-3 bg-stone-950 rounded-lg border border-stone-800">
       <div className="flex items-center justify-between w-full max-w-[440px] mb-2 px-1 font-sans">
         <span className="text-xs font-medium text-amber-400">
           9-Domain Consensus Radar Matrix (D1 to D9)
         </span>
-        <span className="text-[11px] text-slate-400">
+        <span className="text-[11px] text-stone-400">
           Divergence: <strong className="text-rose-400 font-mono tabular-nums">{synthesis.divergence_metrics?.divergence_rate_percent}%</strong>
         </span>
       </div>
@@ -1026,7 +1026,7 @@ export const DomainConsensusRadar: React.FC<RadarProps> = ({ synthesis }) => {
         <defs>
           <linearGradient id="radarGradient" x1="0%" y1="0%" x2="100%" y2="100%">
             <stop offset="0%" stopColor="#38bdf8" stopOpacity="0.35" />
-            <stop offset="50%" stopColor="#818cf8" stopOpacity="0.25" />
+            <stop offset="50%" stopColor="#f59e0b" stopOpacity="0.25" />
             <stop offset="100%" stopColor="#10b981" stopOpacity="0.35" />
           </linearGradient>
         </defs>
@@ -1043,7 +1043,7 @@ export const DomainConsensusRadar: React.FC<RadarProps> = ({ synthesis }) => {
               key={ring}
               d={ringPoints}
               fill="none"
-              stroke="#1b2331"
+              stroke="#2e2823"
               strokeWidth={ring === 1.0 ? '1.5' : '1'}
               strokeDasharray={ring === 1.0 ? undefined : '2 3'}
             />
@@ -1060,7 +1060,7 @@ export const DomainConsensusRadar: React.FC<RadarProps> = ({ synthesis }) => {
               y1={center}
               x2={outerPt.x}
               y2={outerPt.y}
-              stroke="#212d40"
+              stroke="#443c33"
               strokeWidth="1"
             />
           );
@@ -1096,7 +1096,7 @@ export const DomainConsensusRadar: React.FC<RadarProps> = ({ synthesis }) => {
                 cy={pt.y}
                 r="4.5"
                 fill={nodeColor}
-                stroke="#080a0f"
+                stroke="#0c0a09"
                 strokeWidth="1.5"
               />
 
