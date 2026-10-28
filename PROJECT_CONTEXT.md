@@ -1,7 +1,7 @@
 # Synodix: Project Context & Working Memory
 
-**Last Updated:** 2026-10-28 09:53:15
-**Version:** 2.33.5  
+**Last Updated:** 2026-10-28 09:59:23
+**Version:** 2.33.6  
 **Stack:** Python 3.12 (FastAPI, Swiss Ephemeris 2.10, Skyfield DE421) + TypeScript / React 19 / Vite / Tailwind CSS v4 / Framer Motion / Capacitor 8 (iOS & Android)  
 **Workspace:** `/Volumes/Study/Projects/Astrology` (symlinked as `/Volumes/Study/Astrology`)  
 **Git Remote:** `https://github.com/manvenpratap/Synodix.git`  
@@ -10,7 +10,13 @@
 
 ## 1. Current Status & Milestone
 
-- **Active Phase**: Mobile Bottom Navigation Numbering Removal (Completed)
+- **Active Phase**: Epistemic Journey Refinement (Completed)
+- **Epistemic Journey Refinement: Decoupling Evidence (v2.33.6)**:
+  - **Decoupled Empirical Evidence from Natal Journey Stepper (`App.tsx`, `ReadingView.tsx`)**:
+    - Removed Mathematical Evidence from `JOURNEY_STEPS`, focusing the Epistemic Journey purely on the 4 core natal analysis tractates: Tractate I (Input), Tractate II (Traditions), Tractate III (Synthesis), and Tractate IV (Dossier).
+    - Updated stepper display to `Tractate X of IV` with a balanced 4-column layout (`grid-cols-4`) and 4-tier ambient progress conduit.
+    - Repositioned Mathematical Evidence & Benchmark as a standalone empirical verification instrument accessible via observatory sidebar, Feature Guide, and keyboard accelerator (`e` / `5`).
+    - Updated Dossier (`ReadingView.tsx`) culmination button to cycle back cleanly to Input Workbench (`RotateCcw`).
 - **Mobile Bottom Navigation Numbering Removal (v2.33.5)**:
   - **Uncluttered Native Mobile Navigation (`App.tsx`)**:
     - Removed numbering step badges (`1`, `2`, `3`, `4`, `Dual`, `8`) from the mobile bottom navigation bar buttons.

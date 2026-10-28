@@ -212,7 +212,7 @@ export const MathematicalEvidenceCard: React.FC<Props> = ({ onNavigate }) => {
             </div>
             <div className="flex flex-wrap items-center gap-2 mt-1">
               <h2 className="text-base sm:text-lg font-serif font-bold text-stone-100 tracking-tight">
-                Tractate V · Mathematical Evidence & Empirical Validation of Astrological Modeling
+                Mathematical Evidence & Empirical Validation of Astrological Modeling
               </h2>
               <ExplainerTrigger id="epistemic_humility_framework" label="Epistemic Humility" variant="badge" />
             </div>
@@ -1038,7 +1038,7 @@ export const MathematicalEvidenceCard: React.FC<Props> = ({ onNavigate }) => {
         </div>
       )}
 
-      {/* Mobile & Tablet Epistemological Journey Navigation Bar */}
+      {/* Empirical Research & Reference Navigation Bar */}
       {onNavigate && (
         <div className="p-4 sm:p-5 border-t border-slate-800 bg-slate-950 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2.5">
           <button

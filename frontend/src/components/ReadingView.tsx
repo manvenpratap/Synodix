@@ -22,6 +22,7 @@ import {
   Heart,
   ArrowLeft,
   ArrowRight,
+  RotateCcw,
   ChevronDown
 } from 'lucide-react';
 
@@ -1002,11 +1003,11 @@ export const ReadingView: React.FC<Props> = ({ data, subjectName, onNavigate }) 
           </button>
           <button
             type="button"
-            onClick={() => onNavigate('evidence')}
-            className="inline-flex items-center justify-center gap-2 px-4 py-2.5 min-h-[44px] text-xs font-sans font-medium rounded-lg bg-cyan-700 hover:bg-cyan-600 text-white cursor-pointer transition-colors duration-150 border border-cyan-500/80 shadow-xs motion-safe:active:scale-[0.98] motion-reduce:active:scale-100 whitespace-nowrap"
+            onClick={() => onNavigate('workbench')}
+            className="inline-flex items-center justify-center gap-2 px-4 py-2.5 min-h-[44px] text-xs font-serif font-semibold rounded-lg bg-amber-600 hover:bg-amber-500 text-stone-950 cursor-pointer transition-colors duration-150 border border-amber-300 shadow-xs motion-safe:active:scale-[0.98] motion-reduce:active:scale-100 whitespace-nowrap"
           >
-            <span className="whitespace-nowrap">Mathematical Evidence</span>
-            <ArrowRight className="w-3.5 h-3.5 text-cyan-100" />
+            <span className="whitespace-nowrap">Complete · Return to Workbench</span>
+            <RotateCcw className="w-3.5 h-3.5 text-stone-950" />
           </button>
         </div>
       )}

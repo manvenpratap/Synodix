@@ -122,7 +122,6 @@ const JOURNEY_STEPS: { id: AppScreen; step: number; label: string }[] = [
   { id: 'traditions', step: 2, label: 'Traditions' },
   { id: 'synthesis', step: 3, label: 'Synthesis' },
   { id: 'dossier', step: 4, label: 'Dossier' },
-  { id: 'evidence', step: 5, label: 'Evidence' },
 ];
 
 function AppContent() {
@@ -329,7 +328,7 @@ function AppContent() {
         navigateTo('synthesis');
       } else if (e.key === '4') {
         navigateTo('dossier');
-      } else if (e.key === '5') {
+      } else if (e.key === '5' || e.key === 'e' || e.key === 'E') {
         navigateTo('evidence');
       } else if (e.key === 's' || e.key === 'S') {
         navigateTo('synastry');
@@ -832,11 +831,11 @@ function AppContent() {
             </span>
             <span className="text-[11px] text-stone-300 font-serif">
               {JOURNEY_STEPS.findIndex((s) => s.id === currentScreen) >= 0
-                ? `Tractate ${['I', 'II', 'III', 'IV', 'V'][JOURNEY_STEPS.findIndex((s) => s.id === currentScreen)]} of V`
+                ? `Tractate ${['I', 'II', 'III', 'IV'][JOURNEY_STEPS.findIndex((s) => s.id === currentScreen)]} of IV`
                 : 'Reference'}
             </span>
           </div>
-          <div className="grid grid-cols-5 gap-1.5 py-0.5 w-full">
+          <div className="grid grid-cols-4 gap-1.5 py-0.5 w-full">
             {JOURNEY_STEPS.map((s, idx) => {
               const isActive = currentScreen === s.id;
               const isPassed = JOURNEY_STEPS.findIndex((st) => st.id === currentScreen) > idx;
@@ -868,7 +867,7 @@ function AppContent() {
                   </span>
                   <div className="text-left min-w-0">
                     <span className="hidden sm:block text-[9px] text-amber-500/80 font-mono leading-none">
-                      {['Tr. I', 'Tr. II', 'Tr. III', 'Tr. IV', 'Tr. V'][idx]}
+                      {['Tr. I', 'Tr. II', 'Tr. III', 'Tr. IV'][idx]}
                     </span>
                     <span className="truncate text-[11px] font-serif font-medium">{s.label}</span>
                   </div>
@@ -883,7 +882,7 @@ function AppContent() {
               style={{
                 width: `${
                   JOURNEY_STEPS.findIndex((s) => s.id === currentScreen) >= 0
-                    ? ((JOURNEY_STEPS.findIndex((s) => s.id === currentScreen) + 1) / 5) * 100
+                    ? ((JOURNEY_STEPS.findIndex((s) => s.id === currentScreen) + 1) / 4) * 100
                     : 100
                 }%`
               }}
@@ -1197,8 +1196,8 @@ function AppContent() {
                 <kbd className="px-1.5 py-0.5 rounded bg-stone-900 border border-stone-800 text-amber-300 font-bold">4</kbd>
               </div>
               <div className="flex items-center justify-between py-1 border-b border-stone-900">
-                <span className="font-sans">Tractate V · Mathematical Evidence</span>
-                <kbd className="px-1.5 py-0.5 rounded bg-stone-900 border border-stone-800 text-amber-300 font-bold">5</kbd>
+                <span className="font-sans">Mathematical Evidence & Benchmark</span>
+                <kbd className="px-1.5 py-0.5 rounded bg-stone-900 border border-stone-800 text-amber-300 font-bold">e</kbd>
               </div>
               <div className="flex items-center justify-between py-1 border-b border-stone-900">
                 <span className="font-sans">Relational Synastry & Composite</span>
