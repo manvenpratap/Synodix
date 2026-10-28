@@ -1018,17 +1018,16 @@ function AppContent() {
         className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-stone-950/95 backdrop-blur-md border-t border-stone-800 px-1 py-1 pb-[max(0.75rem,env(safe-area-inset-bottom,0px))] flex items-center justify-around text-[11px] font-mono font-medium tracking-tight shadow-2xl"
       >
         {[
-          { id: 'workbench', label: 'Input', step: '1', icon: Sliders },
-          { id: 'traditions', label: 'Traditions', step: '2', icon: Compass },
-          { id: 'synthesis', label: 'Synthesis', step: '3', icon: Layers },
-          { id: 'dossier', label: 'Dossier', step: '4', icon: FileText },
-          { id: 'synastry', label: 'Synastry', step: 'Dual', icon: HeartHandshake },
+          { id: 'workbench', label: 'Input', icon: Sliders },
+          { id: 'traditions', label: 'Traditions', icon: Compass },
+          { id: 'synthesis', label: 'Synthesis', icon: Layers },
+          { id: 'dossier', label: 'Dossier', icon: FileText },
+          { id: 'synastry', label: 'Synastry', icon: HeartHandshake },
           {
             id: 'more',
             label: ['verification', 'evidence', 'guide'].includes(currentScreen)
               ? (currentScreen === 'verification' ? 'Audit' : currentScreen === 'evidence' ? 'Evidence' : 'Guide')
               : 'More',
-            step: '8',
             icon: Menu
           },
         ].map((item) => {
@@ -1048,7 +1047,7 @@ function AppContent() {
                   navigateTo(item.id as AppScreen);
                 }
               }}
-              data-tooltip={isMore ? 'Open full observatory menu & settings' : `Navigate to ${item.label} (Step ${item.step})`}
+              data-tooltip={isMore ? 'Open full observatory menu & settings' : `Navigate to ${item.label}`}
               aria-label={item.label}
               aria-current={isActive ? 'page' : undefined}
               className={`relative flex flex-col items-center justify-center p-1 min-w-[48px] sm:min-w-[56px] min-h-[44px] rounded-lg transition-colors active:scale-[0.94] duration-150 cursor-pointer touch-manipulation focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 ${
@@ -1060,19 +1059,8 @@ function AppContent() {
               {isActive && (
                 <div className="absolute top-0 left-1/2 -translate-x-1/2 w-6 h-0.5 bg-amber-400 rounded-full" />
               )}
-              <div className="relative">
-                <Icon className={`w-4 h-4 mb-0.5 ${isActive ? 'text-amber-400' : 'text-stone-400'}`} />
-                <span
-                  className={`absolute -top-1 -right-2 text-[10px] font-mono px-1 h-3.5 rounded-full flex items-center justify-center select-none leading-none ${
-                    isActive
-                      ? 'bg-amber-400 text-stone-950 font-bold'
-                      : 'bg-stone-850 text-stone-400 border border-stone-800'
-                  }`}
-                >
-                  {item.step}
-                </span>
-              </div>
-              <span className="mt-0.5 text-[10px] leading-tight font-medium tracking-tight truncate max-w-[52px]">{item.label}</span>
+              <Icon className={`w-4.5 h-4.5 mb-0.5 ${isActive ? 'text-amber-400' : 'text-stone-400'}`} />
+              <span className="mt-0.5 text-[10px] leading-tight font-medium tracking-tight truncate max-w-[54px]">{item.label}</span>
             </button>
           );
         })}

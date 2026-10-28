@@ -366,9 +366,8 @@ def test_ui_city_selector_finds_jamshedpur_and_gurugram():
         lon_input.fill("0")
         city_input.press_sequentially("Jamshedpur", delay=40)
         page.wait_for_timeout(400)
-        # Blur the input by blurring city_input directly and focusing birth_date
-        city_input.blur()
-        page.locator("input#birth_date").focus()
+        # Blur the input by clicking birth_date input to dispatch pointer and focusout events
+        page.locator("input#birth_date").click()
         page.wait_for_function("() => document.querySelector('input#country_name')?.value === 'India'", timeout=15000)
 
         # Country should automatically resolve to India and lat/lon updated

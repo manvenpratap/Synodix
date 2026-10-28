@@ -1,7 +1,7 @@
 # Synodix: Project Context & Working Memory
 
-**Last Updated:** 2026-10-28 09:27:16
-**Version:** 2.33.4  
+**Last Updated:** 2026-10-28 09:53:15
+**Version:** 2.33.5  
 **Stack:** Python 3.12 (FastAPI, Swiss Ephemeris 2.10, Skyfield DE421) + TypeScript / React 19 / Vite / Tailwind CSS v4 / Framer Motion / Capacitor 8 (iOS & Android)  
 **Workspace:** `/Volumes/Study/Projects/Astrology` (symlinked as `/Volumes/Study/Astrology`)  
 **Git Remote:** `https://github.com/manvenpratap/Synodix.git`  
@@ -10,7 +10,14 @@
 
 ## 1. Current Status & Milestone
 
-- **Active Phase**: Imperial Amber Harmonization & Residual Purple Purge (Completed)
+- **Active Phase**: Mobile Bottom Navigation Numbering Removal (Completed)
+- **Mobile Bottom Navigation Numbering Removal (v2.33.5)**:
+  - **Uncluttered Native Mobile Navigation (`App.tsx`)**:
+    - Removed numbering step badges (`1`, `2`, `3`, `4`, `Dual`, `8`) from the mobile bottom navigation bar buttons.
+    - Centered icons above clean typographic labels with minimum 44x44pt touch targets adhering strictly to Apple Human Interface Guidelines and Material 3 mobile navigation standards.
+    - Streamlined `data-tooltip` text and maintained active amber top bar indicators and accessible semantic attributes (`aria-label`, `aria-current="page"`).
+  - **Regression Verification**:
+    - Verified all 26 test suites and mobile viewport tests (`test_04_mobile_viewport.py`, `test_09_dossier_inferences.py`) pass 100% cleanly.
 - **Imperial Amber Harmonization & Residual Purple Purge (v2.33.4)**:
   - **Exhaustive Zero-Purple Codebase Audit**:
     - Conducted an exhaustive astrometric monograph audit across all screens and components in `frontend/src`.
