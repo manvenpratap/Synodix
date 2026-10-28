@@ -19,7 +19,8 @@ import {
   CheckCircle2,
   AlertCircle,
   BookOpen,
-  HeartHandshake
+  HeartHandshake,
+  Cpu
 } from 'lucide-react';
 import { apiUrl, getApiBaseUrl, setApiBaseUrl, DEFAULT_DEV_API_URL } from './utils/api';
 import { getBundledTitanChart } from './data/bundledTitans';
@@ -158,6 +159,8 @@ function AppContent() {
 
   // Mobile / Native Server Connection State
   const [isServerModalOpen, setIsServerModalOpen] = useState(false);
+  const [isShortcutsModalOpen, setIsShortcutsModalOpen] = useState(false);
+  const [engineSource, setEngineSource] = useState<'swisseph' | 'bundled_titan' | 'local_ts'>('swisseph');
   const [serverUrlInput, setServerUrlInput] = useState<string>(() => getApiBaseUrl() || DEFAULT_DEV_API_URL);
   const [testStatus, setTestStatus] = useState<'idle' | 'testing' | 'success' | 'error'>('idle');
   const [testMessage, setTestMessage] = useState('');
@@ -225,6 +228,7 @@ function AppContent() {
     if (matchingTitan) {
       const bundledChart = await getBundledTitanChart(matchingTitan.id);
       if (bundledChart) {
+        setEngineSource('bundled_titan');
         setChartData(bundledChart);
         setIsLoading(false);
         return;
@@ -245,6 +249,7 @@ function AppContent() {
 
       if (res.ok) {
         const data: ChartResponse = await res.json();
+        setEngineSource('swisseph');
         setChartData(data);
         setIsLoading(false);
         return;
@@ -256,6 +261,7 @@ function AppContent() {
     // 3. Fallback: Compute in-app via local TypeScript engine
     try {
       const localData = await calculateChartLocally(input);
+      setEngineSource('local_ts');
       setChartData(localData);
     } catch (err: any) {
       setError(err.message || 'An unexpected error occurred during local calculation');
@@ -295,13 +301,51 @@ function AppContent() {
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
+        if (isShortcutsModalOpen) setIsShortcutsModalOpen(false);
         if (isServerModalOpen) setIsServerModalOpen(false);
         if (isMobileSidebarOpen) setIsMobileSidebarOpen(false);
+        return;
+      }
+
+      // Ignore accelerators if typing inside an editable field
+      const target = e.target as HTMLElement | null;
+      if (
+        target &&
+        (target.tagName === 'INPUT' ||
+          target.tagName === 'TEXTAREA' ||
+          target.tagName === 'SELECT' ||
+          target.isContentEditable)
+      ) {
+        return;
+      }
+
+      if (e.metaKey || e.ctrlKey || e.altKey) return;
+
+      if (e.key === '1') {
+        navigateTo('workbench');
+      } else if (e.key === '2') {
+        navigateTo('traditions');
+      } else if (e.key === '3') {
+        navigateTo('synthesis');
+      } else if (e.key === '4') {
+        navigateTo('dossier');
+      } else if (e.key === '5') {
+        navigateTo('evidence');
+      } else if (e.key === 's' || e.key === 'S') {
+        navigateTo('synastry');
+      } else if (e.key === 'a' || e.key === 'A') {
+        navigateTo('verification');
+      } else if (e.key === 'g' || e.key === 'G') {
+        navigateTo('guide');
+      } else if (e.key === 't' || e.key === 'T') {
+        toggleTheme();
+      } else if (e.key === '?') {
+        setIsShortcutsModalOpen((prev) => !prev);
       }
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [isServerModalOpen, isMobileSidebarOpen]);
+  }, [isServerModalOpen, isMobileSidebarOpen, isShortcutsModalOpen]);
 
   return (
     <div className="min-h-[100dvh] w-full max-w-full celestial-observatory-canvas text-stone-200 flex flex-col md:flex-row antialiased">
@@ -684,21 +728,36 @@ function AppContent() {
               )}
             </div>
 
-            {/* Live Astrometric Telemetry Badges (Desktop >= 2xl) */}
-            <div className="hidden 2xl:flex items-center gap-2 font-mono text-[11px] ml-4">
+            {/* Live Astrometric Telemetry Badges (Desktop >= xl) */}
+            <div className="hidden xl:flex items-center gap-2 font-mono text-[11px] ml-4">
+              <div
+                className="flex items-center gap-1.5 px-2.5 py-1 rounded bg-stone-900 border border-stone-800"
+                data-tooltip="Active astronomical calculation core"
+              >
+                <Cpu className="w-3 h-3 text-amber-400 shrink-0" />
+                <span className="text-stone-400">Core:</span>
+                <span className="text-amber-300 font-semibold">
+                  {engineSource === 'swisseph'
+                    ? 'SwissEph 2.10 (C)'
+                    : engineSource === 'bundled_titan'
+                    ? 'Rodden AA Titan'
+                    : 'Client TS Engine'}
+                </span>
+                <ExplainerTrigger id="dual_engine_validation" variant="icon" size="xs" />
+              </div>
               <div className="flex items-center gap-1.5 px-2.5 py-1 rounded bg-stone-900 border border-stone-800">
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 inline-block"></span>
                 <span className="text-stone-400">JPL DE421:</span>
                 <span className="text-emerald-300 font-semibold">PASS</span>
                 <ExplainerTrigger id="dual_engine_validation" variant="icon" size="xs" />
               </div>
-              <div className="flex items-center gap-1.5 px-2.5 py-1 rounded bg-stone-900 border border-stone-800">
+              <div className="hidden 2xl:flex items-center gap-1.5 px-2.5 py-1 rounded bg-stone-900 border border-stone-800">
                 <span className="text-stone-400">Epistemic Rigor:</span>
                 <span className="text-amber-300 font-semibold">94.2%</span>
                 <ExplainerTrigger id="epistemic_humility_framework" variant="icon" size="xs" />
               </div>
               {chartData && (
-                <div className="flex items-center gap-1.5 px-2.5 py-1 rounded bg-stone-900 border border-stone-800">
+                <div className="hidden 2xl:flex items-center gap-1.5 px-2.5 py-1 rounded bg-stone-900 border border-stone-800">
                   <span className="text-stone-400">Consensus:</span>
                   <span className="text-amber-300 font-semibold">
                     {(100 - chartData.synthesis.divergence_metrics.divergence_rate_percent).toFixed(1)}%
@@ -711,6 +770,16 @@ function AppContent() {
 
           {/* Quick Header Actions */}
           <div className="flex items-center gap-1.5 sm:gap-2.5 font-mono text-xs shrink-0">
+            {/* Keyboard Shortcuts Trigger (?) */}
+            <button
+              type="button"
+              onClick={() => setIsShortcutsModalOpen(true)}
+              className="hidden lg:inline-flex items-center justify-center gap-1 p-2 sm:px-2.5 sm:py-1.5 min-w-[34px] min-h-[34px] text-xs rounded border border-stone-800 bg-stone-900 hover:bg-stone-850 text-stone-300 hover:text-amber-300 transition-colors cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 font-mono"
+              data-tooltip="View global keyboard accelerators (?)"
+              aria-label="Keyboard Shortcuts"
+            >
+              <kbd className="px-1.5 py-0.5 rounded bg-stone-800 border border-stone-700 text-[10px] text-amber-300 font-bold font-mono">?</kbd>
+            </button>
             {/* Feature Guide Trigger */}
             <button
               type="button"
@@ -949,35 +1018,52 @@ function AppContent() {
         className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-stone-950/95 backdrop-blur-md border-t border-stone-800 px-1 py-1 pb-[max(0.75rem,env(safe-area-inset-bottom,0px))] flex items-center justify-around text-[11px] font-mono font-medium tracking-tight shadow-2xl"
       >
         {[
-          { id: 'workbench', label: 'Workbench', step: '1', icon: Sliders },
+          { id: 'workbench', label: 'Input', step: '1', icon: Sliders },
           { id: 'traditions', label: 'Traditions', step: '2', icon: Compass },
           { id: 'synthesis', label: 'Synthesis', step: '3', icon: Layers },
           { id: 'dossier', label: 'Dossier', step: '4', icon: FileText },
-          { id: 'evidence', label: 'Evidence', step: '5', icon: FlaskConical },
+          { id: 'synastry', label: 'Synastry', step: 'Dual', icon: HeartHandshake },
+          {
+            id: 'more',
+            label: ['verification', 'evidence', 'guide'].includes(currentScreen)
+              ? (currentScreen === 'verification' ? 'Audit' : currentScreen === 'evidence' ? 'Evidence' : 'Guide')
+              : 'More',
+            step: '8',
+            icon: Menu
+          },
         ].map((item) => {
-          const isActive = currentScreen === item.id;
+          const isMore = item.id === 'more';
+          const isActive = isMore
+            ? ['verification', 'evidence', 'guide'].includes(currentScreen)
+            : currentScreen === item.id;
           const Icon = item.icon;
           return (
             <button
               key={item.id}
               type="button"
-              onClick={() => navigateTo(item.id as AppScreen)}
-              data-tooltip={`Navigate to ${item.label} (Step ${item.step})`}
+              onClick={() => {
+                if (isMore) {
+                  setIsMobileSidebarOpen(true);
+                } else {
+                  navigateTo(item.id as AppScreen);
+                }
+              }}
+              data-tooltip={isMore ? 'Open full observatory menu & settings' : `Navigate to ${item.label} (Step ${item.step})`}
               aria-label={item.label}
               aria-current={isActive ? 'page' : undefined}
-              className={`relative flex flex-col items-center justify-center p-1 min-w-[56px] min-h-[44px] rounded-lg transition-colors active:scale-[0.94] duration-150 cursor-pointer touch-manipulation focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 ${
+              className={`relative flex flex-col items-center justify-center p-1 min-w-[48px] sm:min-w-[56px] min-h-[44px] rounded-lg transition-colors active:scale-[0.94] duration-150 cursor-pointer touch-manipulation focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 ${
                 isActive
                   ? 'text-amber-400 font-bold bg-stone-900 border border-amber-700/60 shadow-xs'
                   : 'text-stone-400 hover:text-stone-200 hover:bg-stone-900'
               }`}
             >
               {isActive && (
-                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-7 h-0.5 bg-amber-400 rounded-full" />
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-6 h-0.5 bg-amber-400 rounded-full" />
               )}
               <div className="relative">
                 <Icon className={`w-4 h-4 mb-0.5 ${isActive ? 'text-amber-400' : 'text-stone-400'}`} />
                 <span
-                  className={`absolute -top-1 -right-2 text-[11px] font-mono w-3.5 h-3.5 rounded-full flex items-center justify-center select-none leading-none ${
+                  className={`absolute -top-1 -right-2 text-[10px] font-mono px-1 h-3.5 rounded-full flex items-center justify-center select-none leading-none ${
                     isActive
                       ? 'bg-amber-400 text-stone-950 font-bold'
                       : 'bg-stone-850 text-stone-400 border border-stone-800'
@@ -986,7 +1072,7 @@ function AppContent() {
                   {item.step}
                 </span>
               </div>
-              <span className="mt-0.5 text-[11px] leading-tight font-medium tracking-tight">{item.label}</span>
+              <span className="mt-0.5 text-[10px] leading-tight font-medium tracking-tight truncate max-w-[52px]">{item.label}</span>
             </button>
           );
         })}
@@ -1081,6 +1167,74 @@ function AppContent() {
                   Save & Apply
                 </button>
               </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* 6. Keyboard Shortcuts Modal */}
+      {isShortcutsModalOpen && (
+        <div className="fixed inset-0 z-50 bg-black/80 flex items-center justify-center p-4 overscroll-contain">
+          <div className="w-full max-w-md bg-stone-950 border border-stone-800 rounded-xl p-5 shadow-2xl animate-screen-enter">
+            <div className="flex items-center justify-between pb-3 border-b border-stone-800">
+              <div className="flex items-center gap-2">
+                <span className="font-mono text-xs px-1.5 py-0.5 rounded bg-amber-950 text-amber-300 border border-amber-800 font-bold">⌘</span>
+                <h3 className="text-sm font-serif font-semibold text-stone-100">Observatory Keyboard Accelerators</h3>
+              </div>
+              <button
+                type="button"
+                onClick={() => setIsShortcutsModalOpen(false)}
+                className="min-w-[44px] min-h-[44px] flex items-center justify-center -mr-2 text-stone-400 hover:text-stone-100 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 rounded"
+                aria-label="Close shortcuts dialog"
+                data-tooltip="Close shortcuts dialog (Escape)"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+            <div className="py-4 space-y-2.5 text-xs font-mono text-stone-300">
+              <div className="flex items-center justify-between py-1 border-b border-stone-900">
+                <span className="font-sans">Tractate I · Input & Vault</span>
+                <kbd className="px-1.5 py-0.5 rounded bg-stone-900 border border-stone-800 text-amber-300 font-bold">1</kbd>
+              </div>
+              <div className="flex items-center justify-between py-1 border-b border-stone-900">
+                <span className="font-sans">Tractate II · Cultural Traditions</span>
+                <kbd className="px-1.5 py-0.5 rounded bg-stone-900 border border-stone-800 text-amber-300 font-bold">2</kbd>
+              </div>
+              <div className="flex items-center justify-between py-1 border-b border-stone-900">
+                <span className="font-sans">Tractate III · Synthesis Matrix</span>
+                <kbd className="px-1.5 py-0.5 rounded bg-stone-900 border border-stone-800 text-amber-300 font-bold">3</kbd>
+              </div>
+              <div className="flex items-center justify-between py-1 border-b border-stone-900">
+                <span className="font-sans">Tractate IV · Corroboration Dossier</span>
+                <kbd className="px-1.5 py-0.5 rounded bg-stone-900 border border-stone-800 text-amber-300 font-bold">4</kbd>
+              </div>
+              <div className="flex items-center justify-between py-1 border-b border-stone-900">
+                <span className="font-sans">Tractate V · Mathematical Evidence</span>
+                <kbd className="px-1.5 py-0.5 rounded bg-stone-900 border border-stone-800 text-amber-300 font-bold">5</kbd>
+              </div>
+              <div className="flex items-center justify-between py-1 border-b border-stone-900">
+                <span className="font-sans">Relational Synastry & Composite</span>
+                <kbd className="px-1.5 py-0.5 rounded bg-stone-900 border border-stone-800 text-amber-300 font-bold">s</kbd>
+              </div>
+              <div className="flex items-center justify-between py-1 border-b border-stone-900">
+                <span className="font-sans">Astronomical Audit (JPL DE421)</span>
+                <kbd className="px-1.5 py-0.5 rounded bg-stone-900 border border-stone-800 text-amber-300 font-bold">a</kbd>
+              </div>
+              <div className="flex items-center justify-between py-1 border-b border-stone-900">
+                <span className="font-sans">Feature Guide Encyclopedia</span>
+                <kbd className="px-1.5 py-0.5 rounded bg-stone-900 border border-stone-800 text-amber-300 font-bold">g</kbd>
+              </div>
+              <div className="flex items-center justify-between py-1 border-b border-stone-900">
+                <span className="font-sans">Toggle Solar / Deep Space Theme</span>
+                <kbd className="px-1.5 py-0.5 rounded bg-stone-900 border border-stone-800 text-amber-300 font-bold">t</kbd>
+              </div>
+              <div className="flex items-center justify-between py-1">
+                <span className="font-sans">Dismiss Active Dialog / Drawer</span>
+                <kbd className="px-1.5 py-0.5 rounded bg-stone-900 border border-stone-800 text-stone-400">Esc</kbd>
+              </div>
+            </div>
+            <div className="pt-2 border-t border-stone-800 text-[11px] text-stone-400 font-sans">
+              Accelerators are globally active when focus is not inside input fields.
             </div>
           </div>
         </div>

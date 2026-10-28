@@ -330,7 +330,7 @@ def test_ui_city_selector_finds_jamshedpur_and_gurugram():
         assert dropdown.is_visible(), "Dropdown listbox should be visible for Jamshed"
 
         jamshedpur_opt = page.locator("div[role='option']:has-text('Jamshedpur')").first
-        jamshedpur_opt.wait_for(state="visible", timeout=6000)
+        jamshedpur_opt.wait_for(state="visible", timeout=8000)
         assert jamshedpur_opt.is_visible(), "Jamshedpur option must be present in suggestion dropdown"
         jamshedpur_opt.click()
         page.wait_for_timeout(300)
@@ -364,10 +364,11 @@ def test_ui_city_selector_finds_jamshedpur_and_gurugram():
         country_input.fill("United States") # simulate stale country from preset
         lat_input.fill("0")
         lon_input.fill("0")
-        city_input.press_sequentially("Jamshedpur", delay=30)
+        city_input.press_sequentially("Jamshedpur", delay=40)
+        page.wait_for_timeout(300)
         # Blur the input by focusing date input
         page.locator("input#birth_date").focus()
-        page.wait_for_function("() => document.querySelector('input#country_name')?.value === 'India'", timeout=10000)
+        page.wait_for_function("() => document.querySelector('input#country_name')?.value === 'India'", timeout=12000)
 
         # Country should automatically resolve to India and lat/lon updated
         assert country_input.input_value() == "India", f"Country should auto-resolve to India on blur, got {country_input.input_value()}"

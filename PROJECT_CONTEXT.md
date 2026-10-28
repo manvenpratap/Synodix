@@ -1,7 +1,7 @@
 # Synodix: Project Context & Working Memory
 
-**Last Updated:** 2026-10-27 10:24:45
-**Version:** 2.33.2  
+**Last Updated:** 2026-10-28 08:30:45
+**Version:** 2.33.3  
 **Stack:** Python 3.12 (FastAPI, Swiss Ephemeris 2.10, Skyfield DE421) + TypeScript / React 19 / Vite / Tailwind CSS v4 / Framer Motion / Capacitor 8 (iOS & Android)  
 **Workspace:** `/Volumes/Study/Projects/Astrology` (symlinked as `/Volumes/Study/Astrology`)  
 **Git Remote:** `https://github.com/manvenpratap/Synodix.git`  
@@ -10,7 +10,20 @@
 
 ## 1. Current Status & Milestone
 
-- **Active Phase**: Anti-AI-Slop Comprehensive Audit & Remediation (Completed)
+- **Active Phase**: Impeccable Critique & Mobile Ergonomics / Accelerator Hardening (Completed)
+- **Impeccable Critique & Mobile Ergonomics / Accelerator Hardening (v2.33.3)**:
+  - **Heuristic Quality Benchmark (40/40, 100%)**:
+    - Conducted full Nielsen Heuristics evaluation (`.impeccable/critique/2026-10-28T02-55-24Z__frontend-src-app-tsx.md`), achieving 40/40 score (trend: `38 → 36 → 40`).
+    - Resolved 100% of prioritized issues with zero deterministic detector warnings across all components.
+  - **Mobile Thumb Ergonomics & Navigation Parity (`App.tsx`)**:
+    - Adapted mobile bottom navigation into a 6-tab layout with direct access to Relational Synastry (`HeartHandshake`) and a dynamic `More` tab opening the full observatory drawer.
+    - Guaranteed minimum 44x44pt touch targets with active indicators across all mobile viewports.
+  - **Epistemic Calculation Engine Transparency (`App.tsx`)**:
+    - Added dedicated Calculation Core Engine telemetry badge (`SwissEph 2.10 (C)`, `Rodden AA Titan`, or `Client TS Engine`) in the desktop and tablet header telemetry array.
+  - **Global Power-User Keyboard Accelerators (`App.tsx`)**:
+    - Implemented global accelerators: `1`–`5` for Tractates I–V, `s` for Synastry, `a` for Astronomical Audit, `g` for Feature Guide, `t` for Theme, `?` for Shortcuts modal, and `Escape` for dismissal (safely ignoring input/textarea editing).
+  - **Renaissance Monograph Palette Purity (`FeatureGuideScreen.tsx`)**:
+    - Replaced residual `purple-300`/`purple-400` in "Historical Lineage & Original Treatises" with authentic burnished brass (`amber-300`/`amber-400`).
 - **Anti-AI-Slop Comprehensive Audit & Remediation (v2.33.2)**:
   - **30-Point Audit Matrix (`ANTI_AI_SLOP_PLAN.md`)**:
     - Conducted comprehensive audit across all 30 AI slop patterns: 28 patterns verified clean/absent, 2 remediated.
