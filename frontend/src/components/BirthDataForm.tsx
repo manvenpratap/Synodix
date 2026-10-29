@@ -153,6 +153,7 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
   }, []);
 
   const latestCityQueryRef = useRef<string>('');
+  const isCityManualEditRef = useRef<boolean>(false);
   const blurTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const formDataRef = useRef(formData);
   formDataRef.current = formData;
@@ -168,6 +169,7 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
   }, []);
 
   const handleCityChange = (val: string) => {
+    isCityManualEditRef.current = true;
     setFormData((prev) => ({ ...prev, city_name: val }));
     setCoordStatus('manual');
     latestCityQueryRef.current = val;
@@ -208,6 +210,7 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
   };
 
   const handleSelectCity = (res: GeocodeResult) => {
+    isCityManualEditRef.current = false;
     if (blurTimeoutRef.current) {
       clearTimeout(blurTimeoutRef.current);
       blurTimeoutRef.current = null;
@@ -252,9 +255,10 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
     if (blurTimeoutRef.current) clearTimeout(blurTimeoutRef.current);
     blurTimeoutRef.current = setTimeout(async () => {
       blurTimeoutRef.current = null;
-      if (formDataRef.current.city_name.trim() && coordStatusRef.current === 'manual') {
+      if (isCityManualEditRef.current && formDataRef.current.city_name.trim()) {
+        isCityManualEditRef.current = false;
         const match = await determineCoordinates(formDataRef.current.city_name, formDataRef.current.country_name);
-        if (match && coordStatusRef.current === 'manual') {
+        if (match) {
           setFormData((prev) => ({
             ...prev,
             latitude: match.latitude,
@@ -265,7 +269,7 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
           setCoordStatus('auto_resolved');
         }
       }
-    }, 150);
+    }, 60);
   };
 
   const handleDetectLocation = async () => {
@@ -638,6 +642,8 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
                   <input
                     id="subject_name"
                     type="text"
+                    autoCapitalize="words"
+                    enterKeyHint="next"
                     value={customSubjectName}
                     onChange={(e) => setCustomSubjectName(e.target.value)}
                     placeholder="e.g. My Personal Chart, Client Natal Audit, Custom Subject..."
@@ -850,6 +856,8 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
                       type="text"
                       required
                       autoComplete="off"
+                      autoCapitalize="words"
+                      enterKeyHint="search"
                       value={formData.city_name}
                       onChange={(e) => handleCityChange(e.target.value)}
                       onFocus={() => {
@@ -956,6 +964,8 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
                     type="text"
                     required
                     autoComplete="country-name"
+                    autoCapitalize="words"
+                    enterKeyHint="done"
                     value={formData.country_name}
                     onChange={(e) => setFormData({ ...formData, country_name: e.target.value })}
                     onBlur={handleCityBlur}
@@ -1022,6 +1032,7 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
                       <input
                         id="latitude"
                         type="number"
+                        inputMode="decimal"
                         step="0.0001"
                         min="-90"
                         max="90"
@@ -1066,6 +1077,7 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
                       <input
                         id="longitude"
                         type="number"
+                        inputMode="decimal"
                         step="0.0001"
                         min="-180"
                         max="180"

@@ -58,6 +58,7 @@ export type AppScreen =
 interface NavItem {
   id: AppScreen;
   label: string;
+  shortLabel?: string;
   badge?: string;
   description: string;
   icon: React.ComponentType<{ className?: string }>;
@@ -67,12 +68,14 @@ const NAV_ITEMS: NavItem[] = [
   {
     id: 'workbench',
     label: 'Workbench & Vault',
+    shortLabel: 'Workbench',
     description: 'Profiles, Birth Input & Boundary Audit',
     icon: Sliders
   },
   {
     id: 'traditions',
     label: 'Cultural Traditions',
+    shortLabel: 'Traditions',
     badge: 'Calculators',
     description: 'Visual Kundali, 360° Wheel, Telemetry',
     icon: Compass
@@ -80,18 +83,21 @@ const NAV_ITEMS: NavItem[] = [
   {
     id: 'synthesis',
     label: 'Synthesis Matrix',
+    shortLabel: 'Synthesis',
     description: 'Domain Consensus vs Divergence',
     icon: Layers
   },
   {
     id: 'dossier',
     label: 'Corroboration Dossier',
+    shortLabel: 'Dossier',
     description: 'Synthesized Reading & Narrative',
     icon: FileText
   },
   {
     id: 'synastry',
     label: 'Relational Synastry',
+    shortLabel: 'Synastry',
     badge: 'Dual-Chart',
     description: 'Cross-Chart Aspects, Composite & Kutas',
     icon: HeartHandshake
@@ -99,6 +105,7 @@ const NAV_ITEMS: NavItem[] = [
   {
     id: 'verification',
     label: 'Astronomical Audit',
+    shortLabel: 'Audit',
     badge: 'JPL DE421',
     description: 'SwissEph vs NASA Skyfield Diffs',
     icon: ShieldCheck
@@ -106,6 +113,7 @@ const NAV_ITEMS: NavItem[] = [
   {
     id: 'evidence',
     label: 'Mathematical Evidence',
+    shortLabel: 'Evidence',
     badge: '100 Titans',
     description: 'Double-Blind Monte Carlo Benchmark',
     icon: FlaskConical
@@ -113,6 +121,7 @@ const NAV_ITEMS: NavItem[] = [
   {
     id: 'guide',
     label: 'Feature Guide',
+    shortLabel: 'Guide',
     badge: '50 Topics',
     description: 'Astrometric & Cultural Explainers',
     icon: BookOpen
@@ -153,6 +162,11 @@ function AppContent() {
       document.documentElement.classList.remove('dark');
     }
     localStorage.setItem('synodix_theme', theme);
+
+    // Update theme-color meta tag dynamically for native mobile browser status bar
+    const themeColorHex = theme === 'dark' ? '#0c0a09' : '#faf7f0';
+    const metaThemeColors = document.querySelectorAll('meta[name="theme-color"]');
+    metaThemeColors.forEach((meta) => meta.setAttribute('content', themeColorHex));
   }, [theme]);
 
   const toggleTheme = () => {
@@ -728,9 +742,12 @@ function AppContent() {
 
             {/* Screen Title */}
             <div className="flex items-center gap-1.5 sm:gap-2 min-w-0">
-              <h1 className="text-xl sm:text-2xl font-serif font-bold text-stone-100 flex items-center gap-2 min-w-0">
-                <span className="truncate max-w-[140px] sm:max-w-none">
+              <h1 className="text-lg sm:text-2xl font-serif font-bold tracking-tight text-stone-100 flex items-center gap-2 min-w-0">
+                <span className="hidden sm:inline truncate">
                   {NAV_ITEMS.find((n) => n.id === currentScreen)?.label || (currentScreen === 'guide' ? 'Feature Guide' : '')}
+                </span>
+                <span className="sm:hidden truncate max-w-[170px]">
+                  {NAV_ITEMS.find((n) => n.id === currentScreen)?.shortLabel || NAV_ITEMS.find((n) => n.id === currentScreen)?.label || (currentScreen === 'guide' ? 'Guide' : '')}
                 </span>
               </h1>
               {/* Mobile Active Subject Chip */}
@@ -858,7 +875,7 @@ function AppContent() {
               )}
             </div>
             <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
-              <span className="text-[10px] sm:text-[11px] text-stone-300 font-serif">
+              <span className="hidden md:inline text-[11px] text-stone-300 font-serif">
                 {JOURNEY_STEPS.findIndex((s) => s.id === currentScreen) >= 0
                   ? `Tractate ${['I', 'II', 'III', 'IV'][JOURNEY_STEPS.findIndex((s) => s.id === currentScreen)]} of IV`
                   : 'Reference'}
@@ -866,14 +883,19 @@ function AppContent() {
               <button
                 type="button"
                 onClick={toggleJourneyCollapsed}
-                className="md:hidden inline-flex items-center justify-center w-5 h-5 rounded hover:bg-stone-800 text-stone-400 hover:text-stone-200 transition-colors cursor-pointer"
+                className="md:hidden inline-flex items-center gap-1 px-1.5 py-0.5 rounded bg-stone-850 hover:bg-stone-800 border border-stone-750 text-stone-300 hover:text-white transition-[background-color,transform] motion-safe:active:scale-[0.97] motion-reduce:active:scale-100 cursor-pointer touch-manipulation"
                 data-tooltip={isJourneyCollapsed ? 'Expand journey steps' : 'Collapse journey stepper to save space'}
                 aria-label={isJourneyCollapsed ? 'Expand journey steps' : 'Collapse journey steps'}
               >
+                <span className="text-[10px] text-stone-300 font-serif">
+                  {JOURNEY_STEPS.findIndex((s) => s.id === currentScreen) >= 0
+                    ? `Tractate ${['I', 'II', 'III', 'IV'][JOURNEY_STEPS.findIndex((s) => s.id === currentScreen)]} of IV`
+                    : 'Reference'}
+                </span>
                 {isJourneyCollapsed ? (
-                  <ChevronDown className="w-3.5 h-3.5" />
+                  <ChevronDown className="w-3.5 h-3.5 text-amber-400" />
                 ) : (
-                  <ChevronUp className="w-3.5 h-3.5" />
+                  <ChevronUp className="w-3.5 h-3.5 text-amber-400" />
                 )}
               </button>
             </div>

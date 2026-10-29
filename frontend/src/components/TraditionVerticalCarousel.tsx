@@ -503,7 +503,7 @@ export const TraditionVerticalCarousel: React.FC<Props> = ({
       </div>
 
       {/* Main 3D Stage */}
-      <div className="relative min-h-[460px] sm:min-h-[480px] flex items-start justify-center pt-2 sm:pt-3 pb-3 p-2 sm:p-3 md:pr-16 overflow-hidden [perspective:1400px]">
+      <div className="relative min-h-[460px] sm:min-h-[480px] flex items-start justify-center pt-2 sm:pt-3 pb-3 p-2 sm:p-3 md:pr-16 overflow-hidden [perspective:1400px] touch-pan-y">
         {/* Floating Vertical Navigation Rail (Desktop & Tablet only: hidden on mobile) */}
         <div
           role="tablist"

@@ -1,7 +1,7 @@
 # Synodix: Project Context & Working Memory
 
-**Last Updated:** 2026-10-29 09:30:40
-**Version:** 2.33.15  
+**Last Updated:** 2026-10-29 09:53:37
+**Version:** 2.33.16  
 **Stack:** Python 3.12 (FastAPI, Swiss Ephemeris 2.10, Skyfield DE421) + TypeScript / React 19 / Vite / Tailwind CSS v4 / Framer Motion / Capacitor 8 (iOS & Android)  
 **Workspace:** `/Volumes/Study/Projects/Astrology` (symlinked as `/Volumes/Study/Astrology`)  
 **Git Remote:** `https://github.com/manvenpratap/Synodix.git`  
@@ -10,7 +10,30 @@
 
 ## 1. Current Status & Milestone
 
-- **Active Phase**: Comprehensive Motion Polish, Emil Kowalski Alignment & Missed Opportunities (Completed)
+- **Active Phase**: Native Mobile Ergonomics & Viewport Hardening (Completed)
+- **Native Mobile Platform Ergonomics & Header Layout Hardening (v2.33.16)**:
+  - **Eliminated Mobile Header Truncation (`WORKBENC...`) (`App.tsx`)**:
+    - Identified root cause of truncated header text on mobile: fixed `max-w-[140px]` with oversized `text-xl` font caused Roman serif titles like "WORKBENCH" to clip into `WORKBENC...` on 360px–390px screens.
+    - Introduced semantic `shortLabel` across all `NAV_ITEMS` (e.g. "Workbench", "Traditions", "Synthesis").
+    - Tuned responsive typography to `text-lg sm:text-2xl font-serif font-bold tracking-tight text-stone-100` with `max-w-[170px]` on mobile, guaranteeing titles render in full without truncation.
+  - **Mobile Touch Targets & Epistemic Stepper Consolidation**:
+    - Replaced the tiny 20x20px chevron button on mobile with a unified, thumb-accessible `[ Tractate I of IV ⌵ ]` bordered chip button with active press feedback and accessible state indicators.
+  - **Sticky Tooltip Elimination on Touch (`index.css`)**:
+    - Gated all `[data-tooltip]:hover::after` pseudo-elements behind `@media (hover: hover) and (pointer: fine)`.
+    - Touch devices no longer suffer from sticky floating tooltips that linger after tapping buttons. Full accessibility is preserved via `focus-visible`.
+  - **Viewport Mechanics & Pull-to-Refresh Protection (`index.html`, `index.css`)**:
+    - Injected `interactive-widget=resizes-content` into `meta[name="viewport"]` so Android software keyboards shrink the layout viewport cleanly without squishing UI.
+    - Set `overscroll-behavior: none` and `-webkit-text-size-adjust: 100%` on `html, body`.
+    - Swapped `min-height: 100vh` on `body` and `#root` for dynamic `100dvh` units with `100vh` fallback.
+  - **Control Selection Isolation & Native Keyboards (`index.css`, `BirthDataForm.tsx`)**:
+    - Added `user-select: none`, `-webkit-user-select: none`, and `-webkit-touch-callout: none` to buttons, tabs, and interactive controls to stop long-press text selection and callouts, keeping data copyable.
+    - Added `inputMode="decimal"` on latitude and longitude inputs, invoking native numeric decimal keypads.
+    - Added `autoCapitalize="words"` and contextual `enterKeyHint` (`"search"`, `"next"`, `"done"`).
+  - **Dual-Scheme Status Bar Color (`index.html`, `App.tsx`)**:
+    - Declared dark/light `meta[name="theme-color"]` and dynamically synchronized with theme toggles.
+  - **Automated Verification**:
+    - Full Pytest suite: 26/26 passed cleanly in 84.15s.
+    - Verified live on Android emulator `emulator-5554` (`native_screen3.png`).
 - **Comprehensive Motion Polish & Animation Optimization (v2.33.15)**:
   - **Executed 11 Rigorous Motion Plans (`plans/001-*.md` through `plans/011-*.md`)**:
     - **Plan 001 & 002 (Carousel GPU Performance & Targeted Transitions)**:

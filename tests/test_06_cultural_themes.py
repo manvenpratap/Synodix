@@ -129,6 +129,7 @@ def test_cultural_traditions_theming_and_presentations():
 
         # Switch back to Carousel Deck mode
         deck_btn = page.locator("button:has-text('Carousel Deck')").first
+        deck_btn.wait_for(state="visible", timeout=8000)
         assert deck_btn.is_visible(), "Carousel Deck mode button must be visible"
         deck_btn.click()
         page.wait_for_timeout(250)
