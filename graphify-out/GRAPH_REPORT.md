@@ -1,16 +1,16 @@
-# Graph Report - Astrology  (2026-10-29)
+# Graph Report - Astrology  (2026-10-30)
 
 ## Corpus Check
-- 127 files · ~2,220,278 words
+- 127 files · ~2,215,649 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 14107 nodes · 70652 edges · 282 communities (276 shown, 6 thin omitted)
+- 14768 nodes · 74195 edges · 291 communities (285 shown, 6 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS · INFERRED: 59 edges (avg confidence: 0.8)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `e2989b8a`
+- Built from commit: `fc3e66c0`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -279,6 +279,15 @@
 - [[_COMMUNITY_Community 261|Community 261]]
 - [[_COMMUNITY_Community 262|Community 262]]
 - [[_COMMUNITY_Community 263|Community 263]]
+- [[_COMMUNITY_Community 264|Community 264]]
+- [[_COMMUNITY_Community 265|Community 265]]
+- [[_COMMUNITY_Community 266|Community 266]]
+- [[_COMMUNITY_Community 267|Community 267]]
+- [[_COMMUNITY_Community 268|Community 268]]
+- [[_COMMUNITY_Community 269|Community 269]]
+- [[_COMMUNITY_Community 270|Community 270]]
+- [[_COMMUNITY_Community 271|Community 271]]
+- [[_COMMUNITY_Community 272|Community 272]]
 
 ## God Nodes (most connected - your core abstractions)
 1. `I()` - 77 edges
@@ -304,1037 +313,1073 @@
 - `test_deterministic_chart_computation()` --calls--> `compute_chart_endpoint()`  [INFERRED]
   tests/test_api_integration.py → backend/app/main.py
 
-## Communities (282 total, 6 thin omitted)
+## Communities (291 total, 6 thin omitted)
 
 ### Community 0 - "Community 0"
-Cohesion: 0.03
-Nodes (235): [A,j], [a,o], {activeExplainer:e,isGlossaryOpen:t,closeExplainer:n,openExplainer:r,openGlossary:i}, {activeExplainer:r}, add(), addChild(), AddDays(), addDependent() (+227 more)
+Cohesion: 0.02
+Nodes (230): [A,j], [a,o], {activeExplainer:e,isGlossaryOpen:t,closeExplainer:n,openExplainer:r,openGlossary:i}, {activeExplainer:r}, addListener(), addWindowListener(), Ae(), animation() (+222 more)
 
 ### Community 1 - "Community 1"
 Cohesion: 0.02
-Nodes (225): [a,o], {activeExplainer:e,isGlossaryOpen:t,closeExplainer:n,openExplainer:r,openGlossary:i}, {activeExplainer:r}, addListener(), addWindowListener(), ae, ag(), an() (+217 more)
+Nodes (229): [A,j], [a,o], {activeExplainer:e,isGlossaryOpen:t,closeExplainer:n,openExplainer:r,openGlossary:i}, {activeExplainer:r}, addListener(), addWindowListener(), ae(), animation() (+221 more)
 
 ### Community 2 - "Community 2"
-Cohesion: 0.03
-Nodes (223): _(), [A,j], [a,o], {activeExplainer:e,isGlossaryOpen:t,closeExplainer:n,openExplainer:r,openGlossary:i}, {activeExplainer:r}, addListener(), addWindowListener(), an() (+215 more)
+Cohesion: 0.02
+Nodes (224): [a,o], {activeExplainer:e,isGlossaryOpen:t,closeExplainer:n,openExplainer:r,openGlossary:i}, {activeExplainer:r}, addListener(), addWindowListener(), ae, ag(), an() (+216 more)
 
 ### Community 3 - "Community 3"
 Cohesion: 0.03
-Nodes (223): [a,o], {activeExplainer:e,isGlossaryOpen:t,closeExplainer:n,openExplainer:r,openGlossary:i}, {activeExplainer:r}, addListener(), addWindowListener(), ae, ag(), animation() (+215 more)
+Nodes (222): _(), [A,j], [a,o], {activeExplainer:e,isGlossaryOpen:t,closeExplainer:n,openExplainer:r,openGlossary:i}, {activeExplainer:r}, add(), addChild(), addDependent() (+214 more)
 
 ### Community 4 - "Community 4"
-Cohesion: 0.03
-Nodes (220): [A,j], [a,o], {activeExplainer:e,isGlossaryOpen:t,closeExplainer:n,openExplainer:r,openGlossary:i}, {activeExplainer:r}, add(), addChild(), addDependent(), addListener() (+212 more)
+Cohesion: 0.02
+Nodes (222): [a,o], {activeExplainer:e,isGlossaryOpen:t,closeExplainer:n,openExplainer:r,openGlossary:i}, {activeExplainer:n}, addListener(), addWindowListener(), [ae,M], ag(), ai() (+214 more)
 
 ### Community 5 - "Community 5"
 Cohesion: 0.02
-Nodes (219): [a,o], {activeExplainer:e,isGlossaryOpen:t,closeExplainer:n,openExplainer:r,openGlossary:i}, {activeExplainer:r}, addListener(), addWindowListener(), ae, ag(), Ai() (+211 more)
+Nodes (220): [a,o], {activeExplainer:e,isGlossaryOpen:t,closeExplainer:n,openExplainer:r,openGlossary:i}, {activeExplainer:r}, addListener(), addWindowListener(), ae, ag(), an() (+212 more)
 
 ### Community 6 - "Community 6"
 Cohesion: 0.03
-Nodes (216): [A,j], [a,o], {activeExplainer:e,isGlossaryOpen:t,closeExplainer:n,openExplainer:r,openGlossary:i}, {activeExplainer:r}, ad(), addListener(), addListeners(), addWindowListener() (+208 more)
+Nodes (218): [a,o], {activeExplainer:e,isGlossaryOpen:t,closeExplainer:n,openExplainer:r,openGlossary:i}, {activeExplainer:r}, addListener(), addWindowListener(), [ae,M], ag(), ai() (+210 more)
 
 ### Community 7 - "Community 7"
 Cohesion: 0.03
-Nodes (216): [a,o], {activeExplainer:e,isGlossaryOpen:t,closeExplainer:n,openExplainer:r,openGlossary:i}, {activeExplainer:r}, addListener(), addWindowListener(), [ae,M], ag(), ai() (+208 more)
+Nodes (214): [A,j], [a,o], {activeExplainer:e,isGlossaryOpen:t,closeExplainer:n,openExplainer:r,openGlossary:i}, {activeExplainer:r}, ad(), add(), addChild(), addDependent() (+206 more)
 
 ### Community 8 - "Community 8"
 Cohesion: 0.03
-Nodes (216): [a,o], {activeExplainer:e,isGlossaryOpen:t,closeExplainer:n,openExplainer:r,openGlossary:i}, {activeExplainer:n}, addListener(), addWindowListener(), [ae,M], ag(), ai() (+208 more)
+Nodes (209): [A,j], [a,o], {activeExplainer:e,isGlossaryOpen:t,closeExplainer:n,openExplainer:r,openGlossary:i}, {activeExplainer:r}, addListener(), addWindowListener(), animation(), Ar() (+201 more)
 
 ### Community 9 - "Community 9"
 Cohesion: 0.03
-Nodes (215): [a,o], {activeExplainer:e,isGlossaryOpen:t,closeExplainer:n,openExplainer:r,openGlossary:i}, {activeExplainer:r}, addListener(), addWindowListener(), ae, ag(), an() (+207 more)
+Nodes (207): [a,o], {activeExplainer:e,isGlossaryOpen:t,closeExplainer:n,openExplainer:r,openGlossary:i}, {activeExplainer:r}, add(), addChild(), addDependent(), addListener(), addWindowListener() (+199 more)
 
 ### Community 10 - "Community 10"
 Cohesion: 0.03
-Nodes (213): [a,o], {activeExplainer:e,isGlossaryOpen:t,closeExplainer:n,openExplainer:r,openGlossary:i}, {activeExplainer:n}, addListener(), addWindowListener(), [ae,M], ag(), ai() (+205 more)
+Nodes (203): [A,j], [a,o], {activeExplainer:e,isGlossaryOpen:t,closeExplainer:n,openExplainer:r,openGlossary:i}, {activeExplainer:r}, add(), addChild(), addDependent(), addListener() (+195 more)
 
 ### Community 11 - "Community 11"
 Cohesion: 0.03
-Nodes (209): [a,o], {activeExplainer:e,isGlossaryOpen:t,closeExplainer:n,openExplainer:r,openGlossary:i}, {activeExplainer:r}, addListener(), addWindowListener(), [ae,M], ag(), ai() (+201 more)
+Nodes (202): _(), [a,o], {activeExplainer:e,isGlossaryOpen:t,closeExplainer:n,openExplainer:r,openGlossary:i}, {activeExplainer:r}, addListener(), addWindowListener(), [ae,M], ag() (+194 more)
 
 ### Community 12 - "Community 12"
 Cohesion: 0.03
-Nodes (207): [a,o], {activeExplainer:e,isGlossaryOpen:t,closeExplainer:n,openExplainer:r,openGlossary:i}, {activeExplainer:r}, addListener(), addWindowListener(), ae, animation(), ar() (+199 more)
+Nodes (202): [a,o], {activeExplainer:e,isGlossaryOpen:t,closeExplainer:n,openExplainer:r,openGlossary:i}, {activeExplainer:n}, addListener(), addWindowListener(), [ae,M], ag(), ai() (+194 more)
 
 ### Community 13 - "Community 13"
 Cohesion: 0.03
-Nodes (197): [A,j], [a,o], {activeExplainer:e,isGlossaryOpen:t,closeExplainer:n,openExplainer:r,openGlossary:i}, {activeExplainer:r}, add(), addChild(), addDependent(), addListener() (+189 more)
+Nodes (198): [A,j], [a,o], {activeExplainer:e,isGlossaryOpen:t,closeExplainer:n,openExplainer:r,openGlossary:i}, {activeExplainer:r}, addListener(), addWindowListener(), animation(), Ar() (+190 more)
 
 ### Community 14 - "Community 14"
 Cohesion: 0.03
-Nodes (189): [A,j], [a,o], aa(), {activeExplainer:e,isGlossaryOpen:t,closeExplainer:n,openExplainer:r,openGlossary:i}, {activeExplainer:r}, addListener(), addValue(), addWindowListener() (+181 more)
+Nodes (191): [a,o], {activeExplainer:e,isGlossaryOpen:t,closeExplainer:n,openExplainer:r,openGlossary:i}, {activeExplainer:r}, addListener(), addWindowListener(), ae, animation(), Ap() (+183 more)
 
 ### Community 15 - "Community 15"
-Cohesion: 0.04
-Nodes (137): [a,o], addListener(), addWindowListener(), ae(), ah(), ao(), ap(), as() (+129 more)
+Cohesion: 0.03
+Nodes (187): [a,o], {activeExplainer:e,isGlossaryOpen:t,closeExplainer:n,openExplainer:r,openGlossary:i}, {activeExplainer:r}, addListener(), addWindowListener(), ae, animation(), At() (+179 more)
 
 ### Community 16 - "Community 16"
 Cohesion: 0.05
-Nodes (124): ac(), addValue(), Ai(), ao(), ba(), bc(), build(), ca() (+116 more)
+Nodes (123): _(), [a,o], addListener(), addWindowListener(), ah(), ap(), b(), Bn() (+115 more)
 
 ### Community 17 - "Community 17"
-Cohesion: 0.05
-Nodes (120): [a,o], addListener(), addWindowListener(), ah(), ap(), Ar(), b(), Bn() (+112 more)
+Cohesion: 0.04
+Nodes (113): {activeExplainer:e,isGlossaryOpen:t,closeExplainer:n,openExplainer:r,openGlossary:i}, addListener(), addWindowListener(), ah(), b(), Bd(), bh(), Bp() (+105 more)
 
 ### Community 18 - "Community 18"
-Cohesion: 0.06
-Nodes (120): aa(), Ai(), al(), ao(), Ap(), ba(), bc(), bl() (+112 more)
+Cohesion: 0.05
+Nodes (113): aa(), ac(), Ai(), ao(), ba(), bc(), bo(), ca() (+105 more)
 
 ### Community 19 - "Community 19"
-Cohesion: 0.05
-Nodes (118): ac(), addListeners(), Ai(), ao(), ba(), bc(), bo(), bs() (+110 more)
+Cohesion: 0.06
+Nodes (113): Aa(), ac(), al(), ao(), au(), ba(), bc(), be() (+105 more)
 
 ### Community 20 - "Community 20"
 Cohesion: 0.05
-Nodes (115): [a,o], {activeExplainer:e,isGlossaryOpen:t,closeExplainer:n,openExplainer:r,openGlossary:i}, addListener(), addWindowListener(), ah(), an(), ap(), as() (+107 more)
+Nodes (111): [a,o], aa(), Acceleration(), AddDays(), af(), Ai(), an(), Ar() (+103 more)
 
 ### Community 21 - "Community 21"
-Cohesion: 0.06
-Nodes (112): ac(), Ai(), ao(), ba(), bc(), bo(), ca(), cc() (+104 more)
+Cohesion: 0.05
+Nodes (110): [a,o], addListener(), addWindowListener(), ah(), an(), ap(), Be(), Bp() (+102 more)
 
 ### Community 22 - "Community 22"
 Cohesion: 0.06
-Nodes (99): ac(), Ai(), ao(), ba(), bc(), bo(), ca(), cc() (+91 more)
+Nodes (110): aa(), ac(), addValue(), Ai(), al(), ao(), ba(), bc() (+102 more)
 
 ### Community 23 - "Community 23"
 Cohesion: 0.06
-Nodes (98): _(), A(), an(), as(), attachTimeline(), b(), bn(), bo() (+90 more)
+Nodes (107): _(), A(), ac(), an(), Ap(), Ar(), attachTimeline(), b() (+99 more)
 
 ### Community 24 - "Community 24"
-Cohesion: 0.07
-Nodes (97): A(), ad(), ae(), ah(), am(), Ap(), b(), bindToMotionValue() (+89 more)
+Cohesion: 0.05
+Nodes (103): [a,o], AddDays(), addListener(), addWindowListener(), ah(), ap(), b(), Bp() (+95 more)
 
 ### Community 25 - "Community 25"
-Cohesion: 0.06
-Nodes (95): aa(), Ai(), al(), ao(), ba(), bc(), ca(), cm() (+87 more)
+Cohesion: 0.05
+Nodes (100): [a,o], addListener(), addWindowListener(), ah(), ap(), b(), bh(), Bn() (+92 more)
 
 ### Community 26 - "Community 26"
 Cohesion: 0.06
-Nodes (94): Aa(), add(), addDependent(), Bc(), Bi(), br(), ca(), cc() (+86 more)
+Nodes (97): aa(), ac(), Ai(), al(), ao(), ba(), bc(), bo() (+89 more)
 
 ### Community 27 - "Community 27"
 Cohesion: 0.07
-Nodes (90): Acceleration(), ad(), add(), AddDays(), addDependent(), addValue(), Ah(), am() (+82 more)
+Nodes (96): Aa(), Bc(), Bi(), bo(), ca(), cc(), co(), constructor() (+88 more)
 
 ### Community 28 - "Community 28"
-Cohesion: 0.07
-Nodes (90): _(), A(), attachTimeline(), Bi(), bs(), ca(), cm(), cs() (+82 more)
+Cohesion: 0.06
+Nodes (94): A(), ad(), addValue(), ae(), am(), b(), bindToMotionValue(), Bm() (+86 more)
 
 ### Community 29 - "Community 29"
-Cohesion: 0.07
-Nodes (90): Aa(), Bc(), Bi(), ca(), cc(), co(), dc(), Di() (+82 more)
+Cohesion: 0.06
+Nodes (92): Ai(), ao(), as(), ba(), bc(), be(), bo(), ca() (+84 more)
 
 ### Community 30 - "Community 30"
-Cohesion: 0.07
-Nodes (89): ac(), al(), ao(), as(), bc(), bi(), bo(), Ca() (+81 more)
+Cohesion: 0.06
+Nodes (91): Aa(), al(), Ap(), bl(), bu(), cl(), co(), componentDidMount() (+83 more)
 
 ### Community 31 - "Community 31"
-Cohesion: 0.06
-Nodes (88): Aa(), al(), Ap(), au(), bl(), bu(), cl(), co() (+80 more)
+Cohesion: 0.07
+Nodes (91): Aa(), Bc(), Bi(), bo(), br(), ca(), cc(), co() (+83 more)
 
 ### Community 32 - "Community 32"
 Cohesion: 0.07
-Nodes (88): Aa(), Bc(), Bi(), bo(), ca(), cc(), co(), Cu() (+80 more)
+Nodes (90): ac(), Ai(), ao(), ba(), bc(), bo(), ca(), cc() (+82 more)
 
 ### Community 33 - "Community 33"
-Cohesion: 0.04
-Nodes (85): _(), [a,o], add(), addListener(), addWindowListener(), ap(), b(), Bp() (+77 more)
+Cohesion: 0.07
+Nodes (90): A(), ao(), as(), attachTimeline(), b(), ba(), bs(), cs() (+82 more)
 
 ### Community 34 - "Community 34"
-Cohesion: 0.07
-Nodes (85): A(), an(), as(), attachTimeline(), b(), bo(), bs(), c() (+77 more)
+Cohesion: 0.06
+Nodes (90): A(), an(), as(), attachTimeline(), b(), boundaries(), bs(), bt() (+82 more)
 
 ### Community 35 - "Community 35"
 Cohesion: 0.07
-Nodes (85): A(), am(), Au(), b(), Bm(), Bp(), c(), Cr() (+77 more)
+Nodes (88): _(), A(), an(), Ap(), attachTimeline(), b(), bf(), bn() (+80 more)
 
 ### Community 36 - "Community 36"
 Cohesion: 0.07
-Nodes (85): Aa(), al(), Bc(), bo(), Bu(), cc(), cl(), co() (+77 more)
+Nodes (88): A(), am(), b(), Bm(), bt(), D(), dn(), E() (+80 more)
 
 ### Community 37 - "Community 37"
 Cohesion: 0.07
-Nodes (85): Ae(), al(), Ao(), Ap(), Au(), bl(), bo(), boundaries() (+77 more)
+Nodes (87): Aa(), Bc(), Bi(), bo(), cc(), cl(), co(), dc() (+79 more)
 
 ### Community 38 - "Community 38"
-Cohesion: 0.07
-Nodes (84): aa(), al(), Ap(), Au(), bl(), Bu(), cm(), componentDidMount() (+76 more)
+Cohesion: 0.08
+Nodes (87): Aa(), Bc(), Bi(), ca(), cc(), co(), da(), dc() (+79 more)
 
 ### Community 39 - "Community 39"
-Cohesion: 0.08
-Nodes (82): A(), Aa(), ao(), ba(), bc(), be(), Bi(), bo() (+74 more)
+Cohesion: 0.07
+Nodes (86): aa(), al(), Ap(), Au(), bl(), Bu(), componentDidMount(), componentDidUpdate() (+78 more)
 
 ### Community 40 - "Community 40"
 Cohesion: 0.07
-Nodes (82): _(), A(), attachTimeline(), b(), c(), cm(), cs(), D() (+74 more)
+Nodes (86): _(), A(), ac(), addListeners(), an(), attachTimeline(), b(), c() (+78 more)
 
 ### Community 41 - "Community 41"
-Cohesion: 0.09
-Nodes (81): A(), ac(), ao(), as(), ba(), bc(), be(), bo() (+73 more)
+Cohesion: 0.06
+Nodes (84): ac(), Ai(), ao(), bc(), build(), ca(), cc(), constructor() (+76 more)
 
 ### Community 42 - "Community 42"
-Cohesion: 0.07
-Nodes (78): _(), A(), attachTimeline(), b(), br(), c(), cm(), cs() (+70 more)
+Cohesion: 0.06
+Nodes (84): A(), ae(), an(), Ap(), as(), attachTimeline(), b(), bs() (+76 more)
 
 ### Community 43 - "Community 43"
-Cohesion: 0.08
-Nodes (78): ac(), al(), as(), bi(), bo(), Ca(), cc(), cl() (+70 more)
+Cohesion: 0.09
+Nodes (83): A(), am(), an(), Ap(), attachTimeline(), b(), Bm(), Bp() (+75 more)
 
 ### Community 44 - "Community 44"
-Cohesion: 0.06
-Nodes (76): a(), ao(), bc(), bs(), C(), cs(), D(), ds() (+68 more)
+Cohesion: 0.07
+Nodes (83): aa(), ac(), al(), ao(), ba(), bc(), bl(), ca() (+75 more)
 
 ### Community 45 - "Community 45"
-Cohesion: 0.08
-Nodes (75): Ai(), bc(), be(), bo(), ca(), Ci(), cm(), constructor() (+67 more)
+Cohesion: 0.07
+Nodes (82): [a,o], Acceleration(), add(), AddDays(), Ai(), an(), Ar(), Bn() (+74 more)
 
 ### Community 46 - "Community 46"
 Cohesion: 0.08
-Nodes (74): aa(), al(), Ap(), Au(), bl(), Bu(), componentDidMount(), componentDidUpdate() (+66 more)
+Nodes (82): ac(), al(), ao(), as(), bc(), bi(), bo(), Ca() (+74 more)
 
 ### Community 47 - "Community 47"
-Cohesion: 0.07
-Nodes (74): _(), A(), ao(), b(), bn(), cn(), dn(), E() (+66 more)
+Cohesion: 0.08
+Nodes (79): ad(), am(), Bm(), bo(), Bp(), ca(), D(), dm() (+71 more)
 
 ### Community 48 - "Community 48"
-Cohesion: 0.08
-Nodes (74): ac(), ao(), as(), bc(), Ca(), cc(), co(), dc() (+66 more)
+Cohesion: 0.06
+Nodes (79): _(), a(), ao(), bc(), bs(), C(), cm(), cs() (+71 more)
 
 ### Community 49 - "Community 49"
-Cohesion: 0.06
-Nodes (73): _(), af(), an(), bn(), ci(), cn(), Cp(), Ct() (+65 more)
+Cohesion: 0.08
+Nodes (78): _(), A(), an(), attachTimeline(), b(), c(), Ch(), cm() (+70 more)
 
 ### Community 50 - "Community 50"
-Cohesion: 0.07
-Nodes (73): _(), A(), an(), attachTimeline(), b(), c(), Ch(), cm() (+65 more)
+Cohesion: 0.06
+Nodes (77): aa(), ac(), ba(), Bc(), Bi(), bo(), cm(), co() (+69 more)
 
 ### Community 51 - "Community 51"
 Cohesion: 0.08
-Nodes (73): ac(), add(), ao(), as(), bc(), Ca(), cc(), co() (+65 more)
+Nodes (76): ao(), ba(), bc(), c(), Ci(), cl(), cm(), Co() (+68 more)
 
 ### Community 52 - "Community 52"
-Cohesion: 0.07
-Nodes (71): A(), attachTimeline(), Au(), bs(), cc(), cm(), ct(), de() (+63 more)
+Cohesion: 0.08
+Nodes (76): Acceleration(), add(), AddDays(), addDependent(), Ah(), am(), bh(), Bm() (+68 more)
 
 ### Community 53 - "Community 53"
 Cohesion: 0.09
-Nodes (70): aa(), al(), Au(), bl(), Bu(), componentDidMount(), componentDidUpdate(), Cr() (+62 more)
+Nodes (74): ad(), am(), an(), bindToMotionValue(), Bm(), Bp(), Ce(), D() (+66 more)
 
 ### Community 54 - "Community 54"
-Cohesion: 0.09
-Nodes (69): Acceleration(), AddDays(), Ai(), an(), Ar(), Bn(), br(), ci() (+61 more)
+Cohesion: 0.08
+Nodes (74): ac(), al(), as(), bo(), Ca(), cc(), cl(), co() (+66 more)
 
 ### Community 55 - "Community 55"
-Cohesion: 0.07
-Nodes (69): A(), ae(), af(), Ap(), as(), attachTimeline(), b(), c() (+61 more)
+Cohesion: 0.08
+Nodes (73): Aa(), al(), au(), bl(), bu(), cl(), co(), componentDidMount() (+65 more)
 
 ### Community 56 - "Community 56"
-Cohesion: 0.06
-Nodes (69): _(), af(), Ai(), Ar(), at(), Bd(), bf(), bi() (+61 more)
+Cohesion: 0.05
+Nodes (73): ac(), addChild(), addListeners(), addValue(), bindToMotionValue(), bs(), build(), canReadNow() (+65 more)
 
 ### Community 57 - "Community 57"
-Cohesion: 0.07
-Nodes (68): a(), bs(), C(), clone(), cs(), D(), div(), dm() (+60 more)
+Cohesion: 0.08
+Nodes (72): al(), ao(), as(), bc(), Ca(), co(), dl(), dp() (+64 more)
 
 ### Community 58 - "Community 58"
-Cohesion: 0.1
-Nodes (68): Aa(), addValue(), ba(), bc(), be(), ca(), Ci(), cm() (+60 more)
+Cohesion: 0.08
+Nodes (71): Aa(), al(), Ap(), bl(), bu(), cl(), componentDidMount(), componentDidUpdate() (+63 more)
 
 ### Community 59 - "Community 59"
-Cohesion: 0.08
-Nodes (68): ac(), au(), bl(), bo(), bu(), cl(), co(), componentDidMount() (+60 more)
+Cohesion: 0.09
+Nodes (71): ao(), as(), ba(), bc(), be(), Bi(), bo(), ca() (+63 more)
 
 ### Community 60 - "Community 60"
 Cohesion: 0.08
-Nodes (68): Aa(), al(), au(), bl(), bu(), cl(), componentDidMount(), componentDidUpdate() (+60 more)
+Nodes (71): A(), ac(), attachTimeline(), b(), bs(), bt(), cs(), da() (+63 more)
 
 ### Community 61 - "Community 61"
 Cohesion: 0.08
-Nodes (68): Ae(), al(), Ao(), Ap(), bl(), bo(), Bu(), cl() (+60 more)
+Nodes (71): Ae(), al(), Ao(), Ap(), Au(), bl(), bo(), Bu() (+63 more)
 
 ### Community 62 - "Community 62"
-Cohesion: 0.11
-Nodes (67): AddDays(), am(), Au(), bindToMotionValue(), Bm(), Bp(), delete(), dh() (+59 more)
+Cohesion: 0.08
+Nodes (71): _(), A(), an(), attachTimeline(), b(), cm(), cn(), D() (+63 more)
 
 ### Community 63 - "Community 63"
-Cohesion: 0.07
-Nodes (67): Acceleration(), add(), AddDays(), Ai(), an(), Ar(), br(), ci() (+59 more)
+Cohesion: 0.08
+Nodes (69): _(), Au(), cl(), cm(), componentDidMount(), componentDidUpdate(), Cu(), el() (+61 more)
 
 ### Community 64 - "Community 64"
 Cohesion: 0.08
-Nodes (66): as(), attachTimeline(), b(), bs(), cs(), da(), dirty(), dn() (+58 more)
+Nodes (69): al(), ap(), ba(), bl(), Bo(), Bu(), ce(), cl() (+61 more)
 
 ### Community 65 - "Community 65"
-Cohesion: 0.08
-Nodes (65): ac(), bc(), cc(), dc(), dh(), Do(), ea(), ec() (+57 more)
+Cohesion: 0.07
+Nodes (69): _(), a(), b(), bs(), C(), cs(), D(), E() (+61 more)
 
 ### Community 66 - "Community 66"
-Cohesion: 0.07
-Nodes (65): Acceleration(), Ai(), an(), Ar(), bi(), Bn(), br(), ci() (+57 more)
+Cohesion: 0.08
+Nodes (68): aa(), al(), Ap(), Au(), bl(), Bu(), componentDidMount(), componentDidUpdate() (+60 more)
 
 ### Community 67 - "Community 67"
-Cohesion: 0.07
-Nodes (65): af(), Ar(), Bd(), bh(), cf(), Cp(), cs(), Ct() (+57 more)
+Cohesion: 0.09
+Nodes (68): addValue(), am(), bindToMotionValue(), Bm(), Bp(), cm(), D(), da() (+60 more)
 
 ### Community 68 - "Community 68"
 Cohesion: 0.09
-Nodes (65): aa(), ac(), ba(), Bc(), Bi(), bo(), cm(), co() (+57 more)
+Nodes (68): Ae(), al(), Ao(), Ap(), Au(), bl(), Bu(), cl() (+60 more)
 
 ### Community 69 - "Community 69"
-Cohesion: 0.09
-Nodes (64): Ap(), Au(), bl(), Bu(), cl(), componentDidMount(), componentDidUpdate(), Cu() (+56 more)
+Cohesion: 0.08
+Nodes (68): a(), Acceleration(), add(), Ai(), an(), Ar(), br(), ci() (+60 more)
 
 ### Community 70 - "Community 70"
-Cohesion: 0.08
-Nodes (64): au(), bl(), bu(), cl(), co(), componentDidMount(), componentDidUpdate(), Cu() (+56 more)
+Cohesion: 0.06
+Nodes (67): _(), af(), an(), at(), Bd(), bf(), bi(), bn() (+59 more)
 
 ### Community 71 - "Community 71"
-Cohesion: 0.1
-Nodes (64): addValue(), am(), an(), Au(), b(), bindToMotionValue(), Bm(), Bp() (+56 more)
+Cohesion: 0.07
+Nodes (67): Acceleration(), add(), AddDays(), addDependent(), ag(), ah(), at(), Bd() (+59 more)
 
 ### Community 72 - "Community 72"
-Cohesion: 0.09
-Nodes (64): A(), ae(), b(), bs(), c(), Ca(), cm(), cs() (+56 more)
+Cohesion: 0.06
+Nodes (67): ac(), addChild(), addListeners(), addValue(), bindToMotionValue(), bs(), build(), cancel() (+59 more)
 
 ### Community 73 - "Community 73"
-Cohesion: 0.05
-Nodes (63): [a,o], addListener(), addWindowListener(), ah(), ap(), b(), bh(), Bn() (+55 more)
+Cohesion: 0.07
+Nodes (67): af(), Ar(), Bd(), bh(), cf(), cs(), Ct(), d() (+59 more)
 
 ### Community 74 - "Community 74"
-Cohesion: 0.1
-Nodes (63): aa(), al(), Au(), bl(), Bu(), componentDidMount(), componentDidUpdate(), Cu() (+55 more)
+Cohesion: 0.08
+Nodes (66): _(), ac(), add(), am(), Au(), bm(), bt(), dm() (+58 more)
 
 ### Community 75 - "Community 75"
-Cohesion: 0.08
-Nodes (63): aa(), Acceleration(), add(), AddDays(), Ai(), Ar(), at(), bi() (+55 more)
+Cohesion: 0.07
+Nodes (66): a(), Acceleration(), add(), AddDays(), Ai(), an(), Ar(), br() (+58 more)
 
 ### Community 76 - "Community 76"
-Cohesion: 0.07
-Nodes (62): af(), ah(), Bd(), bh(), cf(), Ct(), df(), dn() (+54 more)
+Cohesion: 0.1
+Nodes (64): AddDays(), am(), an(), b(), Bm(), Bp(), cn(), Dm() (+56 more)
 
 ### Community 77 - "Community 77"
 Cohesion: 0.07
-Nodes (36): DocBuilder, file_sha256(), GitOrchestrator, log_error(), log_step(), log_success(), log_warn(), main() (+28 more)
+Nodes (63): af(), as(), At(), Bd(), be(), bn(), cf(), Cr() (+55 more)
 
 ### Community 78 - "Community 78"
-Cohesion: 0.09
-Nodes (61): ao(), ba(), bc(), cl(), Co(), Da(), Ea(), es() (+53 more)
+Cohesion: 0.1
+Nodes (62): A(), am(), Bm(), Bp(), c(), Cr(), cs(), D() (+54 more)
 
 ### Community 79 - "Community 79"
-Cohesion: 0.08
-Nodes (61): _(), af(), Bd(), bn(), cf(), cn(), ct(), df() (+53 more)
+Cohesion: 0.11
+Nodes (62): al(), am(), Au(), Bm(), Bp(), cl(), componentDidMount(), Cu() (+54 more)
 
 ### Community 80 - "Community 80"
-Cohesion: 0.08
-Nodes (61): Acceleration(), add(), AddDays(), addDependent(), Ah(), bh(), bt(), Ch() (+53 more)
+Cohesion: 0.09
+Nodes (62): ac(), ao(), as(), bc(), Ca(), cc(), co(), dc() (+54 more)
 
 ### Community 81 - "Community 81"
 Cohesion: 0.08
-Nodes (61): Acceleration(), add(), AddDays(), addDependent(), ag(), ah(), at(), Bd() (+53 more)
+Nodes (61): ac(), Ai(), ao(), bc(), cc(), constructor(), dc(), decr() (+53 more)
 
 ### Community 82 - "Community 82"
-Cohesion: 0.06
-Nodes (60): ac(), addChild(), addListeners(), cancel(), Ci(), clearAnimation(), commitStyles(), createPanHandlers() (+52 more)
+Cohesion: 0.07
+Nodes (36): DocBuilder, file_sha256(), GitOrchestrator, log_error(), log_step(), log_success(), log_warn(), main() (+28 more)
 
 ### Community 83 - "Community 83"
-Cohesion: 0.08
-Nodes (60): af(), as(), At(), Bd(), be(), bf(), bh(), Cr() (+52 more)
+Cohesion: 0.1
+Nodes (61): al(), ao(), au(), bl(), bu(), Cp(), delete(), Du() (+53 more)
 
 ### Community 84 - "Community 84"
-Cohesion: 0.1
-Nodes (60): Ae(), al(), Ao(), Ap(), bl(), Bu(), cl(), componentDidMount() (+52 more)
+Cohesion: 0.08
+Nodes (60): A(), attachTimeline(), br(), c(), cm(), cs(), D(), Dr() (+52 more)
 
 ### Community 85 - "Community 85"
-Cohesion: 0.09
-Nodes (60): al(), ao(), au(), bl(), bu(), cc(), Da(), Di() (+52 more)
+Cohesion: 0.07
+Nodes (60): af(), Bd(), cf(), Ct(), df(), dh(), dt(), ef() (+52 more)
 
 ### Community 86 - "Community 86"
-Cohesion: 0.11
-Nodes (59): addValue(), am(), an(), bindToMotionValue(), Bm(), Bp(), cn(), constructor() (+51 more)
+Cohesion: 0.08
+Nodes (59): _(), af(), an(), bn(), ci(), cn(), ep(), Er() (+51 more)
 
 ### Community 87 - "Community 87"
 Cohesion: 0.07
-Nodes (59): af(), Bd(), cf(), cm(), Ct(), df(), dt(), ef() (+51 more)
+Nodes (59): [a,o], ap(), Bd(), Bp(), ch(), [d,f], dp(), ef() (+51 more)
 
 ### Community 88 - "Community 88"
-Cohesion: 0.05
-Nodes (58): [a,o], addListener(), addWindowListener(), ah(), ap(), Bp(), Ce(), ch() (+50 more)
+Cohesion: 0.08
+Nodes (59): Acceleration(), add(), AddDays(), addDependent(), ag(), Ah(), bg(), bh() (+51 more)
 
 ### Community 89 - "Community 89"
 Cohesion: 0.09
-Nodes (58): Acceleration(), AddDays(), ah(), at(), be(), Bg(), bh(), c() (+50 more)
+Nodes (59): A(), as(), c(), cm(), cs(), D(), dc(), ds() (+51 more)
 
 ### Community 90 - "Community 90"
-Cohesion: 0.09
-Nodes (58): al(), bl(), bo(), bu(), componentDidMount(), componentDidUpdate(), Cu(), delete() (+50 more)
+Cohesion: 0.1
+Nodes (58): Au(), bl(), Bu(), componentDidMount(), componentDidUpdate(), Cu(), delete(), Du() (+50 more)
 
 ### Community 91 - "Community 91"
-Cohesion: 0.11
-Nodes (58): ad(), am(), bindToMotionValue(), Bm(), Bp(), Ch(), D(), dm() (+50 more)
+Cohesion: 0.08
+Nodes (58): _(), af(), Bd(), bh(), Bn(), cf(), Ct(), df() (+50 more)
 
 ### Community 92 - "Community 92"
-Cohesion: 0.09
-Nodes (58): am(), bm(), bt(), bu(), Cp(), Cu(), da(), dm() (+50 more)
+Cohesion: 0.06
+Nodes (57): addListener(), addWindowListener(), ah(), ap(), Bp(), Ce(), ch(), clearAllCookies() (+49 more)
 
 ### Community 93 - "Community 93"
-Cohesion: 0.08
-Nodes (57): a(), [a,o], ap(), Bd(), Bp(), cf(), d(), [d,f] (+49 more)
+Cohesion: 0.09
+Nodes (57): A(), ae(), as(), attachTimeline(), b(), bs(), cs(), ds() (+49 more)
 
 ### Community 94 - "Community 94"
-Cohesion: 0.11
-Nodes (57): ad(), am(), an(), bindToMotionValue(), Bm(), Bp(), D(), dt() (+49 more)
+Cohesion: 0.08
+Nodes (57): Acceleration(), add(), AddDays(), Ai(), an(), Ar(), br(), ci() (+49 more)
 
 ### Community 95 - "Community 95"
-Cohesion: 0.08
-Nodes (57): addChild(), addValue(), bi(), bindToMotionValue(), cancel(), clearAnimation(), commitStyles(), createPanHandlers() (+49 more)
+Cohesion: 0.09
+Nodes (56): Acceleration(), add(), addChild(), AddDays(), addDependent(), ah(), be(), Bg() (+48 more)
 
 ### Community 96 - "Community 96"
-Cohesion: 0.09
-Nodes (56): ac(), ao(), as(), attachTimeline(), ba(), bs(), cs(), dc() (+48 more)
+Cohesion: 0.11
+Nodes (56): ad(), am(), bindToMotionValue(), Bm(), Bp(), Ch(), D(), delete() (+48 more)
 
 ### Community 97 - "Community 97"
-Cohesion: 0.08
-Nodes (56): ac(), Acceleration(), add(), AddDays(), addDependent(), Ah(), bf(), bh() (+48 more)
+Cohesion: 0.11
+Nodes (56): ad(), addValue(), am(), bindToMotionValue(), Bm(), Bp(), D(), delete() (+48 more)
 
 ### Community 98 - "Community 98"
 Cohesion: 0.11
-Nodes (56): addValue(), am(), an(), Au(), bindToMotionValue(), Bm(), Bp(), cn() (+48 more)
+Nodes (56): AddDays(), am(), Au(), bindToMotionValue(), Bm(), Bp(), Cu(), Dm() (+48 more)
 
 ### Community 99 - "Community 99"
-Cohesion: 0.06
-Nodes (55): _(), Ar(), at(), bf(), bn(), br(), canReadNow(), ct() (+47 more)
+Cohesion: 0.1
+Nodes (56): Ae(), al(), Ao(), Ap(), bl(), Bu(), ca(), componentDidMount() (+48 more)
 
 ### Community 100 - "Community 100"
-Cohesion: 0.09
-Nodes (54): Acceleration(), add(), addChild(), AddDays(), addDependent(), ah(), be(), bh() (+46 more)
+Cohesion: 0.08
+Nodes (56): af(), as(), At(), Bd(), be(), bf(), bt(), Ci() (+48 more)
 
 ### Community 101 - "Community 101"
-Cohesion: 0.09
-Nodes (54): _(), af(), Bd(), bn(), cf(), cm(), cn(), ct() (+46 more)
+Cohesion: 0.06
+Nodes (55): ad(), add(), addChild(), addDependent(), addListeners(), Au(), boundaries(), cancel() (+47 more)
 
 ### Community 102 - "Community 102"
-Cohesion: 0.11
-Nodes (54): ad(), am(), bindToMotionValue(), Bm(), Bp(), Fm(), ft(), g() (+46 more)
+Cohesion: 0.09
+Nodes (54): aa(), addValue(), ba(), bo(), build(), cl(), Co(), de() (+46 more)
 
 ### Community 103 - "Community 103"
-Cohesion: 0.09
-Nodes (54): af(), as(), At(), be(), bf(), Cr(), ct(), df() (+46 more)
+Cohesion: 0.08
+Nodes (54): ad(), add(), addChild(), addDependent(), addListeners(), addValue(), bindToMotionValue(), boundaries() (+46 more)
 
 ### Community 104 - "Community 104"
-Cohesion: 0.08
-Nodes (53): A(), an(), b(), boundaries(), bt(), E(), en(), Fe() (+45 more)
+Cohesion: 0.1
+Nodes (54): am(), bm(), bt(), bu(), Cp(), Cu(), dm(), em() (+46 more)
 
 ### Community 105 - "Community 105"
-Cohesion: 0.11
-Nodes (52): Acceleration(), add(), AddDays(), addDependent(), ah(), Bg(), bh(), c() (+44 more)
+Cohesion: 0.09
+Nodes (53): ac(), addListeners(), au(), Bi(), cc(), Ci(), ct(), dc() (+45 more)
 
 ### Community 106 - "Community 106"
 Cohesion: 0.1
-Nodes (51): Acceleration(), AddDays(), ah(), be(), Bg(), bh(), cg(), Ch() (+43 more)
+Nodes (52): Acceleration(), AddDays(), ah(), be(), Bg(), bh(), c(), cg() (+44 more)
 
 ### Community 107 - "Community 107"
-Cohesion: 0.1
-Nodes (51): Acceleration(), add(), AddDays(), addDependent(), Ah(), bf(), bh(), bt() (+43 more)
+Cohesion: 0.08
+Nodes (52): _(), af(), at(), Bd(), bf(), bi(), br(), cf() (+44 more)
 
 ### Community 108 - "Community 108"
-Cohesion: 0.09
-Nodes (51): af(), as(), At(), Bd(), be(), bf(), bn(), Cr() (+43 more)
+Cohesion: 0.1
+Nodes (52): Acceleration(), AddDays(), ah(), at(), Bg(), bh(), cg(), Ch() (+44 more)
 
 ### Community 109 - "Community 109"
-Cohesion: 0.09
-Nodes (51): af(), as(), At(), be(), bf(), Cr(), ct(), df() (+43 more)
+Cohesion: 0.06
+Nodes (52): addValue(), bs(), build(), Ci(), constructor(), createPanHandlers(), decr(), Du() (+44 more)
 
 ### Community 110 - "Community 110"
-Cohesion: 0.09
-Nodes (50): Bp(), bs(), clearAllCookies(), clearCookies(), cs(), [d,f], deleteCookie(), ds() (+42 more)
+Cohesion: 0.07
+Nodes (52): ac(), addChild(), addListeners(), addValue(), bindToMotionValue(), bs(), build(), cancel() (+44 more)
 
 ### Community 111 - "Community 111"
-Cohesion: 0.07
-Nodes (50): ac(), addListeners(), addValue(), bs(), cancel(), Ci(), clearAnimation(), commitStyles() (+42 more)
+Cohesion: 0.11
+Nodes (51): A(), Ap(), bl(), Bu(), componentDidMount(), componentDidUpdate(), Cu(), delete() (+43 more)
 
 ### Community 112 - "Community 112"
-Cohesion: 0.1
-Nodes (50): _(), am(), Au(), bm(), bt(), dm(), em(), fm() (+42 more)
+Cohesion: 0.11
+Nodes (51): Acceleration(), AddDays(), ah(), be(), Bg(), bh(), c(), cg() (+43 more)
 
 ### Community 113 - "Community 113"
-Cohesion: 0.12
-Nodes (50): al(), au(), bl(), bu(), dl(), Du(), ei(), el() (+42 more)
+Cohesion: 0.1
+Nodes (51): ba(), bo(), cl(), Co(), cs(), de(), Dn(), es() (+43 more)
 
 ### Community 114 - "Community 114"
-Cohesion: 0.13
-Nodes (49): ad(), am(), bindToMotionValue(), Bm(), Bp(), D(), dm(), dp() (+41 more)
+Cohesion: 0.08
+Nodes (51): an(), attachTimeline(), bn(), boundaries(), br(), Bu(), cf(), Cn() (+43 more)
 
 ### Community 115 - "Community 115"
-Cohesion: 0.08
-Nodes (49): addChild(), addListeners(), Bi(), cancel(), cc(), clearAnimation(), commitStyles(), createPanHandlers() (+41 more)
+Cohesion: 0.09
+Nodes (51): af(), as(), At(), be(), bf(), Ci(), Cr(), ct() (+43 more)
 
 ### Community 116 - "Community 116"
-Cohesion: 0.1
-Nodes (49): Acceleration(), add(), AddDays(), addDependent(), Ah(), bt(), c(), Ch() (+41 more)
+Cohesion: 0.08
+Nodes (50): af(), at(), Bd(), bi(), cf(), ct(), df(), dt() (+42 more)
 
 ### Community 117 - "Community 117"
-Cohesion: 0.08
-Nodes (49): al(), Bo(), Bu(), cl(), co(), Cp(), Cu(), dl() (+41 more)
+Cohesion: 0.12
+Nodes (50): ad(), am(), bindToMotionValue(), Bm(), Bp(), Ce(), cm(), cn() (+42 more)
 
 ### Community 118 - "Community 118"
-Cohesion: 0.12
-Nodes (49): al(), bo(), bu(), cl(), Cp(), Cu(), el(), eo() (+41 more)
+Cohesion: 0.09
+Nodes (50): _(), af(), at(), Bd(), bi(), br(), cf(), ct() (+42 more)
 
 ### Community 119 - "Community 119"
 Cohesion: 0.12
-Nodes (48): addValue(), am(), bindToMotionValue(), Bm(), Bp(), dg(), ee(), em() (+40 more)
+Nodes (50): bl(), Bu(), componentDidMount(), componentDidUpdate(), Cu(), delete(), Du(), ep() (+42 more)
 
 ### Community 120 - "Community 120"
-Cohesion: 0.09
-Nodes (48): Ap(), b(), Ce(), cn(), dp(), duration(), ff(), Fg() (+40 more)
+Cohesion: 0.1
+Nodes (50): aa(), al(), Au(), bl(), bo(), bu(), componentDidMount(), componentDidUpdate() (+42 more)
 
 ### Community 121 - "Community 121"
-Cohesion: 0.11
-Nodes (48): Acceleration(), AddDays(), Ah(), bh(), bt(), Ch(), delete(), dh() (+40 more)
+Cohesion: 0.1
+Nodes (50): Acceleration(), add(), AddDays(), addDependent(), Ah(), bh(), bt(), c() (+42 more)
 
 ### Community 122 - "Community 122"
-Cohesion: 0.11
-Nodes (47): Acceleration(), AddDays(), ah(), be(), bh(), cg(), Ch(), Ci() (+39 more)
+Cohesion: 0.08
+Nodes (50): af(), Bd(), bh(), cf(), cm(), Ct(), df(), dt() (+42 more)
 
 ### Community 123 - "Community 123"
-Cohesion: 0.09
-Nodes (47): af(), Bd(), bh(), cf(), cm(), Ct(), df(), dt() (+39 more)
+Cohesion: 0.11
+Nodes (49): Acceleration(), AddDays(), ah(), be(), Bg(), bh(), cg(), Ch() (+41 more)
 
 ### Community 124 - "Community 124"
-Cohesion: 0.11
-Nodes (47): _(), am(), b(), bm(), bt(), dn(), E(), fm() (+39 more)
+Cohesion: 0.09
+Nodes (49): Aa(), Bc(), Bi(), Bo(), ca(), cs(), dl(), ec() (+41 more)
 
 ### Community 125 - "Community 125"
-Cohesion: 0.13
-Nodes (46): addValue(), am(), bindToMotionValue(), Bm(), Bp(), dp(), Fm(), get() (+38 more)
+Cohesion: 0.12
+Nodes (48): al(), bo(), bu(), cl(), Cp(), el(), eo(), eu() (+40 more)
 
 ### Community 126 - "Community 126"
 Cohesion: 0.08
-Nodes (45): A(), ae(), af(), b(), cn(), Dn(), E(), F() (+37 more)
+Nodes (32): BirthDataForm(), DomainConsensusRadar(), ExplainerTrigger(), Props, InputAuditCard(), Props, MathematicalEvidenceCard(), Props (+24 more)
 
 ### Community 127 - "Community 127"
-Cohesion: 0.1
-Nodes (45): AddDays(), Ai(), an(), au(), bi(), ci(), Cr(), delete() (+37 more)
+Cohesion: 0.11
+Nodes (47): bl(), Bu(), cl(), delete(), Du(), ep(), eu(), fu() (+39 more)
 
 ### Community 128 - "Community 128"
-Cohesion: 0.12
-Nodes (45): a(), am(), bm(), bt(), delete(), dm(), em(), fm() (+37 more)
+Cohesion: 0.09
+Nodes (47): _(), af(), Bd(), bn(), Br(), cf(), cm(), cn() (+39 more)
 
 ### Community 129 - "Community 129"
-Cohesion: 0.1
-Nodes (44): ac(), af(), Bd(), bi(), cc(), cf(), dc(), df() (+36 more)
+Cohesion: 0.09
+Nodes (47): _(), ae(), as(), At(), b(), bn(), bs(), ds() (+39 more)
 
 ### Community 130 - "Community 130"
-Cohesion: 0.11
-Nodes (44): am(), Bm(), Bp(), cn(), dg(), dl(), dp(), ep() (+36 more)
+Cohesion: 0.08
+Nodes (46): al(), Au(), ca(), da(), dl(), eo(), fa(), Fg() (+38 more)
 
 ### Community 131 - "Community 131"
-Cohesion: 0.1
-Nodes (44): ad(), addValue(), bindToMotionValue(), build(), cd(), di(), fa(), get() (+36 more)
+Cohesion: 0.12
+Nodes (46): Acceleration(), AddDays(), ah(), be(), bh(), cg(), Ch(), Ci() (+38 more)
 
 ### Community 132 - "Community 132"
 Cohesion: 0.08
-Nodes (44): addChild(), addListeners(), al(), cancel(), cc(), clearAnimation(), commitStyles(), createPanHandlers() (+36 more)
+Nodes (46): ad(), addChild(), addListeners(), addValue(), bindToMotionValue(), Bp(), cc(), da() (+38 more)
 
 ### Community 133 - "Community 133"
-Cohesion: 0.1
-Nodes (44): af(), Bd(), Bi(), cf(), ct(), df(), ec(), ef() (+36 more)
+Cohesion: 0.09
+Nodes (46): _(), af(), Bd(), bn(), Br(), cf(), Ci(), cn() (+38 more)
 
 ### Community 134 - "Community 134"
 Cohesion: 0.08
-Nodes (44): ac(), addChild(), addListeners(), bs(), clearAnimation(), commitStyles(), createPanHandlers(), Du() (+36 more)
+Nodes (45): _(), an(), Ar(), at(), bn(), br(), ct(), en() (+37 more)
 
 ### Community 135 - "Community 135"
-Cohesion: 0.11
-Nodes (44): Acceleration(), add(), addChild(), AddDays(), addDependent(), Ah(), bh(), Ch() (+36 more)
+Cohesion: 0.08
+Nodes (45): ad(), add(), addChild(), addDependent(), addListeners(), addValue(), as(), bindToMotionValue() (+37 more)
 
 ### Community 136 - "Community 136"
-Cohesion: 0.12
-Nodes (43): Aa(), al(), bu(), cl(), Cp(), Cu(), eo(), eu() (+35 more)
+Cohesion: 0.09
+Nodes (45): _(), af(), Bd(), bn(), Br(), cf(), cn(), df() (+37 more)
 
 ### Community 137 - "Community 137"
 Cohesion: 0.11
-Nodes (43): Aa(), Bc(), Bi(), ca(), cs(), dl(), ec(), fl() (+35 more)
+Nodes (45): ae(), au(), ba(), bi(), bl(), bo(), cc(), delete() (+37 more)
 
 ### Community 138 - "Community 138"
-Cohesion: 0.09
-Nodes (42): _(), an(), attachTimeline(), bn(), boundaries(), br(), cf(), Cn() (+34 more)
+Cohesion: 0.11
+Nodes (45): al(), au(), bl(), Cp(), Di(), ei(), en(), eu() (+37 more)
 
 ### Community 139 - "Community 139"
-Cohesion: 0.08
-Nodes (42): ac(), addListeners(), bs(), build(), cancel(), Ci(), clearAnimation(), commitStyles() (+34 more)
+Cohesion: 0.11
+Nodes (44): Acceleration(), add(), addChild(), addDependent(), Ah(), bh(), bt(), Ch() (+36 more)
 
 ### Community 140 - "Community 140"
-Cohesion: 0.08
-Nodes (38): angularDistance(), computeAshtakoota(), computeCompositeChart(), computeSynastryAspects(), computeTraditionAnalyses(), DYAD_INTERPRETATIONS, GANA_LABELS, generateSynastryReport() (+30 more)
+Cohesion: 0.12
+Nodes (44): ae(), bc(), Ca(), dl(), Do(), dp(), ea(), fc() (+36 more)
 
 ### Community 141 - "Community 141"
 Cohesion: 0.09
-Nodes (27): BirthDataForm(), FeatureExplainerModal(), CivilizationFilter, CIVILIZATIONS, FeatureGuideScreen(), Props, MathematicalEvidenceCard(), Props (+19 more)
+Nodes (43): ae(), as(), attachTimeline(), b(), bs(), cs(), ds(), E() (+35 more)
 
 ### Community 142 - "Community 142"
-Cohesion: 0.08
-Nodes (41): ad(), add(), addChild(), addDependent(), addListeners(), boundaries(), cd(), fa() (+33 more)
+Cohesion: 0.09
+Nodes (43): addListeners(), addValue(), cd(), createPanHandlers(), da(), fa(), getAxisMotionValue(), getDefaultTransition() (+35 more)
 
 ### Community 143 - "Community 143"
-Cohesion: 0.09
-Nodes (41): _(), an(), at(), attachTimeline(), bn(), br(), ct(), en() (+33 more)
+Cohesion: 0.13
+Nodes (43): Acceleration(), AddDays(), ah(), be(), bh(), cg(), Ch(), Ci() (+35 more)
 
 ### Community 144 - "Community 144"
-Cohesion: 0.12
-Nodes (41): Acceleration(), be(), Bg(), bh(), Ch(), Ci(), dh(), dm() (+33 more)
+Cohesion: 0.09
+Nodes (43): _(), af(), Bd(), bn(), Br(), cf(), cn(), df() (+35 more)
 
 ### Community 145 - "Community 145"
 Cohesion: 0.1
-Nodes (41): _(), af(), Bd(), bn(), Br(), cf(), cn(), df() (+33 more)
+Nodes (43): af(), as(), At(), Bd(), be(), bf(), ct(), df() (+35 more)
 
 ### Community 146 - "Community 146"
 Cohesion: 0.11
-Nodes (41): attachTimeline(), bs(), dn(), ds(), E(), en(), es(), fn() (+33 more)
+Nodes (43): Acceleration(), add(), addDependent(), Ah(), bf(), bh(), bt(), Ch() (+35 more)
 
 ### Community 147 - "Community 147"
-Cohesion: 0.13
-Nodes (41): am(), b(), bm(), dm(), dn(), em(), fm(), fp() (+33 more)
+Cohesion: 0.08
+Nodes (39): angularDistance(), computeAshtakoota(), computeCompositeChart(), computeSynastryAspects(), computeTraditionAnalyses(), DYAD_INTERPRETATIONS, GANA_LABELS, generateSynastryReport() (+31 more)
 
 ### Community 148 - "Community 148"
 Cohesion: 0.09
-Nodes (40): addChild(), addListeners(), al(), cc(), createPanHandlers(), da(), Dr(), getDefaultTransition() (+32 more)
+Nodes (42): addChild(), addListeners(), cancel(), cc(), clearAnimation(), commitStyles(), createPanHandlers(), ec() (+34 more)
 
 ### Community 149 - "Community 149"
-Cohesion: 0.13
-Nodes (40): au(), bu(), cl(), Cu(), delete(), ep(), eu(), Fu() (+32 more)
+Cohesion: 0.1
+Nodes (42): addValue(), bi(), bindToMotionValue(), ef(), fi(), Gd(), get(), getAxisMotionValue() (+34 more)
 
 ### Community 150 - "Community 150"
-Cohesion: 0.13
-Nodes (39): Ae(), Ao(), Ap(), bl(), dp(), ed(), Fu(), getVelocity() (+31 more)
+Cohesion: 0.12
+Nodes (42): am(), bm(), bt(), da(), dm(), em(), fa(), fm() (+34 more)
 
 ### Community 151 - "Community 151"
-Cohesion: 0.11
-Nodes (39): af(), Bd(), cf(), Ct(), df(), dt(), ef(), Er() (+31 more)
+Cohesion: 0.15
+Nodes (41): am(), Bm(), Bp(), em(), Et(), Fm(), hm(), im() (+33 more)
 
 ### Community 152 - "Community 152"
-Cohesion: 0.1
-Nodes (38): af(), Bd(), bf(), bi(), cf(), cm(), cp(), df() (+30 more)
+Cohesion: 0.12
+Nodes (40): ac(), attachTimeline(), au(), bs(), cs(), dc(), Dr(), ds() (+32 more)
 
 ### Community 153 - "Community 153"
-Cohesion: 0.12
-Nodes (38): AddDays(), ae(), au(), ba(), bl(), delete(), ep(), FromTerrestrialTime() (+30 more)
+Cohesion: 0.11
+Nodes (40): af(), Bd(), cf(), Ct(), df(), dt(), ef(), Er() (+32 more)
 
 ### Community 154 - "Community 154"
-Cohesion: 0.1
-Nodes (37): _(), an(), at(), bn(), br(), ct(), en(), Fr() (+29 more)
+Cohesion: 0.13
+Nodes (39): Acceleration(), add(), AddDays(), addDependent(), Ah(), bh(), Ch(), dh() (+31 more)
 
 ### Community 155 - "Community 155"
-Cohesion: 0.1
-Nodes (37): af(), bf(), cp(), df(), dt(), ef(), ff(), ft() (+29 more)
+Cohesion: 0.16
+Nodes (38): am(), bindToMotionValue(), Bm(), Bp(), dp(), em(), Fm(), get() (+30 more)
 
 ### Community 156 - "Community 156"
-Cohesion: 0.15
-Nodes (37): am(), bm(), bt(), dm(), em(), fm(), fp(), get() (+29 more)
+Cohesion: 0.14
+Nodes (38): Acceleration(), add(), AddDays(), addDependent(), Ah(), bh(), dh(), em() (+30 more)
 
 ### Community 157 - "Community 157"
-Cohesion: 0.13
-Nodes (37): ba(), Bo(), c(), ce(), cl(), Ea(), ee(), fe() (+29 more)
+Cohesion: 0.09
+Nodes (38): addChild(), addListeners(), cc(), createPanHandlers(), da(), ec(), getAxisMotionValue(), getDefaultTransition() (+30 more)
 
 ### Community 158 - "Community 158"
+Cohesion: 0.12
+Nodes (37): Acceleration(), AddDays(), Ah(), bf(), bh(), Ch(), delete(), dh() (+29 more)
+
+### Community 159 - "Community 159"
+Cohesion: 0.1
+Nodes (37): a(), ae(), as(), b(), bs(), cm(), ds(), gs() (+29 more)
+
+### Community 160 - "Community 160"
+Cohesion: 0.11
+Nodes (36): af(), Bd(), bi(), cf(), cm(), df(), dt(), ef() (+28 more)
+
+### Community 161 - "Community 161"
 Cohesion: 0.07
 Nodes (35): 1. Android Sideloading (APK), 1. `pyswisseph` Compilation Failure, 1. Repository Setup, 2. Environment Initialization, 2. iOS Sideloading, 2. Skyfield JPL Kernel Download Timeout, 3. Connecting Mobile to Backend, 3. Frontend CORS Errors (+27 more)
 
-### Community 159 - "Community 159"
-Cohesion: 0.11
-Nodes (36): Bd(), bf(), bi(), cf(), cm(), df(), dt(), ef() (+28 more)
-
-### Community 160 - "Community 160"
-Cohesion: 0.09
-Nodes (36): Acceleration(), add(), addChild(), addDependent(), Ah(), bh(), bt(), canReadNow() (+28 more)
-
-### Community 161 - "Community 161"
-Cohesion: 0.18
-Nodes (35): ad(), am(), bindToMotionValue(), Bm(), Bp(), Fm(), get(), gm() (+27 more)
-
 ### Community 162 - "Community 162"
 Cohesion: 0.1
-Nodes (30): AlmutenBarProps, AlmutenDignityBarChart(), BaZiElementPentagram(), BaZiPentagramProps, DomainConsensusRadar(), EgyptianClockProps, EgyptianDecanStarClock(), MaramatakaDialProps (+22 more)
+Nodes (36): af(), Ai(), Bd(), bf(), cf(), cs(), df(), dt() (+28 more)
 
 ### Community 163 - "Community 163"
-Cohesion: 0.1
-Nodes (35): ac(), addChild(), addListeners(), as(), cd(), createPanHandlers(), cs(), dl() (+27 more)
+Cohesion: 0.14
+Nodes (36): Ae(), Ao(), Ap(), bl(), Bu(), dp(), eu(), Fu() (+28 more)
 
 ### Community 164 - "Community 164"
-Cohesion: 0.16
-Nodes (35): am(), bm(), bt(), dm(), em(), fa(), fm(), fp() (+27 more)
+Cohesion: 0.14
+Nodes (36): ae(), au(), ba(), bi(), bl(), delete(), ep(), eu() (+28 more)
 
 ### Community 165 - "Community 165"
-Cohesion: 0.11
-Nodes (34): af(), at(), Bd(), bf(), bi(), cf(), cm(), df() (+26 more)
+Cohesion: 0.15
+Nodes (35): am(), bm(), bt(), da(), dm(), em(), fa(), fm() (+27 more)
 
 ### Community 166 - "Community 166"
 Cohesion: 0.13
-Nodes (34): bf(), Bi(), ct(), dt(), ef(), _f(), Fd(), Gd() (+26 more)
+Nodes (35): a(), am(), bm(), em(), fm(), fp(), ga(), hm() (+27 more)
 
 ### Community 167 - "Community 167"
-Cohesion: 0.16
-Nodes (34): ba(), bl(), ce(), da(), delete(), ep(), fa(), gl() (+26 more)
+Cohesion: 0.14
+Nodes (35): ac(), Co(), d(), dc(), dh(), eo(), fc(), gc() (+27 more)
 
 ### Community 168 - "Community 168"
+Cohesion: 0.11
+Nodes (34): as(), bs(), cs(), ds(), fl(), fs(), hasListeners(), hs() (+26 more)
+
+### Community 169 - "Community 169"
+Cohesion: 0.11
+Nodes (34): ac(), C(), D(), ee(), F(), fh(), g(), h() (+26 more)
+
+### Community 170 - "Community 170"
+Cohesion: 0.17
+Nodes (34): am(), bm(), bt(), dm(), fa(), fm(), fp(), get() (+26 more)
+
+### Community 171 - "Community 171"
+Cohesion: 0.13
+Nodes (34): ae(), ba(), bl(), C(), D(), ee(), F(), g() (+26 more)
+
+### Community 172 - "Community 172"
+Cohesion: 0.14
+Nodes (34): bu(), cl(), Cp(), Cu(), eo(), eu(), gm(), Ho() (+26 more)
+
+### Community 173 - "Community 173"
 Cohesion: 0.09
 Nodes (32): check_classical_yogas(), check_gandanta(), compute_ashtakavarga(), compute_chara_karakas(), compute_graha_drishti(), compute_graha_yuddha(), compute_jyotisha_chart(), compute_vimshottari_dasha() (+24 more)
 
-### Community 169 - "Community 169"
-Cohesion: 0.15
-Nodes (33): as(), bs(), cs(), ds(), es(), fs(), gs(), hasListeners() (+25 more)
-
-### Community 170 - "Community 170"
+### Community 174 - "Community 174"
 Cohesion: 0.12
-Nodes (33): ac(), cc(), Ci(), constructor(), dc(), decr(), ec(), Ei() (+25 more)
+Nodes (33): af(), Bd(), bf(), bi(), cf(), df(), dt(), ef() (+25 more)
 
-### Community 171 - "Community 171"
+### Community 175 - "Community 175"
 Cohesion: 0.12
 Nodes (29): AstronomicalBase, computeAstronomicalBase(), computeTimeAudit(), PlanetPosition, ZODIAC_SIGNS, calculateChartLocally(), computeSynthesis(), BRANCHES (+21 more)
 
-### Community 172 - "Community 172"
-Cohesion: 0.16
-Nodes (32): ae(), au(), ba(), bl(), delete(), ep(), eu(), Fu() (+24 more)
-
-### Community 173 - "Community 173"
-Cohesion: 0.11
-Nodes (32): ac(), ae(), ah(), as(), bs(), cm(), ds(), eh() (+24 more)
-
-### Community 174 - "Community 174"
-Cohesion: 0.15
-Nodes (31): Co(), dc(), dh(), eo(), fc(), gc(), ha(), hc() (+23 more)
-
-### Community 175 - "Community 175"
-Cohesion: 0.1
-Nodes (29): da(), di(), fa(), Fg(), ga(), getDefaultTransition(), gr(), Ii() (+21 more)
-
 ### Community 176 - "Community 176"
 Cohesion: 0.14
-Nodes (29): cs(), fs(), gs(), hasListeners(), hl(), hs(), is(), js() (+21 more)
+Nodes (32): ba(), c(), ce(), cl(), Ct(), Dt(), Ea(), ee() (+24 more)
 
 ### Community 177 - "Community 177"
-Cohesion: 0.14
-Nodes (29): a(), C(), D(), E(), ee(), F(), fh(), g() (+21 more)
+Cohesion: 0.12
+Nodes (31): addChild(), cancel(), clearAnimation(), commitStyles(), createPanHandlers(), Du(), getProps(), getTransformPagePoint() (+23 more)
 
 ### Community 178 - "Community 178"
-Cohesion: 0.07
-Nodes (28): 1. Dual-Engine Astrometric Parity ($< 0.01^\circ$), 1. Run the Backend Automated Test Suite, 2. Nine Authentic World Astrological Traditions, 2. Start the Full-Stack Application (Single Command), 3. Cross-Tradition Triangulation & Consensus Matrix, 3. Decoupled Development Mode (Hot Reloading), 4. Culturally Authentic Display Presentation Theming & Instruments, 4. Ten Interactive SVG Observatory Wheels (+20 more)
+Cohesion: 0.13
+Nodes (31): addListeners(), as(), bo(), bs(), dirty(), ds(), fs(), gs() (+23 more)
 
 ### Community 179 - "Community 179"
-Cohesion: 0.13
-Nodes (28): a(), Acceleration(), add(), constructor(), decr(), Du(), Gr(), Hr() (+20 more)
+Cohesion: 0.1
+Nodes (30): delete(), di(), ee(), eo(), Fg(), ga(), ig(), Ii() (+22 more)
 
 ### Community 180 - "Community 180"
 Cohesion: 0.13
-Nodes (28): _(), C(), D(), ee(), F(), fh(), g(), h() (+20 more)
+Nodes (30): au(), bi(), delete(), Di(), fo(), Fu(), Gi(), gl() (+22 more)
 
 ### Community 181 - "Community 181"
-Cohesion: 0.11
-Nodes (27): Ar(), Fr(), getBaseTargetFromProps(), getDefaultValue(), gr(), Ir(), jr(), Kr() (+19 more)
+Cohesion: 0.15
+Nodes (30): ao(), bu(), cc(), cf(), Da(), df(), Du(), el() (+22 more)
 
 ### Community 182 - "Community 182"
+Cohesion: 0.12
+Nodes (26): AlmutenBarProps, AlmutenDignityBarChart(), BaZiElementPentagram(), BaZiPentagramProps, EgyptianClockProps, EgyptianDecanStarClock(), MaramatakaDialProps, MaramatakaLunarDial() (+18 more)
+
+### Community 183 - "Community 183"
+Cohesion: 0.17
+Nodes (29): Bi(), ct(), ec(), ef(), _f(), Fd(), Gd(), Hd() (+21 more)
+
+### Community 184 - "Community 184"
+Cohesion: 0.15
+Nodes (29): ct(), ef(), Ei(), _f(), Fd(), Gd(), go(), group() (+21 more)
+
+### Community 185 - "Community 185"
+Cohesion: 0.15
+Nodes (29): Ap(), bl(), dp(), duration(), ee(), Fo(), Fu(), gl() (+21 more)
+
+### Community 186 - "Community 186"
+Cohesion: 0.19
+Nodes (29): am(), bm(), dm(), dn(), em(), fm(), fp(), hm() (+21 more)
+
+### Community 187 - "Community 187"
+Cohesion: 0.07
+Nodes (28): 1. Dual-Engine Astrometric Parity ($< 0.01^\circ$), 1. Run the Backend Automated Test Suite, 2. Nine Authentic World Astrological Traditions, 2. Start the Full-Stack Application (Single Command), 3. Cross-Tradition Triangulation & Consensus Matrix, 3. Decoupled Development Mode (Hot Reloading), 4. Culturally Authentic Display Presentation Theming & Instruments, 4. Ten Interactive SVG Observatory Wheels (+20 more)
+
+### Community 188 - "Community 188"
+Cohesion: 0.17
+Nodes (28): Bi(), ct(), ef(), _f(), Gd(), Hd(), Id(), is() (+20 more)
+
+### Community 189 - "Community 189"
+Cohesion: 0.12
+Nodes (28): af(), bf(), delete(), df(), dt(), fe(), ff(), ft() (+20 more)
+
+### Community 190 - "Community 190"
 Cohesion: 0.16
 Nodes (23): CATEGORIES, FEATURED_IDS, Props, CityRecord, getMatchingCities(), normalizeText(), WORLD_CITIES, apiUrl() (+15 more)
 
-### Community 183 - "Community 183"
-Cohesion: 0.14
-Nodes (27): Bd(), bf(), bi(), cf(), df(), ef(), Fd(), Gd() (+19 more)
+### Community 191 - "Community 191"
+Cohesion: 0.12
+Nodes (27): addValue(), Ai(), build(), Fi(), getAxisMotionValue(), getStaticValue(), getValue(), gi() (+19 more)
 
-### Community 184 - "Community 184"
+### Community 192 - "Community 192"
+Cohesion: 0.08
+Nodes (20): audit_input_endpoint(), BirthInputRequest, geocode_city(), get_sample_charts(), health_check(), ip_location_endpoint(), FastAPI application for Synodix Triangulation Engine. Exposes endpoints for inpu, Auto-suggest and resolve latitude and longitude for a city and country query. (+12 more)
+
+### Community 193 - "Community 193"
 Cohesion: 0.08
 Nodes (25): 1.1 Brand Identity & Voice, 1.2 Design Tokens & System Replacements, 1.2 The Worst AI Tells Identified in Current Build, 1. Executive Summary & Design Direction, 2. Evidence-Based 30-Pattern Audit Matrix, 2. The 30-Point Evidence-Based Audit Matrix, 3.1 Color Tokens, 3.2 Typography Rules (+17 more)
 
-### Community 185 - "Community 185"
+### Community 194 - "Community 194"
+Cohesion: 0.11
+Nodes (26): Ai(), build(), constructor(), decr(), Di(), Ei(), Fi(), gi() (+18 more)
+
+### Community 195 - "Community 195"
 Cohesion: 0.09
 Nodes (25): 1. `POST /api/compute-chart`, 2. `GET /api/ephemeris-test`, 2. `GET /api/health`, 2. `POST /api/audit-input`, 3. `GET /api/health`, 3. `GET /health`, 4. `GET /api/sample-charts`, 5. `GET /api/mathematical-evidence` (+17 more)
 
-### Community 186 - "Community 186"
-Cohesion: 0.14
-Nodes (25): da(), Fe(), handleChildMotionValue(), je(), me(), ne(), nn(), on() (+17 more)
+### Community 196 - "Community 196"
+Cohesion: 0.13
+Nodes (25): addValue(), Ai(), bindToMotionValue(), build(), Fi(), getDefaultValue(), getStaticValue(), getValue() (+17 more)
 
-### Community 187 - "Community 187"
+### Community 197 - "Community 197"
+Cohesion: 0.19
+Nodes (25): Aa(), bu(), cl(), cm(), Cu(), eo(), eu(), hu() (+17 more)
+
+### Community 198 - "Community 198"
+Cohesion: 0.17
+Nodes (25): au(), delete(), Di(), ep(), Fu(), Gi(), gl(), gu() (+17 more)
+
+### Community 199 - "Community 199"
 Cohesion: 0.09
 Nodes (23): 1. Client Observatory (`frontend/`), 🏛️ 1. System Architecture, 2. Edge Gateway & Normalization (`backend/app/main.py`), 🔄 2. Multi-Tradition Calculation Workflow, ⚡ 3. Astrometric Computation & Verification Sequence, 3. Astrometric Core (`backend/app/ephemeris.py`), 🌊 4. Invariant Data Flow Pipeline, 4. Nine Cultural Tradition Sub-Engines (`backend/app/traditions/`) (+15 more)
 
-### Community 188 - "Community 188"
-Cohesion: 0.13
-Nodes (24): addValue(), Ai(), build(), Fi(), getStaticValue(), getValue(), gi(), hasValue() (+16 more)
+### Community 200 - "Community 200"
+Cohesion: 0.17
+Nodes (24): cs(), ds(), fs(), gs(), hasListeners(), hl(), hs(), is() (+16 more)
 
-### Community 189 - "Community 189"
-Cohesion: 0.18
-Nodes (24): addListeners(), as(), bs(), ds(), fs(), gs(), hl(), hs() (+16 more)
-
-### Community 190 - "Community 190"
-Cohesion: 0.12
-Nodes (24): _(), an(), bn(), cn(), dn(), en(), ep(), fn() (+16 more)
-
-### Community 191 - "Community 191"
-Cohesion: 0.1
-Nodes (17): audit_input_endpoint(), compute_chart_endpoint(), normalize_birth_input(), Time normalization, boundary proximity audit, and time-uncertainty ensemble gene, build_verification_report(), Verification report generator and invariant auditor. Follows Step 5 of Six-Cultu, Verify end-to-end multi-cultural calculation pipeline with Steve Jobs birth data, test_deterministic_chart_computation() (+9 more)
-
-### Community 192 - "Community 192"
+### Community 201 - "Community 201"
 Cohesion: 0.09
 Nodes (22): 1. Executive Summary & The Definitive Verdict, 2.1 Statistical Test Scorecard, 2. Hypothesis Testing: Titans vs. Monte Carlo Controls, 3.1 The "Orbital Mechanics Trap" (Budhaditya Yoga), 3.2 The "Short Ascension" Celestial Geometry (Pisces Ascendants), 3.3 The Dusthana Lord Probability (Viparita Raja Yoga), 3. The Astronomical De-Biasing Analysis: Exposing Popular Myths, 4. Where the Genuine Mathematical Evidence Resides (+14 more)
 
-### Community 193 - "Community 193"
-Cohesion: 0.14
-Nodes (23): bh(), cm(), dh(), hh(), Ih(), Kd(), mh(), nh() (+15 more)
-
-### Community 194 - "Community 194"
-Cohesion: 0.19
-Nodes (23): ca(), cl(), fe(), Fo(), gl(), go(), Hi(), ho() (+15 more)
-
-### Community 195 - "Community 195"
-Cohesion: 0.1
-Nodes (17): BirthInputRequest, geocode_city(), get_sample_charts(), health_check(), ip_location_endpoint(), FastAPI application for Synodix Triangulation Engine. Exposes endpoints for inpu, Auto-suggest and resolve latitude and longitude for a city and country query., Auto-suggest and resolve latitude and longitude for a city and country query. (+9 more)
-
-### Community 196 - "Community 196"
-Cohesion: 0.13
-Nodes (22): addValue(), Br(), getDefaultTransition(), getDefaultValue(), getValue(), gr(), hasValue(), ia() (+14 more)
-
-### Community 197 - "Community 197"
-Cohesion: 0.18
-Nodes (22): af(), Bd(), df(), dt(), ef(), Fd(), Gd(), Gp() (+14 more)
-
-### Community 198 - "Community 198"
-Cohesion: 0.16
-Nodes (21): as(), bs(), Co(), ds(), hasListeners(), hs(), is(), js() (+13 more)
-
-### Community 199 - "Community 199"
-Cohesion: 0.2
-Nodes (21): ae(), ba(), bl(), bo(), dh(), ep(), hl(), jo() (+13 more)
-
-### Community 200 - "Community 200"
-Cohesion: 0.1
-Nodes (19): 1. Astronomical Coordinate Form, 2. Cross-Cultural Corroboration Matrix, 3. Dual-Engine Verification Checklist, 4. Mathematical Evidence Dossier, Colors, Components, Design System, Do's (+11 more)
-
-### Community 201 - "Community 201"
-Cohesion: 0.14
-Nodes (20): Ai(), build(), Di(), Ei(), Fi(), gi(), go(), group() (+12 more)
-
 ### Community 202 - "Community 202"
-Cohesion: 0.17
-Nodes (20): cn(), dn(), en(), Er(), fn(), hp(), If(), In() (+12 more)
+Cohesion: 0.15
+Nodes (23): al(), Au(), dl(), Fg(), fl(), il(), io(), jg() (+15 more)
 
 ### Community 203 - "Community 203"
-Cohesion: 0.11
-Nodes (18): 1. Western Tropical Astrology (`western.py`), 2. Jyotisha / Vedic Sidereal Astrology (`jyotisha.py`), 3. BaZi / Chinese Four Pillars of Destiny (`bazi.py`), 4. Zi Wei Dou Shu / Purple Star Astrology (`ziwei.py`), 5. Maya Calendar / Mesoamerican Count (`maya.py`), 6. Tibetan Phugpa Astrology (`tibetan.py`), 7. Hellenistic & Medieval Persian Astrology (`persian.py`), 8. Ancient Egyptian Decanic Astrology (`egyptian.py`) (+10 more)
+Cohesion: 0.19
+Nodes (22): ca(), ds(), fs(), gs(), hasListeners(), hs(), ir(), is() (+14 more)
 
 ### Community 204 - "Community 204"
-Cohesion: 0.16
-Nodes (19): Ci(), constructor(), decr(), Di(), ei(), group(), jr(), kr() (+11 more)
+Cohesion: 0.13
+Nodes (22): ag(), bg(), c(), Dg(), eg(), Fg(), gg(), hg() (+14 more)
 
 ### Community 205 - "Community 205"
-Cohesion: 0.12
-Nodes (17): code:mermaid (flowchart LR), Data Pipelines & Ingestion Flow, 🔄 Detailed Pipeline Stages, 🌊 Interactive Dataflow Diagram & Spec, 🌊 Invariant Data Flow Pipeline, Stage 0: Telemetry Ingest & Validation, Stage 0: Telemetry Sources, Stage 1: Ingestion & Boundary Audit (+9 more)
+Cohesion: 0.16
+Nodes (22): cs(), fs(), hl(), hs(), js(), ls(), ms(), Nd() (+14 more)
 
 ### Community 206 - "Community 206"
-Cohesion: 0.21
-Nodes (18): bh(), bt(), ch(), fh(), Fi(), hh(), Ih(), mh() (+10 more)
+Cohesion: 0.18
+Nodes (22): bs(), cs(), fs(), gs(), hs(), js(), ls(), Md() (+14 more)
 
 ### Community 207 - "Community 207"
-Cohesion: 0.15
-Nodes (12): InputAuditCard(), Props, Props, ReadingView(), ALL_PRESETS, Props, SynastryScreen(), getBundledTitanChart() (+4 more)
+Cohesion: 0.22
+Nodes (22): ca(), cl(), fe(), Fo(), gl(), go(), Hi(), ho() (+14 more)
 
 ### Community 208 - "Community 208"
 Cohesion: 0.16
-Nodes (16): _launch_browser(), test_07_geocoding_intelligence.py — Regression suite for City Auto-Suggest & Coo, Verify that clicking Detect GPS populates coordinates, city, and country., Verify that clicking Detect GPS replaces existing preset values with new coordin, Verify that when HTML5 Geolocation is denied/unavailable on desktop, Detect GPS, Verify that city selector reliably discovers Jamshedpur and Gurugram, populating, Verify backend API geocoding endpoint returns structured cities and coordinates., Verify backend API reverse geocoding and IP location endpoints. (+8 more)
+Nodes (21): bc(), be(), constructor(), de(), decr(), Do(), Eo(), ga() (+13 more)
 
 ### Community 209 - "Community 209"
-Cohesion: 0.12
-Nodes (16): Brand & Style, Breakpoints & Reflow, Buttons & Epistemic Action Controls, Colors, Components, Consensus & Divergence Radial Meters, Elevation & Depth, Ephemeris Coordinate Tables with Uncertainty Bands (+8 more)
+Cohesion: 0.18
+Nodes (21): cs(), fs(), hl(), hs(), js(), ls(), ms(), Nd() (+13 more)
 
 ### Community 210 - "Community 210"
+Cohesion: 0.18
+Nodes (21): bh(), dh(), fh(), hh(), Ih(), Lt(), mh(), nh() (+13 more)
+
+### Community 211 - "Community 211"
+Cohesion: 0.15
+Nodes (20): Ar(), bf(), canReadNow(), fe(), getBaseTargetFromProps(), getDefaultValue(), gr(), Ir() (+12 more)
+
+### Community 212 - "Community 212"
+Cohesion: 0.19
+Nodes (13): FeatureExplainerModal(), CivilizationFilter, CIVILIZATIONS, FeatureGuideScreen(), Props, ExplainerProvider(), ExplainerContext, ExplainerContextType (+5 more)
+
+### Community 213 - "Community 213"
+Cohesion: 0.1
+Nodes (19): 1. Astronomical Coordinate Form, 2. Cross-Cultural Corroboration Matrix, 3. Dual-Engine Verification Checklist, 4. Mathematical Evidence Dossier, Colors, Components, Design System, Do's (+11 more)
+
+### Community 214 - "Community 214"
+Cohesion: 0.21
+Nodes (20): ae(), ba(), bl(), dh(), ep(), hl(), jo(), Li() (+12 more)
+
+### Community 215 - "Community 215"
+Cohesion: 0.12
+Nodes (14): compute_chart_endpoint(), build_verification_report(), Verification report generator and invariant auditor. Follows Step 5 of Six-Cultu, Verify end-to-end multi-cultural calculation pipeline with Steve Jobs birth data, test_deterministic_chart_computation(), Standalone assert-based test suite verifying all 6 traditions, dual-engine ephem, test_six_culture_pipeline(), compute_maramataka_chart() (+6 more)
+
+### Community 216 - "Community 216"
+Cohesion: 0.11
+Nodes (18): 1. Western Tropical Astrology (`western.py`), 2. Jyotisha / Vedic Sidereal Astrology (`jyotisha.py`), 3. BaZi / Chinese Four Pillars of Destiny (`bazi.py`), 4. Zi Wei Dou Shu / Purple Star Astrology (`ziwei.py`), 5. Maya Calendar / Mesoamerican Count (`maya.py`), 6. Tibetan Phugpa Astrology (`tibetan.py`), 7. Hellenistic & Medieval Persian Astrology (`persian.py`), 8. Ancient Egyptian Decanic Astrology (`egyptian.py`) (+10 more)
+
+### Community 217 - "Community 217"
+Cohesion: 0.12
+Nodes (17): code:mermaid (flowchart LR), Data Pipelines & Ingestion Flow, 🔄 Detailed Pipeline Stages, 🌊 Interactive Dataflow Diagram & Spec, 🌊 Invariant Data Flow Pipeline, Stage 0: Telemetry Ingest & Validation, Stage 0: Telemetry Sources, Stage 1: Ingestion & Boundary Audit (+9 more)
+
+### Community 218 - "Community 218"
+Cohesion: 0.12
+Nodes (18): dl(), Fg(), ig(), Ii(), jg(), ji(), l(), Lg() (+10 more)
+
+### Community 219 - "Community 219"
+Cohesion: 0.16
+Nodes (16): _launch_browser(), test_07_geocoding_intelligence.py — Regression suite for City Auto-Suggest & Coo, Verify that clicking Detect GPS populates coordinates, city, and country., Verify that clicking Detect GPS replaces existing preset values with new coordin, Verify that when HTML5 Geolocation is denied/unavailable on desktop, Detect GPS, Verify that city selector reliably discovers Jamshedpur and Gurugram, populating, Verify backend API geocoding endpoint returns structured cities and coordinates., Verify backend API reverse geocoding and IP location endpoints. (+8 more)
+
+### Community 220 - "Community 220"
 Cohesion: 0.12
 Nodes (16): Brand & Style, Breakpoints & Reflow, Buttons & Epistemic Action Controls, Colors, Components, Consensus & Divergence Radial Meters, Elevation & Depth, Ephemeris Coordinate Tables with Uncertainty Bands (+8 more)
 
-### Community 211 - "Community 211"
-Cohesion: 0.26
-Nodes (17): ae(), ba(), bl(), hl(), ht(), jo(), ma(), Me() (+9 more)
-
-### Community 212 - "Community 212"
-Cohesion: 0.14
-Nodes (5): AppDelegate, SceneDelegate, UIApplicationDelegate, UIResponder, UIWindowSceneDelegate
-
-### Community 213 - "Community 213"
-Cohesion: 0.14
-Nodes (13): 1. Swiss Ephemeris 2.10 (`pyswisseph`), 1. The 1.0° Boundary Orb, 1. Universal Time (UTC) and Delta-T ($\Delta T$), 2. Equation of Time ($EOT$), 2. Skyfield & NASA JPL DE421 Kernel, 2. Temporal Drift Sweeps ($\pm 15$ Minutes), 3. Local Sidereal Time ($LST$), Astrometric Dual-Engine (+5 more)
-
-### Community 214 - "Community 214"
-Cohesion: 0.28
-Nodes (12): angular_diff(), compute_active_transits(), compute_antiscia(), compute_aspect_list(), compute_aspects(), compute_essential_dignity(), compute_mutual_receptions(), compute_western_chart() (+4 more)
-
-### Community 215 - "Community 215"
-Cohesion: 0.15
-Nodes (12): Accessibility & Inclusion, Brand Commitments, Capabilities and Constraints, Evidence on Hand, Operating Context, Platform, Positioning, Stack (+4 more)
-
-### Community 216 - "Community 216"
-Cohesion: 0.15
-Nodes (12): 10. Epistemology & Cross-Cultural Triangulation, 1. Precision Astrometry & Modern Geodetics, 2. Jyotisha & Vedic Sidereal Tradition, 3. Western Classical & Hellenistic Tradition, 4. Chinese BaZi & Zi Wei Dou Shu Traditions, 5. Mesoamerican & Maya Sacred Calendars, 6. Polynesian Māori Maramataka, 7. Egyptian Decanic Astrometry (+4 more)
-
-### Community 217 - "Community 217"
-Cohesion: 0.26
-Nodes (11): analyze_branch_interactions(), compute_bazi_chart(), compute_liu_nian(), compute_shen_sha(), compute_yong_shen(), get_ten_god(), BaZi (Four Pillars of Destiny) deterministic calculation module. Uses lunar_pyth, Calculates Ten God relationship of target_stem with respect to day_master (+3 more)
-
-### Community 218 - "Community 218"
-Cohesion: 0.18
-Nodes (11): 1. Hot Path States, 2. Invariant & Boundary Gates, 3. Sensitivity & Recovery Loop, 4. Terminal Exits, ⏱️ Astrometric Calculation & Invariant State Lifecycle, code:mermaid (stateDiagram-v2), 🧬 Interactive Lifecycle Diagram & Spec, Lifecycle State Machine Transitions (+3 more)
-
-### Community 219 - "Community 219"
-Cohesion: 0.3
-Nodes (12): addChild(), addListeners(), cc(), ec(), If(), Md(), mount(), nc() (+4 more)
-
-### Community 220 - "Community 220"
-Cohesion: 0.24
-Nodes (10): compute_ziwei_chart(), get_bureau(), get_star_radiance(), get_ziwei_branch(), Zi Wei Dou Shu (Purple Star Astrology) deterministic calculation module. Compute, Calculates Five Elements Bureau (2..6), Finds Earthly Branch of Zi Wei star from Bureau and Lunar Day, Returns brightness tier: 庙 (Miao), 旺 (Wang), 得 (De), 利 (Li), 平 (Ping), 陷 (Xian) (+2 more)
-
 ### Community 221 - "Community 221"
-Cohesion: 0.31
-Nodes (10): build_synthesis(), compute_chronocrator_timeline(), compute_temperament_axes(), evaluate_jyotisha_domain(), evaluate_sinic_domain(), evaluate_western_domain(), generate_astrological_inferences(), Cross-cultural synthesis without double-counting. Implements Step 7 and Step 8 o (+2 more)
+Cohesion: 0.12
+Nodes (16): Brand & Style, Breakpoints & Reflow, Buttons & Epistemic Action Controls, Colors, Components, Consensus & Divergence Radial Meters, Elevation & Depth, Ephemeris Coordinate Tables with Uncertainty Bands (+8 more)
 
 ### Community 222 - "Community 222"
 Cohesion: 0.22
-Nodes (8): Regression suite bridge connecting classical astrological calculation engines an, Execute complete 6-tradition & 9-tradition deterministic calculation checks., Verify 10 and 100 historical personalities simulation benchmarks., test_suite_classical_astrological_engines(), test_suite_simulations_and_personalities(), Test suite validating the 10-personality simulation results against core biograp, test_100_personalities_dataset_integrity(), test_simulation_dataset_integrity()
+Nodes (17): ah(), bh(), bt(), fh(), Fi(), hh(), Ih(), mh() (+9 more)
 
 ### Community 223 - "Community 223"
+Cohesion: 0.23
+Nodes (15): as(), bs(), cs(), ds(), hs(), is(), ks(), ms() (+7 more)
+
+### Community 224 - "Community 224"
+Cohesion: 0.14
+Nodes (5): AppDelegate, SceneDelegate, UIApplicationDelegate, UIResponder, UIWindowSceneDelegate
+
+### Community 225 - "Community 225"
+Cohesion: 0.14
+Nodes (13): 1. Swiss Ephemeris 2.10 (`pyswisseph`), 1. The 1.0° Boundary Orb, 1. Universal Time (UTC) and Delta-T ($\Delta T$), 2. Equation of Time ($EOT$), 2. Skyfield & NASA JPL DE421 Kernel, 2. Temporal Drift Sweeps ($\pm 15$ Minutes), 3. Local Sidereal Time ($LST$), Astrometric Dual-Engine (+5 more)
+
+### Community 226 - "Community 226"
+Cohesion: 0.28
+Nodes (12): angular_diff(), compute_active_transits(), compute_antiscia(), compute_aspect_list(), compute_aspects(), compute_essential_dignity(), compute_mutual_receptions(), compute_western_chart() (+4 more)
+
+### Community 227 - "Community 227"
+Cohesion: 0.15
+Nodes (12): Accessibility & Inclusion, Brand Commitments, Capabilities and Constraints, Evidence on Hand, Operating Context, Platform, Positioning, Stack (+4 more)
+
+### Community 228 - "Community 228"
+Cohesion: 0.15
+Nodes (12): 10. Epistemology & Cross-Cultural Triangulation, 1. Precision Astrometry & Modern Geodetics, 2. Jyotisha & Vedic Sidereal Tradition, 3. Western Classical & Hellenistic Tradition, 4. Chinese BaZi & Zi Wei Dou Shu Traditions, 5. Mesoamerican & Maya Sacred Calendars, 6. Polynesian Māori Maramataka, 7. Egyptian Decanic Astrometry (+4 more)
+
+### Community 229 - "Community 229"
+Cohesion: 0.26
+Nodes (11): analyze_branch_interactions(), compute_bazi_chart(), compute_liu_nian(), compute_shen_sha(), compute_yong_shen(), get_ten_god(), BaZi (Four Pillars of Destiny) deterministic calculation module. Uses lunar_pyth, Calculates Ten God relationship of target_stem with respect to day_master (+3 more)
+
+### Community 230 - "Community 230"
+Cohesion: 0.3
+Nodes (12): as(), bs(), ds(), hs(), is(), ms(), ps(), rs() (+4 more)
+
+### Community 231 - "Community 231"
+Cohesion: 0.18
+Nodes (11): 1. Hot Path States, 2. Invariant & Boundary Gates, 3. Sensitivity & Recovery Loop, 4. Terminal Exits, ⏱️ Astrometric Calculation & Invariant State Lifecycle, code:mermaid (stateDiagram-v2), 🧬 Interactive Lifecycle Diagram & Spec, Lifecycle State Machine Transitions (+3 more)
+
+### Community 232 - "Community 232"
+Cohesion: 0.31
+Nodes (10): build_synthesis(), compute_chronocrator_timeline(), compute_temperament_axes(), evaluate_jyotisha_domain(), evaluate_sinic_domain(), evaluate_western_domain(), generate_astrological_inferences(), Cross-cultural synthesis without double-counting. Implements Step 7 and Step 8 o (+2 more)
+
+### Community 233 - "Community 233"
+Cohesion: 0.24
+Nodes (10): compute_ziwei_chart(), get_bureau(), get_star_radiance(), get_ziwei_branch(), Zi Wei Dou Shu (Purple Star Astrology) deterministic calculation module. Compute, Calculates Five Elements Bureau (2..6), Finds Earthly Branch of Zi Wei star from Bureau and Lunar Day, Returns brightness tier: 庙 (Miao), 旺 (Wang), 得 (De), 利 (Li), 平 (Ping), 陷 (Xian) (+2 more)
+
+### Community 234 - "Community 234"
+Cohesion: 0.25
+Nodes (11): Ai(), exitAnimationComplete(), fc(), forEach(), getCookies(), go(), ln(), ni() (+3 more)
+
+### Community 235 - "Community 235"
+Cohesion: 0.22
+Nodes (8): Regression suite bridge connecting classical astrological calculation engines an, Execute complete 6-tradition & 9-tradition deterministic calculation checks., Verify 10 and 100 historical personalities simulation benchmarks., test_suite_classical_astrological_engines(), test_suite_simulations_and_personalities(), Test suite validating the 10-personality simulation results against core biograp, test_100_personalities_dataset_integrity(), test_simulation_dataset_integrity()
+
+### Community 236 - "Community 236"
 Cohesion: 0.2
 Nodes (9): 003 — Honor Reduced Motion Preference in Framer Motion Components, Boundaries, code:tsx (/* frontend/src/App.tsx:951 — current */), code:tsx (/* target in App.tsx */), Problem, Repo conventions to follow, Steps, Target (+1 more)
 
-### Community 224 - "Community 224"
+### Community 237 - "Community 237"
 Cohesion: 0.2
 Nodes (9): 001 — Restrict Heavy Backdrop Blur to Active Center Carousel Card, Boundaries, code:tsx (/* frontend/src/components/TraditionVerticalCarousel.tsx:618), code:tsx (/* target */), Problem, Repo conventions to follow, Steps, Target (+1 more)
 
-### Community 225 - "Community 225"
+### Community 238 - "Community 238"
 Cohesion: 0.2
 Nodes (9): 005 — Decouple Discrete zIndex from Continuous Spring Tween in Carousel, Boundaries, code:tsx (/* frontend/src/components/TraditionVerticalCarousel.tsx:605), code:tsx (/* target */), Problem, Repo conventions to follow, Steps, Target (+1 more)
 
-### Community 226 - "Community 226"
+### Community 239 - "Community 239"
 Cohesion: 0.2
 Nodes (9): 002 — Replace transition-all on Carousel Indicators and Buttons with Targeted GPU Transitions, Boundaries, code:tsx (/* frontend/src/components/TraditionVerticalCarousel.tsx:484), code:tsx (/* target: line 484 */), Problem, Repo conventions to follow, Steps, Target (+1 more)
 
-### Community 227 - "Community 227"
+### Community 240 - "Community 240"
 Cohesion: 0.2
 Nodes (9): 004 — Tighten Theme Toggle Animation Duration to Snappy 160ms, Boundaries, code:tsx (/* frontend/src/App.tsx:808 — current */), code:tsx (/* target */), Problem, Repo conventions to follow, Steps, Target (+1 more)
 
-### Community 228 - "Community 228"
+### Community 241 - "Community 241"
 Cohesion: 0.2
 Nodes (9): 006 — Calibrate SVG Instrument Entrance Timing to Under 350ms, Boundaries, code:css (/* frontend/src/index.css:1357 — current */), code:css (/* target */), Problem, Repo conventions to follow, Steps, Target (+1 more)
 
-### Community 229 - "Community 229"
+### Community 242 - "Community 242"
 Cohesion: 0.2
 Nodes (9): 📂 Archify Interactive Diagram Artifacts, code:block1 (Frontend:), code:mermaid (graph TD), 🏛️ Comprehensive Architecture & Embedded Diagrams, 📊 Core Architecture Overview, 🏛️ Core Principles, Synodix • Astrometric Triangulation Engine Wiki, 🛠️ Technology Stack (+1 more)
 
-### Community 230 - "Community 230"
+### Community 243 - "Community 243"
 Cohesion: 0.2
 Nodes (9): 1. Voting Weights, 2. Prominence Score Calculation, 3. Polarity Vector, code:mermaid (graph TD), Consensus Matrix & Triangulation Mathematics, 🗳️ The 3-Cluster Voting Algorithm, 🧭 The 9 Universal Life Domains, ⚡ The Divergence Metric ($\bar{d} \approx 31.8\%$) (+1 more)
 
-### Community 231 - "Community 231"
-Cohesion: 0.38
-Nodes (10): c(), ce(), g(), h(), ne(), se(), te(), v() (+2 more)
-
-### Community 232 - "Community 232"
+### Community 244 - "Community 244"
 Cohesion: 0.28
 Nodes (8): blank_page(), _get_launch_args(), page_with_data(), conftest.py — Universal Playwright Test Suite Fixtures Provides shared, isolated, Launches headless Chromium, navigates to target local app,     and captures cons, Launches headless Chromium, navigates to target local app,     and captures cons, Launches headless Chromium for testing uninitialized or first-run empty states., Launches headless Chromium for testing uninitialized or first-run empty states.
 
-### Community 233 - "Community 233"
-Cohesion: 0.28
-Nodes (9): addValue(), getAxisMotionValue(), getValue(), hasValue(), Li(), na(), removeValue(), removeValueFromRenderState() (+1 more)
-
-### Community 234 - "Community 234"
-Cohesion: 0.28
-Nodes (9): _(), fo(), mn(), Q(), Qt(), St(), tp(), ua() (+1 more)
-
-### Community 235 - "Community 235"
-Cohesion: 0.36
-Nodes (7): assert_no_critical_errors(), Asserts that no uncaught JavaScript errors or critical exceptions occurred durin, _launch_browser(), test_10_impeccable_quality_audit.py — Multi-Screen Playwright & Impeccable Quali, Verify light mode color contrast, header tooltip downward orientation, and sideb, test_impeccable_light_mode_contrast_and_tooltip_bounds(), test_impeccable_typography_and_screen_audit()
-
-### Community 236 - "Community 236"
+### Community 245 - "Community 245"
 Cohesion: 0.29
-Nodes (7): catalog_screenshots(), Saves a full viewport screenshot to the local machine directory.     Never uploa, Generates a zero-cloud local HTML gallery of all captured screenshots for local, save_screenshot(), _launch_browser(), test_06_cultural_themes.py — Regression suite for 9 Culturally Themed Display Pr, test_cultural_traditions_theming_and_presentations()
+Nodes (7): catalog_screenshots(), Saves a full viewport screenshot to the local machine directory.     Never uploa, Generates a zero-cloud local HTML gallery of all captured screenshots for local, save_screenshot(), _launch_browser(), test_08_independent_input_experience.py — Regression suite for Independent Custo, test_independent_custom_input_and_titan_archive_separation()
 
-### Community 237 - "Community 237"
+### Community 246 - "Community 246"
 Cohesion: 0.29
 Nodes (7): check_element_overlaps(), get_bounding_boxes(), helpers.py — Universal Playwright Visual Regression & UI Testing Engine Local ma, Retrieve rendered bounding client rects for a list of CSS selectors.     Filters, Detects if any visible floating UI elements (tooltips, modals, HUD overlays), Wait for animations, WebGL, 2D Canvas, or SVG graph rendering to settle., wait_for_scene_ready()
 
-### Community 238 - "Community 238"
+### Community 247 - "Community 247"
 Cohesion: 0.25
 Nodes (7): 1. Mandatory Context Reading, 2. Minimal Tokens Protocol (MANDATORY), 3. Persistent Context Maintenance, 4. Regression Test Suite Rules, 5. UI Tooltips & Accessibility Invariants, 6. Packaging & Release Ship Rule, Project Agent Governance & Pipeline Rules
 
-### Community 239 - "Community 239"
+### Community 248 - "Community 248"
 Cohesion: 0.25
 Nodes (6): 009 — City Auto-Suggestions Dropdown Scale-Fade Entrance & Exit, Boundaries, Problem, Repo conventions to follow, Steps, Target
 
-### Community 240 - "Community 240"
+### Community 249 - "Community 249"
 Cohesion: 0.25
 Nodes (7): 008 — Standardize Button Active Press Feedback and Reduced Motion, Boundaries, code:css (.btn-press {), Problem, Repo conventions to follow, Steps, Target
 
-### Community 241 - "Community 241"
-Cohesion: 0.43
-Nodes (6): check_no_horizontal_overflow(), Ensure the rendered page does not horizontally overflow the viewport.     Return, _launch_browser(), test_09_dossier_inferences.py — Validates Dossier Inferences Profile & Subject S, test_dossier_inferences_and_subject_separation(), test_dossier_inferences_mobile_viewport()
-
-### Community 242 - "Community 242"
-Cohesion: 0.38
-Nodes (6): compute_astronomical_base(), deg_to_sign_degree(), get_skyfield_objects(), Dual-engine astronomical calculation and independent verification module. Uses S, Convert longitude (0..360) to (sign_name, degree_in_sign, sign_index_0_based), Convert longitude (0..360) to (sign_name, degree_in_sign, sign_index_0_based)
-
-### Community 243 - "Community 243"
+### Community 250 - "Community 250"
 Cohesion: 0.43
 Nodes (6): compute_persian_chart(), get_decan_ruler(), get_sign_and_degree(), get_term_ruler(), Persian and Medieval Arabic Astrology (Ilm al-Nujūm / علم النجوم) calculation mo, Computes complete Persian/Arabic horoscopic calculations from astronomical basel
 
-### Community 244 - "Community 244"
+### Community 251 - "Community 251"
+Cohesion: 0.38
+Nodes (6): compute_astronomical_base(), deg_to_sign_degree(), get_skyfield_objects(), Dual-engine astronomical calculation and independent verification module. Uses S, Convert longitude (0..360) to (sign_name, degree_in_sign, sign_index_0_based), Convert longitude (0..360) to (sign_name, degree_in_sign, sign_index_0_based)
+
+### Community 252 - "Community 252"
+Cohesion: 0.43
+Nodes (6): check_no_horizontal_overflow(), Ensure the rendered page does not horizontally overflow the viewport.     Return, _launch_browser(), test_09_dossier_inferences.py — Validates Dossier Inferences Profile & Subject S, test_dossier_inferences_and_subject_separation(), test_dossier_inferences_mobile_viewport()
+
+### Community 253 - "Community 253"
+Cohesion: 0.43
+Nodes (6): assert_no_critical_errors(), Asserts that no uncaught JavaScript errors or critical exceptions occurred durin, _launch_browser(), test_03_theme_toggle.py — Regression suite verifying Solar Day Light Theme & Dee, test_light_theme_screens_render_cleanly(), test_theme_toggle_persistence()
+
+### Community 254 - "Community 254"
 Cohesion: 0.29
 Nodes (6): 010 — Feature Explainer Modal Fluid Exit Transition via AnimatePresence, Boundaries, Problem, Repo conventions to follow, Steps, Target
 
-### Community 245 - "Community 245"
+### Community 255 - "Community 255"
 Cohesion: 0.29
 Nodes (6): 011 — Epistemic Journey Fluid Active Indicator & Progress Bar Transition, Boundaries, Problem, Repo conventions to follow, Steps, Target
 
-### Community 246 - "Community 246"
+### Community 256 - "Community 256"
 Cohesion: 0.6
 Nodes (3): responseToCache, STATIC_ASSETS, url
 
-### Community 247 - "Community 247"
+### Community 257 - "Community 257"
 Cohesion: 0.4
 Nodes (5): calculate_solar_hours(), compute_egyptian_chart(), Ancient Egyptian Astronomy and Decanic Astrology (Hermetic & Temple Traditions)., Computes Egyptian Decanic & Chronocrator Horoscopy., Computes local temporal planetary hours (12 unequal day hours / 12 unequal night
 
-### Community 248 - "Community 248"
+### Community 258 - "Community 258"
+Cohesion: 0.47
+Nodes (5): _launch_browser(), test_10_impeccable_quality_audit.py — Multi-Screen Playwright & Impeccable Quali, Verify light mode color contrast, header tooltip downward orientation, and sideb, test_impeccable_light_mode_contrast_and_tooltip_bounds(), test_impeccable_typography_and_screen_audit()
+
+### Community 259 - "Community 259"
 Cohesion: 0.33
 Nodes (5): 1. Current Status & Milestone, 2. Implemented Traditions & Engines, 3. Mathematical Verification & Simulation, 4. Autonomous Workflow & Pipeline Commands, Synodix: Project Context & Working Memory
 
-### Community 249 - "Community 249"
-Cohesion: 0.6
-Nodes (4): _launch_browser(), test_03_theme_toggle.py — Regression suite verifying Solar Day Light Theme & Dee, test_light_theme_screens_render_cleanly(), test_theme_toggle_persistence()
-
-### Community 250 - "Community 250"
+### Community 260 - "Community 260"
 Cohesion: 0.4
 Nodes (4): code:json ({), Expanding the Oxlint configuration, React Compiler, React + TypeScript + Vite
 
-### Community 251 - "Community 251"
+### Community 261 - "Community 261"
 Cohesion: 0.4
 Nodes (4): code:bash (# Run all tests with compact 1-line token-efficient output), Running Tests, Synodix Test Suite & Verification Harness, Test Modules
 
-### Community 253 - "Community 253"
-Cohesion: 0.5
-Nodes (3): Props, VerificationCard(), VerificationReport
+### Community 263 - "Community 263"
+Cohesion: 0.67
+Nodes (3): _launch_browser(), test_06_cultural_themes.py — Regression suite for 9 Culturally Themed Display Pr, test_cultural_traditions_theming_and_presentations()
 
-### Community 254 - "Community 254"
+### Community 264 - "Community 264"
 Cohesion: 0.67
 Nodes (3): _launch_browser(), test_04_mobile_viewport.py — Playwright Mobile Viewport & Touch Ergonomics Verif, test_mobile_viewport_and_touch_targets()
 
-### Community 255 - "Community 255"
-Cohesion: 0.67
-Nodes (3): _launch_browser(), test_08_independent_input_experience.py — Regression suite for Independent Custo, test_independent_custom_input_and_titan_archive_separation()
-
-### Community 256 - "Community 256"
-Cohesion: 0.67
-Nodes (3): _launch_browser(), test_11_feature_guide.py — Regression suite verifying Astrometric & Cultural Fea, test_feature_guide_navigation_and_search()
-
-### Community 257 - "Community 257"
+### Community 265 - "Community 265"
 Cohesion: 0.67
 Nodes (3): _launch_browser(), test_05_inapp_offline_engine.py — In-App Pure Client-Side Engine & Offline Sidel, test_offline_standalone_calculation()
 
-### Community 258 - "Community 258"
+### Community 266 - "Community 266"
+Cohesion: 0.67
+Nodes (3): _launch_browser(), test_11_feature_guide.py — Regression suite verifying Astrometric & Cultural Fea, test_feature_guide_navigation_and_search()
+
+### Community 267 - "Community 267"
 Cohesion: 0.5
 Nodes (3): Execution Summary, Inventory of Plans, Motion & Animation Improvement Plans
 
@@ -1346,17 +1391,17 @@ Nodes (3): Execution Summary, Inventory of Plans, Motion & Animation Improvement
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `i()` connect `Community 52` to `Community 163`, `Community 90`, `Community 105`, `Community 204`, `Community 14`, `Community 78`, `Community 120`, `Community 56`, `Community 94`?**
+- **Why does `apiUrl()` connect `Community 190` to `Community 126`?**
   _High betweenness centrality (0.000) - this node is a cross-community bridge._
-- **Why does `apiUrl()` connect `Community 182` to `Community 141`?**
+- **Why does `ul()` connect `Community 26` to `Community 67`, `Community 131`, `Community 101`, `Community 8`, `Community 42`, `Community 118`, `Community 119`?**
   _High betweenness centrality (0.000) - this node is a cross-community bridge._
 - **What connects `config`, `FALLBACK_PRESETS`, `NavItem` to the rest of the system?**
   _445 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Community 0` be split into smaller, more focused modules?**
-  _Cohesion score 0.03 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.02 - nodes in this community are weakly interconnected._
 - **Should `Community 1` be split into smaller, more focused modules?**
   _Cohesion score 0.02 - nodes in this community are weakly interconnected._
 - **Should `Community 2` be split into smaller, more focused modules?**
-  _Cohesion score 0.03 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.02 - nodes in this community are weakly interconnected._
 - **Should `Community 3` be split into smaller, more focused modules?**
   _Cohesion score 0.03 - nodes in this community are weakly interconnected._

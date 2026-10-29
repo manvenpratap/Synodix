@@ -461,7 +461,7 @@ export const TraditionVerticalCarousel: React.FC<Props> = ({
       tabIndex={0}
       role="region"
       aria-label="Tradition Cards Vertical Carousel Deck"
-      className="relative w-full rounded-2xl overflow-hidden pt-0 pb-1.5 select-none focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
+      className="relative w-full rounded-2xl overflow-x-clip overflow-y-visible pt-0 pb-1.5 select-none focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
     >
       {/* Top Deck Telemetry Bar */}
       <div className="flex items-center justify-between px-2 sm:px-4 py-1.5 border-b border-white/10 text-[11px] font-mono">
@@ -511,12 +511,12 @@ export const TraditionVerticalCarousel: React.FC<Props> = ({
       </div>
 
       {/* Main 3D Stage */}
-      <div className="relative min-h-[450px] sm:min-h-[475px] lg:min-h-[410px] flex items-start justify-center pt-1 sm:pt-3 pb-1.5 sm:pb-3 p-1 sm:p-3 md:pr-16 overflow-x-clip [perspective:1400px] touch-pan-y">
+      <div className="relative flex items-start justify-center pt-1 sm:pt-2 pb-3 sm:pb-4 p-1 sm:p-2 md:pr-14 md:min-h-[420px] overflow-x-clip [perspective:1400px] touch-pan-y">
         {/* Floating Vertical Navigation Rail (Desktop & Tablet only: hidden on mobile) */}
         <div
           role="tablist"
           aria-label="Astrological tradition cards"
-          className="hidden md:flex absolute right-2 sm:right-4 z-40 flex-col items-center gap-1 p-1.5 rounded-full bg-stone-950/85 backdrop-blur-md border border-stone-700/60 shadow-xl"
+          className="hidden md:flex absolute right-1 sm:right-2 z-40 flex-col items-center gap-1 p-1 rounded-full bg-stone-950/90 backdrop-blur-md border border-stone-700/60 shadow-xl"
         >
           <button
             type="button"
@@ -569,7 +569,7 @@ export const TraditionVerticalCarousel: React.FC<Props> = ({
         </div>
 
         {/* Stacked Vertical Carousel Cards */}
-        <div className="relative w-full max-w-4xl min-h-[440px] sm:min-h-[465px] lg:min-h-[400px] flex items-start justify-center">
+        <div className="relative w-full max-w-4xl flex items-start justify-center">
           {TRADITION_ORDER.map((key, index) => {
             const diff = index - activeIndex;
             const theme = cultureThemes[key] || cultureThemes.jyotisha;
@@ -579,10 +579,9 @@ export const TraditionVerticalCarousel: React.FC<Props> = ({
             if (Math.abs(diff) > 2) return null;
 
             // Compute vertical 3D transform metrics with compact headroom
-            const baseTop = activeIndex > 0 ? 10 : 0;
-            const yOffset = diff < 0 ? baseTop + diff * 8 : baseTop + diff * 12;
+            const yOffset = diff < 0 ? diff * 6 : diff * 8;
             const scale = 1 - Math.abs(diff) * 0.035;
-            const opacity = isCenter ? 1 : Math.max(0.2, 0.6 - Math.abs(diff) * 0.25);
+            const opacity = isCenter ? 1 : Math.max(0.15, 0.45 - Math.abs(diff) * 0.2);
             const zIndex = 30 - Math.abs(diff) * 10;
             const rotateX = diff * -2;
 
@@ -627,10 +626,10 @@ export const TraditionVerticalCarousel: React.FC<Props> = ({
                         mass: 0.85,
                       }
                 }
-                className={`absolute w-full rounded-2xl border p-2.5 sm:p-4 lg:p-4.5 shadow-2xl transition-shadow ${
+                className={`${isCenter ? 'relative' : 'absolute inset-0 cursor-pointer'} w-full rounded-2xl border p-2 sm:p-3 shadow-2xl transition-shadow ${
                   isCenter
                     ? `${theme.containerBg} ${theme.containerBorder} backdrop-blur-md shadow-2xl cursor-grab active:cursor-grabbing ring-1 ring-amber-500/30 touch-pan-y`
-                    : 'bg-stone-950/92 border-stone-800 cursor-pointer hover:border-amber-500/40'
+                    : 'bg-stone-950/92 border-stone-800 hover:border-amber-500/40'
                 }`}
                 style={{
                   transformOrigin: 'center center',
@@ -638,7 +637,7 @@ export const TraditionVerticalCarousel: React.FC<Props> = ({
                 }}
               >
                 {/* Cultural Card Header */}
-                <div className="flex items-center justify-between border-b border-white/10 pb-2 mb-2 sm:pb-2.5 sm:mb-2.5">
+                <div className="flex items-center justify-between border-b border-white/10 pb-1.5 mb-1.5 sm:pb-2 sm:mb-2">
                   <div className="flex items-center gap-2 sm:gap-2.5">
                     <span className="text-xl sm:text-2xl select-none">{theme.glyph}</span>
                     <div>
@@ -650,7 +649,7 @@ export const TraditionVerticalCarousel: React.FC<Props> = ({
                           {theme.badge}
                         </span>
                       </div>
-                      <p className="text-xs text-slate-300 font-sans mt-0.5 hidden sm:block">
+                      <p className="text-[11px] text-slate-300 font-sans mt-0.5 truncate hidden md:block">
                         {theme.lineage}
                       </p>
                     </div>
@@ -664,10 +663,10 @@ export const TraditionVerticalCarousel: React.FC<Props> = ({
                 </div>
 
                 {/* Card Main Body: Split between Telemetry and Visual Instrument */}
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-1.5 sm:gap-3 lg:gap-4 items-center">
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-1.5 sm:gap-2.5 lg:gap-3 items-center">
                   {/* Telemetry Placements (shown when not in pure chart mode) */}
                   {chartViewMode !== 'chart' && (
-                    <div className={`${chartViewMode === 'table' ? 'lg:col-span-12' : 'lg:col-span-5'} space-y-1 sm:space-y-2.5`}>
+                    <div className={`${chartViewMode === 'table' ? 'lg:col-span-12' : 'lg:col-span-5'} space-y-1 sm:space-y-1.5`}>
                       <div className="text-xs font-medium text-slate-300 flex items-center justify-between">
                         <span>Key Placements &amp; Positions</span>
                         {primaryExplainers[key] && (
@@ -682,8 +681,8 @@ export const TraditionVerticalCarousel: React.FC<Props> = ({
                       {renderTelemetryHighlights(key)}
 
                       {/* Motto Quote Box (Desktop/Tablet only to reserve vertical space for chart on mobile) */}
-                      <div className="p-1.5 sm:p-2 rounded-lg bg-black/30 border border-white/5 hidden sm:block">
-                        <p className="text-[11px] sm:text-xs text-slate-400 italic font-serif leading-relaxed line-clamp-2">
+                      <div className="p-1 sm:p-1.5 rounded-lg bg-black/30 border border-white/5 hidden sm:block">
+                        <p className="text-[10px] sm:text-[11px] text-slate-400 italic font-serif leading-snug line-clamp-1 sm:line-clamp-2">
                           &ldquo;{theme.motto}&rdquo;
                         </p>
                       </div>
@@ -693,11 +692,11 @@ export const TraditionVerticalCarousel: React.FC<Props> = ({
                   {/* Visual Instrument Display (shown when not in pure table mode) */}
                   {chartViewMode !== 'table' && (
                     <div className={`${chartViewMode === 'chart' ? 'lg:col-span-12' : 'lg:col-span-7'} flex flex-col items-center justify-center`}>
-                      <div className={`w-full p-1.5 sm:p-2.5 rounded-xl border ${theme.frameBorder} ${theme.frameBg} shadow-inner`}>
-                        <div className="flex items-center justify-between pb-0.5 mb-1 sm:pb-1 sm:mb-1.5 border-b border-white/10">
+                      <div className={`w-full p-1 sm:p-2 rounded-xl border ${theme.frameBorder} ${theme.frameBg} shadow-inner`}>
+                        <div className="flex items-center justify-between pb-0.5 mb-1 border-b border-white/10">
                           <div className="flex items-center gap-1.5">
                             <Compass className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-amber-400" />
-                            <h5 className={`text-[11px] sm:text-xs font-sans font-semibold ${theme.accentText}`}>
+                            <h5 className={`text-[10.5px] sm:text-xs font-sans font-semibold ${theme.accentText}`}>
                               {theme.instrumentName}
                             </h5>
                           </div>
@@ -715,31 +714,36 @@ export const TraditionVerticalCarousel: React.FC<Props> = ({
                     </div>
                   )}
                 </div>
+
+                {/* Persistent Common Action Strip (Docked cleanly inside active card only) */}
+                {isCenter && (
+                  <div className="flex flex-col sm:flex-row items-center justify-between gap-1 sm:gap-1.5 px-1 sm:px-2 pt-1.5 sm:pt-2 mt-1.5 sm:mt-2 border-t border-white/10 text-xs">
+                    <div className="flex items-center gap-1.5 text-[10px] sm:text-[11px] font-sans text-stone-400">
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 inline-block shrink-0 shadow-xs shadow-emerald-400/50" />
+                      <span className="hidden sm:inline">Dual-Engine JPL DE421 + SwissEph 2.10 Authenticated</span>
+                      <span className="sm:hidden">JPL DE421 + SwissEph 2.10</span>
+                    </div>
+
+                    <button
+                      type="button"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        onOpenInspector(key);
+                      }}
+                      className="inline-flex items-center justify-center gap-1.5 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-lg bg-amber-950 hover:bg-amber-900/80 text-amber-200 border border-amber-700/80 text-[11px] sm:text-xs font-sans font-semibold transition-[background-color,border-color,transform] motion-safe:active:scale-[0.97] motion-reduce:active:scale-100 duration-150 ease-out cursor-pointer shadow-xs whitespace-nowrap"
+                      data-tooltip={`Open full detailed tables and analysis for ${theme?.name || key}`}
+                      aria-label={`Inspect full telemetry and tables for ${theme?.name || key}`}
+                    >
+                      <span>View Detailed Tables &amp; Analysis</span>
+                      <span className="sr-only">Inspect Full Telemetry & Tables</span>
+                      <ArrowRight className="w-3.5 h-3.5" />
+                    </button>
+                  </div>
+                )}
               </motion.div>
             );
           })}
         </div>
-      </div>
-
-      {/* Persistent Common Action Strip (Outside Carousel Cards) */}
-      <div className="flex flex-col sm:flex-row items-center justify-between gap-1 sm:gap-2 px-2.5 sm:px-6 pt-1.5 sm:pt-2 pb-1 border-t border-white/10 text-xs">
-        <div className="flex items-center gap-2 text-[10px] sm:text-[11px] font-sans text-stone-400">
-          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 inline-block shadow-xs shadow-emerald-400/50" />
-          <span className="hidden sm:inline">Dual-Engine JPL DE421 + SwissEph 2.10 Authenticated</span>
-          <span className="sm:hidden">JPL DE421 + SwissEph 2.10 Authenticated</span>
-        </div>
-
-        <button
-          type="button"
-          onClick={() => onOpenInspector(activeTab)}
-          className="inline-flex items-center justify-center gap-1.5 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-lg bg-amber-950 hover:bg-amber-900/80 text-amber-200 border border-amber-700/80 text-[11px] sm:text-xs font-sans font-semibold transition-[background-color,border-color,transform] motion-safe:active:scale-[0.97] motion-reduce:active:scale-100 duration-150 ease-out cursor-pointer shadow-xs whitespace-nowrap"
-          data-tooltip={`Open full detailed tables and analysis for ${currentTheme?.name || activeTab}`}
-          aria-label={`Inspect full telemetry and tables for ${currentTheme?.name || activeTab}`}
-        >
-          <span>View Detailed Tables &amp; Analysis</span>
-          <span className="sr-only">Inspect Full Telemetry & Tables</span>
-          <ArrowRight className="w-3.5 h-3.5" />
-        </button>
       </div>
     </div>
   );

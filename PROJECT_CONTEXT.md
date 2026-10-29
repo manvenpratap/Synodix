@@ -1,7 +1,7 @@
 # Synodix: Project Context & Working Memory
 
-**Last Updated:** 2026-10-29 23:27:08
-**Version:** 2.33.21  
+**Last Updated:** 2026-10-30 00:38:06
+**Version:** 2.33.22  
 **Stack:** Python 3.12 (FastAPI, Swiss Ephemeris 2.10, Skyfield DE421) + TypeScript / React 19 / Vite / Tailwind CSS v4 / Framer Motion / Capacitor 8 (iOS & Android)  
 **Workspace:** `/Volumes/Study/Projects/Astrology` (symlinked as `/Volumes/Study/Astrology`)  
 **Git Remote:** `https://github.com/manvenpratap/Synodix.git`  
@@ -10,7 +10,28 @@
 
 ## 1. Current Status & Milestone
 
-- **Active Phase**: Vertical Carousel Deck Viewport Geometry & Zero-Clipping Calibration (Completed)
+- **Active Phase**: Carousel Deck Zero-Overlap Geometry & Viewport Calibration (Completed)
+- **Zero-Overlap Viewport Geometry & De-truncation Calibration (v2.33.22)**:
+  - **Docked Active Card Action Strip (`TraditionVerticalCarousel.tsx`)**:
+    - Relocated the persistent Common Action Strip ("Dual-Engine JPL DE421 + SwissEph 2.10" & "View Detailed Tables & Analysis") directly into the bottom flow of the active card (`isCenter`), bounded by the card's rounded border and subtle top divider.
+    - Conditionally excluded the action strip on background/stacked cards (`{isCenter && (...)}`), completely eliminating duplicate button peeking and bleeding beneath the active card.
+    - Converted active card to natural relative flow while maintaining absolute positioning for stacked cards, matching container height dynamically.
+  - **Visual Instrument Scaling & Streamlining (`ChartWheelVisualizer.tsx`)**:
+    - Calibrated circular wheels (`NorthIndianChart`, `WesternCircularWheel`, `BaZiElementPentagram`) to `max-w-[145px] sm:max-w-[175px] lg:max-w-[200px]`.
+    - Calibrated dials and matrices (`MaramatakaLunarDial`, `EgyptianDecanStarClock`, `MayaCalendarCompass`, `TibetanMewaGrid`) to `max-w-[145px] sm:max-w-[170px] lg:max-w-[195px]`.
+    - Compacted `ZiWeiPalaceGrid` cells with `p-0.5`, `text-[8px]` headers, and single-star rows, reducing height to 145px and capping grid container at `max-w-[340px] sm:max-w-[380px] lg:max-w-[400px]`.
+    - Compacted `AlmutenDignityBarChart` to `max-w-[270px] space-y-0.5`.
+  - **De-truncation Across Mobile & Desktop Layouts (`App.tsx`, `TraditionCharts.tsx`)**:
+    - Mobile bottom navigation tab label: switched to `text-[8.5px] sm:text-[9.5px] whitespace-nowrap`, permanently eliminating ellipsis truncation on the `Traditions` tab (`scrollWidth === clientWidth == 55px`).
+    - Mobile active subject chip: expanded to `max-w-[140px]`, preventing "Custom Subject" from clipping into "CUSTOM SUBJ...".
+    - Screen header title: initialized Workbench `shortLabel` to clean "Input", avoiding "WORKBENC..." uppercase clipping on narrow screens.
+    - Stepper height compaction: refined step pill buttons to `min-h-[26px] sm:min-h-[30px]` and `py-0.5 sm:py-1`, saving 35px of vertical screen real estate.
+    - Stage container: configured `overflow-x-clip overflow-y-visible` and `md:min-h-[420px]`, ensuring pointer events on vertical rail buttons are never intercepted.
+  - **Light Mode High-Contrast Repair (`index.css`)**:
+    - Added `background-image: none !important;` to `[data-theme="light"] .machined-bezel`, preventing dark obsidian background gradients from painting over light theme backgrounds and ensuring high-contrast dark warm amber text on clean vellum parchment.
+  - **Automated Verification**:
+    - Playwright telemetry measurements confirmed 59.0px clearance above mobile bottom nav (390x844) and 48px lateral clearance from desktop vertical rail (1024x665).
+    - Full Pytest suite passed cleanly: 26/26 passed in 87.42s via `./pipeline.sh test --summary`.
 - **Carousel Card Viewport Geometry & Zero-Clipping Calibration (v2.33.21)**:
   - **Eliminated Container Clipping & Document Flow Collision**:
     - Replaced rigid stage `overflow-hidden` with `overflow-x-clip`, eliminating artificial bottom cutoffs while preserving horizontal swipe safety and satisfying zero horizontal overflow.

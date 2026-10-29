@@ -69,7 +69,7 @@ const NAV_ITEMS: NavItem[] = [
   {
     id: 'workbench',
     label: 'Workbench & Vault',
-    shortLabel: 'Workbench',
+    shortLabel: 'Input',
     description: 'Enter birth details, load saved profiles, or pick historical figures',
     icon: Sliders
   },
@@ -766,7 +766,7 @@ function AppContent() {
                 <button
                   type="button"
                   onClick={() => navigateTo('workbench')}
-                  className="md:hidden flex items-center gap-1 px-2 py-0.5 rounded-full bg-stone-900 border border-amber-800/60 text-[11px] font-mono text-amber-300 truncate max-w-[110px] cursor-pointer shrink-0"
+                  className="md:hidden flex items-center gap-1 px-2 py-0.5 rounded-full bg-stone-900 border border-amber-800/60 text-[11px] font-mono text-amber-300 truncate max-w-[140px] cursor-pointer shrink-0"
                   data-tooltip="Switch active subject"
                   aria-label={`Subject: ${activeSubjectName}. Tap to switch.`}
                 >
@@ -930,7 +930,7 @@ function AppContent() {
                   aria-current={isActive ? 'step' : undefined}
                   aria-label={`Step ${s.step}: ${s.label}${isActive ? ' (current step)' : isPassed ? ' (completed)' : ''}`}
                   data-tooltip={`Step ${s.step} of 4: ${s.label}`}
-                  className={`relative flex flex-row items-center justify-center gap-1 sm:gap-1.5 px-1 sm:px-2 py-0.5 sm:py-1.5 min-h-[28px] sm:min-h-[38px] rounded-md sm:rounded-lg text-center cursor-pointer transition-[background-color,border-color,color,transform] motion-safe:active:scale-[0.97] motion-reduce:active:scale-100 duration-150 ease-out touch-manipulation focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 ${
+                  className={`relative flex flex-row items-center justify-center gap-1 sm:gap-1.5 px-1 sm:px-2 py-0.5 sm:py-1 min-h-[26px] sm:min-h-[30px] rounded-md sm:rounded-lg text-center cursor-pointer transition-[background-color,border-color,color,transform] motion-safe:active:scale-[0.97] motion-reduce:active:scale-100 duration-150 ease-out touch-manipulation focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 ${
                     isActive
                       ? 'text-amber-200 font-bold shadow-xs'
                       : isPassed
@@ -961,10 +961,10 @@ function AppContent() {
                     {s.step}
                   </span>
                   <div className="relative z-10 text-left min-w-0">
-                    <span className="hidden sm:block text-[9px] text-amber-500/80 font-mono leading-none">
+                    <span className="hidden sm:block text-[8.5px] text-amber-500/80 font-mono leading-none">
                       {['Step 1', 'Step 2', 'Step 3', 'Step 4'][idx]}
                     </span>
-                    <span className="truncate text-[10px] sm:text-[11px] font-serif font-medium">
+                    <span className="truncate text-[9.5px] sm:text-[10.5px] font-serif font-medium">
                       {s.label}
                       {s.srText && <span className="sr-only"> {s.srText}</span>}
                     </span>
@@ -991,7 +991,7 @@ function AppContent() {
         {/* Main Content Viewport */}
         <main
           className={`flex-1 ${
-            currentScreen === 'traditions' ? 'p-3 sm:p-4 lg:p-5' : 'p-4 sm:p-6 lg:p-8'
+            currentScreen === 'traditions' ? 'p-2 sm:p-3 lg:p-3' : 'p-4 sm:p-6 lg:p-8'
           } w-full mx-auto pb-[calc(6.5rem+env(safe-area-inset-bottom,0px))] md:pb-8 ${
             currentScreen === 'guide' || currentScreen === 'evidence' ? 'max-w-full lg:px-8' : 'max-w-7xl'
           }`}
@@ -1159,7 +1159,7 @@ function AppContent() {
                 <div className="absolute top-0 left-1/2 -translate-x-1/2 w-6 h-0.5 bg-amber-400 rounded-full" />
               )}
               <Icon className={`w-4.5 h-4.5 mb-0.5 ${isActive ? 'text-amber-400' : 'text-stone-400'}`} />
-              <span className="mt-0.5 text-[9.5px] leading-tight font-medium tracking-tight truncate w-full text-center px-0.5">
+              <span className="mt-0.5 text-[8.5px] sm:text-[9.5px] leading-tight font-medium tracking-tight whitespace-nowrap w-full text-center px-0.5">
                 {item.label}
                 {'srText' in item && item.srText && <span className="sr-only">{item.srText}</span>}
               </span>

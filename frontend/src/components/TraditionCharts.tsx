@@ -264,14 +264,14 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
   const currentTheme = CULTURE_THEMES[activeTab] || CULTURE_THEMES.jyotisha;
 
   return (
-    <div className={`machined-bezel p-2 sm:p-5 pt-2 sm:pt-4 rounded-2xl shadow-2xl relative transition-colors duration-300 overflow-hidden backdrop-blur-xl ${currentTheme.containerBg} ${currentTheme.containerBorder}`}>
+    <div className={`machined-bezel p-2 sm:p-3.5 pt-2 sm:pt-3 rounded-2xl shadow-2xl relative transition-colors duration-300 overflow-hidden backdrop-blur-xl ${currentTheme.containerBg} ${currentTheme.containerBorder}`}>
       <div className="reticle-corner-tl" />
       <div className="reticle-corner-tr" />
       <div className="reticle-corner-bl" />
       <div className="reticle-corner-br" />
 
       {/* Tractate II Header Bar: Title + Display Presentation Switcher + View Mode Toggle */}
-      <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-1.5 sm:gap-2.5 pb-1.5 sm:pb-2 border-b border-white/10">
+      <div className="flex flex-col xl:flex-row xl:items-center justify-between gap-1.5 pb-1.5 border-b border-white/10">
         <div className="min-w-0">
           <h3 className="text-sm sm:text-base font-serif font-semibold text-stone-100 flex items-center gap-2 whitespace-nowrap">
             <span>Step 2 · 9 Astrological Traditions</span>
@@ -282,7 +282,7 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
           </p>
         </div>
 
-        <div className="flex flex-wrap items-center justify-between sm:justify-end gap-1 sm:gap-2 shrink-0">
+        <div className="flex flex-wrap items-center justify-between sm:justify-start xl:justify-end gap-1.5 sm:gap-2 shrink-0">
           {/* Display Presentation Switcher: Comprehensive / Visual Instrument / Telemetry Tables */}
           <div className="flex items-center gap-0.5 p-0.5 rounded-lg bg-stone-900/90 border border-stone-800 text-[10px] sm:text-[11px] font-mono shrink-0">
             {(['both', 'chart', 'table'] as const).map((mode) => {
@@ -1851,11 +1851,11 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
 
       {/* Mobile & Tablet Journey Navigation Bar */}
       {onNavigate && (
-        <div className="mt-6 pt-4 border-t border-white/10 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2.5">
+        <div className="mt-3 pt-2 sm:mt-4 sm:pt-2.5 border-t border-white/10 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2">
           <button
             type="button"
             onClick={() => onNavigate('workbench')}
-            className="inline-flex items-center justify-center gap-2 px-4 py-2.5 min-h-[44px] text-xs font-sans rounded-lg bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-800 cursor-pointer transition-colors active:scale-[0.98]"
+            className="inline-flex items-center justify-center gap-2 px-3.5 py-1.5 min-h-[38px] text-xs font-sans rounded-lg bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-800 cursor-pointer transition-colors active:scale-[0.98]"
           >
             <ArrowLeft className="w-3.5 h-3.5 shrink-0" aria-hidden="true" />
             <span className="whitespace-nowrap">Step 1 · Back to Birth Input<span className="sr-only"> Back to Workbench</span></span>
@@ -1863,7 +1863,7 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
           <button
             type="button"
             onClick={() => onNavigate('synthesis')}
-            className="inline-flex items-center justify-center gap-2 px-4 py-2.5 min-h-[44px] text-xs font-serif rounded-lg bg-amber-600 hover:bg-amber-500 text-stone-950 font-semibold cursor-pointer transition-colors duration-150 border border-amber-300 shadow-xs active:scale-[0.98] whitespace-nowrap"
+            className="inline-flex items-center justify-center gap-2 px-3.5 py-1.5 min-h-[38px] text-xs font-serif rounded-lg bg-amber-600 hover:bg-amber-500 text-stone-950 font-semibold cursor-pointer transition-colors duration-150 border border-amber-300 shadow-xs active:scale-[0.98] whitespace-nowrap"
           >
             <span className="whitespace-nowrap">Step 3 · Tradition Comparison<span className="sr-only"> Explore Cross-Cultural Synthesis Matrix</span></span>
             <ArrowRight className="w-3.5 h-3.5 shrink-0" aria-hidden="true" />
