@@ -437,15 +437,15 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
           <div className="hidden sm:block">
             <div className="flex flex-wrap items-center gap-x-2 gap-y-0.5">
               <span className="text-xs text-amber-400 font-serif font-medium">
-                Tractate I · Astrometric Calibration & Input
+                Step 1 · Enter Birth Details
               </span>
               <span className="text-stone-400 hidden sm:inline">•</span>
               <span className="text-xs text-stone-400 font-sans">
-                {activeMode === 'custom' ? 'Clean Independent Workspace' : '100 Verified Historical Records'}
+                {activeMode === 'custom' ? 'Custom Input Workspace' : '100 Verified Historical Records'}
               </span>
             </div>
             <h2 className="text-base sm:text-lg font-serif font-semibold text-stone-100 mt-2.5 sm:mt-3">
-              {activeMode === 'custom' ? 'Custom Birth Chart Calibration' : 'Historical Titan Benchmark Library'}
+              {activeMode === 'custom' ? 'Your Birth Chart Details' : 'Historical Figures & Benchmark Library'}
             </h2>
           </div>
 
@@ -534,11 +534,11 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
             <div className="flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-emerald-400 inline-block shadow-xs" />
               <span className="text-xs font-sans font-medium text-stone-200">
-                Astrometric Telemetry Studio
+                Astronomical Calculation Studio
               </span>
               <span className="text-stone-400 hidden md:inline">•</span>
               <span className="text-xs font-sans text-stone-400 hidden md:inline">
-                WGS-84 Standards & Dual-Engine Verification
+                High-Precision Swiss Ephemeris & GPS Standards
               </span>
             </div>
 
@@ -547,7 +547,7 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
               <div className="flex items-center gap-1.5 flex-wrap">
                 <span className="text-xs font-medium text-stone-300 flex items-center gap-1">
                   <Bookmark className="w-3 h-3 text-amber-400" />
-                  Vault ({savedProfiles.length}):
+                  Saved Profiles ({savedProfiles.length}):
                 </span>
                 <div className="flex items-center gap-1 flex-wrap">
                   {savedProfiles.map((sp) => (
@@ -591,14 +591,14 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
                   <div>
                     <div className="flex items-center gap-2">
                       <span className="text-xs font-medium text-amber-400 bg-amber-950/60 px-1.5 py-0.5 rounded border border-amber-800/60">
-                        Module 1
+                        Section 1
                       </span>
                       <h3 className="text-xs sm:text-sm font-medium text-stone-100">
-                        Subject Identity & Natal Cycle
+                        Name & Gender Cycle
                       </h3>
                     </div>
                     <p className="hidden sm:block text-[11px] text-stone-400 font-sans mt-0.5">
-                      Dossier label, biological cycle polarity, and local draft persistence
+                      Name or label for this chart session and gender cycle for BaZi luck direction
                     </p>
                   </div>
                 </div>
@@ -637,7 +637,7 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
                     htmlFor="subject_name"
                     className="block text-xs font-sans font-medium text-stone-300 mb-1"
                   >
-                    Subject / Profile Dossier Name
+                    Person's Name or Chart Label
                   </label>
                   <input
                     id="subject_name"
@@ -646,11 +646,11 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
                     enterKeyHint="next"
                     value={customSubjectName}
                     onChange={(e) => setCustomSubjectName(e.target.value)}
-                    placeholder="e.g. My Personal Chart, Client Natal Audit, Custom Subject..."
+                    placeholder="e.g. My Personal Chart, Jane Doe, Custom Subject..."
                     className="w-full bg-stone-950 border border-stone-800 rounded-lg px-3 py-2.5 sm:py-2 min-h-[44px] sm:min-h-[40px] text-xs font-medium text-stone-100 placeholder-stone-500 focus:outline-none focus:border-amber-500 focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:ring-offset-1 focus-visible:ring-offset-stone-950 transition-colors"
                   />
                   <p className="hidden sm:block text-[11px] text-stone-400 font-sans mt-1">
-                    Label assigned to this custom astrometric session
+                    Name or label for this birth chart session
                   </p>
                 </div>
 
@@ -661,10 +661,10 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
                       htmlFor="gender"
                       className="block text-xs font-sans font-medium text-stone-300"
                     >
-                      Gender (Cycle Polarity)
+                      Gender / Cycle Direction
                     </label>
                     <span className="text-[11px] font-sans text-amber-400/80">
-                      BaZi / Tibetan Cycle
+                      BaZi &amp; Tibetan Cycles
                     </span>
                   </div>
                   <select
@@ -675,12 +675,12 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
                     }
                     className="w-full bg-stone-950 border border-stone-800 rounded-lg px-3 py-2.5 sm:py-2 min-h-[44px] sm:min-h-[40px] text-xs text-stone-100 focus:outline-none focus:border-amber-500 focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:ring-offset-1 focus-visible:ring-offset-stone-950 transition-colors cursor-pointer"
                   >
-                    <option value="male">Male (Da Yun forward/backward rule)</option>
-                    <option value="female">Female (Da Yun forward/backward rule)</option>
+                    <option value="male">Male (Standard forward/backward luck cycles)</option>
+                    <option value="female">Female (Standard forward/backward luck cycles)</option>
                     <option value="neutral">Neutral / Unspecified</option>
                   </select>
                   <p className="hidden sm:block text-[11px] text-stone-400 font-sans mt-1">
-                    Directs 10-year luck pillar trajectory & elemental stem polarity
+                    Directs 10-year luck pillar trajectory in Chinese BaZi
                   </p>
                 </div>
               </div>
@@ -698,19 +698,19 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
                   <div>
                     <div className="flex items-center gap-2">
                       <span className="text-xs font-medium text-amber-400 bg-amber-950/60 px-1.5 py-0.5 rounded border border-amber-800/60">
-                        Module 2
+                        Section 2
                       </span>
                       <h3 className="text-xs sm:text-sm font-medium text-stone-100">
-                        Temporal Coordinates & Ephemeris Epoch
+                        Date &amp; Time of Birth
                       </h3>
                     </div>
                     <p className="hidden sm:block text-[11px] text-stone-400 font-sans mt-0.5">
-                      Civil calendar date, local 24-hour time, and Rodden record rating
+                      Civil calendar date, local 24-hour time, and birth-time certainty rating
                     </p>
                   </div>
                 </div>
                 <span className="text-[11px] font-sans text-amber-300 bg-amber-950/60 border border-amber-800/70 px-2 py-0.5 rounded self-start sm:self-auto">
-                  Julian Day (UT) Calibrated
+                  Universal Time (UTC) Standard
                 </span>
               </div>
 
@@ -721,7 +721,7 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
                     htmlFor="birth_date"
                     className="block text-xs font-sans font-medium text-stone-300 mb-1"
                   >
-                    Date of Birth (Gregorian Civil)
+                    Date of Birth
                   </label>
                   <input
                     id="birth_date"
@@ -733,7 +733,7 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
                     className="w-full bg-stone-950 border border-stone-800 rounded-lg px-3 py-2.5 sm:py-2 min-h-[44px] sm:min-h-[40px] text-xs font-mono text-stone-100 focus:outline-none focus:border-amber-500 focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:ring-offset-1 focus-visible:ring-offset-stone-950 transition-colors"
                   />
                   <p className="hidden sm:block text-[11px] text-stone-400 font-sans mt-1">
-                    Gregorian civil calendar date
+                    Standard calendar date
                   </p>
                 </div>
 
@@ -743,7 +743,7 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
                     htmlFor="birth_time"
                     className="block text-xs font-sans font-medium text-stone-300 mb-1"
                   >
-                    Time (24-Hour Local Civil)
+                    Time of Birth (24-Hour Local Time)
                   </label>
                   <input
                     id="birth_time"
@@ -765,7 +765,7 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
                     htmlFor="time_certainty"
                     className="block text-xs font-sans font-medium text-stone-300 mb-1"
                   >
-                    Time Certainty / Record Quality
+                    Birth Time Accuracy
                   </label>
                   <select
                     id="time_certainty"
@@ -779,12 +779,12 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
                     className="w-full bg-stone-950 border border-stone-800 rounded-lg px-3 py-2.5 sm:py-2 min-h-[44px] sm:min-h-[40px] text-xs text-stone-100 focus:outline-none focus:border-amber-500 focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:ring-offset-1 focus-visible:ring-offset-stone-950 transition-colors cursor-pointer"
                   >
                     <option value="exact">Exact (Certificate / Hospital record, ±2m)</option>
-                    <option value="rounded_15">Rounded to 15m (Family memory / registry, ±15m)</option>
-                    <option value="approx_30">Approximate (Time of day, ±30m)</option>
-                    <option value="unknown">Unknown Time (Date-stable methods only)</option>
+                    <option value="rounded_15">Approximate (Family memory, within ±15m)</option>
+                    <option value="approx_30">Rough Estimate (Time of day, within ±30m)</option>
+                    <option value="unknown">Unknown Time (Date-only calculations)</option>
                   </select>
                   <p className="hidden sm:block text-[11px] text-stone-400 font-sans mt-1">
-                    Calibrates T-, T, T+ uncertainty ensemble
+                    Calibrates time-sensitivity calculations
                   </p>
                 </div>
               </div>
@@ -802,14 +802,14 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
                   <div>
                     <div className="flex items-center gap-2">
                       <span className="text-xs font-medium text-emerald-400 bg-emerald-950/60 px-1.5 py-0.5 rounded border border-emerald-800/60">
-                        Module 3
+                        Section 3
                       </span>
                       <h3 className="text-xs sm:text-sm font-medium text-stone-100">
-                        Geographic Origin & Spatial Observer
+                        Birthplace &amp; Location
                       </h3>
                     </div>
                     <p className="hidden sm:block text-[11px] text-stone-400 font-sans mt-0.5">
-                      Birth city, country gazetteer, and high-precision WGS-84 decimal coordinates
+                      City, country, and coordinates used for exact rising sign calculations
                     </p>
                   </div>
                 </div>
@@ -1184,12 +1184,18 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
                       <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                       <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                     </svg>
-                    <span className="relative z-10 font-serif tracking-wide whitespace-nowrap">Evaluating Dual Engines & Uncertainty Ensemble…</span>
+                    <span className="relative z-10 font-serif tracking-wide whitespace-nowrap">
+                      Calculating Planetary Positions &amp; Charts…
+                      <span className="sr-only">Evaluating Dual Engines & Uncertainty Ensemble…</span>
+                    </span>
                   </>
                 ) : (
                   <>
                     <Compass className="w-4 h-4 text-stone-950" />
-                    <span className="font-serif font-bold tracking-wide whitespace-nowrap">Compute, Verify & Synthesize Chart</span>
+                    <span className="relative z-10 font-serif font-bold tracking-wide whitespace-nowrap">
+                      Calculate All 9 Traditions
+                      <span className="sr-only">Compute, Verify & Synthesize Chart</span>
+                    </span>
                   </>
                 )}
               </button>
@@ -1198,14 +1204,14 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
             {/* Subtle Independent Gateway to Benchmark Archive */}
             <div className="pt-3 border-t border-stone-800 flex flex-col sm:flex-row sm:items-center justify-between text-xs text-stone-400 gap-2">
               <span className="text-xs">
-                Want to cross-examine against historical geniuses and certified records?
+                Want to test with a famous historical figure or certified record?
               </span>
               <button
                 type="button"
                 onClick={() => setActiveMode('archive')}
                 className="inline-flex items-center gap-1.5 min-h-[44px] sm:min-h-[36px] text-amber-400 hover:text-amber-300 font-sans font-medium text-[11px] cursor-pointer hover:underline self-start sm:self-auto focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 rounded px-2 whitespace-nowrap"
               >
-                <span className="whitespace-nowrap">Browse 100 Verified Historical Titans</span>
+                <span className="whitespace-nowrap">Explore 100 Famous Historical Figures (Titans)</span>
                 <ArrowRight className="w-3.5 h-3.5" />
               </button>
             </div>
@@ -1373,10 +1379,10 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
                     type="button"
                     onClick={() => handleCustomizeTitan(selectedTitan)}
                     className="w-full sm:w-auto inline-flex items-center justify-center gap-1.5 px-3 py-2 min-h-[44px] text-xs rounded-lg border border-stone-800 hover:border-amber-700/80 bg-stone-900 hover:bg-stone-800 text-stone-200 hover:text-amber-300 cursor-pointer transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 whitespace-nowrap"
-                    title="Load this titan's birth details into the Custom Calibration Workbench"
+                    title="Load this figure's birth details into the Custom Calibration Workbench"
                   >
                     <PenTool className="w-3.5 h-3.5 text-amber-400" />
-                    <span className="whitespace-nowrap">Customize in Manual Input</span>
+                    <span className="whitespace-nowrap">Customize Birth Details<span className="sr-only">Customize in Manual Input</span></span>
                   </button>
 
                   <button
@@ -1385,7 +1391,7 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
                     disabled={isLoading}
                     className="w-full sm:w-auto inline-flex items-center justify-center gap-1.5 px-4 py-2.5 min-h-[44px] text-xs rounded-lg bg-amber-600 hover:bg-amber-500 text-stone-950 font-serif font-bold border border-amber-300 cursor-pointer transition-colors shadow-xs focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 whitespace-nowrap"
                   >
-                    <span className="whitespace-nowrap">Calculate Titan Chart</span>
+                    <span className="whitespace-nowrap">Calculate This Chart</span>
                     <ArrowRight className="w-3.5 h-3.5" />
                   </button>
                 </div>

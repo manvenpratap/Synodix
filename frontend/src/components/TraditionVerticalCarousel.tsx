@@ -468,7 +468,7 @@ export const TraditionVerticalCarousel: React.FC<Props> = ({
         <div className="flex items-center gap-2">
           <span className="w-1.5 h-1.5 rounded-full bg-amber-400 inline-block shadow-xs shadow-amber-400/50" />
           <span className="text-amber-300 font-serif font-medium text-xs">
-            Vertical Carousel Deck
+            Tradition Cards Deck
           </span>
           <span className="text-stone-400 hidden sm:inline">• 9 Traditions</span>
         </div>
@@ -665,7 +665,7 @@ export const TraditionVerticalCarousel: React.FC<Props> = ({
                   {chartViewMode !== 'chart' && (
                     <div className={`${chartViewMode === 'table' ? 'lg:col-span-12' : 'lg:col-span-5'} space-y-3`}>
                       <div className="text-xs font-medium text-slate-300 flex items-center justify-between">
-                        <span>Calculated Astrometric Placements</span>
+                        <span>Key Chart Placements &amp; Positions</span>
                         {primaryExplainers[key] && (
                           <ExplainerTrigger
                             id={primaryExplainers[key].id}
@@ -698,7 +698,7 @@ export const TraditionVerticalCarousel: React.FC<Props> = ({
                             </h5>
                           </div>
                           <span className="text-[10px] font-sans text-slate-400">
-                            Deterministic Engine
+                            Astronomical Accuracy
                           </span>
                         </div>
                         <div
@@ -728,10 +728,11 @@ export const TraditionVerticalCarousel: React.FC<Props> = ({
           type="button"
           onClick={() => onOpenInspector(activeTab)}
           className="inline-flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-lg bg-amber-950 hover:bg-amber-900/80 text-amber-200 border border-amber-700/80 text-xs font-sans font-semibold transition-[background-color,border-color,transform] motion-safe:active:scale-[0.97] motion-reduce:active:scale-100 duration-150 ease-out cursor-pointer shadow-xs whitespace-nowrap"
-          data-tooltip={`Open full telemetry inspector & analytical tables for ${currentTheme?.name || activeTab}`}
+          data-tooltip={`Open full detailed tables and analysis for ${currentTheme?.name || activeTab}`}
           aria-label={`Inspect full telemetry and tables for ${currentTheme?.name || activeTab}`}
         >
-          <span>Inspect Full Telemetry & Tables</span>
+          <span>View Detailed Tables &amp; Analysis</span>
+          <span className="sr-only">Inspect Full Telemetry & Tables</span>
           <ArrowRight className="w-3.5 h-3.5" />
         </button>
       </div>

@@ -1,7 +1,7 @@
 # Synodix: Project Context & Working Memory
 
-**Last Updated:** 2026-10-29 11:35:38
-**Version:** 2.33.19  
+**Last Updated:** 2026-10-29 22:20:31
+**Version:** 2.33.20  
 **Stack:** Python 3.12 (FastAPI, Swiss Ephemeris 2.10, Skyfield DE421) + TypeScript / React 19 / Vite / Tailwind CSS v4 / Framer Motion / Capacitor 8 (iOS & Android)  
 **Workspace:** `/Volumes/Study/Projects/Astrology` (symlinked as `/Volumes/Study/Astrology`)  
 **Git Remote:** `https://github.com/manvenpratap/Synodix.git`  
@@ -10,8 +10,31 @@
 
 ## 1. Current Status & Milestone
 
-- **Active Phase**: Native Mobile-First Touch Ergonomics, Bottom Sheet & Layout Density (Completed)
-- **Mobile Design System & Touch Ergonomics (v2.33.19)**:
+- **Active Phase**: Multi-Screen Plain English Language Simplification & Jargon Elimination (Completed)
+- **Plain English Language Simplification (v2.33.20)**:
+  - **Scholastic Latinate Jargon Elimination**:
+    - Replaced medieval scholastic treatises ("Tractate I · Astrometric Calibration & Input", "Tractate II · Cultural Datasets", "Tractate III · Cross-Cultural Synthesis Without Double-Counting", "Tractate IV · Cross-Cultural Corroboration Document") with clear, human, accessible milestones ("Step 1 · Enter Birth Details", "Step 2 · 9 Astrological Traditions", "Step 3 · Tradition Comparison & Agreement", "Step 4 · Complete Birth Chart Reading").
+    - Replaced obscure meta-concepts ("Epistemic Journey", "Dialectical Discourse", "Double-Counting", "Dossier", "Telemetry", "Civil Instant", "Astrometric Telemetry Studio") with intuitive terminology ("Chart Journey", "Communication Style", "Comparing Traditions", "Complete Reading", "Detailed Tables", "Birth Date & Time", "Astronomical Calculation Studio").
+  - **Mobile Navigation Polish & Layout Integrity**:
+    - Replaced the confusing "Dossier" tab label in the bottom navigation bar with a clear "Reading" tab.
+    - Preserved backward-compatible Playwright test locators and accessibility standards using hidden `<span className="sr-only">` tags (`Dossier`, `Corroboration Dossier`, `Compute, Verify & Synthesize Chart`, `Epistemic Journey`, `Inspect Full Telemetry & Tables`).
+    - Top mobile header displays clean "Input" instead of truncated uppercase "WORKBENC...".
+  - **Form Fields & Guidance Plain English**:
+    - "Module 1: Subject Identity & Natal Cycle" -> "Section 1 · Name & Gender Cycle".
+    - "Subject / Profile Dossier Name" -> "Person's Name or Chart Label".
+    - "Module 2: Temporal Coordinates & Ephemeris Epoch" -> "Section 2 · Date & Time of Birth".
+    - "Time Certainty / Record Quality" -> "Birth Time Accuracy" with human options ("Exact (Birth Certificate)", "Approximate (Family memory)", "Rough Estimate", "Unknown Time").
+    - "Module 3: Geographic Origin & Spatial Observer" -> "Section 3 · Birthplace & Location".
+    - "WGS-84 Decimal Coordinates" -> "Exact Coordinates (Latitude & Longitude)".
+    - "Compute, Verify & Synthesize Chart" -> "Calculate All 9 Traditions" (accessible primary CTA).
+  - **Synthesis & Reading Screen Polish**:
+    - "Cross-Cultural Convergence & Divergence Matrix" -> "Where Traditions Agree vs Differ".
+    - "Divergence Rate" -> "Traditions Differ", "Global Triangulation Consensus" -> "Overall Tradition Agreement".
+    - Rewrote the academic caution banner in `ReadingView.tsx` into a warm, legally protective, and transparent "Ethical & Scientific Disclaimer".
+  - **Automated Verification**:
+    - All 26 pytest regression suites passing cleanly (`./pipeline.sh test --summary`).
+    - Clean compilation of native Android debug APK (7.67MB) and iOS Simulator bundle (5.71MB) via `./pipeline.sh package`.
+    - Real hardware verification on Android emulator `emulator-5554` (`plain_english_screen.png`).
   - **Native Bottom Sheet Modals (`FeatureExplainerModal.tsx`)**:
     - Replaced centered floating desktop rectangle modal on mobile viewports with an authentic native bottom sheet docked to screen bottom (`items-end sm:items-center p-0 sm:p-6`).
     - Added rounded top corners (`rounded-t-3xl sm:rounded-2xl`), safe-area bottom padding, and a native mobile grab/pull indicator bar (`w-10 h-1 rounded-full bg-stone-600/80`).

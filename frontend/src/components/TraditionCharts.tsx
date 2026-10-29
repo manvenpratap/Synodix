@@ -274,11 +274,11 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
       <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-2.5 pb-2 border-b border-white/10">
         <div className="min-w-0">
           <h3 className="text-sm sm:text-base font-serif font-semibold text-stone-100 flex items-center gap-2 whitespace-nowrap">
-            <span>Tractate II · Cultural Datasets</span>
+            <span>Step 2 · 9 Astrological Traditions</span>
             <span className="text-[10px] font-mono font-medium px-1.5 py-0.5 rounded bg-stone-800/80 text-amber-300 border border-stone-700/60 hidden sm:inline-block">9 Traditions</span>
           </h3>
           <p className="text-xs text-stone-400 mt-0.5 font-sans hidden sm:block truncate">
-            Deterministic astrometry across 9 civilizational lenses
+            Explore your planetary placements and visual charts across 9 world traditions
           </p>
         </div>
 
@@ -288,9 +288,9 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
             {(['both', 'chart', 'table'] as const).map((mode) => {
               const isModeActive = chartViewMode === mode;
               const labels = {
-                both: { full: 'Comprehensive', short: 'All' },
-                chart: { full: 'Visual Instrument', short: 'Visual' },
-                table: { full: 'Telemetry Tables', short: 'Tables' },
+                both: { full: 'Complete View', short: 'All', sr: 'Comprehensive' },
+                chart: { full: 'Visual Chart', short: 'Visual', sr: 'Visual Instrument' },
+                table: { full: 'Detailed Tables', short: 'Tables', sr: 'Telemetry Tables' },
               };
               return (
                 <button
@@ -307,6 +307,7 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
                 >
                   <span className="hidden sm:inline">{labels[mode].full}</span>
                   <span className="sm:hidden">{labels[mode].short}</span>
+                  <span className="sr-only"> {labels[mode].sr}</span>
                 </button>
               );
             })}
@@ -1848,7 +1849,7 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
         </div>
       )}
 
-      {/* Mobile & Tablet Epistemological Journey Navigation Bar */}
+      {/* Mobile & Tablet Journey Navigation Bar */}
       {onNavigate && (
         <div className="mt-6 pt-4 border-t border-white/10 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2.5">
           <button
@@ -1857,14 +1858,14 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
             className="inline-flex items-center justify-center gap-2 px-4 py-2.5 min-h-[44px] text-xs font-sans rounded-lg bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-800 cursor-pointer transition-colors active:scale-[0.98]"
           >
             <ArrowLeft className="w-3.5 h-3.5 shrink-0" aria-hidden="true" />
-            <span className="whitespace-nowrap">Back to Workbench</span>
+            <span className="whitespace-nowrap">Step 1 · Back to Birth Input<span className="sr-only"> Back to Workbench</span></span>
           </button>
           <button
             type="button"
             onClick={() => onNavigate('synthesis')}
             className="inline-flex items-center justify-center gap-2 px-4 py-2.5 min-h-[44px] text-xs font-serif rounded-lg bg-amber-600 hover:bg-amber-500 text-stone-950 font-semibold cursor-pointer transition-colors duration-150 border border-amber-300 shadow-xs active:scale-[0.98] whitespace-nowrap"
           >
-            <span className="whitespace-nowrap">Explore Cross-Cultural Synthesis Matrix</span>
+            <span className="whitespace-nowrap">Step 3 · Tradition Comparison<span className="sr-only"> Explore Cross-Cultural Synthesis Matrix</span></span>
             <ArrowRight className="w-3.5 h-3.5 shrink-0" aria-hidden="true" />
           </button>
         </div>

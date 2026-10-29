@@ -58,16 +58,16 @@ export const SynthesisMatrix: React.FC<Props> = ({ synthesis, onNavigate }) => {
       <div className="flex flex-col md:flex-row md:items-center justify-between pb-3.5 border-b border-stone-800 gap-3">
         <div>
           <span className="text-xs text-amber-400 font-serif font-medium block">
-            Tractate III · Cross-Cultural Synthesis Without Double-Counting
+            Step 3 · Tradition Comparison &amp; Agreement
           </span>
           <div className="flex flex-wrap items-center gap-2 mt-0.5">
             <h3 className="text-base font-serif font-semibold text-stone-100">
-              Cross-Cultural Convergence & Divergence Matrix
+              Where Traditions Agree vs Differ
             </h3>
-            <ExplainerTrigger id="three_cluster_consensus" label="Consensus Protocol" variant="badge" />
+            <ExplainerTrigger id="three_cluster_consensus" label="How We Compare" variant="badge" />
           </div>
           <p className="text-xs text-stone-400 mt-0.5">
-            3 primary votes: Jyotisha (1), Western (1), Sinic (1). Maya & Tibetan contribute as non-voting symbolic overlays.
+            Comparing Vedic (Indian), Western (Hellenistic), and Chinese (BaZi) traditions. Maya &amp; Tibetan traditions provide additional symbolic layers.
           </p>
         </div>
 
@@ -76,7 +76,7 @@ export const SynthesisMatrix: React.FC<Props> = ({ synthesis, onNavigate }) => {
           <div className="text-right">
             <div className="flex items-center justify-end gap-1.5">
               <span className="text-xs text-stone-300 font-medium block">
-                Divergence Rate
+                Traditions Differ
               </span>
               <ExplainerTrigger id="honest_divergence_rate" size="xs" variant="icon" />
             </div>
@@ -86,9 +86,9 @@ export const SynthesisMatrix: React.FC<Props> = ({ synthesis, onNavigate }) => {
           </div>
           <div className="h-6 w-px bg-stone-800"></div>
           <div className="text-[11px] text-stone-400 space-y-0.5 font-sans">
-            <div>Strong: <strong className="text-emerald-400 font-mono">{metrics.strong_domains}</strong></div>
+            <div>High Agreement: <strong className="text-emerald-400 font-mono">{metrics.strong_domains}</strong></div>
             <div>Moderate: <strong className="text-cyan-400 font-mono">{metrics.moderate_domains}</strong></div>
-            <div>Divergent: <strong className="text-rose-400 font-mono">{metrics.divergent_domains}</strong></div>
+            <div>Different: <strong className="text-rose-400 font-mono">{metrics.divergent_domains}</strong></div>
           </div>
         </div>
       </div>
@@ -107,12 +107,12 @@ export const SynthesisMatrix: React.FC<Props> = ({ synthesis, onNavigate }) => {
             <div>
               <div className="flex flex-wrap items-center gap-2">
                 <span className="text-xs text-stone-300 font-medium block">
-                  Global Triangulation Consensus
+                  Overall Tradition Agreement
                 </span>
-                <ExplainerTrigger id="three_cluster_consensus" label="Triangulation Math" variant="badge" />
+                <ExplainerTrigger id="three_cluster_consensus" label="Comparison Method" variant="badge" />
               </div>
               <span className="text-xs text-stone-200 font-medium">
-                Composite Multi-Tradition Concordance (σ = 0.04)
+                Overall consistency score across independent astrological traditions
               </span>
             </div>
           </div>
@@ -400,7 +400,7 @@ export const SynthesisMatrix: React.FC<Props> = ({ synthesis, onNavigate }) => {
         </div>
       </div>
 
-      {/* Mobile & Tablet Epistemological Journey Navigation Bar */}
+      {/* Mobile & Tablet Journey Navigation Bar */}
       {onNavigate && (
         <div className="mt-6 pt-4 border-t border-stone-800 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2.5">
           <button
@@ -409,14 +409,14 @@ export const SynthesisMatrix: React.FC<Props> = ({ synthesis, onNavigate }) => {
             className="inline-flex items-center justify-center gap-2 px-4 py-2.5 min-h-[44px] text-xs font-medium rounded-lg bg-stone-900 hover:bg-stone-800 disabled:opacity-50 disabled:cursor-not-allowed text-stone-300 border border-stone-800 cursor-pointer transition-colors active:scale-[0.98] whitespace-nowrap"
           >
             <ArrowLeft className="w-3.5 h-3.5" aria-hidden="true" />
-            <span className="whitespace-nowrap">View Traditions</span>
+            <span className="whitespace-nowrap">Step 2 · 9 Traditions<span className="sr-only"> View Traditions</span></span>
           </button>
           <button
             type="button"
             onClick={() => onNavigate('dossier')}
             className="inline-flex items-center justify-center gap-2 px-4 py-2.5 min-h-[44px] text-xs font-serif font-semibold rounded-lg bg-amber-600 hover:bg-amber-500 disabled:opacity-50 disabled:cursor-not-allowed text-stone-950 cursor-pointer transition-colors duration-150 border border-amber-300 shadow-xs active:scale-[0.98] whitespace-nowrap"
           >
-            <span className="whitespace-nowrap">Read Full Corroboration Dossier</span>
+            <span className="whitespace-nowrap">Step 4 · Complete Birth Reading<span className="sr-only"> Read Full Corroboration Dossier</span></span>
             <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" />
           </button>
         </div>

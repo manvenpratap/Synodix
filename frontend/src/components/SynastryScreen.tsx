@@ -982,20 +982,20 @@ export const SynastryScreen: React.FC<Props> = ({
               <div className="p-4 sm:p-6 rounded-2xl bg-stone-900/90 border border-stone-800 space-y-4 shadow-xl">
                 <div className="border-b border-stone-800 pb-3">
                   <span className="text-xs text-amber-400 font-serif font-medium block">
-                    Tractate IV · Multi-Civilizational Relationship Synthesis
+                    Detailed Relationship Analysis
                   </span>
                   <h3 className="text-lg sm:text-xl font-serif font-bold text-stone-100 mt-0.5">
-                    Corroborated Archetypal Relationship Dossier
+                    Complete Compatibility Reading
                   </h3>
                   <p className="text-xs text-stone-400 font-mono mt-0.5">
-                    Synthesis across Hellenistic, Vedic, BaZi, Zi Wei Dou Shu, Mayan, Tibetan, Persian, Egyptian, and Māori traditions.
+                    Synthesized across Hellenistic, Vedic, BaZi, Zi Wei Dou Shu, Mayan, Tibetan, Persian, Egyptian, and Māori traditions.
                   </p>
                 </div>
 
                 <div className="space-y-4 text-xs sm:text-sm font-serif leading-relaxed text-stone-300">
                   <div className="p-3.5 rounded-xl bg-stone-950/80 border border-amber-900/40 space-y-1.5">
                     <h4 className="text-xs font-mono uppercase text-amber-400 tracking-wider font-semibold">
-                      I. Executive Archetypal Synthesis
+                      I. Overall Connection &amp; Core Dynamic
                     </h4>
                     <p className="text-stone-300 leading-relaxed">
                       {synastryReport.dossier.executiveSummary}
@@ -1004,7 +1004,7 @@ export const SynastryScreen: React.FC<Props> = ({
 
                   <div className="p-3.5 rounded-xl bg-stone-950/80 border border-stone-800 space-y-1.5">
                     <h4 className="text-xs font-mono uppercase text-cyan-400 tracking-wider font-semibold">
-                      II. Emotional Sanctuary &amp; Psychological Instincts
+                      II. Emotional Bond &amp; Psychological Instincts
                     </h4>
                     <p className="text-stone-300 leading-relaxed">
                       {synastryReport.dossier.emotionalPsychologicalBond}
@@ -1013,7 +1013,7 @@ export const SynastryScreen: React.FC<Props> = ({
 
                   <div className="p-3.5 rounded-xl bg-stone-950/80 border border-stone-800 space-y-1.5">
                     <h4 className="text-xs font-mono uppercase text-emerald-400 tracking-wider font-semibold">
-                      III. Intellectual Alignment &amp; Dialectical Discourse
+                      III. Intellectual Alignment &amp; Communication Style
                     </h4>
                     <p className="text-stone-300 leading-relaxed">
                       {synastryReport.dossier.intellectualCommunicationAlignment}
@@ -1031,7 +1031,7 @@ export const SynastryScreen: React.FC<Props> = ({
 
                   <div className="p-3.5 rounded-xl bg-stone-950/80 border border-stone-800 space-y-1.5">
                     <h4 className="text-xs font-mono uppercase text-amber-400 tracking-wider font-semibold">
-                      V. Karmic Growth Edge &amp; Soul Contract
+                      V. Shared Growth &amp; Long-Term Lessons
                     </h4>
                     <p className="text-stone-300 leading-relaxed">
                       {synastryReport.dossier.karmicEvolutionaryPurpose}

@@ -618,12 +618,12 @@ export const FeatureGuideScreen: React.FC<Props> = ({ onNavigate, initialExplain
               </div>
             </div>
 
-            {/* 3. Why It Matters for Multi-Tradition Triangulation */}
+            {/* 3. Why It Matters for Multi-Tradition Agreement */}
             <div className="p-5 sm:p-6 rounded-2xl bg-stone-950 border border-stone-800 space-y-2.5 shadow-xs">
               <div className="flex items-center gap-2 text-emerald-400">
                 <Lightbulb className="w-4 h-4" />
                 <h3 className="text-xs font-serif font-semibold text-emerald-300">
-                  Role in Epistemic Triangulation & Consensus
+                  Why This Matters &amp; Tradition Agreement
                 </h3>
               </div>
               <p className="text-xs sm:text-sm text-stone-300 leading-relaxed font-sans">

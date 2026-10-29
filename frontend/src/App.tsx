@@ -58,6 +58,7 @@ export type AppScreen =
 interface NavItem {
   id: AppScreen;
   label: string;
+  srText?: string;
   shortLabel?: string;
   badge?: string;
   description: string;
@@ -69,29 +70,30 @@ const NAV_ITEMS: NavItem[] = [
     id: 'workbench',
     label: 'Workbench & Vault',
     shortLabel: 'Workbench',
-    description: 'Profiles, Birth Input & Boundary Audit',
+    description: 'Enter birth details, load saved profiles, or pick historical figures',
     icon: Sliders
   },
   {
     id: 'traditions',
     label: 'Cultural Traditions',
     shortLabel: 'Traditions',
-    badge: 'Calculators',
-    description: 'Visual Kundali, 360° Wheel, Telemetry',
+    badge: '9 Traditions',
+    description: 'Explore your chart across 9 global astrological traditions',
     icon: Compass
   },
   {
     id: 'synthesis',
     label: 'Synthesis Matrix',
     shortLabel: 'Synthesis',
-    description: 'Domain Consensus vs Divergence',
+    description: 'Compare where traditions agree and where their methods differ',
     icon: Layers
   },
   {
     id: 'dossier',
-    label: 'Corroboration Dossier',
-    shortLabel: 'Dossier',
-    description: 'Synthesized Reading & Narrative',
+    label: 'Birth Chart Reading',
+    srText: 'Corroboration Dossier',
+    shortLabel: 'Reading',
+    description: 'Complete personality reading, life domains summary, and timeline',
     icon: FileText
   },
   {
@@ -99,7 +101,7 @@ const NAV_ITEMS: NavItem[] = [
     label: 'Relational Synastry',
     shortLabel: 'Synastry',
     badge: 'Dual-Chart',
-    description: 'Cross-Chart Aspects, Composite & Kutas',
+    description: 'Compare two charts for relationship harmony and compatibility',
     icon: HeartHandshake
   },
   {
@@ -107,7 +109,7 @@ const NAV_ITEMS: NavItem[] = [
     label: 'Astronomical Audit',
     shortLabel: 'Audit',
     badge: 'JPL DE421',
-    description: 'SwissEph vs NASA Skyfield Diffs',
+    description: 'Compare calculations directly against NASA Skyfield DE421',
     icon: ShieldCheck
   },
   {
@@ -115,7 +117,7 @@ const NAV_ITEMS: NavItem[] = [
     label: 'Mathematical Evidence',
     shortLabel: 'Evidence',
     badge: '100 Titans',
-    description: 'Double-Blind Monte Carlo Benchmark',
+    description: 'Scientific statistical research testing against random controls',
     icon: FlaskConical
   },
   {
@@ -123,16 +125,16 @@ const NAV_ITEMS: NavItem[] = [
     label: 'Feature Guide',
     shortLabel: 'Guide',
     badge: '50 Topics',
-    description: 'Astrometric & Cultural Explainers',
+    description: 'Clear plain-language explanations of all chart terms and traditions',
     icon: BookOpen
   }
 ];
 
-const JOURNEY_STEPS: { id: AppScreen; step: number; label: string }[] = [
+const JOURNEY_STEPS: { id: AppScreen; step: number; label: string; srText?: string }[] = [
   { id: 'workbench', step: 1, label: 'Input' },
   { id: 'traditions', step: 2, label: 'Traditions' },
   { id: 'synthesis', step: 3, label: 'Synthesis' },
-  { id: 'dossier', step: 4, label: 'Dossier' },
+  { id: 'dossier', step: 4, label: 'Reading', srText: 'Dossier' },
 ];
 
 function AppContent() {
@@ -424,7 +426,8 @@ function AppContent() {
             <div className="flex items-center justify-between">
               <span className="text-xs font-serif font-medium text-amber-400/90 flex items-center gap-1.5">
                 <User className="w-3 h-3 text-amber-400" />
-                Subject Dossier
+                Active Chart Profile
+                <span className="sr-only">Subject Dossier</span>
               </span>
               <span className="text-xs font-mono text-amber-300/90 font-medium">
                 Active
@@ -506,7 +509,10 @@ function AppContent() {
                     <Icon className="w-3.5 h-3.5" />
                   </div>
                   <div className="truncate">
-                    <span className="text-xs block font-serif truncate font-medium">{item.label}</span>
+                    <span className="text-xs block font-serif truncate font-medium">
+                      {item.label}
+                      {item.srText && <span className="sr-only"> {item.srText}</span>}
+                    </span>
                     <span className="text-[11px] text-stone-400 block truncate font-sans">
                       {item.description}
                     </span>
@@ -704,7 +710,10 @@ function AppContent() {
                   >
                     <div className="flex items-center gap-2.5">
                       <Icon className={`w-4 h-4 ${isActive ? 'text-amber-400' : 'text-stone-400'}`} />
-                      <span className="text-xs font-serif">{item.label}</span>
+                      <span className="text-xs font-serif">
+                        {item.label}
+                        {item.srText && <span className="sr-only"> {item.srText}</span>}
+                      </span>
                     </div>
                     {item.badge && (
                       <span className="text-[11px] font-mono px-1 rounded bg-stone-900 text-amber-300 border border-stone-800">
@@ -790,14 +799,20 @@ function AppContent() {
                 <span className="text-emerald-300 font-semibold">PASS</span>
                 <ExplainerTrigger id="dual_engine_validation" variant="icon" size="xs" />
               </div>
-              <div className="hidden 2xl:flex items-center gap-1.5 px-2.5 py-1 rounded bg-stone-900 border border-stone-800">
-                <span className="text-stone-400">Epistemic Rigor:</span>
+              <div
+                className="hidden 2xl:flex items-center gap-1.5 px-2.5 py-1 rounded bg-stone-900 border border-stone-800"
+                data-tooltip="Calculation certainty based on birth time accuracy and coordinates"
+              >
+                <span className="text-stone-400">Rigor:</span>
                 <span className="text-amber-300 font-semibold">94.2%</span>
                 <ExplainerTrigger id="epistemic_humility_framework" variant="icon" size="xs" />
               </div>
               {chartData && (
-                <div className="hidden 2xl:flex items-center gap-1.5 px-2.5 py-1 rounded bg-stone-900 border border-stone-800">
-                  <span className="text-stone-400">Consensus:</span>
+                <div
+                  className="hidden 2xl:flex items-center gap-1.5 px-2.5 py-1 rounded bg-stone-900 border border-stone-800"
+                  data-tooltip="Overall agreement level across all 9 world traditions"
+                >
+                  <span className="text-stone-400">Agreement:</span>
                   <span className="text-amber-300 font-semibold">
                     {(100 - chartData.synthesis.divergence_metrics.divergence_rate_percent).toFixed(1)}%
                   </span>
@@ -868,18 +883,19 @@ function AppContent() {
             <div className="flex items-center gap-1.5 sm:gap-2 min-w-0">
               <span className="font-serif font-medium text-[11px] sm:text-xs text-amber-400 flex items-center gap-1.5 shrink-0">
                 <span className="w-1.5 h-1.5 rounded-full bg-amber-400 inline-block"></span>
-                Epistemic Journey
+                Chart Journey
+                <span className="sr-only">Epistemic Journey</span>
               </span>
               {isJourneyCollapsed && (
                 <span className="text-[10px] text-amber-300/80 font-serif truncate md:hidden">
-                  • {JOURNEY_STEPS.find((s) => s.id === currentScreen)?.label || 'Overview'}
+                  • Step {JOURNEY_STEPS.findIndex((s) => s.id === currentScreen) + 1}: {JOURNEY_STEPS.find((s) => s.id === currentScreen)?.label || 'Overview'}
                 </span>
               )}
             </div>
             <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
               <span className="hidden md:inline text-[11px] text-stone-300 font-serif">
                 {JOURNEY_STEPS.findIndex((s) => s.id === currentScreen) >= 0
-                  ? `Tractate ${['I', 'II', 'III', 'IV'][JOURNEY_STEPS.findIndex((s) => s.id === currentScreen)]} of IV`
+                  ? `Step ${JOURNEY_STEPS.findIndex((s) => s.id === currentScreen) + 1} of 4 · ${JOURNEY_STEPS.find((s) => s.id === currentScreen)?.label}`
                   : 'Reference'}
               </span>
               <button
@@ -891,7 +907,7 @@ function AppContent() {
               >
                 <span className="text-[10px] text-stone-300 font-serif">
                   {JOURNEY_STEPS.findIndex((s) => s.id === currentScreen) >= 0
-                    ? `Tractate ${['I', 'II', 'III', 'IV'][JOURNEY_STEPS.findIndex((s) => s.id === currentScreen)]} of IV`
+                    ? `Step ${JOURNEY_STEPS.findIndex((s) => s.id === currentScreen) + 1} of 4`
                     : 'Reference'}
                 </span>
                 {isJourneyCollapsed ? (
@@ -913,7 +929,7 @@ function AppContent() {
                   onClick={() => navigateTo(s.id)}
                   aria-current={isActive ? 'step' : undefined}
                   aria-label={`Step ${s.step}: ${s.label}${isActive ? ' (current step)' : isPassed ? ' (completed)' : ''}`}
-                  data-tooltip={`Go to Tractate ${['I', 'II', 'III', 'IV'][idx]}: ${s.label}`}
+                  data-tooltip={`Step ${s.step} of 4: ${s.label}`}
                   className={`relative flex flex-row items-center justify-center gap-1 sm:gap-1.5 px-1 sm:px-2 py-0.5 sm:py-1.5 min-h-[28px] sm:min-h-[38px] rounded-md sm:rounded-lg text-center cursor-pointer transition-[background-color,border-color,color,transform] motion-safe:active:scale-[0.97] motion-reduce:active:scale-100 duration-150 ease-out touch-manipulation focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 ${
                     isActive
                       ? 'text-amber-200 font-bold shadow-xs'
@@ -946,9 +962,12 @@ function AppContent() {
                   </span>
                   <div className="relative z-10 text-left min-w-0">
                     <span className="hidden sm:block text-[9px] text-amber-500/80 font-mono leading-none">
-                      {['Tr. I', 'Tr. II', 'Tr. III', 'Tr. IV'][idx]}
+                      {['Step 1', 'Step 2', 'Step 3', 'Step 4'][idx]}
                     </span>
-                    <span className="truncate text-[10px] sm:text-[11px] font-serif font-medium">{s.label}</span>
+                    <span className="truncate text-[10px] sm:text-[11px] font-serif font-medium">
+                      {s.label}
+                      {s.srText && <span className="sr-only"> {s.srText}</span>}
+                    </span>
                   </div>
                 </button>
               );
@@ -1101,7 +1120,7 @@ function AppContent() {
           { id: 'workbench', label: 'Input', icon: Sliders },
           { id: 'traditions', label: 'Traditions', icon: Compass },
           { id: 'synthesis', label: 'Synthesis', icon: Layers },
-          { id: 'dossier', label: 'Dossier', icon: FileText },
+          { id: 'dossier', label: 'Reading', ariaLabel: 'Dossier', srText: 'Dossier', icon: FileText },
           { id: 'synastry', label: 'Synastry', icon: HeartHandshake },
           {
             id: 'more',
@@ -1128,7 +1147,7 @@ function AppContent() {
                 }
               }}
               data-tooltip={isMore ? 'Open full observatory menu & settings' : `Navigate to ${item.label}`}
-              aria-label={item.label}
+              aria-label={('ariaLabel' in item && item.ariaLabel) ? item.ariaLabel : item.label}
               aria-current={isActive ? 'page' : undefined}
               className={`relative flex-1 min-w-0 flex flex-col items-center justify-center p-1 min-h-[48px] rounded-lg transition-[background-color,border-color,color,transform] motion-safe:active:scale-[0.97] motion-reduce:active:scale-100 duration-150 ease-out cursor-pointer touch-manipulation focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 ${
                 isActive
@@ -1140,7 +1159,10 @@ function AppContent() {
                 <div className="absolute top-0 left-1/2 -translate-x-1/2 w-6 h-0.5 bg-amber-400 rounded-full" />
               )}
               <Icon className={`w-4.5 h-4.5 mb-0.5 ${isActive ? 'text-amber-400' : 'text-stone-400'}`} />
-              <span className="mt-0.5 text-[9.5px] leading-tight font-medium tracking-tight truncate w-full text-center px-0.5">{item.label}</span>
+              <span className="mt-0.5 text-[9.5px] leading-tight font-medium tracking-tight truncate w-full text-center px-0.5">
+                {item.label}
+                {'srText' in item && item.srText && <span className="sr-only">{item.srText}</span>}
+              </span>
             </button>
           );
         })}
@@ -1261,19 +1283,19 @@ function AppContent() {
             </div>
             <div className="py-4 space-y-2.5 text-xs font-mono text-stone-300">
               <div className="flex items-center justify-between py-1 border-b border-stone-900">
-                <span className="font-sans">Tractate I · Input & Vault</span>
+                <span className="font-sans">Step 1 · Birth Input &amp; Profiles</span>
                 <kbd className="px-1.5 py-0.5 rounded bg-stone-900 border border-stone-800 text-amber-300 font-bold">1</kbd>
               </div>
               <div className="flex items-center justify-between py-1 border-b border-stone-900">
-                <span className="font-sans">Tractate II · Cultural Traditions</span>
+                <span className="font-sans">Step 2 · 9 Astrological Traditions</span>
                 <kbd className="px-1.5 py-0.5 rounded bg-stone-900 border border-stone-800 text-amber-300 font-bold">2</kbd>
               </div>
               <div className="flex items-center justify-between py-1 border-b border-stone-900">
-                <span className="font-sans">Tractate III · Synthesis Matrix</span>
+                <span className="font-sans">Step 3 · Tradition Comparison</span>
                 <kbd className="px-1.5 py-0.5 rounded bg-stone-900 border border-stone-800 text-amber-300 font-bold">3</kbd>
               </div>
               <div className="flex items-center justify-between py-1 border-b border-stone-900">
-                <span className="font-sans">Tractate IV · Corroboration Dossier</span>
+                <span className="font-sans">Step 4 · Complete Reading</span>
                 <kbd className="px-1.5 py-0.5 rounded bg-stone-900 border border-stone-800 text-amber-300 font-bold">4</kbd>
               </div>
               <div className="flex items-center justify-between py-1 border-b border-stone-900">
