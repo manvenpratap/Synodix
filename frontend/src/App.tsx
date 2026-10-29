@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import type { BirthInput, ChartResponse, Preset } from './types';
 import {
   Compass,
@@ -128,6 +128,7 @@ const JOURNEY_STEPS: { id: AppScreen; step: number; label: string }[] = [
 
 function AppContent() {
   const { openGlossary } = useExplainer();
+  const shouldReduceMotion = useReducedMotion();
   const [currentScreen, setCurrentScreen] = useState<AppScreen>('workbench');
   const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
   const [chartData, setChartData] = useState<ChartResponse | null>(null);
@@ -416,10 +417,10 @@ function AppContent() {
             <AnimatePresence mode="wait">
               <motion.div
                 key={`${activeSubjectName}-${activeSubjectDate}`}
-                initial={{ opacity: 0, y: 4 }}
+                initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 4 }}
                 animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -4 }}
-                transition={{ duration: 0.18, ease: [0.16, 1, 0.3, 1] }}
+                exit={{ opacity: 0, y: shouldReduceMotion ? 0 : -4 }}
+                transition={{ duration: shouldReduceMotion ? 0.08 : 0.18, ease: [0.16, 1, 0.3, 1] }}
                 className="flex items-baseline justify-between"
               >
                 <span className="text-xs font-serif font-semibold text-stone-100 truncate tracking-wide">
@@ -825,7 +826,7 @@ function AppContent() {
               data-tooltip={theme === 'dark' ? 'Switch to Solar Day Theme' : 'Switch to Deep Space Theme'}
               aria-label={theme === 'dark' ? 'Switch to Solar Day Theme' : 'Switch to Deep Space Theme'}
             >
-              <div className="transition-transform duration-500 ease-out group-hover:rotate-45 group-active:scale-90">
+              <div className="transition-transform duration-160 ease-out group-hover:rotate-45 motion-safe:group-active:scale-90 motion-reduce:group-active:scale-100">
                 {theme === 'dark' ? (
                   <Sun className="w-4 h-4 text-amber-400 shrink-0" />
                 ) : (
@@ -889,16 +890,27 @@ function AppContent() {
                   aria-current={isActive ? 'step' : undefined}
                   aria-label={`Step ${s.step}: ${s.label}${isActive ? ' (current step)' : isPassed ? ' (completed)' : ''}`}
                   data-tooltip={`Go to Tractate ${['I', 'II', 'III', 'IV'][idx]}: ${s.label}`}
-                  className={`flex flex-row items-center justify-center gap-1 sm:gap-1.5 px-1 sm:px-2 py-0.5 sm:py-1.5 min-h-[28px] sm:min-h-[38px] rounded-md sm:rounded-lg text-center cursor-pointer transition-colors active:scale-95 duration-150 touch-manipulation focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 ${
+                  className={`relative flex flex-row items-center justify-center gap-1 sm:gap-1.5 px-1 sm:px-2 py-0.5 sm:py-1.5 min-h-[28px] sm:min-h-[38px] rounded-md sm:rounded-lg text-center cursor-pointer transition-[background-color,border-color,color,transform] motion-safe:active:scale-[0.97] motion-reduce:active:scale-100 duration-150 ease-out touch-manipulation focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 ${
                     isActive
-                      ? 'bg-amber-950 text-amber-200 border border-amber-600 font-bold shadow-xs ring-1 ring-amber-500/50'
+                      ? 'text-amber-200 font-bold shadow-xs'
                       : isPassed
                       ? 'bg-stone-900 text-emerald-400 border border-emerald-900/50 hover:bg-stone-850'
                       : 'bg-stone-950 text-stone-400 border border-stone-800 hover:text-stone-300'
                   }`}
                 >
+                  {isActive && (
+                    <motion.span
+                      layoutId="active-journey-indicator"
+                      className="absolute inset-0 bg-amber-950 border border-amber-600 rounded-md sm:rounded-lg ring-1 ring-amber-500/50 -z-0 pointer-events-none"
+                      transition={
+                        shouldReduceMotion
+                          ? { duration: 0 }
+                          : { type: 'spring', stiffness: 380, damping: 30 }
+                      }
+                    />
+                  )}
                   <span
-                    className={`w-3.5 h-3.5 sm:w-4 sm:h-4 rounded-full flex items-center justify-center text-[9px] sm:text-[11px] font-mono transition-colors duration-150 shrink-0 ${
+                    className={`relative z-10 w-3.5 h-3.5 sm:w-4 sm:h-4 rounded-full flex items-center justify-center text-[9px] sm:text-[11px] font-mono transition-colors duration-150 shrink-0 ${
                       isActive
                         ? 'bg-amber-400 text-stone-950 font-bold ring-1 sm:ring-2 ring-amber-300/40'
                         : isPassed
@@ -908,7 +920,7 @@ function AppContent() {
                   >
                     {s.step}
                   </span>
-                  <div className="text-left min-w-0">
+                  <div className="relative z-10 text-left min-w-0">
                     <span className="hidden sm:block text-[9px] text-amber-500/80 font-mono leading-none">
                       {['Tr. I', 'Tr. II', 'Tr. III', 'Tr. IV'][idx]}
                     </span>
@@ -921,7 +933,7 @@ function AppContent() {
           {/* Ambient Progress Conduit */}
           <div className="w-full bg-stone-800 h-0.5 mt-1 sm:mt-2 rounded-full overflow-hidden">
             <div
-              className="h-full bg-gradient-to-r from-amber-600 via-amber-400 to-amber-300 motion-safe:transition-opacity motion-reduce:transition-none rounded-full"
+              className="h-full bg-gradient-to-r from-amber-600 via-amber-400 to-amber-300 motion-safe:transition-[width] motion-safe:duration-300 motion-safe:ease-out motion-reduce:transition-none rounded-full"
               style={{
                 width: `${
                   JOURNEY_STEPS.findIndex((s) => s.id === currentScreen) >= 0
@@ -950,9 +962,9 @@ function AppContent() {
 
           <motion.div
             key={currentScreen}
-            initial={{ opacity: 0, y: 4 }}
+            initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 4 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.15, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: shouldReduceMotion ? 0.08 : 0.15, ease: [0.16, 1, 0.3, 1] }}
           >
               {/* SCREEN 1: Workbench & Profile Vault */}
               {currentScreen === 'workbench' && (
@@ -1094,7 +1106,7 @@ function AppContent() {
               data-tooltip={isMore ? 'Open full observatory menu & settings' : `Navigate to ${item.label}`}
               aria-label={item.label}
               aria-current={isActive ? 'page' : undefined}
-              className={`relative flex flex-col items-center justify-center p-1 min-w-[48px] sm:min-w-[56px] min-h-[44px] rounded-lg transition-colors active:scale-[0.94] duration-150 cursor-pointer touch-manipulation focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 ${
+              className={`relative flex flex-col items-center justify-center p-1 min-w-[48px] sm:min-w-[56px] min-h-[44px] rounded-lg transition-[background-color,border-color,color,transform] motion-safe:active:scale-[0.97] motion-reduce:active:scale-100 duration-150 ease-out cursor-pointer touch-manipulation focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 ${
                 isActive
                   ? 'text-amber-400 font-bold bg-stone-900 border border-amber-700/60 shadow-xs'
                   : 'text-stone-400 hover:text-stone-200 hover:bg-stone-900'

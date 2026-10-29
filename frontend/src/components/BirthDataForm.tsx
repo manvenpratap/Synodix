@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import type { BirthInput, Preset } from '../types';
 import {
   Star,
@@ -51,6 +51,7 @@ const CATEGORIES = [
 ];
 
 export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePresets }) => {
+  const shouldReduceMotion = useReducedMotion();
   // Mode switcher: 'custom' for clean independent manual calibration, 'archive' for 100 benchmark titans
   const [activeMode, setActiveMode] = useState<'custom' | 'archive'>('custom');
 
@@ -467,7 +468,11 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
               <motion.div
                 layoutId="active-experience-pill"
                 className="absolute inset-0 bg-amber-950/80 border border-amber-700/80 rounded-md shadow-xs pointer-events-none"
-                transition={{ type: 'spring', stiffness: 500, damping: 35 }}
+                transition={
+                  shouldReduceMotion
+                    ? { duration: 0 }
+                    : { type: 'spring', stiffness: 500, damping: 35 }
+                }
               />
             )}
             <span className="relative z-10 flex items-center gap-2">
@@ -493,7 +498,11 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
               <motion.div
                 layoutId="active-experience-pill"
                 className="absolute inset-0 bg-amber-950/80 border border-amber-700/80 rounded-md shadow-xs pointer-events-none"
-                transition={{ type: 'spring', stiffness: 500, damping: 35 }}
+                transition={
+                  shouldReduceMotion
+                    ? { duration: 0 }
+                    : { type: 'spring', stiffness: 500, damping: 35 }
+                }
               />
             )}
             <span className="relative z-10 flex items-center gap-2">
@@ -873,56 +882,62 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
                   </div>
 
                   {/* City Auto-Suggestions Dropdown */}
-                  {isCitySuggestionsOpen && citySuggestions.length > 0 && (
-                    <div
-                      role="listbox"
-                      aria-label="City suggestions"
-                      className="absolute left-0 right-0 top-full mt-1.5 z-50 bg-stone-900 border border-stone-800 rounded-lg shadow-lg overflow-hidden max-h-64 overflow-y-auto divide-y divide-stone-800 font-sans overscroll-contain"
-                    >
-                      <div className="px-2.5 py-1.5 bg-stone-950 border-b border-stone-800 flex items-center justify-between text-[11px] font-sans text-stone-400">
-                        <span>Suggested Cities & Coordinates</span>
-                        <span className="text-amber-400">↑↓ to navigate • Enter to select</span>
-                      </div>
-                      {citySuggestions.map((s, idx) => {
-                        const isSelected = idx === activeSuggestionIndex;
-                        return (
-                          <div
-                            key={`${s.city}-${s.country}-${idx}`}
-                            role="option"
-                            aria-selected={isSelected}
-                            onClick={() => handleSelectCity(s)}
-                            onMouseEnter={() => setActiveSuggestionIndex(idx)}
-                            className={`px-3 py-2 text-xs cursor-pointer transition-colors flex items-center justify-between gap-2 rounded ${
-                              isSelected
-                                ? 'bg-amber-950/60 text-amber-200 border border-amber-500/50 ring-1 ring-amber-500/20'
-                                : 'text-stone-200 hover:bg-stone-800 border border-transparent'
-                            }`}
-                          >
-                            <div className="min-w-0">
-                              <div className="font-medium text-stone-100 flex items-center gap-1.5 truncate">
-                                {isSelected && <span className="w-1.5 h-1.5 rounded-full bg-amber-400 inline-block shrink-0" />}
-                                <span>{s.city}</span>
-                                {s.adminCode && (
-                                   <span className="text-[11px] text-stone-400">({s.adminCode})</span>
-                                )}
+                  <AnimatePresence>
+                    {isCitySuggestionsOpen && citySuggestions.length > 0 && (
+                      <motion.div
+                        role="listbox"
+                        aria-label="City suggestions"
+                        initial={{ opacity: 0, y: shouldReduceMotion ? 0 : -4, scale: shouldReduceMotion ? 1 : 0.98 }}
+                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                        exit={{ opacity: 0, y: shouldReduceMotion ? 0 : -4, scale: shouldReduceMotion ? 1 : 0.98 }}
+                        transition={{ duration: 0.14, ease: [0.16, 1, 0.3, 1] }}
+                        className="absolute left-0 right-0 top-full mt-1.5 z-50 bg-stone-900 border border-stone-800 rounded-lg shadow-lg overflow-hidden max-h-64 overflow-y-auto divide-y divide-stone-800 font-sans overscroll-contain origin-top"
+                      >
+                        <div className="px-2.5 py-1.5 bg-stone-950 border-b border-stone-800 flex items-center justify-between text-[11px] font-sans text-stone-400">
+                          <span>Suggested Cities & Coordinates</span>
+                          <span className="text-amber-400">↑↓ to navigate • Enter to select</span>
+                        </div>
+                        {citySuggestions.map((s, idx) => {
+                          const isSelected = idx === activeSuggestionIndex;
+                          return (
+                            <div
+                              key={`${s.city}-${s.country}-${idx}`}
+                              role="option"
+                              aria-selected={isSelected}
+                              onClick={() => handleSelectCity(s)}
+                              onMouseEnter={() => setActiveSuggestionIndex(idx)}
+                              className={`px-3 py-2 text-xs cursor-pointer transition-colors flex items-center justify-between gap-2 rounded ${
+                                isSelected
+                                  ? 'bg-amber-950/60 text-amber-200 border border-amber-500/50 ring-1 ring-amber-500/20'
+                                  : 'text-stone-200 hover:bg-stone-800 border border-transparent'
+                              }`}
+                            >
+                              <div className="min-w-0">
+                                <div className="font-medium text-stone-100 flex items-center gap-1.5 truncate">
+                                  {isSelected && <span className="w-1.5 h-1.5 rounded-full bg-amber-400 inline-block shrink-0" />}
+                                  <span>{s.city}</span>
+                                  {s.adminCode && (
+                                     <span className="text-[11px] text-stone-400">({s.adminCode})</span>
+                                  )}
+                                </div>
+                                <div className="text-[11px] text-stone-400 font-sans truncate">
+                                  {s.country}
+                                </div>
                               </div>
-                              <div className="text-[11px] text-stone-400 font-sans truncate">
-                                {s.country}
+                              <div className="text-right shrink-0">
+                                <span className="text-[11px] font-mono text-amber-300/90 block">
+                                  {Math.abs(s.latitude).toFixed(2)}°{s.latitude >= 0 ? 'N' : 'S'}, {Math.abs(s.longitude).toFixed(2)}°{s.longitude >= 0 ? 'E' : 'W'}
+                                </span>
+                                <span className="text-[11px] font-sans text-stone-400">
+                                  {s.source === 'offline_gazetteer' ? 'Offline Verified' : 'Online Geocode'}
+                                </span>
                               </div>
                             </div>
-                            <div className="text-right shrink-0">
-                              <span className="text-[11px] font-mono text-amber-300/90 block">
-                                {Math.abs(s.latitude).toFixed(2)}°{s.latitude >= 0 ? 'N' : 'S'}, {Math.abs(s.longitude).toFixed(2)}°{s.longitude >= 0 ? 'E' : 'W'}
-                              </span>
-                              <span className="text-[11px] font-sans text-stone-400">
-                                {s.source === 'offline_gazetteer' ? 'Offline Verified' : 'Online Geocode'}
-                              </span>
-                            </div>
-                          </div>
-                        );
-                      })}
-                    </div>
-                  )}
+                          );
+                        })}
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
                   <p className="text-[11px] text-stone-400 font-sans mt-1">
                     Auto-resolves coordinates from offline world gazetteer
                   </p>
@@ -1144,7 +1159,7 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
               <button
                 type="submit"
                 disabled={isLoading}
-                className="relative overflow-hidden px-6 py-2.5 min-h-[44px] bg-gradient-to-r from-amber-600 via-amber-500 to-amber-600 hover:from-amber-500 hover:to-amber-400 active:scale-[0.98] text-stone-950 font-serif font-semibold text-xs rounded-lg border border-amber-300 transition-colors duration-150 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:ring-offset-1 focus-visible:ring-offset-stone-950 shadow-md shadow-amber-950/40 whitespace-nowrap"
+                className="relative overflow-hidden px-6 py-2.5 min-h-[44px] bg-gradient-to-r from-amber-600 via-amber-500 to-amber-600 hover:from-amber-500 hover:to-amber-400 transition-[background-color,border-color,transform] motion-safe:active:scale-[0.97] motion-reduce:active:scale-100 duration-150 ease-out text-stone-950 font-serif font-semibold text-xs rounded-lg border border-amber-300 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:ring-offset-1 focus-visible:ring-offset-stone-950 shadow-md shadow-amber-950/40 whitespace-nowrap"
               >
                 {isLoading && (
                   <div className="absolute inset-0 pointer-events-none">
@@ -1314,9 +1329,9 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
           {selectedTitan && (
             <motion.div
               key={selectedTitan.id}
-              initial={{ opacity: 0, y: 10 }}
+              initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 10 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ duration: shouldReduceMotion ? 0.08 : 0.22, ease: [0.16, 1, 0.3, 1] }}
               className="p-3.5 rounded-lg bg-stone-900 border border-amber-900/60 shadow-lg mt-3"
             >
               <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 pb-3 border-b border-stone-800">

@@ -45,6 +45,15 @@ body {
   --cyan-accent: #38bdf8;
   --emerald-accent: #34d399;
   --rose-accent: #fb7185;
+
+  /* Motion & Animation Design Tokens */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out-quint: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out-quint: cubic-bezier(0.83, 0, 0.17, 1);
+  --duration-instant: 100ms;
+  --duration-fast: 160ms;
+  --duration-normal: 240ms;
+  --duration-relaxed: 320ms;
 }
 
 /* Focus visible universal standard */
@@ -1177,15 +1186,15 @@ html[data-theme="light"] {
 }
 
 .animate-screen-enter {
-  animation: screenEnter 220ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: screenEnter var(--duration-normal, 220ms) var(--ease-out-expo, cubic-bezier(0.16, 1, 0.3, 1)) forwards;
 }
 
 .animate-tab-enter {
-  animation: tabEnter 180ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: tabEnter var(--duration-fast, 180ms) var(--ease-out-expo, cubic-bezier(0.16, 1, 0.3, 1)) forwards;
 }
 
 .animate-instrument-focus {
-  animation: instrumentFocus 240ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: instrumentFocus var(--duration-normal, 240ms) var(--ease-out-expo, cubic-bezier(0.16, 1, 0.3, 1)) forwards;
 }
 
 @keyframes instrumentFocus {
@@ -1355,7 +1364,7 @@ html[data-theme="light"] {
 }
 
 .animate-eclipse-spin {
-  animation: eclipseSpin 450ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: eclipseSpin var(--duration-fast, 160ms) var(--ease-out-expo, cubic-bezier(0.16, 1, 0.3, 1)) forwards;
 }
 
 @keyframes kundaliDraw {
@@ -1369,7 +1378,7 @@ html[data-theme="light"] {
 
 .animate-kundali-draw {
   stroke-dasharray: 400;
-  animation: kundaliDraw 650ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: kundaliDraw var(--duration-relaxed, 320ms) var(--ease-out-expo, cubic-bezier(0.16, 1, 0.3, 1)) forwards;
 }
 
 @keyframes gearRotateSync {
@@ -1640,10 +1649,13 @@ textarea {
   .animate-tab-enter,
   .animate-instrument-focus,
   .animate-radar-reveal,
-  .animate-radar-pulse {
+  .animate-radar-pulse,
+  .animate-eclipse-spin,
+  .animate-kundali-draw {
     animation: none !important;
     opacity: 1 !important;
     transform: none !important;
+    stroke-dashoffset: 0 !important;
   }
 
   .animate-celestial-glow,

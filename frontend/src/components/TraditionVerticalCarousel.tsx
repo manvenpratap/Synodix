@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useCallback } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import {
   ChevronUp,
   ChevronDown,
@@ -66,6 +66,7 @@ export const TraditionVerticalCarousel: React.FC<Props> = ({
 }) => {
   const activeIndex = TRADITION_ORDER.indexOf(activeTab);
   const currentTheme = cultureThemes[activeTab] || cultureThemes.jyotisha;
+  const shouldReduceMotion = useReducedMotion();
   const containerRef = useRef<HTMLDivElement>(null);
   const lastScrollTime = useRef<number>(0);
   const touchStartX = useRef<number | null>(null);
@@ -481,7 +482,7 @@ export const TraditionVerticalCarousel: React.FC<Props> = ({
               type="button"
               onClick={() => goToIndex(idx)}
               aria-label={`Mobile jump to ${cultureThemes[key]?.name || key}`}
-              className={`h-1.5 rounded-full transition-all duration-200 cursor-pointer ${
+              className={`h-1.5 rounded-full transition-[width,background-color] duration-200 ease-out cursor-pointer ${
                 activeIndex === idx
                   ? 'w-4 bg-amber-400 shadow-xs shadow-amber-400/50'
                   : 'w-1.5 bg-stone-700 hover:bg-stone-500'
@@ -535,9 +536,9 @@ export const TraditionVerticalCarousel: React.FC<Props> = ({
                   onClick={() => goToIndex(idx)}
                   data-tooltip={`${theme?.name || key} (${idx + 1}/9)`}
                   aria-label={`Jump to ${theme?.name || key}`}
-                  className={`w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center text-xs transition-all motion-safe:transition-transform motion-reduce:transition-none duration-150 cursor-pointer ${
+                  className={`w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center text-xs transition-[background-color,color,transform] duration-150 ease-out cursor-pointer ${
                     isSelected
-                      ? 'bg-amber-400 text-stone-950 font-bold scale-110 shadow-md shadow-amber-500/30 ring-2 ring-amber-300'
+                      ? 'bg-amber-400 text-stone-950 font-bold motion-safe:scale-110 shadow-md shadow-amber-500/30 ring-2 ring-amber-300'
                       : 'text-stone-300 hover:text-white hover:bg-white/15'
                   }`}
                 >
@@ -603,25 +604,29 @@ export const TraditionVerticalCarousel: React.FC<Props> = ({
                   }
                 }}
                 animate={{
-                  y: yOffset,
-                  scale,
+                  y: shouldReduceMotion ? 0 : yOffset,
+                  scale: shouldReduceMotion ? (isCenter ? 1 : 0.96) : scale,
                   opacity,
-                  rotateX,
-                  zIndex,
+                  rotateX: shouldReduceMotion ? 0 : rotateX,
                 }}
-                transition={{
-                  type: 'spring',
-                  stiffness: 380,
-                  damping: 32,
-                  mass: 0.85,
-                }}
-                className={`absolute w-full rounded-2xl border p-4 sm:p-5 shadow-2xl backdrop-blur-xl transition-shadow ${
+                transition={
+                  shouldReduceMotion
+                    ? { duration: 0.1 }
+                    : {
+                        type: 'spring',
+                        stiffness: 380,
+                        damping: 32,
+                        mass: 0.85,
+                      }
+                }
+                className={`absolute w-full rounded-2xl border p-4 sm:p-5 shadow-2xl transition-shadow ${
                   isCenter
-                    ? `${theme.containerBg} ${theme.containerBorder} shadow-2xl cursor-grab active:cursor-grabbing ring-1 ring-amber-500/30 touch-pan-y`
-                    : 'bg-stone-950/85 border-stone-800 cursor-pointer hover:border-amber-500/40'
+                    ? `${theme.containerBg} ${theme.containerBorder} backdrop-blur-md shadow-2xl cursor-grab active:cursor-grabbing ring-1 ring-amber-500/30 touch-pan-y`
+                    : 'bg-stone-950/92 border-stone-800 cursor-pointer hover:border-amber-500/40'
                 }`}
                 style={{
                   transformOrigin: 'center center',
+                  zIndex,
                 }}
               >
                 {/* Cultural Card Header */}
@@ -714,7 +719,7 @@ export const TraditionVerticalCarousel: React.FC<Props> = ({
         <button
           type="button"
           onClick={() => onOpenInspector(activeTab)}
-          className="inline-flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-lg bg-amber-950 hover:bg-amber-900/80 text-amber-200 border border-amber-700/80 text-xs font-sans font-semibold transition-colors active:scale-[0.98] duration-150 cursor-pointer shadow-xs whitespace-nowrap"
+          className="inline-flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-lg bg-amber-950 hover:bg-amber-900/80 text-amber-200 border border-amber-700/80 text-xs font-sans font-semibold transition-[background-color,border-color,transform] motion-safe:active:scale-[0.97] motion-reduce:active:scale-100 duration-150 ease-out cursor-pointer shadow-xs whitespace-nowrap"
           data-tooltip={`Open full telemetry inspector & analytical tables for ${currentTheme?.name || activeTab}`}
           aria-label={`Inspect full telemetry and tables for ${currentTheme?.name || activeTab}`}
         >

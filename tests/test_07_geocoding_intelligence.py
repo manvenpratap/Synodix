@@ -289,7 +289,7 @@ def test_ui_detect_gps_fallback_when_geolocation_denied():
         gps_btn.click()
 
         # Wait for IP location fallback
-        page.wait_for_timeout(1500)
+        page.wait_for_function("() => document.querySelector('input#latitude') && document.querySelector('input#latitude').value !== '0'", timeout=8000)
 
         # Verify coordinates and city/country were populated via fallback
         assert lat_input.input_value() != "0", "Latitude should be populated by IP fallback"

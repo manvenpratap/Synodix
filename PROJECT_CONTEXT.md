@@ -1,7 +1,7 @@
 # Synodix: Project Context & Working Memory
 
-**Last Updated:** 2026-10-29 08:54:11
-**Version:** 2.33.14  
+**Last Updated:** 2026-10-29 09:30:40
+**Version:** 2.33.15  
 **Stack:** Python 3.12 (FastAPI, Swiss Ephemeris 2.10, Skyfield DE421) + TypeScript / React 19 / Vite / Tailwind CSS v4 / Framer Motion / Capacitor 8 (iOS & Android)  
 **Workspace:** `/Volumes/Study/Projects/Astrology` (symlinked as `/Volumes/Study/Astrology`)  
 **Git Remote:** `https://github.com/manvenpratap/Synodix.git`  
@@ -10,7 +10,28 @@
 
 ## 1. Current Status & Milestone
 
-- **Active Phase**: Mobile Epistemic Journey Compact Bar & Space Optimization (Completed)
+- **Active Phase**: Comprehensive Motion Polish, Emil Kowalski Alignment & Missed Opportunities (Completed)
+- **Comprehensive Motion Polish & Animation Optimization (v2.33.15)**:
+  - **Executed 11 Rigorous Motion Plans (`plans/001-*.md` through `plans/011-*.md`)**:
+    - **Plan 001 & 002 (Carousel GPU Performance & Targeted Transitions)**:
+      - Restricted expensive `backdrop-blur-md` (12px) strictly to active center carousel cards (`isCenter`), eliminating 8 concurrent multi-pass GPU blur shaders during 3D card deck flips. Stacked background cards now render solid translucent `bg-stone-950/92`.
+      - Replaced untargeted `transition-all` on mobile indicator dots with composite-targeted `transition-[width,background-color] duration-200 ease-out`, and vertical sidebar rail buttons with `transition-[background-color,color,transform] duration-150 ease-out`.
+    - **Plan 005 (Discrete Layering & zIndex Decoupling)**:
+      - Decoupled `zIndex` from continuous spring physics interpolation in `TraditionVerticalCarousel.tsx` by hoisting it directly into inline `style={{ zIndex }}`, preventing visual z-index sorting pops and velocity reversal layering glitches during card drags.
+    - **Plan 003, 004 & 008 (Reduced Motion, Snappy Duration & Tactile Button Scaling)**:
+      - Fully integrated Framer Motion `useReducedMotion()` across `App.tsx`, `TraditionVerticalCarousel.tsx`, and `BirthDataForm.tsx`. Positional offsets branch smoothly to `y: 0` when `prefers-reduced-motion: reduce` is enabled.
+      - Snapped theme toggle icon rotation duration from 500ms down to a crisp 160ms (`duration-160 ease-out`).
+      - Standardized button tactile press scaling to `motion-safe:active:scale-[0.97]` and `motion-reduce:active:scale-100` across navigation journey steps, mobile bottom bars, and primary compute buttons.
+    - **Plan 006 & 007 (Centralized Semantic Motion Tokens & Instrument Cadence)**:
+      - Declared global motion tokens in `:root` inside `index.css`: `--ease-out-expo`, `--ease-out-quint`, `--ease-in-out-quint`, `--duration-fast: 160ms`, and `--duration-relaxed: 320ms`.
+      - Tightened SVG Kundali line-drawing (`kundaliDraw`) duration from 650ms to 320ms and `eclipseSpin` from 450ms to 160ms. Added reduced-motion resets to eliminate stroke offset delay.
+    - **Plan 009, 010 & 011 (Missed Motion Opportunities Captured)**:
+      - **City Dropdown Popover (`BirthDataForm.tsx`)**: Wrapped `div[role='listbox']` in `<AnimatePresence>` with an anchored scale-fade origin-top entrance and exit.
+      - **Feature Explainer Modal (`FeatureExplainerModal.tsx`)**: Replaced instantaneous modal unmounting with an `<AnimatePresence>` 160ms fade/vertical slide exit transition and preserved full 44px touch targets.
+      - **Epistemic Journey Stepper (`App.tsx`)**: Added Framer Motion `layoutId="active-journey-indicator"` spring-sliding pill across tractate navigation buttons and updated ambient progress conduit to `motion-safe:transition-[width] motion-safe:duration-300`.
+  - **Automated Verification**:
+    - Full Pytest suite: 26/26 passed cleanly in 89.2s via `./pipeline.sh test --summary`.
+    - Capacitor native builds updated and tested on Android emulator (`emulator-5554`) with verified visual fidelity.
 - **Mobile Epistemic Journey Compact Bar & Space Optimization (v2.33.14)**:
   - **Over 45% Vertical Space Savings on Mobile (`App.tsx`)**:
     - Addressed user feedback regarding excessive vertical screen consumption on mobile devices.

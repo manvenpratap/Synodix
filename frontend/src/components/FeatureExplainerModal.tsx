@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react';
+import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import { useExplainer } from '../context/useExplainer';
 import {
   FEATURE_EXPLAINERS,
@@ -19,6 +20,7 @@ import {
 export const FeatureExplainerModal: React.FC = () => {
   const { activeExplainer, isGlossaryOpen, closeExplainer, openExplainer, openGlossary } =
     useExplainer();
+  const shouldReduceMotion = useReducedMotion();
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
 
@@ -51,20 +53,28 @@ export const FeatureExplainerModal: React.FC = () => {
     });
   }, [searchQuery, selectedCategory]);
 
-  if (!activeExplainer && !isGlossaryOpen) return null;
-
   return (
-    <div
-      role="dialog"
-      aria-modal="true"
-      aria-labelledby="explainer-modal-title"
-      className="fixed inset-0 z-[70] flex items-center justify-center p-3 sm:p-6 bg-stone-950/80 overscroll-contain pt-[max(0.75rem,env(safe-area-inset-top,0px))] pb-[max(0.75rem,env(safe-area-inset-bottom,0px))]"
-      onClick={closeExplainer}
-    >
-      <div
-        className="bg-stone-950 border border-stone-800 text-stone-200 rounded-2xl w-full max-w-3xl max-h-[90vh] flex flex-col overflow-hidden relative motion-safe:animate-screen-enter motion-reduce:animate-none shadow-2xl"
-        onClick={(e) => e.stopPropagation()}
-      >
+    <AnimatePresence>
+      {(activeExplainer || isGlossaryOpen) && (
+        <motion.div
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="explainer-modal-title"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.15 }}
+          className="fixed inset-0 z-[70] flex items-center justify-center p-3 sm:p-6 bg-stone-950/80 overscroll-contain pt-[max(0.75rem,env(safe-area-inset-top,0px))] pb-[max(0.75rem,env(safe-area-inset-bottom,0px))]"
+          onClick={closeExplainer}
+        >
+          <motion.div
+            initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 6 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: shouldReduceMotion ? 0 : 6 }}
+            transition={{ duration: 0.16, ease: [0.16, 1, 0.3, 1] }}
+            className="bg-stone-950 border border-stone-800 text-stone-200 rounded-2xl w-full max-w-3xl max-h-[90vh] flex flex-col overflow-hidden relative shadow-2xl"
+            onClick={(e) => e.stopPropagation()}
+          >
         {/* Top Header Bar */}
         <div className="flex items-center justify-between px-5 py-4 border-b border-stone-800 bg-stone-900/90">
           <div className="flex items-center gap-2.5">
@@ -101,7 +111,7 @@ export const FeatureExplainerModal: React.FC = () => {
               type="button"
               onClick={closeExplainer}
               aria-label="Close explainer modal"
-              className="min-w-[44px] min-h-[44px] flex items-center justify-center rounded-lg text-stone-400 hover:text-white hover:bg-stone-850 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 cursor-pointer"
+              className="w-11 h-11 min-w-[44px] min-h-[44px] shrink-0 flex items-center justify-center rounded-lg text-stone-400 hover:text-white hover:bg-stone-850 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 cursor-pointer"
             >
               <X className="w-5 h-5" />
             </button>
@@ -318,7 +328,9 @@ export const FeatureExplainerModal: React.FC = () => {
             </div>
           )}
         </div>
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
+      )}
+    </AnimatePresence>
   );
 };

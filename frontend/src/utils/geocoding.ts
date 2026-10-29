@@ -282,6 +282,16 @@ export async function requestDeviceLocation(): Promise<DeviceLocationResult> {
   // 1. Try HTML5 Geolocation API first (fast Wi-Fi / hardware location)
   if (typeof navigator !== 'undefined' && navigator.geolocation) {
     try {
+      if (navigator.permissions && navigator.permissions.query) {
+        try {
+          const perm = await navigator.permissions.query({ name: 'geolocation' as PermissionName });
+          if (perm && perm.state === 'denied') {
+            throw new Error('Geolocation denied');
+          }
+        } catch {
+          // Permissions API query not supported for geolocation in some browsers; proceed
+        }
+      }
       coords = await new Promise<{ latitude: number; longitude: number }>((resolve, reject) => {
         navigator.geolocation.getCurrentPosition(
           (pos) => {
@@ -293,7 +303,7 @@ export async function requestDeviceLocation(): Promise<DeviceLocationResult> {
           (err) => {
             reject(err);
           },
-          { timeout: 4000, enableHighAccuracy: false, maximumAge: 60000 }
+          { timeout: 3000, enableHighAccuracy: false, maximumAge: 60000 }
         );
       });
     } catch {
