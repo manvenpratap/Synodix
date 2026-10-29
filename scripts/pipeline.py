@@ -855,7 +855,7 @@ class MobileAppManager:
             cmd_args = [f"./{gradle_cmd.name}"]
 
         if cmd_args and cmd_args[0]:
-            cmd = cmd_args + ["assembleDebug", "--no-daemon", "--console=plain"]
+            cmd = cmd_args + ["clean", "assembleDebug", "--no-daemon", "--console=plain"]
             res = subprocess.run(cmd, cwd=str(cand), env=env, capture_output=True, text=True)
             if res.returncode == 0:
                 apk_candidates = list((cand / "app" / "build" / "outputs" / "apk" / "debug").glob("*.apk"))

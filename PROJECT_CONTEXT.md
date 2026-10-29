@@ -1,7 +1,7 @@
 # Synodix: Project Context & Working Memory
 
-**Last Updated:** 2026-10-28 11:41:45
-**Version:** 2.33.9  
+**Last Updated:** 2026-10-29 07:06:53
+**Version:** 2.33.10  
 **Stack:** Python 3.12 (FastAPI, Swiss Ephemeris 2.10, Skyfield DE421) + TypeScript / React 19 / Vite / Tailwind CSS v4 / Framer Motion / Capacitor 8 (iOS & Android)  
 **Workspace:** `/Volumes/Study/Projects/Astrology` (symlinked as `/Volumes/Study/Astrology`)  
 **Git Remote:** `https://github.com/manvenpratap/Synodix.git`  
@@ -10,7 +10,18 @@
 
 ## 1. Current Status & Milestone
 
-- **Active Phase**: Mobile Delivery Pipeline & Native iOS Asset Sync Hardening (Completed)
+- **Active Phase**: Android APK WebView Cache Elimination & Native Versioning (Completed)
+- **Android APK WebView Cache Elimination & Versioning Hardening (v2.33.10)**:
+  - **Native Platform ServiceWorker Elimination (`main.tsx`)**:
+    - Identified root cause of stale Android APK: Android WebView persistently cached `index.html` under a legacy ServiceWorker cache (`synodix-v2.31.8`) that `main.tsx` explicitly preserved across updates.
+    - Updated `main.tsx` to detect `Capacitor.isNativePlatform()`. In native iOS and Android apps, it actively unregisters all ServiceWorkers and wipes any residual CacheStorage to guarantee the WebView always loads bundled native assets directly from the APK/bundle.
+    - For Web/PWA mode, replaced hardcoded `synodix-v2.31.8` with dynamic `synodix-${APP_VERSION_LABEL}` and purged all non-matching cache partitions.
+  - **Android WebView Startup Cache Clearing (`MainActivity.java`)**:
+    - Configured `MainActivity.java` `onCreate()` to clear WebView cache (`clearCache(true)`) and ensure `LOAD_DEFAULT` cache policy on launch.
+  - **Android Package Versioning (`build.gradle`)**:
+    - Synchronized `defaultConfig`: updated `versionCode` from `1` to `23310` and `versionName` from `"1.0"` to `"2.33.10"` so Android OS PackageInstaller recognizes the APK as a legitimate upgrade and updates system app info.
+  - **Clean Gradle Assembly (`scripts/pipeline.py`)**:
+    - Updated pipeline Gradle invocation to run `clean assembleDebug` ensuring no stale intermediate merged assets or dex files persist in `app/build/`.
 - **Mobile Delivery Pipeline & Native iOS Asset Sync Hardening (v2.33.9)**:
   - **Capacitor CLI Native Sync Integration (`scripts/pipeline.py`)**:
     - Identified root cause of stale iOS app: `scripts/pipeline.py` previously checked for `self.root / "dist"`, which already existed to host `dist/mobile`, preventing fallback resolution to `frontend/dist` where Vite actually compiles client assets.

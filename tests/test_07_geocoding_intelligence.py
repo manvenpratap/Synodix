@@ -364,12 +364,14 @@ def test_ui_city_selector_finds_jamshedpur_and_gurugram():
         # 3. Test typing and blur auto-resolution
         city_input.click()
         city_input.fill("")
+        country_input.click()
         country_input.fill("United States") # simulate stale country from preset
+        country_input.evaluate("el => el.blur()")
         lat_input.fill("0")
         lon_input.fill("0")
         city_input.click()
-        city_input.press_sequentially("Jamshedpur", delay=50)
-        page.wait_for_timeout(500)
+        city_input.press_sequentially("Jamshedpur", delay=60)
+        page.wait_for_timeout(600)
         # Blur the input by dispatching blur and clicking birth_date input
         city_input.evaluate("el => el.blur()")
         page.locator("input#birth_date").click()

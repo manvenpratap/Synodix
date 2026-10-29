@@ -11,9 +11,9 @@ import os
 from pathlib import Path
 from playwright.sync_api import sync_playwright
 try:
-    from tests.helpers import check_no_horizontal_overflow
+    from tests.helpers import check_no_horizontal_overflow, assert_no_critical_errors
 except ImportError:
-    from helpers import check_no_horizontal_overflow
+    from helpers import check_no_horizontal_overflow, assert_no_critical_errors
 
 MAC_CHROME = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
 
@@ -62,8 +62,8 @@ def test_theme_toggle_persistence():
             assert page.evaluate("() => document.documentElement.getAttribute('data-theme')") == "dark"
 
         browser.close()
-        critical = [e for e in console_errors if "favicon" not in e.lower()]
-        assert len(critical) == 0, f"Console errors: {critical}"
+        page._console_errors = console_errors
+        assert_no_critical_errors(page)
 
 
 def test_light_theme_screens_render_cleanly():
@@ -94,5 +94,5 @@ def test_light_theme_screens_render_cleanly():
                 page.wait_for_timeout(200)
 
         browser.close()
-        critical = [e for e in console_errors if "favicon" not in e.lower()]
-        assert len(critical) == 0, f"Console errors: {critical}"
+        page._console_errors = console_errors
+        assert_no_critical_errors(page)

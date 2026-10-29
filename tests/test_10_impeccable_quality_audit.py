@@ -198,11 +198,13 @@ def test_impeccable_light_mode_contrast_and_tooltip_bounds():
 
         # Navigate to Feature Guide screen to inspect the functional civilization array buttons
         page.locator("button:has-text('Feature Guide')").first.click()
-        page.wait_for_timeout(300)
+        page.wait_for_selector("[data-tooltip='Persian (Almuten)']", timeout=10000)
+        page.wait_for_timeout(100)
 
         contrast_results = page.evaluate("""() => {
             const pers = document.querySelector("[data-tooltip='Persian (Almuten)']");
             const egypt = document.querySelector("[data-tooltip='Egyptian (Decans)']");
+            if (!pers || !egypt) return { persContrast: 0, egyptContrast: 0 };
 
             // Simple relative luminance parser for rgb(r, g, b)
             function getLuminance(rgbStr) {
@@ -236,7 +238,8 @@ def test_impeccable_light_mode_contrast_and_tooltip_bounds():
         # 4. Mathematical Evidence Screen Light Theme & Hover Contrast
         evidence_nav = page.locator("button:has-text('Mathematical Evid')").first
         evidence_nav.click()
-        page.wait_for_timeout(300)
+        page.wait_for_selector("tr:has-text('H6')", timeout=10000)
+        page.wait_for_timeout(100)
 
         # Hover over H6 row
         row_h6 = page.locator("tr:has-text('H6')")
@@ -263,6 +266,7 @@ def test_impeccable_light_mode_contrast_and_tooltip_bounds():
             const r6 = rows.find(r => r.innerText.includes("H6"));
             const r1 = rows.find(r => r.innerText.includes("H1"));
             const r4 = rows.find(r => r.innerText.includes("H4"));
+            if (!r6 || !r1 || !r4) return { r6Luminance: 0, r6ClaimContrast: 0, h1EnrichedContrast: 0, h6SignificantContrast: 0, h4DisprovenContrast: 0 };
 
             const r6Bg = window.getComputedStyle(r6).backgroundColor;
             const r6ClaimColor = window.getComputedStyle(r6.querySelector("td:nth-child(2)")).color;

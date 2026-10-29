@@ -73,7 +73,7 @@ def test_independent_custom_input_and_titan_archive_separation():
 
         calc_btn = page.locator("button:has-text('Compute, Verify & Synthesize Chart')").first
         calc_btn.click()
-        page.wait_for_timeout(800)
+        page.wait_for_selector("text=Hypatia of Alexandria", timeout=10000)
 
         # Verify chart calculation banner displays custom subject name
         assert page.locator("text=Hypatia of Alexandria").first.is_visible(), "Chart banner must show custom subject name"

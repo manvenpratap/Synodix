@@ -30,3 +30,4 @@ graphify-out/.rebuild.lock
 
 # Hallmark audit artifacts
 .hallmark/
+.vscode/
