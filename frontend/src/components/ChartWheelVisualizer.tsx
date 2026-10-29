@@ -88,80 +88,83 @@ export const NorthIndianChart: React.FC<VedicChartProps> = ({ jyotisha, compact 
           className="animate-kundali-draw"
         />
 
-        {/* House Highlights: Kendra houses (1, 4, 7, 10) have subtle accent tint */}
-        <polygon points="200,10 295,105 200,200 105,105" fill="#38bdf8" fillOpacity="0.04" />
-        <polygon points="10,200 105,105 200,200 105,295" fill="#38bdf8" fillOpacity="0.04" />
-        <polygon points="200,390 105,295 200,200 295,295" fill="#38bdf8" fillOpacity="0.04" />
-        <polygon points="390,200 295,105 200,200 295,295" fill="#38bdf8" fillOpacity="0.04" />
+        {/* House Highlights & Grahas (Fades into focus as kundali lines draw) */}
+        <g className="animate-instrument-focus" style={{ animationDelay: '120ms' }}>
+          {/* Kendra houses (1, 4, 7, 10) have subtle accent tint */}
+          <polygon points="200,10 295,105 200,200 105,105" fill="#38bdf8" fillOpacity="0.04" />
+          <polygon points="10,200 105,105 200,200 105,295" fill="#38bdf8" fillOpacity="0.04" />
+          <polygon points="200,390 105,295 200,200 295,295" fill="#38bdf8" fillOpacity="0.04" />
+          <polygon points="390,200 295,105 200,200 295,295" fill="#38bdf8" fillOpacity="0.04" />
 
-        {/* House Content: Sign Number & Grahas */}
-        {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((h) => {
-          const center = houseCenters[h];
-          const signNum = getHouseSignNum(h);
-          const grahas = houseGrahas[h] || [];
+          {/* House Content: Sign Number & Grahas */}
+          {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((h) => {
+            const center = houseCenters[h];
+            const signNum = getHouseSignNum(h);
+            const grahas = houseGrahas[h] || [];
 
-          return (
-            <g key={h}>
-              {/* Sign Number */}
-              <text
-                x={center.x}
-                y={center.y - 14}
-                textAnchor="middle"
-                fill="#64748b"
-                fontSize="10"
-                fontFamily="monospace"
-                fontWeight="bold"
-              >
-                {signNum}
-              </text>
-
-              {/* Grahas in House */}
-              {grahas.length === 0 ? (
+            return (
+              <g key={h}>
+                {/* Sign Number */}
                 <text
                   x={center.x}
-                  y={center.y + 4}
+                  y={center.y - 14}
                   textAnchor="middle"
-                  fill="#334155"
-                  fontSize="9"
-                  fontFamily="sans-serif"
-                >
-                  -
-                </text>
-              ) : (
-                <text
-                  x={center.x}
-                  y={center.y + 2}
-                  textAnchor="middle"
-                  fill="#f1f5f9"
+                  fill="#64748b"
                   fontSize="10"
-                  fontFamily="monospace"
-                  fontWeight="600"
-                >
-                  {grahas.map((g, idx) => (
-                    <tspan key={idx} x={center.x} dy={idx === 0 ? 0 : 12} fill={g.includes('R') ? '#fbbf24' : '#e2e8f0'}>
-                      {g}
-                    </tspan>
-                  ))}
-                </text>
-              )}
-
-              {/* Lagna marker for H1 */}
-              {h === 1 && (
-                <text
-                  x={center.x}
-                  y={center.y - 28}
-                  textAnchor="middle"
-                  fill="#f59e0b"
-                  fontSize="9"
                   fontFamily="monospace"
                   fontWeight="bold"
                 >
-                  LAGNA
+                  {signNum}
                 </text>
-              )}
-            </g>
-          );
-        })}
+
+                {/* Grahas in House */}
+                {grahas.length === 0 ? (
+                  <text
+                    x={center.x}
+                    y={center.y + 4}
+                    textAnchor="middle"
+                    fill="#334155"
+                    fontSize="9"
+                    fontFamily="sans-serif"
+                  >
+                    -
+                  </text>
+                ) : (
+                  <text
+                    x={center.x}
+                    y={center.y + 2}
+                    textAnchor="middle"
+                    fill="#f1f5f9"
+                    fontSize="10"
+                    fontFamily="monospace"
+                    fontWeight="600"
+                  >
+                    {grahas.map((g, idx) => (
+                      <tspan key={idx} x={center.x} dy={idx === 0 ? 0 : 12} fill={g.includes('R') ? '#fbbf24' : '#e2e8f0'}>
+                        {g}
+                      </tspan>
+                    ))}
+                  </text>
+                )}
+
+                {/* Lagna marker for H1 */}
+                {h === 1 && (
+                  <text
+                    x={center.x}
+                    y={center.y - 28}
+                    textAnchor="middle"
+                    fill="#f59e0b"
+                    fontSize="9"
+                    fontFamily="monospace"
+                    fontWeight="bold"
+                  >
+                    LAGNA
+                  </text>
+                )}
+              </g>
+            );
+          })}
+        </g>
       </svg>
   );
 
@@ -270,7 +273,8 @@ export const WesternCircularWheel: React.FC<WesternWheelProps> = ({ western, com
       {/* Background Circle */}
       <circle cx={center} cy={center} r={radius} fill="#0d1118" stroke="#1b2331" strokeWidth="2" />
 
-        {/* 12 Sign Sectors */}
+      {/* 12 Sign Sectors & Astrolabe Dial Ring (Fluid entrance spin reveal) */}
+      <g className="animate-dial-reveal" style={{ transformOrigin: `${center}px ${center}px` }}>
         {signs.map((s) => {
           const startAngle = lonToAngle(s.start);
           const midAngle = lonToAngle(s.start + 15);
@@ -308,7 +312,10 @@ export const WesternCircularWheel: React.FC<WesternWheelProps> = ({ western, com
 
         {/* Inner Cusp Ring */}
         <circle cx={center} cy={center} r={innerRadius} fill="none" stroke="#2a3649" strokeWidth="1.5" />
-        <circle cx={center} cy={center} r={centerRadius} fill="#080a0f" stroke="#1b2331" strokeWidth="1.5" />
+      </g>
+
+      {/* Central Hub Core & Horizon Cross */}
+      <circle cx={center} cy={center} r={centerRadius} fill="#080a0f" stroke="#1b2331" strokeWidth="1.5" />
 
         {/* Aspect Chords in Inner Disc */}
         {western.aspects && western.aspects.slice(0, 15).map((asp: any, idx: number) => {
@@ -362,47 +369,49 @@ export const WesternCircularWheel: React.FC<WesternWheelProps> = ({ western, com
           DSC
         </text>
 
-        {/* Planet Glyphs & Locations */}
-        {planetPoints.map((p) => (
-          <g key={p.name}>
-            <circle cx={p.x} cy={p.y} r="3" fill={p.isRetro ? '#fbbf24' : '#38bdf8'} />
-            <text
-              x={p.x}
-              y={p.y - 6}
-              textAnchor="middle"
-              fill="#f1f5f9"
-              fontSize="9"
-              fontFamily="monospace"
-              fontWeight="600"
-            >
-              {p.name.slice(0, 2)}
-              {p.isRetro ? ' Rx' : ''}
-            </text>
-          </g>
-        ))}
+        {/* Planet Glyphs & Locations (Focus entrance reveal) */}
+        <g className="animate-instrument-focus" style={{ animationDelay: '140ms' }}>
+          {planetPoints.map((p) => (
+            <g key={p.name}>
+              <circle cx={p.x} cy={p.y} r="3" fill={p.isRetro ? '#fbbf24' : '#38bdf8'} />
+              <text
+                x={p.x}
+                y={p.y - 6}
+                textAnchor="middle"
+                fill="#f1f5f9"
+                fontSize="9"
+                fontFamily="monospace"
+                fontWeight="600"
+              >
+                {p.name.slice(0, 2)}
+                {p.isRetro ? ' Rx' : ''}
+              </text>
+            </g>
+          ))}
 
-        {/* Center Badge */}
-        <text
-          x={center}
-          y={center - 4}
-          textAnchor="middle"
-          fill="#94a3b8"
-          fontSize="9"
-          fontFamily="monospace"
-          fontWeight="bold"
-        >
-          TROPICAL
-        </text>
-        <text
-          x={center}
-          y={center + 10}
-          textAnchor="middle"
-          fill="#38bdf8"
-          fontSize="8"
-          fontFamily="monospace"
-        >
-          {western.sect.label.toUpperCase()} SECT
-        </text>
+          {/* Center Badge */}
+          <text
+            x={center}
+            y={center - 4}
+            textAnchor="middle"
+            fill="#94a3b8"
+            fontSize="9"
+            fontFamily="monospace"
+            fontWeight="bold"
+          >
+            TROPICAL
+          </text>
+          <text
+            x={center}
+            y={center + 10}
+            textAnchor="middle"
+            fill="#38bdf8"
+            fontSize="8"
+            fontFamily="monospace"
+          >
+            {western.sect.label.toUpperCase()} SECT
+          </text>
+        </g>
       </svg>
   );
 
@@ -479,7 +488,7 @@ export const BaZiElementPentagram: React.FC<BaZiPentagramProps> = ({ bazi, compa
         {/* Background Subtle Disc */}
         <circle cx={center} cy={center} r={radius + 35} fill="#0d1118" stroke="#1b2331" strokeWidth="1" />
 
-        {/* Outer Generating Cycle (Sheng Cycle / Green Ring) */}
+        {/* Outer Generating Cycle (Sheng Cycle / Green Ring with Entrance Draw) */}
         {nodeCoords.map((pt, idx) => {
           const next = nodeCoords[(idx + 1) % 5];
           return (
@@ -493,12 +502,13 @@ export const BaZiElementPentagram: React.FC<BaZiPentagramProps> = ({ bazi, compa
               strokeWidth="1.5"
               strokeDasharray="6 3"
               strokeOpacity="0.55"
-              className="animate-cycle-flow"
+              className="animate-cycle-flow animate-pentagram-draw"
+              style={{ animationDelay: `${idx * 40}ms` }}
             />
           );
         })}
 
-        {/* Inner Controlling Cycle (Ke Cycle / Star Chord Lines) */}
+        {/* Inner Controlling Cycle (Ke Cycle / Star Chord Lines with Entrance Draw) */}
         {[0, 1, 2, 3, 4].map((i) => {
           const p1 = nodeCoords[i];
           const p2 = nodeCoords[(i + 2) % 5];
@@ -513,25 +523,32 @@ export const BaZiElementPentagram: React.FC<BaZiPentagramProps> = ({ bazi, compa
               strokeWidth="1"
               strokeDasharray="4 3"
               strokeOpacity="0.45"
-              className="motion-safe:animate-beam-pulse motion-reduce:animate-none hover:stroke-opacity-90 hover:stroke-[1.8] transition-opacity duration-150 cursor-pointer"
+              className="animate-pentagram-draw motion-safe:animate-beam-pulse motion-reduce:animate-none hover:stroke-opacity-90 hover:stroke-[1.8] transition-opacity duration-150 cursor-pointer"
+              style={{ animationDelay: `${(i + 5) * 35}ms` }}
             />
           );
         })}
 
         {/* Center Balance Core */}
-        <circle cx={center} cy={center} r={24} fill="#080a0f" stroke="#1b2331" strokeWidth="1.5" />
-        <text x={center} y={center - 3} textAnchor="middle" fill="#94a3b8" fontSize="9" fontFamily="monospace" fontWeight="bold">
-          {bazi.day_master?.strength?.slice(0, 6) || 'BAL'}
-        </text>
-        <text x={center} y={center + 8} textAnchor="middle" fill="#38bdf8" fontSize="8" fontFamily="monospace">
-          {bazi.day_master?.stem}
-        </text>
+        <g className="animate-instrument-focus" style={{ animationDelay: '100ms' }}>
+          <circle cx={center} cy={center} r={24} fill="#080a0f" stroke="#1b2331" strokeWidth="1.5" />
+          <text x={center} y={center - 3} textAnchor="middle" fill="#94a3b8" fontSize="9" fontFamily="monospace" fontWeight="bold">
+            {bazi.day_master?.strength?.slice(0, 6) || 'BAL'}
+          </text>
+          <text x={center} y={center + 8} textAnchor="middle" fill="#38bdf8" fontSize="8" fontFamily="monospace">
+            {bazi.day_master?.stem}
+          </text>
+        </g>
 
-        {/* Five Element Nodes */}
-        {nodeCoords.map((pt) => {
+        {/* Five Element Nodes (Staggered Focus Pop-in) */}
+        {nodeCoords.map((pt, idx) => {
           const isDayMaster = pt.name === dayMasterElement;
           return (
-            <g key={pt.name}>
+            <g
+              key={pt.name}
+              className="animate-instrument-focus"
+              style={{ animationDelay: `${idx * 45 + 120}ms` }}
+            >
               {/* Outer Glow for Day Master */}
               {isDayMaster && (
                 <circle
@@ -636,13 +653,16 @@ export const ZiWeiPalaceGrid: React.FC<ZiWeiGridProps> = ({ ziwei, compact }) =>
     branchToPalace[p.branch] = p;
   });
 
+  const BRANCH_ORDER = ['巳', '午', '未', '申', '酉', '戌', '亥', '子', '丑', '寅', '卯', '辰'];
+
   const getPalaceCell = (branch: string) => {
     const p = branchToPalace[branch];
     if (!p) return null;
+    const bIdx = Math.max(0, BRANCH_ORDER.indexOf(branch));
     return (
       <div
         key={branch}
-        className={`rounded border flex flex-col justify-between text-left transition-colors duration-150 cursor-pointer ${
+        className={`rounded border flex flex-col justify-between text-left transition-colors duration-150 cursor-pointer animate-grid-cell-reveal ${
           compact ? 'p-1' : 'p-2'
         } ${
           p.is_ming
@@ -651,6 +671,7 @@ export const ZiWeiPalaceGrid: React.FC<ZiWeiGridProps> = ({ ziwei, compact }) =>
             ? 'bg-slate-900 border-amber-400 motion-safe:animate-aura-breathe motion-reduce:animate-none'
             : 'bg-slate-950 border-slate-800 hover:bg-slate-900 hover:border-slate-700'
         }`}
+        style={{ animationDelay: `${bIdx * 20}ms` }}
       >
         {/* Header: Name + Branch + Badges */}
         <div className="flex items-center justify-between border-b border-slate-800 pb-0.5">
@@ -700,7 +721,7 @@ export const ZiWeiPalaceGrid: React.FC<ZiWeiGridProps> = ({ ziwei, compact }) =>
 
       {/* Row 2: 辰 (Left), Courtyard (Center 2x2), 酉 (Right) */}
       {getPalaceCell('辰')}
-      <div className={`col-span-2 row-span-2 bg-slate-900 rounded border border-amber-900/40 ${compact ? 'p-1.5' : 'p-3'} flex flex-col justify-between text-center select-none`}>
+      <div className={`col-span-2 row-span-2 bg-slate-900 rounded border border-amber-900/40 ${compact ? 'p-1.5' : 'p-3'} flex flex-col justify-between text-center select-none animate-instrument-focus`}>
         <div className="border-b border-slate-800 pb-1">
           <span className={`${compact ? 'text-[9px]' : 'text-xs'} font-sans text-amber-400 block font-semibold`}>
             Central Courtyard
@@ -803,16 +824,22 @@ export const AlmutenDignityBarChart: React.FC<AlmutenBarProps> = ({ persian, com
               </span>
             </div>
 
-            {/* Stacked Bar */}
+            {/* Stacked Bar (Fluid GPU scaleX growth on reveal) */}
             <div className={`${compact ? 'h-1.5' : 'h-2'} w-full bg-slate-900 rounded overflow-hidden flex border border-slate-800`}>
               <div
-                className="h-full bg-cyan-500 motion-safe:transition-opacity motion-reduce:transition-none"
-                style={{ width: `${essentialPct}%` }}
+                className="h-full bg-cyan-500 animate-bar-grow motion-safe:transition-opacity motion-reduce:transition-none"
+                style={{
+                  width: `${essentialPct}%`,
+                  animationDelay: `${idx * 40}ms`,
+                }}
                 title={`Essential: +${item.essential_dignity}`}
               />
               <div
-                className="h-full bg-amber-500 motion-safe:transition-opacity motion-reduce:transition-none"
-                style={{ width: `${accidentalPct}%` }}
+                className="h-full bg-amber-500 animate-bar-grow motion-safe:transition-opacity motion-reduce:transition-none"
+                style={{
+                  width: `${accidentalPct}%`,
+                  animationDelay: `${idx * 40 + 25}ms`,
+                }}
                 title={`Accidental: +${item.accidental_dignity}`}
               />
             </div>
@@ -881,46 +908,69 @@ export const MaramatakaLunarDial: React.FC<MaramatakaDialProps> = ({ maramataka,
       className={`w-full select-none ${compact ? 'max-w-[220px] sm:max-w-[240px] h-auto' : 'max-w-[280px] h-auto'}`}
       style={{ filter: 'drop-shadow(0 4px 12px rgba(0,0,0,0.5))' }}
     >
-      {/* Outer Dial Track */}
-      <circle cx={center} cy={center} r={dialRadius} fill="#0d1118" stroke="#1b2331" strokeWidth="2" />
+      {/* Outer Dial Track & 30 Lunar Night Ticks (Fluid dial reveal) */}
+      <g className="animate-dial-reveal" style={{ transformOrigin: `${center}px ${center}px` }}>
+        <circle cx={center} cy={center} r={dialRadius} fill="#0d1118" stroke="#1b2331" strokeWidth="2" />
 
-      {/* 30 Lunar Night Tick Marks */}
-      {Array.from({ length: 30 }).map((_, i) => {
-        const ang = (i / 30) * 360 - 90;
-        const rad = (ang * Math.PI) / 180;
-        const r1 = dialRadius - 8;
-        const r2 = dialRadius;
-        const isQuarter = i % 7 === 0;
+        {/* 30 Lunar Night Tick Marks */}
+        {Array.from({ length: 30 }).map((_, i) => {
+          const ang = (i / 30) * 360 - 90;
+          const rad = (ang * Math.PI) / 180;
+          const r1 = dialRadius - 8;
+          const r2 = dialRadius;
+          const isQuarter = i % 7 === 0;
 
-        return (
-          <line
-            key={i}
-            x1={center + r1 * Math.cos(rad)}
-            y1={center + r1 * Math.sin(rad)}
-            x2={center + r2 * Math.cos(rad)}
-            y2={center + r2 * Math.sin(rad)}
-            stroke={isQuarter ? '#38bdf8' : '#2a3649'}
-            strokeWidth={isQuarter ? 2 : 1}
-          />
-        );
-      })}
+          return (
+            <line
+              key={i}
+              x1={center + r1 * Math.cos(rad)}
+              y1={center + r1 * Math.sin(rad)}
+              x2={center + r2 * Math.cos(rad)}
+              y2={center + r2 * Math.sin(rad)}
+              stroke={isQuarter ? '#38bdf8' : '#2a3649'}
+              strokeWidth={isQuarter ? 2 : 1}
+            />
+          );
+        })}
+      </g>
 
       {/* Center Moon Illumination Globe */}
-      <circle cx={center} cy={center} r={45} fill="#0b0e14" stroke="#1b2331" strokeWidth="1.5" />
-      <circle cx={center} cy={center} r={42} fill="#182232" opacity={night.illumination_percent / 100} />
+      <g className="animate-instrument-focus" style={{ animationDelay: '100ms' }}>
+        <circle cx={center} cy={center} r={45} fill="#0b0e14" stroke="#1b2331" strokeWidth="1.5" />
+        <circle
+          cx={center}
+          cy={center}
+          r={42}
+          fill="#182232"
+          opacity={night.illumination_percent / 100}
+          className="motion-safe:animate-celestial-glow motion-reduce:animate-none"
+        />
 
-      <text x={center} y={center - 8} textAnchor="middle" fill="#f1f5f9" fontSize="12" fontFamily="sans-serif" fontWeight="bold">
-        {night.name}
-      </text>
-      <text x={center} y={center + 8} textAnchor="middle" fill="#10b981" fontSize="9" fontFamily="monospace">
-        {night.vitality_index.slice(0, 10)}
-      </text>
-      <text x={center} y={center + 20} textAnchor="middle" fill="#94a3b8" fontSize="8" fontFamily="monospace">
-        {night.illumination_percent}% Lit
-      </text>
+        <text x={center} y={center - 8} textAnchor="middle" fill="#f1f5f9" fontSize="12" fontFamily="sans-serif" fontWeight="bold">
+          {night.name}
+        </text>
+        <text x={center} y={center + 8} textAnchor="middle" fill="#10b981" fontSize="9" fontFamily="monospace">
+          {night.vitality_index.slice(0, 10)}
+        </text>
+        <text x={center} y={center + 20} textAnchor="middle" fill="#94a3b8" fontSize="8" fontFamily="monospace">
+          {night.illumination_percent}% Lit
+        </text>
+      </g>
 
       {/* Active Night Pointer */}
-      <circle cx={pointerX} cy={pointerY} r={6} fill="#10b981" stroke="#f1f5f9" strokeWidth="1.5" />
+      <g className="animate-instrument-focus" style={{ animationDelay: '160ms' }}>
+        <circle
+          cx={pointerX}
+          cy={pointerY}
+          r={10}
+          fill="none"
+          stroke="#10b981"
+          strokeWidth="1"
+          className="motion-safe:animate-radar-pulse motion-reduce:animate-none"
+          style={{ transformOrigin: `${pointerX}px ${pointerY}px` }}
+        />
+        <circle cx={pointerX} cy={pointerY} r={6} fill="#10b981" stroke="#f1f5f9" strokeWidth="1.5" />
+      </g>
     </svg>
   );
 
@@ -1170,17 +1220,19 @@ export const TibetanMewaGrid: React.FC<TibetanMewaProps> = ({ tibetan, compact }
   const gridCells = (
     <div className={`w-full ${compact ? 'max-w-[240px] sm:max-w-[260px] gap-1.5' : 'max-w-[340px] gap-2'} grid grid-cols-3`}>
       {square.map((row, rIdx) =>
-        row.map((num) => {
+        row.map((num, cIdx) => {
           const isNatal = num === natalMewa;
           const meta = mewaMeta[num];
+          const cellIdx = rIdx * 3 + cIdx;
           return (
             <div
               key={`${rIdx}-${num}`}
-              className={`${compact ? 'p-1.5 rounded' : 'p-3 rounded-md'} border flex flex-col items-center justify-center text-center motion-safe:transition-colors motion-reduce:transition-none duration-150 ${
+              className={`${compact ? 'p-1.5 rounded' : 'p-3 rounded-md'} border flex flex-col items-center justify-center text-center animate-grid-cell-reveal motion-safe:transition-colors motion-reduce:transition-none duration-150 ${
                 isNatal
                   ? 'border-amber-400 bg-slate-800 shadow-md motion-safe:animate-celestial-glow motion-reduce:animate-none'
                   : 'border-slate-800 bg-slate-900'
               }`}
+              style={{ animationDelay: `${cellIdx * 35}ms` }}
             >
               <span
                 className={`${compact ? 'text-lg leading-tight' : 'text-2xl'} font-bold font-mono text-slate-100`}
@@ -1269,49 +1321,67 @@ export const EgyptianDecanStarClock: React.FC<EgyptianClockProps> = ({ egyptian,
       className={`w-full select-none ${compact ? 'max-w-[220px] sm:max-w-[240px] h-auto' : 'max-w-[300px] h-auto'}`}
       style={{ filter: 'drop-shadow(0 4px 12px rgba(0,0,0,0.5))' }}
     >
-      {/* Outer Dial Track */}
-      <circle cx={center} cy={center} r={radius} fill="#0d1118" stroke="#1b2331" strokeWidth="2" />
-      <circle cx={center} cy={center} r={radius - 16} fill="none" stroke="#182335" strokeWidth="1" strokeDasharray="3 3" />
+      {/* Outer Dial Track & 36 Decan Radial Ticks (Fluid dial reveal) */}
+      <g className="animate-dial-reveal" style={{ transformOrigin: `${center}px ${center}px` }}>
+        <circle cx={center} cy={center} r={radius} fill="#0d1118" stroke="#1b2331" strokeWidth="2" />
+        <circle cx={center} cy={center} r={radius - 16} fill="none" stroke="#182335" strokeWidth="1" strokeDasharray="3 3" />
 
-      {/* 36 Decan Radial Ticks */}
-      {decans.map((d) => {
-        const r1 = radius - (d.index % 3 === 1 ? 12 : 6);
-        const r2 = radius;
-        return (
-          <line
-            key={d.index}
-            x1={center + r1 * Math.cos(d.rad)}
-            y1={center + r1 * Math.sin(d.rad)}
-            x2={center + r2 * Math.cos(d.rad)}
-            y2={center + r2 * Math.sin(d.rad)}
-            stroke={d.index % 3 === 1 ? '#38bdf8' : '#2a3649'}
-            strokeWidth={d.index % 3 === 1 ? 1.5 : 1}
-          />
-        );
-      })}
+        {/* 36 Decan Radial Ticks */}
+        {decans.map((d) => {
+          const r1 = radius - (d.index % 3 === 1 ? 12 : 6);
+          const r2 = radius;
+          return (
+            <line
+              key={d.index}
+              x1={center + r1 * Math.cos(d.rad)}
+              y1={center + r1 * Math.sin(d.rad)}
+              x2={center + r2 * Math.cos(d.rad)}
+              y2={center + r2 * Math.sin(d.rad)}
+              stroke={d.index % 3 === 1 ? '#38bdf8' : '#2a3649'}
+              strokeWidth={d.index % 3 === 1 ? 1.5 : 1}
+            />
+          );
+        })}
+      </g>
 
       {/* Center Barque Wheel */}
-      <circle cx={center} cy={center} r={52} fill="#090d15" stroke="#38bdf8" strokeWidth="1.5" strokeOpacity="0.6" />
-      <text x={center} y={center - 14} textAnchor="middle" fill="#38bdf8" fontSize="10" fontFamily="monospace" fontWeight="bold">
-        TEMPORAL HOUR
-      </text>
-      <text x={center} y={center + 4} textAnchor="middle" fill="#f1f5f9" fontSize="14" fontFamily="serif" fontWeight="bold">
-        {hourWatch?.hour_ruler_chronocrator}
-      </text>
-      <text x={center} y={center + 18} textAnchor="middle" fill="#94a3b8" fontSize="9" fontFamily="monospace">
-        Hour #{hourWatch?.temporal_hour_number} ({hourWatch?.period})
-      </text>
+      <g className="animate-instrument-focus" style={{ animationDelay: '100ms' }}>
+        <circle cx={center} cy={center} r={52} fill="#090d15" stroke="#38bdf8" strokeWidth="1.5" strokeOpacity="0.6" />
+        <text x={center} y={center - 14} textAnchor="middle" fill="#38bdf8" fontSize="10" fontFamily="monospace" fontWeight="bold">
+          TEMPORAL HOUR
+        </text>
+        <text x={center} y={center + 4} textAnchor="middle" fill="#f1f5f9" fontSize="14" fontFamily="serif" fontWeight="bold">
+          {hourWatch?.hour_ruler_chronocrator}
+        </text>
+        <text x={center} y={center + 18} textAnchor="middle" fill="#94a3b8" fontSize="9" fontFamily="monospace">
+          Hour #{hourWatch?.temporal_hour_number} ({hourWatch?.period})
+        </text>
+      </g>
 
       {/* Key Decan Markers */}
       {guardians.ascendant_decan && (
-        <circle
-          cx={decans[(guardians.ascendant_decan.overall_decan_number - 1) % 36]?.x || center}
-          cy={decans[(guardians.ascendant_decan.overall_decan_number - 1) % 36]?.y || center}
-          r="5"
-          fill="#38bdf8"
-          stroke="#f1f5f9"
-          strokeWidth="1.5"
-        />
+        <g className="animate-instrument-focus" style={{ animationDelay: '160ms' }}>
+          <circle
+            cx={decans[(guardians.ascendant_decan.overall_decan_number - 1) % 36]?.x || center}
+            cy={decans[(guardians.ascendant_decan.overall_decan_number - 1) % 36]?.y || center}
+            r="10"
+            fill="none"
+            stroke="#38bdf8"
+            strokeWidth="1"
+            className="motion-safe:animate-radar-pulse motion-reduce:animate-none"
+            style={{
+              transformOrigin: `${decans[(guardians.ascendant_decan.overall_decan_number - 1) % 36]?.x || center}px ${decans[(guardians.ascendant_decan.overall_decan_number - 1) % 36]?.y || center}px`
+            }}
+          />
+          <circle
+            cx={decans[(guardians.ascendant_decan.overall_decan_number - 1) % 36]?.x || center}
+            cy={decans[(guardians.ascendant_decan.overall_decan_number - 1) % 36]?.y || center}
+            r="5"
+            fill="#38bdf8"
+            stroke="#f1f5f9"
+            strokeWidth="1.5"
+          />
+        </g>
       )}
     </svg>
   );
@@ -1409,16 +1479,18 @@ export const MayaCalendarCompass: React.FC<MayanCompassProps> = ({ mayan, compac
       </g>
 
       {/* Hub: Kin & Calendar Round */}
-      <circle cx={center} cy={center} r={44} fill="#0b0f19" stroke="#38bdf8" strokeWidth="2" />
-      <text x={center} y={center - 10} textAnchor="middle" fill="#38bdf8" fontSize="12" fontFamily="monospace" fontWeight="bold">
-        {tzolkin?.formatted}
-      </text>
-      <text x={center} y={center + 6} textAnchor="middle" fill="#f1f5f9" fontSize="11" fontFamily="sans-serif">
-        {haab?.formatted}
-      </text>
-      <text x={center} y={center + 20} textAnchor="middle" fill="#fbbf24" fontSize="8" fontFamily="monospace">
-        Glyph: {tzolkin?.symbol}
-      </text>
+      <g className="animate-instrument-focus" style={{ transformOrigin: `${center}px ${center}px`, animationDelay: '100ms' }}>
+        <circle cx={center} cy={center} r={44} fill="#0b0f19" stroke="#38bdf8" strokeWidth="2" />
+        <text x={center} y={center - 10} textAnchor="middle" fill="#38bdf8" fontSize="12" fontFamily="monospace" fontWeight="bold">
+          {tzolkin?.formatted}
+        </text>
+        <text x={center} y={center + 6} textAnchor="middle" fill="#f1f5f9" fontSize="11" fontFamily="sans-serif">
+          {haab?.formatted}
+        </text>
+        <text x={center} y={center + 20} textAnchor="middle" fill="#fbbf24" fontSize="8" fontFamily="monospace">
+          Glyph: {tzolkin?.symbol}
+        </text>
+      </g>
     </svg>
   );
 

@@ -1,7 +1,7 @@
 # Synodix: Project Context & Working Memory
 
-**Last Updated:** 2026-10-29 09:53:37
-**Version:** 2.33.16  
+**Last Updated:** 2026-10-29 10:31:00
+**Version:** 2.33.17  
 **Stack:** Python 3.12 (FastAPI, Swiss Ephemeris 2.10, Skyfield DE421) + TypeScript / React 19 / Vite / Tailwind CSS v4 / Framer Motion / Capacitor 8 (iOS & Android)  
 **Workspace:** `/Volumes/Study/Projects/Astrology` (symlinked as `/Volumes/Study/Astrology`)  
 **Git Remote:** `https://github.com/manvenpratap/Synodix.git`  
@@ -10,7 +10,29 @@
 
 ## 1. Current Status & Milestone
 
-- **Active Phase**: Native Mobile Ergonomics & Viewport Hardening (Completed)
+- **Active Phase**: Apple Design Engineering & Visual Instruments Motion Orchestration (Completed)
+- **Apple Design Principles & Instrument Animations (v2.33.17)**:
+  - **Fluid GPU-Accelerated Animations Across All 9 Visual Instruments (`ChartWheelVisualizer.tsx`, `index.css`)**:
+    - **Persian Almuten Figuris**: Replaced static dignity bar jumps with `.animate-bar-grow` (`scaleX(0) -> scaleX(1)`) using left-centered GPU transforms and 40ms staggered cascading delays.
+    - **Egyptian Decan Star Clock**: Built `.animate-dial-reveal` for the 36 decanal star gates and rotating barque wheel, paired with an `animate-radar-pulse` reticle on the active Ascendant decan star.
+    - **Polynesian Maramataka Lunar Dial**: Added `.animate-dial-reveal` on the 30 lunar night tick marks, animated pulsing night pointer with `.animate-radar-pulse`, and breathing illumination globe.
+    - **Tibetan Mewa Magic Square**: Added 35ms staggered cell entrance reveal `.animate-grid-cell-reveal` across the 3x3 Luoshu matrix.
+    - **Chinese Zi Wei Dou Shu**: Added 20ms staggered entrance reveal `.animate-grid-cell-reveal` across all 12 palace cards surrounding the central courtyard.
+    - **Western Circular Wheel**: Enhanced 360° zodiac wheel and astrolabe ring with fluid entrance `.animate-dial-reveal` and focused planetary glyph placement.
+    - **BaZi Element Pentagram**: Added entrance `.animate-pentagram-draw` stroke transitions to generating and controlling cycles with staggered element node focus pop-ins.
+    - **Maya Sacred Calendar Round**: Structured central calendar round kin hub with `.animate-instrument-focus`.
+    - **North Indian Kundali**: Synchronized Kendra house diamond highlighting and house graha text with smooth `.animate-instrument-focus`.
+  - **Carousel Re-Triggering on Card Focus (`TraditionVerticalCarousel.tsx`)**:
+    - Keyed visual instruments by `${key}-${isCenter ? 'active' : 'idle'}` so swiping or navigating between tradition cards triggers the entrance motion fresh on activation.
+  - **Apple Design Foundations & Human Interface Guidelines (`index.css`, `App.tsx`, `TraditionVerticalCarousel.tsx`)**:
+    - **Frosted Acrylic Translucency & Hairline Light-Catch Edge**: Implemented `.mobile-nav-canvas` with `backdrop-filter: blur(20px) saturate(180%)` and a subtle 1px bright top hairline (`border-top: 1px solid rgba(255, 255, 255, 0.12)`).
+    - **Accessibility: Reduced Transparency (`@media (prefers-reduced-transparency: reduce)`)**: Gracefully drops blur and raises background opacity to 100% solid obsidian or cream for users with transparency sensitivity.
+    - **Accessibility: High Contrast (`@media (prefers-contrast: more)`)**: Injects high-contrast structural borders across buttons, cards, and modal bezels.
+    - **Apple Typography Foundations**: Applied display heading negative tracking (`letter-spacing: -0.02em`), positive mono telemetry tracking (`letter-spacing: 0.025em`), and subpixel antialiasing smoothing (`-webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; text-rendering: optimizeLegibility;`).
+    - **Expanded Mobile Touch Targets**: Padded mobile indicator dot buttons with `p-1.5` hit areas, providing reliable 24px touch targets for mobile fingers while keeping visual dots elegant.
+  - **Automated Verification**:
+    - Pytest test suite: 26/26 passed cleanly in 87.69s via `./pipeline.sh test --summary`.
+    - Native Android APK (7.67MB) and iOS Simulator bundle (5.71MB) compiled and verified on Android emulator `emulator-5554` (`apple_traditions_screen2.png`, `apple_dot_tapped.png`, `apple_western_wheel2.png`).
 - **Native Mobile Platform Ergonomics & Header Layout Hardening (v2.33.16)**:
   - **Eliminated Mobile Header Truncation (`WORKBENC...`) (`App.tsx`)**:
     - Identified root cause of truncated header text on mobile: fixed `max-w-[140px]` with oversized `text-xl` font caused Roman serif titles like "WORKBENCH" to clip into `WORKBENC...` on 360px–390px screens.

@@ -1093,7 +1093,7 @@ function AppContent() {
       {/* 4. Mobile Bottom Navigation Bar (<md) */}
       <nav
         aria-label="Mobile Navigation"
-        className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-stone-950/95 backdrop-blur-md border-t border-stone-800 px-1 py-1 pb-[max(0.75rem,env(safe-area-inset-bottom,0px))] flex items-center justify-around text-[11px] font-mono font-medium tracking-tight shadow-2xl"
+        className="md:hidden fixed bottom-0 left-0 right-0 z-50 mobile-nav-canvas px-1 py-1 pb-[max(0.75rem,env(safe-area-inset-bottom,0px))] flex items-center justify-around text-[11px] font-mono font-medium tracking-tight shadow-2xl"
       >
         {[
           { id: 'workbench', label: 'Input', icon: Sliders },

@@ -64,7 +64,7 @@ export const FeatureExplainerModal: React.FC = () => {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.15 }}
-          className="fixed inset-0 z-[70] flex items-center justify-center p-3 sm:p-6 bg-stone-950/80 overscroll-contain pt-[max(0.75rem,env(safe-area-inset-top,0px))] pb-[max(0.75rem,env(safe-area-inset-bottom,0px))]"
+          className="fixed inset-0 z-[70] flex items-center justify-center p-3 sm:p-6 bg-stone-950/80 backdrop-blur-sm overscroll-contain pt-[max(0.75rem,env(safe-area-inset-top,0px))] pb-[max(0.75rem,env(safe-area-inset-bottom,0px))]"
           onClick={closeExplainer}
         >
           <motion.div
@@ -72,7 +72,7 @@ export const FeatureExplainerModal: React.FC = () => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: shouldReduceMotion ? 0 : 6 }}
             transition={{ duration: 0.16, ease: [0.16, 1, 0.3, 1] }}
-            className="bg-stone-950 border border-stone-800 text-stone-200 rounded-2xl w-full max-w-3xl max-h-[90vh] flex flex-col overflow-hidden relative shadow-2xl"
+            className="bg-stone-950 border border-stone-800 ring-1 ring-white/10 text-stone-200 rounded-2xl w-full max-w-3xl max-h-[90vh] flex flex-col overflow-hidden relative shadow-2xl"
             onClick={(e) => e.stopPropagation()}
           >
         {/* Top Header Bar */}

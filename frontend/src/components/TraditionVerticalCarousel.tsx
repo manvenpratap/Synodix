@@ -473,8 +473,8 @@ export const TraditionVerticalCarousel: React.FC<Props> = ({
           <span className="text-stone-400 hidden sm:inline">• 9 Traditions</span>
         </div>
 
-        {/* Mobile-only compact tradition indicator dots */}
-        <div className="flex md:hidden items-center gap-1">
+        {/* Mobile-only compact tradition indicator dots with Apple-grade touch targets */}
+        <div className="flex md:hidden items-center gap-0.5">
           {TRADITION_ORDER.map((key, idx) => (
             <button
               key={key}
@@ -482,12 +482,16 @@ export const TraditionVerticalCarousel: React.FC<Props> = ({
               type="button"
               onClick={() => goToIndex(idx)}
               aria-label={`Mobile jump to ${cultureThemes[key]?.name || key}`}
-              className={`h-1.5 rounded-full transition-[width,background-color] duration-200 ease-out cursor-pointer ${
-                activeIndex === idx
-                  ? 'w-4 bg-amber-400 shadow-xs shadow-amber-400/50'
-                  : 'w-1.5 bg-stone-700 hover:bg-stone-500'
-              }`}
-            />
+              className="p-1.5 flex items-center justify-center cursor-pointer touch-manipulation focus:outline-none"
+            >
+              <span
+                className={`h-1.5 rounded-full transition-[width,background-color] duration-200 ease-out inline-block ${
+                  activeIndex === idx
+                    ? 'w-4 bg-amber-400 shadow-xs shadow-amber-400/50'
+                    : 'w-1.5 bg-stone-700 hover:bg-stone-500'
+                }`}
+              />
+            </button>
           ))}
         </div>
 
@@ -696,7 +700,10 @@ export const TraditionVerticalCarousel: React.FC<Props> = ({
                             Deterministic Engine
                           </span>
                         </div>
-                        <div className="w-full flex items-center justify-center py-1">
+                        <div
+                          key={`${key}-${isCenter ? 'active' : 'idle'}`}
+                          className={`w-full flex items-center justify-center py-1 ${isCenter ? 'animate-instrument-focus' : ''}`}
+                        >
                           {renderInstrument(key, theme)}
                         </div>
                       </div>

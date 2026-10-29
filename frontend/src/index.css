@@ -1446,6 +1446,69 @@ html[data-theme="light"] {
   animation: gearRotateReverse 30s linear infinite;
 }
 
+@keyframes dialReveal {
+  from {
+    transform: rotate(-10deg) scale(0.97);
+    opacity: 0.3;
+  }
+  to {
+    transform: rotate(0deg) scale(1);
+    opacity: 1;
+  }
+}
+
+.animate-dial-reveal {
+  transform-origin: center center;
+  animation: dialReveal var(--duration-relaxed, 320ms) var(--ease-out-expo, cubic-bezier(0.16, 1, 0.3, 1)) forwards;
+}
+
+@keyframes barGrow {
+  from {
+    transform: scaleX(0);
+    opacity: 0.2;
+  }
+  to {
+    transform: scaleX(1);
+    opacity: 1;
+  }
+}
+
+.animate-bar-grow {
+  transform-origin: left center;
+  animation: barGrow 280ms var(--ease-out-expo, cubic-bezier(0.16, 1, 0.3, 1)) forwards;
+}
+
+@keyframes pentagramDraw {
+  from {
+    stroke-dashoffset: 180;
+    opacity: 0.2;
+  }
+  to {
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+}
+
+.animate-pentagram-draw {
+  stroke-dasharray: 180;
+  animation: pentagramDraw var(--duration-relaxed, 320ms) var(--ease-out-expo, cubic-bezier(0.16, 1, 0.3, 1)) forwards;
+}
+
+@keyframes gridCellReveal {
+  from {
+    transform: scale(0.96);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.animate-grid-cell-reveal {
+  animation: gridCellReveal 240ms var(--ease-out-expo, cubic-bezier(0.16, 1, 0.3, 1)) forwards;
+}
+
 /* Spatial Observatory Atmosphere - Renaissance Celestial Monograph */
 .celestial-observatory-canvas {
   background-color: #0c0a09;
@@ -1643,6 +1706,80 @@ html,
 body {
   -webkit-tap-highlight-color: transparent;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11", "tnum";
+  font-variant-numeric: tabular-nums;
+}
+
+/* Apple Display & Telemetry Typography Optical Scaling */
+h1, h2, h3, h4, .font-serif {
+  letter-spacing: -0.02em; /* Negative tracking on large display headings */
+}
+
+.font-mono, [data-telemetry] {
+  letter-spacing: 0.025em; /* Positive tracking for small telemetry legibility */
+}
+
+/* Apple Frosted Acrylic & Glass Materials */
+.mobile-nav-canvas {
+  background-color: rgba(12, 10, 9, 0.88);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border-top: 1px solid rgba(255, 255, 255, 0.12); /* Apple light-catch hairline */
+}
+
+[data-theme="light"] .mobile-nav-canvas {
+  background-color: rgba(255, 253, 250, 0.90) !important;
+  backdrop-filter: blur(20px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+  border-top: 1px solid rgba(0, 0, 0, 0.08) !important;
+}
+
+/* 5. Apple Accessibility: Reduced Transparency (prefers-reduced-transparency) */
+@media (prefers-reduced-transparency: reduce) {
+  .header-canvas,
+  .sidebar-canvas,
+  .mobile-nav-canvas,
+  [data-tradition-card="active"],
+  .backdrop-blur-md,
+  .backdrop-blur-sm,
+  .backdrop-blur-lg,
+  .backdrop-blur-xl {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    background-color: #0c0a09 !important;
+    opacity: 1 !important;
+  }
+
+  [data-theme="light"] .header-canvas,
+  [data-theme="light"] .sidebar-canvas,
+  [data-theme="light"] .mobile-nav-canvas,
+  [data-theme="light"] [data-tradition-card="active"] {
+    background-color: #faf7f0 !important;
+  }
+}
+
+/* 6. Apple Accessibility: High Contrast (prefers-contrast) */
+@media (prefers-contrast: more) {
+  button,
+  input,
+  select,
+  [role="button"],
+  [role="tab"],
+  [data-tradition-card],
+  .machined-bezel {
+    border-color: rgba(255, 255, 255, 0.45) !important;
+  }
+
+  [data-theme="light"] button,
+  [data-theme="light"] input,
+  [data-theme="light"] select,
+  [data-theme="light"] [role="button"],
+  [data-theme="light"] [role="tab"],
+  [data-theme="light"] [data-tradition-card] {
+    border-color: rgba(0, 0, 0, 0.5) !important;
+  }
 }
 
 button,
@@ -1711,7 +1848,11 @@ textarea {
   .animate-radar-reveal,
   .animate-radar-pulse,
   .animate-eclipse-spin,
-  .animate-kundali-draw {
+  .animate-kundali-draw,
+  .animate-dial-reveal,
+  .animate-bar-grow,
+  .animate-pentagram-draw,
+  .animate-grid-cell-reveal {
     animation: none !important;
     opacity: 1 !important;
     transform: none !important;
