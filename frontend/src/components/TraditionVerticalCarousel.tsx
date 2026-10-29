@@ -65,6 +65,7 @@ export const TraditionVerticalCarousel: React.FC<Props> = ({
   primaryExplainers,
 }) => {
   const activeIndex = TRADITION_ORDER.indexOf(activeTab);
+  const currentTheme = cultureThemes[activeTab] || cultureThemes.jyotisha;
   const containerRef = useRef<HTMLDivElement>(null);
   const lastScrollTime = useRef<number>(0);
   const touchStartY = useRef<number | null>(null);
@@ -463,7 +464,7 @@ export const TraditionVerticalCarousel: React.FC<Props> = ({
       </div>
 
       {/* Main 3D Stage */}
-      <div className="relative min-h-[510px] sm:min-h-[540px] flex items-start justify-center pt-2 sm:pt-3 pb-6 p-2 sm:p-3 pr-12 sm:pr-16 overflow-hidden [perspective:1400px]">
+      <div className="relative min-h-[460px] sm:min-h-[480px] flex items-start justify-center pt-2 sm:pt-3 pb-3 p-2 sm:p-3 pr-12 sm:pr-16 overflow-hidden [perspective:1400px]">
         {/* Floating Vertical Navigation Rail */}
         <div
           role="tablist"
@@ -521,7 +522,7 @@ export const TraditionVerticalCarousel: React.FC<Props> = ({
         </div>
 
         {/* Stacked Vertical Carousel Cards */}
-        <div className="relative w-full max-w-4xl min-h-[480px] sm:min-h-[500px] flex items-start justify-center">
+        <div className="relative w-full max-w-4xl min-h-[430px] sm:min-h-[450px] flex items-start justify-center">
           {TRADITION_ORDER.map((key, index) => {
             const diff = index - activeIndex;
             const theme = cultureThemes[key] || cultureThemes.jyotisha;
@@ -646,29 +647,29 @@ export const TraditionVerticalCarousel: React.FC<Props> = ({
                     </div>
                   )}
                 </div>
-
-                {/* Card Footer: Action Button */}
-                <div className="mt-3 pt-2.5 border-t border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-                  <div className="text-[11px] font-sans text-slate-400">
-                    Dual-Engine JPL DE421 + SwissEph 2.10 Authenticated
-                  </div>
-
-                  <button
-                    type="button"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      onOpenInspector(key);
-                    }}
-                    className="inline-flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-lg bg-amber-950 hover:bg-amber-900/80 disabled:opacity-50 disabled:cursor-not-allowed text-amber-200 border border-amber-700/80 text-xs font-sans font-semibold transition-colors active:scale-[0.98] duration-150 cursor-pointer shadow-xs whitespace-nowrap"
-                  >
-                    <span className="whitespace-nowrap">Inspect Full Telemetry & Tables</span>
-                    <ArrowRight className="w-3.5 h-3.5" />
-                  </button>
-                </div>
               </motion.div>
             );
           })}
         </div>
+      </div>
+
+      {/* Persistent Common Action Strip (Outside Carousel Cards) */}
+      <div className="flex flex-col sm:flex-row items-center justify-between gap-2 px-3 sm:px-6 pt-2 pb-1 border-t border-white/10 text-xs">
+        <div className="flex items-center gap-2 text-[11px] font-sans text-stone-400">
+          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 inline-block shadow-xs shadow-emerald-400/50" />
+          <span>Dual-Engine JPL DE421 + SwissEph 2.10 Authenticated</span>
+        </div>
+
+        <button
+          type="button"
+          onClick={() => onOpenInspector(activeTab)}
+          className="inline-flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-lg bg-amber-950 hover:bg-amber-900/80 text-amber-200 border border-amber-700/80 text-xs font-sans font-semibold transition-colors active:scale-[0.98] duration-150 cursor-pointer shadow-xs whitespace-nowrap"
+          data-tooltip={`Open full telemetry inspector & analytical tables for ${currentTheme?.name || activeTab}`}
+          aria-label={`Inspect full telemetry and tables for ${currentTheme?.name || activeTab}`}
+        >
+          <span>Inspect Full Telemetry & Tables</span>
+          <ArrowRight className="w-3.5 h-3.5" />
+        </button>
       </div>
     </div>
   );

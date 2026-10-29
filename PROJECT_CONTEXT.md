@@ -1,7 +1,7 @@
 # Synodix: Project Context & Working Memory
 
-**Last Updated:** 2026-10-29 07:50:12
-**Version:** 2.33.11  
+**Last Updated:** 2026-10-29 08:08:08
+**Version:** 2.33.12  
 **Stack:** Python 3.12 (FastAPI, Swiss Ephemeris 2.10, Skyfield DE421) + TypeScript / React 19 / Vite / Tailwind CSS v4 / Framer Motion / Capacitor 8 (iOS & Android)  
 **Workspace:** `/Volumes/Study/Projects/Astrology` (symlinked as `/Volumes/Study/Astrology`)  
 **Git Remote:** `https://github.com/manvenpratap/Synodix.git`  
@@ -10,7 +10,18 @@
 
 ## 1. Current Status & Milestone
 
-- **Active Phase**: Tractate II Carousel Headroom Optimization & Layout Density (Completed)
+- **Active Phase**: Common Carousel Action Demotion & Persistent Footer Strip (Completed)
+- **Common Carousel Action Demotion & Persistent Footer Strip (v2.33.12)**:
+  - **Relocated "Inspect Full Telemetry & Tables" Outside Carousel Cards**:
+    - Eliminated redundant per-card footer action buttons duplicated across all 9 cultural cards in `TraditionVerticalCarousel.tsx`.
+    - Created a shared, stationary common action strip positioned directly outside the 3D card deck at the bottom of the carousel viewport.
+    - Shrunk individual card height from 521px to 468px (saving an additional 53px of vertical space inside each card).
+    - Added accessible contextual tooltips and dynamic `activeTab` targeting (`currentTheme?.name`).
+    - The persistent common button (`btnTop: 775.5px`, `btnBottom: 805.5px`) now remains stable during 3D card deck flips and provides instant navigation into the Inspector Matrix.
+  - **Hardened Geocoding Blur Assertion (`test_07_geocoding_intelligence.py`)**:
+    - Replaced heuristic element clicking with standard Playwright `city_input.blur()` API to ensure 100% deterministic test execution.
+  - **Full Test Suite Clean Pass**:
+    - 26 passed in 84.83s with zero console errors.
 - **Tractate II Carousel Headroom Optimization & Viewport Density (v2.33.11)**:
   - **Eliminated ~140px Dead Space Above Vertical Carousel Deck**:
     - Identified root causes of excessive space above the carousel:
