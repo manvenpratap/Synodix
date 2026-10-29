@@ -264,14 +264,14 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
   const currentTheme = CULTURE_THEMES[activeTab] || CULTURE_THEMES.jyotisha;
 
   return (
-    <div className={`machined-bezel p-3 sm:p-5 pt-3 sm:pt-4 rounded-2xl shadow-2xl relative transition-colors duration-300 overflow-hidden backdrop-blur-xl ${currentTheme.containerBg} ${currentTheme.containerBorder}`}>
+    <div className={`machined-bezel p-2 sm:p-5 pt-2 sm:pt-4 rounded-2xl shadow-2xl relative transition-colors duration-300 overflow-hidden backdrop-blur-xl ${currentTheme.containerBg} ${currentTheme.containerBorder}`}>
       <div className="reticle-corner-tl" />
       <div className="reticle-corner-tr" />
       <div className="reticle-corner-bl" />
       <div className="reticle-corner-br" />
 
       {/* Tractate II Header Bar: Title + Display Presentation Switcher + View Mode Toggle */}
-      <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-2.5 pb-2 border-b border-white/10">
+      <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-1.5 sm:gap-2.5 pb-1.5 sm:pb-2 border-b border-white/10">
         <div className="min-w-0">
           <h3 className="text-sm sm:text-base font-serif font-semibold text-stone-100 flex items-center gap-2 whitespace-nowrap">
             <span>Step 2 · 9 Astrological Traditions</span>
@@ -282,9 +282,9 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
           </p>
         </div>
 
-        <div className="flex flex-wrap items-center justify-between sm:justify-end gap-1.5 sm:gap-2 shrink-0">
+        <div className="flex flex-wrap items-center justify-between sm:justify-end gap-1 sm:gap-2 shrink-0">
           {/* Display Presentation Switcher: Comprehensive / Visual Instrument / Telemetry Tables */}
-          <div className="flex items-center gap-0.5 p-0.5 rounded-lg bg-stone-900/90 border border-stone-800 text-[11px] font-mono shrink-0">
+          <div className="flex items-center gap-0.5 p-0.5 rounded-lg bg-stone-900/90 border border-stone-800 text-[10px] sm:text-[11px] font-mono shrink-0">
             {(['both', 'chart', 'table'] as const).map((mode) => {
               const isModeActive = chartViewMode === mode;
               const labels = {
@@ -297,7 +297,7 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
                   key={mode}
                   type="button"
                   onClick={() => setChartViewMode(mode)}
-                  className={`relative px-2 py-1 min-h-[30px] text-[11px] font-mono rounded cursor-pointer transition-colors ${
+                  className={`relative px-1.5 sm:px-2 py-0.5 sm:py-1 min-h-[26px] sm:min-h-[30px] text-[10px] sm:text-[11px] font-mono rounded cursor-pointer transition-colors ${
                     isModeActive
                       ? 'bg-amber-950 text-amber-200 font-bold border border-amber-700/80 shadow-xs'
                       : 'text-stone-400 hover:text-stone-200'
@@ -314,11 +314,11 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
           </div>
 
           {/* View Mode Toggle: Vertical Carousel vs Full Inspector */}
-          <div className="flex items-center p-0.5 rounded-lg bg-stone-900/90 border border-stone-800 text-[11px] font-mono shrink-0">
+          <div className="flex items-center p-0.5 rounded-lg bg-stone-900/90 border border-stone-800 text-[10px] sm:text-[11px] font-mono shrink-0">
             <button
               type="button"
               onClick={() => setLayoutMode('carousel')}
-              className={`flex items-center gap-1 px-2 py-1 min-h-[30px] rounded cursor-pointer transition-colors font-serif ${
+              className={`flex items-center gap-1 px-1.5 sm:px-2 py-0.5 sm:py-1 min-h-[26px] sm:min-h-[30px] rounded cursor-pointer transition-colors font-serif ${
                 layoutMode === 'carousel'
                   ? 'bg-amber-950 text-amber-300 border border-amber-700/80 font-bold'
                   : 'text-stone-400 hover:text-stone-200'
@@ -332,7 +332,7 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
             <button
               type="button"
               onClick={() => setLayoutMode('inspector')}
-              className={`flex items-center gap-1 px-2 py-1 min-h-[30px] rounded cursor-pointer transition-colors font-serif ${
+              className={`flex items-center gap-1 px-1.5 sm:px-2 py-0.5 sm:py-1 min-h-[26px] sm:min-h-[30px] rounded cursor-pointer transition-colors font-serif ${
                 layoutMode === 'inspector'
                   ? 'bg-amber-950 text-amber-300 border border-amber-700/80 font-bold'
                   : 'text-stone-400 hover:text-stone-200'

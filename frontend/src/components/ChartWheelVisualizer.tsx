@@ -67,7 +67,7 @@ export const NorthIndianChart: React.FC<VedicChartProps> = ({ jyotisha, compact 
   const svgContent = (
     <svg
       viewBox="0 0 400 400"
-      className={`w-full select-none ${compact ? 'max-w-[270px] sm:max-w-[290px] h-auto' : 'max-w-[360px] h-auto'}`}
+      className={`w-full select-none ${compact ? 'max-w-[170px] sm:max-w-[230px] lg:max-w-[270px] h-auto' : 'max-w-[360px] h-auto'}`}
       style={{ filter: 'drop-shadow(0 4px 12px rgba(0,0,0,0.5))' }}
       aria-hidden="true"
     >
@@ -267,7 +267,7 @@ export const WesternCircularWheel: React.FC<WesternWheelProps> = ({ western, com
     <svg
       aria-hidden="true"
       viewBox={`0 0 ${size} ${size}`}
-      className={`w-full select-none ${compact ? 'max-w-[270px] sm:max-w-[290px] h-auto' : 'max-w-[380px] h-auto'}`}
+      className={`w-full select-none ${compact ? 'max-w-[170px] sm:max-w-[230px] lg:max-w-[270px] h-auto' : 'max-w-[380px] h-auto'}`}
       style={{ filter: 'drop-shadow(0 4px 12px rgba(0,0,0,0.5))' }}
     >
       {/* Background Circle */}
@@ -482,7 +482,7 @@ export const BaZiElementPentagram: React.FC<BaZiPentagramProps> = ({ bazi, compa
     <svg
       aria-hidden="true"
       viewBox={`0 0 ${size} ${size}`}
-      className={`w-full select-none ${compact ? 'max-w-[250px] sm:max-w-[270px] h-auto' : 'max-w-[340px] h-auto'}`}
+      className={`w-full select-none ${compact ? 'max-w-[170px] sm:max-w-[230px] lg:max-w-[270px] h-auto' : 'max-w-[340px] h-auto'}`}
       style={{ filter: 'drop-shadow(0 4px 12px rgba(0,0,0,0.5))' }}
     >
         {/* Background Subtle Disc */}
@@ -663,7 +663,7 @@ export const ZiWeiPalaceGrid: React.FC<ZiWeiGridProps> = ({ ziwei, compact }) =>
       <div
         key={branch}
         className={`rounded border flex flex-col justify-between text-left transition-colors duration-150 cursor-pointer animate-grid-cell-reveal ${
-          compact ? 'p-1' : 'p-2'
+          compact ? 'p-0.5 sm:p-1' : 'p-2'
         } ${
           p.is_ming
             ? 'bg-slate-900 border-cyan-500 shadow-xs motion-safe:animate-aura-breathe motion-reduce:animate-none'
@@ -675,23 +675,23 @@ export const ZiWeiPalaceGrid: React.FC<ZiWeiGridProps> = ({ ziwei, compact }) =>
       >
         {/* Header: Name + Branch + Badges */}
         <div className="flex items-center justify-between border-b border-slate-800 pb-0.5">
-          <span className={`font-semibold ${compact ? 'text-[10px]' : 'text-[11px]'} text-slate-100 flex items-center gap-1`}>
+          <span className={`font-semibold ${compact ? 'text-[9px] sm:text-[10px]' : 'text-[11px]'} text-slate-100 flex items-center gap-0.5 sm:gap-1`}>
             {p.name}
-            {p.is_ming && <span className="text-[8px] px-0.5 rounded bg-cyan-950 text-cyan-300 border border-cyan-800">M</span>}
-            {p.is_shen && <span className="text-[8px] px-0.5 rounded bg-amber-950 text-amber-300 border border-amber-800">S</span>}
+            {p.is_ming && <span className="text-[7.5px] sm:text-[8px] px-0.5 rounded bg-cyan-950 text-cyan-300 border border-cyan-800">M</span>}
+            {p.is_shen && <span className="text-[7.5px] sm:text-[8px] px-0.5 rounded bg-amber-950 text-amber-300 border border-amber-800">S</span>}
           </span>
-          <span className={`${compact ? 'text-[9px]' : 'text-[11px]'} font-mono text-slate-500`}>{p.branch}</span>
+          <span className={`${compact ? 'text-[8px] sm:text-[9px]' : 'text-[11px]'} font-mono text-slate-500`}>{p.branch}</span>
         </div>
 
         {/* Major Stars */}
         <div className={`${compact ? 'my-0.5 space-y-0' : 'my-1 space-y-0.5'}`}>
           {p.stars.length === 0 ? (
-            <span className={`${compact ? 'text-[9px]' : 'text-[11px]'} text-slate-400 block truncate`}>Empty</span>
+            <span className={`${compact ? 'text-[8px] sm:text-[9px]' : 'text-[11px]'} text-slate-400 block truncate`}>Empty</span>
           ) : (
             p.stars.slice(0, compact ? 1 : 3).map((s: string, sIdx: number) => (
               <div
                 key={sIdx}
-                className={`${compact ? 'text-[9px]' : 'text-[11px]'} font-mono truncate ${
+                className={`${compact ? 'text-[8px] sm:text-[9px]' : 'text-[11px]'} font-mono truncate ${
                   s.startsWith('[A]')
                     ? 'text-cyan-400/90'
                     : 'text-amber-300 font-semibold'
@@ -704,7 +704,7 @@ export const ZiWeiPalaceGrid: React.FC<ZiWeiGridProps> = ({ ziwei, compact }) =>
         </div>
 
         {/* Footer: Decade Decennial Span */}
-        <div className="text-[8px] sm:text-[9px] text-slate-500 font-mono text-right">
+        <div className="text-[7.5px] sm:text-[9px] text-slate-500 font-mono text-right hidden sm:block">
           {compact ? `${p.decennial_span || '—'}` : `Age ${p.decennial_span || '—'}`}
         </div>
       </div>
@@ -712,7 +712,7 @@ export const ZiWeiPalaceGrid: React.FC<ZiWeiGridProps> = ({ ziwei, compact }) =>
   };
 
   const gridContent = (
-    <div className={`w-full max-w-[560px] grid grid-cols-4 grid-rows-4 gap-1 sm:gap-1.5 ${compact ? 'min-h-[220px] sm:min-h-[240px]' : 'min-h-[380px]'}`}>
+    <div className={`w-full max-w-[560px] grid grid-cols-4 grid-rows-4 gap-0.5 sm:gap-1.5 ${compact ? 'min-h-[135px] sm:min-h-[190px]' : 'min-h-[380px]'}`}>
       {/* Row 1 (Top): 巳, 午, 未, 申 */}
       {getPalaceCell('巳')}
       {getPalaceCell('午')}
@@ -721,30 +721,34 @@ export const ZiWeiPalaceGrid: React.FC<ZiWeiGridProps> = ({ ziwei, compact }) =>
 
       {/* Row 2: 辰 (Left), Courtyard (Center 2x2), 酉 (Right) */}
       {getPalaceCell('辰')}
-      <div className={`col-span-2 row-span-2 bg-slate-900 rounded border border-amber-900/40 ${compact ? 'p-1.5' : 'p-3'} flex flex-col justify-between text-center select-none animate-instrument-focus`}>
-        <div className="border-b border-slate-800 pb-1">
-          <span className={`${compact ? 'text-[9px]' : 'text-xs'} font-sans text-amber-400 block font-semibold`}>
-            Central Courtyard
-          </span>
-          <h4 className={`${compact ? 'text-xs' : 'text-sm'} font-bold text-slate-100 mt-0.5`}>
+      <div className={`col-span-2 row-span-2 bg-slate-900 rounded border border-amber-900/40 ${compact ? 'p-1' : 'p-3'} flex flex-col justify-center text-center select-none animate-instrument-focus`}>
+        <div className={`${compact ? 'pb-0.5' : 'border-b border-slate-800 pb-1'}`}>
+          {!compact && (
+            <span className="text-xs font-sans text-amber-400 block font-semibold">
+              Central Courtyard
+            </span>
+          )}
+          <h4 className={`${compact ? 'text-[10px] leading-tight' : 'text-sm mt-0.5'} font-bold text-slate-100`}>
             {ziwei.five_elements_bureau?.name}
           </h4>
         </div>
 
-        <div className={`${compact ? 'text-[10px] space-y-0.5' : 'text-xs space-y-1'} text-slate-300 my-auto font-sans`}>
+        <div className={`${compact ? 'text-[9px] space-y-0.5 my-0.5' : 'text-xs space-y-1 my-auto'} text-slate-300 font-sans`}>
           <div>
             <span className="text-slate-400">Ming:</span> <strong className="text-cyan-300 font-mono">{ziwei.ming_palace_branch}</strong>
-            <span className="mx-1.5 text-slate-600" aria-hidden="true">•</span>
+            <span className="mx-1 text-slate-600" aria-hidden="true">•</span>
             <span className="text-slate-400">Shen:</span> <strong className="text-amber-300 font-mono">{ziwei.shen_palace_branch}</strong>
           </div>
-          <div className="text-[10px] text-slate-400">
-            Lunar: Year <span className="font-mono tabular-nums">{ziwei.lunar_date?.year}</span>, M<span className="font-mono tabular-nums">{ziwei.lunar_date?.month}</span>, D<span className="font-mono tabular-nums">{ziwei.lunar_date?.day}</span>
+          <div className={`${compact ? 'text-[8.5px]' : 'text-[10px]'} text-slate-400`}>
+            Lunar: Y<span className="font-mono tabular-nums">{ziwei.lunar_date?.year}</span>, M<span className="font-mono tabular-nums">{ziwei.lunar_date?.month}</span>, D<span className="font-mono tabular-nums">{ziwei.lunar_date?.day}</span>
           </div>
         </div>
 
-        <div className="text-[9px] font-sans text-slate-500 pt-0.5 border-t border-slate-800">
-          14 Major Stars
-        </div>
+        {!compact && (
+          <div className="text-[9px] font-sans text-slate-500 pt-0.5 border-t border-slate-800">
+            14 Major Stars
+          </div>
+        )}
       </div>
       {getPalaceCell('酉')}
 
@@ -801,10 +805,10 @@ interface AlmutenBarProps {
 export const AlmutenDignityBarChart: React.FC<AlmutenBarProps> = ({ persian, compact }) => {
   const leaderboard = persian.almuten_figuris?.leaderboard || [];
   const maxScore = Math.max(...leaderboard.map((item: any) => item.total_score), 40);
-  const displayedItems = compact ? leaderboard.slice(0, 5) : leaderboard;
+  const displayedItems = compact ? leaderboard.slice(0, 4) : leaderboard;
 
   const barContent = (
-    <div className={`w-full ${compact ? 'max-w-[320px] space-y-1.5' : 'space-y-2'}`}>
+    <div className={`w-full ${compact ? 'max-w-[300px] space-y-1' : 'space-y-2'}`}>
       {displayedItems.map((item: any, idx: number) => {
         const isVictor = idx === 0;
         const essentialPct = (item.essential_dignity / maxScore) * 100;
@@ -853,9 +857,9 @@ export const AlmutenDignityBarChart: React.FC<AlmutenBarProps> = ({ persian, com
     return (
       <div className="flex flex-col items-center justify-center w-full py-0.5">
         {barContent}
-        <div className="mt-2 text-xs text-slate-400 font-sans flex items-center justify-center gap-3">
-          <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-sm bg-cyan-500"></span> Essential</span>
-          <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-sm bg-amber-500"></span> Accidental</span>
+        <div className="mt-1 text-[10px] sm:text-xs text-slate-400 font-sans flex items-center justify-center gap-3">
+          <span className="flex items-center gap-1"><span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-sm bg-cyan-500"></span> Essential</span>
+          <span className="flex items-center gap-1"><span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-sm bg-amber-500"></span> Accidental</span>
         </div>
       </div>
     );
@@ -905,7 +909,7 @@ export const MaramatakaLunarDial: React.FC<MaramatakaDialProps> = ({ maramataka,
     <svg
       aria-hidden="true"
       viewBox={`0 0 ${size} ${size}`}
-      className={`w-full select-none ${compact ? 'max-w-[220px] sm:max-w-[240px] h-auto' : 'max-w-[280px] h-auto'}`}
+      className={`w-full select-none ${compact ? 'max-w-[165px] sm:max-w-[210px] lg:max-w-[240px] h-auto' : 'max-w-[280px] h-auto'}`}
       style={{ filter: 'drop-shadow(0 4px 12px rgba(0,0,0,0.5))' }}
     >
       {/* Outer Dial Track & 30 Lunar Night Ticks (Fluid dial reveal) */}
@@ -1218,7 +1222,7 @@ export const TibetanMewaGrid: React.FC<TibetanMewaProps> = ({ tibetan, compact }
   };
 
   const gridCells = (
-    <div className={`w-full ${compact ? 'max-w-[240px] sm:max-w-[260px] gap-1.5' : 'max-w-[340px] gap-2'} grid grid-cols-3`}>
+    <div className={`w-full ${compact ? 'max-w-[165px] sm:max-w-[210px] lg:max-w-[240px] gap-1' : 'max-w-[340px] gap-2'} grid grid-cols-3`}>
       {square.map((row, rIdx) =>
         row.map((num, cIdx) => {
           const isNatal = num === natalMewa;
@@ -1318,7 +1322,7 @@ export const EgyptianDecanStarClock: React.FC<EgyptianClockProps> = ({ egyptian,
     <svg
       aria-hidden="true"
       viewBox={`0 0 ${size} ${size}`}
-      className={`w-full select-none ${compact ? 'max-w-[220px] sm:max-w-[240px] h-auto' : 'max-w-[300px] h-auto'}`}
+      className={`w-full select-none ${compact ? 'max-w-[165px] sm:max-w-[210px] lg:max-w-[240px] h-auto' : 'max-w-[300px] h-auto'}`}
       style={{ filter: 'drop-shadow(0 4px 12px rgba(0,0,0,0.5))' }}
     >
       {/* Outer Dial Track & 36 Decan Radial Ticks (Fluid dial reveal) */}
@@ -1435,7 +1439,7 @@ export const MayaCalendarCompass: React.FC<MayanCompassProps> = ({ mayan, compac
     <svg
       aria-hidden="true"
       viewBox={`0 0 ${size} ${size}`}
-      className={`w-full select-none ${compact ? 'max-w-[220px] sm:max-w-[240px] h-auto' : 'max-w-[280px] h-auto'}`}
+      className={`w-full select-none ${compact ? 'max-w-[165px] sm:max-w-[210px] lg:max-w-[240px] h-auto' : 'max-w-[280px] h-auto'}`}
       style={{ filter: 'drop-shadow(0 4px 12px rgba(0,0,0,0.5))' }}
     >
       {/* Outer Haab' Ring (365 days / 18 months + Wayeb) */}

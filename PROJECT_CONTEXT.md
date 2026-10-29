@@ -1,7 +1,7 @@
 # Synodix: Project Context & Working Memory
 
-**Last Updated:** 2026-10-29 22:20:31
-**Version:** 2.33.20  
+**Last Updated:** 2026-10-29 23:27:08
+**Version:** 2.33.21  
 **Stack:** Python 3.12 (FastAPI, Swiss Ephemeris 2.10, Skyfield DE421) + TypeScript / React 19 / Vite / Tailwind CSS v4 / Framer Motion / Capacitor 8 (iOS & Android)  
 **Workspace:** `/Volumes/Study/Projects/Astrology` (symlinked as `/Volumes/Study/Astrology`)  
 **Git Remote:** `https://github.com/manvenpratap/Synodix.git`  
@@ -10,7 +10,25 @@
 
 ## 1. Current Status & Milestone
 
-- **Active Phase**: Multi-Screen Plain English Language Simplification & Jargon Elimination (Completed)
+- **Active Phase**: Vertical Carousel Deck Viewport Geometry & Zero-Clipping Calibration (Completed)
+- **Carousel Card Viewport Geometry & Zero-Clipping Calibration (v2.33.21)**:
+  - **Eliminated Container Clipping & Document Flow Collision**:
+    - Replaced rigid stage `overflow-hidden` with `overflow-x-clip`, eliminating artificial bottom cutoffs while preserving horizontal swipe safety and satisfying zero horizontal overflow.
+    - Calibrated stage container `min-h` (`min-h-[450px] sm:min-h-[475px] lg:min-h-[410px]`) and stacked container `min-h` to accurately accommodate absolute-positioned cards in document flow.
+    - Shifted the persistent Common Action Strip ("Dual-Engine JPL DE421 + SwissEph 2.10" & "View Detailed Tables & Analysis") below the stage with 25.5px of clear separation above the bottom navigation bar on mobile (390x844).
+  - **Compact Visual Instruments Calibration across all 9 Traditions (`ChartWheelVisualizer.tsx`)**:
+    - Calibrated 1:1 circular visual instruments (`NorthIndianChart`, `WesternCircularWheel`, `BaZiElementPentagram`) to `max-w-[170px] sm:max-w-[230px] lg:max-w-[270px]`.
+    - Compacted dials (`MaramatakaLunarDial`, `EgyptianDecanStarClock`, `MayaCalendarCompass`, `TibetanMewaGrid`) to `max-w-[165px] sm:max-w-[210px] lg:max-w-[240px]`.
+    - Streamlined `ZiWeiPalaceGrid`: compacted courtyard to concise Ming/Shen + Bureau badge, hid redundant decennial span footers in compact mode, shrinking grid height from 259px to 145px (114px saved).
+    - Compacted `AlmutenDignityBarChart`: capped leaderboard to top 4 planets in compact mode, reduced legend vertical padding.
+  - **3D Transform & Card Geometry Optimization (`TraditionVerticalCarousel.tsx`)**:
+    - Tightened vertical stack offset metrics: `baseTop = activeIndex > 0 ? 10 : 0`, `yOffset = diff < 0 ? baseTop + diff * 8 : baseTop + diff * 12`, `scale = 1 - Math.abs(diff) * 0.035`, `rotateX = diff * -2`.
+    - Optimized telemetry placement badges with `p-1.5 sm:p-2`, `gap-1.5 sm:gap-2`, `text-[10px] sm:text-xs`, and line-clamp handling.
+    - De-truncated the top deck telemetry bar: resolved 3-line text wrapping by using single-line "Traditions" on mobile and compacting indicator dots to `p-1` touch targets.
+  - **Automated Verification**:
+    - Full Playwright telemetry measurement script verified all 9 tradition cards fit onto mobile (390x844) and desktop (1280x800) with zero clipping and zero console errors.
+    - All 26 pytest regression suites passing cleanly (`./pipeline.sh test --summary`).
+    - Clean compilation of native Android debug APK (7.67MB) and iOS Simulator bundle (5.71MB) via `./pipeline.sh package`.
 - **Plain English Language Simplification (v2.33.20)**:
   - **Scholastic Latinate Jargon Elimination**:
     - Replaced medieval scholastic treatises ("Tractate I · Astrometric Calibration & Input", "Tractate II · Cultural Datasets", "Tractate III · Cross-Cultural Synthesis Without Double-Counting", "Tractate IV · Cross-Cultural Corroboration Document") with clear, human, accessible milestones ("Step 1 · Enter Birth Details", "Step 2 · 9 Astrological Traditions", "Step 3 · Tradition Comparison & Agreement", "Step 4 · Complete Birth Chart Reading").

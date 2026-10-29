@@ -203,26 +203,26 @@ export const TraditionVerticalCarousel: React.FC<Props> = ({
     switch (key) {
       case 'jyotisha':
         return (
-          <div className="grid grid-cols-2 gap-2 text-xs font-mono">
-            <div className="p-2 rounded bg-black/40 border border-white/10">
-              <span className="text-xs text-slate-400 block font-medium">Lagna (Ascendant)</span>
-              <strong className="text-amber-300 font-bold">
+          <div className="grid grid-cols-2 gap-1.5 sm:gap-2 text-[11px] sm:text-xs font-mono">
+            <div className="p-1.5 sm:p-2 rounded bg-black/40 border border-white/10">
+              <span className="text-[10px] sm:text-xs text-slate-400 block font-medium leading-tight truncate">Lagna (Ascendant)</span>
+              <strong className="text-amber-300 font-bold block truncate">
                 {jyotisha?.lagna?.sign} ({jyotisha?.lagna?.degree?.toFixed(2)}°)
               </strong>
             </div>
-            <div className="p-2 rounded bg-black/40 border border-white/10">
-              <span className="text-xs text-slate-400 block font-medium">Moon Nakshatra</span>
-              <strong className="text-amber-200">
+            <div className="p-1.5 sm:p-2 rounded bg-black/40 border border-white/10">
+              <span className="text-[10px] sm:text-xs text-slate-400 block font-medium leading-tight truncate">Moon Nakshatra</span>
+              <strong className="text-amber-200 block truncate">
                 {jyotisha?.lagna?.nakshatra?.name || 'Ashwini'} P{jyotisha?.lagna?.nakshatra?.pada || 1}
               </strong>
             </div>
-            <div className="p-2 rounded bg-black/40 border border-white/10">
-              <span className="text-xs text-slate-400 block font-medium">D9 Navamsha</span>
-              <strong className="text-amber-400">{jyotisha?.lagna?.navamsha_sign || 'Aries'}</strong>
+            <div className="p-1.5 sm:p-2 rounded bg-black/40 border border-white/10">
+              <span className="text-[10px] sm:text-xs text-slate-400 block font-medium leading-tight truncate">D9 Navamsha</span>
+              <strong className="text-amber-400 block truncate">{jyotisha?.lagna?.navamsha_sign || 'Aries'}</strong>
             </div>
-            <div className="p-2 rounded bg-black/40 border border-white/10">
-              <span className="text-xs text-slate-400 block font-medium">Ayanamsha (Lahiri)</span>
-              <strong className="text-amber-300 font-mono">
+            <div className="p-1.5 sm:p-2 rounded bg-black/40 border border-white/10">
+              <span className="text-[10px] sm:text-xs text-slate-400 block font-medium leading-tight truncate">Ayanamsha (Lahiri)</span>
+              <strong className="text-amber-300 font-mono block truncate">
                 {data.astronomical_base?.ayanamsha?.degrees?.toFixed(4)}°
               </strong>
             </div>
@@ -231,24 +231,24 @@ export const TraditionVerticalCarousel: React.FC<Props> = ({
 
       case 'bazi':
         return (
-          <div className="grid grid-cols-2 gap-2 text-xs font-mono">
-            <div className="p-2 rounded bg-black/40 border border-white/10">
-              <span className="text-xs text-slate-400 block font-medium">Day Master (日主)</span>
-              <strong className="text-rose-300 font-bold">
+          <div className="grid grid-cols-2 gap-1.5 sm:gap-2 text-[11px] sm:text-xs font-mono">
+            <div className="p-1.5 sm:p-2 rounded bg-black/40 border border-white/10">
+              <span className="text-[10px] sm:text-xs text-slate-400 block font-medium leading-tight truncate">Day Master (日主)</span>
+              <strong className="text-rose-300 font-bold block truncate">
                 {bazi?.day_master?.stem || 'Jia (甲)'} ({bazi?.day_master?.element || 'Wood'})
               </strong>
             </div>
-            <div className="p-2 rounded bg-black/40 border border-white/10">
-              <span className="text-xs text-slate-400 block font-medium">Dominant Qi (气)</span>
-              <strong className="text-rose-200">{bazi?.dominant_element || 'Fire/Metal Balance'}</strong>
+            <div className="p-1.5 sm:p-2 rounded bg-black/40 border border-white/10">
+              <span className="text-[10px] sm:text-xs text-slate-400 block font-medium leading-tight truncate">Dominant Qi (气)</span>
+              <strong className="text-rose-200 block truncate">{bazi?.dominant_element || 'Fire/Metal Balance'}</strong>
             </div>
-            <div className="p-2 rounded bg-black/40 border border-white/10">
-              <span className="text-xs text-slate-400 block font-medium">Solar Term (节气)</span>
-              <strong className="text-rose-400">{bazi?.solar_term || 'Vernal Equinox'}</strong>
+            <div className="p-1.5 sm:p-2 rounded bg-black/40 border border-white/10">
+              <span className="text-[10px] sm:text-xs text-slate-400 block font-medium leading-tight truncate">Solar Term (节气)</span>
+              <strong className="text-rose-400 block truncate">{bazi?.solar_term || 'Vernal Equinox'}</strong>
             </div>
-            <div className="p-2 rounded bg-black/40 border border-white/10">
-              <span className="text-xs text-slate-400 block font-medium">Year Pillar</span>
-              <strong className="text-rose-300 font-mono">
+            <div className="p-1.5 sm:p-2 rounded bg-black/40 border border-white/10">
+              <span className="text-[10px] sm:text-xs text-slate-400 block font-medium leading-tight truncate">Year Pillar</span>
+              <strong className="text-rose-300 font-mono block truncate">
                 {bazi?.pillars?.year?.stem} {bazi?.pillars?.year?.branch}
               </strong>
             </div>
@@ -257,52 +257,52 @@ export const TraditionVerticalCarousel: React.FC<Props> = ({
 
       case 'western':
         return (
-          <div className="grid grid-cols-2 gap-2 text-xs font-mono">
-            <div className="p-2 rounded bg-black/40 border border-white/10">
-              <span className="text-xs text-slate-400 block font-medium">Ascendant (H1)</span>
-              <strong className="text-sky-300 font-bold">
+          <div className="grid grid-cols-2 gap-1.5 sm:gap-2 text-[11px] sm:text-xs font-mono">
+            <div className="p-1.5 sm:p-2 rounded bg-black/40 border border-white/10">
+              <span className="text-[10px] sm:text-xs text-slate-400 block font-medium leading-tight truncate">Ascendant (H1)</span>
+              <strong className="text-sky-300 font-bold block truncate">
                 {western?.ascendant?.sign || 'Leo'} ({western?.ascendant?.degree || 0}°)
               </strong>
             </div>
-            <div className="p-2 rounded bg-black/40 border border-white/10">
-              <span className="text-xs text-slate-400 block font-medium">Planetary Sect</span>
-              <strong className="text-sky-200">
+            <div className="p-1.5 sm:p-2 rounded bg-black/40 border border-white/10">
+              <span className="text-[10px] sm:text-xs text-slate-400 block font-medium leading-tight truncate">Planetary Sect</span>
+              <strong className="text-sky-200 block truncate">
                 {western?.sect?.label || (western?.sect?.is_day_chart ? 'Diurnal Chart' : 'Nocturnal Chart')}
               </strong>
             </div>
-            <div className="p-2 rounded bg-black/40 border border-white/10">
-              <span className="text-xs text-slate-400 block font-medium">Lot of Fortune</span>
-              <strong className="text-sky-400">
+            <div className="p-1.5 sm:p-2 rounded bg-black/40 border border-white/10">
+              <span className="text-[10px] sm:text-xs text-slate-400 block font-medium leading-tight truncate">Lot of Fortune</span>
+              <strong className="text-sky-400 block truncate">
                 {western?.lots?.lot_of_fortune ? `${western.lots.lot_of_fortune.sign} H${western.lots.lot_of_fortune.house}` : 'H1 Angular'}
               </strong>
             </div>
-            <div className="p-2 rounded bg-black/40 border border-white/10">
-              <span className="text-xs text-slate-400 block font-medium">House System</span>
-              <strong className="text-sky-300">Ptolemaic Whole Sign</strong>
+            <div className="p-1.5 sm:p-2 rounded bg-black/40 border border-white/10">
+              <span className="text-[10px] sm:text-xs text-slate-400 block font-medium leading-tight truncate">House System</span>
+              <strong className="text-sky-300 block truncate">Ptolemaic Whole Sign</strong>
             </div>
           </div>
         );
 
       case 'ziwei':
         return (
-          <div className="grid grid-cols-2 gap-2 text-xs font-mono">
-            <div className="p-2 rounded bg-black/40 border border-white/10">
-              <span className="text-xs text-slate-400 block font-medium">Five Elements Bureau</span>
-              <strong className="text-amber-300 font-bold">
+          <div className="grid grid-cols-2 gap-1.5 sm:gap-2 text-[11px] sm:text-xs font-mono">
+            <div className="p-1.5 sm:p-2 rounded bg-black/40 border border-white/10">
+              <span className="text-[10px] sm:text-xs text-slate-400 block font-medium leading-tight truncate">Five Elements Bureau</span>
+              <strong className="text-amber-300 font-bold block truncate">
                 {ziwei?.five_elements_bureau?.name || 'Water 2 Bureau'}
               </strong>
             </div>
-            <div className="p-2 rounded bg-black/40 border border-white/10">
-              <span className="text-xs text-slate-400 block font-medium">Ming Palace (命宮)</span>
-              <strong className="text-amber-200">{ziwei?.ming_palace_branch || 'Zi (子)'}</strong>
+            <div className="p-1.5 sm:p-2 rounded bg-black/40 border border-white/10">
+              <span className="text-[10px] sm:text-xs text-slate-400 block font-medium leading-tight truncate">Ming Palace (命宮)</span>
+              <strong className="text-amber-200 block truncate">{ziwei?.ming_palace_branch || 'Zi (子)'}</strong>
             </div>
-            <div className="p-2 rounded bg-black/40 border border-white/10">
-              <span className="text-xs text-slate-400 block font-medium">Shen Palace (身宮)</span>
-              <strong className="text-amber-400">{ziwei?.shen_palace_branch || 'Wu (午)'}</strong>
+            <div className="p-1.5 sm:p-2 rounded bg-black/40 border border-white/10">
+              <span className="text-[10px] sm:text-xs text-slate-400 block font-medium leading-tight truncate">Shen Palace (身宮)</span>
+              <strong className="text-amber-400 block truncate">{ziwei?.shen_palace_branch || 'Wu (午)'}</strong>
             </div>
-            <div className="p-2 rounded bg-black/40 border border-white/10">
-              <span className="text-xs text-slate-400 block font-medium">Si Hua (四化)</span>
-              <strong className="text-amber-300">
+            <div className="p-1.5 sm:p-2 rounded bg-black/40 border border-white/10">
+              <span className="text-[10px] sm:text-xs text-slate-400 block font-medium leading-tight truncate">Si Hua (四化)</span>
+              <strong className="text-amber-300 block truncate">
                 {ziwei?.si_hua_transformations ? `Lu: ${ziwei.si_hua_transformations.Lu}` : 'Imperial Stars'}
               </strong>
             </div>
@@ -311,56 +311,56 @@ export const TraditionVerticalCarousel: React.FC<Props> = ({
 
       case 'mayan':
         return (
-          <div className="grid grid-cols-2 gap-2 text-xs font-sans">
-            <div className="p-2 rounded bg-black/40 border border-white/10">
-              <span className="text-xs text-slate-400 block font-medium">Long Count Stele</span>
-              <strong className="text-emerald-300 font-bold font-mono">
+          <div className="grid grid-cols-2 gap-1.5 sm:gap-2 text-[11px] sm:text-xs font-sans">
+            <div className="p-1.5 sm:p-2 rounded bg-black/40 border border-white/10">
+              <span className="text-[10px] sm:text-xs text-slate-400 block font-medium leading-tight truncate">Long Count Stele</span>
+              <strong className="text-emerald-300 font-bold font-mono block truncate">
                 {mayan?.long_count?.formatted || '13.0.11.12.9'}
               </strong>
             </div>
-            <div className="p-2 rounded bg-black/40 border border-white/10">
-              <span className="text-xs text-slate-400 block font-medium">Sacred Tzolk’in</span>
-              <strong className="text-emerald-200 font-mono">
+            <div className="p-1.5 sm:p-2 rounded bg-black/40 border border-white/10">
+              <span className="text-[10px] sm:text-xs text-slate-400 block font-medium leading-tight truncate">Sacred Tzolk’in</span>
+              <strong className="text-emerald-200 font-mono block truncate">
                 {mayan?.tzolkin?.formatted || '8 Chuwen'}
               </strong>
             </div>
-            <div className="p-2 rounded bg-black/40 border border-white/10">
-              <span className="text-xs text-slate-400 block font-medium">Haab’ Solar Month</span>
-              <strong className="text-emerald-400 font-mono">
+            <div className="p-1.5 sm:p-2 rounded bg-black/40 border border-white/10">
+              <span className="text-[10px] sm:text-xs text-slate-400 block font-medium leading-tight truncate">Haab’ Solar Month</span>
+              <strong className="text-emerald-400 font-mono block truncate">
                 {mayan?.haab?.formatted || '14 Pop'}
               </strong>
             </div>
-            <div className="p-2 rounded bg-black/40 border border-white/10">
-              <span className="text-xs text-slate-400 block font-medium">Lord of Night</span>
-              <strong className="text-emerald-300 font-mono">{mayan?.lord_of_the_night || 'G7'}</strong>
+            <div className="p-1.5 sm:p-2 rounded bg-black/40 border border-white/10">
+              <span className="text-[10px] sm:text-xs text-slate-400 block font-medium leading-tight truncate">Lord of Night</span>
+              <strong className="text-emerald-300 font-mono block truncate">{mayan?.lord_of_the_night || 'G7'}</strong>
             </div>
           </div>
         );
 
       case 'tibetan':
         return (
-          <div className="grid grid-cols-2 gap-2 text-xs font-mono">
-            <div className="p-2 rounded bg-black/40 border border-white/10">
-              <span className="text-xs text-slate-400 block font-medium">Rabjung Cycle (རབ་བྱུང)</span>
-              <strong className="text-amber-300 font-bold">
+          <div className="grid grid-cols-2 gap-1.5 sm:gap-2 text-[11px] sm:text-xs font-mono">
+            <div className="p-1.5 sm:p-2 rounded bg-black/40 border border-white/10">
+              <span className="text-[10px] sm:text-xs text-slate-400 block font-medium leading-tight truncate">Rabjung Cycle (རབ་བྱུང)</span>
+              <strong className="text-amber-300 font-bold block truncate">
                 {tibetan?.rabjung_cycle?.element_gender_animal || 'Iron Dragon Year'}
               </strong>
             </div>
-            <div className="p-2 rounded bg-black/40 border border-white/10">
-              <span className="text-xs text-slate-400 block font-medium">Year Mewa (སྨེ་བ)</span>
-              <strong className="text-amber-200">
+            <div className="p-1.5 sm:p-2 rounded bg-black/40 border border-white/10">
+              <span className="text-[10px] sm:text-xs text-slate-400 block font-medium leading-tight truncate">Year Mewa (སྨེ་བ)</span>
+              <strong className="text-amber-200 block truncate">
                 {tibetan?.mewa?.formatted || 'Mewa 9 Red'}
               </strong>
             </div>
-            <div className="p-2 rounded bg-black/40 border border-white/10">
-              <span className="text-xs text-slate-400 block font-medium">Natal Parkha (སྤར་ཁ)</span>
-              <strong className="text-amber-400">
+            <div className="p-1.5 sm:p-2 rounded bg-black/40 border border-white/10">
+              <span className="text-[10px] sm:text-xs text-slate-400 block font-medium leading-tight truncate">Natal Parkha (སྤར་ཁ)</span>
+              <strong className="text-amber-400 block truncate">
                 {tibetan?.parkha?.name ? `${tibetan.parkha.name} (${tibetan.parkha.element})` : 'Li (Fire)'}
               </strong>
             </div>
-            <div className="p-2 rounded bg-black/40 border border-white/10">
-              <span className="text-xs text-slate-400 block font-medium">Sog Life Force</span>
-              <strong className="text-amber-300">
+            <div className="p-1.5 sm:p-2 rounded bg-black/40 border border-white/10">
+              <span className="text-[10px] sm:text-xs text-slate-400 block font-medium leading-tight truncate">Sog Life Force</span>
+              <strong className="text-amber-300 block truncate">
                 {tibetan?.five_personal_forces?.sog_life_force || 'High Vitality'}
               </strong>
             </div>
@@ -369,78 +369,78 @@ export const TraditionVerticalCarousel: React.FC<Props> = ({
 
       case 'persian':
         return (
-          <div className="grid grid-cols-2 gap-2 text-xs font-mono">
-            <div className="p-2 rounded bg-black/40 border border-white/10">
-              <span className="text-xs text-slate-400 block font-medium">Almuten Figuris</span>
-              <strong className="text-teal-300 font-bold">
+          <div className="grid grid-cols-2 gap-1.5 sm:gap-2 text-[11px] sm:text-xs font-mono">
+            <div className="p-1.5 sm:p-2 rounded bg-black/40 border border-white/10">
+              <span className="text-[10px] sm:text-xs text-slate-400 block font-medium leading-tight truncate">Almuten Figuris</span>
+              <strong className="text-teal-300 font-bold block truncate">
                 {persian?.almuten_figuris?.victor || 'Jupiter'} (+{persian?.almuten_figuris?.victor_score || 38} pts)
               </strong>
             </div>
-            <div className="p-2 rounded bg-black/40 border border-white/10">
-              <span className="text-xs text-slate-400 block font-medium">Sect Alignment</span>
-              <strong className="text-teal-200">{persian?.sect?.sect_name || 'Diurnal Sect'}</strong>
+            <div className="p-1.5 sm:p-2 rounded bg-black/40 border border-white/10">
+              <span className="text-[10px] sm:text-xs text-slate-400 block font-medium leading-tight truncate">Sect Alignment</span>
+              <strong className="text-teal-200 block truncate">{persian?.sect?.sect_name || 'Diurnal Sect'}</strong>
             </div>
-            <div className="p-2 rounded bg-black/40 border border-white/10">
-              <span className="text-xs text-slate-400 block font-medium">Planetary Day Ruler</span>
-              <strong className="text-teal-400">{persian?.sect?.day_ruler || 'Sun'}</strong>
+            <div className="p-1.5 sm:p-2 rounded bg-black/40 border border-white/10">
+              <span className="text-[10px] sm:text-xs text-slate-400 block font-medium leading-tight truncate">Planetary Day Ruler</span>
+              <strong className="text-teal-400 block truncate">{persian?.sect?.day_ruler || 'Sun'}</strong>
             </div>
-            <div className="p-2 rounded bg-black/40 border border-white/10">
-              <span className="text-xs text-slate-400 block font-medium">Tradition Model</span>
-              <strong className="text-teal-300">Abu Ma’shar & Ibn Ezra</strong>
+            <div className="p-1.5 sm:p-2 rounded bg-black/40 border border-white/10">
+              <span className="text-[10px] sm:text-xs text-slate-400 block font-medium leading-tight truncate">Tradition Model</span>
+              <strong className="text-teal-300 block truncate">Abu Ma’shar & Ibn Ezra</strong>
             </div>
           </div>
         );
 
       case 'egyptian':
         return (
-          <div className="grid grid-cols-2 gap-2 text-xs font-sans">
-            <div className="p-2 rounded bg-black/40 border border-white/10">
-              <span className="text-xs text-slate-400 block font-medium">Hour Ruler Chronocrator</span>
-              <strong className="text-yellow-300 font-bold font-mono">
+          <div className="grid grid-cols-2 gap-1.5 sm:gap-2 text-[11px] sm:text-xs font-sans">
+            <div className="p-1.5 sm:p-2 rounded bg-black/40 border border-white/10">
+              <span className="text-[10px] sm:text-xs text-slate-400 block font-medium leading-tight truncate">Hour Ruler Chronocrator</span>
+              <strong className="text-yellow-300 font-bold font-mono block truncate">
                 {egyptian?.chronocrator_watch?.hour_ruler_chronocrator || 'Horus'} ({egyptian?.chronocrator_watch?.period || 'Day'})
               </strong>
             </div>
-            <div className="p-2 rounded bg-black/40 border border-white/10">
-              <span className="text-xs text-slate-400 block font-medium">Sothic Season</span>
-              <strong className="text-yellow-200">
+            <div className="p-1.5 sm:p-2 rounded bg-black/40 border border-white/10">
+              <span className="text-[10px] sm:text-xs text-slate-400 block font-medium leading-tight truncate">Sothic Season</span>
+              <strong className="text-yellow-200 block truncate">
                 {egyptian?.sothic_civil_cycle?.season || 'Akhet (Inundation)'}
               </strong>
             </div>
-            <div className="p-2 rounded bg-black/40 border border-white/10">
-              <span className="text-xs text-slate-400 block font-medium">Temporal Hour</span>
-              <strong className="text-yellow-400">
+            <div className="p-1.5 sm:p-2 rounded bg-black/40 border border-white/10">
+              <span className="text-[10px] sm:text-xs text-slate-400 block font-medium leading-tight truncate">Temporal Hour</span>
+              <strong className="text-yellow-400 block truncate">
                 Hour {egyptian?.chronocrator_watch?.temporal_hour_number || 1} of 12
               </strong>
             </div>
-            <div className="p-2 rounded bg-black/40 border border-white/10">
-              <span className="text-xs text-slate-400 block font-medium">Dendera Star Ceiling</span>
-              <strong className="text-yellow-300">36 Decanal Gates</strong>
+            <div className="p-1.5 sm:p-2 rounded bg-black/40 border border-white/10">
+              <span className="text-[10px] sm:text-xs text-slate-400 block font-medium leading-tight truncate">Dendera Star Ceiling</span>
+              <strong className="text-yellow-300 block truncate">36 Decanal Gates</strong>
             </div>
           </div>
         );
 
       case 'maramataka':
         return (
-          <div className="grid grid-cols-2 gap-2 text-xs font-sans">
-            <div className="p-2 rounded bg-black/40 border border-white/10">
-              <span className="text-xs text-slate-400 block font-medium">Oceanic Moon Night</span>
-              <strong className="text-emerald-300 font-bold font-mono">
+          <div className="grid grid-cols-2 gap-1.5 sm:gap-2 text-[11px] sm:text-xs font-sans">
+            <div className="p-1.5 sm:p-2 rounded bg-black/40 border border-white/10">
+              <span className="text-[10px] sm:text-xs text-slate-400 block font-medium leading-tight truncate">Oceanic Moon Night</span>
+              <strong className="text-emerald-300 font-bold font-mono block truncate">
                 {maramataka?.lunar_night?.name ? `#${maramataka.lunar_night.number}: ${maramataka.lunar_night.name}` : 'Rakaunui (#16)'}
               </strong>
             </div>
-            <div className="p-2 rounded bg-black/40 border border-white/10">
-              <span className="text-xs text-slate-400 block font-medium">Mauri Vitality Index</span>
-              <strong className="text-emerald-200">{maramataka?.lunar_night?.vitality_index || 'High Mauri'}</strong>
+            <div className="p-1.5 sm:p-2 rounded bg-black/40 border border-white/10">
+              <span className="text-[10px] sm:text-xs text-slate-400 block font-medium leading-tight truncate">Mauri Vitality Index</span>
+              <strong className="text-emerald-200 block truncate">{maramataka?.lunar_night?.vitality_index || 'High Mauri'}</strong>
             </div>
-            <div className="p-2 rounded bg-black/40 border border-white/10">
-              <span className="text-xs text-slate-400 block font-medium">Moon Illumination</span>
-              <strong className="text-emerald-400 font-mono">
+            <div className="p-1.5 sm:p-2 rounded bg-black/40 border border-white/10">
+              <span className="text-[10px] sm:text-xs text-slate-400 block font-medium leading-tight truncate">Moon Illumination</span>
+              <strong className="text-emerald-400 font-mono block truncate">
                 {maramataka?.lunar_night?.illumination_percent ? `${maramataka.lunar_night.illumination_percent}%` : 'Full Moon'}
               </strong>
             </div>
-            <div className="p-2 rounded bg-black/40 border border-white/10">
-              <span className="text-xs text-slate-400 block font-medium">Elongation</span>
-              <strong className="text-emerald-300 font-mono">
+            <div className="p-1.5 sm:p-2 rounded bg-black/40 border border-white/10">
+              <span className="text-[10px] sm:text-xs text-slate-400 block font-medium leading-tight truncate">Elongation</span>
+              <strong className="text-emerald-300 font-mono block truncate">
                 {maramataka?.lunar_night?.elongation_degrees ? `${maramataka.lunar_night.elongation_degrees}°` : '180°'}
               </strong>
             </div>
@@ -465,10 +465,11 @@ export const TraditionVerticalCarousel: React.FC<Props> = ({
     >
       {/* Top Deck Telemetry Bar */}
       <div className="flex items-center justify-between px-2 sm:px-4 py-1.5 border-b border-white/10 text-[11px] font-mono">
-        <div className="flex items-center gap-2">
-          <span className="w-1.5 h-1.5 rounded-full bg-amber-400 inline-block shadow-xs shadow-amber-400/50" />
-          <span className="text-amber-300 font-serif font-medium text-xs">
-            Tradition Cards Deck
+        <div className="flex items-center gap-2 min-w-0">
+          <span className="w-1.5 h-1.5 rounded-full bg-amber-400 inline-block shrink-0 shadow-xs shadow-amber-400/50" />
+          <span className="text-amber-300 font-serif font-medium text-xs truncate">
+            <span className="sm:hidden">Traditions</span>
+            <span className="hidden sm:inline">Tradition Cards Deck</span>
           </span>
           <span className="text-stone-400 hidden sm:inline">• 9 Traditions</span>
         </div>
@@ -482,12 +483,12 @@ export const TraditionVerticalCarousel: React.FC<Props> = ({
               type="button"
               onClick={() => goToIndex(idx)}
               aria-label={`Mobile jump to ${cultureThemes[key]?.name || key}`}
-              className="p-1.5 flex items-center justify-center cursor-pointer touch-manipulation focus:outline-none"
+              className="p-1 flex items-center justify-center cursor-pointer touch-manipulation focus:outline-none"
             >
               <span
                 className={`h-1.5 rounded-full transition-[width,background-color] duration-200 ease-out inline-block ${
                   activeIndex === idx
-                    ? 'w-4 bg-amber-400 shadow-xs shadow-amber-400/50'
+                    ? 'w-3.5 bg-amber-400 shadow-xs shadow-amber-400/50'
                     : 'w-1.5 bg-stone-700 hover:bg-stone-500'
                 }`}
               />
@@ -495,19 +496,22 @@ export const TraditionVerticalCarousel: React.FC<Props> = ({
           ))}
         </div>
 
-        <div className="flex items-center gap-2 text-stone-400">
-          <span className="text-amber-400 font-semibold">Card {activeIndex + 1} of 9</span>
+        <div className="flex items-center gap-1.5 text-stone-400 shrink-0 text-[10px] sm:text-xs">
+          <span className="text-amber-400 font-semibold">
+            <span className="sm:hidden">{activeIndex + 1}/9</span>
+            <span className="hidden sm:inline">Card {activeIndex + 1} of 9</span>
+          </span>
           <span className="hidden md:inline px-1.5 py-0.5 rounded bg-stone-900 border border-stone-800 text-[10px] text-stone-400">
             ↑ / ↓ or Scroll
           </span>
-          <span className="md:hidden px-1.5 py-0.5 rounded bg-stone-900 border border-stone-800 text-[10px] text-stone-400">
+          <span className="md:hidden px-1 py-0.5 rounded bg-stone-900 border border-stone-800 text-[9px] text-stone-400">
             Swipe
           </span>
         </div>
       </div>
 
       {/* Main 3D Stage */}
-      <div className="relative min-h-[460px] sm:min-h-[480px] flex items-start justify-center pt-2 sm:pt-3 pb-3 p-2 sm:p-3 md:pr-16 overflow-hidden [perspective:1400px] touch-pan-y">
+      <div className="relative min-h-[450px] sm:min-h-[475px] lg:min-h-[410px] flex items-start justify-center pt-1 sm:pt-3 pb-1.5 sm:pb-3 p-1 sm:p-3 md:pr-16 overflow-x-clip [perspective:1400px] touch-pan-y">
         {/* Floating Vertical Navigation Rail (Desktop & Tablet only: hidden on mobile) */}
         <div
           role="tablist"
@@ -565,7 +569,7 @@ export const TraditionVerticalCarousel: React.FC<Props> = ({
         </div>
 
         {/* Stacked Vertical Carousel Cards */}
-        <div className="relative w-full max-w-4xl min-h-[430px] sm:min-h-[450px] flex items-start justify-center">
+        <div className="relative w-full max-w-4xl min-h-[440px] sm:min-h-[465px] lg:min-h-[400px] flex items-start justify-center">
           {TRADITION_ORDER.map((key, index) => {
             const diff = index - activeIndex;
             const theme = cultureThemes[key] || cultureThemes.jyotisha;
@@ -575,12 +579,12 @@ export const TraditionVerticalCarousel: React.FC<Props> = ({
             if (Math.abs(diff) > 2) return null;
 
             // Compute vertical 3D transform metrics with compact headroom
-            const baseTop = activeIndex > 0 ? 26 : 0;
-            const yOffset = diff < 0 ? baseTop + diff * 24 : baseTop + diff * 32;
-            const scale = 1 - Math.abs(diff) * 0.05;
+            const baseTop = activeIndex > 0 ? 10 : 0;
+            const yOffset = diff < 0 ? baseTop + diff * 8 : baseTop + diff * 12;
+            const scale = 1 - Math.abs(diff) * 0.035;
             const opacity = isCenter ? 1 : Math.max(0.2, 0.6 - Math.abs(diff) * 0.25);
             const zIndex = 30 - Math.abs(diff) * 10;
-            const rotateX = diff * -4;
+            const rotateX = diff * -2;
 
             return (
               <motion.div
@@ -623,7 +627,7 @@ export const TraditionVerticalCarousel: React.FC<Props> = ({
                         mass: 0.85,
                       }
                 }
-                className={`absolute w-full rounded-2xl border p-4 sm:p-5 shadow-2xl transition-shadow ${
+                className={`absolute w-full rounded-2xl border p-2.5 sm:p-4 lg:p-4.5 shadow-2xl transition-shadow ${
                   isCenter
                     ? `${theme.containerBg} ${theme.containerBorder} backdrop-blur-md shadow-2xl cursor-grab active:cursor-grabbing ring-1 ring-amber-500/30 touch-pan-y`
                     : 'bg-stone-950/92 border-stone-800 cursor-pointer hover:border-amber-500/40'
@@ -634,11 +638,11 @@ export const TraditionVerticalCarousel: React.FC<Props> = ({
                 }}
               >
                 {/* Cultural Card Header */}
-                <div className="flex items-center justify-between border-b border-white/10 pb-3 mb-3">
-                  <div className="flex items-center gap-2.5">
-                    <span className="text-2xl select-none">{theme.glyph}</span>
+                <div className="flex items-center justify-between border-b border-white/10 pb-2 mb-2 sm:pb-2.5 sm:mb-2.5">
+                  <div className="flex items-center gap-2 sm:gap-2.5">
+                    <span className="text-xl sm:text-2xl select-none">{theme.glyph}</span>
                     <div>
-                      <div className="flex items-center gap-2">
+                      <div className="flex items-center gap-1.5 sm:gap-2">
                         <h4 className={`text-sm sm:text-base font-bold tracking-wide font-serif ${theme.accentText} truncate`}>
                           {theme.nativeTitle}
                         </h4>
@@ -653,19 +657,19 @@ export const TraditionVerticalCarousel: React.FC<Props> = ({
                   </div>
 
                   <div className="flex items-center gap-2">
-                    <span className="text-xs font-mono text-amber-300 font-bold px-2 py-1 rounded bg-black/40 border border-white/10">
+                    <span className="text-xs font-mono text-amber-300 font-bold px-2 py-0.5 sm:py-1 rounded bg-black/40 border border-white/10">
                       {String(index + 1).padStart(2, '0')} / 09
                     </span>
                   </div>
                 </div>
 
                 {/* Card Main Body: Split between Telemetry and Visual Instrument */}
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-3 sm:gap-4 items-center">
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-1.5 sm:gap-3 lg:gap-4 items-center">
                   {/* Telemetry Placements (shown when not in pure chart mode) */}
                   {chartViewMode !== 'chart' && (
-                    <div className={`${chartViewMode === 'table' ? 'lg:col-span-12' : 'lg:col-span-5'} space-y-3`}>
+                    <div className={`${chartViewMode === 'table' ? 'lg:col-span-12' : 'lg:col-span-5'} space-y-1 sm:space-y-2.5`}>
                       <div className="text-xs font-medium text-slate-300 flex items-center justify-between">
-                        <span>Key Chart Placements &amp; Positions</span>
+                        <span>Key Placements &amp; Positions</span>
                         {primaryExplainers[key] && (
                           <ExplainerTrigger
                             id={primaryExplainers[key].id}
@@ -678,8 +682,8 @@ export const TraditionVerticalCarousel: React.FC<Props> = ({
                       {renderTelemetryHighlights(key)}
 
                       {/* Motto Quote Box (Desktop/Tablet only to reserve vertical space for chart on mobile) */}
-                      <div className="p-2.5 rounded-lg bg-black/30 border border-white/5 hidden sm:block">
-                        <p className="text-xs text-slate-400 italic font-serif leading-relaxed">
+                      <div className="p-1.5 sm:p-2 rounded-lg bg-black/30 border border-white/5 hidden sm:block">
+                        <p className="text-[11px] sm:text-xs text-slate-400 italic font-serif leading-relaxed line-clamp-2">
                           &ldquo;{theme.motto}&rdquo;
                         </p>
                       </div>
@@ -689,21 +693,21 @@ export const TraditionVerticalCarousel: React.FC<Props> = ({
                   {/* Visual Instrument Display (shown when not in pure table mode) */}
                   {chartViewMode !== 'table' && (
                     <div className={`${chartViewMode === 'chart' ? 'lg:col-span-12' : 'lg:col-span-7'} flex flex-col items-center justify-center`}>
-                      <div className={`w-full p-2.5 sm:p-3 rounded-xl border ${theme.frameBorder} ${theme.frameBg} shadow-inner`}>
-                        <div className="flex items-center justify-between pb-1.5 mb-2 border-b border-white/10">
+                      <div className={`w-full p-1.5 sm:p-2.5 rounded-xl border ${theme.frameBorder} ${theme.frameBg} shadow-inner`}>
+                        <div className="flex items-center justify-between pb-0.5 mb-1 sm:pb-1 sm:mb-1.5 border-b border-white/10">
                           <div className="flex items-center gap-1.5">
-                            <Compass className="w-3.5 h-3.5 text-amber-400" />
-                            <h5 className={`text-xs font-sans font-semibold ${theme.accentText}`}>
+                            <Compass className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-amber-400" />
+                            <h5 className={`text-[11px] sm:text-xs font-sans font-semibold ${theme.accentText}`}>
                               {theme.instrumentName}
                             </h5>
                           </div>
-                          <span className="text-[10px] font-sans text-slate-400">
+                          <span className="text-[9px] sm:text-[10px] font-sans text-slate-400">
                             Astronomical Accuracy
                           </span>
                         </div>
                         <div
                           key={`${key}-${isCenter ? 'active' : 'idle'}`}
-                          className={`w-full flex items-center justify-center py-1 ${isCenter ? 'animate-instrument-focus' : ''}`}
+                          className={`w-full flex items-center justify-center py-0.5 ${isCenter ? 'animate-instrument-focus' : ''}`}
                         >
                           {renderInstrument(key, theme)}
                         </div>
@@ -718,16 +722,17 @@ export const TraditionVerticalCarousel: React.FC<Props> = ({
       </div>
 
       {/* Persistent Common Action Strip (Outside Carousel Cards) */}
-      <div className="flex flex-col sm:flex-row items-center justify-between gap-2 px-3 sm:px-6 pt-2 pb-1 border-t border-white/10 text-xs">
-        <div className="flex items-center gap-2 text-[11px] font-sans text-stone-400">
+      <div className="flex flex-col sm:flex-row items-center justify-between gap-1 sm:gap-2 px-2.5 sm:px-6 pt-1.5 sm:pt-2 pb-1 border-t border-white/10 text-xs">
+        <div className="flex items-center gap-2 text-[10px] sm:text-[11px] font-sans text-stone-400">
           <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 inline-block shadow-xs shadow-emerald-400/50" />
-          <span>Dual-Engine JPL DE421 + SwissEph 2.10 Authenticated</span>
+          <span className="hidden sm:inline">Dual-Engine JPL DE421 + SwissEph 2.10 Authenticated</span>
+          <span className="sm:hidden">JPL DE421 + SwissEph 2.10 Authenticated</span>
         </div>
 
         <button
           type="button"
           onClick={() => onOpenInspector(activeTab)}
-          className="inline-flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-lg bg-amber-950 hover:bg-amber-900/80 text-amber-200 border border-amber-700/80 text-xs font-sans font-semibold transition-[background-color,border-color,transform] motion-safe:active:scale-[0.97] motion-reduce:active:scale-100 duration-150 ease-out cursor-pointer shadow-xs whitespace-nowrap"
+          className="inline-flex items-center justify-center gap-1.5 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-lg bg-amber-950 hover:bg-amber-900/80 text-amber-200 border border-amber-700/80 text-[11px] sm:text-xs font-sans font-semibold transition-[background-color,border-color,transform] motion-safe:active:scale-[0.97] motion-reduce:active:scale-100 duration-150 ease-out cursor-pointer shadow-xs whitespace-nowrap"
           data-tooltip={`Open full detailed tables and analysis for ${currentTheme?.name || activeTab}`}
           aria-label={`Inspect full telemetry and tables for ${currentTheme?.name || activeTab}`}
         >
