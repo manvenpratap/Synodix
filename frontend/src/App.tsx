@@ -892,7 +892,9 @@ function AppContent() {
 
         {/* Main Content Viewport */}
         <main
-          className={`flex-1 p-4 sm:p-6 lg:p-8 w-full mx-auto pb-[calc(5rem+env(safe-area-inset-bottom,0px))] md:pb-8 ${
+          className={`flex-1 ${
+            currentScreen === 'traditions' ? 'p-3 sm:p-4 lg:p-5' : 'p-4 sm:p-6 lg:p-8'
+          } w-full mx-auto pb-[calc(5rem+env(safe-area-inset-bottom,0px))] md:pb-8 ${
             currentScreen === 'guide' || currentScreen === 'evidence' ? 'max-w-full lg:px-8' : 'max-w-7xl'
           }`}
         >

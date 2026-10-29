@@ -443,19 +443,19 @@ export const TraditionVerticalCarousel: React.FC<Props> = ({
       tabIndex={0}
       role="region"
       aria-label="Tradition Cards Vertical Carousel Deck"
-      className="relative w-full rounded-2xl overflow-hidden py-3 select-none focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
+      className="relative w-full rounded-2xl overflow-hidden pt-0 pb-1.5 select-none focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
     >
       {/* Top Deck Telemetry Bar */}
-      <div className="flex items-center justify-between px-3 sm:px-6 pb-2.5 border-b border-white/10 text-xs">
+      <div className="flex items-center justify-between px-2 sm:px-4 py-1.5 border-b border-white/10 text-[11px] font-mono">
         <div className="flex items-center gap-2">
-          <span className="w-2 h-2 rounded-full bg-amber-400 inline-block shadow-xs shadow-amber-400/50" />
-          <span className="text-amber-300 font-serif font-semibold">
+          <span className="w-1.5 h-1.5 rounded-full bg-amber-400 inline-block shadow-xs shadow-amber-400/50" />
+          <span className="text-amber-300 font-serif font-medium text-xs">
             Vertical Carousel Deck
           </span>
-          <span className="text-stone-400 hidden sm:inline font-mono">• 9 Astrometric Traditions</span>
+          <span className="text-stone-400 hidden sm:inline">• 9 Traditions</span>
         </div>
-        <div className="flex items-center gap-2 text-stone-400 text-[11px] font-mono">
-          <span className="text-stone-300 font-semibold">Card {activeIndex + 1} of 9</span>
+        <div className="flex items-center gap-2 text-stone-400">
+          <span className="text-amber-400 font-semibold">Card {activeIndex + 1} of 9</span>
           <span className="hidden md:inline px-1.5 py-0.5 rounded bg-stone-900 border border-stone-800 text-[10px] text-stone-400">
             ↑ / ↓ or Scroll
           </span>
@@ -463,7 +463,7 @@ export const TraditionVerticalCarousel: React.FC<Props> = ({
       </div>
 
       {/* Main 3D Stage */}
-      <div className="relative min-h-[620px] sm:min-h-[660px] lg:min-h-[680px] flex items-center justify-center p-2 sm:p-4 pr-12 sm:pr-16 overflow-hidden [perspective:1400px]">
+      <div className="relative min-h-[510px] sm:min-h-[540px] flex items-start justify-center pt-2 sm:pt-3 pb-6 p-2 sm:p-3 pr-12 sm:pr-16 overflow-hidden [perspective:1400px]">
         {/* Floating Vertical Navigation Rail */}
         <div
           role="tablist"
@@ -521,7 +521,7 @@ export const TraditionVerticalCarousel: React.FC<Props> = ({
         </div>
 
         {/* Stacked Vertical Carousel Cards */}
-        <div className="relative w-full max-w-4xl min-h-[540px] sm:min-h-[580px] flex items-center justify-center">
+        <div className="relative w-full max-w-4xl min-h-[480px] sm:min-h-[500px] flex items-start justify-center">
           {TRADITION_ORDER.map((key, index) => {
             const diff = index - activeIndex;
             const theme = cultureThemes[key] || cultureThemes.jyotisha;
@@ -530,12 +530,13 @@ export const TraditionVerticalCarousel: React.FC<Props> = ({
             // Only render cards within distance <= 2 for optimal GPU performance
             if (Math.abs(diff) > 2) return null;
 
-            // Compute vertical 3D transform metrics
-            const yOffset = diff * 95;
-            const scale = 1 - Math.abs(diff) * 0.08;
+            // Compute vertical 3D transform metrics with compact headroom
+            const baseTop = activeIndex > 0 ? 26 : 0;
+            const yOffset = diff < 0 ? baseTop + diff * 24 : baseTop + diff * 32;
+            const scale = 1 - Math.abs(diff) * 0.05;
             const opacity = isCenter ? 1 : Math.max(0.2, 0.6 - Math.abs(diff) * 0.25);
             const zIndex = 30 - Math.abs(diff) * 10;
-            const rotateX = diff * -5;
+            const rotateX = diff * -4;
 
             return (
               <motion.div

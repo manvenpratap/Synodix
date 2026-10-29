@@ -1,7 +1,7 @@
 # Synodix: Project Context & Working Memory
 
-**Last Updated:** 2026-10-29 07:06:53
-**Version:** 2.33.10  
+**Last Updated:** 2026-10-29 07:50:12
+**Version:** 2.33.11  
 **Stack:** Python 3.12 (FastAPI, Swiss Ephemeris 2.10, Skyfield DE421) + TypeScript / React 19 / Vite / Tailwind CSS v4 / Framer Motion / Capacitor 8 (iOS & Android)  
 **Workspace:** `/Volumes/Study/Projects/Astrology` (symlinked as `/Volumes/Study/Astrology`)  
 **Git Remote:** `https://github.com/manvenpratap/Synodix.git`  
@@ -10,7 +10,22 @@
 
 ## 1. Current Status & Milestone
 
-- **Active Phase**: Android APK WebView Cache Elimination & Native Versioning (Completed)
+- **Active Phase**: Tractate II Carousel Headroom Optimization & Layout Density (Completed)
+- **Tractate II Carousel Headroom Optimization & Viewport Density (v2.33.11)**:
+  - **Eliminated ~140px Dead Space Above Vertical Carousel Deck**:
+    - Identified root causes of excessive space above the carousel:
+      1. Fixed `min-h-[680px]` with `flex items-center justify-center` in `TraditionVerticalCarousel.tsx` vertically centered the ~480px cards in the middle of a massive stage, leaving over 100px of dead gap above the active card.
+      2. Card offset algorithm spread cards by `yOffset = diff * 95`, forcing excessive artificial clearance.
+      3. Redundant 45px "Top Deck Telemetry Bar" duplicated the Tractate II header controls.
+      4. Tractate II header bar had wide button groups causing the title and subtitle to wrap onto multiple lines (`barHeight = 93px`).
+      5. Excessive container padding (`p-4 sm:p-6 lg:p-8` on `<main>` and `p-4 sm:p-6` on bezel).
+    - Replaced vertical center alignment with top anchoring (`items-start`) and compact 3D stacked peek headroom (`baseTop = activeIndex > 0 ? 26 : 0`, `topPeek = 24`, `bottomPeek = 32`). When on Card 1 (Jyotisha/Vedic), the card starts immediately with 0px wasted top headroom.
+    - Streamlined Tractate II header bar (`barHeight` reduced from 93px to 51px) with inline presentation toggles and view mode switcher, preventing text wrapping.
+    - Reduced outer bezel padding to `p-3 sm:p-5 pt-3 sm:pt-4` and `<main>` padding for traditions screen to `p-3 sm:p-4 lg:p-5`.
+    - Total vertical headroom savings: ~140px. All 9 cultural visualizer cards (including the full Parashari diamond kundali and inspect footer) now fit 100% within a standard 900px viewport (`bottom: 819.5px <= 900px`) with zero scrolling required.
+  - **Test Suite Hardening**:
+    - Resolved auto-suggest blur test flakiness in `test_07_geocoding_intelligence.py` by pressing Escape to dismiss floating dropdown overlays before triggering blur verification.
+    - Verified all 26 test suites pass cleanly via `./pipeline.sh test --summary` (26 passed in 78.92s).
 - **Android APK WebView Cache Elimination & Versioning Hardening (v2.33.10)**:
   - **Native Platform ServiceWorker Elimination (`main.tsx`)**:
     - Identified root cause of stale Android APK: Android WebView persistently cached `index.html` under a legacy ServiceWorker cache (`synodix-v2.31.8`) that `main.tsx` explicitly preserved across updates.
