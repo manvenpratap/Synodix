@@ -173,10 +173,12 @@ function AppContent() {
     setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'));
   };
 
-  // Mobile Epistemic Journey Collapsed State
+  // Mobile Epistemic Journey Collapsed State (defaults to collapsed on mobile viewports)
   const [isJourneyCollapsed, setIsJourneyCollapsed] = useState<boolean>(() => {
     if (typeof window !== 'undefined') {
-      return localStorage.getItem('synodix_journey_collapsed') === 'true';
+      const stored = localStorage.getItem('synodix_journey_collapsed');
+      if (stored !== null) return stored === 'true';
+      return window.innerWidth < 768;
     }
     return false;
   });
@@ -742,11 +744,11 @@ function AppContent() {
 
             {/* Screen Title */}
             <div className="flex items-center gap-1.5 sm:gap-2 min-w-0">
-              <h1 className="text-lg sm:text-2xl font-serif font-bold tracking-tight text-stone-100 flex items-center gap-2 min-w-0">
+              <h1 className="text-base sm:text-2xl font-serif font-bold tracking-tight text-stone-100 flex items-center gap-2 min-w-0">
                 <span className="hidden sm:inline truncate">
                   {NAV_ITEMS.find((n) => n.id === currentScreen)?.label || (currentScreen === 'guide' ? 'Feature Guide' : '')}
                 </span>
-                <span className="sm:hidden truncate max-w-[170px]">
+                <span className="sm:hidden truncate max-w-[220px] tracking-normal">
                   {NAV_ITEMS.find((n) => n.id === currentScreen)?.shortLabel || NAV_ITEMS.find((n) => n.id === currentScreen)?.label || (currentScreen === 'guide' ? 'Guide' : '')}
                 </span>
               </h1>
@@ -971,7 +973,7 @@ function AppContent() {
         <main
           className={`flex-1 ${
             currentScreen === 'traditions' ? 'p-3 sm:p-4 lg:p-5' : 'p-4 sm:p-6 lg:p-8'
-          } w-full mx-auto pb-[calc(5rem+env(safe-area-inset-bottom,0px))] md:pb-8 ${
+          } w-full mx-auto pb-[calc(6.5rem+env(safe-area-inset-bottom,0px))] md:pb-8 ${
             currentScreen === 'guide' || currentScreen === 'evidence' ? 'max-w-full lg:px-8' : 'max-w-7xl'
           }`}
         >
@@ -1128,7 +1130,7 @@ function AppContent() {
               data-tooltip={isMore ? 'Open full observatory menu & settings' : `Navigate to ${item.label}`}
               aria-label={item.label}
               aria-current={isActive ? 'page' : undefined}
-              className={`relative flex flex-col items-center justify-center p-1 min-w-[48px] sm:min-w-[56px] min-h-[44px] rounded-lg transition-[background-color,border-color,color,transform] motion-safe:active:scale-[0.97] motion-reduce:active:scale-100 duration-150 ease-out cursor-pointer touch-manipulation focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 ${
+              className={`relative flex-1 min-w-0 flex flex-col items-center justify-center p-1 min-h-[48px] rounded-lg transition-[background-color,border-color,color,transform] motion-safe:active:scale-[0.97] motion-reduce:active:scale-100 duration-150 ease-out cursor-pointer touch-manipulation focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 ${
                 isActive
                   ? 'text-amber-400 font-bold bg-stone-900 border border-amber-700/60 shadow-xs'
                   : 'text-stone-400 hover:text-stone-200 hover:bg-stone-900'
@@ -1138,7 +1140,7 @@ function AppContent() {
                 <div className="absolute top-0 left-1/2 -translate-x-1/2 w-6 h-0.5 bg-amber-400 rounded-full" />
               )}
               <Icon className={`w-4.5 h-4.5 mb-0.5 ${isActive ? 'text-amber-400' : 'text-stone-400'}`} />
-              <span className="mt-0.5 text-[10px] leading-tight font-medium tracking-tight truncate max-w-[54px]">{item.label}</span>
+              <span className="mt-0.5 text-[9.5px] leading-tight font-medium tracking-tight truncate w-full text-center px-0.5">{item.label}</span>
             </button>
           );
         })}

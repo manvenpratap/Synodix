@@ -639,10 +639,10 @@ export const TraditionVerticalCarousel: React.FC<Props> = ({
                     <span className="text-2xl select-none">{theme.glyph}</span>
                     <div>
                       <div className="flex items-center gap-2">
-                        <h4 className={`text-base font-bold tracking-wide font-serif ${theme.accentText}`}>
+                        <h4 className={`text-sm sm:text-base font-bold tracking-wide font-serif ${theme.accentText} truncate`}>
                           {theme.nativeTitle}
                         </h4>
-                        <span className={`px-2 py-0.5 rounded text-[10px] font-sans border font-medium ${theme.accentBadge}`}>
+                        <span className={`px-2 py-0.5 rounded text-[10px] font-sans border font-medium ${theme.accentBadge} hidden sm:inline-block shrink-0`}>
                           {theme.badge}
                         </span>
                       </div>
@@ -677,7 +677,8 @@ export const TraditionVerticalCarousel: React.FC<Props> = ({
 
                       {renderTelemetryHighlights(key)}
 
-                      <div className="p-2.5 rounded-lg bg-black/30 border border-white/5">
+                      {/* Motto Quote Box (Desktop/Tablet only to reserve vertical space for chart on mobile) */}
+                      <div className="p-2.5 rounded-lg bg-black/30 border border-white/5 hidden sm:block">
                         <p className="text-xs text-slate-400 italic font-serif leading-relaxed">
                           &ldquo;{theme.motto}&rdquo;
                         </p>

@@ -64,17 +64,21 @@ export const FeatureExplainerModal: React.FC = () => {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.15 }}
-          className="fixed inset-0 z-[70] flex items-center justify-center p-3 sm:p-6 bg-stone-950/80 backdrop-blur-sm overscroll-contain pt-[max(0.75rem,env(safe-area-inset-top,0px))] pb-[max(0.75rem,env(safe-area-inset-bottom,0px))]"
+          className="fixed inset-0 z-[70] flex items-end sm:items-center justify-center p-0 sm:p-6 bg-stone-950/80 backdrop-blur-sm overscroll-contain pt-[max(0.75rem,env(safe-area-inset-top,0px))] pb-0 sm:pb-[max(0.75rem,env(safe-area-inset-bottom,0px))]"
           onClick={closeExplainer}
         >
           <motion.div
-            initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 6 }}
+            initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 20 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: shouldReduceMotion ? 0 : 6 }}
-            transition={{ duration: 0.16, ease: [0.16, 1, 0.3, 1] }}
-            className="bg-stone-950 border border-stone-800 ring-1 ring-white/10 text-stone-200 rounded-2xl w-full max-w-3xl max-h-[90vh] flex flex-col overflow-hidden relative shadow-2xl"
+            exit={{ opacity: 0, y: shouldReduceMotion ? 0 : 20 }}
+            transition={{ duration: 0.18, ease: [0.16, 1, 0.3, 1] }}
+            className="bg-stone-950 border-t sm:border border-stone-800 ring-1 ring-white/10 text-stone-200 rounded-t-3xl sm:rounded-2xl w-full max-w-3xl max-h-[88vh] sm:max-h-[90vh] flex flex-col overflow-hidden relative shadow-2xl pb-[max(0.75rem,env(safe-area-inset-bottom,0px))]"
             onClick={(e) => e.stopPropagation()}
           >
+            {/* Native Mobile Bottom Sheet Grab Indicator */}
+            <div className="sm:hidden w-full pt-2.5 pb-1 flex items-center justify-center bg-stone-900/90 cursor-grab select-none">
+              <div className="w-10 h-1 rounded-full bg-stone-600/80" />
+            </div>
         {/* Top Header Bar */}
         <div className="flex items-center justify-between px-5 py-4 border-b border-stone-800 bg-stone-900/90">
           <div className="flex items-center gap-2.5">

@@ -426,35 +426,35 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
   });
 
   return (
-    <div className="machined-bezel p-4 sm:p-6 rounded-2xl relative shadow-xl">
-      <div className="reticle-corner-tl" />
-      <div className="reticle-corner-tr" />
-      <div className="reticle-corner-bl" />
-      <div className="reticle-corner-br" />
+    <div className="machined-bezel p-3 sm:p-6 rounded-xl sm:rounded-2xl relative shadow-xl">
+      <div className="hidden sm:block reticle-corner-tl" />
+      <div className="hidden sm:block reticle-corner-tr" />
+      <div className="hidden sm:block reticle-corner-bl" />
+      <div className="hidden sm:block reticle-corner-br" />
 
         {/* Top Header & Independent Experience Mode Switcher */}
-        <div className="flex flex-col md:flex-row md:items-center justify-between pb-4 border-b border-stone-800 gap-3">
-        <div>
-          <div className="flex flex-wrap items-center gap-x-2 gap-y-0.5">
-            <span className="text-xs text-amber-400 font-serif font-medium">
-              Tractate I · Astrometric Calibration & Input
-            </span>
-            <span className="text-stone-400 hidden sm:inline">•</span>
-            <span className="text-xs text-stone-400 font-sans">
-              {activeMode === 'custom' ? 'Clean Independent Workspace' : '100 Verified Historical Records'}
-            </span>
+        <div className="flex flex-col md:flex-row md:items-center justify-between pb-2 sm:pb-4 border-b border-stone-800 gap-2 sm:gap-3">
+          <div className="hidden sm:block">
+            <div className="flex flex-wrap items-center gap-x-2 gap-y-0.5">
+              <span className="text-xs text-amber-400 font-serif font-medium">
+                Tractate I · Astrometric Calibration & Input
+              </span>
+              <span className="text-stone-400 hidden sm:inline">•</span>
+              <span className="text-xs text-stone-400 font-sans">
+                {activeMode === 'custom' ? 'Clean Independent Workspace' : '100 Verified Historical Records'}
+              </span>
+            </div>
+            <h2 className="text-base sm:text-lg font-serif font-semibold text-stone-100 mt-2.5 sm:mt-3">
+              {activeMode === 'custom' ? 'Custom Birth Chart Calibration' : 'Historical Titan Benchmark Library'}
+            </h2>
           </div>
-          <h2 className="text-base sm:text-lg font-serif font-semibold text-stone-100 mt-2.5 sm:mt-3">
-            {activeMode === 'custom' ? 'Custom Birth Chart Calibration' : 'Historical Titan Benchmark Library'}
-          </h2>
-        </div>
 
-        {/* Clean Segmented Mode Switcher */}
-        <div
-          role="tablist"
-          aria-label="Input Experience Switcher"
-          className="relative flex items-center bg-stone-900 p-1 rounded-lg border border-stone-800 w-full sm:w-auto"
-        >
+          {/* Clean Segmented Mode Switcher */}
+          <div
+            role="tablist"
+            aria-label="Input Experience Switcher"
+            className="relative flex items-center bg-stone-900 p-1 rounded-lg border border-stone-800 w-full sm:w-auto"
+          >
           <button
             type="button"
             role="tab"
@@ -530,7 +530,7 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
           className="pt-2 space-y-4 focus:outline-none"
         >
           {/* Workspace Telemetry Sub-header & Vault Quick-Load Strip */}
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between px-3.5 py-2.5 rounded-xl bg-stone-900 border border-stone-800 gap-2.5">
+          <div className={`flex flex-col sm:flex-row sm:items-center justify-between px-3.5 py-2.5 rounded-xl bg-stone-900 border border-stone-800 gap-2.5 ${savedProfiles.length === 0 ? 'hidden sm:flex' : 'flex'}`}>
             <div className="flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-emerald-400 inline-block shadow-xs" />
               <span className="text-xs font-sans font-medium text-stone-200">
@@ -597,7 +597,7 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
                         Subject Identity & Natal Cycle
                       </h3>
                     </div>
-                    <p className="text-[11px] text-stone-400 font-sans mt-0.5">
+                    <p className="hidden sm:block text-[11px] text-stone-400 font-sans mt-0.5">
                       Dossier label, biological cycle polarity, and local draft persistence
                     </p>
                   </div>
@@ -649,7 +649,7 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
                     placeholder="e.g. My Personal Chart, Client Natal Audit, Custom Subject..."
                     className="w-full bg-stone-950 border border-stone-800 rounded-lg px-3 py-2.5 sm:py-2 min-h-[44px] sm:min-h-[40px] text-xs font-medium text-stone-100 placeholder-stone-500 focus:outline-none focus:border-amber-500 focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:ring-offset-1 focus-visible:ring-offset-stone-950 transition-colors"
                   />
-                  <p className="text-[11px] text-stone-400 font-sans mt-1">
+                  <p className="hidden sm:block text-[11px] text-stone-400 font-sans mt-1">
                     Label assigned to this custom astrometric session
                   </p>
                 </div>
@@ -679,7 +679,7 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
                     <option value="female">Female (Da Yun forward/backward rule)</option>
                     <option value="neutral">Neutral / Unspecified</option>
                   </select>
-                  <p className="text-[11px] text-stone-400 font-sans mt-1">
+                  <p className="hidden sm:block text-[11px] text-stone-400 font-sans mt-1">
                     Directs 10-year luck pillar trajectory & elemental stem polarity
                   </p>
                 </div>
@@ -704,7 +704,7 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
                         Temporal Coordinates & Ephemeris Epoch
                       </h3>
                     </div>
-                    <p className="text-[11px] text-stone-400 font-sans mt-0.5">
+                    <p className="hidden sm:block text-[11px] text-stone-400 font-sans mt-0.5">
                       Civil calendar date, local 24-hour time, and Rodden record rating
                     </p>
                   </div>
@@ -732,7 +732,7 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
                     onChange={(e) => setFormData({ ...formData, birth_date: e.target.value })}
                     className="w-full bg-stone-950 border border-stone-800 rounded-lg px-3 py-2.5 sm:py-2 min-h-[44px] sm:min-h-[40px] text-xs font-mono text-stone-100 focus:outline-none focus:border-amber-500 focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:ring-offset-1 focus-visible:ring-offset-stone-950 transition-colors"
                   />
-                  <p className="text-[11px] text-stone-400 font-sans mt-1">
+                  <p className="hidden sm:block text-[11px] text-stone-400 font-sans mt-1">
                     Gregorian civil calendar date
                   </p>
                 </div>
@@ -754,7 +754,7 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
                     onChange={(e) => setFormData({ ...formData, birth_time: e.target.value })}
                     className="w-full bg-stone-950 border border-stone-800 rounded-lg px-3 py-2.5 sm:py-2 min-h-[44px] sm:min-h-[40px] text-xs font-mono text-stone-100 focus:outline-none focus:border-amber-500 focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:ring-offset-1 focus-visible:ring-offset-stone-950 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
                   />
-                  <p className="text-[11px] text-stone-400 font-sans mt-1">
+                  <p className="hidden sm:block text-[11px] text-stone-400 font-sans mt-1">
                     {formData.time_certainty === 'unknown' ? 'Disabled in unknown time mode' : 'Local standard / daylight saving time'}
                   </p>
                 </div>
@@ -783,7 +783,7 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
                     <option value="approx_30">Approximate (Time of day, ±30m)</option>
                     <option value="unknown">Unknown Time (Date-stable methods only)</option>
                   </select>
-                  <p className="text-[11px] text-stone-400 font-sans mt-1">
+                  <p className="hidden sm:block text-[11px] text-stone-400 font-sans mt-1">
                     Calibrates T-, T, T+ uncertainty ensemble
                   </p>
                 </div>
@@ -808,7 +808,7 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
                         Geographic Origin & Spatial Observer
                       </h3>
                     </div>
-                    <p className="text-[11px] text-stone-400 font-sans mt-0.5">
+                    <p className="hidden sm:block text-[11px] text-stone-400 font-sans mt-0.5">
                       Birth city, country gazetteer, and high-precision WGS-84 decimal coordinates
                     </p>
                   </div>
@@ -1171,7 +1171,7 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
               <button
                 type="submit"
                 disabled={isLoading}
-                className="relative overflow-hidden px-6 py-2.5 min-h-[44px] bg-gradient-to-r from-amber-600 via-amber-500 to-amber-600 hover:from-amber-500 hover:to-amber-400 transition-[background-color,border-color,transform] motion-safe:active:scale-[0.97] motion-reduce:active:scale-100 duration-150 ease-out text-stone-950 font-serif font-semibold text-xs rounded-lg border border-amber-300 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:ring-offset-1 focus-visible:ring-offset-stone-950 shadow-md shadow-amber-950/40 whitespace-nowrap"
+                className="w-full sm:w-auto relative overflow-hidden px-6 py-3 min-h-[48px] bg-gradient-to-r from-amber-600 via-amber-500 to-amber-600 hover:from-amber-500 hover:to-amber-400 transition-[background-color,border-color,transform] motion-safe:active:scale-[0.98] motion-reduce:active:scale-100 duration-150 ease-out text-stone-950 font-serif font-bold text-xs sm:text-xs rounded-xl border border-amber-300 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:ring-offset-1 focus-visible:ring-offset-stone-950 shadow-md shadow-amber-950/40 whitespace-nowrap"
               >
                 {isLoading && (
                   <div className="absolute inset-0 pointer-events-none">
@@ -1368,11 +1368,11 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
                   </div>
                 </div>
 
-                <div className="flex items-center gap-2">
+                <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 w-full sm:w-auto">
                   <button
                     type="button"
                     onClick={() => handleCustomizeTitan(selectedTitan)}
-                    className="inline-flex items-center gap-1.5 px-3 py-2 text-xs rounded border border-stone-800 hover:border-amber-700/80 bg-stone-900 hover:bg-stone-800 text-stone-200 hover:text-amber-300 cursor-pointer transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 whitespace-nowrap"
+                    className="w-full sm:w-auto inline-flex items-center justify-center gap-1.5 px-3 py-2 min-h-[44px] text-xs rounded-lg border border-stone-800 hover:border-amber-700/80 bg-stone-900 hover:bg-stone-800 text-stone-200 hover:text-amber-300 cursor-pointer transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 whitespace-nowrap"
                     title="Load this titan's birth details into the Custom Calibration Workbench"
                   >
                     <PenTool className="w-3.5 h-3.5 text-amber-400" />
@@ -1383,7 +1383,7 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
                     type="button"
                     onClick={() => handleSelectTitan(selectedTitan, true)}
                     disabled={isLoading}
-                    className="inline-flex items-center gap-1.5 px-4 py-2 text-xs rounded bg-amber-600 hover:bg-amber-500 text-stone-950 font-serif font-bold border border-amber-300 cursor-pointer transition-colors shadow-xs focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 whitespace-nowrap"
+                    className="w-full sm:w-auto inline-flex items-center justify-center gap-1.5 px-4 py-2.5 min-h-[44px] text-xs rounded-lg bg-amber-600 hover:bg-amber-500 text-stone-950 font-serif font-bold border border-amber-300 cursor-pointer transition-colors shadow-xs focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 whitespace-nowrap"
                   >
                     <span className="whitespace-nowrap">Calculate Titan Chart</span>
                     <ArrowRight className="w-3.5 h-3.5" />

@@ -1723,16 +1723,16 @@ h1, h2, h3, h4, .font-serif {
 
 /* Apple Frosted Acrylic & Glass Materials */
 .mobile-nav-canvas {
-  background-color: rgba(12, 10, 9, 0.88);
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  background-color: rgba(12, 10, 9, 0.96);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
   border-top: 1px solid rgba(255, 255, 255, 0.12); /* Apple light-catch hairline */
 }
 
 [data-theme="light"] .mobile-nav-canvas {
-  background-color: rgba(255, 253, 250, 0.90) !important;
-  backdrop-filter: blur(20px) saturate(180%) !important;
-  -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+  background-color: rgba(250, 248, 245, 0.97) !important;
+  backdrop-filter: blur(24px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(24px) saturate(180%) !important;
   border-top: 1px solid rgba(0, 0, 0, 0.08) !important;
 }
 

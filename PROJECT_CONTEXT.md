@@ -1,7 +1,7 @@
 # Synodix: Project Context & Working Memory
 
-**Last Updated:** 2026-10-29 10:31:00
-**Version:** 2.33.17  
+**Last Updated:** 2026-10-29 11:35:38
+**Version:** 2.33.19  
 **Stack:** Python 3.12 (FastAPI, Swiss Ephemeris 2.10, Skyfield DE421) + TypeScript / React 19 / Vite / Tailwind CSS v4 / Framer Motion / Capacitor 8 (iOS & Android)  
 **Workspace:** `/Volumes/Study/Projects/Astrology` (symlinked as `/Volumes/Study/Astrology`)  
 **Git Remote:** `https://github.com/manvenpratap/Synodix.git`  
@@ -10,8 +10,28 @@
 
 ## 1. Current Status & Milestone
 
-- **Active Phase**: Apple Design Engineering & Visual Instruments Motion Orchestration (Completed)
-- **Apple Design Principles & Instrument Animations (v2.33.17)**:
+- **Active Phase**: Native Mobile-First Touch Ergonomics, Bottom Sheet & Layout Density (Completed)
+- **Mobile Design System & Touch Ergonomics (v2.33.19)**:
+  - **Native Bottom Sheet Modals (`FeatureExplainerModal.tsx`)**:
+    - Replaced centered floating desktop rectangle modal on mobile viewports with an authentic native bottom sheet docked to screen bottom (`items-end sm:items-center p-0 sm:p-6`).
+    - Added rounded top corners (`rounded-t-3xl sm:rounded-2xl`), safe-area bottom padding, and a native mobile grab/pull indicator bar (`w-10 h-1 rounded-full bg-stone-600/80`).
+  - **Mobile Navigation Bar Polish & Bleed-Through Elimination (`App.tsx`, `index.css`)**:
+    - Equalized tab button widths with `flex-1 min-w-0` and refined typography to `text-[9.5px] leading-tight`, permanently resolving truncation on the `Traditions` label (previously clipped as `Traditio...`).
+    - Increased `.mobile-nav-canvas` opacity to `0.96` (dark) and `0.97` (light), completely eliminating underlying form content and numbers from bleeding through the frosted glass bar.
+    - Expanded `<main>` content bottom padding to `pb-[calc(6.5rem+env(safe-area-inset-bottom,0px))]`, ensuring all form fields and CTAs can scroll completely clear of the docked navigation bar.
+  - **Screen Title De-truncation (`App.tsx`)**:
+    - Refined screen title layout to `text-base sm:text-2xl font-serif font-bold tracking-tight text-stone-100` with `max-w-[220px] tracking-normal` on mobile, permanently preventing "WORKBENCH" from clipping to `WORKBENC...`.
+  - **Form Density & Visual Decluttering (`BirthDataForm.tsx`)**:
+    - Hid desktop academic subtitle banners, field micro-notes, and ornamental corner reticles on mobile (`hidden sm:block`), reducing vertical scroll distance by >50%.
+    - Hid empty `Astrometric Telemetry Studio` banner when no saved vault profiles exist (`savedProfiles.length === 0 ? 'hidden sm:flex' : 'flex'`).
+    - Expanded the primary "Compute, Verify & Synthesize Chart" CTA button to full-width (`w-full sm:w-auto min-h-[48px] text-sm font-bold rounded-xl`), anchoring it directly in the natural thumb zone.
+    - Expanded direct actions in Historical Titan dossiers to full-width mobile button stacks (`w-full sm:w-auto min-h-[44px] justify-center`).
+  - **Epistemic Journey Default Consolidation (`App.tsx`, `tests/test_04_mobile_viewport.py`)**:
+    - Initialized `isJourneyCollapsed` to default to `true` on mobile viewports (`window.innerWidth < 768`), saving 60px of screen real estate on fresh mobile sessions.
+    - Hardened Playwright mobile tests with dynamic wait functions to eliminate timing race conditions.
+  - **Automated Verification**:
+    - Pytest test suite: 26/26 passed cleanly in 83.26s via `./pipeline.sh test --summary`.
+    - Native Android APK (7.67MB) and iOS Simulator bundle (5.71MB) compiled and verified on Android emulator `emulator-5554` (`mobile_design_verified3.png`).
   - **Fluid GPU-Accelerated Animations Across All 9 Visual Instruments (`ChartWheelVisualizer.tsx`, `index.css`)**:
     - **Persian Almuten Figuris**: Replaced static dignity bar jumps with `.animate-bar-grow` (`scaleX(0) -> scaleX(1)`) using left-centered GPU transforms and 40ms staggered cascading delays.
     - **Egyptian Decan Star Clock**: Built `.animate-dial-reveal` for the 36 decanal star gates and rotating barque wheel, paired with an `animate-radar-pulse` reticle on the active Ascendant decan star.
