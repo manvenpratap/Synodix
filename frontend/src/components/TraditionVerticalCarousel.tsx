@@ -68,6 +68,7 @@ export const TraditionVerticalCarousel: React.FC<Props> = ({
   const currentTheme = cultureThemes[activeTab] || cultureThemes.jyotisha;
   const containerRef = useRef<HTMLDivElement>(null);
   const lastScrollTime = useRef<number>(0);
+  const touchStartX = useRef<number | null>(null);
   const touchStartY = useRef<number | null>(null);
 
   const goToIndex = useCallback(
@@ -99,10 +100,10 @@ export const TraditionVerticalCarousel: React.FC<Props> = ({
         return;
       }
 
-      if (e.key === 'ArrowUp' || e.key === 'PageUp') {
+      if (e.key === 'ArrowUp' || e.key === 'PageUp' || e.key === 'ArrowLeft') {
         e.preventDefault();
         goPrev();
-      } else if (e.key === 'ArrowDown' || e.key === 'PageDown') {
+      } else if (e.key === 'ArrowDown' || e.key === 'PageDown' || e.key === 'ArrowRight') {
         e.preventDefault();
         goNext();
       } else if (e.key === 'Home') {
@@ -133,21 +134,36 @@ export const TraditionVerticalCarousel: React.FC<Props> = ({
     }
   };
 
-  // Touch swipe support for mobile
+  // Fluid swipe gestures for mobile (supports both horizontal & vertical touch gestures)
   const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
     touchStartY.current = e.touches[0].clientY;
   };
 
   const handleTouchEnd = (e: React.TouchEvent) => {
-    if (touchStartY.current === null) return;
+    if (touchStartY.current === null || touchStartX.current === null) return;
+    const deltaX = e.changedTouches[0].clientX - touchStartX.current;
     const deltaY = e.changedTouches[0].clientY - touchStartY.current;
-    if (Math.abs(deltaY) > 40) {
-      if (deltaY < 0) {
-        goNext();
-      } else {
-        goPrev();
+
+    // Detect dominant swipe orientation
+    if (Math.abs(deltaX) > Math.abs(deltaY)) {
+      if (Math.abs(deltaX) > 35) {
+        if (deltaX < 0) {
+          goNext(); // Swipe left -> Next card
+        } else {
+          goPrev(); // Swipe right -> Previous card
+        }
+      }
+    } else {
+      if (Math.abs(deltaY) > 35) {
+        if (deltaY < 0) {
+          goNext(); // Swipe up -> Next card
+        } else {
+          goPrev(); // Swipe down -> Previous card
+        }
       }
     }
+    touchStartX.current = null;
     touchStartY.current = null;
   };
 
@@ -455,21 +471,43 @@ export const TraditionVerticalCarousel: React.FC<Props> = ({
           </span>
           <span className="text-stone-400 hidden sm:inline">• 9 Traditions</span>
         </div>
+
+        {/* Mobile-only compact tradition indicator dots */}
+        <div className="flex md:hidden items-center gap-1">
+          {TRADITION_ORDER.map((key, idx) => (
+            <button
+              key={key}
+              data-mobile-dot={key}
+              type="button"
+              onClick={() => goToIndex(idx)}
+              aria-label={`Mobile jump to ${cultureThemes[key]?.name || key}`}
+              className={`h-1.5 rounded-full transition-all duration-200 cursor-pointer ${
+                activeIndex === idx
+                  ? 'w-4 bg-amber-400 shadow-xs shadow-amber-400/50'
+                  : 'w-1.5 bg-stone-700 hover:bg-stone-500'
+              }`}
+            />
+          ))}
+        </div>
+
         <div className="flex items-center gap-2 text-stone-400">
           <span className="text-amber-400 font-semibold">Card {activeIndex + 1} of 9</span>
           <span className="hidden md:inline px-1.5 py-0.5 rounded bg-stone-900 border border-stone-800 text-[10px] text-stone-400">
             ↑ / ↓ or Scroll
           </span>
+          <span className="md:hidden px-1.5 py-0.5 rounded bg-stone-900 border border-stone-800 text-[10px] text-stone-400">
+            Swipe
+          </span>
         </div>
       </div>
 
       {/* Main 3D Stage */}
-      <div className="relative min-h-[460px] sm:min-h-[480px] flex items-start justify-center pt-2 sm:pt-3 pb-3 p-2 sm:p-3 pr-12 sm:pr-16 overflow-hidden [perspective:1400px]">
-        {/* Floating Vertical Navigation Rail */}
+      <div className="relative min-h-[460px] sm:min-h-[480px] flex items-start justify-center pt-2 sm:pt-3 pb-3 p-2 sm:p-3 md:pr-16 overflow-hidden [perspective:1400px]">
+        {/* Floating Vertical Navigation Rail (Desktop & Tablet only: hidden on mobile) */}
         <div
           role="tablist"
           aria-label="Astrological tradition cards"
-          className="absolute right-2 sm:right-4 z-40 flex flex-col items-center gap-1 p-1.5 rounded-full bg-stone-950/85 backdrop-blur-md border border-stone-700/60 shadow-xl"
+          className="hidden md:flex absolute right-2 sm:right-4 z-40 flex-col items-center gap-1 p-1.5 rounded-full bg-stone-950/85 backdrop-blur-md border border-stone-700/60 shadow-xl"
         >
           <button
             type="button"
@@ -551,6 +589,19 @@ export const TraditionVerticalCarousel: React.FC<Props> = ({
                 onClick={() => {
                   if (!isCenter) goToIndex(index);
                 }}
+                drag={isCenter ? 'x' : false}
+                dragConstraints={{ left: 0, right: 0 }}
+                dragElastic={0.2}
+                onDragEnd={(_e, info) => {
+                  if (!isCenter) return;
+                  const threshold = 35;
+                  const velocityThreshold = 260;
+                  if (info.offset.x < -threshold || info.velocity.x < -velocityThreshold) {
+                    goNext();
+                  } else if (info.offset.x > threshold || info.velocity.x > velocityThreshold) {
+                    goPrev();
+                  }
+                }}
                 animate={{
                   y: yOffset,
                   scale,
@@ -566,7 +617,7 @@ export const TraditionVerticalCarousel: React.FC<Props> = ({
                 }}
                 className={`absolute w-full rounded-2xl border p-4 sm:p-5 shadow-2xl backdrop-blur-xl transition-shadow ${
                   isCenter
-                    ? `${theme.containerBg} ${theme.containerBorder} shadow-2xl cursor-default ring-1 ring-amber-500/30`
+                    ? `${theme.containerBg} ${theme.containerBorder} shadow-2xl cursor-grab active:cursor-grabbing ring-1 ring-amber-500/30 touch-pan-y`
                     : 'bg-stone-950/85 border-stone-800 cursor-pointer hover:border-amber-500/40'
                 }`}
                 style={{

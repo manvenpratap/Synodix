@@ -1,7 +1,7 @@
 # Synodix: Project Context & Working Memory
 
-**Last Updated:** 2026-10-29 08:08:08
-**Version:** 2.33.12  
+**Last Updated:** 2026-10-29 08:26:49
+**Version:** 2.33.13  
 **Stack:** Python 3.12 (FastAPI, Swiss Ephemeris 2.10, Skyfield DE421) + TypeScript / React 19 / Vite / Tailwind CSS v4 / Framer Motion / Capacitor 8 (iOS & Android)  
 **Workspace:** `/Volumes/Study/Projects/Astrology` (symlinked as `/Volumes/Study/Astrology`)  
 **Git Remote:** `https://github.com/manvenpratap/Synodix.git`  
@@ -10,7 +10,21 @@
 
 ## 1. Current Status & Milestone
 
-- **Active Phase**: Common Carousel Action Demotion & Persistent Footer Strip (Completed)
+- **Active Phase**: Mobile Carousel Swipable Cards & Sidebar Removal (Completed)
+- **Mobile Carousel Swipable Cards & Sidebar Removal (v2.33.13)**:
+  - **Removed Vertical Sidebar Rail on Mobile (`TraditionVerticalCarousel.tsx`)**:
+    - Hid the bulky vertical button rail (`hidden md:flex`) on mobile devices, reclaiming 48px–64px of horizontal stage padding (`md:pr-16`).
+    - Allowed carousel cards on mobile devices to expand to full available width (from 260px indented to full 324px on 390px iPhone displays).
+  - **Fluid Multi-Directional Touch & Drag Gestures**:
+    - Added Framer Motion interactive horizontal drag (`drag={isCenter ? 'x' : false}`, `dragConstraints`, `dragElastic={0.2}`, `onDragEnd`) with flick-velocity and distance threshold detection.
+    - Updated container touch listeners to support both horizontal swipes (swipe left = next card, swipe right = previous card) and vertical swipes (swipe up = next card, swipe down = previous card).
+    - Enabled natural physical spring animations during drag with cursor grab/grabbing indicators and `touch-pan-y` compatibility.
+  - **Mobile Carousel Progress & Indicator Dots**:
+    - Introduced a responsive 9-dot indicator bar (`data-mobile-dot`) docked in the top deck telemetry strip on mobile, displaying active card progress and enabling 1-tap jumping across all 9 civilizational lenses.
+    - Replaced the desktop "↑ / ↓ or Scroll" hint with a mobile-tailored "Swipe" badge on touch devices.
+  - **Automated Verification**:
+    - Playwright verified: zero horizontal overflow on mobile viewports (`document.documentElement.scrollWidth <= window.innerWidth + 2`), swipe left transitions from Jyotisha to BaZi, swipe right transitions back to Jyotisha, and dot tapping jumps directly to Western.
+    - Full Pytest suite: 26/26 passed in 80.44s with zero console errors.
 - **Common Carousel Action Demotion & Persistent Footer Strip (v2.33.12)**:
   - **Relocated "Inspect Full Telemetry & Tables" Outside Carousel Cards**:
     - Eliminated redundant per-card footer action buttons duplicated across all 9 cultural cards in `TraditionVerticalCarousel.tsx`.

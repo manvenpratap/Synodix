@@ -1,5 +1,5 @@
 // Service Worker for Synodix Astrometric Triangulation Engine
-const CACHE_NAME = 'synodix-v2.33.12';
+const CACHE_NAME = 'synodix-v2.33.13';
 const STATIC_ASSETS = [
   '/',
   '/index.html',

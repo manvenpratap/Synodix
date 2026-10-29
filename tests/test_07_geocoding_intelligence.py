@@ -375,6 +375,7 @@ def test_ui_city_selector_finds_jamshedpur_and_gurugram():
         # Press Escape to dismiss suggestion dropdown, then trigger native blur
         city_input.press("Escape")
         city_input.blur()
+        page.evaluate("() => document.querySelector('input#city_name')?.blur()")
         page.wait_for_function("() => document.querySelector('input#country_name')?.value === 'India'", timeout=15000)
 
         # Country should automatically resolve to India and lat/lon updated

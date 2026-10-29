@@ -127,10 +127,10 @@ def test_mobile_viewport_and_touch_targets():
             
             # Navigate via Journey Stepper to Traditions
             page.evaluate("() => { const b = document.querySelectorAll(\"button\"); for (const el of b) { if (el.innerText.includes('Traditions') && el.innerText.includes('2')) { el.click(); break; } } }")
-            page.wait_for_timeout(400)
             
             # Bottom Journey CTA should be visible
             synth_cta = page.locator("button:has-text('Explore Cross-Cultural Synthesis Matrix')").first
+            synth_cta.wait_for(state="visible", timeout=10000)
             assert synth_cta.is_visible(), f"Bottom Journey CTA to Synthesis should be visible on {vp['name']}"
             synth_cta.click()
             page.wait_for_timeout(400)
