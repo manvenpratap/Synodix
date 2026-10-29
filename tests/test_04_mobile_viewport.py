@@ -124,6 +124,19 @@ def test_mobile_viewport_and_touch_targets():
             # 10. Test Mobile Epistemological Journey Stepper & Navigation CTAs
             stepper = page.locator("text=Epistemic Journey").first
             assert stepper.is_visible(), f"Epistemic Journey Stepper should be visible on {vp['name']}"
+
+            # Test Epistemic Journey collapse & expand toggle on mobile
+            collapse_btn = page.locator("button[aria-label='Collapse journey steps']").first
+            if collapse_btn.is_visible():
+                initial_nav_height = page.locator("nav[aria-label='Epistemic Journey Stepper']").bounding_box()["height"]
+                collapse_btn.click()
+                page.wait_for_timeout(200)
+                collapsed_nav_height = page.locator("nav[aria-label='Epistemic Journey Stepper']").bounding_box()["height"]
+                assert collapsed_nav_height < initial_nav_height, f"Nav height should decrease when collapsed: {collapsed_nav_height} < {initial_nav_height}"
+                # Expand back
+                expand_btn = page.locator("button[aria-label='Expand journey steps']").first
+                expand_btn.click()
+                page.wait_for_timeout(200)
             
             # Navigate via Journey Stepper to Traditions
             page.evaluate("() => { const b = document.querySelectorAll(\"button\"); for (const el of b) { if (el.innerText.includes('Traditions') && el.innerText.includes('2')) { el.click(); break; } } }")

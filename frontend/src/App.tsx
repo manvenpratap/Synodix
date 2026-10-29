@@ -12,6 +12,8 @@ import {
   X,
   User,
   ChevronRight,
+  ChevronDown,
+  ChevronUp,
   ArrowRight,
   Sun,
   Moon,
@@ -154,6 +156,24 @@ function AppContent() {
 
   const toggleTheme = () => {
     setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'));
+  };
+
+  // Mobile Epistemic Journey Collapsed State
+  const [isJourneyCollapsed, setIsJourneyCollapsed] = useState<boolean>(() => {
+    if (typeof window !== 'undefined') {
+      return localStorage.getItem('synodix_journey_collapsed') === 'true';
+    }
+    return false;
+  });
+
+  const toggleJourneyCollapsed = () => {
+    setIsJourneyCollapsed((prev) => {
+      const next = !prev;
+      if (typeof window !== 'undefined') {
+        localStorage.setItem('synodix_journey_collapsed', String(next));
+      }
+      return next;
+    });
   };
 
   // Mobile / Native Server Connection State
@@ -822,20 +842,42 @@ function AppContent() {
         {/* Epistemological Journey Stepper — Tractate Progression */}
         <nav
           aria-label="Epistemic Journey Stepper"
-          className="px-3 sm:px-6 py-2 bg-stone-900/90 backdrop-blur-md border-b border-stone-800 select-none sticky top-[calc(3.75rem+env(safe-area-inset-top,0px))] z-20"
+          className="px-2.5 sm:px-6 py-1 sm:py-2 bg-stone-900/90 backdrop-blur-md border-b border-stone-800 select-none sticky top-[calc(3.75rem+env(safe-area-inset-top,0px))] z-20"
         >
-          <div className="flex items-center justify-between text-[11px] font-mono mb-1.5 text-stone-400">
-            <span className="font-serif font-medium text-xs text-amber-400 flex items-center gap-1.5">
-              <span className="w-1.5 h-1.5 rounded-full bg-amber-400 inline-block"></span>
-              Epistemic Journey
-            </span>
-            <span className="text-[11px] text-stone-300 font-serif">
-              {JOURNEY_STEPS.findIndex((s) => s.id === currentScreen) >= 0
-                ? `Tractate ${['I', 'II', 'III', 'IV'][JOURNEY_STEPS.findIndex((s) => s.id === currentScreen)]} of IV`
-                : 'Reference'}
-            </span>
+          <div className="flex items-center justify-between text-[10px] sm:text-[11px] font-mono mb-0.5 sm:mb-1.5 text-stone-400">
+            <div className="flex items-center gap-1.5 sm:gap-2 min-w-0">
+              <span className="font-serif font-medium text-[11px] sm:text-xs text-amber-400 flex items-center gap-1.5 shrink-0">
+                <span className="w-1.5 h-1.5 rounded-full bg-amber-400 inline-block"></span>
+                Epistemic Journey
+              </span>
+              {isJourneyCollapsed && (
+                <span className="text-[10px] text-amber-300/80 font-serif truncate md:hidden">
+                  • {JOURNEY_STEPS.find((s) => s.id === currentScreen)?.label || 'Overview'}
+                </span>
+              )}
+            </div>
+            <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
+              <span className="text-[10px] sm:text-[11px] text-stone-300 font-serif">
+                {JOURNEY_STEPS.findIndex((s) => s.id === currentScreen) >= 0
+                  ? `Tractate ${['I', 'II', 'III', 'IV'][JOURNEY_STEPS.findIndex((s) => s.id === currentScreen)]} of IV`
+                  : 'Reference'}
+              </span>
+              <button
+                type="button"
+                onClick={toggleJourneyCollapsed}
+                className="md:hidden inline-flex items-center justify-center w-5 h-5 rounded hover:bg-stone-800 text-stone-400 hover:text-stone-200 transition-colors cursor-pointer"
+                data-tooltip={isJourneyCollapsed ? 'Expand journey steps' : 'Collapse journey stepper to save space'}
+                aria-label={isJourneyCollapsed ? 'Expand journey steps' : 'Collapse journey steps'}
+              >
+                {isJourneyCollapsed ? (
+                  <ChevronDown className="w-3.5 h-3.5" />
+                ) : (
+                  <ChevronUp className="w-3.5 h-3.5" />
+                )}
+              </button>
+            </div>
           </div>
-          <div className="grid grid-cols-4 gap-1.5 py-0.5 w-full">
+          <div className={`grid grid-cols-4 gap-1 sm:gap-1.5 py-0.5 w-full ${isJourneyCollapsed ? 'hidden md:grid' : 'grid'}`}>
             {JOURNEY_STEPS.map((s, idx) => {
               const isActive = currentScreen === s.id;
               const isPassed = JOURNEY_STEPS.findIndex((st) => st.id === currentScreen) > idx;
@@ -846,7 +888,8 @@ function AppContent() {
                   onClick={() => navigateTo(s.id)}
                   aria-current={isActive ? 'step' : undefined}
                   aria-label={`Step ${s.step}: ${s.label}${isActive ? ' (current step)' : isPassed ? ' (completed)' : ''}`}
-                  className={`flex flex-col min-[380px]:flex-row items-center justify-center gap-0.5 min-[380px]:gap-1.5 px-1 py-1.5 min-h-[38px] rounded-lg text-center cursor-pointer transition-colors active:scale-95 duration-150 touch-manipulation focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 ${
+                  data-tooltip={`Go to Tractate ${['I', 'II', 'III', 'IV'][idx]}: ${s.label}`}
+                  className={`flex flex-row items-center justify-center gap-1 sm:gap-1.5 px-1 sm:px-2 py-0.5 sm:py-1.5 min-h-[28px] sm:min-h-[38px] rounded-md sm:rounded-lg text-center cursor-pointer transition-colors active:scale-95 duration-150 touch-manipulation focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 ${
                     isActive
                       ? 'bg-amber-950 text-amber-200 border border-amber-600 font-bold shadow-xs ring-1 ring-amber-500/50'
                       : isPassed
@@ -855,9 +898,9 @@ function AppContent() {
                   }`}
                 >
                   <span
-                    className={`w-4 h-4 rounded-full flex items-center justify-center text-[11px] font-mono transition-colors duration-150 shrink-0 ${
+                    className={`w-3.5 h-3.5 sm:w-4 sm:h-4 rounded-full flex items-center justify-center text-[9px] sm:text-[11px] font-mono transition-colors duration-150 shrink-0 ${
                       isActive
-                        ? 'bg-amber-400 text-stone-950 font-bold ring-2 ring-amber-300/40'
+                        ? 'bg-amber-400 text-stone-950 font-bold ring-1 sm:ring-2 ring-amber-300/40'
                         : isPassed
                         ? 'bg-emerald-500/20 text-emerald-300 font-semibold'
                         : 'bg-stone-800 text-stone-400'
@@ -869,14 +912,14 @@ function AppContent() {
                     <span className="hidden sm:block text-[9px] text-amber-500/80 font-mono leading-none">
                       {['Tr. I', 'Tr. II', 'Tr. III', 'Tr. IV'][idx]}
                     </span>
-                    <span className="truncate text-[11px] font-serif font-medium">{s.label}</span>
+                    <span className="truncate text-[10px] sm:text-[11px] font-serif font-medium">{s.label}</span>
                   </div>
                 </button>
               );
             })}
           </div>
           {/* Ambient Progress Conduit */}
-          <div className="w-full bg-stone-800 h-0.5 mt-2 rounded-full overflow-hidden">
+          <div className="w-full bg-stone-800 h-0.5 mt-1 sm:mt-2 rounded-full overflow-hidden">
             <div
               className="h-full bg-gradient-to-r from-amber-600 via-amber-400 to-amber-300 motion-safe:transition-opacity motion-reduce:transition-none rounded-full"
               style={{

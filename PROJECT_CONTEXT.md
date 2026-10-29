@@ -1,7 +1,7 @@
 # Synodix: Project Context & Working Memory
 
-**Last Updated:** 2026-10-29 08:26:49
-**Version:** 2.33.13  
+**Last Updated:** 2026-10-29 08:54:11
+**Version:** 2.33.14  
 **Stack:** Python 3.12 (FastAPI, Swiss Ephemeris 2.10, Skyfield DE421) + TypeScript / React 19 / Vite / Tailwind CSS v4 / Framer Motion / Capacitor 8 (iOS & Android)  
 **Workspace:** `/Volumes/Study/Projects/Astrology` (symlinked as `/Volumes/Study/Astrology`)  
 **Git Remote:** `https://github.com/manvenpratap/Synodix.git`  
@@ -10,7 +10,21 @@
 
 ## 1. Current Status & Milestone
 
-- **Active Phase**: Mobile Carousel Swipable Cards & Sidebar Removal (Completed)
+- **Active Phase**: Mobile Epistemic Journey Compact Bar & Space Optimization (Completed)
+- **Mobile Epistemic Journey Compact Bar & Space Optimization (v2.33.14)**:
+  - **Over 45% Vertical Space Savings on Mobile (`App.tsx`)**:
+    - Addressed user feedback regarding excessive vertical screen consumption on mobile devices.
+    - Shaved nav container padding from `py-2` to `py-1` (`px-2.5 sm:px-6 py-1 sm:py-2`).
+    - Tightened header metrics row margins from `mb-1.5` to `mb-0.5` with compact `text-[10px]` typography.
+    - Re-architected 4 journey buttons to inline flex row (`min-h-[28px] sm:min-h-[38px] py-0.5 sm:py-1.5 px-1 sm:px-2 rounded-md sm:rounded-lg`) with `text-[10px]` labels and `w-3.5 h-3.5` numeral badges.
+    - Decreased expanded bar height on mobile from ~96px to ~50px (saving 46px of vertical screen real estate).
+  - **Interactive Mobile Collapse / Expand Control**:
+    - Added an accessible mobile chevron toggle (`<ChevronDown>` / `<ChevronUp>`) with `localStorage` persistence (`synodix_journey_collapsed`).
+    - When collapsed on mobile, the 4 buttons tuck away cleanly into a 22px ultra-minimalist progress conduit strip (`• Epistemic Journey • Current Tractate` + gradient progress line), saving over 74px of vertical screen space for visual instruments.
+    - Seamlessly restores 4 buttons on tap; desktop remains spacious and untouched (`md:hidden` toggle).
+  - **Automated Verification**:
+    - Updated `tests/test_04_mobile_viewport.py` with collapse and expand assertions verifying bounding box height reductions.
+    - Full Pytest suite: 26/26 passed with zero console errors.
 - **Mobile Carousel Swipable Cards & Sidebar Removal (v2.33.13)**:
   - **Removed Vertical Sidebar Rail on Mobile (`TraditionVerticalCarousel.tsx`)**:
     - Hid the bulky vertical button rail (`hidden md:flex`) on mobile devices, reclaiming 48px–64px of horizontal stage padding (`md:pr-16`).
