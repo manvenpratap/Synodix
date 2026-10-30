@@ -1,7 +1,7 @@
 # Synodix: Project Context & Working Memory
 
-**Last Updated:** 2026-10-30 00:38:06
-**Version:** 2.33.22  
+**Last Updated:** 2026-10-30 08:43:57
+**Version:** 2.33.23  
 **Stack:** Python 3.12 (FastAPI, Swiss Ephemeris 2.10, Skyfield DE421) + TypeScript / React 19 / Vite / Tailwind CSS v4 / Framer Motion / Capacitor 8 (iOS & Android)  
 **Workspace:** `/Volumes/Study/Projects/Astrology` (symlinked as `/Volumes/Study/Astrology`)  
 **Git Remote:** `https://github.com/manvenpratap/Synodix.git`  
@@ -10,7 +10,19 @@
 
 ## 1. Current Status & Milestone
 
-- **Active Phase**: Carousel Deck Zero-Overlap Geometry & Viewport Calibration (Completed)
+- **Active Phase**: Carousel Deck Uniform Card Dimensions & Zero-Jitter Calibration (Completed)
+- **Carousel Card Uniform Dimensions Calibration (v2.33.23)**:
+  - **Identical Dimensions Across All 9 Traditions (`TraditionVerticalCarousel.tsx`)**:
+    - Standardized card dimensions with fixed responsive geometry: `w-full h-[470px] sm:h-[480px] lg:h-[405px] flex flex-col justify-between`.
+    - Stacked background cards with `absolute inset-0` stretch to the exact 100% width and 100% height of the active card, guaranteeing identical bounding boxes across all 9 traditions.
+    - Card header is pinned to top (`shrink-0`), telemetry/instrument body occupies fluid middle space (`flex-1 my-auto min-h-0`), and Action Strip anchors to the bottom (`mt-auto shrink-0`), ensuring 0 height jitter and 0 shape difference during carousel swipe/scroll.
+    - Compacted Egyptian instrument SVG in `ChartWheelVisualizer.tsx` from 240px to standard `max-w-[145px] sm:max-w-[170px] lg:max-w-[195px]`.
+  - **Automated Verification**:
+    - Telemetry verification script confirmed all 9 tradition cards have 100% uniform heights:
+      - Desktop (1024x665): exactly **405.0px ± 0.4px** height and 617px width across all 9 traditions.
+      - Mobile (390x844): exactly **470.0px ± 0.5px** height and 348px width across all 9 traditions.
+    - All 26 pytest regression suites passing cleanly (`./pipeline.sh test --summary`).
+    - Clean compilation of native Android debug APK (7.67MB) and iOS Simulator bundle (5.71MB) via `./pipeline.sh package`.
 - **Zero-Overlap Viewport Geometry & De-truncation Calibration (v2.33.22)**:
   - **Docked Active Card Action Strip (`TraditionVerticalCarousel.tsx`)**:
     - Relocated the persistent Common Action Strip ("Dual-Engine JPL DE421 + SwissEph 2.10" & "View Detailed Tables & Analysis") directly into the bottom flow of the active card (`isCenter`), bounded by the card's rounded border and subtle top divider.

@@ -1322,7 +1322,7 @@ export const EgyptianDecanStarClock: React.FC<EgyptianClockProps> = ({ egyptian,
     <svg
       aria-hidden="true"
       viewBox={`0 0 ${size} ${size}`}
-      className={`w-full select-none ${compact ? 'max-w-[165px] sm:max-w-[210px] lg:max-w-[240px] h-auto' : 'max-w-[300px] h-auto'}`}
+      className={`w-full select-none ${compact ? 'max-w-[145px] sm:max-w-[170px] lg:max-w-[195px] h-auto' : 'max-w-[300px] h-auto'}`}
       style={{ filter: 'drop-shadow(0 4px 12px rgba(0,0,0,0.5))' }}
     >
       {/* Outer Dial Track & 36 Decan Radial Ticks (Fluid dial reveal) */}

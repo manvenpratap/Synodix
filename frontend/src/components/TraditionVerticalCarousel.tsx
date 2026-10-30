@@ -626,7 +626,7 @@ export const TraditionVerticalCarousel: React.FC<Props> = ({
                         mass: 0.85,
                       }
                 }
-                className={`${isCenter ? 'relative' : 'absolute inset-0 cursor-pointer'} w-full rounded-2xl border p-2 sm:p-3 shadow-2xl transition-shadow ${
+                className={`${isCenter ? 'relative' : 'absolute inset-0 cursor-pointer'} w-full h-[470px] sm:h-[480px] lg:h-[405px] flex flex-col justify-between rounded-2xl border p-2 sm:p-3 shadow-2xl transition-shadow ${
                   isCenter
                     ? `${theme.containerBg} ${theme.containerBorder} backdrop-blur-md shadow-2xl cursor-grab active:cursor-grabbing ring-1 ring-amber-500/30 touch-pan-y`
                     : 'bg-stone-950/92 border-stone-800 hover:border-amber-500/40'
@@ -637,7 +637,7 @@ export const TraditionVerticalCarousel: React.FC<Props> = ({
                 }}
               >
                 {/* Cultural Card Header */}
-                <div className="flex items-center justify-between border-b border-white/10 pb-1.5 mb-1.5 sm:pb-2 sm:mb-2">
+                <div className="flex items-center justify-between border-b border-white/10 pb-1.5 mb-1.5 sm:pb-2 sm:mb-2 shrink-0">
                   <div className="flex items-center gap-2 sm:gap-2.5">
                     <span className="text-xl sm:text-2xl select-none">{theme.glyph}</span>
                     <div>
@@ -663,7 +663,7 @@ export const TraditionVerticalCarousel: React.FC<Props> = ({
                 </div>
 
                 {/* Card Main Body: Split between Telemetry and Visual Instrument */}
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-1.5 sm:gap-2.5 lg:gap-3 items-center">
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-1.5 sm:gap-2.5 lg:gap-3 items-center flex-1 my-auto">
                   {/* Telemetry Placements (shown when not in pure chart mode) */}
                   {chartViewMode !== 'chart' && (
                     <div className={`${chartViewMode === 'table' ? 'lg:col-span-12' : 'lg:col-span-5'} space-y-1 sm:space-y-1.5`}>
@@ -716,8 +716,8 @@ export const TraditionVerticalCarousel: React.FC<Props> = ({
                 </div>
 
                 {/* Persistent Common Action Strip (Docked cleanly inside active card only) */}
-                {isCenter && (
-                  <div className="flex flex-col sm:flex-row items-center justify-between gap-1 sm:gap-1.5 px-1 sm:px-2 pt-1.5 sm:pt-2 mt-1.5 sm:mt-2 border-t border-white/10 text-xs">
+                {isCenter ? (
+                  <div className="flex flex-col sm:flex-row items-center justify-between gap-1 sm:gap-1.5 px-1 sm:px-2 pt-1.5 sm:pt-2 mt-auto border-t border-white/10 text-xs shrink-0">
                     <div className="flex items-center gap-1.5 text-[10px] sm:text-[11px] font-sans text-stone-400">
                       <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 inline-block shrink-0 shadow-xs shadow-emerald-400/50" />
                       <span className="hidden sm:inline">Dual-Engine JPL DE421 + SwissEph 2.10 Authenticated</span>
@@ -739,6 +739,8 @@ export const TraditionVerticalCarousel: React.FC<Props> = ({
                       <ArrowRight className="w-3.5 h-3.5" />
                     </button>
                   </div>
+                ) : (
+                  <div className="h-[36px] mt-auto shrink-0 border-t border-transparent" />
                 )}
               </motion.div>
             );
