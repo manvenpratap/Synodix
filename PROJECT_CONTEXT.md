@@ -1,7 +1,7 @@
 # Synodix: Project Context & Working Memory
 
-**Last Updated:** 2026-10-30 08:43:57
-**Version:** 2.33.23  
+**Last Updated:** 2026-10-30 09:33:10
+**Version:** 2.33.24  
 **Stack:** Python 3.12 (FastAPI, Swiss Ephemeris 2.10, Skyfield DE421) + TypeScript / React 19 / Vite / Tailwind CSS v4 / Framer Motion / Capacitor 8 (iOS & Android)  
 **Workspace:** `/Volumes/Study/Projects/Astrology` (symlinked as `/Volumes/Study/Astrology`)  
 **Git Remote:** `https://github.com/manvenpratap/Synodix.git`  
@@ -10,7 +10,28 @@
 
 ## 1. Current Status & Milestone
 
-- **Active Phase**: Carousel Deck Uniform Card Dimensions & Zero-Jitter Calibration (Completed)
+- **Active Phase**: Hallmark Visual-First Overhaul & Mobile Decluttering (Completed)
+- **Hallmark Visual-First Overhaul & Mobile Decluttering (v2.33.24)**:
+  - **Screen 1 (Workbench / Input) Astrometric Celestial Compass & Form Polish (`BirthDataForm.tsx`)**:
+    - Embedded dynamic SVG Astrolabe Compass (`AstrometricCelestialCompass`) providing real-time solar degree, lunar phase, zodiac symbol, and exact observer coordinates.
+    - Eliminated verbose meta-feature paragraphs and internal mechanics boilerplate on mobile (`hidden sm:block`), cutting vertical scroll distance by >50%.
+    - Enforced strict Apple HIG & WCAG touch target invariants (`min-h-[44px] sm:min-h-[40px]`) across all inputs, selects, and action buttons.
+  - **Screen 2 (Traditions) Hero Visual Instruments & Streamlined Deck (`TraditionCharts.tsx`, `TraditionVerticalCarousel.tsx`, `ChartWheelVisualizer.tsx`)**:
+    - Compacted presentation switcher and deck/matrix toggles to a clean single line on mobile viewports (390px) without wrapping or lateral clipping.
+    - Scaled up visual instruments by ~20% (from 145px to 175px–200px) across all 9 circular wheels and dials, placing the visual instruments center stage.
+    - Compacted telemetry badges to `p-1 sm:p-1.5` and `gap-1 sm:gap-1.5`, saving 40px of vertical space, and streamlined active card action strip to a single row: `• DE421 Verified` and `[Detailed Tables →]`.
+  - **Screen 3 (Synthesis) Domain Consensus Radar Matrix & Visual Meters (`SynthesisMatrix.tsx`)**:
+    - Promoted the 9-Domain Consensus Radar Matrix directly to the initial viewport on mobile, hiding verbose explanatory text.
+    - Added visual domain agreement mini-progress bars (emerald/cyan/rose) into domain cards for instant visual comprehension.
+  - **Screen 4 (Reading) Visual Harmony Gauge & Collapsible Accordion (`ReadingView.tsx`)**:
+    - Converted static 130px legal/academic disclaimer banner into a sleek collapsible `<details>` accordion on mobile viewports.
+    - Integrated circular Civilizational Harmony SVG meter and 4 visual Life Pillars progress bars into the Archetype Spotlight header.
+  - **Touch Tooltip Isolation (`index.css`, `App.tsx`)**:
+    - Scoped `[data-tooltip]` pseudo-elements strictly to fine pointer devices (`@media (hover: hover) and (pointer: fine)`), permanently eliminating lingering sticky black tooltip popups on touch taps.
+    - Cleaned up redundant tooltips from the mobile bottom navigation bar.
+  - **Automated Verification**:
+    - All 26 pytest regression suites passing cleanly (`./pipeline.sh test --summary` in 90.98s).
+    - Verified zero horizontal overflow and strict touch target compliance (`test_04_mobile_viewport.py`).
 - **Carousel Card Uniform Dimensions Calibration (v2.33.23)**:
   - **Identical Dimensions Across All 9 Traditions (`TraditionVerticalCarousel.tsx`)**:
     - Standardized card dimensions with fixed responsive geometry: `w-full h-[470px] sm:h-[480px] lg:h-[405px] flex flex-col justify-between`.

@@ -270,9 +270,9 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
       <div className="reticle-corner-bl" />
       <div className="reticle-corner-br" />
 
-      {/* Tractate II Header Bar: Title + Display Presentation Switcher + View Mode Toggle */}
-      <div className="flex flex-col xl:flex-row xl:items-center justify-between gap-1.5 pb-1.5 border-b border-white/10">
-        <div className="min-w-0">
+      {/* Screen 2 Header Bar: Title + Display Presentation Switcher + View Mode Toggle */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1.5 pb-1 sm:pb-1.5 border-b border-white/10">
+        <div className="hidden sm:block min-w-0">
           <h3 className="text-sm sm:text-base font-serif font-semibold text-stone-100 flex items-center gap-2 whitespace-nowrap">
             <span>Step 2 · 9 Astrological Traditions</span>
             <span className="text-[10px] font-mono font-medium px-1.5 py-0.5 rounded bg-stone-800/80 text-amber-300 border border-stone-700/60 hidden sm:inline-block">9 Traditions</span>
@@ -282,7 +282,7 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
           </p>
         </div>
 
-        <div className="flex flex-wrap items-center justify-between sm:justify-start xl:justify-end gap-1.5 sm:gap-2 shrink-0">
+        <div className="flex items-center justify-between sm:justify-end gap-1.5 sm:gap-2 w-full sm:w-auto shrink-0">
           {/* Display Presentation Switcher: Comprehensive / Visual Instrument / Telemetry Tables */}
           <div className="flex items-center gap-0.5 p-0.5 rounded-lg bg-stone-900/90 border border-stone-800 text-[10px] sm:text-[11px] font-mono shrink-0">
             {(['both', 'chart', 'table'] as const).map((mode) => {
@@ -327,7 +327,9 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
               aria-label="Vertical Carousel Deck view"
             >
               <Layers className="w-3.5 h-3.5 text-amber-400" />
-              <span>Carousel Deck</span>
+              <span className="hidden sm:inline">Carousel Deck</span>
+              <span className="sm:hidden">Deck</span>
+              <span className="sr-only">Carousel Deck</span>
             </button>
             <button
               type="button"
@@ -341,7 +343,9 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
               aria-label="Detailed Inspector view"
             >
               <Sliders className="w-3.5 h-3.5" />
-              <span>Inspector Matrix</span>
+              <span className="hidden sm:inline">Inspector Matrix</span>
+              <span className="sm:hidden">Matrix</span>
+              <span className="sr-only">Inspector Matrix</span>
             </button>
           </div>
         </div>

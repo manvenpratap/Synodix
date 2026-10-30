@@ -50,6 +50,122 @@ const CATEGORIES = [
   { id: 'all', label: 'All 100 Records', count: 100, icon: Users },
 ];
 
+const AstrometricCelestialCompass: React.FC<{
+  birthDate: string;
+  birthTime: string;
+  latitude: number;
+  longitude: number;
+  cityName: string;
+  countryName: string;
+}> = ({ birthDate, birthTime, latitude, longitude, cityName, countryName }) => {
+  const [year, month, day] = (birthDate || '1955-02-24').split('-').map(Number);
+  const [hour, min] = (birthTime || '12:00').split(':').map(Number);
+  const date = new Date(Date.UTC(year || 2000, (month || 1) - 1, day || 1, hour || 12, min || 0));
+  const startOfYear = new Date(Date.UTC(date.getUTCFullYear(), 0, 1));
+  const dayOfYear = Math.floor((date.getTime() - startOfYear.getTime()) / (1000 * 60 * 60 * 24));
+  // Vernal equinox ~ March 21 (day 80) = 0° Aries
+  const sunDeg = ((dayOfYear - 79.25) * (360 / 365.2422) + (hour + min / 60) * (360 / (365.25 * 24))) % 360;
+  const normalizedSun = (sunDeg + 360) % 360;
+
+  const ZODIAC = [
+    { sign: 'Aries', glyph: '♈' },
+    { sign: 'Taurus', glyph: '♉' },
+    { sign: 'Gemini', glyph: '♊' },
+    { sign: 'Cancer', glyph: '♋' },
+    { sign: 'Leo', glyph: '♌' },
+    { sign: 'Virgo', glyph: '♍' },
+    { sign: 'Libra', glyph: '♎' },
+    { sign: 'Scorpio', glyph: '♏' },
+    { sign: 'Sagittarius', glyph: '♐' },
+    { sign: 'Capricorn', glyph: '♑' },
+    { sign: 'Aquarius', glyph: '♒' },
+    { sign: 'Pisces', glyph: '♓' },
+  ];
+  const signIndex = Math.floor(normalizedSun / 30);
+  const degInSign = (normalizedSun % 30).toFixed(1);
+  const currentZodiac = ZODIAC[signIndex] || ZODIAC[0];
+
+  const daysSinceEpoch = (date.getTime() - new Date(Date.UTC(2000, 0, 6, 18, 14)).getTime()) / (1000 * 60 * 60 * 24);
+  const moonPhaseAngle = ((daysSinceEpoch % 29.53058867) / 29.53058867) * 360;
+  const moonDeg = (normalizedSun + moonPhaseAngle) % 360;
+
+  const sunRad = ((normalizedSun - 90) * Math.PI) / 180;
+  const sunX = 55 + 40 * Math.cos(sunRad);
+  const sunY = 55 + 40 * Math.sin(sunRad);
+
+  const moonRad = ((moonDeg - 90) * Math.PI) / 180;
+  const moonX = 55 + 40 * Math.cos(moonRad);
+  const moonY = 55 + 40 * Math.sin(moonRad);
+
+  const latStr = `${Math.abs(latitude).toFixed(2)}°${latitude >= 0 ? 'N' : 'S'}`;
+  const lonStr = `${Math.abs(longitude).toFixed(2)}°${longitude >= 0 ? 'E' : 'W'}`;
+
+  return (
+    <div className="p-2.5 sm:p-3 rounded-xl bg-stone-900/90 dark:bg-stone-950 border border-amber-800/60 shadow-inner flex items-center justify-between gap-3 overflow-hidden">
+      <div className="flex items-center gap-3 min-w-0">
+        <div className="relative w-16 h-16 sm:w-20 sm:h-20 shrink-0 flex items-center justify-center">
+          <svg viewBox="0 0 110 110" className="w-full h-full select-none" aria-hidden="true">
+            {/* Outer brass ring */}
+            <circle cx="55" cy="55" r="52" fill="#0c0a09" stroke="#78350f" strokeWidth="1.5" />
+            <circle cx="55" cy="55" r="48" fill="none" stroke="#d97706" strokeWidth="0.8" strokeDasharray="2 3" opacity="0.6" />
+
+            {/* Cardinal crosshairs */}
+            <line x1="55" y1="7" x2="55" y2="103" stroke="#44403c" strokeWidth="0.8" strokeDasharray="3 3" />
+            <line x1="7" y1="55" x2="103" y2="55" stroke="#44403c" strokeWidth="0.8" strokeDasharray="3 3" />
+
+            {/* Inner coordinate orbit */}
+            <circle cx="55" cy="55" r="30" fill="none" stroke="#292524" strokeWidth="1" />
+            <circle cx="55" cy="55" r="16" fill="#1c1917" stroke="#78350f" strokeWidth="1" />
+
+            {/* Cardinal marks */}
+            <text x="55" y="14" textAnchor="middle" fill="#d97706" fontSize="6.5" fontFamily="sans-serif" fontWeight="bold">N</text>
+            <text x="98" y="57" textAnchor="middle" fill="#78716c" fontSize="6" fontFamily="sans-serif">E</text>
+            <text x="55" y="100" textAnchor="middle" fill="#78716c" fontSize="6" fontFamily="sans-serif">S</text>
+            <text x="12" y="57" textAnchor="middle" fill="#78716c" fontSize="6" fontFamily="sans-serif">W</text>
+
+            {/* Solar Ray Pointer */}
+            <line x1="55" y1="55" x2={sunX} y2={sunY} stroke="#f59e0b" strokeWidth="1.5" opacity="0.85" />
+            <circle cx={sunX} cy={sunY} r="4" fill="#f59e0b" stroke="#fef3c7" strokeWidth="1" />
+            <text x={sunX} y={sunY + 2} textAnchor="middle" fill="#451a03" fontSize="5.5" fontWeight="bold">☉</text>
+
+            {/* Lunar Pointer */}
+            <line x1="55" y1="55" x2={moonX} y2={moonY} stroke="#94a3b8" strokeWidth="1" strokeDasharray="2 2" opacity="0.75" />
+            <circle cx={moonX} cy={moonY} r="3" fill="#e2e8f0" stroke="#64748b" strokeWidth="0.8" />
+            <text x={moonX} y={moonY + 1.8} textAnchor="middle" fill="#0f172a" fontSize="4.5" fontWeight="bold">☽</text>
+
+            {/* Center Reticle Core */}
+            <circle cx="55" cy="55" r="2.5" fill="#f59e0b" />
+          </svg>
+        </div>
+
+        <div className="min-w-0 space-y-0.5">
+          <div className="flex items-center gap-1.5 flex-wrap">
+            <span className="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-amber-950 text-amber-300 border border-amber-800/80">
+              {currentZodiac.glyph} Sun in {currentZodiac.sign} {degInSign}°
+            </span>
+          </div>
+          <div className="text-xs font-serif font-semibold text-amber-200 dark:text-amber-100 truncate">
+            {cityName ? `${cityName}, ${countryName}` : 'Custom Coordinates'}
+          </div>
+          <div className="text-[10px] font-mono text-stone-400 truncate">
+            {latStr}, {lonStr} • {birthDate} {birthTime}
+          </div>
+        </div>
+      </div>
+
+      <div className="hidden sm:flex flex-col items-end shrink-0 text-right pr-1">
+        <span className="text-[10px] font-mono text-emerald-400 flex items-center gap-1">
+          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 inline-block animate-pulse" />
+          Live Sky Astrolabe
+        </span>
+        <span className="text-[10px] font-sans text-stone-400">
+          SwissEph &amp; JPL DE421
+        </span>
+      </div>
+    </div>
+  );
+};
+
 export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePresets }) => {
   const shouldReduceMotion = useReducedMotion();
   // Mode switcher: 'custom' for clean independent manual calibration, 'archive' for 100 benchmark titans
@@ -432,29 +548,29 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
       <div className="hidden sm:block reticle-corner-bl" />
       <div className="hidden sm:block reticle-corner-br" />
 
-        {/* Top Header & Independent Experience Mode Switcher */}
-        <div className="flex flex-col md:flex-row md:items-center justify-between pb-2 sm:pb-4 border-b border-stone-800 gap-2 sm:gap-3">
-          <div className="hidden sm:block">
-            <div className="flex flex-wrap items-center gap-x-2 gap-y-0.5">
-              <span className="text-xs text-amber-400 font-serif font-medium">
-                Step 1 · Enter Birth Details
-              </span>
-              <span className="text-stone-400 hidden sm:inline">•</span>
-              <span className="text-xs text-stone-400 font-sans">
-                {activeMode === 'custom' ? 'Custom Input Workspace' : '100 Verified Historical Records'}
-              </span>
-            </div>
-            <h2 className="text-base sm:text-lg font-serif font-semibold text-stone-100 mt-2.5 sm:mt-3">
-              {activeMode === 'custom' ? 'Your Birth Chart Details' : 'Historical Figures & Benchmark Library'}
-            </h2>
+      {/* Top Header & Independent Experience Mode Switcher */}
+      <div className="flex flex-col md:flex-row md:items-center justify-between pb-2 sm:pb-4 border-b border-stone-800 gap-2 sm:gap-3">
+        <div className="hidden sm:block">
+          <div className="flex flex-wrap items-center gap-x-2 gap-y-0.5">
+            <span className="text-xs text-amber-400 font-serif font-medium">
+              Step 1 · Enter Birth Details
+            </span>
+            <span className="text-stone-400 hidden sm:inline">•</span>
+            <span className="text-xs text-stone-400 font-sans">
+              {activeMode === 'custom' ? 'Custom Input Workspace' : '100 Verified Historical Records'}
+            </span>
           </div>
+          <h2 className="text-base sm:text-lg font-serif font-semibold text-stone-100 mt-2.5 sm:mt-3">
+            {activeMode === 'custom' ? 'Your Birth Chart Details' : 'Historical Figures & Benchmark Library'}
+          </h2>
+        </div>
 
-          {/* Clean Segmented Mode Switcher */}
-          <div
-            role="tablist"
-            aria-label="Input Experience Switcher"
-            className="relative flex items-center bg-stone-900 p-1 rounded-lg border border-stone-800 w-full sm:w-auto"
-          >
+        {/* Clean Segmented Mode Switcher */}
+        <div
+          role="tablist"
+          aria-label="Input Experience Switcher"
+          className="relative flex items-center bg-stone-900 p-1 rounded-lg border border-stone-800 w-full sm:w-auto"
+        >
           <button
             type="button"
             role="tab"
@@ -462,11 +578,10 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
             aria-selected={activeMode === 'custom'}
             aria-controls="panel-custom-mode"
             onClick={() => setActiveMode('custom')}
-            className={`relative flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-3 sm:px-3.5 py-2.5 sm:py-1.5 min-h-[44px] sm:min-h-[38px] text-xs rounded-md font-medium transition-colors cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 ${
-              activeMode === 'custom'
-                ? 'text-amber-200 font-semibold'
-                : 'text-stone-400 hover:text-stone-200'
-            }`}
+            className={`relative flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-3 sm:px-3.5 py-2.5 sm:py-1.5 min-h-[44px] sm:min-h-[38px] text-xs rounded-md font-medium transition-colors cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 ${activeMode === 'custom'
+              ? 'text-amber-200 font-semibold'
+              : 'text-stone-400 hover:text-stone-200'
+              }`}
           >
             {activeMode === 'custom' && (
               <motion.div
@@ -492,11 +607,10 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
             aria-selected={activeMode === 'archive'}
             aria-controls="panel-archive-mode"
             onClick={() => setActiveMode('archive')}
-            className={`relative flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-3 sm:px-3.5 py-2.5 sm:py-1.5 min-h-[44px] sm:min-h-[38px] text-xs rounded-md font-medium transition-colors cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 ${
-              activeMode === 'archive'
-                ? 'text-amber-200 font-semibold'
-                : 'text-stone-400 hover:text-stone-200'
-            }`}
+            className={`relative flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-3 sm:px-3.5 py-2.5 sm:py-1.5 min-h-[44px] sm:min-h-[38px] text-xs rounded-md font-medium transition-colors cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 ${activeMode === 'archive'
+              ? 'text-amber-200 font-semibold'
+              : 'text-stone-400 hover:text-stone-200'
+              }`}
           >
             {activeMode === 'archive' && (
               <motion.div
@@ -527,80 +641,66 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
           role="tabpanel"
           aria-labelledby="tab-custom-mode"
           tabIndex={0}
-          className="pt-2 space-y-4 focus:outline-none"
+          className="pt-2 space-y-3.5 focus:outline-none"
         >
-          {/* Workspace Telemetry Sub-header & Vault Quick-Load Strip */}
-          <div className={`flex flex-col sm:flex-row sm:items-center justify-between px-3.5 py-2.5 rounded-xl bg-stone-900 border border-stone-800 gap-2.5 ${savedProfiles.length === 0 ? 'hidden sm:flex' : 'flex'}`}>
-            <div className="flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-emerald-400 inline-block shadow-xs" />
-              <span className="text-xs font-sans font-medium text-stone-200">
-                Astronomical Calculation Studio
-              </span>
-              <span className="text-stone-400 hidden md:inline">•</span>
-              <span className="text-xs font-sans text-stone-400 hidden md:inline">
-                High-Precision Swiss Ephemeris & GPS Standards
-              </span>
-            </div>
+          {/* Live Astrometric Astrolabe Instrument (Visual centerpiece on mobile & desktop) */}
+          <AstrometricCelestialCompass
+            birthDate={formData.birth_date}
+            birthTime={formData.birth_time}
+            latitude={formData.latitude}
+            longitude={formData.longitude}
+            cityName={formData.city_name}
+            countryName={formData.country_name}
+          />
 
-            {/* My Vault Quick Load Bar */}
-            {savedProfiles.length > 0 && (
-              <div className="flex items-center gap-1.5 flex-wrap">
-                <span className="text-xs font-medium text-stone-300 flex items-center gap-1">
-                  <Bookmark className="w-3 h-3 text-amber-400" />
-                  Saved Profiles ({savedProfiles.length}):
-                </span>
-                <div className="flex items-center gap-1 flex-wrap">
-                  {savedProfiles.map((sp) => (
-                    <div
-                      key={sp.id}
-                      className="inline-flex items-center gap-1.5 px-2.5 py-1 min-h-[28px] rounded text-[11px] font-sans bg-stone-800 hover:bg-stone-700 border border-stone-700 text-stone-300 transition-colors shrink-0"
+          {/* Saved Profiles Quick Bar */}
+          {savedProfiles.length > 0 && (
+            <div className="flex items-center gap-1.5 px-3 py-2 rounded-lg bg-stone-900 border border-stone-800 flex-wrap">
+              <span className="text-xs font-medium text-stone-300 flex items-center gap-1">
+                <Bookmark className="w-3 h-3 text-amber-400" />
+                Saved ({savedProfiles.length}):
+              </span>
+              <div className="flex items-center gap-1 flex-wrap">
+                {savedProfiles.map((sp) => (
+                  <div
+                    key={sp.id}
+                    className="inline-flex items-center gap-1.5 px-2.5 py-1 min-h-[28px] rounded text-[11px] font-sans bg-stone-800 hover:bg-stone-700 border border-stone-700 text-stone-300 transition-colors shrink-0"
+                  >
+                    <button
+                      type="button"
+                      onClick={() => handleLoadVaultProfile(sp)}
+                      className="hover:text-amber-300 cursor-pointer"
+                      title={`Load ${sp.name} (${sp.city_name})`}
                     >
-                      <button
-                        type="button"
-                        onClick={() => handleLoadVaultProfile(sp)}
-                        className="hover:text-amber-300 cursor-pointer"
-                        title={`Load ${sp.name} (${sp.city_name})`}
-                      >
-                        {sp.name}
-                      </button>
-                      <button
-                        type="button"
-                        onClick={(e) => handleDeleteSavedProfile(e, sp.id)}
-                        className="text-stone-500 hover:text-rose-400 p-0.5 cursor-pointer ml-0.5"
-                        aria-label={`Delete ${sp.name} from vault`}
-                      >
-                        <Trash2 className="w-2.5 h-2.5" />
-                      </button>
-                    </div>
-                  ))}
-                </div>
+                      {sp.name}
+                    </button>
+                    <button
+                      type="button"
+                      onClick={(e) => handleDeleteSavedProfile(e, sp.id)}
+                      className="text-stone-500 hover:text-rose-400 p-0.5 cursor-pointer ml-0.5"
+                      aria-label={`Delete ${sp.name} from vault`}
+                    >
+                      <Trash2 className="w-2.5 h-2.5" />
+                    </button>
+                  </div>
+                ))}
               </div>
-            )}
-          </div>
+            </div>
+          )}
 
-          <form onSubmit={handleSubmit} className="space-y-4">
+          <form onSubmit={handleSubmit} className="space-y-3.5">
             {/* ========================================================================= */}
             {/* MODULE 1: SUBJECT DOSSIER & NATAL PARAMETERS                              */}
             {/* ========================================================================= */}
-            <div className="rounded-xl bg-stone-900 border border-stone-800 p-4 sm:p-5 space-y-4 shadow-xs">
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-3 border-b border-stone-800 gap-2">
-                <div className="flex items-center gap-2.5">
-                  <div className="w-8 h-8 rounded-lg bg-amber-950/80 border border-amber-800/80 flex items-center justify-center text-amber-400 shrink-0 shadow-xs">
-                    <User className="w-4 h-4" />
+            <div className="rounded-xl bg-stone-900 border border-stone-800 p-3.5 sm:p-5 space-y-3 shadow-xs">
+              <div className="flex items-center justify-between pb-2 border-b border-stone-800 gap-2">
+                <div className="flex items-center gap-2">
+                  <div className="w-6 h-6 rounded-md bg-amber-950/80 border border-amber-800/80 flex items-center justify-center text-amber-400 shrink-0 shadow-xs">
+                    <User className="w-3.5 h-3.5" />
                   </div>
-                  <div>
-                    <div className="flex items-center gap-2">
-                      <span className="text-xs font-medium text-amber-400 bg-amber-950/60 px-1.5 py-0.5 rounded border border-amber-800/60">
-                        Section 1
-                      </span>
-                      <h3 className="text-xs sm:text-sm font-medium text-stone-100">
-                        Name & Gender Cycle
-                      </h3>
-                    </div>
-                    <p className="hidden sm:block text-[11px] text-stone-400 font-sans mt-0.5">
-                      Name or label for this chart session and gender cycle for BaZi luck direction
-                    </p>
-                  </div>
+                  <h3 className="text-xs sm:text-sm font-semibold text-stone-100">
+                    <span className="hidden sm:inline">Section 1 · </span>Name &amp; Gender Cycle
+                  </h3>
                 </div>
 
                 {/* Draft Restore & Form Reset Controls */}
@@ -609,7 +709,7 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
                     <button
                       type="button"
                       onClick={handleRestoreDraft}
-                      className="inline-flex items-center gap-1.5 px-2.5 py-1.5 min-h-[34px] text-[11px] font-sans text-amber-300 hover:text-amber-200 border border-amber-800/60 hover:border-amber-600 bg-amber-950/30 rounded-md cursor-pointer transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
+                      className="inline-flex items-center gap-1.5 px-2 py-1 min-h-[30px] sm:min-h-[34px] text-[11px] font-sans text-amber-300 hover:text-amber-200 border border-amber-800/60 hover:border-amber-600 bg-amber-950/30 rounded-md cursor-pointer transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
                       data-tooltip="Restore unsaved manual calibration draft"
                       aria-label="Restore Custom Draft"
                     >
@@ -620,7 +720,7 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
                   <button
                     type="button"
                     onClick={handleResetForm}
-                    className="inline-flex items-center gap-1.5 px-2.5 py-1.5 min-h-[34px] text-[11px] font-sans text-stone-400 hover:text-stone-200 border border-stone-800 hover:border-stone-700 bg-stone-900 rounded-md cursor-pointer transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
+                    className="inline-flex items-center gap-1.5 px-2 py-1 min-h-[30px] sm:min-h-[34px] text-[11px] font-sans text-stone-400 hover:text-stone-200 border border-stone-800 hover:border-stone-700 bg-stone-900 rounded-md cursor-pointer transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
                     data-tooltip="Reset all calibration fields to default"
                     aria-label="Reset Form"
                   >
@@ -630,14 +730,15 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-12 gap-3.5 items-start">
+              <div className="grid grid-cols-1 md:grid-cols-12 gap-3 items-start">
                 {/* Profile / Dossier Name */}
                 <div className="md:col-span-7">
                   <label
                     htmlFor="subject_name"
                     className="block text-xs font-sans font-medium text-stone-300 mb-1"
                   >
-                    Person's Name or Chart Label
+                    <span className="hidden sm:inline">Person's Name or Chart Label</span>
+                    <span className="sm:hidden">Person's Name</span>
                   </label>
                   <input
                     id="subject_name"
@@ -646,12 +747,9 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
                     enterKeyHint="next"
                     value={customSubjectName}
                     onChange={(e) => setCustomSubjectName(e.target.value)}
-                    placeholder="e.g. My Personal Chart, Jane Doe, Custom Subject..."
+                    placeholder="e.g. Jane Doe, My Personal Chart..."
                     className="w-full bg-stone-950 border border-stone-800 rounded-lg px-3 py-2.5 sm:py-2 min-h-[44px] sm:min-h-[40px] text-xs font-medium text-stone-100 placeholder-stone-500 focus:outline-none focus:border-amber-500 focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:ring-offset-1 focus-visible:ring-offset-stone-950 transition-colors"
                   />
-                  <p className="hidden sm:block text-[11px] text-stone-400 font-sans mt-1">
-                    Name or label for this birth chart session
-                  </p>
                 </div>
 
                 {/* Gender / Natal Cycle Polarity */}
@@ -663,7 +761,7 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
                     >
                       Gender / Cycle Direction
                     </label>
-                    <span className="text-[11px] font-sans text-amber-400/80">
+                    <span className="hidden sm:inline text-[11px] font-sans text-amber-400/80">
                       BaZi &amp; Tibetan Cycles
                     </span>
                   </div>
@@ -679,9 +777,6 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
                     <option value="female">Female (Standard forward/backward luck cycles)</option>
                     <option value="neutral">Neutral / Unspecified</option>
                   </select>
-                  <p className="hidden sm:block text-[11px] text-stone-400 font-sans mt-1">
-                    Directs 10-year luck pillar trajectory in Chinese BaZi
-                  </p>
                 </div>
               </div>
             </div>
@@ -689,32 +784,22 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
             {/* ========================================================================= */}
             {/* MODULE 2: TEMPORAL COORDINATES & EPHEMERIS EPOCH                          */}
             {/* ========================================================================= */}
-            <div className="rounded-xl bg-stone-900 border border-stone-800 p-4 sm:p-5 space-y-4 shadow-xs">
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-3 border-b border-stone-800 gap-2">
-                <div className="flex items-center gap-2.5">
-                  <div className="w-8 h-8 rounded-lg bg-amber-950/80 border border-amber-800/80 flex items-center justify-center text-amber-400 shrink-0 shadow-xs">
-                    <Clock className="w-4 h-4" />
+            <div className="rounded-xl bg-stone-900 border border-stone-800 p-3.5 sm:p-5 space-y-3 shadow-xs">
+              <div className="flex items-center justify-between pb-2 border-b border-stone-800 gap-2">
+                <div className="flex items-center gap-2">
+                  <div className="w-6 h-6 rounded-md bg-amber-950/80 border border-amber-800/80 flex items-center justify-center text-amber-400 shrink-0 shadow-xs">
+                    <Clock className="w-3.5 h-3.5" />
                   </div>
-                  <div>
-                    <div className="flex items-center gap-2">
-                      <span className="text-xs font-medium text-amber-400 bg-amber-950/60 px-1.5 py-0.5 rounded border border-amber-800/60">
-                        Section 2
-                      </span>
-                      <h3 className="text-xs sm:text-sm font-medium text-stone-100">
-                        Date &amp; Time of Birth
-                      </h3>
-                    </div>
-                    <p className="hidden sm:block text-[11px] text-stone-400 font-sans mt-0.5">
-                      Civil calendar date, local 24-hour time, and birth-time certainty rating
-                    </p>
-                  </div>
+                  <h3 className="text-xs sm:text-sm font-semibold text-stone-100">
+                    <span className="hidden sm:inline">Section 2 · </span>Date &amp; Time of Birth
+                  </h3>
                 </div>
-                <span className="text-[11px] font-sans text-amber-300 bg-amber-950/60 border border-amber-800/70 px-2 py-0.5 rounded self-start sm:self-auto">
+                <span className="hidden sm:inline-block text-[11px] font-sans text-amber-300 bg-amber-950/60 border border-amber-800/70 px-2 py-0.5 rounded">
                   Universal Time (UTC) Standard
                 </span>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
                 {/* Date of Birth */}
                 <div>
                   <label
@@ -732,9 +817,6 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
                     onChange={(e) => setFormData({ ...formData, birth_date: e.target.value })}
                     className="w-full bg-stone-950 border border-stone-800 rounded-lg px-3 py-2.5 sm:py-2 min-h-[44px] sm:min-h-[40px] text-xs font-mono text-stone-100 focus:outline-none focus:border-amber-500 focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:ring-offset-1 focus-visible:ring-offset-stone-950 transition-colors"
                   />
-                  <p className="hidden sm:block text-[11px] text-stone-400 font-sans mt-1">
-                    Standard calendar date
-                  </p>
                 </div>
 
                 {/* Time of Birth */}
@@ -743,7 +825,8 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
                     htmlFor="birth_time"
                     className="block text-xs font-sans font-medium text-stone-300 mb-1"
                   >
-                    Time of Birth (24-Hour Local Time)
+                    <span className="hidden sm:inline">Time of Birth (24-Hour Local Time)</span>
+                    <span className="sm:hidden">Time of Birth</span>
                   </label>
                   <input
                     id="birth_time"
@@ -754,9 +837,6 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
                     onChange={(e) => setFormData({ ...formData, birth_time: e.target.value })}
                     className="w-full bg-stone-950 border border-stone-800 rounded-lg px-3 py-2.5 sm:py-2 min-h-[44px] sm:min-h-[40px] text-xs font-mono text-stone-100 focus:outline-none focus:border-amber-500 focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:ring-offset-1 focus-visible:ring-offset-stone-950 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
                   />
-                  <p className="hidden sm:block text-[11px] text-stone-400 font-sans mt-1">
-                    {formData.time_certainty === 'unknown' ? 'Disabled in unknown time mode' : 'Local standard / daylight saving time'}
-                  </p>
                 </div>
 
                 {/* Time Certainty / Record Quality */}
@@ -783,9 +863,6 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
                     <option value="approx_30">Rough Estimate (Time of day, within ±30m)</option>
                     <option value="unknown">Unknown Time (Date-only calculations)</option>
                   </select>
-                  <p className="hidden sm:block text-[11px] text-stone-400 font-sans mt-1">
-                    Calibrates time-sensitivity calculations
-                  </p>
                 </div>
               </div>
             </div>
@@ -793,25 +870,15 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
             {/* ========================================================================= */}
             {/* MODULE 3: GEOGRAPHIC ORIGIN & SPATIAL OBSERVER                            */}
             {/* ========================================================================= */}
-            <div className="rounded-xl bg-stone-900 border border-stone-800 p-4 sm:p-5 space-y-4 shadow-xs">
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-3 border-b border-stone-800 gap-2">
-                <div className="flex items-center gap-2.5">
-                  <div className="w-8 h-8 rounded-lg bg-emerald-950/80 border border-emerald-800/80 flex items-center justify-center text-emerald-400 shrink-0 shadow-xs">
-                    <MapPin className="w-4 h-4" />
+            <div className="rounded-xl bg-stone-900 border border-stone-800 p-3.5 sm:p-5 space-y-3 shadow-xs">
+              <div className="flex items-center justify-between pb-2 border-b border-stone-800 gap-2">
+                <div className="flex items-center gap-2">
+                  <div className="w-6 h-6 rounded-md bg-emerald-950/80 border border-emerald-800/80 flex items-center justify-center text-emerald-400 shrink-0 shadow-xs">
+                    <MapPin className="w-3.5 h-3.5" />
                   </div>
-                  <div>
-                    <div className="flex items-center gap-2">
-                      <span className="text-xs font-medium text-emerald-400 bg-emerald-950/60 px-1.5 py-0.5 rounded border border-emerald-800/60">
-                        Section 3
-                      </span>
-                      <h3 className="text-xs sm:text-sm font-medium text-stone-100">
-                        Birthplace &amp; Location
-                      </h3>
-                    </div>
-                    <p className="hidden sm:block text-[11px] text-stone-400 font-sans mt-0.5">
-                      City, country, and coordinates used for exact rising sign calculations
-                    </p>
-                  </div>
+                  <h3 className="text-xs sm:text-sm font-semibold text-stone-100">
+                    <span className="hidden sm:inline">Section 3 · </span>Birthplace &amp; Location
+                  </h3>
                 </div>
 
                 {/* GPS Satellite Lock Button */}
@@ -819,7 +886,7 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
                   type="button"
                   onClick={handleDetectLocation}
                   disabled={isLocating}
-                  className="relative shrink-0 inline-flex items-center gap-1.5 min-h-[36px] sm:min-h-[32px] px-3 py-1.5 text-[11px] font-sans text-amber-300 hover:text-amber-100 bg-stone-900 border border-amber-800/70 rounded-lg transition-colors duration-150 cursor-pointer disabled:opacity-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 overflow-hidden shadow-xs hover:border-amber-500 self-start sm:self-auto whitespace-nowrap"
+                  className="relative shrink-0 inline-flex items-center gap-1.5 min-h-[30px] sm:min-h-[32px] px-2.5 py-1 text-[11px] font-sans text-amber-300 hover:text-amber-100 bg-stone-900 border border-amber-800/70 rounded-lg transition-colors duration-150 cursor-pointer disabled:opacity-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 overflow-hidden shadow-xs hover:border-amber-500 self-start sm:self-auto whitespace-nowrap"
                   data-tooltip="Detect current device GPS coordinates"
                   aria-label="Detect GPS coordinates"
                 >
@@ -914,18 +981,17 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
                               aria-selected={isSelected}
                               onClick={() => handleSelectCity(s)}
                               onMouseEnter={() => setActiveSuggestionIndex(idx)}
-                              className={`px-3 py-2 text-xs cursor-pointer transition-colors flex items-center justify-between gap-2 rounded ${
-                                isSelected
-                                  ? 'bg-amber-950/60 text-amber-200 border border-amber-500/50 ring-1 ring-amber-500/20'
-                                  : 'text-stone-200 hover:bg-stone-800 border border-transparent'
-                              }`}
+                              className={`px-3 py-2 text-xs cursor-pointer transition-colors flex items-center justify-between gap-2 rounded ${isSelected
+                                ? 'bg-amber-950/60 text-amber-200 border border-amber-500/50 ring-1 ring-amber-500/20'
+                                : 'text-stone-200 hover:bg-stone-800 border border-transparent'
+                                }`}
                             >
                               <div className="min-w-0">
                                 <div className="font-medium text-stone-100 flex items-center gap-1.5 truncate">
                                   {isSelected && <span className="w-1.5 h-1.5 rounded-full bg-amber-400 inline-block shrink-0" />}
                                   <span>{s.city}</span>
                                   {s.adminCode && (
-                                     <span className="text-[11px] text-stone-400">({s.adminCode})</span>
+                                    <span className="text-[11px] text-stone-400">({s.adminCode})</span>
                                   )}
                                 </div>
                                 <div className="text-[11px] text-stone-400 font-sans truncate">
@@ -993,23 +1059,22 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
                       {formData.longitude >= 0 ? `${formData.longitude.toFixed(4)}°E` : `${Math.abs(formData.longitude).toFixed(4)}°W`}
                     </span>
                     <span
-                      className={`px-2 py-0.5 rounded text-[11px] font-mono font-medium border ${
-                        coordStatus === 'auto_resolved'
-                          ? 'bg-emerald-950/80 text-emerald-300 border-emerald-700/60'
-                          : coordStatus === 'gps'
+                      className={`px-2 py-0.5 rounded text-[11px] font-mono font-medium border ${coordStatus === 'auto_resolved'
+                        ? 'bg-emerald-950/80 text-emerald-300 border-emerald-700/60'
+                        : coordStatus === 'gps'
                           ? 'bg-amber-950/80 text-amber-300 border-amber-700/60'
                           : coordStatus === 'preset'
-                          ? 'bg-blue-950/80 text-blue-300 border-blue-700/60'
-                          : 'bg-stone-900 text-stone-300 border-stone-700'
-                      }`}
+                            ? 'bg-blue-950/80 text-blue-300 border-blue-700/60'
+                            : 'bg-stone-900 text-stone-300 border-stone-700'
+                        }`}
                     >
                       {coordStatus === 'auto_resolved'
                         ? '✓ Auto-matched'
                         : coordStatus === 'gps'
-                        ? 'GPS Active'
-                        : coordStatus === 'preset'
-                        ? 'Rodden Standard'
-                        : 'Manual'}
+                          ? 'GPS Active'
+                          : coordStatus === 'preset'
+                            ? 'Rodden Standard'
+                            : 'Manual'}
                     </span>
                   </div>
                 </div>
@@ -1144,11 +1209,10 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
                       setProfileSaveName(customSubjectName);
                       setIsSaving(true);
                     }}
-                    className={`inline-flex items-center gap-1.5 px-3 py-2 min-h-[44px] text-xs rounded-lg border transition-colors cursor-pointer whitespace-nowrap focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 ${
-                      saveSuccess
-                        ? 'bg-emerald-950 text-emerald-300 border-emerald-700'
-                        : 'bg-stone-900 hover:bg-stone-800 text-stone-300 hover:text-amber-300 border-stone-800'
-                    }`}
+                    className={`inline-flex items-center gap-1.5 px-3 py-2 min-h-[44px] text-xs rounded-lg border transition-colors cursor-pointer whitespace-nowrap focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 ${saveSuccess
+                      ? 'bg-emerald-950 text-emerald-300 border-emerald-700'
+                      : 'bg-stone-900 hover:bg-stone-800 text-stone-300 hover:text-amber-300 border-stone-800'
+                      }`}
                   >
                     {saveSuccess ? (
                       <>
@@ -1239,11 +1303,10 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
                     key={cat.id}
                     type="button"
                     onClick={() => setSelectedCategory(cat.id)}
-                    className={`inline-flex items-center gap-1.5 px-3 py-2 min-h-[44px] text-xs rounded-md font-medium transition-colors whitespace-nowrap cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:ring-offset-1 focus-visible:ring-offset-stone-950 ${
-                      isSelected
-                        ? 'bg-amber-950 text-amber-200 border border-amber-700/80 shadow-xs'
-                        : 'bg-stone-900 hover:bg-stone-800 text-stone-300 hover:text-stone-100 border border-stone-800'
-                    }`}
+                    className={`inline-flex items-center gap-1.5 px-3 py-2 min-h-[44px] text-xs rounded-md font-medium transition-colors whitespace-nowrap cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:ring-offset-1 focus-visible:ring-offset-stone-950 ${isSelected
+                      ? 'bg-amber-950 text-amber-200 border border-amber-700/80 shadow-xs'
+                      : 'bg-stone-900 hover:bg-stone-800 text-stone-300 hover:text-stone-100 border border-stone-800'
+                      }`}
                   >
                     <Icon className={`w-3.5 h-3.5 ${isSelected ? 'text-amber-300' : 'text-stone-400'}`} />
                     <span>{cat.label}</span>
@@ -1309,22 +1372,20 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
                         handleSelectTitan(p, false);
                       }
                     }}
-                    className={`btn-press flex flex-col text-left p-2.5 rounded-lg border transition-colors duration-150 cursor-pointer relative group min-h-[58px] active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:ring-offset-1 focus-visible:ring-offset-stone-950 ${
-                      isSelected
-                        ? 'bg-amber-950/70 border-amber-500/80 shadow-sm shadow-amber-950 text-stone-100 ring-1 ring-amber-500/40'
-                        : 'bg-stone-900 hover:bg-stone-800 border-stone-800 text-stone-300 hover:border-stone-700'
-                    }`}
+                    className={`btn-press flex flex-col text-left p-2.5 rounded-lg border transition-colors duration-150 cursor-pointer relative group min-h-[58px] active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:ring-offset-1 focus-visible:ring-offset-stone-950 ${isSelected
+                      ? 'bg-amber-950/70 border-amber-500/80 shadow-sm shadow-amber-950 text-stone-100 ring-1 ring-amber-500/40'
+                      : 'bg-stone-900 hover:bg-stone-800 border-stone-800 text-stone-300 hover:border-stone-700'
+                      }`}
                   >
                     <div className="flex items-center justify-between gap-1 w-full">
                       <span className="text-xs font-semibold truncate text-stone-100">
                         {p.name}
                       </span>
                       <span
-                        className={`text-[11px] font-mono px-1 py-0.2 rounded font-semibold shrink-0 ${
-                          p.rodden_rating === 'AA'
-                            ? 'bg-emerald-950 text-emerald-300 border border-emerald-800/60'
-                            : 'bg-blue-950 text-blue-300 border border-blue-800/60'
-                        }`}
+                        className={`text-[11px] font-mono px-1 py-0.2 rounded font-semibold shrink-0 ${p.rodden_rating === 'AA'
+                          ? 'bg-emerald-950 text-emerald-300 border border-emerald-800/60'
+                          : 'bg-blue-950 text-blue-300 border border-blue-800/60'
+                          }`}
                       >
                         {p.rodden_rating || 'AA'}
                       </span>
@@ -1361,11 +1422,10 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
                     <div className="flex items-center gap-2">
                       <h4 className="text-sm font-semibold text-stone-100">{selectedTitan.name}</h4>
                       <span
-                        className={`text-[11px] font-sans px-1.5 py-0.5 rounded font-semibold ${
-                          selectedTitan.rodden_rating === 'AA'
-                            ? 'bg-emerald-950 text-emerald-300 border border-emerald-800/60'
-                            : 'bg-blue-950 text-blue-300 border border-blue-800/60'
-                        }`}
+                        className={`text-[11px] font-sans px-1.5 py-0.5 rounded font-semibold ${selectedTitan.rodden_rating === 'AA'
+                          ? 'bg-emerald-950 text-emerald-300 border border-emerald-800/60'
+                          : 'bg-blue-950 text-blue-300 border border-blue-800/60'
+                          }`}
                       >
                         Rodden {selectedTitan.rodden_rating || 'AA'} Certified
                       </span>

@@ -1146,7 +1146,6 @@ function AppContent() {
                   navigateTo(item.id as AppScreen);
                 }
               }}
-              data-tooltip={isMore ? 'Open full observatory menu & settings' : `Navigate to ${item.label}`}
               aria-label={('ariaLabel' in item && item.ariaLabel) ? item.ariaLabel : item.label}
               aria-current={isActive ? 'page' : undefined}
               className={`relative flex-1 min-w-0 flex flex-col items-center justify-center p-1 min-h-[48px] rounded-lg transition-[background-color,border-color,color,transform] motion-safe:active:scale-[0.97] motion-reduce:active:scale-100 duration-150 ease-out cursor-pointer touch-manipulation focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 ${

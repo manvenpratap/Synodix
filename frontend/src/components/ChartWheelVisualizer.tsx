@@ -67,7 +67,7 @@ export const NorthIndianChart: React.FC<VedicChartProps> = ({ jyotisha, compact 
   const svgContent = (
     <svg
       viewBox="0 0 400 400"
-      className={`w-full select-none ${compact ? 'max-w-[145px] sm:max-w-[175px] lg:max-w-[200px] h-auto' : 'max-w-[360px] h-auto'}`}
+      className={`w-full select-none ${compact ? 'max-w-[175px] sm:max-w-[185px] lg:max-w-[200px] h-auto' : 'max-w-[360px] h-auto'}`}
       style={{ filter: 'drop-shadow(0 4px 12px rgba(0,0,0,0.5))' }}
       aria-hidden="true"
     >
@@ -267,7 +267,7 @@ export const WesternCircularWheel: React.FC<WesternWheelProps> = ({ western, com
     <svg
       aria-hidden="true"
       viewBox={`0 0 ${size} ${size}`}
-      className={`w-full select-none ${compact ? 'max-w-[145px] sm:max-w-[175px] lg:max-w-[200px] h-auto' : 'max-w-[380px] h-auto'}`}
+      className={`w-full select-none ${compact ? 'max-w-[175px] sm:max-w-[185px] lg:max-w-[200px] h-auto' : 'max-w-[380px] h-auto'}`}
       style={{ filter: 'drop-shadow(0 4px 12px rgba(0,0,0,0.5))' }}
     >
       {/* Background Circle */}
@@ -482,7 +482,7 @@ export const BaZiElementPentagram: React.FC<BaZiPentagramProps> = ({ bazi, compa
     <svg
       aria-hidden="true"
       viewBox={`0 0 ${size} ${size}`}
-      className={`w-full select-none ${compact ? 'max-w-[145px] sm:max-w-[175px] lg:max-w-[200px] h-auto' : 'max-w-[340px] h-auto'}`}
+      className={`w-full select-none ${compact ? 'max-w-[175px] sm:max-w-[185px] lg:max-w-[200px] h-auto' : 'max-w-[340px] h-auto'}`}
       style={{ filter: 'drop-shadow(0 4px 12px rgba(0,0,0,0.5))' }}
     >
         {/* Background Subtle Disc */}
@@ -909,7 +909,7 @@ export const MaramatakaLunarDial: React.FC<MaramatakaDialProps> = ({ maramataka,
     <svg
       aria-hidden="true"
       viewBox={`0 0 ${size} ${size}`}
-      className={`w-full select-none ${compact ? 'max-w-[145px] sm:max-w-[170px] lg:max-w-[195px] h-auto' : 'max-w-[280px] h-auto'}`}
+      className={`w-full select-none ${compact ? 'max-w-[170px] sm:max-w-[185px] lg:max-w-[195px] h-auto' : 'max-w-[280px] h-auto'}`}
       style={{ filter: 'drop-shadow(0 4px 12px rgba(0,0,0,0.5))' }}
     >
       {/* Outer Dial Track & 30 Lunar Night Ticks (Fluid dial reveal) */}
@@ -1222,7 +1222,7 @@ export const TibetanMewaGrid: React.FC<TibetanMewaProps> = ({ tibetan, compact }
   };
 
   const gridCells = (
-    <div className={`w-full ${compact ? 'max-w-[145px] sm:max-w-[170px] lg:max-w-[195px] gap-1' : 'max-w-[340px] gap-2'} grid grid-cols-3`}>
+    <div className={`w-full ${compact ? 'max-w-[170px] sm:max-w-[185px] lg:max-w-[195px] gap-1' : 'max-w-[340px] gap-2'} grid grid-cols-3`}>
       {square.map((row, rIdx) =>
         row.map((num, cIdx) => {
           const isNatal = num === natalMewa;
@@ -1439,7 +1439,7 @@ export const MayaCalendarCompass: React.FC<MayanCompassProps> = ({ mayan, compac
     <svg
       aria-hidden="true"
       viewBox={`0 0 ${size} ${size}`}
-      className={`w-full select-none ${compact ? 'max-w-[145px] sm:max-w-[170px] lg:max-w-[195px] h-auto' : 'max-w-[280px] h-auto'}`}
+      className={`w-full select-none ${compact ? 'max-w-[170px] sm:max-w-[185px] lg:max-w-[195px] h-auto' : 'max-w-[280px] h-auto'}`}
       style={{ filter: 'drop-shadow(0 4px 12px rgba(0,0,0,0.5))' }}
     >
       {/* Outer Haab' Ring (365 days / 18 months + Wayeb) */}

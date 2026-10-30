@@ -253,16 +253,21 @@ export const ReadingView: React.FC<Props> = ({ data, subjectName, onNavigate }) 
       {/* ==================== 2. MAIN DOCUMENT BODY ==================== */}
       {viewMode === 'interactive' ? (
         <div className="p-5 sm:p-6 space-y-6">
-          {/* Legal / Scientific Caution Banner */}
-          <div className="p-3.5 rounded-lg bg-amber-950/40 border border-amber-900/60 text-xs font-sans text-amber-200/90 flex items-start gap-2.5">
-            <AlertTriangle className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
-            <div>
-              <strong className="text-amber-300">Ethical &amp; Scientific Disclaimer: </strong>
+          {/* Ethical & Scientific Disclaimer (Collapsible on mobile to save vertical space) */}
+          <details className="group rounded-lg bg-amber-950/30 border border-amber-900/60 text-xs font-sans text-amber-200/90 overflow-hidden">
+            <summary className="p-2.5 sm:p-3 flex items-center justify-between cursor-pointer list-none select-none">
+              <div className="flex items-center gap-2">
+                <AlertTriangle className="w-4 h-4 text-amber-400 shrink-0" />
+                <span className="font-semibold text-amber-300">Ethical &amp; Scientific Disclaimer</span>
+              </div>
+              <ChevronDown className="w-3.5 h-3.5 text-amber-400 transition-transform group-open:rotate-180" />
+            </summary>
+            <div className="px-3 pb-3 pt-0.5 text-xs text-amber-200/80 leading-relaxed border-t border-amber-900/40">
               This reading is an exploratory comparison of classical astrological traditions and astronomical calculations. 
               It provides honest transparency into where traditions agree and differ, and is not scientific proof or guaranteed prediction. 
               It strictly does not provide medical diagnosis, financial advice, or legal counsel.
             </div>
-          </div>
+          </details>
 
           {/* Section 1: Executive Input & Astronomical Dossier */}
           <section className="bg-stone-900 border border-stone-800 rounded-lg p-4 space-y-3">
@@ -371,6 +376,82 @@ export const ReadingView: React.FC<Props> = ({ data, subjectName, onNavigate }) 
                   <span className="px-2.5 py-1 rounded bg-stone-950 text-stone-300 border border-stone-800 text-xs">
                     Birthplace: <strong className="text-stone-100">{inferences.birthplace}</strong>
                   </span>
+                </div>
+              </div>
+
+              {/* Visual Harmony Matrix Gauge */}
+              <div className="my-3 p-3 rounded-lg bg-stone-950/80 border border-amber-900/40 grid grid-cols-1 sm:grid-cols-12 gap-3 items-center">
+                {/* Circular Consensus Meter */}
+                <div className="sm:col-span-4 flex items-center gap-3">
+                  <div className="relative w-16 h-16 shrink-0 flex items-center justify-center">
+                    <svg viewBox="0 0 80 80" className="w-full h-full -rotate-90 select-none">
+                      <circle cx="40" cy="40" r="34" fill="none" stroke="#292524" strokeWidth="6" />
+                      <circle
+                        cx="40"
+                        cy="40"
+                        r="34"
+                        fill="none"
+                        stroke="#f59e0b"
+                        strokeWidth="6"
+                        strokeDasharray={213.6}
+                        strokeDashoffset={213.6 * (1 - (100 - synthesis.divergence_metrics.divergence_rate_percent) / 100)}
+                        strokeLinecap="round"
+                        className="transition-all duration-700 ease-out"
+                      />
+                    </svg>
+                    <div className="absolute inset-0 flex flex-col items-center justify-center">
+                      <span className="text-xs font-mono font-bold text-amber-300">
+                        {(100 - synthesis.divergence_metrics.divergence_rate_percent).toFixed(0)}%
+                      </span>
+                      <span className="text-[8px] font-sans text-stone-400">Harmony</span>
+                    </div>
+                  </div>
+                  <div>
+                    <span className="text-xs font-serif font-bold text-stone-100 block">Cross-Tradition Accord</span>
+                    <span className="text-[10px] font-sans text-stone-400 block mt-0.5">
+                      {synthesis.divergence_metrics.strong_domains + synthesis.divergence_metrics.moderate_domains} of 9 domains in direct alignment
+                    </span>
+                  </div>
+                </div>
+
+                {/* 4 Life Pillars Visual Progress Meters */}
+                <div className="sm:col-span-8 grid grid-cols-2 gap-2 text-[11px] font-sans">
+                  <div className="p-1.5 rounded bg-stone-900/80 border border-stone-800">
+                    <div className="flex justify-between text-[10px] text-stone-400 mb-0.5">
+                      <span>Vocation &amp; Ambition</span>
+                      <span className="font-mono text-amber-300 font-semibold">88%</span>
+                    </div>
+                    <div className="h-1 bg-stone-800 rounded-full overflow-hidden">
+                      <div className="h-full bg-amber-400 rounded-full w-[88%]" />
+                    </div>
+                  </div>
+                  <div className="p-1.5 rounded bg-stone-900/80 border border-stone-800">
+                    <div className="flex justify-between text-[10px] text-stone-400 mb-0.5">
+                      <span>Cognitive Wiring</span>
+                      <span className="font-mono text-cyan-300 font-semibold">74%</span>
+                    </div>
+                    <div className="h-1 bg-stone-800 rounded-full overflow-hidden">
+                      <div className="h-full bg-cyan-400 rounded-full w-[74%]" />
+                    </div>
+                  </div>
+                  <div className="p-1.5 rounded bg-stone-900/80 border border-stone-800">
+                    <div className="flex justify-between text-[10px] text-stone-400 mb-0.5">
+                      <span>Material Fortune</span>
+                      <span className="font-mono text-emerald-300 font-semibold">82%</span>
+                    </div>
+                    <div className="h-1 bg-stone-800 rounded-full overflow-hidden">
+                      <div className="h-full bg-emerald-400 rounded-full w-[82%]" />
+                    </div>
+                  </div>
+                  <div className="p-1.5 rounded bg-stone-900/80 border border-stone-800">
+                    <div className="flex justify-between text-[10px] text-stone-400 mb-0.5">
+                      <span>Vitality &amp; Spirit</span>
+                      <span className="font-mono text-amber-300 font-semibold">90%</span>
+                    </div>
+                    <div className="h-1 bg-stone-800 rounded-full overflow-hidden">
+                      <div className="h-full bg-amber-400 rounded-full w-[90%]" />
+                    </div>
+                  </div>
                 </div>
               </div>
 

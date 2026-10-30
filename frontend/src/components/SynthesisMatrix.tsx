@@ -66,7 +66,7 @@ export const SynthesisMatrix: React.FC<Props> = ({ synthesis, onNavigate }) => {
             </h3>
             <ExplainerTrigger id="three_cluster_consensus" label="How We Compare" variant="badge" />
           </div>
-          <p className="text-xs text-stone-400 mt-0.5">
+          <p className="text-xs text-stone-400 mt-0.5 hidden sm:block">
             Comparing Vedic (Indian), Western (Hellenistic), and Chinese (BaZi) traditions. Maya &amp; Tibetan traditions provide additional symbolic layers.
           </p>
         </div>
@@ -111,7 +111,7 @@ export const SynthesisMatrix: React.FC<Props> = ({ synthesis, onNavigate }) => {
                 </span>
                 <ExplainerTrigger id="three_cluster_consensus" label="Comparison Method" variant="badge" />
               </div>
-              <span className="text-xs text-stone-200 font-medium">
+              <span className="text-xs text-stone-400 font-sans hidden sm:block">
                 Overall consistency score across independent astrological traditions
               </span>
             </div>
@@ -229,6 +229,19 @@ export const SynthesisMatrix: React.FC<Props> = ({ synthesis, onNavigate }) => {
                       <span title="Western">W: <span className={`font-mono ${getPolarityColor(dom.evaluations.western.polarity)}`}>{dom.evaluations.western.polarity[0]}</span></span>
                       <span className="w-px h-2.5 bg-stone-700" aria-hidden="true" />
                       <span title="Sinic">S: <span className={`font-mono ${getPolarityColor(dom.evaluations.sinic.polarity)}`}>{dom.evaluations.sinic.polarity[0]}</span></span>
+                    </div>
+
+                    {/* Visual Agreement Mini Meter */}
+                    <div className="w-12 sm:w-16 h-1.5 rounded-full bg-stone-800 overflow-hidden shrink-0 hidden xs:block" aria-hidden="true">
+                      <div
+                        className={`h-full rounded-full transition-all duration-300 ${
+                          dom.grade === 'STRONG'
+                            ? 'w-full bg-emerald-400'
+                            : dom.grade === 'MODERATE'
+                            ? 'w-2/3 bg-cyan-400'
+                            : 'w-1/3 bg-rose-400'
+                        }`}
+                      />
                     </div>
 
                     <span className={`px-2 py-0.5 text-xs font-mono font-medium rounded border ${getGradeBadge(dom.grade)}`}>
