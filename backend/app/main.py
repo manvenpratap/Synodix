@@ -58,28 +58,19 @@ import urllib.parse
 import math
 
 _data_file = os.path.join(os.path.dirname(__file__), "data", "personalities_100.json")
+_data_file_500 = os.path.join(os.path.dirname(__file__), "data", "personalities_500.json")
+
 if os.path.exists(_data_file):
     with open(_data_file, "r", encoding="utf-8") as _f:
         SAMPLE_PRESETS = json.load(_f)
 else:
-    SAMPLE_PRESETS = [
-        {
-            "id": "steve-jobs",
-            "name": "Steve Jobs",
-            "category": "science_tech",
-            "tag": "Apple Co-founder",
-            "rodden_rating": "AA",
-            "birth_date": "1955-02-24",
-            "birth_time": "19:15",
-            "time_certainty": "exact",
-            "latitude": 37.7749,
-            "longitude": -122.4194,
-            "city_name": "San Francisco",
-            "country_name": "USA",
-            "gender": "male",
-            "note": "Birth Certificate (AA) • Sidereal Leo 29.06° (0.94° cusp) • Ju Men Orator • Viparita Raja Yoga"
-        }
-    ]
+    SAMPLE_PRESETS = []
+
+if os.path.exists(_data_file_500):
+    with open(_data_file_500, "r", encoding="utf-8") as _f:
+        SAMPLE_PRESETS_500 = json.load(_f)
+else:
+    SAMPLE_PRESETS_500 = SAMPLE_PRESETS
 
 @app.get("/api/health")
 def health_check():
@@ -93,10 +84,17 @@ def health_check():
     }
 
 @app.get("/api/sample-charts")
-def get_sample_charts(category: Optional[str] = None):
+def get_sample_charts(category: Optional[str] = None, cohort: Optional[int] = None):
+    source = SAMPLE_PRESETS_500 if cohort == 500 else SAMPLE_PRESETS
     if category and category != "all":
-        return [p for p in SAMPLE_PRESETS if p.get("category") == category]
-    return SAMPLE_PRESETS
+        return [p for p in source if p.get("category") == category]
+    return source
+
+@app.get("/api/sample-charts-500")
+def get_sample_charts_500(category: Optional[str] = None):
+    if category and category != "all":
+        return [p for p in SAMPLE_PRESETS_500 if p.get("category") == category]
+    return SAMPLE_PRESETS_500
 
 # Curated global cities for backend geocoding lookup
 _COMMON_CITIES = [
@@ -398,9 +396,9 @@ def get_mathematical_evidence():
         with open(report_file, "r", encoding="utf-8") as f:
             report_md = f.read()
     return {
-        "title": "Mathematical Evidence & Empirical Validation of Astrological Modeling",
-        "cohort_titans": 100,
-        "cohort_controls": 1000,
+        "title": stats.get("title", "500 Titans Monte Carlo Benchmark & Empirical Deductive Study"),
+        "cohort_titans": stats.get("cohort_titans", 500),
+        "cohort_controls": stats.get("cohort_controls", 2500),
         "stats": stats,
         "report_markdown": report_md
     }

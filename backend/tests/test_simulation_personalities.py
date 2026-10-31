@@ -74,6 +74,36 @@ def test_100_personalities_dataset_integrity():
     
     print(f"[PASS] 100 Personalities benchmark verified: 100/100 charts simulated, mean divergence: {mean_div:.1f}%.")
 
+def test_500_personalities_dataset_integrity():
+    data_500_path = Path("backend/app/data/personalities_500.json")
+    assert data_500_path.exists(), "500 Personalities data file must exist"
+    
+    with open(data_500_path) as f:
+        personalities = json.load(f)
+    assert len(personalities) == 500, f"Expected 500 personalities, got {len(personalities)}"
+    
+    # Verify categories
+    categories = {p["category"] for p in personalities}
+    expected_categories = {"science_tech", "leaders_statesmen", "arts_music_lit", "philosophy_spirituality", "sports_athletics", "cinema_business"}
+    assert categories == expected_categories, f"Category mismatch: {categories} != {expected_categories}"
+    
+    # Verify Rodden ratings are 100% AA or A
+    rodden_ratings = {p["rodden_rating"] for p in personalities}
+    assert rodden_ratings.issubset({"AA", "A"}), f"Invalid Rodden rating: {rodden_ratings}"
+    
+    # Verify stats file
+    stats_path = Path("backend/app/data/mathematical_evidence_stats.json")
+    assert stats_path.exists(), "Mathematical evidence stats file must exist"
+    with open(stats_path) as f:
+        stats = json.load(f)
+    assert stats["cohort_titans"] == 500
+    assert stats["cohort_controls"] == 2500
+    assert len(stats["tradition_rankings"]) == 6
+    assert stats["tradition_rankings"][0]["tradition"] == "BaZi (Four Pillars of Destiny)"
+    
+    print("[PASS] 500 Personalities dataset and statistical benchmark integrity verified.")
+
 if __name__ == "__main__":
     test_simulation_dataset_integrity()
     test_100_personalities_dataset_integrity()
+    test_500_personalities_dataset_integrity()
