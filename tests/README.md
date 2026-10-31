@@ -27,8 +27,9 @@ Execute via the minimal-token pipeline runner:
 - `test_09_dossier_inferences.py`: Validates Corroboration Dossier substantive inferences profile, explicit Subject vs Birthplace separation, Core Archetype spotlight, 5 civilizational foundation pillars, 3-column analytical triad, and mobile layout integrity.
 - `test_10_impeccable_quality_audit.py`: Validates comprehensive typography floors (>=11px UI, >=12px narrative), zero tiny-text/undersized-ui-text anti-patterns across all 5 epistemic screens and 9 traditions, and zero critical console errors.
 - `test_11_feature_guide.py`: Validates 50-topic Astrometric & Cultural Feature Guide screen navigation, category filtering, search input filtering, deep-dive modal rendering, and Escape dismissal.
+- `test_12_monte_carlo_500_rankings.py`: Validates 500 Titans Monte Carlo Benchmark endpoints, 100% Rodden AA/A integrity, empirical tradition accuracy rankings (#1 BaZi 64.6, #2 Jyotisha 60.9), and historical case studies (Churchill, Einstein, Ali, Jobs).
 - `conftest.py`: Playwright & browser fixtures for local UI and headless browser regression checks.
 - `helpers.py`: Bounding-box collision detection, viewport overflow assertions, and local screenshot catalog.
 
 ---
-**Total Active Test Modules:** 11
+**Total Active Test Modules:** 12
