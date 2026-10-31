@@ -234,11 +234,11 @@ export const SynthesisMatrix: React.FC<Props> = ({ synthesis, onNavigate }) => {
                     {/* Visual Agreement Mini Meter */}
                     <div className="w-12 sm:w-16 h-1.5 rounded-full bg-stone-800 overflow-hidden shrink-0 hidden xs:block" aria-hidden="true">
                       <div
-                        className={`h-full rounded-full transition-all duration-300 ${
+                        className={`h-full rounded-full transition-colors duration-200 ${
                           dom.grade === 'STRONG'
-                            ? 'w-full bg-emerald-400'
+                            ? 'w-full bg-amber-400'
                             : dom.grade === 'MODERATE'
-                            ? 'w-2/3 bg-cyan-400'
+                            ? 'w-2/3 bg-amber-300'
                             : 'w-1/3 bg-rose-400'
                         }`}
                       />

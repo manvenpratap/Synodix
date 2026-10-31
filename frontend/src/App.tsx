@@ -615,7 +615,7 @@ function AppContent() {
                 </div>
                 <div className="flex items-center gap-1.5">
                   <span className="font-serif font-bold text-stone-100 text-sm">Synodix</span>
-                  <span className="px-1.5 py-0.2 rounded text-[10px] font-mono bg-amber-950 text-amber-300 border border-amber-800 font-medium">
+                  <span className="px-1.5 py-0.2 rounded text-[11px] font-mono bg-amber-950 text-amber-300 border border-amber-800 font-medium">
                     {APP_VERSION_LABEL}
                   </span>
                 </div>
@@ -828,7 +828,7 @@ function AppContent() {
               data-tooltip="View global keyboard accelerators (?)"
               aria-label="Keyboard Shortcuts"
             >
-              <kbd className="px-1.5 py-0.5 rounded bg-stone-800 border border-stone-700 text-[10px] text-amber-300 font-bold font-mono">?</kbd>
+              <kbd className="px-1.5 py-0.5 rounded bg-stone-800 border border-stone-700 text-[11px] text-amber-300 font-bold font-mono">?</kbd>
             </button>
             {/* Feature Guide Trigger */}
             <button
@@ -875,7 +875,7 @@ function AppContent() {
           aria-label="Epistemic Journey Stepper"
           className="px-2.5 sm:px-6 py-1 sm:py-2 bg-stone-900/90 backdrop-blur-md border-b border-stone-800 select-none sticky top-[calc(3.75rem+env(safe-area-inset-top,0px))] z-20"
         >
-          <div className="flex items-center justify-between text-[10px] sm:text-[11px] font-mono mb-0.5 sm:mb-1.5 text-stone-400">
+          <div className="flex items-center justify-between text-[11px] font-mono mb-0.5 sm:mb-1.5 text-stone-400">
             <div className="flex items-center gap-1.5 sm:gap-2 min-w-0">
               <span className="font-serif font-medium text-[11px] sm:text-xs text-amber-400 flex items-center gap-1.5 shrink-0">
                 <span className="w-1.5 h-1.5 rounded-full bg-amber-400 inline-block"></span>
@@ -883,7 +883,7 @@ function AppContent() {
                 <span className="sr-only">Epistemic Journey</span>
               </span>
               {isJourneyCollapsed && (
-                <span className="text-[10px] text-amber-300/80 font-serif truncate md:hidden">
+                <span className="text-[11px] text-amber-300/80 font-serif truncate md:hidden">
                   • Step {JOURNEY_STEPS.findIndex((s) => s.id === currentScreen) + 1}: {JOURNEY_STEPS.find((s) => s.id === currentScreen)?.label || 'Overview'}
                 </span>
               )}
@@ -946,7 +946,7 @@ function AppContent() {
                     />
                   )}
                   <span
-                    className={`relative z-10 w-3.5 h-3.5 sm:w-4 sm:h-4 rounded-full flex items-center justify-center text-[9px] sm:text-[11px] font-mono transition-colors duration-150 shrink-0 ${
+                    className={`relative z-10 w-3.5 h-3.5 sm:w-4 sm:h-4 rounded-full flex items-center justify-center text-[10px] sm:text-[11px] font-mono transition-colors duration-150 shrink-0 ${
                       isActive
                         ? 'bg-amber-400 text-black font-bold ring-1 sm:ring-2 ring-amber-300/40'
                         : isPassed
@@ -960,7 +960,7 @@ function AppContent() {
                     <span className="hidden sm:block text-[11px] text-amber-500/80 font-mono leading-none">
                       {['Step 1', 'Step 2', 'Step 3', 'Step 4'][idx]}
                     </span>
-                    <span className="truncate text-[11px] sm:text-xs font-serif font-medium block">
+                    <span className="truncate text-xs font-serif font-medium block">
                       {s.label}
                     </span>
                   </div>
@@ -1153,7 +1153,7 @@ function AppContent() {
                 <div className="absolute top-0 left-1/2 -translate-x-1/2 w-6 h-0.5 bg-amber-400 rounded-full" />
               )}
               <Icon className={`w-4.5 h-4.5 mb-0.5 ${isActive ? 'text-amber-400' : 'text-stone-400'}`} />
-              <span className="mt-0.5 text-[10.5px] sm:text-[11px] leading-tight font-medium tracking-tight whitespace-nowrap w-full text-center px-0.5">
+              <span className="mt-0.5 text-[11px] leading-tight font-medium tracking-tight whitespace-nowrap w-full text-center px-0.5">
                 {item.label}
               </span>
             </button>

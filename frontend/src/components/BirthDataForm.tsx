@@ -794,7 +794,7 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
                     <span className="hidden sm:inline">Section 2 · </span>Date &amp; Time of Birth
                   </h3>
                 </div>
-                <span className="hidden sm:inline-block text-xs font-sans text-amber-300 bg-amber-950/60 border border-amber-800/70 px-2 py-0.5 rounded">
+                <span className="hidden sm:inline-block text-xs font-sans text-amber-300 bg-amber-950/60 border border-amber-800/70 px-2.5 py-1 rounded">
                   Universal Time (UTC) Standard
                 </span>
               </div>

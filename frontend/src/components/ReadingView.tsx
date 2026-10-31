@@ -396,19 +396,19 @@ export const ReadingView: React.FC<Props> = ({ data, subjectName, onNavigate }) 
                         strokeDasharray={213.6}
                         strokeDashoffset={213.6 * (1 - (100 - synthesis.divergence_metrics.divergence_rate_percent) / 100)}
                         strokeLinecap="round"
-                        className="transition-all duration-700 ease-out"
+                        className="transition-[stroke-dashoffset] duration-700 ease-out"
                       />
                     </svg>
                     <div className="absolute inset-0 flex flex-col items-center justify-center">
                       <span className="text-xs font-mono font-bold text-amber-300">
                         {(100 - synthesis.divergence_metrics.divergence_rate_percent).toFixed(0)}%
                       </span>
-                      <span className="text-[8px] font-sans text-stone-400">Harmony</span>
+                      <span className="text-[10px] font-sans text-stone-400">Harmony</span>
                     </div>
                   </div>
                   <div>
                     <span className="text-xs font-serif font-bold text-stone-100 block">Cross-Tradition Accord</span>
-                    <span className="text-[10px] font-sans text-stone-400 block mt-0.5">
+                    <span className="text-[11px] font-sans text-stone-400 block mt-0.5">
                       {synthesis.divergence_metrics.strong_domains + synthesis.divergence_metrics.moderate_domains} of 9 domains in direct alignment
                     </span>
                   </div>
@@ -417,7 +417,7 @@ export const ReadingView: React.FC<Props> = ({ data, subjectName, onNavigate }) 
                 {/* 4 Life Pillars Visual Progress Meters */}
                 <div className="sm:col-span-8 grid grid-cols-2 gap-2 text-[11px] font-sans">
                   <div className="p-1.5 rounded bg-stone-900/80 border border-stone-800">
-                    <div className="flex justify-between text-[10px] text-stone-400 mb-0.5">
+                    <div className="flex justify-between text-[11px] text-stone-400 mb-0.5">
                       <span>Vocation &amp; Ambition</span>
                       <span className="font-mono text-amber-300 font-semibold">88%</span>
                     </div>
@@ -426,25 +426,25 @@ export const ReadingView: React.FC<Props> = ({ data, subjectName, onNavigate }) 
                     </div>
                   </div>
                   <div className="p-1.5 rounded bg-stone-900/80 border border-stone-800">
-                    <div className="flex justify-between text-[10px] text-stone-400 mb-0.5">
+                    <div className="flex justify-between text-[11px] text-stone-400 mb-0.5">
                       <span>Cognitive Wiring</span>
-                      <span className="font-mono text-cyan-300 font-semibold">74%</span>
+                      <span className="font-mono text-amber-200 font-semibold">74%</span>
                     </div>
                     <div className="h-1 bg-stone-800 rounded-full overflow-hidden">
-                      <div className="h-full bg-cyan-400 rounded-full w-[74%]" />
+                      <div className="h-full bg-amber-300 rounded-full w-[74%]" />
                     </div>
                   </div>
                   <div className="p-1.5 rounded bg-stone-900/80 border border-stone-800">
-                    <div className="flex justify-between text-[10px] text-stone-400 mb-0.5">
+                    <div className="flex justify-between text-[11px] text-stone-400 mb-0.5">
                       <span>Material Fortune</span>
-                      <span className="font-mono text-emerald-300 font-semibold">82%</span>
+                      <span className="font-mono text-amber-300 font-semibold">82%</span>
                     </div>
                     <div className="h-1 bg-stone-800 rounded-full overflow-hidden">
-                      <div className="h-full bg-emerald-400 rounded-full w-[82%]" />
+                      <div className="h-full bg-amber-400 rounded-full w-[82%]" />
                     </div>
                   </div>
                   <div className="p-1.5 rounded bg-stone-900/80 border border-stone-800">
-                    <div className="flex justify-between text-[10px] text-stone-400 mb-0.5">
+                    <div className="flex justify-between text-[11px] text-stone-400 mb-0.5">
                       <span>Vitality &amp; Spirit</span>
                       <span className="font-mono text-amber-300 font-semibold">90%</span>
                     </div>

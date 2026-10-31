@@ -581,7 +581,7 @@ export const FeatureGuideScreen: React.FC<Props> = ({ onNavigate, initialExplain
                 </div>
 
                 {/* Formula Display Box */}
-                <div className="p-3.5 sm:p-4 rounded-xl bg-stone-900/70 border-l-2 border-amber-500/80 text-xs sm:text-sm text-amber-200/95 overflow-x-auto select-all">
+                <div className="p-3.5 sm:p-4 rounded-xl bg-stone-900/70 border border-amber-800/60 text-xs sm:text-sm text-amber-200/95 overflow-x-auto select-all">
                   <span className="text-xs text-stone-400 block mb-1 font-serif font-medium">
                     Governing Formula / Mathematical Invariant
                   </span>
