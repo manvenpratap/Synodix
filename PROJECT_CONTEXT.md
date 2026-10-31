@@ -1,6 +1,6 @@
 # Synodix: Project Context & Working Memory
 
-**Last Updated:** 2026-10-31 23:19:26
+**Last Updated:** 2026-10-31 23:36:39
 **Version:** 2.35.0  
 **Stack:** Python 3.12 (FastAPI, Swiss Ephemeris 2.10, Skyfield DE421) + TypeScript / React 19 / Vite / Tailwind CSS v4 / Framer Motion / Capacitor 8 (iOS & Android)  
 **Workspace:** `/Volumes/Study/Projects/Astrology` (symlinked as `/Volumes/Study/Astrology`)  
@@ -33,8 +33,10 @@
     - **#5 Western / Hellenistic (Tropical) — Composite Score: 55.7/100**: Highest specificity (70.1%); timing accuracy 74.0%, sensitivity 27.2%.
     - **#6 Tibetan Phugpa (Elemental Lunisolar) — Composite Score: 55.4/100**: 95.0% robustness; macro-cyclical constitution mapping.
   - **Backend & Frontend Integration**:
-    - Updated `backend/app/main.py`: added `/api/sample-charts-500`, supported `cohort=500` on `/api/sample-charts`, updated `/api/mathematical-evidence` to return dynamic 500 titans / 2,500 controls stats.
+    - Updated `backend/app/main.py`: defaulted `/api/sample-charts` to 500 records (preserving `cohort=100` backwards compatibility), added `/api/sample-charts-500`, updated `/api/mathematical-evidence` to return dynamic 500 titans / 2,500 controls stats.
+    - Upgraded `frontend/src/App.tsx`, `BirthDataForm.tsx`, `SynastryScreen.tsx`, and `FeatureGuideScreen.tsx` to load and display all 500 verified records with dynamic category counts (`All Records (500)`, `Science (87)`, `Leaders (83)`, etc.).
     - Extended `backend/tests/test_simulation_personalities.py` with `test_500_personalities_dataset_integrity()`.
+    - Added dedicated Playwright regression suite `tests/test_12_monte_carlo_500_rankings.py` validating 500 records rendering, tradition accuracy rankings, and historical case studies (all 29 tests passing).
     - Upgraded `frontend/src/components/MathematicalEvidenceCard.tsx` with interactive tradition accuracy rankings, comparison matrix, and 4 documented historical biographical case studies.
   - **Automated Verification**:
     - TypeScript compilation passed with 0 errors (`npx tsc --noEmit`).

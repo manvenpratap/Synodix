@@ -40,14 +40,14 @@ const FEATURED_IDS = [
 ];
 
 const CATEGORIES = [
-  { id: 'featured', label: 'Featured', count: 10, icon: Star },
-  { id: 'science_tech', label: 'Science & Tech', count: 18, icon: FlaskConical },
-  { id: 'leaders_statesmen', label: 'Leaders', count: 18, icon: Landmark },
-  { id: 'arts_music_lit', label: 'Arts & Music', count: 20, icon: Palette },
-  { id: 'philosophy_spirituality', label: 'Philosophy', count: 14, icon: BookOpen },
-  { id: 'sports_athletics', label: 'Sports & Martial', count: 16, icon: Trophy },
-  { id: 'cinema_business', label: 'Cinema & Media', count: 14, icon: Clapperboard },
-  { id: 'all', label: 'All 100 Records', count: 100, icon: Users },
+  { id: 'featured', label: 'Featured', icon: Star },
+  { id: 'science_tech', label: 'Science & Tech', icon: FlaskConical },
+  { id: 'leaders_statesmen', label: 'Leaders', icon: Landmark },
+  { id: 'arts_music_lit', label: 'Arts & Music', icon: Palette },
+  { id: 'philosophy_spirituality', label: 'Philosophy', icon: BookOpen },
+  { id: 'sports_athletics', label: 'Sports & Martial', icon: Trophy },
+  { id: 'cinema_business', label: 'Cinema & Media', icon: Clapperboard },
+  { id: 'all', label: 'All Records', icon: Users },
 ];
 
 const AstrometricCelestialCompass: React.FC<{
@@ -557,7 +557,7 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
             </span>
             <span className="text-stone-400 hidden sm:inline">•</span>
             <span className="text-xs text-stone-400 font-sans">
-              {activeMode === 'custom' ? 'Custom Input Workspace' : '100 Verified Historical Records'}
+              {activeMode === 'custom' ? 'Custom Input Workspace' : `${samplePresets.length || 500} Verified Historical Records`}
             </span>
           </div>
           <h2 className="text-base sm:text-lg font-serif font-semibold text-stone-100 mt-2.5 sm:mt-3">
@@ -625,8 +625,8 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
             )}
             <span className="relative z-10 flex items-center gap-2">
               <Users className="w-3.5 h-3.5 shrink-0" />
-              <span className="hidden sm:inline whitespace-nowrap">Historical Titans (100)</span>
-              <span className="sm:hidden whitespace-nowrap">Titans (100)</span>
+              <span className="hidden sm:inline whitespace-nowrap">Historical Titans ({samplePresets.length || 500})</span>
+              <span className="sm:hidden whitespace-nowrap">Titans ({samplePresets.length || 500})</span>
             </span>
           </button>
         </div>
@@ -1266,7 +1266,7 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
                 onClick={() => setActiveMode('archive')}
                 className="inline-flex items-center gap-1.5 min-h-[44px] sm:min-h-[36px] text-amber-400 hover:text-amber-300 font-sans font-medium text-xs cursor-pointer hover:underline self-start sm:self-auto focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 rounded px-2 whitespace-nowrap"
               >
-                <span className="whitespace-nowrap">Explore 100 Titans Archive</span>
+                <span className="whitespace-nowrap">Explore {samplePresets.length || 500} Titans Archive</span>
                 <ArrowRight className="w-3.5 h-3.5" />
               </button>
             </div>
@@ -1289,6 +1289,11 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
               {CATEGORIES.map((cat) => {
                 const Icon = cat.icon;
                 const isSelected = selectedCategory === cat.id;
+                const count = cat.id === 'all'
+                  ? (samplePresets.length || 500)
+                  : cat.id === 'featured'
+                    ? (samplePresets.filter((p) => FEATURED_IDS.includes(p.id)).length || 10)
+                    : (samplePresets.filter((p) => p.category === cat.id).length || 0);
                 return (
                   <button
                     key={cat.id}
@@ -1301,7 +1306,7 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
                   >
                     <Icon className={`w-3.5 h-3.5 ${isSelected ? 'text-amber-300' : 'text-stone-400'}`} />
                     <span>{cat.label}</span>
-                    <span className="text-[11px] opacity-75 font-mono">({cat.count})</span>
+                    <span className="text-[11px] opacity-75 font-mono">({count})</span>
                   </button>
                 );
               })}
@@ -1320,7 +1325,7 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder="Search by name, discovery, or city (e.g. Einstein, Jordan, Kahlo, Curie, London)..."
-                  aria-label="Search 100 historical figures by name, field, or city"
+                  aria-label={`Search ${samplePresets.length || 500} historical figures by name, field, or city`}
                   enterKeyHint="search"
                   className="w-full bg-transparent text-xs text-stone-200 placeholder-stone-500 focus:outline-none font-sans py-1"
                 />

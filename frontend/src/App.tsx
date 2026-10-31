@@ -27,7 +27,7 @@ import {
 import { apiUrl, getApiBaseUrl, setApiBaseUrl, DEFAULT_DEV_API_URL } from './utils/api';
 import { getBundledTitanChart } from './data/bundledTitans';
 import { calculateChartLocally } from './engine';
-import TITANS_100_DATA from './data/personalities_100.json';
+import TITANS_500_DATA from './data/personalities_500.json';
 import { BirthDataForm } from './components/BirthDataForm';
 import { InputAuditCard } from './components/InputAuditCard';
 import { VerificationCard } from './components/VerificationCard';
@@ -43,7 +43,7 @@ import { FeatureExplainerModal } from './components/FeatureExplainerModal';
 import { ExplainerTrigger } from './components/ExplainerTrigger';
 import { APP_VERSION_LABEL } from './version';
 
-const FALLBACK_PRESETS: Preset[] = TITANS_100_DATA as unknown as Preset[];
+const FALLBACK_PRESETS: Preset[] = TITANS_500_DATA as unknown as Preset[];
 
 export type AppScreen =
   | 'workbench'
@@ -116,7 +116,7 @@ const NAV_ITEMS: NavItem[] = [
     id: 'evidence',
     label: 'Mathematical Evidence',
     shortLabel: 'Evidence',
-    badge: '100 Titans',
+    badge: '500 Titans',
     description: 'Scientific statistical research testing against random controls',
     icon: FlaskConical
   },
@@ -1348,7 +1348,7 @@ function EmptyChartState({ onOpenWorkbench }: { onOpenWorkbench: () => void }) {
         No Subject Chart Loaded
       </h3>
       <p className="text-xs text-stone-300 mt-1.5 max-w-sm mx-auto leading-relaxed font-sans">
-        Select a subject from the 100 historical titans gallery or calculate a custom birth record in the Workbench to render this view.
+        Select a subject from the 500 historical titans gallery or calculate a custom birth record in the Workbench to render this view.
       </p>
       <button
         type="button"

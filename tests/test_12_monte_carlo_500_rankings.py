@@ -144,3 +144,41 @@ def test_ui_mathematical_evidence_rankings_and_case_studies():
         assert len(critical_errors) == 0, f"Critical console errors detected: {critical_errors}"
 
         browser.close()
+
+
+def test_workbench_500_titans_ui_labels():
+    """Verify Workbench and input form reflect 500 Verified Historical Records and dynamic categories."""
+    with sync_playwright() as pw:
+        browser = _launch_browser(pw)
+        page = browser.new_page(viewport={"width": 1280, "height": 900})
+        console_errors = []
+        page.on("console", lambda m: console_errors.append(m.text) if m.type == "error" else None)
+        page.on("pageerror", lambda e: console_errors.append(f"PAGE ERROR: {e}"))
+
+        page.goto(FRONTEND_BASE, wait_until="domcontentloaded")
+        page.wait_for_timeout(400)
+
+        # 1. Check Historical Titans (500) tab button
+        archive_tab = page.locator("#tab-archive-mode")
+        assert archive_tab.is_visible(), "Archive tab button must be visible"
+        assert "500" in archive_tab.inner_text(), f"Archive tab must show 500 titans, got: {archive_tab.inner_text()}"
+
+        # 2. Switch to Archive mode
+        archive_tab.click()
+        page.wait_for_timeout(300)
+
+        # 3. Assert header shows 500 Verified Historical Records
+        header_text = page.locator("text='500 Verified Historical Records'").first
+        assert header_text.is_visible(), "Header must display '500 Verified Historical Records'"
+
+        # 4. Assert All Records (500) category button
+        all_btn = page.locator("button:has-text('All Records')").first
+        assert all_btn.is_visible(), "All Records category button must be visible"
+        assert "500" in all_btn.inner_text(), f"All Records count must show 500, got: {all_btn.inner_text()}"
+
+        # 5. Check no critical console errors
+        critical_errors = [e for e in console_errors if "favicon" not in e and "404" not in e]
+        assert len(critical_errors) == 0, f"Critical console errors detected: {critical_errors}"
+
+        browser.close()
+

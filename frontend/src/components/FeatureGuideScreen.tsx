@@ -244,7 +244,7 @@ export const FeatureGuideScreen: React.FC<Props> = ({ onNavigate, initialExplain
                 {activeSection === 'evidence' ? 'Empirical Statistical Validation' : 'Astrometric Knowledge Base'}
               </span>
               <span className="text-xs text-stone-400 font-sans hidden sm:inline">
-                {activeSection === 'evidence' ? '100 Titans Monte Carlo Benchmark' : '50 Authoritative Topics'}
+                {activeSection === 'evidence' ? '500 Titans Monte Carlo Benchmark' : '50 Authoritative Topics'}
               </span>
             </div>
             <h1 className="text-xl sm:text-2xl font-serif font-bold text-stone-100 tracking-tight mt-1">

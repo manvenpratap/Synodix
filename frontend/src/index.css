@@ -825,7 +825,7 @@ aside > div:first-child {
   color: #0369a1 !important;
 }
 
-/* Sidebar navigation badges in light theme (Calculators, JPL DE421, 100 Titans) */
+/* Sidebar navigation badges in light theme (Calculators, JPL DE421, 500 Titans) */
 [data-theme="light"] aside nav span.bg-\[\#18202c\],
 [data-theme="light"] nav span.bg-\[\#18202c\] {
   background-color: #e0f2fe !important;

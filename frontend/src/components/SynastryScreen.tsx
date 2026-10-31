@@ -21,7 +21,7 @@ import {
   Scale
 } from 'lucide-react';
 import type { ChartResponse, BirthInput, Preset } from '../types';
-import TITANS_100_DATA from '../data/personalities_100.json';
+import TITANS_500_DATA from '../data/personalities_500.json';
 import { getBundledTitanChart } from '../data/bundledTitans';
 import { calculateChartLocally } from '../engine';
 import { generateSynastryReport } from '../engine/synastry';
@@ -33,7 +33,7 @@ interface Props {
   onNavigate?: (screen: any) => void;
 }
 
-const ALL_PRESETS: Preset[] = TITANS_100_DATA as unknown as Preset[];
+const ALL_PRESETS: Preset[] = TITANS_500_DATA as unknown as Preset[];
 
 export const SynastryScreen: React.FC<Props> = ({
   currentChart,
@@ -304,7 +304,7 @@ export const SynastryScreen: React.FC<Props> = ({
                       ? 'bg-amber-950 text-amber-300 border border-amber-700/60 font-semibold'
                       : 'text-stone-400 hover:text-stone-200'
                   }`}
-                  data-tooltip="Choose from 100 historical titan benchmarks"
+                  data-tooltip="Choose from 500 historical titan benchmarks"
                 >
                   Titan Presets
                 </button>
@@ -342,7 +342,7 @@ export const SynastryScreen: React.FC<Props> = ({
             {partnerAMode === 'preset' && (
               <div className="space-y-2">
                 <label className="block text-xs font-mono text-stone-400">
-                  Select Benchmark Personality (100 Titans):
+                  Select Benchmark Personality (500 Titans):
                 </label>
                 <select
                   value={partnerAPresetId}
@@ -456,7 +456,7 @@ export const SynastryScreen: React.FC<Props> = ({
                       ? 'bg-amber-950 text-amber-300 border border-amber-700/60 font-semibold'
                       : 'text-stone-400 hover:text-stone-200'
                   }`}
-                  data-tooltip="Choose from 100 historical titan benchmarks"
+                  data-tooltip="Choose from 500 historical titan benchmarks"
                 >
                   Titan Presets
                 </button>
@@ -478,7 +478,7 @@ export const SynastryScreen: React.FC<Props> = ({
             {partnerBMode === 'preset' && (
               <div className="space-y-2">
                 <label className="block text-xs font-mono text-stone-400">
-                  Select Benchmark Personality (100 Titans):
+                  Select Benchmark Personality (500 Titans):
                 </label>
                 <select
                   value={partnerBPresetId}

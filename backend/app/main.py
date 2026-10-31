@@ -80,12 +80,14 @@ def health_check():
         "engine_version": "2.0.0",
         "primary_astronomy": "Swiss Ephemeris (pyswisseph)",
         "independent_validator": "Skyfield (JPL DE421)",
-        "total_sample_profiles": len(SAMPLE_PRESETS),
+        "total_sample_profiles": len(SAMPLE_PRESETS_500),
+        "total_sample_profiles_500": len(SAMPLE_PRESETS_500),
+        "total_sample_profiles_100": len(SAMPLE_PRESETS),
     }
 
 @app.get("/api/sample-charts")
 def get_sample_charts(category: Optional[str] = None, cohort: Optional[int] = None):
-    source = SAMPLE_PRESETS_500 if cohort == 500 else SAMPLE_PRESETS
+    source = SAMPLE_PRESETS if cohort == 100 else SAMPLE_PRESETS_500
     if category and category != "all":
         return [p for p in source if p.get("category") == category]
     return source
