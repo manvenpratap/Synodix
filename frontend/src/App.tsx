@@ -753,7 +753,7 @@ function AppContent() {
                 <span className="hidden sm:inline truncate">
                   {NAV_ITEMS.find((n) => n.id === currentScreen)?.label || (currentScreen === 'guide' ? 'Feature Guide' : '')}
                 </span>
-                <span className="sm:hidden truncate max-w-[220px] tracking-normal">
+                <span className="sm:hidden truncate max-w-[220px] tracking-normal" aria-hidden="true">
                   {NAV_ITEMS.find((n) => n.id === currentScreen)?.shortLabel || NAV_ITEMS.find((n) => n.id === currentScreen)?.label || (currentScreen === 'guide' ? 'Guide' : '')}
                 </span>
               </h1>

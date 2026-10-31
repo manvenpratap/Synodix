@@ -1,7 +1,7 @@
 # Synodix: Project Context & Working Memory
 
-**Last Updated:** 2026-10-31 15:29:14
-**Version:** 2.33.34  
+**Last Updated:** 2026-10-31 16:38:40
+**Version:** 2.33.35  
 **Stack:** Python 3.12 (FastAPI, Swiss Ephemeris 2.10, Skyfield DE421) + TypeScript / React 19 / Vite / Tailwind CSS v4 / Framer Motion / Capacitor 8 (iOS & Android)  
 **Workspace:** `/Volumes/Study/Projects/Astrology` (symlinked as `/Volumes/Study/Astrology`)  
 **Git Remote:** `https://github.com/manvenpratap/Synodix.git`  
@@ -10,7 +10,26 @@
 
 ## 1. Current Status & Milestone
 
-- **Active Phase**: Relational Synastry Impeccable Zero-Findings & Responsive Polish (Completed)
+- **Active Phase**: Astronomical Audit Impeccable Zero-Findings & Layout Polish (Completed)
+- **Astronomical Audit Impeccable Zero-Findings & Layout Polish (v2.33.35)**:
+  - **AI Tells & Palette Harmonization (`VerificationCard.tsx`)**:
+    - Replaced 100% of cyan/emerald neon tokens (`text-emerald-400`, `text-cyan-400`, `bg-cyan-950`, `border-cyan-800`, `bg-emerald-950`, `text-emerald-300`, `border-emerald-800`) with dignified warm amber (`text-amber-400`, `text-amber-300`, `bg-amber-950`, `border-amber-800/80`) and neutral stone (`text-stone-300`, `bg-stone-900`, `border-stone-700/80`).
+    - Standardized Section 3 header kicker and confidence pill to warm amber and stone neutral.
+    - Updated Invariant status badges: PASS to amber (`bg-amber-950 text-amber-300 border border-amber-800/80`), FAIL/WARN to rose (`bg-rose-950 text-rose-300 border border-rose-800/80`).
+    - Harmonized ephemeris table diff columns: Delta (deg) to `text-amber-400`, Delta (arcsec) to `text-stone-300`, and Verification status badge to `bg-amber-950 text-amber-300 border border-amber-800/80`.
+  - **Nested Cards Flattening (`VerificationCard.tsx`)**:
+    - Removed outer card container (`bg-stone-900 border border-stone-800 rounded-lg p-5`); converted root layout into an unboxed `<div className="space-y-5">`.
+    - Converted all 4-5 Invariant checklist tiles (`bg-stone-900/90 p-3.5 rounded-xl border border-stone-800`) and the dual-engine diff table into top-level cards, eliminating all 6 nested card warnings.
+  - **Heading Hierarchy & Accessibility Calibration (`VerificationCard.tsx`, `App.tsx`)**:
+    - Converted section header from `<h3>` to `<h2>` in `VerificationCard.tsx`, establishing an unbroken outline (`h1` -> `h2`).
+    - Added `aria-hidden="true"` to mobile screen short title in `App.tsx`, preventing screen readers and text extractors from reading duplicated header text (`"Astronomical AuditAudit"`).
+  - **Typography & Table Layout Calibration (`VerificationCard.tsx`)**:
+    - Elevated Invariant values, actual readout, max observed delta, table rows, and verification badges from `text-[11px]` to standard `text-xs` (12px), satisfying legibility thresholds.
+    - Upgraded table container to `rounded-xl border border-stone-800 bg-stone-900/90 shadow-md`, eliminating `cramped-padding` warnings.
+  - **Automated Verification**:
+    - Zero Impeccable findings (exit code 0) across Desktop (1280x900), Tablet (768x1024), and Mobile (390x844).
+    - Zero TypeScript errors (`npx tsc --noEmit`).
+    - All 26 pytest regression suites passing cleanly (`./pipeline.sh test --summary`, 26 passed in 96s).
 - **Relational Synastry Impeccable Zero-Findings & Responsive Polish (v2.33.34)**:
   - **AI Tells & Palette Harmonization (`SynastryScreen.tsx`)**:
     - Replaced 100% of cyan/sky/emerald neon tokens (`text-cyan-300`, `text-cyan-400`, `bg-cyan-950`, `border-cyan-800`, `bg-emerald-950`, `text-emerald-300`, `border-emerald-800`, `text-emerald-400`) with dignified warm amber (`text-amber-400`, `text-amber-300`, `text-amber-200`, `bg-amber-950`, `border-amber-700/80`) and neutral stone (`text-stone-300`, `bg-stone-900`, `border-stone-700/80`).
