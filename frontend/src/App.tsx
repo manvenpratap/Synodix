@@ -749,7 +749,7 @@ function AppContent() {
 
             {/* Screen Title */}
             <div className="flex items-center gap-1.5 sm:gap-2 min-w-0">
-              <h1 className="text-base sm:text-2xl font-serif font-bold tracking-tight text-stone-100 flex items-center gap-2 min-w-0">
+              <h1 className="text-lg sm:text-2xl font-serif font-bold tracking-tight text-stone-100 flex items-center gap-2 min-w-0">
                 <span className="hidden sm:inline truncate">
                   {NAV_ITEMS.find((n) => n.id === currentScreen)?.label || (currentScreen === 'guide' ? 'Feature Guide' : '')}
                 </span>
@@ -930,7 +930,7 @@ function AppContent() {
                     isActive
                       ? 'text-amber-200 font-bold shadow-xs'
                       : isPassed
-                      ? 'bg-stone-900 text-emerald-400 border border-emerald-900/50 hover:bg-stone-850'
+                      ? 'bg-stone-900 text-amber-400 border border-amber-800/60 hover:bg-stone-850'
                       : 'bg-stone-950 text-stone-400 border border-stone-800 hover:text-stone-300'
                   }`}
                 >
@@ -950,7 +950,7 @@ function AppContent() {
                       isActive
                         ? 'bg-amber-400 text-black font-bold ring-1 sm:ring-2 ring-amber-300/40'
                         : isPassed
-                        ? 'bg-emerald-500/20 text-emerald-300 font-semibold'
+                        ? 'bg-amber-500/20 text-amber-300 font-semibold'
                         : 'bg-stone-800 text-stone-400'
                     }`}
                   >

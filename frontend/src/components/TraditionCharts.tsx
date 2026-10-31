@@ -66,12 +66,12 @@ const CULTURE_THEMES: Record<string, {
     badge: 'Sacred Saffron & Vedic Brass',
     instrumentName: 'Parashari Diamond Kundali (D1 Lagna & D9 Navamsha)',
     containerBg: 'bg-gradient-to-b from-amber-950/70 via-stone-950 to-neutral-950',
-    containerBorder: 'border-amber-700/60 shadow-lg shadow-amber-950/20',
+    containerBorder: 'border-amber-700/60',
     headerBg: 'bg-gradient-to-r from-amber-950 via-stone-950 to-neutral-950',
     headerBorder: 'border-amber-600/60',
     accentText: 'text-amber-400',
     accentBadge: 'bg-amber-950/90 text-amber-200 border-amber-600/80',
-    activeTabClass: 'bg-gradient-to-r from-amber-950 via-amber-900/80 to-amber-950 text-amber-200 border-amber-600 shadow-sm shadow-amber-950/60 font-semibold ring-1 ring-amber-500/40',
+    activeTabClass: 'bg-gradient-to-r from-amber-950 via-amber-900/80 to-amber-950 text-amber-200 border-amber-600 font-semibold ring-1 ring-amber-500/40',
     presentationToggleActive: 'bg-gradient-to-r from-amber-900 to-amber-950 text-amber-200 font-bold border border-amber-600 shadow-xs',
     presentationToggleInactive: 'text-slate-400 hover:text-amber-200 hover:bg-amber-950/30',
     frameBg: 'bg-amber-950/30',
@@ -88,12 +88,12 @@ const CULTURE_THEMES: Record<string, {
     badge: 'Imperial Cinnabar & Jade',
     instrumentName: 'Wu Xing Dynamic Elemental Pentagram (Generating & Overcoming Cycles)',
     containerBg: 'bg-gradient-to-b from-rose-950/70 via-stone-950 to-neutral-950',
-    containerBorder: 'border-red-800/60 shadow-lg shadow-red-950/20',
+    containerBorder: 'border-red-800/60',
     headerBg: 'bg-gradient-to-r from-rose-950 via-stone-950 to-neutral-950',
     headerBorder: 'border-red-600/60',
     accentText: 'text-red-400',
     accentBadge: 'bg-red-950/90 text-red-200 border-red-600/80',
-    activeTabClass: 'bg-gradient-to-r from-red-950 via-red-900/80 to-rose-950 text-red-200 border-red-600 shadow-sm shadow-red-950/60 font-semibold ring-1 ring-red-500/40',
+    activeTabClass: 'bg-gradient-to-r from-red-950 via-red-900/80 to-rose-950 text-red-200 border-red-600 font-semibold ring-1 ring-red-500/40',
     presentationToggleActive: 'bg-gradient-to-r from-red-900 to-red-950 text-red-200 font-bold border border-red-600 shadow-xs',
     presentationToggleInactive: 'text-slate-400 hover:text-red-200 hover:bg-red-950/30',
     frameBg: 'bg-rose-950/30',
@@ -110,12 +110,12 @@ const CULTURE_THEMES: Record<string, {
     badge: 'Aegean Lapis & Grecian Bronze',
     instrumentName: 'Ptolemaic 360° Circular Aspect Wheel & Essential Dignities',
     containerBg: 'bg-gradient-to-b from-blue-950/70 via-slate-950 to-neutral-950',
-    containerBorder: 'border-blue-700/60 shadow-lg shadow-blue-950/20',
+    containerBorder: 'border-blue-700/60',
     headerBg: 'bg-gradient-to-r from-blue-950 via-slate-950 to-neutral-950',
     headerBorder: 'border-blue-500/60',
     accentText: 'text-blue-300',
     accentBadge: 'bg-blue-950/90 text-blue-200 border-blue-500/80',
-    activeTabClass: 'bg-gradient-to-r from-blue-950 via-blue-900/80 to-indigo-950 text-blue-200 border-blue-500 shadow-sm shadow-blue-950/60 font-semibold ring-1 ring-blue-400/40',
+    activeTabClass: 'bg-gradient-to-r from-blue-950 via-blue-900/80 to-indigo-950 text-blue-200 border-blue-500 font-semibold ring-1 ring-blue-400/40',
     presentationToggleActive: 'bg-gradient-to-r from-blue-900 to-blue-950 text-blue-200 font-bold border border-blue-500 shadow-xs',
     presentationToggleInactive: 'text-slate-400 hover:text-blue-200 hover:bg-blue-950/30',
     frameBg: 'bg-blue-950/30',
@@ -132,12 +132,12 @@ const CULTURE_THEMES: Record<string, {
     badge: 'Isfahan Turquoise & Damascened Gold',
     instrumentName: 'Almuten Figuris Comparative Dignity & 75-Year Firdaria Timeline',
     containerBg: 'bg-gradient-to-b from-cyan-950/70 via-slate-950 to-neutral-950',
-    containerBorder: 'border-cyan-700/60 shadow-lg shadow-cyan-950/20',
+    containerBorder: 'border-cyan-700/60',
     headerBg: 'bg-gradient-to-r from-cyan-950 via-slate-950 to-neutral-950',
     headerBorder: 'border-cyan-500/60',
     accentText: 'text-cyan-300',
     accentBadge: 'bg-cyan-950/90 text-cyan-200 border-cyan-500/80',
-    activeTabClass: 'bg-gradient-to-r from-cyan-950 via-cyan-900/80 to-teal-950 text-cyan-200 border-cyan-500 shadow-sm shadow-cyan-950/60 font-semibold ring-1 ring-cyan-400/40',
+    activeTabClass: 'bg-gradient-to-r from-cyan-950 via-cyan-900/80 to-teal-950 text-cyan-200 border-cyan-500 font-semibold ring-1 ring-cyan-400/40',
     presentationToggleActive: 'bg-gradient-to-r from-cyan-900 to-cyan-950 text-cyan-200 font-bold border border-cyan-500 shadow-xs',
     presentationToggleInactive: 'text-slate-400 hover:text-cyan-200 hover:bg-cyan-950/30',
     frameBg: 'bg-cyan-950/30',
@@ -154,12 +154,12 @@ const CULTURE_THEMES: Record<string, {
     badge: 'Pharaonic Sun Gold & Nile Basalt',
     instrumentName: '36-Decan Star Compass & Sothic Civil Calendar Clock',
     containerBg: 'bg-gradient-to-b from-yellow-950/70 via-stone-950 to-neutral-950',
-    containerBorder: 'border-yellow-700/60 shadow-lg shadow-yellow-950/20',
+    containerBorder: 'border-yellow-700/60',
     headerBg: 'bg-gradient-to-r from-yellow-950 via-stone-950 to-neutral-950',
     headerBorder: 'border-yellow-600/60',
     accentText: 'text-yellow-400',
     accentBadge: 'bg-yellow-950/90 text-yellow-200 border-yellow-600/80',
-    activeTabClass: 'bg-gradient-to-r from-yellow-950 via-amber-900/80 to-yellow-950 text-yellow-200 border-yellow-500 shadow-sm shadow-yellow-950/60 font-semibold ring-1 ring-yellow-400/40',
+    activeTabClass: 'bg-gradient-to-r from-yellow-950 via-amber-900/80 to-yellow-950 text-yellow-200 border-yellow-500 font-semibold ring-1 ring-yellow-400/40',
     presentationToggleActive: 'bg-gradient-to-r from-yellow-900 to-yellow-950 text-yellow-200 font-bold border border-yellow-500 shadow-xs',
     presentationToggleInactive: 'text-slate-400 hover:text-yellow-200 hover:bg-yellow-950/30',
     frameBg: 'bg-yellow-950/30',
@@ -176,12 +176,12 @@ const CULTURE_THEMES: Record<string, {
     badge: 'Imperial Polar Star Enclosure',
     instrumentName: 'Authentic 4x4 Imperial Courtyard Palace Matrix (14 Major & Auxiliary Stars)',
     containerBg: 'bg-gradient-to-b from-amber-950/50 via-slate-950 to-neutral-950',
-    containerBorder: 'border-amber-800/60 shadow-lg shadow-amber-950/20',
+    containerBorder: 'border-amber-800/60',
     headerBg: 'bg-gradient-to-r from-amber-950/80 via-slate-950 to-neutral-950',
     headerBorder: 'border-amber-600/60',
     accentText: 'text-amber-300',
     accentBadge: 'bg-amber-950/90 text-amber-200 border-amber-600/80',
-    activeTabClass: 'bg-amber-950 text-amber-200 border-amber-500 shadow-sm shadow-amber-950/60 font-semibold ring-1 ring-amber-400/40',
+    activeTabClass: 'bg-amber-950 text-amber-200 border-amber-500 font-semibold ring-1 ring-amber-400/40',
     presentationToggleActive: 'bg-amber-900 text-amber-200 font-bold border border-amber-500 shadow-xs',
     presentationToggleInactive: 'text-slate-400 hover:text-amber-200 hover:bg-amber-950/30',
     frameBg: 'bg-amber-950/20',
@@ -198,12 +198,12 @@ const CULTURE_THEMES: Record<string, {
     badge: 'Mesoamerican Jadeite & Rainforest Obsidian',
     instrumentName: 'Tzolk’in & Haab’ Interlocking Stele Gear Compass',
     containerBg: 'bg-gradient-to-b from-emerald-950/70 via-stone-950 to-neutral-950',
-    containerBorder: 'border-emerald-700/60 shadow-lg shadow-emerald-950/20',
+    containerBorder: 'border-emerald-700/60',
     headerBg: 'bg-gradient-to-r from-emerald-950 via-stone-950 to-neutral-950',
     headerBorder: 'border-emerald-500/60',
     accentText: 'text-emerald-300',
     accentBadge: 'bg-emerald-950/90 text-emerald-200 border-emerald-500/80',
-    activeTabClass: 'bg-gradient-to-r from-emerald-950 via-emerald-900/80 to-teal-950 text-emerald-200 border-emerald-500 shadow-sm shadow-emerald-950/60 font-semibold ring-1 ring-emerald-400/40',
+    activeTabClass: 'bg-gradient-to-r from-emerald-950 via-emerald-900/80 to-teal-950 text-emerald-200 border-emerald-500 font-semibold ring-1 ring-emerald-400/40',
     presentationToggleActive: 'bg-gradient-to-r from-emerald-900 to-emerald-950 text-emerald-200 font-bold border border-emerald-500 shadow-xs',
     presentationToggleInactive: 'text-slate-400 hover:text-emerald-200 hover:bg-emerald-950/30',
     frameBg: 'bg-emerald-950/30',
@@ -220,12 +220,12 @@ const CULTURE_THEMES: Record<string, {
     badge: 'Himalayan Yak Maroon & Saffron Robe',
     instrumentName: '3x3 Lo Shu Mewa Magic Square & 8 Parkha Trigram Mandala',
     containerBg: 'bg-gradient-to-b from-rose-950/70 via-stone-950 to-neutral-950',
-    containerBorder: 'border-rose-800/60 shadow-lg shadow-rose-950/20',
+    containerBorder: 'border-rose-800/60',
     headerBg: 'bg-gradient-to-r from-rose-950 via-stone-950 to-neutral-950',
     headerBorder: 'border-rose-600/60',
     accentText: 'text-rose-300',
     accentBadge: 'bg-rose-950/90 text-rose-200 border-rose-600/80',
-    activeTabClass: 'bg-gradient-to-r from-rose-950 via-rose-900/80 to-orange-950 text-rose-200 border-rose-600 shadow-sm shadow-rose-950/60 font-semibold ring-1 ring-rose-400/40',
+    activeTabClass: 'bg-gradient-to-r from-rose-950 via-rose-900/80 to-orange-950 text-rose-200 border-rose-600 font-semibold ring-1 ring-rose-400/40',
     presentationToggleActive: 'bg-gradient-to-r from-rose-900 to-rose-950 text-rose-200 font-bold border border-rose-600 shadow-xs',
     presentationToggleInactive: 'text-slate-400 hover:text-rose-200 hover:bg-rose-950/30',
     frameBg: 'bg-rose-950/30',
@@ -242,12 +242,12 @@ const CULTURE_THEMES: Record<string, {
     badge: 'Pacific Deep Indigo & Pounamu Green',
     instrumentName: '30-Phase Oceanic Lunar Dial & Vitality Energy Gauge',
     containerBg: 'bg-gradient-to-b from-teal-950/70 via-slate-950 to-neutral-950',
-    containerBorder: 'border-teal-700/60 shadow-lg shadow-teal-950/20',
+    containerBorder: 'border-teal-700/60',
     headerBg: 'bg-gradient-to-r from-teal-950 via-slate-950 to-neutral-950',
     headerBorder: 'border-teal-500/60',
     accentText: 'text-teal-300',
     accentBadge: 'bg-teal-950/90 text-teal-200 border-teal-500/80',
-    activeTabClass: 'bg-gradient-to-r from-teal-950 via-teal-900/80 to-cyan-950 text-teal-200 border-teal-500 shadow-sm shadow-teal-950/60 font-semibold ring-1 ring-teal-400/40',
+    activeTabClass: 'bg-gradient-to-r from-teal-950 via-teal-900/80 to-cyan-950 text-teal-200 border-teal-500 font-semibold ring-1 ring-teal-400/40',
     presentationToggleActive: 'bg-gradient-to-r from-teal-900 to-teal-950 text-teal-200 font-bold border border-teal-500 shadow-xs',
     presentationToggleInactive: 'text-slate-400 hover:text-teal-200 hover:bg-teal-950/30',
     frameBg: 'bg-teal-950/30',
@@ -264,19 +264,14 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
   const currentTheme = CULTURE_THEMES[activeTab] || CULTURE_THEMES.jyotisha;
 
   return (
-    <div className={`machined-bezel p-2 sm:p-3.5 pt-2 sm:pt-3 rounded-2xl shadow-2xl relative transition-colors duration-300 overflow-hidden backdrop-blur-xl ${currentTheme.containerBg} ${currentTheme.containerBorder}`}>
-      <div className="reticle-corner-tl" />
-      <div className="reticle-corner-tr" />
-      <div className="reticle-corner-bl" />
-      <div className="reticle-corner-br" />
-
+    <div className="p-1 sm:p-2 relative transition-colors duration-300 overflow-hidden">
       {/* Screen 2 Header Bar: Title + Display Presentation Switcher + View Mode Toggle */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1.5 pb-1 sm:pb-1.5 border-b border-white/10">
         <div className="hidden sm:block min-w-0">
-          <h3 className="text-sm sm:text-base font-serif font-semibold text-stone-100 flex items-center gap-2 whitespace-nowrap">
+          <h2 className="text-sm sm:text-base font-serif font-semibold text-stone-100 flex items-center gap-2 whitespace-nowrap">
             <span>Step 2 · 9 Astrological Traditions</span>
-            <span className="text-[10px] font-mono font-medium px-1.5 py-0.5 rounded bg-stone-800/80 text-amber-300 border border-stone-700/60 hidden sm:inline-block">9 Traditions</span>
-          </h3>
+            <span className="text-[11px] font-mono font-medium px-1.5 py-0.5 rounded bg-stone-800/80 text-amber-300 border border-stone-700/60 hidden sm:inline-block">9 Traditions</span>
+          </h2>
           <p className="text-xs text-stone-400 mt-0.5 font-sans hidden sm:block truncate">
             Explore your planetary placements and visual charts across 9 world traditions
           </p>
@@ -284,7 +279,7 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
 
         <div className="flex items-center justify-between sm:justify-end gap-1.5 sm:gap-2 w-full sm:w-auto shrink-0">
           {/* Display Presentation Switcher: Comprehensive / Visual Instrument / Telemetry Tables */}
-          <div className="flex items-center gap-0.5 p-0.5 rounded-lg bg-stone-900/90 border border-stone-800 text-[10px] sm:text-[11px] font-mono shrink-0">
+          <div className="flex items-center gap-0.5 p-0.5 rounded-lg bg-stone-900 text-[11px] font-mono shrink-0">
             {(['both', 'chart', 'table'] as const).map((mode) => {
               const isModeActive = chartViewMode === mode;
               const labels = {
@@ -297,7 +292,7 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
                   key={mode}
                   type="button"
                   onClick={() => setChartViewMode(mode)}
-                  className={`relative px-2 sm:px-2 py-1 sm:py-1 min-h-[34px] sm:min-h-[30px] text-[10px] sm:text-[11px] font-mono rounded cursor-pointer transition-colors flex items-center justify-center ${
+                  className={`relative px-2 py-1 min-h-[34px] sm:min-h-[30px] text-[11px] font-mono rounded cursor-pointer transition-colors flex items-center justify-center ${
                     isModeActive
                       ? 'bg-amber-950 text-amber-200 font-bold border border-amber-700/80 shadow-xs'
                       : 'text-stone-400 hover:text-stone-200'
@@ -314,11 +309,11 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
           </div>
 
           {/* View Mode Toggle: Vertical Carousel vs Full Inspector */}
-          <div className="flex items-center p-0.5 rounded-lg bg-stone-900/90 border border-stone-800 text-[10px] sm:text-[11px] font-mono shrink-0">
+          <div className="flex items-center p-0.5 rounded-lg bg-stone-900 text-[11px] font-mono shrink-0">
             <button
               type="button"
               onClick={() => setLayoutMode('carousel')}
-              className={`flex items-center gap-1 px-2 sm:px-2 py-1 sm:py-1 min-h-[34px] sm:min-h-[30px] rounded cursor-pointer transition-colors font-serif ${
+              className={`flex items-center gap-1 px-2 py-1 min-h-[34px] sm:min-h-[30px] rounded cursor-pointer transition-colors font-serif text-xs ${
                 layoutMode === 'carousel'
                   ? 'bg-amber-950 text-amber-300 border border-amber-700/80 font-bold'
                   : 'text-stone-400 hover:text-stone-200'
@@ -334,7 +329,7 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
             <button
               type="button"
               onClick={() => setLayoutMode('inspector')}
-              className={`flex items-center gap-1 px-2 sm:px-2 py-1 sm:py-1 min-h-[34px] sm:min-h-[30px] rounded cursor-pointer transition-colors font-serif ${
+              className={`flex items-center gap-1 px-2 py-1 min-h-[34px] sm:min-h-[30px] rounded cursor-pointer transition-colors font-serif text-xs ${
                 layoutMode === 'inspector'
                   ? 'bg-amber-950 text-amber-300 border border-amber-700/80 font-bold'
                   : 'text-stone-400 hover:text-stone-200'

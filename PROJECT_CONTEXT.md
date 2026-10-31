@@ -1,7 +1,7 @@
 # Synodix: Project Context & Working Memory
 
-**Last Updated:** 2026-10-31 12:54:30
-**Version:** 2.33.30  
+**Last Updated:** 2026-10-31 13:19:35
+**Version:** 2.33.31  
 **Stack:** Python 3.12 (FastAPI, Swiss Ephemeris 2.10, Skyfield DE421) + TypeScript / React 19 / Vite / Tailwind CSS v4 / Framer Motion / Capacitor 8 (iOS & Android)  
 **Workspace:** `/Volumes/Study/Projects/Astrology` (symlinked as `/Volumes/Study/Astrology`)  
 **Git Remote:** `https://github.com/manvenpratap/Synodix.git`  
@@ -10,7 +10,27 @@
 
 ## 1. Current Status & Milestone
 
-- **Active Phase**: Impeccable Audit Zero-Findings & Layout Transition Elimination (Completed)
+- **Active Phase**: Traditions Deck Impeccable Zero-Findings & Type Hierarchy Polish (Completed)
+- **Traditions Deck Impeccable Zero-Findings & Type Hierarchy Polish (v2.33.31)**:
+  - **AI Tells & Color Palette Remediation (`App.tsx`, `TraditionCharts.tsx`, `TraditionVerticalCarousel.tsx`)**:
+    - Replaced cyan/emerald neon tokens (`text-emerald-400`, `text-emerald-300`) on completed stepper items (`isPassed`) in `App.tsx` with unified warm amber (`text-amber-400`, `bg-amber-500/20 text-amber-300`).
+    - Stripped colored box-shadow glows (`shadow-lg shadow-*-950/20`, `shadow-sm shadow-*-950/60`, `shadow-md shadow-amber-500/30`, and `shadow-2xl`) across all 9 cultural themes and navigation tabs in `TraditionCharts.tsx` and `TraditionVerticalCarousel.tsx`.
+    - Harmonized sky/cyan neon text tokens in Hellenistic telemetry to dignified warm amber (`text-amber-300`, `text-amber-200`, `text-amber-400`).
+    - Flattened 36 repetitive nested card containers into streamlined `TelemetryTile` components inside a clean tabular grid (`grid grid-cols-2 gap-x-3 gap-y-1`), eliminating nested cards across all 9 traditions.
+    - Removed concentric outer card borders, allowing the tradition card to be the sole framed instrument.
+  - **Quality & Accessibility Polish (`App.tsx`, `TraditionCharts.tsx`, `TraditionVerticalCarousel.tsx`, `index.css`, `tests/test_06_cultural_themes.py`)**:
+    - Replaced variable pagination dot width with uniform `h-2 w-2 rounded-full` and active ring, eliminating layout property animation (`transition: width`).
+    - Raised all telemetry functional labels, tradition glyphs, and swipe hints to the $\ge 11\text{px}$ floor.
+    - Raised lineage, motto, and JPL telemetry body text to standard `text-xs` (12px).
+    - Fixed heading hierarchy across screens: `App.tsx` title `h1` calibrated to `text-lg sm:text-2xl` ($\ge 1.28:1$ ratio over `h3`), Screen 2 title set to `h2`, tradition titles set to `h3`, and instrument headers set to `h4`, completely resolving skipped headings and flat type hierarchy warnings.
+    - Fixed inactive card text occlusion by rendering empty decorative shells (`<div className="w-full h-full pointer-events-none" aria-hidden="true" />`) for non-center cards in the 3D vertical carousel.
+    - Added global light-theme attribute rules in `index.css` for `[class*="bg-stone-"]`, `[class*="border-stone-"]`, and `[class*="text-amber-"]`, securing WCAG 2.2 AA contrast $\ge 7.8:1$ across all opacity variants.
+    - Updated regression test selector in `tests/test_06_cultural_themes.py` to `:is(h4, h5):has-text(...)`.
+  - **Automated Verification**:
+    - Zero Impeccable findings (exit code 0) across Mobile (390x844), Tablet (768x1024), and Desktop (1280x900) via CDP scan.
+    - Zero regex anti-patterns across all 35 source code files (`impeccable detect frontend/src`).
+    - All 26 pytest regression suites passing cleanly (`./pipeline.sh test --summary` in 90.46s).
+    - Zero critical console errors and zero horizontal overflow across all viewports.
 - **Impeccable Audit Zero-Findings & Layout Transition Elimination (v2.33.30)**:
   - **Layout Property Animation Elimination (`ReadingView.tsx`, `SynthesisMatrix.tsx`)**:
     - Replaced `transition-all duration-700` on the SVG circular consensus meter in `ReadingView.tsx` with targeted `transition-[stroke-dashoffset] duration-700`, eliminating implicit width/layout transitions.

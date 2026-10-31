@@ -82,7 +82,7 @@ def test_cultural_traditions_theming_and_presentations():
             page.wait_for_timeout(200)
 
             # Instrument should be visible
-            inst_heading = page.locator(f"h5:has-text('{expected_inst}')")
+            inst_heading = page.locator(f":is(h4, h5):has-text('{expected_inst}')")
             assert inst_heading.is_visible(), f"Instrument '{expected_inst}' must be visible in Visual Instrument mode"
 
             # 2. Telemetry Tables mode

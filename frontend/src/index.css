@@ -163,6 +163,16 @@ html[data-theme="light"] {
    ========================================================================= */
 
 /* Renaissance Astrometric Monograph: Warm Stone Palette in Solar Day */
+[data-theme="light"] [class*="bg-stone-950"] {
+  background-color: #f8f9fa !important;
+}
+
+[data-theme="light"] [class*="bg-stone-900"],
+[data-theme="light"] [class*="bg-stone-850"],
+[data-theme="light"] [class*="bg-stone-800"] {
+  background-color: #ffffff !important;
+}
+
 [data-theme="light"] .bg-stone-950,
 [data-theme="light"] .bg-stone-950\/95,
 [data-theme="light"] .bg-stone-950\/90,
@@ -194,6 +204,10 @@ html[data-theme="light"] {
 [data-theme="light"] .hover\:bg-stone-900:hover,
 [data-theme="light"] .hover\:bg-stone-900\/80:hover {
   background-color: #e9ecef !important;
+}
+
+[data-theme="light"] [class*="border-stone-"] {
+  border-color: #e5e7eb !important;
 }
 
 [data-theme="light"] .border-stone-900,
@@ -447,14 +461,17 @@ aside > div:first-child {
   color: #047857 !important;
 }
 
+[data-theme="light"] [class*="text-amber-"],
 [data-theme="light"] .text-amber-300,
 [data-theme="light"] .text-amber-400,
 [data-theme="light"] .text-amber-300\/80,
 [data-theme="light"] .text-amber-400\/80,
+[data-theme="light"] .text-amber-400\/90,
+[data-theme="light"] .text-amber-500\/80,
 [data-theme="light"] .text-amber-300\/90,
 [data-theme="light"] .text-amber-200\/95,
 [data-theme="light"] .text-amber-500 {
-  color: #92400e !important;
+  color: #78350f !important;
 }
 
 [data-theme="light"] .text-rose-300,

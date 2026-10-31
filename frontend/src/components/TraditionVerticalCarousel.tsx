@@ -198,252 +198,104 @@ export const TraditionVerticalCarousel: React.FC<Props> = ({
     }
   };
 
+  // Clean high-density telemetry cell without nested card border tells
+  const renderTile = (label: string, value: React.ReactNode, colorClass = 'text-amber-300') => (
+    <div className="min-w-0 py-0.5">
+      <span className="text-[11px] text-stone-400 block font-medium leading-tight truncate">{label}</span>
+      <strong className={`${colorClass} font-bold block truncate text-xs font-mono`}>{value}</strong>
+    </div>
+  );
+
   // Extract key telemetry badges per tradition
   const renderTelemetryHighlights = (key: TraditionKey) => {
     switch (key) {
       case 'jyotisha':
         return (
-          <div className="grid grid-cols-2 gap-1 sm:gap-1.5 text-[10px] sm:text-xs font-mono">
-            <div className="p-1 sm:p-1.5 rounded bg-black/40 border border-white/10 min-w-0">
-              <span className="text-[9px] sm:text-[10.5px] text-slate-400 block font-medium leading-tight truncate">Lagna (Ascendant)</span>
-              <strong className="text-amber-300 font-bold block truncate">
-                {jyotisha?.lagna?.sign} ({jyotisha?.lagna?.degree?.toFixed(2)}°)
-              </strong>
-            </div>
-            <div className="p-1 sm:p-1.5 rounded bg-black/40 border border-white/10 min-w-0">
-              <span className="text-[9px] sm:text-[10.5px] text-slate-400 block font-medium leading-tight truncate">Moon Nakshatra</span>
-              <strong className="text-amber-200 block truncate">
-                {jyotisha?.lagna?.nakshatra?.name || 'Ashwini'} P{jyotisha?.lagna?.nakshatra?.pada || 1}
-              </strong>
-            </div>
-            <div className="p-1 sm:p-1.5 rounded bg-black/40 border border-white/10 min-w-0">
-              <span className="text-[9px] sm:text-[10.5px] text-slate-400 block font-medium leading-tight truncate">D9 Navamsha</span>
-              <strong className="text-amber-400 block truncate">{jyotisha?.lagna?.navamsha_sign || 'Aries'}</strong>
-            </div>
-            <div className="p-1 sm:p-1.5 rounded bg-black/40 border border-white/10 min-w-0">
-              <span className="text-[9px] sm:text-[10.5px] text-slate-400 block font-medium leading-tight truncate">Ayanamsha (Lahiri)</span>
-              <strong className="text-amber-300 font-mono block truncate">
-                {data.astronomical_base?.ayanamsha?.degrees?.toFixed(4)}°
-              </strong>
-            </div>
+          <div className="grid grid-cols-2 gap-x-3 gap-y-1 py-0.5 text-xs font-mono">
+            {renderTile('Lagna (Ascendant)', `${jyotisha?.lagna?.sign} (${jyotisha?.lagna?.degree?.toFixed(2)}°)`, 'text-amber-300')}
+            {renderTile('Moon Nakshatra', `${jyotisha?.lagna?.nakshatra?.name || 'Ashwini'} P${jyotisha?.lagna?.nakshatra?.pada || 1}`, 'text-amber-200')}
+            {renderTile('D9 Navamsha', jyotisha?.lagna?.navamsha_sign || 'Aries', 'text-amber-400')}
+            {renderTile('Ayanamsha (Lahiri)', `${data.astronomical_base?.ayanamsha?.degrees?.toFixed(4)}°`, 'text-amber-300')}
           </div>
         );
 
       case 'bazi':
         return (
-          <div className="grid grid-cols-2 gap-1 sm:gap-1.5 text-[10px] sm:text-xs font-mono">
-            <div className="p-1 sm:p-1.5 rounded bg-black/40 border border-white/10 min-w-0">
-              <span className="text-[9px] sm:text-[10.5px] text-slate-400 block font-medium leading-tight truncate">Day Master (日主)</span>
-              <strong className="text-rose-300 font-bold block truncate">
-                {bazi?.day_master?.stem || 'Jia (甲)'} ({bazi?.day_master?.element || 'Wood'})
-              </strong>
-            </div>
-            <div className="p-1 sm:p-1.5 rounded bg-black/40 border border-white/10 min-w-0">
-              <span className="text-[9px] sm:text-[10.5px] text-slate-400 block font-medium leading-tight truncate">Dominant Qi (气)</span>
-              <strong className="text-rose-200 block truncate">{bazi?.dominant_element || 'Fire/Metal Balance'}</strong>
-            </div>
-            <div className="p-1 sm:p-1.5 rounded bg-black/40 border border-white/10 min-w-0">
-              <span className="text-[9px] sm:text-[10.5px] text-slate-400 block font-medium leading-tight truncate">Solar Term (节气)</span>
-              <strong className="text-rose-400 block truncate">{bazi?.solar_term || 'Vernal Equinox'}</strong>
-            </div>
-            <div className="p-1 sm:p-1.5 rounded bg-black/40 border border-white/10 min-w-0">
-              <span className="text-[9px] sm:text-[10.5px] text-slate-400 block font-medium leading-tight truncate">Year Pillar</span>
-              <strong className="text-rose-300 font-mono block truncate">
-                {bazi?.pillars?.year?.stem} {bazi?.pillars?.year?.branch}
-              </strong>
-            </div>
+          <div className="grid grid-cols-2 gap-x-3 gap-y-1 py-0.5 text-xs font-mono">
+            {renderTile('Day Master (日主)', `${bazi?.day_master?.stem || 'Jia (甲)'} (${bazi?.day_master?.element || 'Wood'})`, 'text-amber-300')}
+            {renderTile('Dominant Qi (气)', bazi?.dominant_element || 'Fire/Metal Balance', 'text-amber-200')}
+            {renderTile('Solar Term (节气)', bazi?.solar_term || 'Vernal Equinox', 'text-amber-400')}
+            {renderTile('Year Pillar', `${bazi?.pillars?.year?.stem} ${bazi?.pillars?.year?.branch}`, 'text-amber-300')}
           </div>
         );
 
       case 'western':
         return (
-          <div className="grid grid-cols-2 gap-1 sm:gap-1.5 text-[10px] sm:text-xs font-mono">
-            <div className="p-1 sm:p-1.5 rounded bg-black/40 border border-white/10 min-w-0">
-              <span className="text-[9px] sm:text-[10.5px] text-slate-400 block font-medium leading-tight truncate">Ascendant (H1)</span>
-              <strong className="text-sky-300 font-bold block truncate">
-                {western?.ascendant?.sign || 'Leo'} ({western?.ascendant?.degree || 0}°)
-              </strong>
-            </div>
-            <div className="p-1 sm:p-1.5 rounded bg-black/40 border border-white/10 min-w-0">
-              <span className="text-[9px] sm:text-[10.5px] text-slate-400 block font-medium leading-tight truncate">Planetary Sect</span>
-              <strong className="text-sky-200 block truncate">
-                {western?.sect?.label || (western?.sect?.is_day_chart ? 'Diurnal Chart' : 'Nocturnal Chart')}
-              </strong>
-            </div>
-            <div className="p-1 sm:p-1.5 rounded bg-black/40 border border-white/10 min-w-0">
-              <span className="text-[9px] sm:text-[10.5px] text-slate-400 block font-medium leading-tight truncate">Lot of Fortune</span>
-              <strong className="text-sky-400 block truncate">
-                {western?.lots?.lot_of_fortune ? `${western.lots.lot_of_fortune.sign} H${western.lots.lot_of_fortune.house}` : 'H1 Angular'}
-              </strong>
-            </div>
-            <div className="p-1 sm:p-1.5 rounded bg-black/40 border border-white/10 min-w-0">
-              <span className="text-[9px] sm:text-[10.5px] text-slate-400 block font-medium leading-tight truncate">House System</span>
-              <strong className="text-sky-300 block truncate">Ptolemaic Whole Sign</strong>
-            </div>
+          <div className="grid grid-cols-2 gap-x-3 gap-y-1 py-0.5 text-xs font-mono">
+            {renderTile('Ascendant (H1)', `${western?.ascendant?.sign || 'Leo'} (${western?.ascendant?.degree || 0}°)`, 'text-amber-300')}
+            {renderTile('Planetary Sect', western?.sect?.label || (western?.sect?.is_day_chart ? 'Diurnal Chart' : 'Nocturnal Chart'), 'text-amber-200')}
+            {renderTile('Lot of Fortune', western?.lots?.lot_of_fortune ? `${western.lots.lot_of_fortune.sign} H${western.lots.lot_of_fortune.house}` : 'H1 Angular', 'text-amber-400')}
+            {renderTile('House System', 'Ptolemaic Whole Sign', 'text-amber-300')}
           </div>
         );
 
       case 'ziwei':
         return (
-          <div className="grid grid-cols-2 gap-1 sm:gap-1.5 text-[10px] sm:text-xs font-mono">
-            <div className="p-1 sm:p-1.5 rounded bg-black/40 border border-white/10 min-w-0">
-              <span className="text-[9px] sm:text-[10.5px] text-slate-400 block font-medium leading-tight truncate">Five Elements Bureau</span>
-              <strong className="text-amber-300 font-bold block truncate">
-                {ziwei?.five_elements_bureau?.name || 'Water 2 Bureau'}
-              </strong>
-            </div>
-            <div className="p-1 sm:p-1.5 rounded bg-black/40 border border-white/10 min-w-0">
-              <span className="text-[9px] sm:text-[10.5px] text-slate-400 block font-medium leading-tight truncate">Ming Palace (命宮)</span>
-              <strong className="text-amber-200 block truncate">{ziwei?.ming_palace_branch || 'Zi (子)'}</strong>
-            </div>
-            <div className="p-1 sm:p-1.5 rounded bg-black/40 border border-white/10 min-w-0">
-              <span className="text-[9px] sm:text-[10.5px] text-slate-400 block font-medium leading-tight truncate">Shen Palace (身宮)</span>
-              <strong className="text-amber-400 block truncate">{ziwei?.shen_palace_branch || 'Wu (午)'}</strong>
-            </div>
-            <div className="p-1 sm:p-1.5 rounded bg-black/40 border border-white/10 min-w-0">
-              <span className="text-[9px] sm:text-[10.5px] text-slate-400 block font-medium leading-tight truncate">Si Hua (四化)</span>
-              <strong className="text-amber-300 block truncate">
-                {ziwei?.si_hua_transformations ? `Lu: ${ziwei.si_hua_transformations.Lu}` : 'Imperial Stars'}
-              </strong>
-            </div>
+          <div className="grid grid-cols-2 gap-x-3 gap-y-1 py-0.5 text-xs font-mono">
+            {renderTile('Five Elements Bureau', ziwei?.five_elements_bureau?.name || 'Water 2 Bureau', 'text-amber-300')}
+            {renderTile('Ming Palace (命宮)', ziwei?.ming_palace_branch || 'Zi (子)', 'text-amber-200')}
+            {renderTile('Shen Palace (身宮)', ziwei?.shen_palace_branch || 'Wu (午)', 'text-amber-400')}
+            {renderTile('Si Hua (四化)', ziwei?.si_hua_transformations ? `Lu: ${ziwei.si_hua_transformations.Lu}` : 'Imperial Stars', 'text-amber-300')}
           </div>
         );
 
       case 'mayan':
         return (
-          <div className="grid grid-cols-2 gap-1 sm:gap-1.5 text-[10px] sm:text-xs font-sans">
-            <div className="p-1 sm:p-1.5 rounded bg-black/40 border border-white/10 min-w-0">
-              <span className="text-[9px] sm:text-[10.5px] text-slate-400 block font-medium leading-tight truncate">Long Count Stele</span>
-              <strong className="text-emerald-300 font-bold font-mono block truncate">
-                {mayan?.long_count?.formatted || '13.0.11.12.9'}
-              </strong>
-            </div>
-            <div className="p-1 sm:p-1.5 rounded bg-black/40 border border-white/10 min-w-0">
-              <span className="text-[9px] sm:text-[10.5px] text-slate-400 block font-medium leading-tight truncate">Sacred Tzolk’in</span>
-              <strong className="text-emerald-200 font-mono block truncate">
-                {mayan?.tzolkin?.formatted || '8 Chuwen'}
-              </strong>
-            </div>
-            <div className="p-1 sm:p-1.5 rounded bg-black/40 border border-white/10 min-w-0">
-              <span className="text-[9px] sm:text-[10.5px] text-slate-400 block font-medium leading-tight truncate">Haab’ Solar Month</span>
-              <strong className="text-emerald-400 font-mono block truncate">
-                {mayan?.haab?.formatted || '14 Pop'}
-              </strong>
-            </div>
-            <div className="p-1 sm:p-1.5 rounded bg-black/40 border border-white/10 min-w-0">
-              <span className="text-[9px] sm:text-[10.5px] text-slate-400 block font-medium leading-tight truncate">Lord of Night</span>
-              <strong className="text-emerald-300 font-mono block truncate">{mayan?.lord_of_the_night || 'G7'}</strong>
-            </div>
+          <div className="grid grid-cols-2 gap-x-3 gap-y-1 py-0.5 text-xs font-sans">
+            {renderTile('Long Count Stele', mayan?.long_count?.formatted || '13.0.11.12.9', 'text-amber-300 font-mono')}
+            {renderTile('Sacred Tzolk’in', mayan?.tzolkin?.formatted || '8 Chuwen', 'text-amber-200 font-mono')}
+            {renderTile('Haab’ Solar Month', mayan?.haab?.formatted || '14 Pop', 'text-amber-400 font-mono')}
+            {renderTile('Lord of Night', mayan?.lord_of_the_night || 'G7', 'text-amber-300 font-mono')}
           </div>
         );
 
       case 'tibetan':
         return (
-          <div className="grid grid-cols-2 gap-1 sm:gap-1.5 text-[10px] sm:text-xs font-mono">
-            <div className="p-1 sm:p-1.5 rounded bg-black/40 border border-white/10 min-w-0">
-              <span className="text-[9px] sm:text-[10.5px] text-slate-400 block font-medium leading-tight truncate">Rabjung Cycle (རབ་བྱུང)</span>
-              <strong className="text-amber-300 font-bold block truncate">
-                {tibetan?.rabjung_cycle?.element_gender_animal || 'Iron Dragon Year'}
-              </strong>
-            </div>
-            <div className="p-1 sm:p-1.5 rounded bg-black/40 border border-white/10 min-w-0">
-              <span className="text-[9px] sm:text-[10.5px] text-slate-400 block font-medium leading-tight truncate">Year Mewa (སྨེ་བ)</span>
-              <strong className="text-amber-200 block truncate">
-                {tibetan?.mewa?.formatted || 'Mewa 9 Red'}
-              </strong>
-            </div>
-            <div className="p-1 sm:p-1.5 rounded bg-black/40 border border-white/10 min-w-0">
-              <span className="text-[9px] sm:text-[10.5px] text-slate-400 block font-medium leading-tight truncate">Natal Parkha (སྤར་ཁ)</span>
-              <strong className="text-amber-400 block truncate">
-                {tibetan?.parkha?.name ? `${tibetan.parkha.name} (${tibetan.parkha.element})` : 'Li (Fire)'}
-              </strong>
-            </div>
-            <div className="p-1 sm:p-1.5 rounded bg-black/40 border border-white/10 min-w-0">
-              <span className="text-[9px] sm:text-[10.5px] text-slate-400 block font-medium leading-tight truncate">Sog Life Force</span>
-              <strong className="text-amber-300 block truncate">
-                {tibetan?.five_personal_forces?.sog_life_force || 'High Vitality'}
-              </strong>
-            </div>
+          <div className="grid grid-cols-2 gap-x-3 gap-y-1 py-0.5 text-xs font-mono">
+            {renderTile('Rabjung Cycle (རབ་བྱུང)', tibetan?.rabjung_cycle?.element_gender_animal || 'Iron Dragon Year', 'text-amber-300')}
+            {renderTile('Year Mewa (སྨེ་བ)', tibetan?.mewa?.formatted || 'Mewa 9 Red', 'text-amber-200')}
+            {renderTile('Natal Parkha (སྤར་ཁ)', tibetan?.parkha?.name ? `${tibetan.parkha.name} (${tibetan.parkha.element})` : 'Li (Fire)', 'text-amber-400')}
+            {renderTile('Sog Life Force', tibetan?.five_personal_forces?.sog_life_force || 'High Vitality', 'text-amber-300')}
           </div>
         );
 
       case 'persian':
         return (
-          <div className="grid grid-cols-2 gap-1 sm:gap-1.5 text-[10px] sm:text-xs font-mono">
-            <div className="p-1 sm:p-1.5 rounded bg-black/40 border border-white/10 min-w-0">
-              <span className="text-[9px] sm:text-[10.5px] text-slate-400 block font-medium leading-tight truncate">Almuten Figuris</span>
-              <strong className="text-teal-300 font-bold block truncate">
-                {persian?.almuten_figuris?.victor || 'Jupiter'} (+{persian?.almuten_figuris?.victor_score || 38} pts)
-              </strong>
-            </div>
-            <div className="p-1 sm:p-1.5 rounded bg-black/40 border border-white/10 min-w-0">
-              <span className="text-[9px] sm:text-[10.5px] text-slate-400 block font-medium leading-tight truncate">Sect Alignment</span>
-              <strong className="text-teal-200 block truncate">{persian?.sect?.sect_name || 'Diurnal Sect'}</strong>
-            </div>
-            <div className="p-1 sm:p-1.5 rounded bg-black/40 border border-white/10 min-w-0">
-              <span className="text-[9px] sm:text-[10.5px] text-slate-400 block font-medium leading-tight truncate">Planetary Day Ruler</span>
-              <strong className="text-teal-400 block truncate">{persian?.sect?.day_ruler || 'Sun'}</strong>
-            </div>
-            <div className="p-1 sm:p-1.5 rounded bg-black/40 border border-white/10 min-w-0">
-              <span className="text-[9px] sm:text-[10.5px] text-slate-400 block font-medium leading-tight truncate">Tradition Model</span>
-              <strong className="text-teal-300 block truncate">Abu Ma’shar & Ibn Ezra</strong>
-            </div>
+          <div className="grid grid-cols-2 gap-x-3 gap-y-1 py-0.5 text-xs font-mono">
+            {renderTile('Almuten Figuris', `${persian?.almuten_figuris?.victor || 'Jupiter'} (+${persian?.almuten_figuris?.victor_score || 38} pts)`, 'text-amber-300')}
+            {renderTile('Sect Alignment', persian?.sect?.sect_name || 'Diurnal Sect', 'text-amber-200')}
+            {renderTile('Planetary Day Ruler', persian?.sect?.day_ruler || 'Sun', 'text-amber-400')}
+            {renderTile('Tradition Model', 'Abu Ma’shar & Ibn Ezra', 'text-amber-300')}
           </div>
         );
 
       case 'egyptian':
         return (
-          <div className="grid grid-cols-2 gap-1 sm:gap-1.5 text-[10px] sm:text-xs font-sans">
-            <div className="p-1 sm:p-1.5 rounded bg-black/40 border border-white/10 min-w-0">
-              <span className="text-[9px] sm:text-[10.5px] text-slate-400 block font-medium leading-tight truncate">Hour Ruler Chronocrator</span>
-              <strong className="text-yellow-300 font-bold font-mono block truncate">
-                {egyptian?.chronocrator_watch?.hour_ruler_chronocrator || 'Horus'} ({egyptian?.chronocrator_watch?.period || 'Day'})
-              </strong>
-            </div>
-            <div className="p-1 sm:p-1.5 rounded bg-black/40 border border-white/10 min-w-0">
-              <span className="text-[9px] sm:text-[10.5px] text-slate-400 block font-medium leading-tight truncate">Sothic Season</span>
-              <strong className="text-yellow-200 block truncate">
-                {egyptian?.sothic_civil_cycle?.season || 'Akhet (Inundation)'}
-              </strong>
-            </div>
-            <div className="p-1 sm:p-1.5 rounded bg-black/40 border border-white/10 min-w-0">
-              <span className="text-[9px] sm:text-[10.5px] text-slate-400 block font-medium leading-tight truncate">Temporal Hour</span>
-              <strong className="text-yellow-400 block truncate">
-                Hour {egyptian?.chronocrator_watch?.temporal_hour_number || 1} of 12
-              </strong>
-            </div>
-            <div className="p-1 sm:p-1.5 rounded bg-black/40 border border-white/10 min-w-0">
-              <span className="text-[9px] sm:text-[10.5px] text-slate-400 block font-medium leading-tight truncate">Dendera Star Ceiling</span>
-              <strong className="text-yellow-300 block truncate">36 Decanal Gates</strong>
-            </div>
+          <div className="grid grid-cols-2 gap-x-3 gap-y-1 py-0.5 text-xs font-sans">
+            {renderTile('Hour Ruler Chronocrator', `${egyptian?.chronocrator_watch?.hour_ruler_chronocrator || 'Horus'} (${egyptian?.chronocrator_watch?.period || 'Day'})`, 'text-amber-300 font-mono')}
+            {renderTile('Sothic Season', egyptian?.sothic_civil_cycle?.season || 'Akhet (Inundation)', 'text-amber-200')}
+            {renderTile('Temporal Hour', `Hour ${egyptian?.chronocrator_watch?.temporal_hour_number || 1} of 12`, 'text-amber-400')}
+            {renderTile('Dendera Star Ceiling', '36 Decanal Gates', 'text-amber-300')}
           </div>
         );
 
       case 'maramataka':
         return (
-          <div className="grid grid-cols-2 gap-1 sm:gap-1.5 text-[10px] sm:text-xs font-sans">
-            <div className="p-1 sm:p-1.5 rounded bg-black/40 border border-white/10 min-w-0">
-              <span className="text-[9px] sm:text-[10.5px] text-slate-400 block font-medium leading-tight truncate">Oceanic Moon Night</span>
-              <strong className="text-emerald-300 font-bold font-mono block truncate">
-                {maramataka?.lunar_night?.name ? `#${maramataka.lunar_night.number}: ${maramataka.lunar_night.name}` : 'Rakaunui (#16)'}
-              </strong>
-            </div>
-            <div className="p-1 sm:p-1.5 rounded bg-black/40 border border-white/10 min-w-0">
-              <span className="text-[9px] sm:text-[10.5px] text-slate-400 block font-medium leading-tight truncate">Mauri Vitality Index</span>
-              <strong className="text-emerald-200 block truncate">{maramataka?.lunar_night?.vitality_index || 'High Mauri'}</strong>
-            </div>
-            <div className="p-1 sm:p-1.5 rounded bg-black/40 border border-white/10 min-w-0">
-              <span className="text-[9px] sm:text-[10.5px] text-slate-400 block font-medium leading-tight truncate">Moon Illumination</span>
-              <strong className="text-emerald-400 font-mono block truncate">
-                {maramataka?.lunar_night?.illumination_percent ? `${maramataka.lunar_night.illumination_percent}%` : 'Full Moon'}
-              </strong>
-            </div>
-            <div className="p-1 sm:p-1.5 rounded bg-black/40 border border-white/10 min-w-0">
-              <span className="text-[9px] sm:text-[10.5px] text-slate-400 block font-medium leading-tight truncate">Elongation</span>
-              <strong className="text-emerald-300 font-mono block truncate">
-                {maramataka?.lunar_night?.elongation_degrees ? `${maramataka.lunar_night.elongation_degrees}°` : '180°'}
-              </strong>
-            </div>
+          <div className="grid grid-cols-2 gap-x-3 gap-y-1 py-0.5 text-xs font-sans">
+            {renderTile('Oceanic Moon Night', maramataka?.lunar_night?.name ? `#${maramataka.lunar_night.number}: ${maramataka.lunar_night.name}` : 'Rakaunui (#16)', 'text-amber-300 font-mono')}
+            {renderTile('Mauri Vitality Index', maramataka?.lunar_night?.vitality_index || 'High Mauri', 'text-amber-200')}
+            {renderTile('Moon Illumination', maramataka?.lunar_night?.illumination_percent ? `${maramataka.lunar_night.illumination_percent}%` : 'Full Moon', 'text-amber-400 font-mono')}
+            {renderTile('Elongation', maramataka?.lunar_night?.elongation_degrees ? `${maramataka.lunar_night.elongation_degrees}°` : '180°', 'text-amber-300 font-mono')}
           </div>
         );
 
@@ -486,25 +338,25 @@ export const TraditionVerticalCarousel: React.FC<Props> = ({
               className="p-1 flex items-center justify-center cursor-pointer touch-manipulation focus:outline-none"
             >
               <span
-                className={`h-1.5 rounded-full transition-colors duration-200 ease-out inline-block ${
+                className={`h-2 w-2 rounded-full transition-colors duration-200 ease-out inline-block ${
                   activeIndex === idx
-                    ? 'w-3.5 bg-amber-400 shadow-xs'
-                    : 'w-1.5 bg-stone-700 hover:bg-stone-500'
+                    ? 'bg-amber-400 ring-2 ring-amber-300/50'
+                    : 'bg-stone-700 hover:bg-stone-500'
                 }`}
               />
             </button>
           ))}
         </div>
 
-        <div className="flex items-center gap-1.5 text-stone-400 shrink-0 text-[10px] sm:text-xs">
+        <div className="flex items-center gap-1.5 text-stone-400 shrink-0 text-xs">
           <span className="text-amber-400 font-semibold">
             <span className="sm:hidden">{activeIndex + 1}/9</span>
             <span className="hidden sm:inline">Card {activeIndex + 1} of 9</span>
           </span>
-          <span className="hidden md:inline px-1.5 py-0.5 rounded bg-stone-900 border border-stone-800 text-[10px] text-stone-400">
+          <span className="hidden md:inline px-1.5 py-0.5 rounded bg-stone-900 border border-stone-800 text-[11px] text-stone-300">
             ↑ / ↓ or Scroll
           </span>
-          <span className="md:hidden px-1 py-0.5 rounded bg-stone-900 border border-stone-800 text-[9px] text-stone-400">
+          <span className="md:hidden px-1 py-0.5 rounded bg-stone-900 border border-stone-800 text-[11px] text-stone-300">
             Swipe
           </span>
         </div>
@@ -546,11 +398,11 @@ export const TraditionVerticalCarousel: React.FC<Props> = ({
                   aria-label={`Jump to ${theme?.name || key}`}
                   className={`w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center text-xs transition-[background-color,color,transform] duration-150 ease-out cursor-pointer ${
                     isSelected
-                      ? 'bg-amber-400 text-stone-950 font-bold motion-safe:scale-110 shadow-md shadow-amber-500/30 ring-2 ring-amber-300'
+                      ? 'bg-amber-400 text-stone-950 font-bold motion-safe:scale-110 ring-2 ring-amber-300'
                       : 'text-stone-300 hover:text-white hover:bg-white/15'
                   }`}
                 >
-                  <span className="text-[10px] font-mono font-bold select-none">{theme?.glyph || '•'}</span>
+                  <span className="text-[11px] font-mono font-bold select-none">{theme?.glyph || '•'}</span>
                 </button>
               );
             })}
@@ -626,116 +478,118 @@ export const TraditionVerticalCarousel: React.FC<Props> = ({
                         mass: 0.85,
                       }
                 }
-                className={`${isCenter ? 'relative' : 'absolute inset-0 cursor-pointer'} w-full h-[470px] sm:h-[480px] lg:h-[405px] flex flex-col justify-between rounded-2xl border p-2 sm:p-3 shadow-2xl transition-shadow ${
+                className={`${isCenter ? 'relative' : 'absolute inset-0 cursor-pointer'} w-full h-[470px] sm:h-[480px] lg:h-[405px] flex flex-col justify-between rounded-2xl border p-2 sm:p-3 transition-colors ${
                   isCenter
-                    ? `${theme.containerBg} ${theme.containerBorder} backdrop-blur-md shadow-2xl cursor-grab active:cursor-grabbing ring-1 ring-amber-500/30 touch-pan-y`
-                    : 'bg-stone-950/92 border-stone-800 hover:border-amber-500/40'
+                    ? `${theme.containerBg} ${theme.containerBorder} backdrop-blur-md cursor-grab active:cursor-grabbing ring-1 ring-amber-500/30 touch-pan-y`
+                    : 'bg-stone-950/95 border-stone-800 hover:border-amber-500/40'
                 }`}
                 style={{
                   transformOrigin: 'center center',
                   zIndex,
                 }}
               >
-                {/* Cultural Card Header */}
-                <div className="flex items-center justify-between border-b border-white/10 pb-1.5 mb-1.5 sm:pb-2 sm:mb-2 shrink-0">
-                  <div className="flex items-center gap-2 sm:gap-2.5 min-w-0">
-                    <span className="text-xl sm:text-2xl select-none shrink-0">{theme.glyph}</span>
-                    <div className="min-w-0">
-                      <h4 className={`text-sm sm:text-base font-bold tracking-wide font-serif ${theme.accentText} truncate`}>
-                        {theme.nativeTitle}
-                      </h4>
-                      <p className="text-[11px] text-slate-300 font-sans mt-0.5 truncate hidden md:block">
-                        {theme.lineage}
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="flex items-center gap-2 shrink-0">
-                    <span className="text-xs font-mono text-amber-300 font-bold px-2 py-0.5 sm:py-1 rounded bg-black/40 border border-white/10">
-                      {String(index + 1).padStart(2, '0')} / 09
-                    </span>
-                  </div>
-                </div>
-
-                {/* Card Main Body: Split between Telemetry and Visual Instrument */}
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-1 sm:gap-2 lg:gap-3 items-center flex-1 my-auto">
-                  {/* Telemetry Placements (shown when not in pure chart mode) */}
-                  {chartViewMode !== 'chart' && (
-                    <div className={`${chartViewMode === 'table' ? 'lg:col-span-12' : 'lg:col-span-5'} space-y-1 sm:space-y-1.5`}>
-                      <div className="text-xs font-medium text-slate-300 flex items-center justify-between pb-0.5">
-                        <span className="hidden sm:inline">Key Placements</span>
-                        {primaryExplainers[key] && (
-                          <ExplainerTrigger
-                            id={primaryExplainers[key].id}
-                            label={primaryExplainers[key].label}
-                            variant="badge"
-                          />
-                        )}
-                      </div>
-
-                      {renderTelemetryHighlights(key)}
-
-                      {/* Motto Quote Box (Desktop/Tablet only to reserve vertical space for chart on mobile) */}
-                      <div className="p-1 sm:p-1.5 rounded-lg bg-black/30 border border-white/5 hidden sm:block">
-                        <p className="text-[10px] sm:text-[11px] text-slate-400 italic font-serif leading-snug line-clamp-1 sm:line-clamp-2">
-                          &ldquo;{theme.motto}&rdquo;
-                        </p>
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Visual Instrument Display (shown when not in pure table mode) */}
-                  {chartViewMode !== 'table' && (
-                    <div className={`${chartViewMode === 'chart' ? 'lg:col-span-12' : 'lg:col-span-7'} flex flex-col items-center justify-center`}>
-                      <div className={`w-full p-1 sm:p-2 rounded-xl border ${theme.frameBorder} ${theme.frameBg} shadow-inner`}>
-                        <div className="flex items-center justify-between pb-0.5 mb-1 border-b border-white/10">
-                          <div className="flex items-center gap-1.5 min-w-0">
-                            <Compass className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-amber-400 shrink-0" />
-                            <h5 className={`text-[10.5px] sm:text-xs font-sans font-semibold ${theme.accentText} truncate`}>
-                              {theme.instrumentName}
-                            </h5>
-                          </div>
-                          <span className="text-[9px] sm:text-[10px] font-sans text-slate-400 hidden sm:inline-block shrink-0">
-                            Astronomical Accuracy
-                          </span>
-                        </div>
-                        <div
-                          key={`${key}-${isCenter ? 'active' : 'idle'}`}
-                          className={`w-full flex items-center justify-center py-0.5 ${isCenter ? 'animate-instrument-focus' : ''}`}
-                        >
-                          {renderInstrument(key, theme)}
-                        </div>
-                      </div>
-                    </div>
-                  )}
-                </div>
-
-                {/* Persistent Common Action Strip (Docked cleanly inside active card only) */}
-                {isCenter ? (
-                  <div className="flex items-center justify-between gap-1.5 px-1 sm:px-2 pt-1.5 sm:pt-2 mt-auto border-t border-white/10 text-xs shrink-0">
-                    <div className="flex items-center gap-1.5 text-[10px] sm:text-[11px] font-sans text-stone-400 min-w-0">
-                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 inline-block shrink-0 shadow-xs shadow-emerald-400/50" />
-                      <span className="hidden sm:inline truncate">Dual-Engine JPL DE421 + SwissEph 2.10 Authenticated</span>
-                      <span className="sm:hidden truncate">DE421 Verified</span>
-                    </div>
-
-                    <button
-                      type="button"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        onOpenInspector(key);
-                      }}
-                      className="inline-flex items-center justify-center gap-1 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-lg bg-amber-950 hover:bg-amber-900/80 text-amber-200 border border-amber-700/80 text-[10.5px] sm:text-xs font-sans font-semibold transition-[background-color,border-color,transform] motion-safe:active:scale-[0.97] motion-reduce:active:scale-100 duration-150 ease-out cursor-pointer shadow-xs whitespace-nowrap shrink-0"
-                      data-tooltip={`Open full detailed tables and analysis for ${theme?.name || key}`}
-                      aria-label={`Inspect full telemetry and tables for ${theme?.name || key}`}
-                    >
-                      <span>Detailed Tables</span>
-                      <span className="sr-only">Inspect Full Telemetry & Tables</span>
-                      <ArrowRight className="w-3.5 h-3.5" />
-                    </button>
-                  </div>
+                {!isCenter ? (
+                  <div className="w-full h-full pointer-events-none" aria-hidden="true" />
                 ) : (
-                  <div className="h-[36px] mt-auto shrink-0 border-t border-transparent" />
+                  <>
+                    {/* Cultural Card Header */}
+                    <div className="flex items-center justify-between border-b border-white/10 pb-1.5 mb-1.5 sm:pb-2 sm:mb-2 shrink-0">
+                      <div className="flex items-center gap-2 sm:gap-2.5 min-w-0">
+                        <span className="text-xl sm:text-2xl select-none shrink-0">{theme.glyph}</span>
+                        <div className="min-w-0">
+                          <h3 className={`text-sm sm:text-base font-bold tracking-wide font-serif ${theme.accentText} truncate`}>
+                            {theme.nativeTitle}
+                          </h3>
+                          <p className="text-xs text-stone-300 font-sans mt-0.5 truncate hidden md:block">
+                            {theme.lineage}
+                          </p>
+                        </div>
+                      </div>
+
+                      <div className="flex items-center gap-2 shrink-0">
+                        <span className="text-xs font-mono text-amber-300 font-bold px-2 py-0.5">
+                          {String(index + 1).padStart(2, '0')} / 09
+                        </span>
+                      </div>
+                    </div>
+
+                    {/* Card Main Body: Split between Telemetry and Visual Instrument */}
+                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-1 sm:gap-2 lg:gap-3 items-center flex-1 my-auto">
+                      {/* Telemetry Placements (shown when not in pure chart mode) */}
+                      {chartViewMode !== 'chart' && (
+                        <div className={`${chartViewMode === 'table' ? 'lg:col-span-12' : 'lg:col-span-5'} space-y-1 sm:space-y-1.5`}>
+                          <div className="text-xs font-medium text-slate-300 flex items-center justify-between pb-0.5">
+                            <span className="hidden sm:inline">Key Placements</span>
+                            {primaryExplainers[key] && (
+                              <ExplainerTrigger
+                                id={primaryExplainers[key].id}
+                                label={primaryExplainers[key].label}
+                                variant="badge"
+                              />
+                            )}
+                          </div>
+
+                          {renderTelemetryHighlights(key)}
+
+                          {/* Motto Quote Box (Desktop/Tablet only to reserve vertical space for chart on mobile) */}
+                          <div className="pt-1.5 border-t border-white/10 hidden sm:block">
+                            <p className="text-xs text-stone-400 italic font-serif leading-snug line-clamp-1 sm:line-clamp-2">
+                              &ldquo;{theme.motto}&rdquo;
+                            </p>
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Visual Instrument Display (shown when not in pure table mode) */}
+                      {chartViewMode !== 'table' && (
+                        <div className={`${chartViewMode === 'chart' ? 'lg:col-span-12' : 'lg:col-span-7'} flex flex-col items-center justify-center`}>
+                          <div className="w-full flex flex-col items-center">
+                            <div className="flex items-center justify-between pb-1.5 mb-1.5 border-b border-white/10 w-full">
+                              <div className="flex items-center gap-1.5 min-w-0">
+                                <Compass className="w-3.5 h-3.5 text-amber-400 shrink-0" />
+                                <h4 className={`text-xs font-sans font-semibold ${theme.accentText} truncate`}>
+                                  {theme.instrumentName}
+                                </h4>
+                              </div>
+                              <span className="text-xs font-sans text-stone-400 hidden sm:inline-block shrink-0">
+                                Astronomical Accuracy
+                              </span>
+                            </div>
+                            <div
+                              key={`${key}-active`}
+                              className="w-full flex items-center justify-center py-0.5 animate-instrument-focus"
+                            >
+                              {renderInstrument(key, theme)}
+                            </div>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Persistent Common Action Strip (Docked cleanly inside active card only) */}
+                    <div className="flex items-center justify-between gap-1.5 px-1 sm:px-2 pt-1.5 sm:pt-2 mt-auto border-t border-white/10 text-xs shrink-0">
+                      <div className="flex items-center gap-1.5 text-xs font-sans text-stone-400 min-w-0">
+                        <span className="w-1.5 h-1.5 rounded-full bg-amber-400 inline-block shrink-0" />
+                        <span className="hidden sm:inline truncate">Dual-Engine JPL DE421 + SwissEph 2.10 Authenticated</span>
+                        <span className="sm:hidden truncate">DE421 Verified</span>
+                      </div>
+
+                      <button
+                        type="button"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          onOpenInspector(key);
+                        }}
+                        className="inline-flex items-center justify-center gap-1 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-lg bg-amber-950 hover:bg-amber-900/80 text-amber-200 border border-amber-700/80 text-xs font-sans font-semibold transition-[background-color,border-color,transform] motion-safe:active:scale-[0.97] motion-reduce:active:scale-100 duration-150 ease-out cursor-pointer shadow-xs whitespace-nowrap shrink-0"
+                        data-tooltip={`Open full detailed tables and analysis for ${theme?.name || key}`}
+                        aria-label={`Inspect full telemetry and tables for ${theme?.name || key}`}
+                      >
+                        <span>Detailed Tables</span>
+                        <span className="sr-only">Inspect Full Telemetry & Tables</span>
+                        <ArrowRight className="w-3.5 h-3.5" />
+                      </button>
+                    </div>
+                  </>
                 )}
               </motion.div>
             );
