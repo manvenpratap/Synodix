@@ -177,17 +177,17 @@ export const NorthIndianChart: React.FC<VedicChartProps> = ({ jyotisha, compact 
   }
 
   return (
-    <div className="flex flex-col items-center justify-center p-3 bg-slate-950 rounded-lg border border-slate-800">
+    <div className="flex flex-col items-center justify-center p-3 bg-stone-950 rounded-lg border border-stone-800">
       <div className="flex items-center justify-between w-full max-w-[400px] mb-2 px-1">
         <span className="text-xs font-medium text-amber-400">
           North Indian Kundaḷī (Lagna: {jyotisha.lagna.sign})
         </span>
-        <span className="text-xs font-sans text-slate-400">Fixed House Geometry</span>
+        <span className="text-xs font-sans text-stone-400">Fixed House Geometry</span>
       </div>
       {svgContent}
-      <div className="mt-2 text-xs text-slate-400 font-sans text-center flex flex-wrap items-center justify-center gap-2">
+      <div className="mt-2 text-xs text-stone-400 font-sans text-center flex flex-wrap items-center justify-center gap-2">
         <span>Numbers indicate Zodiac Signs (1=Aries ... 12=Pisces)</span>
-        <span className="w-px h-3 bg-slate-700 hidden sm:inline-block" aria-hidden="true" />
+        <span className="w-px h-3 bg-stone-700 hidden sm:inline-block" aria-hidden="true" />
         <span>H1-H4-H7-H10 highlighted Kendras</span>
       </div>
     </div>
@@ -424,20 +424,20 @@ export const WesternCircularWheel: React.FC<WesternWheelProps> = ({ western, com
   }
 
   return (
-    <div className="flex flex-col items-center justify-center p-3 bg-slate-950 rounded-lg border border-slate-800">
+    <div className="flex flex-col items-center justify-center p-3 bg-stone-950 rounded-lg border border-stone-800">
       <div className="flex items-center justify-between w-full max-w-[420px] mb-2 px-1">
         <span className="text-xs font-medium text-cyan-400">
           Western 360° Circular Wheel (Asc: {western.ascendant.sign} {western.ascendant.degree}°)
         </span>
-        <span className="text-xs font-sans text-slate-400">Whole Sign Houses</span>
+        <span className="text-xs font-sans text-stone-400">Whole Sign Houses</span>
       </div>
       {svgContent}
-      <div className="mt-2 text-xs text-slate-400 font-sans text-center flex flex-wrap items-center justify-center gap-2">
+      <div className="mt-2 text-xs text-stone-400 font-sans text-center flex flex-wrap items-center justify-center gap-2">
         <span>Aspect Chords:</span>
         <span className="text-emerald-400">Green = Trine/Sextile</span>
-        <span className="w-px h-3 bg-slate-700 hidden sm:inline-block" aria-hidden="true" />
+        <span className="w-px h-3 bg-stone-700 hidden sm:inline-block" aria-hidden="true" />
         <span className="text-rose-400">Rose = Square/Opposition</span>
-        <span className="w-px h-3 bg-slate-700 hidden sm:inline-block" aria-hidden="true" />
+        <span className="w-px h-3 bg-stone-700 hidden sm:inline-block" aria-hidden="true" />
         <span className="text-amber-400">® = Retrograde</span>
       </div>
     </div>
@@ -613,19 +613,19 @@ export const BaZiElementPentagram: React.FC<BaZiPentagramProps> = ({ bazi, compa
   }
 
   return (
-    <div className="flex flex-col items-center justify-center p-3 bg-slate-950 rounded-lg border border-slate-800">
+    <div className="flex flex-col items-center justify-center p-3 bg-stone-950 rounded-lg border border-stone-800">
       <div className="flex items-center justify-between w-full max-w-[360px] mb-2 px-1">
         <span className="text-xs font-medium text-emerald-400">
           Wu Xing Five Elements Flow (五行生克)
         </span>
-        <span className="text-xs font-sans text-slate-400">Day Master: {bazi.day_master?.stem} ({dayMasterElement})</span>
+        <span className="text-xs font-sans text-stone-400">Day Master: {bazi.day_master?.stem} ({dayMasterElement})</span>
       </div>
       {svgContent}
-      <div className="mt-2 text-xs text-slate-400 font-sans text-center flex flex-wrap items-center justify-center gap-2">
+      <div className="mt-2 text-xs text-stone-400 font-sans text-center flex flex-wrap items-center justify-center gap-2">
         <span><strong className="text-emerald-400">Green Ring:</strong> Generating (生)</span>
-        <span className="w-px h-3 bg-slate-700 hidden sm:inline-block" aria-hidden="true" />
+        <span className="w-px h-3 bg-stone-700 hidden sm:inline-block" aria-hidden="true" />
         <span><strong className="text-rose-400">Dashed Star:</strong> Controlling (克)</span>
-        <span className="w-px h-3 bg-slate-700 hidden sm:inline-block" aria-hidden="true" />
+        <span className="w-px h-3 bg-stone-700 hidden sm:inline-block" aria-hidden="true" />
         <span><strong className="text-amber-400">Gold Glow:</strong> Day Master</span>
       </div>
     </div>
@@ -666,27 +666,27 @@ export const ZiWeiPalaceGrid: React.FC<ZiWeiGridProps> = ({ ziwei, compact }) =>
           compact ? 'p-0.5' : 'p-2'
         } ${
           p.is_ming
-            ? 'bg-slate-900 border-cyan-500 shadow-xs motion-safe:animate-aura-breathe motion-reduce:animate-none'
+            ? 'bg-stone-900 border-cyan-500 shadow-xs motion-safe:animate-aura-breathe motion-reduce:animate-none'
             : p.is_shen
-            ? 'bg-slate-900 border-amber-400 motion-safe:animate-aura-breathe motion-reduce:animate-none'
-            : 'bg-slate-950 border-slate-800 hover:bg-slate-900 hover:border-slate-700'
+            ? 'bg-stone-900 border-amber-400 motion-safe:animate-aura-breathe motion-reduce:animate-none'
+            : 'bg-stone-950 border-stone-800 hover:bg-stone-900 hover:border-stone-700'
         }`}
         style={{ animationDelay: `${bIdx * 20}ms` }}
       >
         {/* Header: Name + Branch + Badges */}
-        <div className="flex items-center justify-between border-b border-slate-800 pb-0.5">
-          <span className={`font-semibold ${compact ? 'text-[8px] sm:text-[8.5px]' : 'text-[11px]'} text-slate-100 flex items-center gap-0.5`}>
+        <div className="flex items-center justify-between border-b border-stone-800 pb-0.5">
+          <span className={`font-semibold ${compact ? 'text-[8px] sm:text-[8.5px]' : 'text-[11px]'} text-stone-100 flex items-center gap-0.5`}>
             {p.name}
             {p.is_ming && <span className="text-[7px] px-0.5 rounded bg-cyan-950 text-cyan-300 border border-cyan-800">M</span>}
             {p.is_shen && <span className="text-[7px] px-0.5 rounded bg-amber-950 text-amber-300 border border-amber-800">S</span>}
           </span>
-          <span className={`${compact ? 'text-[7.5px] sm:text-[8px]' : 'text-[11px]'} font-mono text-slate-500`}>{p.branch}</span>
+          <span className={`${compact ? 'text-[7.5px] sm:text-[8px]' : 'text-[11px]'} font-mono text-stone-500`}>{p.branch}</span>
         </div>
 
         {/* Major Stars */}
         <div className={`${compact ? 'my-0 space-y-0' : 'my-1 space-y-0.5'}`}>
           {p.stars.length === 0 ? (
-            <span className={`${compact ? 'text-[7.5px]' : 'text-[11px]'} text-slate-400 block truncate`}>Empty</span>
+            <span className={`${compact ? 'text-[7.5px]' : 'text-[11px]'} text-stone-400 block truncate`}>Empty</span>
           ) : (
             p.stars.slice(0, compact ? 1 : 3).map((s: string, sIdx: number) => (
               <div
@@ -704,7 +704,7 @@ export const ZiWeiPalaceGrid: React.FC<ZiWeiGridProps> = ({ ziwei, compact }) =>
         </div>
 
         {/* Footer: Decade Decennial Span */}
-        <div className="text-[7px] text-slate-500 font-mono text-right hidden sm:block leading-none">
+        <div className="text-[7px] text-stone-500 font-mono text-right hidden sm:block leading-none">
           {compact ? `${p.decennial_span || '—'}` : `Age ${p.decennial_span || '—'}`}
         </div>
       </div>
@@ -721,31 +721,31 @@ export const ZiWeiPalaceGrid: React.FC<ZiWeiGridProps> = ({ ziwei, compact }) =>
 
       {/* Row 2: 辰 (Left), Courtyard (Center 2x2), 酉 (Right) */}
       {getPalaceCell('辰')}
-      <div className={`col-span-2 row-span-2 bg-slate-900 rounded border border-amber-900/40 ${compact ? 'p-0.5 sm:p-1' : 'p-3'} flex flex-col justify-center text-center select-none animate-instrument-focus`}>
-        <div className={`${compact ? 'pb-0.5' : 'border-b border-slate-800 pb-1'}`}>
+      <div className={`col-span-2 row-span-2 bg-stone-900 rounded border border-amber-900/40 ${compact ? 'p-0.5 sm:p-1' : 'p-3'} flex flex-col justify-center text-center select-none animate-instrument-focus`}>
+        <div className={`${compact ? 'pb-0.5' : 'border-b border-stone-800 pb-1'}`}>
           {!compact && (
             <span className="text-xs font-sans text-amber-400 block font-semibold">
               Central Courtyard
             </span>
           )}
-          <h4 className={`${compact ? 'text-[9.5px] sm:text-[10px] leading-tight' : 'text-sm mt-0.5'} font-bold text-slate-100`}>
+          <h4 className={`${compact ? 'text-[9.5px] sm:text-[10px] leading-tight' : 'text-sm mt-0.5'} font-bold text-stone-100`}>
             {ziwei.five_elements_bureau?.name}
           </h4>
         </div>
 
-        <div className={`${compact ? 'text-[8px] sm:text-[8.5px] space-y-0.5 my-0.5' : 'text-xs space-y-1 my-auto'} text-slate-300 font-sans`}>
+        <div className={`${compact ? 'text-[8px] sm:text-[8.5px] space-y-0.5 my-0.5' : 'text-xs space-y-1 my-auto'} text-stone-300 font-sans`}>
           <div>
-            <span className="text-slate-400">Ming:</span> <strong className="text-cyan-300 font-mono">{ziwei.ming_palace_branch}</strong>
-            <span className="mx-1 text-slate-600" aria-hidden="true">•</span>
-            <span className="text-slate-400">Shen:</span> <strong className="text-amber-300 font-mono">{ziwei.shen_palace_branch}</strong>
+            <span className="text-stone-400">Ming:</span> <strong className="text-cyan-300 font-mono">{ziwei.ming_palace_branch}</strong>
+            <span className="mx-1 text-stone-600" aria-hidden="true">•</span>
+            <span className="text-stone-400">Shen:</span> <strong className="text-amber-300 font-mono">{ziwei.shen_palace_branch}</strong>
           </div>
-          <div className={`${compact ? 'text-[7.5px] sm:text-[8px]' : 'text-[10px]'} text-slate-400`}>
+          <div className={`${compact ? 'text-[7.5px] sm:text-[8px]' : 'text-[10px]'} text-stone-400`}>
             Lunar: Y<span className="font-mono tabular-nums">{ziwei.lunar_date?.year}</span>, M<span className="font-mono tabular-nums">{ziwei.lunar_date?.month}</span>, D<span className="font-mono tabular-nums">{ziwei.lunar_date?.day}</span>
           </div>
         </div>
 
         {!compact && (
-          <div className="text-[9px] font-sans text-slate-500 pt-0.5 border-t border-slate-800">
+          <div className="text-[9px] font-sans text-stone-500 pt-0.5 border-t border-stone-800">
             14 Major Stars
           </div>
         )}
@@ -773,21 +773,21 @@ export const ZiWeiPalaceGrid: React.FC<ZiWeiGridProps> = ({ ziwei, compact }) =>
   }
 
   return (
-    <div className="flex flex-col items-center justify-center p-3 bg-slate-950 rounded-lg border border-slate-800">
+    <div className="flex flex-col items-center justify-center p-3 bg-stone-950 rounded-lg border border-stone-800">
       <div className="flex items-center justify-between w-full max-w-[560px] mb-2 px-1">
         <span className="text-xs font-medium text-amber-400">
           Zi Wei Dou Shu 12-Palace Heavenly Grid (紫微斗数命盘)
         </span>
-        <span className="text-xs font-sans text-slate-400">Bureau: {ziwei.five_elements_bureau?.name}</span>
+        <span className="text-xs font-sans text-stone-400">Bureau: {ziwei.five_elements_bureau?.name}</span>
       </div>
 
       {gridContent}
 
-      <div className="mt-2 text-xs text-slate-400 font-sans text-center flex flex-wrap items-center justify-center gap-2">
+      <div className="mt-2 text-xs text-stone-400 font-sans text-center flex flex-wrap items-center justify-center gap-2">
         <span>Traditional clockwise layout</span>
-        <span className="w-px h-3 bg-slate-700 hidden sm:inline-block" aria-hidden="true" />
+        <span className="w-px h-3 bg-stone-700 hidden sm:inline-block" aria-hidden="true" />
         <span className="text-cyan-300">Cyan Border = Ming (Life)</span>
-        <span className="w-px h-3 bg-slate-700 hidden sm:inline-block" aria-hidden="true" />
+        <span className="w-px h-3 bg-stone-700 hidden sm:inline-block" aria-hidden="true" />
         <span className="text-amber-300">Amber Border = Shen (Body)</span>
       </div>
     </div>
@@ -817,19 +817,19 @@ export const AlmutenDignityBarChart: React.FC<AlmutenBarProps> = ({ persian, com
         return (
           <div key={item.planet} className="space-y-0.5">
             <div className="flex items-center justify-between text-xs font-sans">
-              <span className={`flex items-center gap-1.5 ${isVictor ? 'text-amber-400 font-bold' : 'text-slate-300'}`}>
+              <span className={`flex items-center gap-1.5 ${isVictor ? 'text-amber-400 font-bold' : 'text-stone-300'}`}>
                 {isVictor ? '★' : `#${idx + 1}`} {item.planet}
               </span>
-              <span className="font-mono tabular-nums font-bold text-slate-200">
+              <span className="font-mono tabular-nums font-bold text-stone-200">
                 {item.total_score} pts{' '}
-                <span className="text-[11px] font-normal text-slate-500 font-sans">
+                <span className="text-[11px] font-normal text-stone-500 font-sans">
                   ({item.essential_dignity} ess + {item.accidental_dignity} acc)
                 </span>
               </span>
             </div>
 
             {/* Stacked Bar (Fluid GPU scaleX growth on reveal) */}
-            <div className={`${compact ? 'h-1.5' : 'h-2'} w-full bg-slate-900 rounded overflow-hidden flex border border-slate-800`}>
+            <div className={`${compact ? 'h-1.5' : 'h-2'} w-full bg-stone-900 rounded overflow-hidden flex border border-stone-800`}>
               <div
                 className="h-full bg-cyan-500 animate-bar-grow motion-safe:transition-opacity motion-reduce:transition-none"
                 style={{
@@ -857,7 +857,7 @@ export const AlmutenDignityBarChart: React.FC<AlmutenBarProps> = ({ persian, com
     return (
       <div className="flex flex-col items-center justify-center w-full py-0.5">
         {barContent}
-        <div className="mt-1 text-[10px] sm:text-xs text-slate-400 font-sans flex items-center justify-center gap-3">
+        <div className="mt-1 text-[10px] sm:text-xs text-stone-400 font-sans flex items-center justify-center gap-3">
           <span className="flex items-center gap-1"><span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-sm bg-cyan-500"></span> Essential</span>
           <span className="flex items-center gap-1"><span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-sm bg-amber-500"></span> Accidental</span>
         </div>
@@ -866,17 +866,17 @@ export const AlmutenDignityBarChart: React.FC<AlmutenBarProps> = ({ persian, com
   }
 
   return (
-    <div className="flex flex-col p-3 bg-slate-950 rounded-lg border border-slate-800">
+    <div className="flex flex-col p-3 bg-stone-950 rounded-lg border border-stone-800">
       <div className="flex items-center justify-between mb-3 px-1">
         <span className="text-xs font-medium text-amber-400">
           Almuten Figuris Point Distribution (Weighted Scoring)
         </span>
-        <span className="text-xs font-sans text-slate-400">Victor: {persian.almuten_figuris?.victor}</span>
+        <span className="text-xs font-sans text-stone-400">Victor: {persian.almuten_figuris?.victor}</span>
       </div>
 
       {barContent}
 
-      <div className="mt-3 text-xs text-slate-400 font-sans flex items-center justify-center gap-4">
+      <div className="mt-3 text-xs text-stone-400 font-sans flex items-center justify-center gap-4">
         <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-sm bg-cyan-500"></span> Essential Dignity (Domicile, Exaltation, Bounds)</span>
         <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-sm bg-amber-500"></span> Accidental Dignity (House Angularity & Day Ruler)</span>
       </div>
@@ -982,9 +982,9 @@ export const MaramatakaLunarDial: React.FC<MaramatakaDialProps> = ({ maramataka,
     return (
       <div className="flex flex-col items-center justify-center w-full py-0.5">
         {svgContent}
-        <div className="mt-1 text-[10px] text-slate-400 font-sans text-center flex items-center justify-center gap-1.5">
+        <div className="mt-1 text-[10px] text-stone-400 font-sans text-center flex items-center justify-center gap-1.5">
           <span>{maramataka.oceanic_archetype?.optimal_action}</span>
-          <span className="w-px h-3 bg-slate-700 inline-block" aria-hidden="true" />
+          <span className="w-px h-3 bg-stone-700 inline-block" aria-hidden="true" />
           <span className="font-mono tabular-nums">{night.elongation_degrees}°</span>
           <span>Elongation</span>
         </div>
@@ -993,19 +993,19 @@ export const MaramatakaLunarDial: React.FC<MaramatakaDialProps> = ({ maramataka,
   }
 
   return (
-    <div className="flex flex-col items-center justify-center p-3 bg-slate-950 rounded-lg border border-slate-800">
+    <div className="flex flex-col items-center justify-center p-3 bg-stone-950 rounded-lg border border-stone-800">
       <div className="flex items-center justify-between w-full max-w-[320px] mb-2 px-1 font-sans">
         <span className="text-xs font-medium text-emerald-400">
           Maramataka 30-Night Oceanic Dial
         </span>
-        <span className="text-[11px] text-slate-400">Night <span className="font-mono tabular-nums">#{currentNightNum}</span></span>
+        <span className="text-[11px] text-stone-400">Night <span className="font-mono tabular-nums">#{currentNightNum}</span></span>
       </div>
 
       {svgContent}
 
-      <div className="mt-2 text-[11px] text-slate-400 font-sans text-center flex items-center justify-center gap-1.5">
+      <div className="mt-2 text-[11px] text-stone-400 font-sans text-center flex items-center justify-center gap-1.5">
         <span>{maramataka.oceanic_archetype?.optimal_action}</span>
-        <span className="w-px h-3 bg-slate-700 inline-block" aria-hidden="true" />
+        <span className="w-px h-3 bg-stone-700 inline-block" aria-hidden="true" />
         <span className="font-mono tabular-nums">{night.elongation_degrees}°</span>
         <span>Elongation</span>
       </div>
@@ -1172,7 +1172,7 @@ export const DomainConsensusRadar: React.FC<RadarProps> = ({ synthesis }) => {
         })}
       </svg>
 
-      <div className="mt-2 text-[11px] text-slate-400 font-sans text-center flex items-center justify-center gap-3 flex-wrap">
+      <div className="mt-2 text-[11px] text-stone-400 font-sans text-center flex items-center justify-center gap-3 flex-wrap">
         <span className="flex items-center gap-1">
           <span className="w-2 h-2 rounded-full bg-emerald-400"></span> Strong (3/3)
         </span>
@@ -1233,17 +1233,17 @@ export const TibetanMewaGrid: React.FC<TibetanMewaProps> = ({ tibetan, compact }
               key={`${rIdx}-${num}`}
               className={`${compact ? 'p-1.5 rounded' : 'p-3 rounded-md'} border flex flex-col items-center justify-center text-center animate-grid-cell-reveal motion-safe:transition-colors motion-reduce:transition-none duration-150 ${
                 isNatal
-                  ? 'border-amber-400 bg-slate-800 shadow-md motion-safe:animate-celestial-glow motion-reduce:animate-none'
-                  : 'border-slate-800 bg-slate-900'
+                  ? 'border-amber-400 bg-stone-800 shadow-md motion-safe:animate-celestial-glow motion-reduce:animate-none'
+                  : 'border-stone-800 bg-stone-900'
               }`}
               style={{ animationDelay: `${cellIdx * 35}ms` }}
             >
               <span
-                className={`${compact ? 'text-lg leading-tight' : 'text-2xl'} font-bold font-mono text-slate-100`}
+                className={`${compact ? 'text-lg leading-tight' : 'text-2xl'} font-bold font-mono text-stone-100`}
               >
                 {num}
               </span>
-              <span className={`${compact ? 'text-[9px]' : 'text-[11px] mt-1'} font-sans font-medium text-slate-300`}>
+              <span className={`${compact ? 'text-[9px]' : 'text-[11px] mt-1'} font-sans font-medium text-stone-300`}>
                 {meta?.element}
               </span>
               {isNatal && (
@@ -1262,7 +1262,7 @@ export const TibetanMewaGrid: React.FC<TibetanMewaProps> = ({ tibetan, compact }
     return (
       <div className="flex flex-col items-center justify-center w-full py-0.5">
         {gridCells}
-        <div className="mt-2 text-[10px] font-sans text-slate-400">
+        <div className="mt-2 text-[10px] font-sans text-stone-400">
           Parkha: <strong className="text-cyan-300 font-mono">{natalParkha}</strong> ({tibetan.parkha?.element})
         </div>
       </div>
@@ -1270,18 +1270,18 @@ export const TibetanMewaGrid: React.FC<TibetanMewaProps> = ({ tibetan, compact }
   }
 
   return (
-    <div className="flex flex-col items-center justify-center p-3 bg-slate-950 rounded-lg border border-slate-800">
+    <div className="flex flex-col items-center justify-center p-3 bg-stone-950 rounded-lg border border-stone-800">
       <div className="flex items-center justify-between w-full max-w-[400px] mb-2 px-1 font-sans">
         <span className="text-xs font-medium text-rose-400">
           Tibetan Mewa Magic Square & Parkha (Luoshu Matrix)
         </span>
-        <span className="text-[11px] text-slate-400">Sum = <span className="font-mono tabular-nums">15</span></span>
+        <span className="text-[11px] text-stone-400">Sum = <span className="font-mono tabular-nums">15</span></span>
       </div>
 
       {gridCells}
 
-      <div className="mt-3 p-2 bg-slate-900 border border-slate-800 rounded w-full max-w-[340px] flex items-center justify-between text-xs font-sans">
-        <span className="text-slate-400">Natal Parkha Trigram:</span>
+      <div className="mt-3 p-2 bg-stone-900 border border-stone-800 rounded w-full max-w-[340px] flex items-center justify-between text-xs font-sans">
+        <span className="text-stone-400">Natal Parkha Trigram:</span>
         <span className="text-cyan-300 font-bold font-mono">
           {natalParkha} ({tibetan.parkha?.element})
         </span>
@@ -1394,7 +1394,7 @@ export const EgyptianDecanStarClock: React.FC<EgyptianClockProps> = ({ egyptian,
     return (
       <div className="flex flex-col items-center justify-center w-full py-0.5">
         {svgContent}
-        <div className="mt-1 text-[10px] text-slate-400 font-sans text-center">
+        <div className="mt-1 text-[10px] text-stone-400 font-sans text-center">
           Ascendant Decan: <span className="text-amber-300 font-medium">{guardians.ascendant_decan?.decan_name}</span>
         </div>
       </div>
@@ -1402,17 +1402,17 @@ export const EgyptianDecanStarClock: React.FC<EgyptianClockProps> = ({ egyptian,
   }
 
   return (
-    <div className="flex flex-col items-center justify-center p-3 bg-slate-950 rounded-lg border border-slate-800">
+    <div className="flex flex-col items-center justify-center p-3 bg-stone-950 rounded-lg border border-stone-800">
       <div className="flex items-center justify-between w-full max-w-[360px] mb-2 px-1 font-sans">
         <span className="text-xs font-medium text-cyan-400">
           Ra’s Cosmic Barque 36-Decan Star Clock
         </span>
-        <span className="text-[11px] text-slate-400"><span className="font-mono tabular-nums">10°</span> Segments</span>
+        <span className="text-[11px] text-stone-400"><span className="font-mono tabular-nums">10°</span> Segments</span>
       </div>
 
       {svgContent}
 
-      <div className="mt-2 text-[11px] text-slate-400 font-sans text-center">
+      <div className="mt-2 text-[11px] text-stone-400 font-sans text-center">
         Ascendant Decan: <span className="text-amber-300 font-medium">{guardians.ascendant_decan?.decan_name}</span> (Deity: {guardians.ascendant_decan?.presiding_deity})
       </div>
     </div>
@@ -1502,7 +1502,7 @@ export const MayaCalendarCompass: React.FC<MayanCompassProps> = ({ mayan, compac
     return (
       <div className="flex flex-col items-center justify-center w-full py-0.5">
         {svgContent}
-        <div className="mt-1 text-[10px] text-slate-400 font-sans text-center">
+        <div className="mt-1 text-[10px] text-stone-400 font-sans text-center">
           Long Count: <span className="text-cyan-300 font-mono">{mayan.long_count?.formatted}</span>
         </div>
       </div>
@@ -1510,20 +1510,20 @@ export const MayaCalendarCompass: React.FC<MayanCompassProps> = ({ mayan, compac
   }
 
   return (
-    <div className="flex flex-col items-center justify-center p-3 bg-slate-950 rounded-lg border border-slate-800">
+    <div className="flex flex-col items-center justify-center p-3 bg-stone-950 rounded-lg border border-stone-800">
       <div className="flex items-center justify-between w-full max-w-[340px] mb-2 px-1 font-sans">
         <span className="text-xs font-medium text-cyan-400">
           Maya Calendar Round Interlocking Wheels
         </span>
-        <span className="text-[11px] text-slate-400"><span className="font-mono tabular-nums">52</span>-Year Cycle</span>
+        <span className="text-[11px] text-stone-400"><span className="font-mono tabular-nums">52</span>-Year Cycle</span>
       </div>
 
       {svgContent}
 
-      <div className="mt-2 text-[11px] text-slate-400 font-sans text-center flex items-center justify-center gap-1.5">
+      <div className="mt-2 text-[11px] text-stone-400 font-sans text-center flex items-center justify-center gap-1.5">
         <span>Long Count:</span>
         <span className="text-cyan-300 font-mono">{mayan.long_count?.formatted}</span>
-        <span className="w-px h-3 bg-slate-700 inline-block" aria-hidden="true" />
+        <span className="w-px h-3 bg-stone-700 inline-block" aria-hidden="true" />
         <span>Kin</span>
         <span className="font-mono tabular-nums">#{mayan.long_count?.total_kin}</span>
       </div>

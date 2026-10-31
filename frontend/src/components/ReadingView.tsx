@@ -666,7 +666,7 @@ export const ReadingView: React.FC<Props> = ({ data, subjectName, onNavigate }) 
                 <button
                   type="button"
                   onClick={() => setDomainFilter('all')}
-                  className={`px-3 py-1.5 min-h-[38px] sm:min-h-[32px] rounded text-xs cursor-pointer transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 ${
+                  className={`px-3 py-2 sm:py-1.5 min-h-[44px] sm:min-h-[32px] rounded text-xs cursor-pointer transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 ${
                     domainFilter === 'all'
                       ? 'bg-amber-950 text-amber-200 border border-amber-700/80'
                       : 'text-stone-400 hover:text-stone-200 border border-stone-800'
@@ -677,7 +677,7 @@ export const ReadingView: React.FC<Props> = ({ data, subjectName, onNavigate }) 
                 <button
                   type="button"
                   onClick={() => setDomainFilter('consensus')}
-                  className={`px-3 py-1.5 min-h-[38px] sm:min-h-[32px] rounded text-xs cursor-pointer transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 ${
+                  className={`px-3 py-2 sm:py-1.5 min-h-[44px] sm:min-h-[32px] rounded text-xs cursor-pointer transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 ${
                     domainFilter === 'consensus'
                       ? 'bg-emerald-950 text-emerald-300 border border-emerald-700/80'
                       : 'text-stone-400 hover:text-stone-200 border border-stone-800'
@@ -688,7 +688,7 @@ export const ReadingView: React.FC<Props> = ({ data, subjectName, onNavigate }) 
                 <button
                   type="button"
                   onClick={() => setDomainFilter('divergent')}
-                  className={`px-3 py-1.5 min-h-[38px] sm:min-h-[32px] rounded text-xs cursor-pointer transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 ${
+                  className={`px-3 py-2 sm:py-1.5 min-h-[44px] sm:min-h-[32px] rounded text-xs cursor-pointer transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 ${
                     domainFilter === 'divergent'
                       ? 'bg-amber-950 text-amber-300 border border-amber-700/80'
                       : 'text-stone-400 hover:text-stone-200 border border-stone-800'

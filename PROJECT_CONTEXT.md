@@ -1,7 +1,7 @@
 # Synodix: Project Context & Working Memory
 
-**Last Updated:** 2026-10-31 06:51:21
-**Version:** 2.33.25  
+**Last Updated:** 2026-10-31 10:08:27
+**Version:** 2.33.26  
 **Stack:** Python 3.12 (FastAPI, Swiss Ephemeris 2.10, Skyfield DE421) + TypeScript / React 19 / Vite / Tailwind CSS v4 / Framer Motion / Capacitor 8 (iOS & Android)  
 **Workspace:** `/Volumes/Study/Projects/Astrology` (symlinked as `/Volumes/Study/Astrology`)  
 **Git Remote:** `https://github.com/manvenpratap/Synodix.git`  
@@ -10,7 +10,17 @@
 
 ## 1. Current Status & Milestone
 
-- **Active Phase**: Modern Mission-Control Typography & All-Caps Elimination (Completed)
+- **Active Phase**: UI Review Touch Targets & Token Discipline Refinements (Completed)
+- **UI Review Touch Targets & Token Discipline Refinements (v2.33.26)**:
+  - **Mobile Touch Target Optimization (`ReadingView.tsx`, `TraditionCharts.tsx`, `ExplainerTrigger.tsx`)**:
+    - Expanded domain filter pill touch targets in `ReadingView` to `min-h-[44px] sm:min-h-[32px]` with comfortable touch padding.
+    - Upgraded `TraditionCharts` presentation toggles (`All / Visual / Tables`) and layout switcher (`Deck / Matrix`) to `min-h-[34px] sm:min-h-[30px]`.
+    - Enhanced `ExplainerTrigger` touch boundaries: icon variant expanded to `min-w-[44px] min-h-[44px] sm:min-w-0 sm:min-h-0` on mobile, button variant to `min-h-[44px] sm:min-h-[32px]`, and badge variant to `min-h-[36px] sm:min-h-0`.
+  - **Design Token Discipline & Palette Parity (`ChartWheelVisualizer.tsx`)**:
+    - Completely replaced 69 occurrences of legacy `slate-` classes in `ChartWheelVisualizer.tsx` with semantic `stone-` tokens (`bg-stone-950`, `border-stone-800`, `text-stone-400`, `text-stone-100`, etc.), establishing 100% palette harmony between visual instruments and the obsidian umber / vellum themes.
+  - **Automated Verification**:
+    - All 26 pytest regression suites passing cleanly (`./pipeline.sh test --summary` in 96.96s).
+    - Zero console errors and zero horizontal overflow across mobile and desktop viewports.
 - **Modern Mission-Control Typography & All-Caps Elimination (v2.33.25)**:
   - **Eliminated All-Caps Roman Inscriptional Fonts (`Cinzel`)**:
     - Replaced archaic all-caps Roman titling font (`Cinzel`) with contemporary, high-legibility `Plus Jakarta Sans` across all headings, titles, buttons, tabs, and navigation items.

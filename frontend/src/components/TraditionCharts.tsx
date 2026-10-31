@@ -297,7 +297,7 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
                   key={mode}
                   type="button"
                   onClick={() => setChartViewMode(mode)}
-                  className={`relative px-1.5 sm:px-2 py-0.5 sm:py-1 min-h-[26px] sm:min-h-[30px] text-[10px] sm:text-[11px] font-mono rounded cursor-pointer transition-colors ${
+                  className={`relative px-2 sm:px-2 py-1 sm:py-1 min-h-[34px] sm:min-h-[30px] text-[10px] sm:text-[11px] font-mono rounded cursor-pointer transition-colors flex items-center justify-center ${
                     isModeActive
                       ? 'bg-amber-950 text-amber-200 font-bold border border-amber-700/80 shadow-xs'
                       : 'text-stone-400 hover:text-stone-200'
@@ -318,7 +318,7 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
             <button
               type="button"
               onClick={() => setLayoutMode('carousel')}
-              className={`flex items-center gap-1 px-1.5 sm:px-2 py-0.5 sm:py-1 min-h-[26px] sm:min-h-[30px] rounded cursor-pointer transition-colors font-serif ${
+              className={`flex items-center gap-1 px-2 sm:px-2 py-1 sm:py-1 min-h-[34px] sm:min-h-[30px] rounded cursor-pointer transition-colors font-serif ${
                 layoutMode === 'carousel'
                   ? 'bg-amber-950 text-amber-300 border border-amber-700/80 font-bold'
                   : 'text-stone-400 hover:text-stone-200'
@@ -334,7 +334,7 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
             <button
               type="button"
               onClick={() => setLayoutMode('inspector')}
-              className={`flex items-center gap-1 px-1.5 sm:px-2 py-0.5 sm:py-1 min-h-[26px] sm:min-h-[30px] rounded cursor-pointer transition-colors font-serif ${
+              className={`flex items-center gap-1 px-2 sm:px-2 py-1 sm:py-1 min-h-[34px] sm:min-h-[30px] rounded cursor-pointer transition-colors font-serif ${
                 layoutMode === 'inspector'
                   ? 'bg-amber-950 text-amber-300 border border-amber-700/80 font-bold'
                   : 'text-stone-400 hover:text-stone-200'
