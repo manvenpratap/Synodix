@@ -1,7 +1,7 @@
 # Synodix: Project Context & Working Memory
 
-**Last Updated:** 2026-10-30 09:33:10
-**Version:** 2.33.24  
+**Last Updated:** 2026-10-31 06:51:21
+**Version:** 2.33.25  
 **Stack:** Python 3.12 (FastAPI, Swiss Ephemeris 2.10, Skyfield DE421) + TypeScript / React 19 / Vite / Tailwind CSS v4 / Framer Motion / Capacitor 8 (iOS & Android)  
 **Workspace:** `/Volumes/Study/Projects/Astrology` (symlinked as `/Volumes/Study/Astrology`)  
 **Git Remote:** `https://github.com/manvenpratap/Synodix.git`  
@@ -10,7 +10,20 @@
 
 ## 1. Current Status & Milestone
 
-- **Active Phase**: Hallmark Visual-First Overhaul & Mobile Decluttering (Completed)
+- **Active Phase**: Modern Mission-Control Typography & All-Caps Elimination (Completed)
+- **Modern Mission-Control Typography & All-Caps Elimination (v2.33.25)**:
+  - **Eliminated All-Caps Roman Inscriptional Fonts (`Cinzel`)**:
+    - Replaced archaic all-caps Roman titling font (`Cinzel`) with contemporary, high-legibility `Plus Jakarta Sans` across all headings, titles, buttons, tabs, and navigation items.
+    - Preserved true sentence-case and mixed-case typography throughout the UI (`Input`, `Traditions`, `Synthesis`, `Reading`, `Vedic Astrometry`, `Calculate All 9 Traditions`), eliminating aggressive shouting caps.
+  - **Precision Telemetry Alignment (`JetBrains Mono`)**:
+    - Standardized celestial telemetry, planetary degrees, coordinates, and astronomical constants on tabular `JetBrains Mono` (`font-variant-numeric: tabular-nums`).
+    - Ensures planetary degrees, nakshatra pads, and ephemeris coordinates align in clean columns without horizontal jitter.
+  - **CSS Design Tokens & Theme Synchronization (`index.html`, `index.css`)**:
+    - Declared `--font-sans` (`Plus Jakarta Sans`), `--font-mono` (`JetBrains Mono`), and Tailwind v4 `@theme` overrides, mapping all `.font-serif` legacy bindings directly to modern sans.
+    - Stripped lingering legacy `uppercase` utility classes from synastry cards and headers in accordance with Hallmark Floor Rule 9.
+  - **Automated Verification**:
+    - All 26 pytest regression suites passing cleanly (`./pipeline.sh test --summary` in 94.48s).
+    - Verified desktop and mobile viewports with zero clipping and clean optical tracking.
 - **Hallmark Visual-First Overhaul & Mobile Decluttering (v2.33.24)**:
   - **Screen 1 (Workbench / Input) Astrometric Celestial Compass & Form Polish (`BirthDataForm.tsx`)**:
     - Embedded dynamic SVG Astrolabe Compass (`AstrometricCelestialCompass`) providing real-time solar degree, lunar phase, zodiac symbol, and exact observer coordinates.

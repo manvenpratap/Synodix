@@ -240,7 +240,7 @@ export const SynastryScreen: React.FC<Props> = ({
           <div>
             <div className="flex items-center gap-2 mb-1">
               <span className="w-2 h-2 rounded-full bg-amber-400 inline-block"></span>
-              <span className="text-xs text-amber-400 font-serif font-medium tracking-wide uppercase">
+              <span className="text-xs text-amber-400 font-serif font-medium tracking-wide">
                 Astrometric Conjunction · Inter-Chart Resonance Engine
               </span>
               <ExplainerTrigger id="synastry_conjunctions" variant="badge" />
@@ -568,7 +568,7 @@ export const SynastryScreen: React.FC<Props> = ({
           <div className="mt-5 p-4 rounded-xl bg-stone-900/90 border border-amber-900/50 shadow-md">
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
               <div className="space-y-1">
-                <span className="text-[11px] font-mono text-amber-400 tracking-wider uppercase">
+                <span className="text-[11px] font-mono text-amber-400 tracking-wide">
                   Archetypal Concordance Synthesis
                 </span>
                 <h3 className="text-base sm:text-lg font-serif font-bold text-stone-100 flex items-center gap-2">
@@ -582,19 +582,19 @@ export const SynastryScreen: React.FC<Props> = ({
               {/* Score Badges */}
               <div className="flex flex-wrap items-center gap-3">
                 <div className="flex flex-col items-center justify-center px-4 py-2 rounded-lg bg-stone-950 border border-amber-800/60 min-w-[100px]">
-                  <span className="text-[10px] font-mono text-stone-400 uppercase">Concordance</span>
+                  <span className="text-[10px] font-sans text-stone-400 font-medium">Concordance</span>
                   <span className="text-xl sm:text-2xl font-serif font-bold text-amber-400">
                     {synastryReport.overallConcordanceScore}%
                   </span>
                 </div>
                 <div className="flex flex-col items-center justify-center px-4 py-2 rounded-lg bg-stone-950 border border-emerald-800/60 min-w-[100px]">
-                  <span className="text-[10px] font-mono text-stone-400 uppercase">Vedic Gunas</span>
+                  <span className="text-[10px] font-sans text-stone-400 font-medium">Vedic Gunas</span>
                   <span className="text-xl sm:text-2xl font-serif font-bold text-emerald-400">
                     {synastryReport.ashtakoota.totalScore}/36
                   </span>
                 </div>
                 <div className="flex flex-col items-center justify-center px-4 py-2 rounded-lg bg-stone-950 border border-stone-800 min-w-[100px]">
-                  <span className="text-[10px] font-mono text-stone-400 uppercase">Aspects</span>
+                  <span className="text-[10px] font-sans text-stone-400 font-medium">Aspects</span>
                   <span className="text-xl sm:text-2xl font-serif font-bold text-cyan-400">
                     {synastryReport.synastryAspects.length}
                   </span>
@@ -663,7 +663,7 @@ export const SynastryScreen: React.FC<Props> = ({
                     <div>
                       <div className="flex items-center justify-between border-b border-stone-800 pb-2">
                         <div>
-                          <span className="text-[10px] font-mono text-amber-400/90 uppercase tracking-wide">
+                          <span className="text-[10px] font-sans text-amber-400/90 font-medium tracking-wide">
                             {trad.culture}
                           </span>
                           <h3 className="text-sm font-serif font-bold text-stone-200">
@@ -857,7 +857,7 @@ export const SynastryScreen: React.FC<Props> = ({
 
               {/* Composite Internal Aspects */}
               <div className="space-y-2">
-                <h4 className="text-xs font-mono text-stone-400 uppercase tracking-wide">
+                <h4 className="text-xs font-sans font-medium text-stone-400">
                   Composite Chart Internal Aspects:
                 </h4>
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2.5">
@@ -887,7 +887,7 @@ export const SynastryScreen: React.FC<Props> = ({
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-stone-800 pb-3">
                   <div>
                     <div className="flex items-center gap-2">
-                      <span className="text-[11px] font-mono text-amber-400 uppercase tracking-wide">
+                      <span className="text-[11px] font-sans font-medium text-amber-400">
                         Parashari Vedic Astrology · 36-Point Guna Milan
                       </span>
                       <ExplainerTrigger id="ashtakoota_compatibility" variant="icon" size="xs" />
@@ -994,7 +994,7 @@ export const SynastryScreen: React.FC<Props> = ({
 
                 <div className="space-y-4 text-xs sm:text-sm font-serif leading-relaxed text-stone-300">
                   <div className="p-3.5 rounded-xl bg-stone-950/80 border border-amber-900/40 space-y-1.5">
-                    <h4 className="text-xs font-mono uppercase text-amber-400 tracking-wider font-semibold">
+                    <h4 className="text-xs font-sans text-amber-400 font-semibold">
                       I. Overall Connection &amp; Core Dynamic
                     </h4>
                     <p className="text-stone-300 leading-relaxed">
@@ -1003,7 +1003,7 @@ export const SynastryScreen: React.FC<Props> = ({
                   </div>
 
                   <div className="p-3.5 rounded-xl bg-stone-950/80 border border-stone-800 space-y-1.5">
-                    <h4 className="text-xs font-mono uppercase text-cyan-400 tracking-wider font-semibold">
+                    <h4 className="text-xs font-sans text-cyan-400 font-semibold">
                       II. Emotional Bond &amp; Psychological Instincts
                     </h4>
                     <p className="text-stone-300 leading-relaxed">
@@ -1012,7 +1012,7 @@ export const SynastryScreen: React.FC<Props> = ({
                   </div>
 
                   <div className="p-3.5 rounded-xl bg-stone-950/80 border border-stone-800 space-y-1.5">
-                    <h4 className="text-xs font-mono uppercase text-emerald-400 tracking-wider font-semibold">
+                    <h4 className="text-xs font-sans text-emerald-400 font-semibold">
                       III. Intellectual Alignment &amp; Communication Style
                     </h4>
                     <p className="text-stone-300 leading-relaxed">
@@ -1021,7 +1021,7 @@ export const SynastryScreen: React.FC<Props> = ({
                   </div>
 
                   <div className="p-3.5 rounded-xl bg-stone-950/80 border border-stone-800 space-y-1.5">
-                    <h4 className="text-xs font-mono uppercase text-rose-400 tracking-wider font-semibold">
+                    <h4 className="text-xs font-sans text-rose-400 font-semibold">
                       IV. Physical Vitality, Attraction &amp; Chemistry
                     </h4>
                     <p className="text-stone-300 leading-relaxed">
@@ -1030,7 +1030,7 @@ export const SynastryScreen: React.FC<Props> = ({
                   </div>
 
                   <div className="p-3.5 rounded-xl bg-stone-950/80 border border-stone-800 space-y-1.5">
-                    <h4 className="text-xs font-mono uppercase text-amber-400 tracking-wider font-semibold">
+                    <h4 className="text-xs font-sans text-amber-400 font-semibold">
                       V. Shared Growth &amp; Long-Term Lessons
                     </h4>
                     <p className="text-stone-300 leading-relaxed">
@@ -1039,7 +1039,7 @@ export const SynastryScreen: React.FC<Props> = ({
                   </div>
 
                   <div className="p-3.5 rounded-xl bg-stone-950/80 border border-stone-800 space-y-1.5">
-                    <h4 className="text-xs font-mono uppercase text-stone-400 tracking-wider font-semibold">
+                    <h4 className="text-xs font-sans text-stone-400 font-semibold">
                       VI. Pragmatic Longevity &amp; Family Stewardship
                     </h4>
                     <p className="text-stone-300 leading-relaxed">
