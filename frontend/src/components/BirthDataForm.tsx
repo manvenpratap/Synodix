@@ -101,7 +101,7 @@ const AstrometricCelestialCompass: React.FC<{
   const lonStr = `${Math.abs(longitude).toFixed(2)}°${longitude >= 0 ? 'E' : 'W'}`;
 
   return (
-    <div className="p-2.5 sm:p-3 rounded-xl bg-stone-900/90 dark:bg-stone-950 border border-amber-800/60 shadow-inner flex items-center justify-between gap-3 overflow-hidden">
+    <div className="p-3 border-b border-stone-800/80 flex items-center justify-between gap-3 overflow-hidden">
       <div className="flex items-center gap-3 min-w-0">
         <div className="relative w-16 h-16 sm:w-20 sm:h-20 shrink-0 flex items-center justify-center">
           <svg viewBox="0 0 110 110" className="w-full h-full select-none" aria-hidden="true">
@@ -140,25 +140,25 @@ const AstrometricCelestialCompass: React.FC<{
 
         <div className="min-w-0 space-y-0.5">
           <div className="flex items-center gap-1.5 flex-wrap">
-            <span className="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-amber-950 text-amber-300 border border-amber-800/80">
+            <span className="px-2 py-0.5 rounded text-[11px] font-mono font-bold bg-amber-950 text-amber-300 border border-amber-800/80">
               {currentZodiac.glyph} Sun in {currentZodiac.sign} {degInSign}°
             </span>
           </div>
           <div className="text-xs font-serif font-semibold text-amber-200 dark:text-amber-100 truncate">
             {cityName ? `${cityName}, ${countryName}` : 'Custom Coordinates'}
           </div>
-          <div className="text-[10px] font-mono text-stone-400 truncate">
+          <div className="text-[11px] font-mono text-stone-400 truncate">
             {latStr}, {lonStr} • {birthDate} {birthTime}
           </div>
         </div>
       </div>
 
       <div className="hidden sm:flex flex-col items-end shrink-0 text-right pr-1">
-        <span className="text-[10px] font-mono text-emerald-400 flex items-center gap-1">
-          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 inline-block animate-pulse" />
+        <span className="text-[11px] font-mono text-amber-300 flex items-center gap-1">
+          <span className="w-1.5 h-1.5 rounded-full bg-amber-400 inline-block" />
           Live Sky Astrolabe
         </span>
-        <span className="text-[10px] font-sans text-stone-400">
+        <span className="text-[11px] font-sans text-stone-400">
           SwissEph &amp; JPL DE421
         </span>
       </div>
@@ -569,7 +569,7 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
         <div
           role="tablist"
           aria-label="Input Experience Switcher"
-          className="relative flex items-center bg-stone-900 p-1 rounded-lg border border-stone-800 w-full sm:w-auto"
+          className="relative flex items-center bg-stone-900/80 p-0.5 rounded-lg w-full sm:w-auto"
         >
           <button
             type="button"
@@ -692,7 +692,7 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
             {/* ========================================================================= */}
             {/* MODULE 1: SUBJECT DOSSIER & NATAL PARAMETERS                              */}
             {/* ========================================================================= */}
-            <div className="rounded-xl bg-stone-900 border border-stone-800 p-3.5 sm:p-5 space-y-3 shadow-xs">
+            <div className="pt-2 pb-3 border-b border-stone-800/70 space-y-3">
               <div className="flex items-center justify-between pb-2 border-b border-stone-800 gap-2">
                 <div className="flex items-center gap-2">
                   <div className="w-6 h-6 rounded-md bg-amber-950/80 border border-amber-800/80 flex items-center justify-center text-amber-400 shrink-0 shadow-xs">
@@ -761,7 +761,7 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
                     >
                       Gender / Cycle Direction
                     </label>
-                    <span className="hidden sm:inline text-[11px] font-sans text-amber-400/80">
+                    <span className="hidden sm:inline text-xs font-sans text-amber-400/80">
                       BaZi &amp; Tibetan Cycles
                     </span>
                   </div>
@@ -784,7 +784,7 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
             {/* ========================================================================= */}
             {/* MODULE 2: TEMPORAL COORDINATES & EPHEMERIS EPOCH                          */}
             {/* ========================================================================= */}
-            <div className="rounded-xl bg-stone-900 border border-stone-800 p-3.5 sm:p-5 space-y-3 shadow-xs">
+            <div className="pt-3 pb-3 border-b border-stone-800/70 space-y-3">
               <div className="flex items-center justify-between pb-2 border-b border-stone-800 gap-2">
                 <div className="flex items-center gap-2">
                   <div className="w-6 h-6 rounded-md bg-amber-950/80 border border-amber-800/80 flex items-center justify-center text-amber-400 shrink-0 shadow-xs">
@@ -794,7 +794,7 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
                     <span className="hidden sm:inline">Section 2 · </span>Date &amp; Time of Birth
                   </h3>
                 </div>
-                <span className="hidden sm:inline-block text-[11px] font-sans text-amber-300 bg-amber-950/60 border border-amber-800/70 px-2 py-0.5 rounded">
+                <span className="hidden sm:inline-block text-xs font-sans text-amber-300 bg-amber-950/60 border border-amber-800/70 px-2 py-0.5 rounded">
                   Universal Time (UTC) Standard
                 </span>
               </div>
@@ -870,10 +870,10 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
             {/* ========================================================================= */}
             {/* MODULE 3: GEOGRAPHIC ORIGIN & SPATIAL OBSERVER                            */}
             {/* ========================================================================= */}
-            <div className="rounded-xl bg-stone-900 border border-stone-800 p-3.5 sm:p-5 space-y-3 shadow-xs">
+            <div className="pt-3 pb-3 border-b border-stone-800/70 space-y-3">
               <div className="flex items-center justify-between pb-2 border-b border-stone-800 gap-2">
                 <div className="flex items-center gap-2">
-                  <div className="w-6 h-6 rounded-md bg-emerald-950/80 border border-emerald-800/80 flex items-center justify-center text-emerald-400 shrink-0 shadow-xs">
+                  <div className="w-6 h-6 rounded-md bg-amber-950/80 border border-amber-800/80 flex items-center justify-center text-amber-400 shrink-0 shadow-xs">
                     <MapPin className="w-3.5 h-3.5" />
                   </div>
                   <h3 className="text-xs sm:text-sm font-semibold text-stone-100">
@@ -1012,7 +1012,7 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
                       </motion.div>
                     )}
                   </AnimatePresence>
-                  <p className="text-[11px] text-stone-400 font-sans mt-1">
+                  <p className="text-xs text-stone-400 font-sans mt-1">
                     Auto-resolves coordinates from offline world gazetteer
                   </p>
                 </div>
@@ -1038,14 +1038,14 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
                     placeholder="Country"
                     className="w-full bg-stone-950 border border-stone-800 rounded-lg px-3 py-2.5 sm:py-2 min-h-[44px] sm:min-h-[40px] text-xs text-stone-100 focus:outline-none focus:border-amber-500 focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:ring-offset-1 focus-visible:ring-offset-stone-950 transition-colors"
                   />
-                  <p className="text-[11px] text-stone-400 font-sans mt-1">
+                  <p className="text-xs text-stone-400 font-sans mt-1">
                     Used for regional historical daylight saving time tables
                   </p>
                 </div>
               </div>
 
               {/* Dedicated High-Precision WGS-84 Coordinates Panel */}
-              <div className="p-3.5 rounded-lg bg-stone-900 border border-stone-800 space-y-3">
+              <div className="pt-3 border-t border-stone-800/70 space-y-3">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1.5 pb-2 border-b border-stone-800">
                   <div className="flex items-center gap-1.5">
                     <Compass className="w-3.5 h-3.5 text-amber-400" />
@@ -1227,7 +1227,7 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
                     )}
                   </button>
                 )}
-                <span className="text-[11px] font-sans text-stone-400 hidden xl:inline">
+                <span className="text-xs font-sans text-stone-400 hidden xl:inline">
                   NASA JPL DE421 Ephemeris • Swiss Ephemeris 2.10 Active
                 </span>
               </div>
@@ -1235,7 +1235,7 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
               <button
                 type="submit"
                 disabled={isLoading}
-                className="w-full sm:w-auto relative overflow-hidden px-6 py-3 min-h-[48px] bg-gradient-to-r from-amber-600 via-amber-500 to-amber-600 hover:from-amber-500 hover:to-amber-400 transition-[background-color,border-color,transform] motion-safe:active:scale-[0.98] motion-reduce:active:scale-100 duration-150 ease-out text-stone-950 font-serif font-bold text-xs sm:text-xs rounded-xl border border-amber-300 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:ring-offset-1 focus-visible:ring-offset-stone-950 shadow-md shadow-amber-950/40 whitespace-nowrap"
+                className="w-full sm:w-auto relative overflow-hidden px-6 py-3 min-h-[48px] bg-gradient-to-r from-amber-600 via-amber-500 to-amber-600 hover:from-amber-500 hover:to-amber-400 transition-[background-color,border-color,transform] motion-safe:active:scale-[0.98] motion-reduce:active:scale-100 duration-150 ease-out text-stone-950 font-serif font-bold text-xs sm:text-xs rounded-xl border border-amber-300 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:ring-offset-1 focus-visible:ring-offset-stone-950 shadow-md whitespace-nowrap"
               >
                 {isLoading && (
                   <div className="absolute inset-0 pointer-events-none">
@@ -1373,7 +1373,7 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
                       }
                     }}
                     className={`btn-press flex flex-col text-left p-2.5 rounded-lg border transition-colors duration-150 cursor-pointer relative group min-h-[58px] active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:ring-offset-1 focus-visible:ring-offset-stone-950 ${isSelected
-                      ? 'bg-amber-950/70 border-amber-500/80 shadow-sm shadow-amber-950 text-stone-100 ring-1 ring-amber-500/40'
+                      ? 'bg-amber-950/70 border-amber-500/80 shadow-sm text-stone-100 ring-1 ring-amber-500/40'
                       : 'bg-stone-900 hover:bg-stone-800 border-stone-800 text-stone-300 hover:border-stone-700'
                       }`}
                   >

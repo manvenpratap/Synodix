@@ -64,14 +64,14 @@ export const InputAuditCard: React.FC<Props> = ({ data }) => {
         {/* Grid of Key Normalizations */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-2.5">
           {/* UTC Instant */}
-          <div className="p-3 bg-stone-900/50 border-t border-stone-800 rounded-lg">
+          <div className="p-2.5 border-l-2 border-stone-800">
             <div className="flex items-center justify-between">
               <span className="text-xs text-stone-400 font-sans font-medium block">
                 UTC Instant
               </span>
               <ExplainerTrigger id="utc_instant_julian_day" variant="icon" size="xs" />
             </div>
-            <p className="text-xs font-sans font-semibold text-cyan-300 mt-1 truncate">
+            <p className="text-xs font-sans font-semibold text-amber-200 mt-1 truncate">
               <span className="font-mono tabular-nums">{norm.utc_iso.replace('T', ' ').slice(0, 19)}</span>Z
             </p>
             <span className="text-xs text-stone-500 font-sans block mt-0.5">
@@ -80,7 +80,7 @@ export const InputAuditCard: React.FC<Props> = ({ data }) => {
           </div>
 
           {/* Local Solar Times */}
-          <div className="p-3 bg-stone-900/50 border-t border-stone-800 rounded-lg">
+          <div className="p-2.5 border-l-2 border-stone-800">
             <div className="flex items-center justify-between">
               <span className="text-xs text-stone-400 font-sans font-medium block">
                 Solar Time & EoT
@@ -96,7 +96,7 @@ export const InputAuditCard: React.FC<Props> = ({ data }) => {
           </div>
 
           {/* Sunrise & Sunset */}
-          <div className="p-3 bg-stone-900/50 border-t border-stone-800 rounded-lg">
+          <div className="p-2.5 border-l-2 border-stone-800">
             <div className="flex items-center justify-between">
               <span className="text-xs text-stone-400 font-sans font-medium block">
                 Horizon & Sect
@@ -112,7 +112,7 @@ export const InputAuditCard: React.FC<Props> = ({ data }) => {
           </div>
 
           {/* Boundary Audit */}
-          <div className="p-3 bg-stone-900/50 border-t border-stone-800 rounded-lg">
+          <div className="p-2.5 border-l-2 border-stone-800">
             <div className="flex items-center justify-between">
               <span className="text-xs text-stone-400 font-sans font-medium block">
                 Boundary Distances
@@ -159,10 +159,10 @@ export const InputAuditCard: React.FC<Props> = ({ data }) => {
             {uncertClass.ensemble_alternatives.map((alt) => (
               <div
                 key={alt.label}
-                className={`p-2.5 rounded-lg border text-xs font-sans ${
+                className={`p-2.5 border-l-2 text-xs font-sans ${
                   alt.label === 'T'
-                    ? 'bg-stone-900/80 border-amber-800/80 text-stone-200'
-                    : 'bg-stone-950/60 border-stone-800 text-stone-300'
+                    ? 'border-amber-500 text-stone-200'
+                    : 'border-stone-800 text-stone-300'
                 }`}
               >
                 <div className="flex items-center justify-between font-medium text-xs text-stone-200">

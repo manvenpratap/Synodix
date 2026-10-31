@@ -467,10 +467,10 @@ function AppContent() {
               {/* Divergence Mini Gauge Bar */}
               <div className="w-full h-1 bg-stone-800 rounded-full overflow-hidden">
                 <div
-                  className={`h-full motion-safe:transition-opacity motion-reduce:transition-none rounded-full ${
+                  className={`h-full rounded-full ${
                     chartData.synthesis.divergence_metrics.divergence_rate_percent > 40
-                      ? 'bg-gradient-to-r from-amber-500 to-rose-500'
-                      : 'bg-gradient-to-r from-amber-600 via-amber-400 to-emerald-400'
+                      ? 'bg-rose-500'
+                      : 'bg-amber-400'
                   }`}
                   style={{ width: `${Math.min(100, Math.max(8, 100 - chartData.synthesis.divergence_metrics.divergence_rate_percent))}%` }}
                 />
@@ -540,7 +540,7 @@ function AppContent() {
             </div>
             <div className="flex justify-between"><span>Epoch:</span> <span className="text-stone-200">J2000.0</span></div>
             <div className="flex justify-between"><span>Julian Day:</span> <span className="text-amber-300">{chartData.astronomical_base?.julian_day_ut?.toFixed(2) || '2451545.00'}</span></div>
-            <div className="flex justify-between"><span>Topocentric:</span> <span className="text-emerald-400">IAU 2000B</span></div>
+            <div className="flex justify-between"><span>Topocentric:</span> <span className="text-stone-300 font-mono">IAU 2000B</span></div>
           </div>
         )}
 
@@ -548,10 +548,10 @@ function AppContent() {
         <div className="px-4 py-3 border-t border-stone-800/80 text-[11px] font-mono space-y-2 shrink-0">
           <div className="flex items-center justify-between text-stone-400">
             <span className="flex items-center gap-1.5">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 shadow-xs inline-block"></span>
+              <span className="w-1.5 h-1.5 rounded-full bg-amber-400 inline-block"></span>
               NASA JPL DE421
             </span>
-            <span className="text-emerald-400 font-semibold">VERIFIED</span>
+            <span className="text-amber-400 font-semibold">VERIFIED</span>
           </div>
           <div className="flex items-center justify-between text-stone-400">
             <span>Client Vault:</span>
@@ -790,9 +790,9 @@ function AppContent() {
                 <ExplainerTrigger id="dual_engine_validation" variant="icon" size="xs" />
               </div>
               <div className="flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-stone-900/70">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 inline-block"></span>
+                <span className="w-1.5 h-1.5 rounded-full bg-amber-400 inline-block"></span>
                 <span className="text-stone-400">JPL DE421:</span>
-                <span className="text-emerald-300 font-semibold">PASS</span>
+                <span className="text-amber-300 font-semibold">PASS</span>
                 <ExplainerTrigger id="dual_engine_validation" variant="icon" size="xs" />
               </div>
               <div
@@ -948,7 +948,7 @@ function AppContent() {
                   <span
                     className={`relative z-10 w-3.5 h-3.5 sm:w-4 sm:h-4 rounded-full flex items-center justify-center text-[9px] sm:text-[11px] font-mono transition-colors duration-150 shrink-0 ${
                       isActive
-                        ? 'bg-amber-400 text-stone-950 font-bold ring-1 sm:ring-2 ring-amber-300/40'
+                        ? 'bg-amber-400 text-black font-bold ring-1 sm:ring-2 ring-amber-300/40'
                         : isPassed
                         ? 'bg-emerald-500/20 text-emerald-300 font-semibold'
                         : 'bg-stone-800 text-stone-400'

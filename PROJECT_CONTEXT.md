@@ -1,7 +1,7 @@
 # Synodix: Project Context & Working Memory
 
-**Last Updated:** 2026-10-31 12:11:10
-**Version:** 2.33.27  
+**Last Updated:** 2026-10-31 12:36:30
+**Version:** 2.33.29  
 **Stack:** Python 3.12 (FastAPI, Swiss Ephemeris 2.10, Skyfield DE421) + TypeScript / React 19 / Vite / Tailwind CSS v4 / Framer Motion / Capacitor 8 (iOS & Android)  
 **Workspace:** `/Volumes/Study/Projects/Astrology` (symlinked as `/Volumes/Study/Astrology`)  
 **Git Remote:** `https://github.com/manvenpratap/Synodix.git`  
@@ -10,7 +10,30 @@
 
 ## 1. Current Status & Milestone
 
-- **Active Phase**: Impeccable Audit Remediation & Contrast Calibration (Completed)
+- **Active Phase**: Palette Harmonization & Neon Accent Elimination (Completed)
+- **Palette Harmonization & Neon Accent Elimination (v2.33.29)**:
+  - **Dignified Telemetry & Icon Palette Alignment (`App.tsx`, `BirthDataForm.tsx`)**:
+    - Replaced lingering emerald/cyan neon tokens (`text-emerald-400`, `bg-emerald-400`) in sidebar status indicators (IAU 2000B, NASA JPL DE421 "VERIFIED", Live Sky Astrolabe) with unified, dignified warm amber (`text-amber-400`, `text-amber-300`, `bg-amber-400`) and neutral stone (`text-stone-300`).
+    - Standardized Section 3 (Birthplace & Location) header icon badge in `BirthDataForm.tsx` to `bg-amber-950/80 border-amber-800/80 text-amber-400`, aligning with Section 1 and Section 2 for 100% monochromatic theme harmony.
+  - **Automated Verification**:
+    - All 26 pytest regression suites passing cleanly (`./pipeline.sh test --summary` in 94.29s).
+    - Zero critical console errors and zero horizontal overflow across mobile and desktop viewports.
+- **Workbench AI Tells Elimination & Typography Alignment (v2.33.28)**:
+  - **AI Tells Remediation (`BirthDataForm.tsx`, `InputAuditCard.tsx`, `App.tsx`, `index.css`, `index.html`)**:
+    - Replaced `animate-pulse` on Live Sky Astrolabe status indicator with a static, calm emerald status dot.
+    - Stripped colored box-shadow glows (`shadow-amber-950`, `shadow-amber-950/40`, `shadow-amber-400/50`) across form submit buttons and cards.
+    - Converted divergence mini gauge in `App.tsx` from an interpolated gradient to solid semantic tokens (`bg-amber-400` / `bg-rose-500`).
+    - Standardized `--font-sans` on the native platform system font stack, reducing Plus Jakarta Sans usage from 64% to balanced heading accents.
+    - Flattened nested cards across `BirthDataForm` (Astrolabe instrument, Form Modules 1-3, coordinates box) and `InputAuditCard` (normalization metrics & alternative intervals) into integrated semantic sections with border dividers.
+  - **Quality & Layout Polish (`BirthDataForm.tsx`, `App.tsx`, `TraditionVerticalCarousel.tsx`)**:
+    - Corrected step 1 indicator badge text on `bg-amber-400` from `text-stone-950` to `text-black font-bold`.
+    - Raised all 10px functional labels in the Astrolabe instrument to the $\ge 11\text{px}$ floor.
+    - Bumped all 11px explanatory body text and helper descriptions across `BirthDataForm.tsx` to standard `text-xs` (12px).
+    - Replaced `transition-[width,background-color]` on carousel pagination dots in `TraditionVerticalCarousel.tsx` with composite `transition-colors`.
+    - Preserved `h4` topic titles in `FeatureGuideScreen.tsx` for robust regression test selector compatibility.
+  - **Automated Verification**:
+    - All 26 pytest regression suites passing cleanly (`./pipeline.sh test --summary` in 89.92s).
+    - Zero critical console errors and zero horizontal overflow across mobile and desktop viewports.
 - **Impeccable Audit Remediation & Contrast Calibration (v2.33.27)**:
   - **AI Tells Remediation (`index.css`, `FeatureGuideScreen.tsx`, `ChartWheelVisualizer.tsx`)**:
     - Eliminated decorative radial spotlight glow from `.celestial-observatory-canvas`, substituting a clean technical precision grid.

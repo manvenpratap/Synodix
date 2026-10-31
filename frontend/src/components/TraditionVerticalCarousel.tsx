@@ -466,7 +466,7 @@ export const TraditionVerticalCarousel: React.FC<Props> = ({
       {/* Top Deck Telemetry Bar */}
       <div className="flex items-center justify-between px-2 sm:px-4 py-1.5 border-b border-white/10 text-[11px] font-mono">
         <div className="flex items-center gap-2 min-w-0">
-          <span className="w-1.5 h-1.5 rounded-full bg-amber-400 inline-block shrink-0 shadow-xs shadow-amber-400/50" />
+          <span className="w-1.5 h-1.5 rounded-full bg-amber-400 inline-block shrink-0 shadow-xs" />
           <span className="text-amber-300 font-serif font-medium text-xs truncate">
             <span className="sm:hidden">Traditions</span>
             <span className="hidden sm:inline">Tradition Cards Deck</span>
@@ -486,9 +486,9 @@ export const TraditionVerticalCarousel: React.FC<Props> = ({
               className="p-1 flex items-center justify-center cursor-pointer touch-manipulation focus:outline-none"
             >
               <span
-                className={`h-1.5 rounded-full transition-[width,background-color] duration-200 ease-out inline-block ${
+                className={`h-1.5 rounded-full transition-colors duration-200 ease-out inline-block ${
                   activeIndex === idx
-                    ? 'w-3.5 bg-amber-400 shadow-xs shadow-amber-400/50'
+                    ? 'w-3.5 bg-amber-400 shadow-xs'
                     : 'w-1.5 bg-stone-700 hover:bg-stone-500'
                 }`}
               />

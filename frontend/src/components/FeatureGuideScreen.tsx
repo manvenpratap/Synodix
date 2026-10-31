@@ -236,11 +236,10 @@ export const FeatureGuideScreen: React.FC<Props> = ({ onNavigate, initialExplain
           <div>
             <div className="flex items-center gap-2">
               <span
-                className={`text-xs font-serif font-medium px-2 py-0.5 rounded border ${
-                  activeSection === 'evidence'
+                className={`text-xs font-serif font-medium px-2 py-0.5 rounded border ${activeSection === 'evidence'
                     ? 'text-amber-300 bg-amber-950/60 border-amber-800/60'
                     : 'text-amber-300 bg-amber-950/60 border-amber-800/60'
-                }`}
+                  }`}
               >
                 {activeSection === 'evidence' ? 'Empirical Statistical Validation' : 'Astrometric Knowledge Base'}
               </span>
@@ -274,11 +273,10 @@ export const FeatureGuideScreen: React.FC<Props> = ({ onNavigate, initialExplain
               role="tab"
               aria-selected={activeSection === 'topics'}
               onClick={() => setActiveSection('topics')}
-              className={`flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-serif font-medium transition-colors duration-150 cursor-pointer min-h-[34px] ${
-                activeSection === 'topics'
+              className={`flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-serif font-medium transition-colors duration-150 cursor-pointer min-h-[34px] ${activeSection === 'topics'
                   ? 'bg-stone-900 text-amber-300 border border-amber-700/80 font-semibold shadow-xs'
                   : 'text-stone-400 hover:text-stone-200'
-              }`}
+                }`}
             >
               <BookOpen className="w-3.5 h-3.5 text-amber-400" />
               <span>50 Knowledge Topics</span>
@@ -288,11 +286,10 @@ export const FeatureGuideScreen: React.FC<Props> = ({ onNavigate, initialExplain
               role="tab"
               aria-selected={activeSection === 'evidence'}
               onClick={() => setActiveSection('evidence')}
-              className={`flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-serif font-medium transition-colors duration-150 cursor-pointer min-h-[34px] ${
-                activeSection === 'evidence'
+              className={`flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-serif font-medium transition-colors duration-150 cursor-pointer min-h-[34px] ${activeSection === 'evidence'
                   ? 'bg-stone-900 text-amber-300 border border-amber-700/80 font-semibold shadow-xs'
                   : 'text-stone-400 hover:text-stone-200'
-              }`}
+                }`}
             >
               <FlaskConical className="w-3.5 h-3.5 text-amber-400" />
               <span>Mathematical Evidence</span>
@@ -336,349 +333,345 @@ export const FeatureGuideScreen: React.FC<Props> = ({ onNavigate, initialExplain
             aria-label="Feature Guide Navigation"
             className="lg:col-span-4 xl:col-span-3 space-y-4"
           >
-          {/* 1. Functional Civilizational Array (9) */}
-          <div className="p-3.5 rounded-xl bg-stone-950 border border-stone-800 shadow-sm space-y-2.5">
-            <div className="flex items-center justify-between pb-1.5 border-b border-stone-800">
-              <span className="text-xs font-serif font-semibold text-stone-300">
-                Civilizational Traditions (9)
-              </span>
-              <div className="flex items-center gap-1.5">
-                {activeCivilization ? (
-                  <button
-                    type="button"
-                    onClick={() => setActiveCivilization(null)}
-                    className="text-xs font-sans text-amber-400 hover:text-amber-200 underline cursor-pointer"
-                  >
-                    Reset Filter
-                  </button>
-                ) : (
-                  <span className="text-xs font-sans text-amber-400 font-medium">9 of 9 Active</span>
-                )}
-              </div>
-            </div>
-
-            {/* 3x3 Grid of Interactive Civilizational Buttons */}
-            <div className="grid grid-cols-3 gap-1.5 text-xs text-center">
-              {CIVILIZATIONS.map((civ) => {
-                const isSelected = activeCivilization === civ.id;
-                return (
-                  <button
-                    key={civ.id}
-                    type="button"
-                    onClick={() => handleCivilizationClick(civ.id)}
-                    data-tooltip={civ.tooltip}
-                    aria-label={`Filter by ${civ.label}`}
-                    aria-pressed={isSelected}
-                    className={`px-1.5 py-1.5 rounded-lg border text-xs font-medium flex items-center justify-center transition-colors duration-150 cursor-pointer min-w-0 ${
-                      isSelected
-                        ? 'bg-amber-950/80 border-amber-500 text-amber-200 shadow-sm ring-1 ring-amber-400'
-                        : 'bg-stone-900 border-stone-800 text-stone-300 hover:text-stone-100 hover:border-stone-700 hover:bg-stone-850'
-                    }`}
-                  >
-                    <span className="truncate font-mono">{civ.code}</span>
-                  </button>
-                );
-              })}
-            </div>
-
-            {/* Active Civilization Jump Link */}
-            {activeCivObj && (
-              <div className="pt-2 border-t border-stone-800 flex items-center justify-between text-xs font-sans">
-                <span className="text-stone-300 truncate">
-                  Filtered: <strong className={activeCivObj.colorClass}>{activeCivObj.label}</strong>
+            {/* 1. Functional Civilizational Array (9) */}
+            <div className="p-3.5 rounded-xl bg-stone-950 border border-stone-800 shadow-sm space-y-2.5">
+              <div className="flex items-center justify-between pb-1.5 border-b border-stone-800">
+                <span className="text-xs font-serif font-semibold text-stone-300">
+                  Civilizational Traditions (9)
                 </span>
-                <button
-                  type="button"
-                  onClick={() => onNavigate('traditions')}
-                  className="text-amber-400 hover:text-amber-200 inline-flex items-center gap-1 hover:underline shrink-0 font-medium"
-                >
-                  <span>Visualizer</span>
-                  <ArrowRight className="w-3 h-3" />
-                </button>
+                <div className="flex items-center gap-1.5">
+                  {activeCivilization ? (
+                    <button
+                      type="button"
+                      onClick={() => setActiveCivilization(null)}
+                      className="text-xs font-sans text-amber-400 hover:text-amber-200 underline cursor-pointer"
+                    >
+                      Reset Filter
+                    </button>
+                  ) : (
+                    <span className="text-xs font-sans text-amber-400 font-medium">9 of 9 Active</span>
+                  )}
+                </div>
               </div>
-            )}
-          </div>
 
-          {/* 2. Search & Category Filters */}
-          <div className="p-3.5 rounded-xl bg-stone-950/90 border border-stone-800 space-y-3 shadow-xs">
-            {/* Search Input */}
-            <div className="relative">
-              <input
-                type="text"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Search formulas, concepts..."
-                className="w-full bg-stone-900 border border-stone-800 rounded-lg pl-8 pr-8 py-2 text-xs font-sans text-stone-100 placeholder:text-stone-500 focus:outline-none focus:border-amber-500 focus-visible:ring-2 focus-visible:ring-amber-400"
-              />
-              <Search className="w-3.5 h-3.5 text-stone-400 absolute left-2.5 top-1/2 -translate-y-1/2 pointer-events-none" />
-              {searchQuery && (
-                <button
-                  type="button"
-                  onClick={() => setSearchQuery('')}
-                  className="absolute right-2 top-1/2 -translate-y-1/2 text-stone-400 hover:text-white"
-                  aria-label="Clear search"
-                >
-                  <X className="w-3 h-3" />
-                </button>
-              )}
-            </div>
-
-            {/* Category Filter Pills */}
-            <div className="space-y-1">
-              <span className="text-xs font-serif font-semibold text-stone-300 block mb-1">
-                Knowledge Domains
-              </span>
-              <div className="flex flex-col gap-1">
-                <button
-                  type="button"
-                  onClick={() => setSelectedCategory('all')}
-                  className={`w-full text-left px-2.5 py-1.5 rounded-md text-xs font-sans transition-colors flex items-center justify-between cursor-pointer ${
-                    selectedCategory === 'all'
-                      ? 'bg-amber-950/80 text-amber-300 font-semibold border border-amber-800/80'
-                      : 'text-stone-400 hover:text-stone-200 hover:bg-stone-900'
-                  }`}
-                >
-                  <span>All Knowledge Domains</span>
-                  <span className="text-xs font-mono text-stone-400">50</span>
-                </button>
-
-                {EXPLAINER_CATEGORIES.map((cat) => {
-                  const isSelected = selectedCategory === cat.name;
-                  const count = allExplainers.filter((e) => e.category === cat.name).length;
+              {/* 3x3 Grid of Interactive Civilizational Buttons */}
+              <div className="grid grid-cols-3 gap-1.5 text-xs text-center">
+                {CIVILIZATIONS.map((civ) => {
+                  const isSelected = activeCivilization === civ.id;
                   return (
                     <button
-                      key={cat.name}
+                      key={civ.id}
                       type="button"
-                      onClick={() => setSelectedCategory(cat.name)}
-                      className={`w-full text-left px-2.5 py-1.5 rounded-md text-xs font-sans transition-colors flex items-center justify-between cursor-pointer ${
-                        isSelected
-                          ? 'bg-amber-950/80 text-amber-300 font-semibold border border-amber-800/80'
-                          : 'text-stone-400 hover:text-stone-200 hover:bg-stone-900'
-                      }`}
+                      onClick={() => handleCivilizationClick(civ.id)}
+                      data-tooltip={civ.tooltip}
+                      aria-label={`Filter by ${civ.label}`}
+                      aria-pressed={isSelected}
+                      className={`px-1.5 py-1.5 rounded-lg border text-xs font-medium flex items-center justify-center transition-colors duration-150 cursor-pointer min-w-0 ${isSelected
+                          ? 'bg-amber-950/80 border-amber-500 text-amber-200 shadow-sm ring-1 ring-amber-400'
+                          : 'bg-stone-900 border-stone-800 text-stone-300 hover:text-stone-100 hover:border-stone-700 hover:bg-stone-850'
+                        }`}
                     >
-                      <span className="truncate">{cat.name}</span>
-                      <span className="text-[10px] font-mono text-stone-400">{count}</span>
+                      <span className="truncate font-mono">{civ.code}</span>
                     </button>
                   );
                 })}
               </div>
-            </div>
-          </div>
 
-          {/* 3. Filtered Topic Explorer List */}
-          <div className="p-3.5 rounded-xl bg-stone-950/90 border border-stone-800 space-y-2 shadow-xs">
-            <div className="flex items-center justify-between pb-1.5 border-b border-stone-800">
-              <span className="text-xs font-serif font-semibold text-stone-300">
-                Topics ({filteredExplainers.length})
-              </span>
-              <span className="text-xs text-stone-400 font-sans">Select to inspect</span>
-            </div>
-
-            <div className="max-h-[380px] overflow-y-auto space-y-1 pr-1 overscroll-contain">
-              {filteredExplainers.length === 0 ? (
-                <div className="p-4 text-center text-xs text-stone-400 font-sans">
-                  No matching topics found for active filters.
+              {/* Active Civilization Jump Link */}
+              {activeCivObj && (
+                <div className="pt-2 border-t border-stone-800 flex items-center justify-between text-xs font-sans">
+                  <span className="text-stone-300 truncate">
+                    Filtered: <strong className={activeCivObj.colorClass}>{activeCivObj.label}</strong>
+                  </span>
+                  <button
+                    type="button"
+                    onClick={() => onNavigate('traditions')}
+                    className="text-amber-400 hover:text-amber-200 inline-flex items-center gap-1 hover:underline shrink-0 font-medium"
+                  >
+                    <span>Visualizer</span>
+                    <ArrowRight className="w-3 h-3" />
+                  </button>
                 </div>
-              ) : (
-                filteredExplainers.map((item) => {
-                  const isSelected = item.id === currentExplainer.id;
-                  return (
-                    <button
-                      key={item.id}
-                      type="button"
-                      onClick={() => setSelectedExplainerId(item.id)}
-                      className={`w-full text-left p-2 rounded-lg transition-colors duration-150 cursor-pointer flex items-center justify-between gap-2 ${
-                        isSelected
-                          ? 'bg-stone-900 border border-amber-500/70 text-amber-200 shadow-sm'
-                          : 'hover:bg-stone-900 text-stone-300 border border-transparent'
-                      }`}
-                    >
-                      <div className="min-w-0">
-                        <h4 className="text-xs font-serif font-semibold text-stone-100 truncate">
-                          {item.title}
-                        </h4>
-                        <div className="flex items-center gap-1.5 mt-0.5">
-                          <span className="text-[11px] font-sans text-stone-400 truncate">
-                            {item.culturalTradition || item.category}
-                          </span>
-                        </div>
-                      </div>
-                      {isSelected && (
-                        <ChevronRight className="w-3.5 h-3.5 text-amber-400 shrink-0" />
-                      )}
-                    </button>
-                  );
-                })
               )}
             </div>
-          </div>
-        </aside>
 
-        {/* ========================================================================= */}
-        {/* RIGHT MASTER READING CANVAS: Detailed Explainer Master Document           */}
-        {/* ========================================================================= */}
-        <section
-          aria-label="Explainer Content"
-          className="lg:col-span-8 xl:col-span-9 space-y-5"
-        >
-          {/* Header Card with Meta Badges */}
-          <div className="p-5 sm:p-6 rounded-2xl bg-stone-900 border border-stone-800 shadow-sm space-y-3.5">
-            <div className="flex flex-wrap items-center justify-between gap-2.5 pb-3 border-b border-stone-800">
-              <div className="flex flex-wrap items-center gap-2">
-                <span className="px-2.5 py-0.5 rounded text-xs font-sans font-medium bg-amber-950/80 text-amber-300 border border-amber-800">
-                  {currentExplainer.category}
-                </span>
-                {currentExplainer.culturalTradition && (
-                  <span className="px-2.5 py-0.5 rounded text-xs font-sans font-medium bg-stone-900 text-stone-300 border border-stone-700">
-                    {currentExplainer.culturalTradition}
-                  </span>
+            {/* 2. Search & Category Filters */}
+            <div className="p-3.5 rounded-xl bg-stone-950/90 border border-stone-800 space-y-3 shadow-xs">
+              {/* Search Input */}
+              <div className="relative">
+                <input
+                  type="text"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  placeholder="Search formulas, concepts..."
+                  className="w-full bg-stone-900 border border-stone-800 rounded-lg pl-8 pr-8 py-2 text-xs font-sans text-stone-100 placeholder:text-stone-500 focus:outline-none focus:border-amber-500 focus-visible:ring-2 focus-visible:ring-amber-400"
+                />
+                <Search className="w-3.5 h-3.5 text-stone-400 absolute left-2.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+                {searchQuery && (
+                  <button
+                    type="button"
+                    onClick={() => setSearchQuery('')}
+                    className="absolute right-2 top-1/2 -translate-y-1/2 text-stone-400 hover:text-white"
+                    aria-label="Clear search"
+                  >
+                    <X className="w-3 h-3" />
+                  </button>
                 )}
-                <span className="text-xs font-sans text-stone-400 hidden sm:inline">
-                  Topic ID: <span className="font-mono">{currentExplainer.id}</span>
-                </span>
               </div>
 
-              {/* Direct Workbench / Visualizer Jump CTA */}
-              <div className="flex items-center gap-2">
+              {/* Category Filter Pills */}
+              <div className="space-y-1">
+                <span className="text-xs font-serif font-semibold text-stone-300 block mb-1">
+                  Knowledge Domains
+                </span>
+                <div className="flex flex-col gap-1">
+                  <button
+                    type="button"
+                    onClick={() => setSelectedCategory('all')}
+                    className={`w-full text-left px-2.5 py-1.5 rounded-md text-xs font-sans transition-colors flex items-center justify-between cursor-pointer ${selectedCategory === 'all'
+                        ? 'bg-amber-950/80 text-amber-300 font-semibold border border-amber-800/80'
+                        : 'text-stone-400 hover:text-stone-200 hover:bg-stone-900'
+                      }`}
+                  >
+                    <span>All Knowledge Domains</span>
+                    <span className="text-xs font-mono text-stone-400">50</span>
+                  </button>
+
+                  {EXPLAINER_CATEGORIES.map((cat) => {
+                    const isSelected = selectedCategory === cat.name;
+                    const count = allExplainers.filter((e) => e.category === cat.name).length;
+                    return (
+                      <button
+                        key={cat.name}
+                        type="button"
+                        onClick={() => setSelectedCategory(cat.name)}
+                        className={`w-full text-left px-2.5 py-1.5 rounded-md text-xs font-sans transition-colors flex items-center justify-between cursor-pointer ${isSelected
+                            ? 'bg-amber-950/80 text-amber-300 font-semibold border border-amber-800/80'
+                            : 'text-stone-400 hover:text-stone-200 hover:bg-stone-900'
+                          }`}
+                      >
+                        <span className="truncate">{cat.name}</span>
+                        <span className="text-[10px] font-mono text-stone-400">{count}</span>
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+            </div>
+
+            {/* 3. Filtered Topic Explorer List */}
+            <div className="p-3.5 rounded-xl bg-stone-950/90 border border-stone-800 space-y-2 shadow-xs">
+              <div className="flex items-center justify-between pb-1.5 border-b border-stone-800">
+                <span className="text-xs font-serif font-semibold text-stone-300">
+                  Topics ({filteredExplainers.length})
+                </span>
+                <span className="text-xs text-stone-400 font-sans">Select to inspect</span>
+              </div>
+
+              <div className="max-h-[380px] overflow-y-auto space-y-1 pr-1 overscroll-contain">
+                {filteredExplainers.length === 0 ? (
+                  <div className="p-4 text-center text-xs text-stone-400 font-sans">
+                    No matching topics found for active filters.
+                  </div>
+                ) : (
+                  filteredExplainers.map((item) => {
+                    const isSelected = item.id === currentExplainer.id;
+                    return (
+                      <button
+                        key={item.id}
+                        type="button"
+                        onClick={() => setSelectedExplainerId(item.id)}
+                        className={`w-full text-left p-2 rounded-lg transition-colors duration-150 cursor-pointer flex items-center justify-between gap-2 ${isSelected
+                            ? 'bg-stone-900 border border-amber-500/70 text-amber-200 shadow-sm'
+                            : 'hover:bg-stone-900 text-stone-300 border border-transparent'
+                          }`}
+                      >
+                        <div className="min-w-0">
+                          <h4 className="text-xs font-serif font-semibold text-stone-100 truncate">
+                            {item.title}
+                          </h4>
+                          <div className="flex items-center gap-1.5 mt-0.5">
+                            <span className="text-[11px] font-sans text-stone-400 truncate">
+                              {item.culturalTradition || item.category}
+                            </span>
+                          </div>
+                        </div>
+                        {isSelected && (
+                          <ChevronRight className="w-3.5 h-3.5 text-amber-400 shrink-0" />
+                        )}
+                      </button>
+                    );
+                  })
+                )}
+              </div>
+            </div>
+          </aside>
+
+          {/* ========================================================================= */}
+          {/* RIGHT MASTER READING CANVAS: Detailed Explainer Master Document           */}
+          {/* ========================================================================= */}
+          <section
+            aria-label="Explainer Content"
+            className="lg:col-span-8 xl:col-span-9 space-y-5"
+          >
+            {/* Header Card with Meta Badges */}
+            <div className="p-5 sm:p-6 rounded-2xl bg-stone-900 border border-stone-800 shadow-sm space-y-3.5">
+              <div className="flex flex-wrap items-center justify-between gap-2.5 pb-3 border-b border-stone-800">
+                <div className="flex flex-wrap items-center gap-2">
+                  <span className="px-2.5 py-0.5 rounded text-xs font-sans font-medium bg-amber-950/80 text-amber-300 border border-amber-800">
+                    {currentExplainer.category}
+                  </span>
+                  {currentExplainer.culturalTradition && (
+                    <span className="px-2.5 py-0.5 rounded text-xs font-sans font-medium bg-stone-900 text-stone-300 border border-stone-700">
+                      {currentExplainer.culturalTradition}
+                    </span>
+                  )}
+                  <span className="text-xs font-sans text-stone-400 hidden sm:inline">
+                    Topic ID: <span className="font-mono">{currentExplainer.id}</span>
+                  </span>
+                </div>
+
+                {/* Direct Workbench / Visualizer Jump CTA */}
+                <div className="flex items-center gap-2">
+                  <button
+                    type="button"
+                    onClick={() => onNavigate('traditions')}
+                    className="inline-flex items-center gap-1 px-3 py-1 text-xs font-serif font-medium text-amber-300 hover:text-amber-100 bg-stone-900 hover:bg-stone-850 border border-amber-700/60 rounded-md transition-colors cursor-pointer"
+                  >
+                    <span>Open in Traditions</span>
+                    <ArrowRight className="w-3 h-3" />
+                  </button>
+                </div>
+              </div>
+
+              <div>
+                <h2 className="text-xl sm:text-2xl lg:text-3xl font-serif font-bold tracking-tight text-stone-100">
+                  {currentExplainer.title}
+                </h2>
+                {currentExplainer.subtitle && (
+                  <p className="text-xs sm:text-sm text-amber-400 font-serif italic mt-1">
+                    {currentExplainer.subtitle}
+                  </p>
+                )}
+              </div>
+            </div>
+
+            {/* Master Content Bento Grid */}
+            <div className="space-y-4">
+              {/* 1. Concept Overview Card */}
+              <div className="p-5 sm:p-6 rounded-2xl bg-stone-950 border border-stone-800 space-y-2.5 shadow-xs">
+                <div className="flex items-center gap-2 text-amber-400">
+                  <Compass className="w-4 h-4" />
+                  <h3 className="text-xs font-serif font-semibold text-amber-300">
+                    Concept Overview & Astrometric Phenomenon
+                  </h3>
+                </div>
+                <p className="text-sm sm:text-base text-stone-200 leading-relaxed font-sans">
+                  {currentExplainer.shortSummary}
+                </p>
+              </div>
+
+              {/* 2. Mathematical Formulation & Algorithmic Steps */}
+              <div className="p-5 sm:p-6 rounded-2xl bg-stone-950 border border-stone-800 space-y-4 shadow-xs">
+                <div className="flex items-center gap-2 text-amber-400">
+                  <Calculator className="w-4 h-4" />
+                  <h3 className="text-xs font-serif font-semibold text-amber-300">
+                    Astronomical & Mathematical Algorithm
+                  </h3>
+                </div>
+
+                {/* Formula Display Box */}
+                <div className="p-3.5 sm:p-4 rounded-xl bg-stone-900/70 border-l-2 border-amber-500/80 text-xs sm:text-sm text-amber-200/95 overflow-x-auto select-all">
+                  <span className="text-xs text-stone-400 block mb-1 font-serif font-medium">
+                    Governing Formula / Mathematical Invariant
+                  </span>
+                  <code className="font-mono block">{currentExplainer.astronomicalFormula}</code>
+                </div>
+
+                {/* Step-by-Step Breakdown */}
+                <div className="space-y-2.5 pt-2">
+                  <h4 className="text-xs font-serif font-semibold text-stone-300">
+                    Algorithmic Execution Pipeline:
+                  </h4>
+                  <div className="divide-y divide-stone-800/60">
+                    {currentExplainer.howItWorks.map((step, idx) => (
+                      <div
+                        key={idx}
+                        className="py-2.5 flex items-start gap-3 first:pt-1 last:pb-1"
+                      >
+                        <div className="w-5 h-5 rounded-full bg-stone-900 border border-stone-800 text-amber-400 flex items-center justify-center text-[10px] font-mono shrink-0 font-bold mt-0.5">
+                          {idx + 1}
+                        </div>
+                        <p className="text-xs sm:text-sm text-stone-300 font-sans leading-relaxed">
+                          {step}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              {/* 3. Why It Matters for Multi-Tradition Agreement */}
+              <div className="p-5 sm:p-6 rounded-2xl bg-stone-950 border border-stone-800 space-y-2.5 shadow-xs">
+                <div className="flex items-center gap-2 text-emerald-400">
+                  <Lightbulb className="w-4 h-4" />
+                  <h3 className="text-xs font-serif font-semibold text-emerald-300">
+                    Why This Matters &amp; Tradition Agreement
+                  </h3>
+                </div>
+                <p className="text-xs sm:text-sm text-stone-300 leading-relaxed font-sans">
+                  {currentExplainer.whyItMatters}
+                </p>
+              </div>
+
+              {/* 4. Epistemological & Historical Lineage */}
+              <div className="p-5 sm:p-6 rounded-2xl bg-stone-950 border border-stone-800 space-y-2.5 shadow-xs">
+                <div className="flex items-center gap-2 text-amber-400">
+                  <History className="w-4 h-4" />
+                  <h3 className="text-xs font-serif font-semibold text-amber-300">
+                    Historical Lineage & Original Treatises
+                  </h3>
+                </div>
+                <p className="text-xs sm:text-sm text-stone-300 italic font-serif leading-relaxed">
+                  {currentExplainer.historicalLineage}
+                </p>
+              </div>
+            </div>
+
+            {/* Chapter Navigation Footer */}
+            <div className="p-4 rounded-xl bg-stone-950 border border-stone-800 flex flex-col sm:flex-row items-center justify-between gap-3">
+              {prevExplainer ? (
                 <button
                   type="button"
-                  onClick={() => onNavigate('traditions')}
-                  className="inline-flex items-center gap-1 px-3 py-1 text-xs font-serif font-medium text-amber-300 hover:text-amber-100 bg-stone-900 hover:bg-stone-850 border border-amber-700/60 rounded-md transition-colors cursor-pointer"
+                  onClick={() => setSelectedExplainerId(prevExplainer.id)}
+                  className="w-full sm:w-auto inline-flex items-center gap-2 px-3.5 py-2 text-xs font-serif font-medium text-stone-300 hover:text-white bg-stone-900 hover:bg-stone-850 border border-stone-800 rounded-lg transition-colors cursor-pointer"
                 >
-                  <span>Open in Traditions</span>
-                  <ArrowRight className="w-3 h-3" />
+                  <ChevronLeft className="w-4 h-4 text-amber-400" />
+                  <span className="truncate max-w-[200px]">Prev: {prevExplainer.title}</span>
                 </button>
-              </div>
-            </div>
+              ) : (
+                <div />
+              )}
 
-            <div>
-              <h2 className="text-xl sm:text-2xl lg:text-3xl font-serif font-bold tracking-tight text-stone-100">
-                {currentExplainer.title}
-              </h2>
-              {currentExplainer.subtitle && (
-                <p className="text-xs sm:text-sm text-amber-400 font-serif italic mt-1">
-                  {currentExplainer.subtitle}
-                </p>
+              <span className="text-xs font-sans text-stone-400">
+                Topic <span className="font-mono">{currentIndex + 1}</span> of <span className="font-mono">{filteredExplainers.length}</span>
+              </span>
+
+              {nextExplainer ? (
+                <button
+                  type="button"
+                  onClick={() => setSelectedExplainerId(nextExplainer.id)}
+                  className="w-full sm:w-auto inline-flex items-center justify-end gap-2 px-3.5 py-2 text-xs font-serif font-medium text-stone-300 hover:text-white bg-stone-900 hover:bg-stone-850 border border-stone-800 rounded-lg transition-colors cursor-pointer text-right"
+                >
+                  <span className="truncate max-w-[200px]">Next: {nextExplainer.title}</span>
+                  <ChevronRight className="w-4 h-4 text-amber-400" />
+                </button>
+              ) : (
+                <div />
               )}
             </div>
-          </div>
-
-          {/* Master Content Bento Grid */}
-          <div className="space-y-4">
-            {/* 1. Concept Overview Card */}
-            <div className="p-5 sm:p-6 rounded-2xl bg-stone-950 border border-stone-800 space-y-2.5 shadow-xs">
-              <div className="flex items-center gap-2 text-amber-400">
-                <Compass className="w-4 h-4" />
-                <h3 className="text-xs font-serif font-semibold text-amber-300">
-                  Concept Overview & Astrometric Phenomenon
-                </h3>
-              </div>
-              <p className="text-sm sm:text-base text-stone-200 leading-relaxed font-sans">
-                {currentExplainer.shortSummary}
-              </p>
-            </div>
-
-            {/* 2. Mathematical Formulation & Algorithmic Steps */}
-            <div className="p-5 sm:p-6 rounded-2xl bg-stone-950 border border-stone-800 space-y-4 shadow-xs">
-              <div className="flex items-center gap-2 text-amber-400">
-                <Calculator className="w-4 h-4" />
-                <h3 className="text-xs font-serif font-semibold text-amber-300">
-                  Astronomical & Mathematical Algorithm
-                </h3>
-              </div>
-
-              {/* Formula Display Box */}
-              <div className="p-3.5 sm:p-4 rounded-xl bg-stone-900/70 border-l-2 border-amber-500/80 text-xs sm:text-sm text-amber-200/95 overflow-x-auto select-all">
-                <span className="text-xs text-stone-400 block mb-1 font-serif font-medium">
-                  Governing Formula / Mathematical Invariant
-                </span>
-                <code className="font-mono block">{currentExplainer.astronomicalFormula}</code>
-              </div>
-
-              {/* Step-by-Step Breakdown */}
-              <div className="space-y-2.5 pt-2">
-                <h4 className="text-xs font-serif font-semibold text-stone-300">
-                  Algorithmic Execution Pipeline:
-                </h4>
-                <div className="divide-y divide-stone-800/60">
-                  {currentExplainer.howItWorks.map((step, idx) => (
-                    <div
-                      key={idx}
-                      className="py-2.5 flex items-start gap-3 first:pt-1 last:pb-1"
-                    >
-                      <div className="w-5 h-5 rounded-full bg-stone-900 border border-stone-800 text-amber-400 flex items-center justify-center text-[10px] font-mono shrink-0 font-bold mt-0.5">
-                        {idx + 1}
-                      </div>
-                      <p className="text-xs sm:text-sm text-stone-300 font-sans leading-relaxed">
-                        {step}
-                      </p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-
-            {/* 3. Why It Matters for Multi-Tradition Agreement */}
-            <div className="p-5 sm:p-6 rounded-2xl bg-stone-950 border border-stone-800 space-y-2.5 shadow-xs">
-              <div className="flex items-center gap-2 text-emerald-400">
-                <Lightbulb className="w-4 h-4" />
-                <h3 className="text-xs font-serif font-semibold text-emerald-300">
-                  Why This Matters &amp; Tradition Agreement
-                </h3>
-              </div>
-              <p className="text-xs sm:text-sm text-stone-300 leading-relaxed font-sans">
-                {currentExplainer.whyItMatters}
-              </p>
-            </div>
-
-            {/* 4. Epistemological & Historical Lineage */}
-            <div className="p-5 sm:p-6 rounded-2xl bg-stone-950 border border-stone-800 space-y-2.5 shadow-xs">
-              <div className="flex items-center gap-2 text-amber-400">
-                <History className="w-4 h-4" />
-                <h3 className="text-xs font-serif font-semibold text-amber-300">
-                  Historical Lineage & Original Treatises
-                </h3>
-              </div>
-              <p className="text-xs sm:text-sm text-stone-300 italic font-serif leading-relaxed">
-                {currentExplainer.historicalLineage}
-              </p>
-            </div>
-          </div>
-
-          {/* Chapter Navigation Footer */}
-          <div className="p-4 rounded-xl bg-stone-950 border border-stone-800 flex flex-col sm:flex-row items-center justify-between gap-3">
-            {prevExplainer ? (
-              <button
-                type="button"
-                onClick={() => setSelectedExplainerId(prevExplainer.id)}
-                className="w-full sm:w-auto inline-flex items-center gap-2 px-3.5 py-2 text-xs font-serif font-medium text-stone-300 hover:text-white bg-stone-900 hover:bg-stone-850 border border-stone-800 rounded-lg transition-colors cursor-pointer"
-              >
-                <ChevronLeft className="w-4 h-4 text-amber-400" />
-                <span className="truncate max-w-[200px]">Prev: {prevExplainer.title}</span>
-              </button>
-            ) : (
-              <div />
-            )}
-
-            <span className="text-xs font-sans text-stone-400">
-              Topic <span className="font-mono">{currentIndex + 1}</span> of <span className="font-mono">{filteredExplainers.length}</span>
-            </span>
-
-            {nextExplainer ? (
-              <button
-                type="button"
-                onClick={() => setSelectedExplainerId(nextExplainer.id)}
-                className="w-full sm:w-auto inline-flex items-center justify-end gap-2 px-3.5 py-2 text-xs font-serif font-medium text-stone-300 hover:text-white bg-stone-900 hover:bg-stone-850 border border-stone-800 rounded-lg transition-colors cursor-pointer text-right"
-              >
-                <span className="truncate max-w-[200px]">Next: {nextExplainer.title}</span>
-                <ChevronRight className="w-4 h-4 text-amber-400" />
-              </button>
-            ) : (
-              <div />
-            )}
-          </div>
-        </section>
-      </div>
+          </section>
+        </div>
       )}
     </div>
   );
