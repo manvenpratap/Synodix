@@ -198,7 +198,7 @@ export const SynthesisMatrix: React.FC<Props> = ({ synthesis, onNavigate }) => {
                 tabIndex={0}
                 aria-expanded={isExpanded}
                 aria-controls={`synthesis-domain-${dom.domain_id}`}
-                className="py-3 px-1.5 sm:px-2 hover:bg-stone-900/30 transition-colors cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
+                className="py-3 px-1.5 sm:px-2 min-h-[48px] hover:bg-stone-900/30 transition-colors cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 select-none touch-manipulation"
                 onClick={() => setExpandedDomain(isExpanded ? null : dom.domain_id)}
                 onKeyDown={(e) => {
                   if (e.key === 'Enter' || e.key === ' ') {
@@ -426,14 +426,14 @@ export const SynthesisMatrix: React.FC<Props> = ({ synthesis, onNavigate }) => {
             className="inline-flex items-center justify-center gap-2 px-4 py-2.5 min-h-[44px] text-xs font-medium rounded-lg bg-stone-900 hover:bg-stone-800 disabled:opacity-50 disabled:cursor-not-allowed text-stone-300 border border-stone-800 cursor-pointer transition-colors active:scale-[0.98] whitespace-nowrap"
           >
             <ArrowLeft className="w-3.5 h-3.5" aria-hidden="true" />
-            <span className="whitespace-nowrap">Step 2 · 9 Traditions<span className="sr-only"> View Traditions</span></span>
+            <span className="whitespace-nowrap">Back to Traditions (Step 2)</span>
           </button>
           <button
             type="button"
             onClick={() => onNavigate('dossier')}
             className="inline-flex items-center justify-center gap-2 px-4 py-2.5 min-h-[44px] text-xs font-serif font-semibold rounded-lg bg-amber-600 hover:bg-amber-500 disabled:opacity-50 disabled:cursor-not-allowed text-stone-950 cursor-pointer transition-colors duration-150 border border-amber-300 shadow-xs active:scale-[0.98] whitespace-nowrap"
           >
-            <span className="whitespace-nowrap">Step 4 · Complete Birth Reading<span className="sr-only"> Read Full Corroboration Dossier</span></span>
+            <span className="whitespace-nowrap">Proceed to Reading (Step 4)<span className="sr-only"> Read Full Corroboration Dossier</span></span>
             <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" />
           </button>
         </div>

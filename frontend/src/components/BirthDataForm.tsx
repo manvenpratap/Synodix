@@ -68,18 +68,18 @@ const AstrometricCelestialCompass: React.FC<{
   const normalizedSun = (sunDeg + 360) % 360;
 
   const ZODIAC = [
-    { sign: 'Aries', glyph: '♈' },
-    { sign: 'Taurus', glyph: '♉' },
-    { sign: 'Gemini', glyph: '♊' },
-    { sign: 'Cancer', glyph: '♋' },
-    { sign: 'Leo', glyph: '♌' },
-    { sign: 'Virgo', glyph: '♍' },
-    { sign: 'Libra', glyph: '♎' },
-    { sign: 'Scorpio', glyph: '♏' },
-    { sign: 'Sagittarius', glyph: '♐' },
-    { sign: 'Capricorn', glyph: '♑' },
-    { sign: 'Aquarius', glyph: '♒' },
-    { sign: 'Pisces', glyph: '♓' },
+    { sign: 'Aries', abbrev: 'Ari' },
+    { sign: 'Taurus', abbrev: 'Tau' },
+    { sign: 'Gemini', abbrev: 'Gem' },
+    { sign: 'Cancer', abbrev: 'Can' },
+    { sign: 'Leo', abbrev: 'Leo' },
+    { sign: 'Virgo', abbrev: 'Vir' },
+    { sign: 'Libra', abbrev: 'Lib' },
+    { sign: 'Scorpio', abbrev: 'Sco' },
+    { sign: 'Sagittarius', abbrev: 'Sag' },
+    { sign: 'Capricorn', abbrev: 'Cap' },
+    { sign: 'Aquarius', abbrev: 'Aqu' },
+    { sign: 'Pisces', abbrev: 'Pis' },
   ];
   const signIndex = Math.floor(normalizedSun / 30);
   const degInSign = (normalizedSun % 30).toFixed(1);
@@ -141,7 +141,7 @@ const AstrometricCelestialCompass: React.FC<{
         <div className="min-w-0 space-y-0.5">
           <div className="flex items-center gap-1.5 flex-wrap">
             <span className="px-2 py-0.5 rounded text-[11px] font-mono font-bold bg-amber-950 text-amber-300 border border-amber-800/80">
-              {currentZodiac.glyph} Sun in {currentZodiac.sign} {degInSign}°
+              Sun in {currentZodiac.sign} {degInSign}°
             </span>
           </div>
           <div className="text-xs font-serif font-semibold text-amber-200 dark:text-amber-100 truncate">
@@ -690,7 +690,7 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
 
           <form onSubmit={handleSubmit} className="space-y-3.5">
             {/* ========================================================================= */}
-            {/* MODULE 1: SUBJECT DOSSIER & NATAL PARAMETERS                              */}
+            {/* MODULE 1: SUBJECT PROFILE & NATAL PARAMETERS                              */}
             {/* ========================================================================= */}
             <div className="pt-2 pb-3 border-b border-stone-800/70 space-y-3">
               <div className="flex items-center justify-between pb-2 border-b border-stone-800 gap-2">
@@ -698,8 +698,8 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
                   <div className="w-6 h-6 rounded-md bg-amber-950/80 border border-amber-800/80 flex items-center justify-center text-amber-400 shrink-0 shadow-xs">
                     <User className="w-3.5 h-3.5" />
                   </div>
-                  <h3 className="text-xs sm:text-sm font-semibold text-stone-100">
-                    <span className="hidden sm:inline">Section 1 · </span>Name &amp; Gender Cycle
+                  <h3 className="text-xs sm:text-sm font-semibold text-stone-100 font-serif">
+                    Subject Profile
                   </h3>
                 </div>
 
@@ -709,22 +709,22 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
                     <button
                       type="button"
                       onClick={handleRestoreDraft}
-                      className="inline-flex items-center gap-1.5 px-2 py-1 min-h-[30px] sm:min-h-[34px] text-[11px] font-sans text-amber-300 hover:text-amber-200 border border-amber-800/60 hover:border-amber-600 bg-amber-950/30 rounded-md cursor-pointer transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
+                      className="inline-flex items-center gap-1.5 px-3 py-1.5 min-h-[44px] sm:min-h-[34px] text-xs font-sans text-amber-300 hover:text-amber-200 border border-amber-800/60 hover:border-amber-600 bg-amber-950/30 rounded-md cursor-pointer transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
                       data-tooltip="Restore unsaved manual calibration draft"
                       aria-label="Restore Custom Draft"
                     >
-                      <RotateCcw className="w-3 h-3 text-amber-400" />
+                      <RotateCcw className="w-3.5 h-3.5 text-amber-400" />
                       <span>Restore Draft</span>
                     </button>
                   )}
                   <button
                     type="button"
                     onClick={handleResetForm}
-                    className="inline-flex items-center gap-1.5 px-2 py-1 min-h-[30px] sm:min-h-[34px] text-[11px] font-sans text-stone-400 hover:text-stone-200 border border-stone-800 hover:border-stone-700 bg-stone-900 rounded-md cursor-pointer transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 min-h-[44px] sm:min-h-[34px] text-xs font-sans text-stone-400 hover:text-stone-200 border border-stone-800 hover:border-stone-700 bg-stone-900 rounded-md cursor-pointer transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
                     data-tooltip="Reset all calibration fields to default"
                     aria-label="Reset Form"
                   >
-                    <RotateCcw className="w-3 h-3" />
+                    <RotateCcw className="w-3.5 h-3.5" />
                     <span>Reset</span>
                   </button>
                 </div>
@@ -737,8 +737,8 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
                     htmlFor="subject_name"
                     className="block text-xs font-sans font-medium text-stone-300 mb-1"
                   >
-                    <span className="hidden sm:inline">Person's Name or Chart Label</span>
-                    <span className="sm:hidden">Person's Name</span>
+                    <span className="hidden sm:inline">Person’s Name or Chart Label</span>
+                    <span className="sm:hidden">Person’s Name</span>
                   </label>
                   <input
                     id="subject_name"
@@ -782,7 +782,7 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
             </div>
 
             {/* ========================================================================= */}
-            {/* MODULE 2: TEMPORAL COORDINATES & EPHEMERIS EPOCH                          */}
+            {/* MODULE 2: BIRTH DATE & TIME                                               */}
             {/* ========================================================================= */}
             <div className="pt-3 pb-3 border-b border-stone-800/70 space-y-3">
               <div className="flex items-center justify-between pb-2 border-b border-stone-800 gap-2">
@@ -790,13 +790,10 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
                   <div className="w-6 h-6 rounded-md bg-amber-950/80 border border-amber-800/80 flex items-center justify-center text-amber-400 shrink-0 shadow-xs">
                     <Clock className="w-3.5 h-3.5" />
                   </div>
-                  <h3 className="text-xs sm:text-sm font-semibold text-stone-100">
-                    <span className="hidden sm:inline">Section 2 · </span>Date &amp; Time of Birth
+                  <h3 className="text-xs sm:text-sm font-semibold text-stone-100 font-serif">
+                    Birth Date &amp; Time
                   </h3>
                 </div>
-                <span className="hidden sm:inline-block text-xs font-sans text-amber-300 bg-amber-950/60 border border-amber-800/70 px-2.5 py-1 rounded">
-                  Universal Time (UTC) Standard
-                </span>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
@@ -868,7 +865,7 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
             </div>
 
             {/* ========================================================================= */}
-            {/* MODULE 3: GEOGRAPHIC ORIGIN & SPATIAL OBSERVER                            */}
+            {/* MODULE 3: BIRTH LOCATION & GEOGRAPHY                                      */}
             {/* ========================================================================= */}
             <div className="pt-3 pb-3 border-b border-stone-800/70 space-y-3">
               <div className="flex items-center justify-between pb-2 border-b border-stone-800 gap-2">
@@ -876,8 +873,8 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
                   <div className="w-6 h-6 rounded-md bg-amber-950/80 border border-amber-800/80 flex items-center justify-center text-amber-400 shrink-0 shadow-xs">
                     <MapPin className="w-3.5 h-3.5" />
                   </div>
-                  <h3 className="text-xs sm:text-sm font-semibold text-stone-100">
-                    <span className="hidden sm:inline">Section 3 · </span>Birthplace &amp; Location
+                  <h3 className="text-xs sm:text-sm font-semibold text-stone-100 font-serif">
+                    Birth Location
                   </h3>
                 </div>
 
@@ -886,7 +883,7 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
                   type="button"
                   onClick={handleDetectLocation}
                   disabled={isLocating}
-                  className="relative shrink-0 inline-flex items-center gap-1.5 min-h-[30px] sm:min-h-[32px] px-2.5 py-1 text-[11px] font-sans text-amber-300 hover:text-amber-100 bg-stone-900 border border-amber-800/70 rounded-lg transition-colors duration-150 cursor-pointer disabled:opacity-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 overflow-hidden shadow-xs hover:border-amber-500 self-start sm:self-auto whitespace-nowrap"
+                  className="relative shrink-0 inline-flex items-center gap-1.5 min-h-[44px] sm:min-h-[34px] px-3 py-1.5 text-xs font-sans text-amber-300 hover:text-amber-100 bg-stone-900 border border-amber-800/70 rounded-lg transition-colors duration-150 cursor-pointer disabled:opacity-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 overflow-hidden shadow-xs hover:border-amber-500 self-start sm:self-auto whitespace-nowrap"
                   data-tooltip="Detect current device GPS coordinates"
                   aria-label="Detect GPS coordinates"
                 >
@@ -1012,9 +1009,6 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
                       </motion.div>
                     )}
                   </AnimatePresence>
-                  <p className="text-xs text-stone-400 font-sans mt-1">
-                    Auto-resolves coordinates from offline world gazetteer
-                  </p>
                 </div>
 
                 {/* Country */}
@@ -1038,19 +1032,16 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
                     placeholder="Country"
                     className="w-full bg-stone-950 border border-stone-800 rounded-lg px-3 py-2.5 sm:py-2 min-h-[44px] sm:min-h-[40px] text-xs text-stone-100 focus:outline-none focus:border-amber-500 focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:ring-offset-1 focus-visible:ring-offset-stone-950 transition-colors"
                   />
-                  <p className="text-xs text-stone-400 font-sans mt-1">
-                    Used for regional historical daylight saving time tables
-                  </p>
                 </div>
               </div>
 
-              {/* Dedicated High-Precision WGS-84 Coordinates Panel */}
+              {/* High-Precision WGS-84 Decimal Coordinates Panel */}
               <div className="pt-3 border-t border-stone-800/70 space-y-3">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1.5 pb-2 border-b border-stone-800">
                   <div className="flex items-center gap-1.5">
                     <Compass className="w-3.5 h-3.5 text-amber-400" />
                     <span className="text-xs font-sans font-semibold text-stone-200">
-                      WGS-84 Decimal Coordinates (Latitude & Longitude)
+                      WGS-84 Decimal Coordinates (Latitude &amp; Longitude)
                     </span>
                   </div>
                   <div className="flex items-center gap-2">
@@ -1108,7 +1099,7 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
                           setCoordStatus('manual');
                           setFormData({ ...formData, latitude: parseFloat(e.target.value) || 0 });
                         }}
-                        className="w-full bg-stone-950 border border-stone-800 rounded-lg pl-3 pr-11 py-2.5 sm:py-2 min-h-[44px] sm:min-h-[40px] text-xs font-mono text-stone-100 focus:outline-none focus:border-amber-500 focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:ring-offset-1 focus-visible:ring-offset-stone-950 transition-colors"
+                        className="w-full bg-stone-950 border border-stone-800 rounded-lg pl-3 pr-12 py-2.5 sm:py-2 min-h-[44px] sm:min-h-[40px] text-xs font-mono text-stone-100 focus:outline-none focus:border-amber-500 focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:ring-offset-1 focus-visible:ring-offset-stone-950 transition-colors"
                       />
                       <button
                         type="button"
@@ -1118,7 +1109,7 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
                         }}
                         title={`Toggle hemisphere: ${formData.latitude >= 0 ? 'North (°N)' : 'South (°S)'}. Click to invert.`}
                         aria-label={`Toggle latitude hemisphere. Current: ${formData.latitude >= 0 ? 'North' : 'South'}`}
-                        className="absolute right-1 top-1/2 -translate-y-1/2 px-2.5 py-1 text-[11px] font-mono font-bold rounded-md bg-stone-800 hover:bg-stone-700 text-amber-300 border border-stone-700 cursor-pointer transition-colors focus:outline-none focus-visible:ring-1 focus-visible:ring-amber-400"
+                        className="absolute right-1 top-1/2 -translate-y-1/2 px-2.5 py-1.5 min-h-[36px] text-xs font-mono font-bold rounded-md bg-stone-800 hover:bg-stone-700 text-amber-300 border border-stone-700 cursor-pointer transition-colors focus:outline-none focus-visible:ring-1 focus-visible:ring-amber-400"
                       >
                         {formData.latitude >= 0 ? '°N' : '°S'}
                       </button>
@@ -1153,7 +1144,7 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
                           setCoordStatus('manual');
                           setFormData({ ...formData, longitude: parseFloat(e.target.value) || 0 });
                         }}
-                        className="w-full bg-stone-950 border border-stone-800 rounded-lg pl-3 pr-11 py-2.5 sm:py-2 min-h-[44px] sm:min-h-[40px] text-xs font-mono text-stone-100 focus:outline-none focus:border-amber-500 focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:ring-offset-1 focus-visible:ring-offset-stone-950 transition-colors"
+                        className="w-full bg-stone-950 border border-stone-800 rounded-lg pl-3 pr-12 py-2.5 sm:py-2 min-h-[44px] sm:min-h-[40px] text-xs font-mono text-stone-100 focus:outline-none focus:border-amber-500 focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:ring-offset-1 focus-visible:ring-offset-stone-950 transition-colors"
                       />
                       <button
                         type="button"
@@ -1163,7 +1154,7 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
                         }}
                         title={`Toggle hemisphere: ${formData.longitude >= 0 ? 'East (°E)' : 'West (°W)'}. Click to invert.`}
                         aria-label={`Toggle longitude hemisphere. Current: ${formData.longitude >= 0 ? 'East' : 'West'}`}
-                        className="absolute right-1 top-1/2 -translate-y-1/2 px-2.5 py-1 text-[11px] font-mono font-bold rounded-md bg-stone-800 hover:bg-stone-700 text-amber-300 border border-stone-700 cursor-pointer transition-colors focus:outline-none focus-visible:ring-1 focus-visible:ring-amber-400"
+                        className="absolute right-1 top-1/2 -translate-y-1/2 px-2.5 py-1.5 min-h-[36px] text-xs font-mono font-bold rounded-md bg-stone-800 hover:bg-stone-700 text-amber-300 border border-stone-700 cursor-pointer transition-colors focus:outline-none focus-visible:ring-1 focus-visible:ring-amber-400"
                       >
                         {formData.longitude >= 0 ? '°E' : '°W'}
                       </button>
@@ -1244,7 +1235,7 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
                 )}
                 {isLoading ? (
                   <>
-                    <svg className="motion-safe:animate-spin h-3.5 w-3.5 text-stone-950" viewBox="0 0 24 24" fill="none">
+                    <svg className="motion-safe:animate-spin h-3.5 w-3.5 text-stone-950" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                       <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                       <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                     </svg>
@@ -1273,9 +1264,9 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
               <button
                 type="button"
                 onClick={() => setActiveMode('archive')}
-                className="inline-flex items-center gap-1.5 min-h-[44px] sm:min-h-[36px] text-amber-400 hover:text-amber-300 font-sans font-medium text-[11px] cursor-pointer hover:underline self-start sm:self-auto focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 rounded px-2 whitespace-nowrap"
+                className="inline-flex items-center gap-1.5 min-h-[44px] sm:min-h-[36px] text-amber-400 hover:text-amber-300 font-sans font-medium text-xs cursor-pointer hover:underline self-start sm:self-auto focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 rounded px-2 whitespace-nowrap"
               >
-                <span className="whitespace-nowrap">Explore 100 Famous Historical Figures (Titans)</span>
+                <span className="whitespace-nowrap">Explore 100 Titans Archive</span>
                 <ArrowRight className="w-3.5 h-3.5" />
               </button>
             </div>

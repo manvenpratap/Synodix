@@ -762,11 +762,11 @@ function AppContent() {
                 <button
                   type="button"
                   onClick={() => navigateTo('workbench')}
-                  className="md:hidden flex items-center gap-1 px-2 py-0.5 rounded-full bg-stone-900 border border-amber-800/60 text-[11px] font-mono text-amber-300 truncate max-w-[140px] cursor-pointer shrink-0"
+                  className="md:hidden flex items-center gap-1.5 px-3 py-1.5 min-h-[44px] rounded-full bg-stone-900 border border-amber-800/60 text-xs font-serif text-amber-300 truncate max-w-[150px] cursor-pointer shrink-0"
                   data-tooltip="Switch active subject"
                   aria-label={`Subject: ${activeSubjectName}. Tap to switch.`}
                 >
-                  <User className="w-2.5 h-2.5 text-amber-400 shrink-0" />
+                  <User className="w-3.5 h-3.5 text-amber-400 shrink-0" />
                   <span className="truncate font-serif">{activeSubjectName}</span>
                 </button>
               )}
@@ -840,7 +840,7 @@ function AppContent() {
                   navigateTo('guide');
                 }
               }}
-              className="inline-flex items-center justify-center gap-1.5 p-2 sm:px-3 sm:py-1.5 min-w-[40px] min-h-[40px] sm:min-h-[34px] text-xs rounded border border-stone-800 bg-stone-900 hover:bg-stone-800 text-amber-400 hover:text-amber-200 transition-colors cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 font-serif"
+              className="inline-flex items-center justify-center gap-1.5 p-2 sm:px-3 sm:py-1.5 min-w-[44px] min-h-[44px] sm:min-h-[36px] text-xs rounded border border-stone-800 bg-stone-900 hover:bg-stone-800 text-amber-400 hover:text-amber-200 transition-colors cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 font-serif"
               data-tooltip="Browse all 50 astronomical & cultural feature explainers"
               aria-label="Browse Feature Explainers & Astrometric Glossary"
             >
@@ -852,7 +852,7 @@ function AppContent() {
             <button
               type="button"
               onClick={toggleTheme}
-              className="inline-flex items-center justify-center gap-1.5 p-2 sm:px-3 sm:py-1.5 min-w-[40px] min-h-[40px] sm:min-h-[34px] text-xs rounded border border-stone-800 bg-stone-900 hover:bg-stone-800 text-stone-300 hover:text-amber-400 transition-colors cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 group"
+              className="inline-flex items-center justify-center gap-1.5 p-2 sm:px-3 sm:py-1.5 min-w-[44px] min-h-[44px] sm:min-h-[36px] text-xs rounded border border-stone-800 bg-stone-900 hover:bg-stone-800 text-stone-300 hover:text-amber-400 transition-colors cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 group"
               data-tooltip={theme === 'dark' ? 'Switch to Solar Day Theme' : 'Switch to Deep Space Theme'}
               aria-label={theme === 'dark' ? 'Switch to Solar Day Theme' : 'Switch to Deep Space Theme'}
             >
@@ -897,24 +897,24 @@ function AppContent() {
               <button
                 type="button"
                 onClick={toggleJourneyCollapsed}
-                className="md:hidden inline-flex items-center gap-1 px-1.5 py-0.5 rounded bg-stone-850 hover:bg-stone-800 border border-stone-750 text-stone-300 hover:text-white transition-[background-color,transform] motion-safe:active:scale-[0.97] motion-reduce:active:scale-100 cursor-pointer touch-manipulation"
+                className="md:hidden inline-flex items-center gap-1.5 px-2.5 py-1.5 min-h-[44px] rounded-lg bg-stone-850 hover:bg-stone-800 border border-stone-750 text-stone-300 hover:text-white transition-[background-color,transform] motion-safe:active:scale-[0.97] motion-reduce:active:scale-100 cursor-pointer touch-manipulation"
                 data-tooltip={isJourneyCollapsed ? 'Expand journey steps' : 'Collapse journey stepper to save space'}
                 aria-label={isJourneyCollapsed ? 'Expand journey steps' : 'Collapse journey steps'}
               >
-                <span className="text-[11px] text-stone-300 font-serif">
+                <span className="text-xs text-stone-300 font-serif">
                   {JOURNEY_STEPS.findIndex((s) => s.id === currentScreen) >= 0
                     ? `Step ${JOURNEY_STEPS.findIndex((s) => s.id === currentScreen) + 1} of 4`
                     : 'Reference'}
                 </span>
                 {isJourneyCollapsed ? (
-                  <ChevronDown className="w-3.5 h-3.5 text-amber-400" />
+                  <ChevronDown className="w-4 h-4 text-amber-400" />
                 ) : (
-                  <ChevronUp className="w-3.5 h-3.5 text-amber-400" />
+                  <ChevronUp className="w-4 h-4 text-amber-400" />
                 )}
               </button>
             </div>
           </div>
-          <div className={`grid grid-cols-4 gap-1 sm:gap-1.5 py-0.5 w-full ${isJourneyCollapsed ? 'hidden md:grid' : 'grid'}`}>
+          <div className={`grid grid-cols-4 gap-1.5 sm:gap-2 py-1 w-full ${isJourneyCollapsed ? 'hidden md:grid' : 'grid'}`}>
             {JOURNEY_STEPS.map((s, idx) => {
               const isActive = currentScreen === s.id;
               const isPassed = JOURNEY_STEPS.findIndex((st) => st.id === currentScreen) > idx;
@@ -926,7 +926,7 @@ function AppContent() {
                   aria-current={isActive ? 'step' : undefined}
                   aria-label={`Step ${s.step}: ${s.label}${isActive ? ' (current step)' : isPassed ? ' (completed)' : ''}`}
                   data-tooltip={`Step ${s.step} of 4: ${s.label}`}
-                  className={`relative flex flex-row items-center justify-center gap-1 sm:gap-1.5 px-1 sm:px-2 py-0.5 sm:py-1 min-h-[26px] sm:min-h-[30px] rounded-md sm:rounded-lg text-center cursor-pointer transition-[background-color,border-color,color,transform] motion-safe:active:scale-[0.97] motion-reduce:active:scale-100 duration-150 ease-out touch-manipulation focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 ${
+                  className={`relative flex flex-row items-center justify-center gap-1 sm:gap-1.5 px-1.5 sm:px-2.5 py-1.5 sm:py-2 min-h-[44px] sm:min-h-[38px] rounded-lg text-center cursor-pointer transition-[background-color,border-color,color,transform] motion-safe:active:scale-[0.97] motion-reduce:active:scale-100 duration-150 ease-out touch-manipulation focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 ${
                     isActive
                       ? 'text-amber-200 font-bold shadow-xs'
                       : isPassed
@@ -1022,9 +1022,9 @@ function AppContent() {
                         <button
                           type="button"
                           onClick={() => navigateTo('traditions')}
-                          className="inline-flex items-center justify-center gap-2 px-3.5 py-2 min-h-[44px] sm:min-h-[36px] text-xs rounded-lg bg-amber-600 hover:bg-amber-500 text-stone-950 font-serif font-semibold border border-amber-400/80 cursor-pointer transition-colors shadow-xs active:scale-95"
+                          className="inline-flex items-center justify-center gap-2 px-3.5 py-2 min-h-[44px] sm:min-h-[36px] text-xs rounded-lg bg-amber-600 hover:bg-amber-500 text-stone-950 font-serif font-semibold border border-amber-400/80 cursor-pointer transition-colors shadow-xs active:scale-95 whitespace-nowrap"
                         >
-                          <span className="whitespace-nowrap">Explore 9 Traditions (Step 2)</span>
+                          <span className="whitespace-nowrap">Explore Traditions (Step 2)</span>
                           <ArrowRight className="w-3.5 h-3.5" />
                         </button>
                       </div>
@@ -1353,9 +1353,9 @@ function EmptyChartState({ onOpenWorkbench }: { onOpenWorkbench: () => void }) {
       <button
         type="button"
         onClick={onOpenWorkbench}
-        className="mt-5 inline-flex items-center gap-2 px-4 py-2.5 min-h-[44px] rounded-lg bg-amber-700 hover:bg-amber-600 text-stone-950 font-bold text-xs transition-colors cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:ring-offset-1 focus-visible:ring-offset-stone-950"
+        className="mt-5 inline-flex items-center gap-2 px-4 py-2.5 min-h-[44px] rounded-lg bg-amber-700 hover:bg-amber-600 text-stone-950 font-bold text-xs transition-colors cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:ring-offset-1 focus-visible:ring-offset-stone-950 whitespace-nowrap"
       >
-        <span className="whitespace-nowrap">Open Workbench & Profile Vault</span>
+        <span className="whitespace-nowrap">Open Workbench</span>
         <ChevronRight className="w-4 h-4" />
       </button>
     </div>

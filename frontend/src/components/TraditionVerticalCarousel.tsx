@@ -326,26 +326,28 @@ export const TraditionVerticalCarousel: React.FC<Props> = ({
           <span className="text-stone-400 hidden sm:inline">• 9 Traditions</span>
         </div>
 
-        {/* Mobile-only compact tradition indicator dots with Apple-grade touch targets */}
-        <div className="flex md:hidden items-center gap-0.5">
-          {TRADITION_ORDER.map((key, idx) => (
-            <button
-              key={key}
-              data-mobile-dot={key}
-              type="button"
-              onClick={() => goToIndex(idx)}
-              aria-label={`Mobile jump to ${cultureThemes[key]?.name || key}`}
-              className="p-1 flex items-center justify-center cursor-pointer touch-manipulation focus:outline-none"
-            >
-              <span
-                className={`h-2 w-2 rounded-full transition-colors duration-200 ease-out inline-block ${
-                  activeIndex === idx
-                    ? 'bg-amber-400 ring-2 ring-amber-300/50'
-                    : 'bg-stone-700 hover:bg-stone-500'
+        {/* Mobile-only thumb-friendly tradition selector pill strip */}
+        <div className="flex md:hidden items-center gap-1.5 overflow-x-auto py-1 px-1 no-scrollbar touch-manipulation max-w-[250px]">
+          {TRADITION_ORDER.map((key, idx) => {
+            const theme = cultureThemes[key];
+            const isSelected = activeIndex === idx;
+            return (
+              <button
+                key={key}
+                data-mobile-dot={key}
+                type="button"
+                onClick={() => goToIndex(idx)}
+                aria-label={`Jump to ${theme?.name || key}`}
+                className={`px-2.5 py-1 min-h-[36px] rounded-full text-xs font-serif font-medium whitespace-nowrap transition-colors cursor-pointer touch-manipulation shrink-0 ${
+                  isSelected
+                    ? 'bg-amber-400 text-stone-950 font-bold shadow-xs'
+                    : 'bg-stone-900 text-stone-300 border border-stone-800 hover:text-white'
                 }`}
-              />
-            </button>
-          ))}
+              >
+                <span>{theme?.shortName || theme?.name?.split(' ')[0] || key}</span>
+              </button>
+            );
+          })}
         </div>
 
         <div className="flex items-center gap-1.5 text-stone-400 shrink-0 text-xs">
@@ -368,7 +370,7 @@ export const TraditionVerticalCarousel: React.FC<Props> = ({
         <div
           role="tablist"
           aria-label="Astrological tradition cards"
-          className="hidden md:flex absolute right-1 sm:right-2 z-40 flex-col items-center gap-1 p-1 rounded-full bg-stone-950/90 backdrop-blur-md border border-stone-700/60 shadow-xl"
+          className="hidden md:flex absolute right-1 sm:right-2 top-2 z-40 flex-col items-center gap-0.5 p-1 rounded-full bg-stone-950/90 backdrop-blur-md border border-stone-700/60 shadow-xl"
         >
           <button
             type="button"
@@ -381,7 +383,7 @@ export const TraditionVerticalCarousel: React.FC<Props> = ({
             <ChevronUp className="w-4 h-4" />
           </button>
 
-          <div className="flex flex-col gap-1.5 py-1">
+          <div className="flex flex-col gap-1 py-0.5">
             {TRADITION_ORDER.map((key, idx) => {
               const theme = cultureThemes[key];
               const isSelected = activeIndex === idx;

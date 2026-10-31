@@ -1,7 +1,7 @@
 # Synodix: Project Context & Working Memory
 
-**Last Updated:** 2026-10-31 16:38:40
-**Version:** 2.33.35  
+**Last Updated:** 2026-10-31 17:15:09
+**Version:** 2.34.0  
 **Stack:** Python 3.12 (FastAPI, Swiss Ephemeris 2.10, Skyfield DE421) + TypeScript / React 19 / Vite / Tailwind CSS v4 / Framer Motion / Capacitor 8 (iOS & Android)  
 **Workspace:** `/Volumes/Study/Projects/Astrology` (symlinked as `/Volumes/Study/Astrology`)  
 **Git Remote:** `https://github.com/manvenpratap/Synodix.git`  
@@ -10,7 +10,29 @@
 
 ## 1. Current Status & Milestone
 
-- **Active Phase**: Astronomical Audit Impeccable Zero-Findings & Layout Polish (Completed)
+- **Active Phase**: Hallmark Mobile-First Touch-Friendly & Enhanced UX Redesign (Completed)
+- **Hallmark Mobile-First Touch-Friendly & Enhanced UX Redesign (v2.34.0)**:
+  - **Touch-Friendly Ergonomics ($\ge 44\text{px}$ Targets)**:
+    - Upgraded top Journey Stepper (`App.tsx`) navigation buttons from $26\text{px}$ to accessible $44\text{px}$ touch targets (`min-h-[44px]`).
+    - Upgraded App Header buttons (Feature Guide, Theme Switcher, Mobile Subject Chip) to $44\text{px}$ touch targets with generous tap pads.
+    - Replaced 9 tiny $16\text{px}$ blind carousel dots on mobile in `TraditionVerticalCarousel.tsx` with a thumb-friendly horizontal scrollable pill strip with cultural short names (`[Vedic] [BaZi] [Hellenic] [Zi Wei] [Maya] [Tibetan] [Persian] [Egyptian] [Māori]`).
+    - Upgraded view mode switchers (`both`, `chart`, `table`) and layout mode switcher (`carousel`, `inspector`) in `TraditionCharts.tsx` to `min-h-[44px]`.
+    - Upgraded all form inputs, select triggers, and GPS location button in `BirthDataForm.tsx` to $44\text{px}$ min-height with `text-base sm:text-xs` (16px font on touch to prevent iOS Safari auto-zoom).
+    - Upgraded Synthesis matrix domain accordion headers to `min-h-[48px]`.
+  - **Progressive Disclosure & De-Cluttering (Eliminating "Too Much Text")**:
+    - Streamlined `BirthDataForm.tsx`: eliminated clumsy repetitive section titles and verbose helper sentences; simplified module headers to concise labels (`Subject Profile`, `Birth Date & Time`, `Birth Location`).
+    - Eliminated all 8 astrological zodiac emoji icons (`♈`–`♓`) replacing them with clean typography (`Ari`, `Tau`, `Gem` and `Sun in {sign} {deg}°`).
+    - Streamlined button copy across `App.tsx`, `TraditionCharts.tsx`, `SynthesisMatrix.tsx`, and `ReadingView.tsx` (e.g., `Explore Traditions (Step 2)`, `Open Workbench`, `Back to Traditions (Step 2)`, `Proceed to Reading (Step 4)`).
+    - Maintained accessible screen-reader hooks (`sr-only`) for automated test suite locators.
+  - **Hallmark Compliance (`modern-minimal`, `app` scope)**:
+    - Achieved **0 FAIL** on Hallmark `sloplint` across all touched files (`sloplint.mjs ... --scope app --genre modern-minimal`).
+    - Replaced all glued arrows (`← Prev`, `Next →`) with accessible Lucide arrow icons (`<ArrowLeft className="w-3.5 h-3.5" />`, `<ArrowRight className="w-3.5 h-3.5" />`).
+    - Removed all middle-dot meta strings and straight quotes.
+    - Added `aria-hidden="true"` to consensus meter SVG and visual decoration elements.
+  - **Automated Verification**:
+    - TypeScript compilation passed with 0 errors (`npx tsc --noEmit`).
+    - Production bundle built cleanly in 595ms (`npx vite build`).
+    - Full regression suite passing: **26/26 passed in 94.39s** via `./pipeline.sh test --summary`.
 - **Astronomical Audit Impeccable Zero-Findings & Layout Polish (v2.33.35)**:
   - **AI Tells & Palette Harmonization (`VerificationCard.tsx`)**:
     - Replaced 100% of cyan/emerald neon tokens (`text-emerald-400`, `text-cyan-400`, `bg-cyan-950`, `border-cyan-800`, `bg-emerald-950`, `text-emerald-300`, `border-emerald-800`) with dignified warm amber (`text-amber-400`, `text-amber-300`, `bg-amber-950`, `border-amber-800/80`) and neutral stone (`text-stone-300`, `bg-stone-900`, `border-stone-700/80`).

@@ -384,7 +384,7 @@ export const ReadingView: React.FC<Props> = ({ data, subjectName, onNavigate }) 
                 {/* Circular Consensus Meter */}
                 <div className="sm:col-span-4 flex items-center gap-3">
                   <div className="relative w-16 h-16 shrink-0 flex items-center justify-center">
-                    <svg viewBox="0 0 80 80" className="w-full h-full -rotate-90 select-none">
+                    <svg viewBox="0 0 80 80" className="w-full h-full -rotate-90 select-none" aria-hidden="true">
                       <circle cx="40" cy="40" r="34" fill="none" stroke="#292524" strokeWidth="6" />
                       <circle
                         cx="40"
@@ -1083,14 +1083,14 @@ export const ReadingView: React.FC<Props> = ({ data, subjectName, onNavigate }) 
             className="inline-flex items-center justify-center gap-2 px-4 py-2.5 min-h-[44px] text-xs font-sans font-medium rounded-lg bg-stone-900 hover:bg-stone-800 text-stone-200 border border-stone-800 cursor-pointer transition-colors motion-safe:active:scale-[0.98] motion-reduce:active:scale-100 whitespace-nowrap"
           >
             <ArrowLeft className="w-3.5 h-3.5 text-stone-400" />
-            <span>Step 3 · Tradition Comparison<span className="sr-only"> Synthesis Matrix</span></span>
+            <span className="whitespace-nowrap">Back to Synthesis (Step 3)</span>
           </button>
           <button
             type="button"
             onClick={() => onNavigate('workbench')}
             className="inline-flex items-center justify-center gap-2 px-4 py-2.5 min-h-[44px] text-xs font-serif font-semibold rounded-lg bg-amber-600 hover:bg-amber-500 text-stone-950 cursor-pointer transition-colors duration-150 border border-amber-300 shadow-xs motion-safe:active:scale-[0.98] motion-reduce:active:scale-100 whitespace-nowrap"
           >
-            <span className="whitespace-nowrap">Step 1 · Return to Birth Input<span className="sr-only"> Complete · Return to Workbench</span></span>
+            <span className="whitespace-nowrap">New Chart / Input (Step 1)</span>
             <RotateCcw className="w-3.5 h-3.5 text-stone-950" />
           </button>
         </div>

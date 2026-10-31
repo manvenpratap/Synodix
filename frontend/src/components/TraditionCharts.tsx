@@ -279,7 +279,7 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
 
         <div className="flex items-center justify-between sm:justify-end gap-1.5 sm:gap-2 w-full sm:w-auto shrink-0">
           {/* Display Presentation Switcher: Comprehensive / Visual Instrument / Telemetry Tables */}
-          <div className="flex items-center gap-0.5 p-0.5 rounded-lg bg-stone-900 text-[11px] font-mono shrink-0">
+          <div className="flex items-center gap-1 p-0.5 rounded-lg bg-stone-900 text-xs font-mono shrink-0">
             {(['both', 'chart', 'table'] as const).map((mode) => {
               const isModeActive = chartViewMode === mode;
               const labels = {
@@ -292,7 +292,7 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
                   key={mode}
                   type="button"
                   onClick={() => setChartViewMode(mode)}
-                  className={`relative px-2 py-1 min-h-[34px] sm:min-h-[30px] text-[11px] font-mono rounded cursor-pointer transition-colors flex items-center justify-center ${
+                  className={`relative px-2.5 sm:px-3 py-1.5 min-h-[44px] sm:min-h-[34px] text-xs font-mono rounded-md cursor-pointer transition-colors flex items-center justify-center ${
                     isModeActive
                       ? 'bg-amber-950 text-amber-200 font-bold border border-amber-700/80 shadow-xs'
                       : 'text-stone-400 hover:text-stone-200'
@@ -309,11 +309,11 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
           </div>
 
           {/* View Mode Toggle: Vertical Carousel vs Full Inspector */}
-          <div className="flex items-center p-0.5 rounded-lg bg-stone-900 text-[11px] font-mono shrink-0">
+          <div className="flex items-center gap-1 p-0.5 rounded-lg bg-stone-900 text-xs font-mono shrink-0">
             <button
               type="button"
               onClick={() => setLayoutMode('carousel')}
-              className={`flex items-center gap-1 px-2 py-1 min-h-[34px] sm:min-h-[30px] rounded cursor-pointer transition-colors font-serif text-xs ${
+              className={`flex items-center gap-1.5 px-3 py-1.5 min-h-[44px] sm:min-h-[34px] rounded-md cursor-pointer transition-colors font-serif text-xs ${
                 layoutMode === 'carousel'
                   ? 'bg-amber-950 text-amber-300 border border-amber-700/80 font-bold'
                   : 'text-stone-400 hover:text-stone-200'
@@ -329,7 +329,7 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
             <button
               type="button"
               onClick={() => setLayoutMode('inspector')}
-              className={`flex items-center gap-1 px-2 py-1 min-h-[34px] sm:min-h-[30px] rounded cursor-pointer transition-colors font-serif text-xs ${
+              className={`flex items-center gap-1.5 px-3 py-1.5 min-h-[44px] sm:min-h-[34px] rounded-md cursor-pointer transition-colors font-serif text-xs ${
                 layoutMode === 'inspector'
                   ? 'bg-amber-950 text-amber-300 border border-amber-700/80 font-bold'
                   : 'text-stone-400 hover:text-stone-200'
@@ -397,11 +397,12 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
                   const prevIdx = TRADITION_ORDER.indexOf(activeTab) - 1;
                   if (prevIdx >= 0) setActiveTab(TRADITION_ORDER[prevIdx]);
                 }}
-                className="px-2.5 py-1 rounded bg-stone-800 hover:bg-stone-700 disabled:opacity-30 disabled:pointer-events-none text-stone-300 font-mono text-xs transition-colors cursor-pointer"
+                className="inline-flex items-center gap-1 px-3 py-1.5 min-h-[44px] sm:min-h-[32px] rounded-lg bg-stone-800 hover:bg-stone-700 disabled:opacity-30 disabled:pointer-events-none text-stone-300 font-sans text-xs transition-colors cursor-pointer"
                 data-tooltip="Previous Tradition [Inspector]"
                 aria-label="Previous Tradition"
               >
-                ← Prev
+                <ArrowLeft className="w-3.5 h-3.5" />
+                <span>Prev</span>
               </button>
               <button
                 type="button"
@@ -410,11 +411,12 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
                   const nextIdx = TRADITION_ORDER.indexOf(activeTab) + 1;
                   if (nextIdx < TRADITION_ORDER.length) setActiveTab(TRADITION_ORDER[nextIdx]);
                 }}
-                className="px-2.5 py-1 rounded bg-stone-800 hover:bg-stone-700 disabled:opacity-30 disabled:pointer-events-none text-stone-300 font-mono text-xs transition-colors cursor-pointer"
+                className="inline-flex items-center gap-1 px-3 py-1.5 min-h-[44px] sm:min-h-[32px] rounded-lg bg-stone-800 hover:bg-stone-700 disabled:opacity-30 disabled:pointer-events-none text-stone-300 font-sans text-xs transition-colors cursor-pointer"
                 data-tooltip="Next Tradition [Inspector]"
                 aria-label="Next Tradition"
               >
-                Next →
+                <span>Next</span>
+                <ArrowRight className="w-3.5 h-3.5" />
               </button>
             </div>
           </div>
@@ -1850,21 +1852,21 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
 
       {/* Mobile & Tablet Journey Navigation Bar */}
       {onNavigate && (
-        <div className="mt-3 pt-2 sm:mt-4 sm:pt-2.5 border-t border-white/10 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2">
+        <div className="mt-3 pt-2 sm:mt-4 sm:pt-2.5 border-t border-white/10 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2.5">
           <button
             type="button"
             onClick={() => onNavigate('workbench')}
-            className="inline-flex items-center justify-center gap-2 px-3.5 py-1.5 min-h-[38px] text-xs font-sans rounded-lg bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-800 cursor-pointer transition-colors active:scale-[0.98]"
+            className="inline-flex items-center justify-center gap-2 px-4 py-2 min-h-[44px] text-xs font-sans rounded-lg bg-stone-900 hover:bg-stone-800 text-stone-300 border border-stone-800 cursor-pointer transition-colors active:scale-[0.98] whitespace-nowrap"
           >
             <ArrowLeft className="w-3.5 h-3.5 shrink-0" aria-hidden="true" />
-            <span className="whitespace-nowrap">Step 1 · Back to Birth Input<span className="sr-only"> Back to Workbench</span></span>
+            <span className="whitespace-nowrap">Back to Input (Step 1)<span className="sr-only"> Back to Workbench</span></span>
           </button>
           <button
             type="button"
             onClick={() => onNavigate('synthesis')}
-            className="inline-flex items-center justify-center gap-2 px-3.5 py-1.5 min-h-[38px] text-xs font-serif rounded-lg bg-amber-600 hover:bg-amber-500 text-stone-950 font-semibold cursor-pointer transition-colors duration-150 border border-amber-300 shadow-xs active:scale-[0.98] whitespace-nowrap"
+            className="inline-flex items-center justify-center gap-2 px-4 py-2 min-h-[44px] text-xs font-serif rounded-lg bg-amber-600 hover:bg-amber-500 text-stone-950 font-semibold cursor-pointer transition-colors duration-150 border border-amber-300 shadow-xs active:scale-[0.98] whitespace-nowrap"
           >
-            <span className="whitespace-nowrap">Step 3 · Tradition Comparison<span className="sr-only"> Explore Cross-Cultural Synthesis Matrix</span></span>
+            <span className="whitespace-nowrap">Proceed to Synthesis (Step 3)<span className="sr-only"> Explore Cross-Cultural Synthesis Matrix</span></span>
             <ArrowRight className="w-3.5 h-3.5 shrink-0" aria-hidden="true" />
           </button>
         </div>
