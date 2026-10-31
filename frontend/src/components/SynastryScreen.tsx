@@ -247,9 +247,9 @@ export const SynastryScreen: React.FC<Props> = ({
             </div>
             <h1 className="text-xl sm:text-2xl font-serif font-bold text-stone-100 flex items-center gap-2.5">
               <HeartHandshake className="w-6 h-6 text-amber-400 shrink-0" />
-              <span>Synastry & Composite Charts across 9 Traditions</span>
+              <span>Synastry &amp; Composite Charts across 9 Traditions</span>
             </h1>
-            <p className="text-xs text-stone-400 mt-1 max-w-3xl leading-relaxed">
+            <p className="text-xs text-stone-400 mt-1 max-w-[55ch] text-pretty leading-relaxed">
               Compare two birth charts across all 9 civilizational systems: astronomical inter-aspects, circular midpoint composite entity, authentic 36-point Vedic Ashtakoota Milan, BaZi Wu Xing balances, and esoteric decanic/lunar affinities.
             </p>
           </div>
@@ -269,19 +269,19 @@ export const SynastryScreen: React.FC<Props> = ({
         </div>
 
         {/* 2. Dual Subject Calibration Matrix */}
-        <div className="grid grid-cols-1 lg:grid-cols-11 gap-4 pt-4 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-11 gap-6 pt-4 items-start divide-y lg:divide-y-0 lg:divide-x divide-stone-800/80">
           {/* Partner A Selector */}
-          <div className="lg:col-span-5 bg-stone-950/80 rounded-xl p-4 border border-stone-800 shadow-inner space-y-3">
-            <div className="flex items-center justify-between border-b border-stone-850 pb-2">
+          <div className="lg:col-span-5 space-y-3 pt-2 lg:pt-0 lg:pr-3">
+            <div className="flex flex-wrap items-center justify-between gap-2 border-b border-stone-850 pb-2">
               <div className="flex items-center gap-2">
-                <span className="w-5 h-5 rounded-full bg-amber-500/20 text-amber-400 border border-amber-500/30 flex items-center justify-center text-xs font-mono font-bold">
+                <span className="w-5 h-5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/30 flex items-center justify-center text-xs font-mono font-bold">
                   A
                 </span>
                 <h2 className="text-sm font-serif font-semibold text-stone-200">
                   Partner A · Primary Subject
                 </h2>
               </div>
-              <div className="flex items-center gap-1 text-[11px] font-mono">
+              <div className="flex flex-wrap items-center gap-1 text-[11px] font-mono">
                 {currentChart && (
                   <button
                     type="button"
@@ -324,13 +324,13 @@ export const SynastryScreen: React.FC<Props> = ({
             </div>
 
             {partnerAMode === 'active' && (
-              <div className="p-2.5 rounded bg-stone-900 border border-stone-800 text-xs">
+              <div className="pt-2 border-t border-stone-800/80 text-xs">
                 <div className="flex items-center justify-between font-serif">
                   <span className="text-stone-200 font-semibold text-sm">{partnerAName}</span>
                   <span className="text-amber-400 font-mono text-[11px]">Workbench Profile</span>
                 </div>
                 {partnerAChart && (
-                  <div className="grid grid-cols-3 gap-1.5 mt-2 text-[11px] font-mono text-stone-400">
+                  <div className="grid grid-cols-3 gap-1.5 mt-2 text-xs font-mono text-stone-400">
                     <div>Sun: <span className="text-stone-300">{partnerAChart.astronomical_base?.planets_tropical?.['Sun']?.sign}</span></div>
                     <div>Moon: <span className="text-stone-300">{partnerAChart.astronomical_base?.planets_tropical?.['Moon']?.sign}</span></div>
                     <div>Asc: <span className="text-stone-300">{partnerAChart.astronomical_base?.angles?.tropical?.ascendant_sign}</span></div>
@@ -341,7 +341,7 @@ export const SynastryScreen: React.FC<Props> = ({
 
             {partnerAMode === 'preset' && (
               <div className="space-y-2">
-                <label className="block text-[11px] font-mono text-stone-400">
+                <label className="block text-xs font-mono text-stone-400">
                   Select Benchmark Personality (100 Titans):
                 </label>
                 <select
@@ -357,7 +357,7 @@ export const SynastryScreen: React.FC<Props> = ({
                   ))}
                 </select>
                 {partnerAChart && (
-                  <div className="grid grid-cols-3 gap-1.5 pt-1 text-[11px] font-mono text-stone-400">
+                  <div className="grid grid-cols-3 gap-1.5 pt-1 text-xs font-mono text-stone-400">
                     <div>Sun: <span className="text-stone-300">{partnerAChart.astronomical_base?.planets_tropical?.['Sun']?.sign}</span></div>
                     <div>Moon: <span className="text-stone-300">{partnerAChart.astronomical_base?.planets_tropical?.['Moon']?.sign}</span></div>
                     <div>Asc: <span className="text-stone-300">{partnerAChart.astronomical_base?.angles?.tropical?.ascendant_sign}</span></div>
@@ -427,27 +427,27 @@ export const SynastryScreen: React.FC<Props> = ({
           </div>
 
           {/* Central Conjunction Resonator */}
-          <div className="lg:col-span-1 flex flex-col items-center justify-center py-2 lg:py-0">
+          <div className="lg:col-span-1 flex flex-col items-center justify-center py-4 lg:py-8">
             <div className="w-12 h-12 rounded-full bg-stone-900 border border-amber-700/60 flex items-center justify-center shadow-lg relative group">
               <Orbit className="w-5 h-5 text-amber-400 group-hover:rotate-45 transition-transform" />
-              <div className="absolute -bottom-6 whitespace-nowrap text-[10px] font-mono text-amber-300/80">
+              <div className="absolute -bottom-6 whitespace-nowrap text-[11px] font-mono text-amber-300 font-semibold">
                 {synastryReport?.overallConcordanceScore ?? 0}%
               </div>
             </div>
           </div>
 
           {/* Partner B Selector */}
-          <div className="lg:col-span-5 bg-stone-950/80 rounded-xl p-4 border border-stone-800 shadow-inner space-y-3">
-            <div className="flex items-center justify-between border-b border-stone-850 pb-2">
+          <div className="lg:col-span-5 space-y-3 lg:pl-6 pt-4 lg:pt-0">
+            <div className="flex flex-wrap items-center justify-between gap-2 border-b border-stone-850 pb-2">
               <div className="flex items-center gap-2">
-                <span className="w-5 h-5 rounded-full bg-cyan-500/20 text-cyan-400 border border-cyan-500/30 flex items-center justify-center text-xs font-mono font-bold">
+                <span className="w-5 h-5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/30 flex items-center justify-center text-xs font-mono font-bold">
                   B
                 </span>
                 <h2 className="text-sm font-serif font-semibold text-stone-200">
                   Partner B · Comparative Subject
                 </h2>
               </div>
-              <div className="flex items-center gap-1 text-[11px] font-mono">
+              <div className="flex flex-wrap items-center gap-1 text-[11px] font-mono">
                 <button
                   type="button"
                   onClick={() => setPartnerBMode('preset')}
@@ -477,7 +477,7 @@ export const SynastryScreen: React.FC<Props> = ({
 
             {partnerBMode === 'preset' && (
               <div className="space-y-2">
-                <label className="block text-[11px] font-mono text-stone-400">
+                <label className="block text-xs font-mono text-stone-400">
                   Select Benchmark Personality (100 Titans):
                 </label>
                 <select
@@ -493,7 +493,7 @@ export const SynastryScreen: React.FC<Props> = ({
                   ))}
                 </select>
                 {partnerBChart && (
-                  <div className="grid grid-cols-3 gap-1.5 pt-1 text-[11px] font-mono text-stone-400">
+                  <div className="grid grid-cols-3 gap-1.5 pt-1 text-xs font-mono text-stone-400">
                     <div>Sun: <span className="text-stone-300">{partnerBChart.astronomical_base?.planets_tropical?.['Sun']?.sign}</span></div>
                     <div>Moon: <span className="text-stone-300">{partnerBChart.astronomical_base?.planets_tropical?.['Moon']?.sign}</span></div>
                     <div>Asc: <span className="text-stone-300">{partnerBChart.astronomical_base?.angles?.tropical?.ascendant_sign}</span></div>
@@ -554,7 +554,7 @@ export const SynastryScreen: React.FC<Props> = ({
                     setPartnerBName(customB.name || 'Custom Subject B');
                     setIsLoading(false);
                   }}
-                  className="w-full py-1.5 rounded bg-cyan-700 hover:bg-cyan-600 text-stone-950 font-serif font-semibold text-xs cursor-pointer"
+                  className="w-full py-1.5 rounded bg-amber-700 hover:bg-amber-600 text-stone-950 font-serif font-semibold text-xs cursor-pointer"
                 >
                   Recalculate Partner B
                 </button>
@@ -565,37 +565,37 @@ export const SynastryScreen: React.FC<Props> = ({
 
         {/* 3. Concordance Synthesis Telemetry Banner */}
         {synastryReport && (
-          <div className="mt-5 p-4 rounded-xl bg-stone-900/90 border border-amber-900/50 shadow-md">
+          <div className="mt-5 pt-4 border-t border-stone-800/80">
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
               <div className="space-y-1">
-                <span className="text-[11px] font-mono text-amber-400 tracking-wide">
+                <span className="text-xs font-mono text-amber-400 tracking-wide">
                   Archetypal Concordance Synthesis
                 </span>
                 <h3 className="text-base sm:text-lg font-serif font-bold text-stone-100 flex items-center gap-2">
                   <span>{synastryReport.concordanceVerdict}</span>
                 </h3>
                 <p className="text-xs text-stone-400 font-mono">
-                  Calculated between <strong className="text-amber-300 font-serif">{synastryReport.partnerAName}</strong> and <strong className="text-cyan-300 font-serif">{synastryReport.partnerBName}</strong> across 9 traditions.
+                  Calculated between <strong className="text-amber-300 font-serif">{synastryReport.partnerAName}</strong> and <strong className="text-amber-300 font-serif">{synastryReport.partnerBName}</strong> across 9 traditions.
                 </p>
               </div>
 
               {/* Score Badges */}
-              <div className="flex flex-wrap items-center gap-3">
-                <div className="flex flex-col items-center justify-center px-4 py-2 rounded-lg bg-stone-950 border border-amber-800/60 min-w-[100px]">
-                  <span className="text-[10px] font-sans text-stone-400 font-medium">Concordance</span>
+              <div className="flex flex-wrap items-center gap-4 text-xs font-sans">
+                <div className="flex flex-col items-center justify-center px-3 py-1 border-r border-stone-800 min-w-[90px]">
+                  <span className="text-xs font-sans text-stone-400 font-medium">Concordance</span>
                   <span className="text-xl sm:text-2xl font-serif font-bold text-amber-400">
                     {synastryReport.overallConcordanceScore}%
                   </span>
                 </div>
-                <div className="flex flex-col items-center justify-center px-4 py-2 rounded-lg bg-stone-950 border border-emerald-800/60 min-w-[100px]">
-                  <span className="text-[10px] font-sans text-stone-400 font-medium">Vedic Gunas</span>
-                  <span className="text-xl sm:text-2xl font-serif font-bold text-emerald-400">
+                <div className="flex flex-col items-center justify-center px-3 py-1 border-r border-stone-800 min-w-[90px]">
+                  <span className="text-xs font-sans text-stone-400 font-medium">Vedic Gunas</span>
+                  <span className="text-xl sm:text-2xl font-serif font-bold text-amber-300">
                     {synastryReport.ashtakoota.totalScore}/36
                   </span>
                 </div>
-                <div className="flex flex-col items-center justify-center px-4 py-2 rounded-lg bg-stone-950 border border-stone-800 min-w-[100px]">
-                  <span className="text-[10px] font-sans text-stone-400 font-medium">Aspects</span>
-                  <span className="text-xl sm:text-2xl font-serif font-bold text-cyan-400">
+                <div className="flex flex-col items-center justify-center px-3 py-1 min-w-[90px]">
+                  <span className="text-xs font-sans text-stone-400 font-medium">Aspects</span>
+                  <span className="text-xl sm:text-2xl font-serif font-bold text-stone-200">
                     {synastryReport.synastryAspects.length}
                   </span>
                 </div>
@@ -633,8 +633,8 @@ export const SynastryScreen: React.FC<Props> = ({
               <Icon className={`w-3.5 h-3.5 ${isActive ? 'text-amber-400' : 'text-stone-400'}`} />
               <span>{tab.label}</span>
               {tab.badge && (
-                <span className={`text-[10px] font-mono px-1.5 py-0.2 rounded-full ${
-                  isActive ? 'bg-amber-400 text-stone-950 font-bold' : 'bg-stone-800 text-stone-400'
+                <span className={`text-[11px] font-mono px-2 py-0.5 rounded-full ${
+                  isActive ? 'bg-amber-950 text-amber-300 border border-amber-700/80 font-bold' : 'bg-stone-800 text-stone-400'
                 }`}>
                   {tab.badge}
                 </span>
@@ -663,7 +663,7 @@ export const SynastryScreen: React.FC<Props> = ({
                     <div>
                       <div className="flex items-center justify-between border-b border-stone-800 pb-2">
                         <div>
-                          <span className="text-[10px] font-sans text-amber-400/90 font-medium tracking-wide">
+                          <span className="text-xs font-sans text-amber-400/90 font-medium tracking-wide">
                             {trad.culture}
                           </span>
                           <h3 className="text-sm font-serif font-bold text-stone-200">
@@ -674,7 +674,7 @@ export const SynastryScreen: React.FC<Props> = ({
                           <span className="text-xs font-mono font-bold text-amber-400">
                             {trad.affinityScore}%
                           </span>
-                          <span className="text-[10px] text-stone-400 font-serif">
+                          <span className="text-xs text-stone-400 font-serif">
                             {trad.affinityGrade}
                           </span>
                         </div>
@@ -684,23 +684,23 @@ export const SynastryScreen: React.FC<Props> = ({
                         <h4 className="text-xs font-serif font-semibold text-stone-100">
                           {trad.headline}
                         </h4>
-                        <p className="text-[11px] text-stone-400 font-serif mt-1 leading-relaxed">
+                        <p className="text-xs text-stone-400 font-serif mt-1 leading-relaxed max-w-[55ch] text-pretty">
                           {trad.coreDynamic}
                         </p>
                       </div>
 
                       {/* Tradition Specific Metrics */}
-                      <div className="mt-3 grid grid-cols-2 gap-1.5 bg-stone-950/60 p-2 rounded border border-stone-850">
+                      <div className="mt-3 pt-2.5 border-t border-stone-800/80 grid grid-cols-2 gap-2 text-xs">
                         {trad.metrics.map((m, idx) => (
-                          <div key={idx} className="text-[11px] font-mono">
-                            <span className="text-stone-400 text-[10px] block">{m.label}</span>
-                            <span className="text-stone-200 font-medium">{m.value}</span>
+                          <div key={idx} className="space-y-0.5">
+                            <span className="text-stone-400 text-xs block">{m.label}</span>
+                            <span className="text-stone-200 text-xs font-medium font-mono">{m.value}</span>
                           </div>
                         ))}
                       </div>
                     </div>
 
-                    <div className="pt-2 border-t border-stone-800/60 text-[11px] font-serif text-stone-400 flex items-start gap-1.5">
+                    <div className="pt-2 border-t border-stone-800/60 text-xs font-serif text-stone-400 flex items-start gap-1.5">
                       <Compass className="w-3.5 h-3.5 text-amber-400 shrink-0 mt-0.5" />
                       <span><strong className="text-stone-300">Evolutionary Vector:</strong> {trad.karmicGrowthEdge}</span>
                     </div>
@@ -715,7 +715,7 @@ export const SynastryScreen: React.FC<Props> = ({
             <div className="space-y-4">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                 <span className="text-xs font-mono text-stone-400">
-                  Planetary Contacts between <strong className="text-amber-300">{synastryReport.partnerAName}</strong> &amp; <strong className="text-cyan-300">{synastryReport.partnerBName}</strong>:
+                  Planetary Contacts between <strong className="text-amber-300">{synastryReport.partnerAName}</strong> &amp; <strong className="text-stone-300">{synastryReport.partnerBName}</strong>:
                 </span>
                 {/* Filter Pills */}
                 <div className="flex items-center gap-1 text-[11px] font-mono">
@@ -746,12 +746,12 @@ export const SynastryScreen: React.FC<Props> = ({
                   {filteredAspects.map((asp, idx) => {
                     const natureBadgeClass =
                       asp.nature === 'harmonic'
-                        ? 'bg-emerald-950 text-emerald-300 border-emerald-800/80'
-                        : asp.nature === 'magnetic'
                         ? 'bg-amber-950 text-amber-300 border-amber-800/80'
+                        : asp.nature === 'magnetic'
+                        ? 'bg-amber-900/60 text-amber-200 border-amber-700/80'
                         : asp.nature === 'challenging'
                         ? 'bg-rose-950 text-rose-300 border-rose-800/80'
-                        : 'bg-cyan-950 text-cyan-300 border-cyan-800/80';
+                        : 'bg-stone-900 text-stone-300 border-stone-700/80';
 
                     return (
                       <div
@@ -764,19 +764,19 @@ export const SynastryScreen: React.FC<Props> = ({
                             <span className="text-stone-300 font-bold px-1.5 py-0.5 rounded bg-stone-950 border border-stone-800">
                               {asp.symbol} {asp.aspect}
                             </span>
-                            <span className="text-cyan-400">{synastryReport.partnerBName}’s {asp.planetB}</span>
+                            <span className="text-stone-300">{synastryReport.partnerBName}’s {asp.planetB}</span>
                           </div>
-                          <span className={`text-[10px] font-mono px-2 py-0.5 rounded border capitalize ${natureBadgeClass}`}>
+                          <span className={`text-xs font-mono px-2 py-0.5 rounded border capitalize ${natureBadgeClass}`}>
                             {asp.nature}
                           </span>
                         </div>
 
-                        <div className="flex items-center justify-between text-[11px] font-mono text-stone-400">
+                        <div className="flex items-center justify-between text-xs font-mono text-stone-400">
                           <span>Exact Orb: <strong className="text-stone-300">{asp.orb}°</strong></span>
                           <span>Actual Separation: <strong className="text-stone-300">{asp.actualAngle}°</strong></span>
                         </div>
 
-                        <p className="text-xs text-stone-300 font-serif leading-relaxed pt-1">
+                        <p className="text-xs text-stone-300 font-serif leading-relaxed pt-1 max-w-[55ch] text-pretty">
                           {asp.description}
                         </p>
                       </div>
@@ -798,31 +798,31 @@ export const SynastryScreen: React.FC<Props> = ({
                   </h3>
                   <ExplainerTrigger id="composite_midpoint_chart" variant="icon" size="sm" />
                 </div>
-                <p className="text-xs text-stone-400 font-serif leading-relaxed">
+                <p className="text-xs text-stone-400 font-serif leading-relaxed max-w-[55ch] text-pretty">
                   The Midpoint Composite Chart calculates the exact circular short-arc midpoints between corresponding planetary positions and angles of both individuals. It does not represent how you see each other, but the birth chart of the relationship itself as an autonomous energetic entity.
                 </p>
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-2">
-                  <div className="p-2.5 rounded bg-stone-950 border border-stone-800 text-xs font-mono">
-                    <span className="text-stone-400 block text-[10px]">Composite Ascendant</span>
-                    <span className="text-amber-400 font-bold text-sm">
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-3 mt-3 border-t border-stone-800/80 text-xs font-mono">
+                  <div className="space-y-0.5">
+                    <span className="text-stone-400 block text-[11px]">Composite Ascendant</span>
+                    <span className="text-amber-400 font-bold text-sm block">
                       {synastryReport.compositeChart.angles.ascendant_sign} ({synastryReport.compositeChart.angles.ascendant.toFixed(2)}°)
                     </span>
                   </div>
-                  <div className="p-2.5 rounded bg-stone-950 border border-stone-800 text-xs font-mono">
-                    <span className="text-stone-400 block text-[10px]">Composite Midheaven</span>
-                    <span className="text-cyan-400 font-bold text-sm">
+                  <div className="space-y-0.5">
+                    <span className="text-stone-400 block text-[11px]">Composite Midheaven</span>
+                    <span className="text-stone-200 font-bold text-sm block">
                       {synastryReport.compositeChart.angles.midheaven_sign} ({synastryReport.compositeChart.angles.midheaven.toFixed(2)}°)
                     </span>
                   </div>
-                  <div className="p-2.5 rounded bg-stone-950 border border-stone-800 text-xs font-mono">
-                    <span className="text-stone-400 block text-[10px]">Composite Sun Sign</span>
-                    <span className="text-amber-300 font-bold text-sm">
+                  <div className="space-y-0.5">
+                    <span className="text-stone-400 block text-[11px]">Composite Sun Sign</span>
+                    <span className="text-amber-300 font-bold text-sm block">
                       {synastryReport.compositeChart.planets['Sun']?.sign} ({synastryReport.compositeChart.planets['Sun']?.sign_degree}°)
                     </span>
                   </div>
-                  <div className="p-2.5 rounded bg-stone-950 border border-stone-800 text-xs font-mono">
-                    <span className="text-stone-400 block text-[10px]">Composite Moon Sign</span>
-                    <span className="text-emerald-300 font-bold text-sm">
+                  <div className="space-y-0.5">
+                    <span className="text-stone-400 block text-[11px]">Composite Moon Sign</span>
+                    <span className="text-amber-200 font-bold text-sm block">
                       {synastryReport.compositeChart.planets['Moon']?.sign} ({synastryReport.compositeChart.planets['Moon']?.sign_degree}°)
                     </span>
                   </div>
@@ -847,7 +847,7 @@ export const SynastryScreen: React.FC<Props> = ({
                         <td className="py-2 px-3 font-serif font-bold text-stone-100">{p.name}</td>
                         <td className="py-2 px-3 text-amber-400 font-semibold">{p.sign}</td>
                         <td className="py-2 px-3">{p.sign_degree}°</td>
-                        <td className="py-2 px-3 text-cyan-400">House {p.house}</td>
+                        <td className="py-2 px-3 text-stone-300">House {p.house}</td>
                         <td className="py-2 px-3 text-stone-400">{p.longitude}°</td>
                       </tr>
                     ))}
@@ -871,7 +871,7 @@ export const SynastryScreen: React.FC<Props> = ({
                         <span className="text-amber-400 font-bold">{asp.symbol}</span>
                         <span className="font-semibold text-stone-200">{asp.planet2}</span>
                       </div>
-                      <span className="text-[10px] text-stone-400">orb {asp.orb}°</span>
+                      <span className="text-[11px] text-stone-400">orb {asp.orb}°</span>
                     </div>
                   ))}
                 </div>
@@ -887,7 +887,7 @@ export const SynastryScreen: React.FC<Props> = ({
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-stone-800 pb-3">
                   <div>
                     <div className="flex items-center gap-2">
-                      <span className="text-[11px] font-sans font-medium text-amber-400">
+                      <span className="text-xs font-sans font-medium text-amber-400">
                         Parashari Vedic Astrology · 36-Point Guna Milan
                       </span>
                       <ExplainerTrigger id="ashtakoota_compatibility" variant="icon" size="xs" />
@@ -895,7 +895,7 @@ export const SynastryScreen: React.FC<Props> = ({
                     <h3 className="text-lg font-serif font-bold text-stone-100">
                       Ashtakoota Score: {synastryReport.ashtakoota.totalScore} / 36 Points ({synastryReport.ashtakoota.percentage}%)
                     </h3>
-                    <p className="text-xs text-stone-400 font-serif mt-0.5">
+                    <p className="text-xs text-stone-400 font-serif mt-0.5 max-w-[55ch] text-pretty">
                       Classical threshold: $\ge 18$ points denotes favorable compatibility; $\ge 28$ points is considered Utkrisht (exceptional).
                     </p>
                   </div>
@@ -907,21 +907,21 @@ export const SynastryScreen: React.FC<Props> = ({
                 </div>
 
                 {/* Kuja Dosha (Manglik) Deep Dive */}
-                <div className="p-3 rounded-lg bg-stone-950 border border-stone-800 text-xs font-mono space-y-2">
+                <div className="pt-3 mt-3 border-t border-stone-800/80 text-xs font-mono space-y-2">
                   <div className="flex items-center justify-between">
                     <span className="font-serif font-semibold text-stone-200 flex items-center gap-1.5">
                       <ShieldCheck className="w-4 h-4 text-amber-400" />
                       <span>Kuja Dosha (Manglik Analysis)</span>
                     </span>
-                    <span className={`px-2 py-0.5 rounded text-[10px] font-bold ${
+                    <span className={`px-2 py-0.5 rounded text-xs font-bold ${
                       synastryReport.ashtakoota.kujaDosha.isCancelled
-                        ? 'bg-emerald-950 text-emerald-300 border border-emerald-800'
+                        ? 'bg-amber-950 text-amber-300 border border-amber-800/80'
                         : 'bg-stone-900 text-stone-300'
                     }`}>
                       {synastryReport.ashtakoota.kujaDosha.isCancelled ? 'Dosha Cancelled / Harmonized' : 'Standard Alignment'}
                     </span>
                   </div>
-                  <p className="text-[11px] text-stone-400 font-serif leading-relaxed">
+                  <p className="text-xs text-stone-300 font-serif leading-relaxed max-w-[65ch] text-pretty">
                     {synastryReport.ashtakoota.kujaDosha.analysis}
                   </p>
                 </div>
@@ -930,7 +930,7 @@ export const SynastryScreen: React.FC<Props> = ({
               {/* Ashtakoota 8 Kutas Breakdown Table */}
               <div className="overflow-x-auto rounded-xl border border-stone-800 bg-stone-900/90 shadow-md">
                 <table className="w-full text-xs text-left">
-                  <thead className="bg-stone-950 text-stone-400 border-b border-stone-800 text-[11px] font-mono">
+                  <thead className="bg-stone-950 text-stone-400 border-b border-stone-800 text-xs font-mono">
                     <tr>
                       <th className="py-2.5 px-3">Koota</th>
                       <th className="py-2.5 px-3">Domain</th>
@@ -946,26 +946,26 @@ export const SynastryScreen: React.FC<Props> = ({
                       <tr key={k.name} className="hover:bg-stone-800/40 transition-colors">
                         <td className="py-2.5 px-3">
                           <strong className="text-stone-100">{k.name}</strong>
-                          <span className="text-[10px] font-mono text-stone-400 block">{k.sanskrit}</span>
+                          <span className="text-xs font-mono text-stone-400 block">{k.sanskrit}</span>
                         </td>
-                        <td className="py-2.5 px-3 text-stone-400 text-[11px]">{k.category}</td>
-                        <td className="py-2.5 px-3 font-mono text-amber-400 text-[11px]">{k.partnerAAttribute}</td>
-                        <td className="py-2.5 px-3 font-mono text-cyan-400 text-[11px]">{k.partnerBAttribute}</td>
+                        <td className="py-2.5 px-3 text-stone-400 text-xs">{k.category}</td>
+                        <td className="py-2.5 px-3 font-mono text-amber-400 text-xs">{k.partnerAAttribute}</td>
+                        <td className="py-2.5 px-3 font-mono text-stone-300 text-xs">{k.partnerBAttribute}</td>
                         <td className="py-2.5 px-3 font-mono font-bold text-stone-100">
                           {k.obtainedScore} / {k.maxScore}
                         </td>
                         <td className="py-2.5 px-3">
-                          <span className={`px-2 py-0.5 rounded text-[10px] font-mono font-semibold ${
+                          <span className={`px-2 py-0.5 rounded text-xs font-mono font-semibold ${
                             k.obtainedScore === k.maxScore
-                              ? 'bg-emerald-950 text-emerald-300 border border-emerald-800'
-                              : k.obtainedScore > 0
                               ? 'bg-amber-950 text-amber-300 border border-amber-800'
+                              : k.obtainedScore > 0
+                              ? 'bg-amber-950/60 text-amber-200 border border-amber-800/60'
                               : 'bg-rose-950 text-rose-300 border border-rose-800'
                           }`}>
                             {k.verdict}
                           </span>
                         </td>
-                        <td className="py-2.5 px-3 text-[11px] text-stone-400 leading-relaxed max-w-xs">
+                        <td className="py-2.5 px-3 text-xs text-stone-400 leading-relaxed max-w-xs">
                           {k.interpretation}
                         </td>
                       </tr>
@@ -987,62 +987,62 @@ export const SynastryScreen: React.FC<Props> = ({
                   <h3 className="text-lg sm:text-xl font-serif font-bold text-stone-100 mt-0.5">
                     Complete Compatibility Reading
                   </h3>
-                  <p className="text-xs text-stone-400 font-mono mt-0.5">
+                  <p className="text-xs text-stone-400 font-mono mt-0.5 max-w-[55ch] text-pretty">
                     Synthesized across Hellenistic, Vedic, BaZi, Zi Wei Dou Shu, Mayan, Tibetan, Persian, Egyptian, and Māori traditions.
                   </p>
                 </div>
 
-                <div className="space-y-4 text-xs sm:text-sm font-serif leading-relaxed text-stone-300">
-                  <div className="p-3.5 rounded-xl bg-stone-950/80 border border-amber-900/40 space-y-1.5">
-                    <h4 className="text-xs font-sans text-amber-400 font-semibold">
+                <div className="divide-y divide-stone-800/80 space-y-4 font-serif text-stone-300">
+                  <div className="pt-3 space-y-1.5">
+                    <h4 className="text-xs font-sans text-amber-400 font-semibold tracking-wide">
                       I. Overall Connection &amp; Core Dynamic
                     </h4>
-                    <p className="text-stone-300 leading-relaxed">
+                    <p className="text-xs text-stone-300 leading-relaxed max-w-[50ch] text-pretty">
                       {synastryReport.dossier.executiveSummary}
                     </p>
                   </div>
 
-                  <div className="p-3.5 rounded-xl bg-stone-950/80 border border-stone-800 space-y-1.5">
-                    <h4 className="text-xs font-sans text-cyan-400 font-semibold">
+                  <div className="pt-4 space-y-1.5">
+                    <h4 className="text-xs font-sans text-amber-300 font-semibold tracking-wide">
                       II. Emotional Bond &amp; Psychological Instincts
                     </h4>
-                    <p className="text-stone-300 leading-relaxed">
+                    <p className="text-xs text-stone-300 leading-relaxed max-w-[50ch] text-pretty">
                       {synastryReport.dossier.emotionalPsychologicalBond}
                     </p>
                   </div>
 
-                  <div className="p-3.5 rounded-xl bg-stone-950/80 border border-stone-800 space-y-1.5">
-                    <h4 className="text-xs font-sans text-emerald-400 font-semibold">
+                  <div className="pt-4 space-y-1.5">
+                    <h4 className="text-xs font-sans text-amber-200/90 font-semibold tracking-wide">
                       III. Intellectual Alignment &amp; Communication Style
                     </h4>
-                    <p className="text-stone-300 leading-relaxed">
+                    <p className="text-xs text-stone-300 leading-relaxed max-w-[50ch] text-pretty">
                       {synastryReport.dossier.intellectualCommunicationAlignment}
                     </p>
                   </div>
 
-                  <div className="p-3.5 rounded-xl bg-stone-950/80 border border-stone-800 space-y-1.5">
-                    <h4 className="text-xs font-sans text-rose-400 font-semibold">
+                  <div className="pt-4 space-y-1.5">
+                    <h4 className="text-xs font-sans text-rose-300 font-semibold tracking-wide">
                       IV. Physical Vitality, Attraction &amp; Chemistry
                     </h4>
-                    <p className="text-stone-300 leading-relaxed">
+                    <p className="text-xs text-stone-300 leading-relaxed max-w-[50ch] text-pretty">
                       {synastryReport.dossier.sexualVitalityChemistry}
                     </p>
                   </div>
 
-                  <div className="p-3.5 rounded-xl bg-stone-950/80 border border-stone-800 space-y-1.5">
-                    <h4 className="text-xs font-sans text-amber-400 font-semibold">
+                  <div className="pt-4 space-y-1.5">
+                    <h4 className="text-xs font-sans text-amber-400 font-semibold tracking-wide">
                       V. Shared Growth &amp; Long-Term Lessons
                     </h4>
-                    <p className="text-stone-300 leading-relaxed">
+                    <p className="text-xs text-stone-300 leading-relaxed max-w-[50ch] text-pretty">
                       {synastryReport.dossier.karmicEvolutionaryPurpose}
                     </p>
                   </div>
 
-                  <div className="p-3.5 rounded-xl bg-stone-950/80 border border-stone-800 space-y-1.5">
-                    <h4 className="text-xs font-sans text-stone-400 font-semibold">
+                  <div className="pt-4 space-y-1.5">
+                    <h4 className="text-xs font-sans text-stone-300 font-semibold tracking-wide">
                       VI. Pragmatic Longevity &amp; Family Stewardship
                     </h4>
-                    <p className="text-stone-300 leading-relaxed">
+                    <p className="text-xs text-stone-300 leading-relaxed max-w-[50ch] text-pretty">
                       {synastryReport.dossier.pragmaticLongevityFactors}
                     </p>
                   </div>

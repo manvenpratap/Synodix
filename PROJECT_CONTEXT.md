@@ -1,7 +1,7 @@
 # Synodix: Project Context & Working Memory
 
-**Last Updated:** 2026-10-31 15:00:46
-**Version:** 2.33.33  
+**Last Updated:** 2026-10-31 15:29:14
+**Version:** 2.33.34  
 **Stack:** Python 3.12 (FastAPI, Swiss Ephemeris 2.10, Skyfield DE421) + TypeScript / React 19 / Vite / Tailwind CSS v4 / Framer Motion / Capacitor 8 (iOS & Android)  
 **Workspace:** `/Volumes/Study/Projects/Astrology` (symlinked as `/Volumes/Study/Astrology`)  
 **Git Remote:** `https://github.com/manvenpratap/Synodix.git`  
@@ -10,7 +10,28 @@
 
 ## 1. Current Status & Milestone
 
-- **Active Phase**: Synthesis Matrix Impeccable Zero-Findings & Radar Polish (Completed)
+- **Active Phase**: Relational Synastry Impeccable Zero-Findings & Responsive Polish (Completed)
+- **Relational Synastry Impeccable Zero-Findings & Responsive Polish (v2.33.34)**:
+  - **AI Tells & Palette Harmonization (`SynastryScreen.tsx`)**:
+    - Replaced 100% of cyan/sky/emerald neon tokens (`text-cyan-300`, `text-cyan-400`, `bg-cyan-950`, `border-cyan-800`, `bg-emerald-950`, `text-emerald-300`, `border-emerald-800`, `text-emerald-400`) with dignified warm amber (`text-amber-400`, `text-amber-300`, `text-amber-200`, `bg-amber-950`, `border-amber-700/80`) and neutral stone (`text-stone-300`, `bg-stone-900`, `border-stone-700/80`).
+    - Standardized Partner B badge to warm amber (`bg-amber-500/20 text-amber-300 border border-amber-500/30`), harmonizing with Partner A.
+    - Updated Aspect nature badges: harmonic to amber (`bg-amber-950 text-amber-300 border-amber-800/80`), magnetic to warm gold (`bg-amber-900/60 text-amber-200 border-amber-700/80`), challenging to rose (`bg-rose-950 text-rose-300 border-rose-800/80`), stabilizing to stone neutral (`bg-stone-900 text-stone-300 border-stone-700/80`).
+    - Harmonized active sub-nav badge from `bg-amber-400 text-stone-950` to `bg-amber-950 text-amber-300 border border-amber-700/80`, eliminating `gray text on colored background`.
+  - **Nested Cards Flattening across All 5 Synastry Tabs (`SynastryScreen.tsx`)**:
+    - Dual Subject Calibration Matrix: unboxed Partner A and Partner B card containers into a clean divided grid (`divide-y lg:divide-y-0 lg:divide-x divide-stone-800/80`), eliminating outer card borders.
+    - Concordance Telemetry Banner: flattened boxed telemetry strip into an unboxed top divider section (`mt-5 pt-4 border-t border-stone-800/80`) with clean vertical dividers.
+    - Tab 1 (`traditions`): Unboxed the 9 tradition metric grids into clean `pt-2.5 border-t border-stone-800/80` layouts, eliminating all 9 nested card warnings.
+    - Tab 3 (`composite`): Unboxed the 4 angle/planet midpoint boxes into a clean divided row (`grid grid-cols-2 sm:grid-cols-4 gap-3 pt-3 mt-3 border-t border-stone-800/80`).
+    - Tab 4 (`ashtakoota`): Flattened Kuja Dosha (Manglik) analysis box into a clean divider section (`pt-3 mt-3 border-t border-stone-800/80`).
+    - Tab 5 (`dossier`): Flattened all 6 narrative card boxes into a unified clean divided section (`divide-y divide-stone-800/80`).
+  - **Typography & Responsive Overflow Calibration (`SynastryScreen.tsx`)**:
+    - Elevated all undersized labels and badges from `text-[10px]` to standard `text-[11px]` or `text-xs` (12px), satisfying the legibility floor.
+    - Constrained narrative paragraphs in Header, Tab 1, Tab 2, Tab 3, Tab 4, and Tab 5 with `max-w-[50ch] text-pretty` and `max-w-[55ch] text-pretty`, ensuring rendered lines strictly stay under 80 characters.
+    - Added `flex-wrap gap-2` to Partner A and Partner B header bars, preventing preset/custom buttons from overflowing on tablet viewports.
+  - **Automated Verification**:
+    - Zero Impeccable findings (exit code 0) across all 5 Tabs on Desktop (1280x900), Tablet (768x1024), and Mobile (390x844).
+    - Zero TypeScript errors (`npx tsc --noEmit`).
+    - All 26 pytest regression suites passing cleanly (`./pipeline.sh test --summary`, 26 passed in 107s).
 - **Synthesis Matrix Impeccable Zero-Findings & Radar Polish (v2.33.33)**:
   - **AI Tells & Palette Harmonization (`SynthesisMatrix.tsx`, `ChartWheelVisualizer.tsx`)**:
     - Replaced 100% of cyan/sky/emerald neon tokens (`text-emerald-400`, `text-cyan-400`, `bg-cyan-950`, `border-cyan-800`, `bg-emerald-950`, `text-emerald-300`, `border-emerald-800`) with dignified warm amber (`text-amber-400`, `text-amber-300`, `bg-amber-950/80`, `border-amber-800/80`) and neutral stone (`text-stone-300`, `bg-stone-900`, `border-stone-700/80`).

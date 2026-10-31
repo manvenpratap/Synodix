@@ -91,18 +91,17 @@ def test_independent_custom_input_and_titan_archive_separation():
 
         # 4. Search and select a Titan (e.g. Albert Einstein)
         personality_search.fill("Einstein")
-        page.wait_for_timeout(200)
-
         einstein_card = page.locator("div[role='button']:has-text('Albert Einstein')").first
+        einstein_card.wait_for(state="visible", timeout=5000)
         assert einstein_card.is_visible(), "Albert Einstein card should be visible"
         einstein_card.click()
-        page.wait_for_timeout(200)
 
         # 5. Click "Customize in Manual Input" to transfer to Custom Mode
         customize_btn = page.locator("button:has-text('Customize in Manual Input')").first
+        customize_btn.wait_for(state="visible", timeout=5000)
         assert customize_btn.is_visible(), "Customize button should be visible in Titan Dossier"
         customize_btn.click()
-        page.wait_for_timeout(300)
+        page.wait_for_selector("#subject_name", timeout=5000)
 
         # Verify we transitioned back to Custom mode with Einstein's data preloaded
         assert custom_tab.get_attribute("aria-selected") == "true", "Should switch to Custom mode"
