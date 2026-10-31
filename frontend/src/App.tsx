@@ -166,7 +166,7 @@ function AppContent() {
     localStorage.setItem('synodix_theme', theme);
 
     // Update theme-color meta tag dynamically for native mobile browser status bar
-    const themeColorHex = theme === 'dark' ? '#0c0a09' : '#faf7f0';
+    const themeColorHex = theme === 'dark' ? '#0c0a09' : '#f8f9fa';
     const metaThemeColors = document.querySelectorAll('meta[name="theme-color"]');
     metaThemeColors.forEach((meta) => meta.setAttribute('content', themeColorHex));
   }, [theme]);
@@ -420,65 +420,63 @@ function AppContent() {
           </div>
         </div>
 
-        {/* Active Subject Context Pill — Engraved Brass Instrument Plate */}
-        <div className="px-3 pt-3 shrink-0">
-          <div className="p-3 rounded-xl bg-stone-900 border border-amber-900/40 shadow-xs flex flex-col gap-1.5 relative overflow-hidden group">
-            <div className="flex items-center justify-between">
-              <span className="text-xs font-serif font-medium text-amber-400/90 flex items-center gap-1.5">
-                <User className="w-3 h-3 text-amber-400" />
-                Active Chart Profile
-                <span className="sr-only">Subject Dossier</span>
-              </span>
-              <span className="text-xs font-mono text-amber-300/90 font-medium">
-                Active
-              </span>
-            </div>
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={`${activeSubjectName}-${activeSubjectDate}`}
-                initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 4 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: shouldReduceMotion ? 0 : -4 }}
-                transition={{ duration: shouldReduceMotion ? 0.08 : 0.18, ease: [0.16, 1, 0.3, 1] }}
-                className="flex items-baseline justify-between"
-              >
-                <span className="text-xs font-serif font-semibold text-stone-100 truncate tracking-wide">
-                  {activeSubjectName}
-                </span>
-                <span className="text-[11px] font-mono text-stone-400 tabular-nums">
-                  {activeSubjectDate}
-                </span>
-              </motion.div>
-            </AnimatePresence>
-            {chartData && (
-              <div className="pt-1.5 border-t border-stone-800/80 text-[11px] font-mono flex flex-col gap-1">
-                <div className="flex items-center justify-between text-stone-400">
-                  <span className="flex items-center gap-1">
-                    <span>Divergence:</span>
-                    <ExplainerTrigger id="divergence_rate_calculation" variant="icon" size="xs" />
-                  </span>
-                  <span className={`font-semibold ${
-                    chartData.synthesis.divergence_metrics.divergence_rate_percent > 40
-                      ? 'text-rose-400'
-                      : 'text-amber-400'
-                  }`}>
-                    {chartData.synthesis.divergence_metrics.divergence_rate_percent}%
-                  </span>
-                </div>
-                {/* Divergence Mini Gauge Bar */}
-                <div className="w-full h-1 bg-stone-800 rounded-full overflow-hidden">
-                  <div
-                    className={`h-full motion-safe:transition-opacity motion-reduce:transition-none rounded-full ${
-                      chartData.synthesis.divergence_metrics.divergence_rate_percent > 40
-                        ? 'bg-gradient-to-r from-amber-500 to-rose-500'
-                        : 'bg-gradient-to-r from-amber-600 via-amber-400 to-emerald-400'
-                    }`}
-                    style={{ width: `${Math.min(100, Math.max(8, 100 - chartData.synthesis.divergence_metrics.divergence_rate_percent))}%` }}
-                  />
-                </div>
-              </div>
-            )}
+        {/* Active Subject Context Header — Integrated Astrometric Profile */}
+        <div className="px-4 py-3 border-b border-stone-800/80 flex flex-col gap-1.5 relative overflow-hidden group shrink-0">
+          <div className="flex items-center justify-between">
+            <span className="text-xs font-serif font-medium text-amber-400/90 flex items-center gap-1.5">
+              <User className="w-3 h-3 text-amber-400" />
+              Active Chart Profile
+              <span className="sr-only">Subject Dossier</span>
+            </span>
+            <span className="text-xs font-mono text-amber-300/90 font-medium">
+              Active
+            </span>
           </div>
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={`${activeSubjectName}-${activeSubjectDate}`}
+              initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 4 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: shouldReduceMotion ? 0 : -4 }}
+              transition={{ duration: shouldReduceMotion ? 0.08 : 0.18, ease: [0.16, 1, 0.3, 1] }}
+              className="flex items-baseline justify-between"
+            >
+              <span className="text-xs font-serif font-semibold text-stone-100 truncate tracking-wide">
+                {activeSubjectName}
+              </span>
+              <span className="text-[11px] font-mono text-stone-400 tabular-nums">
+                {activeSubjectDate}
+              </span>
+            </motion.div>
+          </AnimatePresence>
+          {chartData && (
+            <div className="pt-1.5 border-t border-stone-800/80 text-[11px] font-mono flex flex-col gap-1">
+              <div className="flex items-center justify-between text-stone-400">
+                <span className="flex items-center gap-1">
+                  <span>Divergence:</span>
+                  <ExplainerTrigger id="divergence_rate_calculation" variant="icon" size="xs" />
+                </span>
+                <span className={`font-semibold ${
+                  chartData.synthesis.divergence_metrics.divergence_rate_percent > 40
+                    ? 'text-rose-400'
+                    : 'text-amber-400'
+                }`}>
+                  {chartData.synthesis.divergence_metrics.divergence_rate_percent}%
+                </span>
+              </div>
+              {/* Divergence Mini Gauge Bar */}
+              <div className="w-full h-1 bg-stone-800 rounded-full overflow-hidden">
+                <div
+                  className={`h-full motion-safe:transition-opacity motion-reduce:transition-none rounded-full ${
+                    chartData.synthesis.divergence_metrics.divergence_rate_percent > 40
+                      ? 'bg-gradient-to-r from-amber-500 to-rose-500'
+                      : 'bg-gradient-to-r from-amber-600 via-amber-400 to-emerald-400'
+                  }`}
+                  style={{ width: `${Math.min(100, Math.max(8, 100 - chartData.synthesis.divergence_metrics.divergence_rate_percent))}%` }}
+                />
+              </div>
+            </div>
+          )}
         </div>
 
         {/* Navigation Screen Links */}
@@ -535,21 +533,19 @@ function AppContent() {
 
         {/* Calibration Inset Box (Renaissance Observatory Style) */}
         {chartData && (
-          <div className="px-3 pb-2 shrink-0">
-            <div className="p-2 rounded bg-stone-950 border border-stone-800 font-mono text-[11px] space-y-0.5 text-stone-400">
-              <div className="flex items-center justify-between text-stone-300 font-medium mb-1">
-                <span className="font-serif">Astrometric Calibration</span>
-                <ExplainerTrigger id="time_normalization_eot" variant="icon" size="xs" />
-              </div>
-              <div className="flex justify-between"><span>Epoch:</span> <span className="text-stone-200">J2000.0</span></div>
-              <div className="flex justify-between"><span>Julian Day:</span> <span className="text-amber-300">{chartData.astronomical_base?.julian_day_ut?.toFixed(2) || '2451545.00'}</span></div>
-              <div className="flex justify-between"><span>Topocentric:</span> <span className="text-emerald-400">IAU 2000B</span></div>
+          <div className="px-4 py-2.5 border-t border-stone-800/80 font-mono text-[11px] space-y-1 text-stone-400 shrink-0">
+            <div className="flex items-center justify-between text-stone-300 font-medium mb-1">
+              <span className="font-serif text-xs font-semibold text-stone-200">Astrometric Calibration</span>
+              <ExplainerTrigger id="time_normalization_eot" variant="icon" size="xs" />
             </div>
+            <div className="flex justify-between"><span>Epoch:</span> <span className="text-stone-200">J2000.0</span></div>
+            <div className="flex justify-between"><span>Julian Day:</span> <span className="text-amber-300">{chartData.astronomical_base?.julian_day_ut?.toFixed(2) || '2451545.00'}</span></div>
+            <div className="flex justify-between"><span>Topocentric:</span> <span className="text-emerald-400">IAU 2000B</span></div>
           </div>
         )}
 
         {/* Sidebar Footer with Engine Diagnostics */}
-        <div className="p-3 border-t border-stone-800 bg-stone-950 text-[11px] font-mono space-y-2 shrink-0">
+        <div className="px-4 py-3 border-t border-stone-800/80 text-[11px] font-mono space-y-2 shrink-0">
           <div className="flex items-center justify-between text-stone-400">
             <span className="flex items-center gap-1.5">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 shadow-xs inline-block"></span>
@@ -779,7 +775,7 @@ function AppContent() {
             {/* Live Astrometric Telemetry Badges (Desktop >= xl) */}
             <div className="hidden xl:flex items-center gap-2 font-mono text-[11px] ml-4">
               <div
-                className="flex items-center gap-1.5 px-2.5 py-1 rounded bg-stone-900 border border-stone-800"
+                className="flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-stone-900/70"
                 data-tooltip="Active astronomical calculation core"
               >
                 <Cpu className="w-3 h-3 text-amber-400 shrink-0" />
@@ -793,14 +789,14 @@ function AppContent() {
                 </span>
                 <ExplainerTrigger id="dual_engine_validation" variant="icon" size="xs" />
               </div>
-              <div className="flex items-center gap-1.5 px-2.5 py-1 rounded bg-stone-900 border border-stone-800">
+              <div className="flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-stone-900/70">
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 inline-block"></span>
                 <span className="text-stone-400">JPL DE421:</span>
                 <span className="text-emerald-300 font-semibold">PASS</span>
                 <ExplainerTrigger id="dual_engine_validation" variant="icon" size="xs" />
               </div>
               <div
-                className="hidden 2xl:flex items-center gap-1.5 px-2.5 py-1 rounded bg-stone-900 border border-stone-800"
+                className="hidden 2xl:flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-stone-900/70"
                 data-tooltip="Calculation certainty based on birth time accuracy and coordinates"
               >
                 <span className="text-stone-400">Rigor:</span>
@@ -905,7 +901,7 @@ function AppContent() {
                 data-tooltip={isJourneyCollapsed ? 'Expand journey steps' : 'Collapse journey stepper to save space'}
                 aria-label={isJourneyCollapsed ? 'Expand journey steps' : 'Collapse journey steps'}
               >
-                <span className="text-[10px] text-stone-300 font-serif">
+                <span className="text-[11px] text-stone-300 font-serif">
                   {JOURNEY_STEPS.findIndex((s) => s.id === currentScreen) >= 0
                     ? `Step ${JOURNEY_STEPS.findIndex((s) => s.id === currentScreen) + 1} of 4`
                     : 'Reference'}
@@ -961,28 +957,27 @@ function AppContent() {
                     {s.step}
                   </span>
                   <div className="relative z-10 text-left min-w-0">
-                    <span className="hidden sm:block text-[8.5px] text-amber-500/80 font-mono leading-none">
+                    <span className="hidden sm:block text-[11px] text-amber-500/80 font-mono leading-none">
                       {['Step 1', 'Step 2', 'Step 3', 'Step 4'][idx]}
                     </span>
-                    <span className="truncate text-[9.5px] sm:text-[10.5px] font-serif font-medium">
+                    <span className="truncate text-[11px] sm:text-xs font-serif font-medium block">
                       {s.label}
-                      {s.srText && <span className="sr-only"> {s.srText}</span>}
                     </span>
                   </div>
                 </button>
               );
             })}
           </div>
-          {/* Ambient Progress Conduit */}
+          {/* Ambient Progress Conduit (GPU-composited transform) */}
           <div className="w-full bg-stone-800 h-0.5 mt-1 sm:mt-2 rounded-full overflow-hidden">
             <div
-              className="h-full bg-gradient-to-r from-amber-600 via-amber-400 to-amber-300 motion-safe:transition-[width] motion-safe:duration-300 motion-safe:ease-out motion-reduce:transition-none rounded-full"
+              className="h-full w-full bg-gradient-to-r from-amber-600 via-amber-400 to-amber-300 origin-left motion-safe:transition-transform motion-safe:duration-300 motion-safe:ease-out motion-reduce:transition-none rounded-full"
               style={{
-                width: `${
+                transform: `scaleX(${
                   JOURNEY_STEPS.findIndex((s) => s.id === currentScreen) >= 0
-                    ? ((JOURNEY_STEPS.findIndex((s) => s.id === currentScreen) + 1) / 4) * 100
-                    : 100
-                }%`
+                    ? (JOURNEY_STEPS.findIndex((s) => s.id === currentScreen) + 1) / 4
+                    : 1
+                })`
               }}
             />
           </div>
@@ -1158,9 +1153,8 @@ function AppContent() {
                 <div className="absolute top-0 left-1/2 -translate-x-1/2 w-6 h-0.5 bg-amber-400 rounded-full" />
               )}
               <Icon className={`w-4.5 h-4.5 mb-0.5 ${isActive ? 'text-amber-400' : 'text-stone-400'}`} />
-              <span className="mt-0.5 text-[8.5px] sm:text-[9.5px] leading-tight font-medium tracking-tight whitespace-nowrap w-full text-center px-0.5">
+              <span className="mt-0.5 text-[10.5px] sm:text-[11px] leading-tight font-medium tracking-tight whitespace-nowrap w-full text-center px-0.5">
                 {item.label}
-                {'srText' in item && item.srText && <span className="sr-only">{item.srText}</span>}
               </span>
             </button>
           );

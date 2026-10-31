@@ -1,7 +1,7 @@
 # Synodix: Project Context & Working Memory
 
-**Last Updated:** 2026-10-31 10:08:27
-**Version:** 2.33.26  
+**Last Updated:** 2026-10-31 12:11:10
+**Version:** 2.33.27  
 **Stack:** Python 3.12 (FastAPI, Swiss Ephemeris 2.10, Skyfield DE421) + TypeScript / React 19 / Vite / Tailwind CSS v4 / Framer Motion / Capacitor 8 (iOS & Android)  
 **Workspace:** `/Volumes/Study/Projects/Astrology` (symlinked as `/Volumes/Study/Astrology`)  
 **Git Remote:** `https://github.com/manvenpratap/Synodix.git`  
@@ -10,7 +10,22 @@
 
 ## 1. Current Status & Milestone
 
-- **Active Phase**: UI Review Touch Targets & Token Discipline Refinements (Completed)
+- **Active Phase**: Impeccable Audit Remediation & Contrast Calibration (Completed)
+- **Impeccable Audit Remediation & Contrast Calibration (v2.33.27)**:
+  - **AI Tells Remediation (`index.css`, `FeatureGuideScreen.tsx`, `ChartWheelVisualizer.tsx`)**:
+    - Eliminated decorative radial spotlight glow from `.celestial-observatory-canvas`, substituting a clean technical precision grid.
+    - Neutralized cream/beige `#faf7f0` palette across all theme variables, establishing crisp architectural off-white (`#f8f9fa`) with surface cards at `#ffffff`.
+    - Removed cyan neon accents from unselected civilizational buttons in `FeatureGuideScreen.tsx` (restored to dignified `text-stone-300`) and replaced `cyan-500` in the Almuten Figuris bar chart with warm `amber-400`.
+    - Flattened nested cards in the sidebar and feature guide, replacing boxed enclosures with integrated document lists and clean dividers.
+  - **Quality & Layout Polish (`App.tsx`, `FeatureGuideScreen.tsx`)**:
+    - Raised all topic tags, mobile navigation items, and journey step indicators to the $\ge 11\text{px}$ floor.
+    - Replaced layout property animation (`transition: width`) on the stepper conduit with GPU-composited `transform: scaleX(...)` with `origin-left`.
+    - Eliminated dark gradient bleed in light mode, securing $\ge 8.9:1$ contrast across all headings and paragraphs.
+    - Resolved positioned child clipping by removing absolute `.sr-only` from inside overflow-clipped spans.
+    - Constrained long descriptive text to `max-w-2xl` (<80 chars/line).
+  - **Automated Verification**:
+    - All 26 pytest regression suites passing cleanly (`./pipeline.sh test --summary` in 90.44s).
+    - Zero critical console errors and zero horizontal overflow across mobile and desktop viewports.
 - **UI Review Touch Targets & Token Discipline Refinements (v2.33.26)**:
   - **Mobile Touch Target Optimization (`ReadingView.tsx`, `TraditionCharts.tsx`, `ExplainerTrigger.tsx`)**:
     - Expanded domain filter pill touch targets in `ReadingView` to `min-h-[44px] sm:min-h-[32px]` with comfortable touch padding.

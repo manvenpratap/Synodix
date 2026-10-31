@@ -831,7 +831,7 @@ export const AlmutenDignityBarChart: React.FC<AlmutenBarProps> = ({ persian, com
             {/* Stacked Bar (Fluid GPU scaleX growth on reveal) */}
             <div className={`${compact ? 'h-1.5' : 'h-2'} w-full bg-stone-900 rounded overflow-hidden flex border border-stone-800`}>
               <div
-                className="h-full bg-cyan-500 animate-bar-grow motion-safe:transition-opacity motion-reduce:transition-none"
+                className="h-full bg-amber-400 animate-bar-grow motion-safe:transition-opacity motion-reduce:transition-none"
                 style={{
                   width: `${essentialPct}%`,
                   animationDelay: `${idx * 40}ms`,
@@ -839,7 +839,7 @@ export const AlmutenDignityBarChart: React.FC<AlmutenBarProps> = ({ persian, com
                 title={`Essential: +${item.essential_dignity}`}
               />
               <div
-                className="h-full bg-amber-500 animate-bar-grow motion-safe:transition-opacity motion-reduce:transition-none"
+                className="h-full bg-amber-600 animate-bar-grow motion-safe:transition-opacity motion-reduce:transition-none"
                 style={{
                   width: `${accidentalPct}%`,
                   animationDelay: `${idx * 40 + 25}ms`,
@@ -858,8 +858,8 @@ export const AlmutenDignityBarChart: React.FC<AlmutenBarProps> = ({ persian, com
       <div className="flex flex-col items-center justify-center w-full py-0.5">
         {barContent}
         <div className="mt-1 text-[10px] sm:text-xs text-stone-400 font-sans flex items-center justify-center gap-3">
-          <span className="flex items-center gap-1"><span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-sm bg-cyan-500"></span> Essential</span>
-          <span className="flex items-center gap-1"><span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-sm bg-amber-500"></span> Accidental</span>
+          <span className="flex items-center gap-1"><span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-sm bg-amber-400"></span> Essential</span>
+          <span className="flex items-center gap-1"><span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-sm bg-amber-600"></span> Accidental</span>
         </div>
       </div>
     );
@@ -877,8 +877,8 @@ export const AlmutenDignityBarChart: React.FC<AlmutenBarProps> = ({ persian, com
       {barContent}
 
       <div className="mt-3 text-xs text-stone-400 font-sans flex items-center justify-center gap-4">
-        <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-sm bg-cyan-500"></span> Essential Dignity (Domicile, Exaltation, Bounds)</span>
-        <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-sm bg-amber-500"></span> Accidental Dignity (House Angularity & Day Ruler)</span>
+        <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-sm bg-amber-400"></span> Essential Dignity (Domicile, Exaltation, Bounds)</span>
+        <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-sm bg-amber-600"></span> Accidental Dignity (House Angularity & Day Ruler)</span>
       </div>
     </div>
   );

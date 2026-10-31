@@ -224,7 +224,7 @@ export const FeatureGuideScreen: React.FC<Props> = ({ onNavigate, initialExplain
   return (
     <div className="w-full max-w-full space-y-6 motion-safe:animate-screen-enter motion-reduce:animate-none">
       {/* Top Banner & Knowledge Base Headline */}
-      <div className="flex flex-col lg:flex-row lg:items-center justify-between p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-stone-900 via-stone-950 to-stone-900 border border-amber-900/60 shadow-md gap-4">
+      <div className="flex flex-col lg:flex-row lg:items-center justify-between p-4 sm:p-5 rounded-2xl bg-stone-900 border border-stone-800 shadow-md gap-4">
         <div className="flex items-start gap-3.5">
           <div className="w-10 h-10 rounded-xl bg-amber-950/90 border border-amber-800 flex items-center justify-center text-amber-300 shrink-0 shadow-xs">
             {activeSection === 'evidence' ? (
@@ -253,7 +253,7 @@ export const FeatureGuideScreen: React.FC<Props> = ({ onNavigate, initialExplain
                 ? 'Empirical Mathematical Evidence & Statistical Validation'
                 : 'Multi-Tradition Astrometric & Cultural Feature Guide'}
             </h1>
-            <p className="text-xs text-stone-300 font-sans mt-0.5 leading-relaxed">
+            <p className="text-xs text-stone-300 font-sans mt-0.5 leading-relaxed max-w-2xl">
               {activeSection === 'evidence'
                 ? 'Peer-reviewed style statistical whitepaper, double-blind permutation null controls, and rigorous p-value benchmarks.'
                 : 'Exhaustive documentation of celestial mechanics, ancient calibration lineages, mathematical formulas, and triangulation invariants.'}
@@ -337,7 +337,7 @@ export const FeatureGuideScreen: React.FC<Props> = ({ onNavigate, initialExplain
             className="lg:col-span-4 xl:col-span-3 space-y-4"
           >
           {/* 1. Functional Civilizational Array (9) */}
-          <div className="p-3.5 rounded-xl bg-gradient-to-b from-stone-900 to-stone-950 border border-stone-800 shadow-sm space-y-2.5">
+          <div className="p-3.5 rounded-xl bg-stone-950 border border-stone-800 shadow-sm space-y-2.5">
             <div className="flex items-center justify-between pb-1.5 border-b border-stone-800">
               <span className="text-xs font-serif font-semibold text-stone-300">
                 Civilizational Traditions (9)
@@ -371,8 +371,8 @@ export const FeatureGuideScreen: React.FC<Props> = ({ onNavigate, initialExplain
                     aria-pressed={isSelected}
                     className={`px-1.5 py-1.5 rounded-lg border text-xs font-medium flex items-center justify-center transition-colors duration-150 cursor-pointer min-w-0 ${
                       isSelected
-                        ? `${civ.activeBorder} ${civ.colorClass} shadow-sm ring-1 ring-amber-400`
-                        : `bg-stone-900 border-stone-800 ${civ.colorClass} hover:border-amber-500/50 hover:bg-stone-850`
+                        ? 'bg-amber-950/80 border-amber-500 text-amber-200 shadow-sm ring-1 ring-amber-400'
+                        : 'bg-stone-900 border-stone-800 text-stone-300 hover:text-stone-100 hover:border-stone-700 hover:bg-stone-850'
                     }`}
                   >
                     <span className="truncate font-mono">{civ.code}</span>
@@ -498,7 +498,7 @@ export const FeatureGuideScreen: React.FC<Props> = ({ onNavigate, initialExplain
                           {item.title}
                         </h4>
                         <div className="flex items-center gap-1.5 mt-0.5">
-                          <span className="text-[10px] font-sans text-stone-400 truncate">
+                          <span className="text-[11px] font-sans text-stone-400 truncate">
                             {item.culturalTradition || item.category}
                           </span>
                         </div>
@@ -522,7 +522,7 @@ export const FeatureGuideScreen: React.FC<Props> = ({ onNavigate, initialExplain
           className="lg:col-span-8 xl:col-span-9 space-y-5"
         >
           {/* Header Card with Meta Badges */}
-          <div className="p-5 sm:p-6 rounded-2xl bg-gradient-to-br from-stone-900 to-stone-950 border border-stone-800 shadow-sm space-y-3.5">
+          <div className="p-5 sm:p-6 rounded-2xl bg-stone-900 border border-stone-800 shadow-sm space-y-3.5">
             <div className="flex flex-wrap items-center justify-between gap-2.5 pb-3 border-b border-stone-800">
               <div className="flex flex-wrap items-center gap-2">
                 <span className="px-2.5 py-0.5 rounded text-xs font-sans font-medium bg-amber-950/80 text-amber-300 border border-amber-800">
@@ -588,7 +588,7 @@ export const FeatureGuideScreen: React.FC<Props> = ({ onNavigate, initialExplain
               </div>
 
               {/* Formula Display Box */}
-              <div className="p-3.5 sm:p-4 rounded-xl bg-stone-900 border border-amber-900/40 text-xs sm:text-sm text-amber-200/95 overflow-x-auto select-all shadow-inner">
+              <div className="p-3.5 sm:p-4 rounded-xl bg-stone-900/70 border-l-2 border-amber-500/80 text-xs sm:text-sm text-amber-200/95 overflow-x-auto select-all">
                 <span className="text-xs text-stone-400 block mb-1 font-serif font-medium">
                   Governing Formula / Mathematical Invariant
                 </span>
@@ -600,13 +600,13 @@ export const FeatureGuideScreen: React.FC<Props> = ({ onNavigate, initialExplain
                 <h4 className="text-xs font-serif font-semibold text-stone-300">
                   Algorithmic Execution Pipeline:
                 </h4>
-                <div className="grid grid-cols-1 gap-2">
+                <div className="divide-y divide-stone-800/60">
                   {currentExplainer.howItWorks.map((step, idx) => (
                     <div
                       key={idx}
-                      className="p-3 rounded-lg bg-stone-900 border border-stone-800 flex items-start gap-3"
+                      className="py-2.5 flex items-start gap-3 first:pt-1 last:pb-1"
                     >
-                      <div className="w-5 h-5 rounded-full bg-stone-800 border border-stone-700 text-amber-400 flex items-center justify-center text-[10px] font-mono shrink-0 font-bold mt-0.5">
+                      <div className="w-5 h-5 rounded-full bg-stone-900 border border-stone-800 text-amber-400 flex items-center justify-center text-[10px] font-mono shrink-0 font-bold mt-0.5">
                         {idx + 1}
                       </div>
                       <p className="text-xs sm:text-sm text-stone-300 font-sans leading-relaxed">

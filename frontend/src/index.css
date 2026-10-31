@@ -143,11 +143,11 @@ body {
 :root[data-theme="light"],
 html[data-theme="light"] {
   color-scheme: light;
-  --bg-space: #faf7f0;
-  --surface-card: #fffdfa;
-  --surface-card-subtle: #f5efe6;
-  --border-subtle: #e7e0d3;
-  --border-active: #d6cbba;
+  --bg-space: #f8f9fa;
+  --surface-card: #ffffff;
+  --surface-card-subtle: #f1f3f5;
+  --border-subtle: #e5e7eb;
+  --border-active: #d1d5db;
   --brass-accent: #b45309;
   --cyan-accent: #0284c7;
 }
@@ -168,7 +168,7 @@ html[data-theme="light"] {
 [data-theme="light"] .bg-stone-950\/90,
 [data-theme="light"] .bg-stone-950\/80,
 [data-theme="light"] .bg-stone-950\/60 {
-  background-color: #faf7f0 !important;
+  background-color: #f8f9fa !important;
 }
 
 [data-theme="light"] .bg-stone-900,
@@ -178,7 +178,7 @@ html[data-theme="light"] {
 [data-theme="light"] .bg-stone-900\/60,
 [data-theme="light"] .bg-stone-850,
 [data-theme="light"] .bg-stone-800 {
-  background-color: #fffdfa !important;
+  background-color: #ffffff !important;
 }
 
 [data-theme="light"] .bg-stone-950\/40,
@@ -186,14 +186,14 @@ html[data-theme="light"] {
 [data-theme="light"] .bg-stone-900\/50,
 [data-theme="light"] .bg-stone-800\/40,
 [data-theme="light"] .bg-stone-800\/60 {
-  background-color: #f5efe6 !important;
+  background-color: #f1f3f5 !important;
 }
 
 [data-theme="light"] .hover\:bg-stone-800:hover,
 [data-theme="light"] .hover\:bg-stone-850:hover,
 [data-theme="light"] .hover\:bg-stone-900:hover,
 [data-theme="light"] .hover\:bg-stone-900\/80:hover {
-  background-color: #f5efe6 !important;
+  background-color: #e9ecef !important;
 }
 
 [data-theme="light"] .border-stone-900,
@@ -202,7 +202,7 @@ html[data-theme="light"] {
 [data-theme="light"] .border-stone-800\/80,
 [data-theme="light"] .border-stone-800\/60,
 [data-theme="light"] .border-stone-700 {
-  border-color: #e7e0d3 !important;
+  border-color: #e5e7eb !important;
 }
 
 [data-theme="light"] .divide-stone-800,
@@ -601,7 +601,7 @@ aside > div:first-child {
 [data-theme="light"] .bg-slate-950\/90,
 [data-theme="light"] .bg-slate-950\/80,
 [data-theme="light"] .bg-slate-950\/60 {
-  background-color: #faf7f0 !important;
+  background-color: #f8f9fa !important;
 }
 
 [data-theme="light"] .bg-slate-900,
@@ -1526,23 +1526,17 @@ html[data-theme="light"] {
   animation: gridCellReveal 240ms var(--ease-out-expo, cubic-bezier(0.16, 1, 0.3, 1)) forwards;
 }
 
-/* Spatial Observatory Atmosphere - Renaissance Celestial Monograph */
+/* Precision Observatory Canvas - Technical Grid Ground */
 .celestial-observatory-canvas {
   background-color: #0c0a09;
-  background-image: 
-    radial-gradient(ellipse 70% 45% at 50% 0%, rgba(217, 119, 6, 0.08), transparent 70%),
-    radial-gradient(circle at 15% 25%, rgba(180, 83, 9, 0.04) 0%, transparent 45%),
-    radial-gradient(circle at 85% 75%, rgba(251, 191, 36, 0.03) 0%, transparent 45%),
-    radial-gradient(rgba(245, 158, 11, 0.04) 1px, transparent 1px);
-  background-size: 100% 100%, 100% 100%, 100% 100%, 36px 36px;
+  background-image: radial-gradient(rgba(245, 158, 11, 0.035) 1px, transparent 1px);
+  background-size: 32px 32px;
 }
 
 [data-theme="light"] .celestial-observatory-canvas {
-  background-color: #faf7f0 !important;
-  background-image: 
-    radial-gradient(ellipse 75% 50% at 50% 0%, rgba(180, 83, 9, 0.06), transparent 70%),
-    radial-gradient(rgba(120, 53, 15, 0.03) 1px, transparent 1px) !important;
-  background-size: 100% 100%, 36px 36px !important;
+  background-color: #f8f9fa !important;
+  background-image: radial-gradient(rgba(120, 53, 15, 0.025) 1px, transparent 1px) !important;
+  background-size: 32px 32px !important;
 }
 
 /* Machined Doppelrand Hardware Enclosure & Burnished Brass Framing */
@@ -1596,9 +1590,17 @@ html[data-theme="light"] {
 [data-theme="light"] [class*="bg-gradient-to-r"][class*="from-\[#"],
 [data-theme="light"] [class*="bg-gradient-to-b"][class*="from-\[#"],
 [data-theme="light"] [class*="bg-gradient-to-br"][class*="from-\[#"] {
-  background: linear-gradient(135deg, #faf7f0 0%, #f5efe6 100%) !important;
-  background-image: linear-gradient(135deg, #faf7f0 0%, #f5efe6 100%) !important;
-  border-color: #e7e0d3 !important;
+  background: #ffffff !important;
+  background-image: none !important;
+  border-color: #e5e7eb !important;
+}
+
+/* Eliminate dark gradient bleed over light mode text */
+[data-theme="light"] [class*="bg-gradient-to-"][class*="from-stone-"],
+[data-theme="light"] [class*="bg-gradient-to-"][class*="from-slate-"],
+[data-theme="light"] [class*="bg-gradient-to-"][class*="from-neutral-"],
+[data-theme="light"] [class*="bg-gradient-to-"][class*="from-cyan-"] {
+  background-image: none !important;
 }
 
 [data-theme="light"] .border-\[\#1e293b\],
@@ -1774,7 +1776,7 @@ h1, h2, h3, h4, .font-serif {
   [data-theme="light"] .sidebar-canvas,
   [data-theme="light"] .mobile-nav-canvas,
   [data-theme="light"] [data-tradition-card="active"] {
-    background-color: #faf7f0 !important;
+    background-color: #f8f9fa !important;
   }
 }
 
