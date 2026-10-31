@@ -1061,12 +1061,12 @@ export const DomainConsensusRadar: React.FC<RadarProps> = ({ synthesis }) => {
   const rings = [0.25, 0.50, 0.75, 1.0];
 
   return (
-    <div className="flex flex-col items-center justify-center p-3 bg-stone-950 rounded-lg border border-stone-800">
+    <div className="flex flex-col items-center justify-center pt-3 pb-3 border-b border-stone-800/80 w-full">
       <div className="flex items-center justify-between w-full max-w-[440px] mb-2 px-1 font-sans">
         <span className="text-xs font-medium text-amber-400">
           9-Domain Consensus Radar Matrix (D1 to D9)
         </span>
-        <span className="text-[11px] text-stone-400">
+        <span className="text-xs text-stone-400">
           Divergence: <strong className="text-rose-400 font-mono tabular-nums">{synthesis.divergence_metrics?.divergence_rate_percent}%</strong>
         </span>
       </div>
@@ -1079,9 +1079,9 @@ export const DomainConsensusRadar: React.FC<RadarProps> = ({ synthesis }) => {
       >
         <defs>
           <linearGradient id="radarGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#38bdf8" stopOpacity="0.35" />
-            <stop offset="50%" stopColor="#f59e0b" stopOpacity="0.25" />
-            <stop offset="100%" stopColor="#10b981" stopOpacity="0.35" />
+            <stop offset="0%" stopColor="#f59e0b" stopOpacity="0.30" />
+            <stop offset="50%" stopColor="#d97706" stopOpacity="0.20" />
+            <stop offset="100%" stopColor="#b45309" stopOpacity="0.30" />
           </linearGradient>
         </defs>
 
@@ -1124,7 +1124,7 @@ export const DomainConsensusRadar: React.FC<RadarProps> = ({ synthesis }) => {
         <path
           d={polygonPath}
           fill="url(#radarGradient)"
-          stroke="#38bdf8"
+          stroke="#f59e0b"
           strokeWidth="2"
           className="motion-safe:animate-radar-reveal motion-reduce:animate-none"
         />
@@ -1137,10 +1137,10 @@ export const DomainConsensusRadar: React.FC<RadarProps> = ({ synthesis }) => {
           const isDivergent = dom.grade === 'DIVERGENT';
 
           const nodeColor = isStrong
-            ? '#10b981'
+            ? '#f59e0b'
             : isDivergent
             ? '#f43f5e'
-            : '#38bdf8';
+            : '#a8a29e';
 
           return (
             <g key={dom.domain_id}>
@@ -1172,15 +1172,15 @@ export const DomainConsensusRadar: React.FC<RadarProps> = ({ synthesis }) => {
         })}
       </svg>
 
-      <div className="mt-2 text-[11px] text-stone-400 font-sans text-center flex items-center justify-center gap-3 flex-wrap">
-        <span className="flex items-center gap-1">
-          <span className="w-2 h-2 rounded-full bg-emerald-400"></span> Strong (3/3)
+      <div className="mt-2 text-xs text-stone-400 font-sans text-center flex items-center justify-center gap-4 flex-wrap">
+        <span className="flex items-center gap-1.5">
+          <span className="w-2 h-2 rounded-full bg-amber-400"></span> Strong (3/3)
         </span>
-        <span className="flex items-center gap-1">
-          <span className="w-2 h-2 rounded-full bg-sky-400"></span> Moderate (2/3)
+        <span className="flex items-center gap-1.5">
+          <span className="w-2 h-2 rounded-full bg-stone-400"></span> Moderate (2/3)
         </span>
-        <span className="flex items-center gap-1">
-          <span className="w-2 h-2 rounded-full bg-rose-400"></span> Divergent (Conflict)
+        <span className="flex items-center gap-1.5">
+          <span className="w-2 h-2 rounded-full bg-rose-400"></span> Different (&lt;2/3)
         </span>
       </div>
     </div>
