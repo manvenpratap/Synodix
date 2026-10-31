@@ -1,7 +1,7 @@
 # Synodix: Project Context & Working Memory
 
-**Last Updated:** 2026-10-31 13:19:35
-**Version:** 2.33.31  
+**Last Updated:** 2026-10-31 14:10:40
+**Version:** 2.33.32  
 **Stack:** Python 3.12 (FastAPI, Swiss Ephemeris 2.10, Skyfield DE421) + TypeScript / React 19 / Vite / Tailwind CSS v4 / Framer Motion / Capacitor 8 (iOS & Android)  
 **Workspace:** `/Volumes/Study/Projects/Astrology` (symlinked as `/Volumes/Study/Astrology`)  
 **Git Remote:** `https://github.com/manvenpratap/Synodix.git`  
@@ -10,7 +10,30 @@
 
 ## 1. Current Status & Milestone
 
-- **Active Phase**: Traditions Deck Impeccable Zero-Findings & Type Hierarchy Polish (Completed)
+- **Active Phase**: Empirical Mathematical Evidence Impeccable Zero-Findings & Responsive Polish (Completed)
+- **Empirical Mathematical Evidence Impeccable Zero-Findings & Responsive Polish (v2.33.32)**:
+  - **AI Tells & Palette Harmonization (`MathematicalEvidenceCard.tsx`, `FeatureGuideScreen.tsx`)**:
+    - Replaced 100% of cyan/sky neon tokens (`text-cyan-300`, `text-cyan-400`, `bg-cyan-950`, `border-cyan-700`, `bg-cyan-700`) with dignified warm amber (`text-amber-400`, `text-amber-300`, `bg-amber-950/80`, `border-amber-800/80`, `bg-amber-600`) and neutral stone (`text-stone-300`).
+    - Standardized Western (Hellenistic) civilizational badge in `FeatureGuideScreen.tsx` to `text-amber-300`, `border-amber-500 bg-amber-950/40`.
+  - **Nested Cards Flattening across Tabs 1-5 & Views (`MathematicalEvidenceCard.tsx`)**:
+    - Flattened top KPI strip into an unboxed telemetry row (`grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 pt-3 mt-3 border-t border-stone-800/80`).
+    - Tab 2 (`debiasing`): Replaced 3 boxed cards with clean divided columns (`grid grid-cols-1 md:grid-cols-3 gap-6 divide-y md:divide-y-0 md:divide-x divide-stone-800`), eliminating nested cards completely.
+    - Tab 3 (`pillars`): Replaced 3 boxed cards with clean divided columns (`grid grid-cols-1 md:grid-cols-3 gap-6 divide-y md:divide-y-0 md:divide-x divide-stone-800`) and top dividers.
+    - Tab 4 (`moat`): Flattened public positioning box into a border-top section (`pt-4 border-t border-stone-800`); flattened mobile stacked cards into divided list rows (`divide-y divide-stone-800/80`).
+    - Tab 5 (`checklist`): Removed outer enclosing box; flattened checklist items into unbordered rows (`py-2 px-2.5 rounded bg-stone-900/60`); raised file path labels from `text-[11px]` to `text-xs` (12px), eliminating all `tiny-text` findings.
+    - Whitepaper View: Converted Section 1 boxes to unbordered left-accented rows (`border-l-2 border-rose-600/80` and `border-l-2 border-emerald-600/80`); removed card wrappers from Section 2 hypothesis table and Section 3 myth boxes (`py-2.5 border-b border-stone-800/80`); flattened conclusion box (`pt-4 border-t border-amber-800/60`).
+  - **Heading Hierarchy & Line Length Calibration (`MathematicalEvidenceCard.tsx`, `FeatureGuideScreen.tsx`)**:
+    - Converted all subtopic headers across Tabs 2, 3, 4, 5 from `<h4>` to `<h3>`, eliminating skipped heading warnings (`[skipped-heading]`).
+    - Subtitle in Whitepaper view changed from `<h3>` to `<p className="text-base text-stone-400 font-sans">`, preserving strict document outline (`h1` -> `h2`).
+    - Page title in `FeatureGuideScreen.tsx` updated to `text-xl sm:text-2xl` ($\ge 1.25:1$ ratio over `h2`), resolving flat type hierarchy.
+    - Constrained all whitepaper narrative paragraphs and lists with `max-w-[55ch] text-pretty`, resolving all `line-length` (>80 chars) and `straggler` findings.
+  - **Light Theme Contrast Harmonization in `index.css`**:
+    - Added global light theme override for `[class*="bg-rose-950"]` with `background-color: #fff1f2 !important; color: #9f1239 !important; border-color: #fecdd3 !important;`.
+    - Standardized `text-rose-*` to `#9f1239` in light mode, securing $\ge 6.8:1$ contrast (WCAG AAA) across both themes.
+  - **Automated Verification**:
+    - Zero Impeccable findings (exit code 0) across all 5 Tabs + Whitepaper View + Markdown View on Desktop (1280x900), Tablet (768x1024), and Mobile (390x844).
+    - Zero regex anti-patterns across all 35 source code files (`impeccable detect frontend/src`).
+    - TypeScript compilation cleanly passes with zero errors (`npx tsc --noEmit`).
 - **Traditions Deck Impeccable Zero-Findings & Type Hierarchy Polish (v2.33.31)**:
   - **AI Tells & Color Palette Remediation (`App.tsx`, `TraditionCharts.tsx`, `TraditionVerticalCarousel.tsx`)**:
     - Replaced cyan/emerald neon tokens (`text-emerald-400`, `text-emerald-300`) on completed stepper items (`isPassed`) in `App.tsx` with unified warm amber (`text-amber-400`, `bg-amber-500/20 text-amber-300`).

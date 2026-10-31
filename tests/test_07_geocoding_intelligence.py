@@ -86,10 +86,8 @@ def test_ui_city_autosuggest_and_coordinate_resolution():
         # 1. Type "Toky" to trigger auto-suggest
         city_input.fill("")
         city_input.press_sequentially("Toky", delay=50)
-        page.wait_for_timeout(300)
-
-        # Verify suggestion dropdown appears
         dropdown = page.locator("div[role='listbox']")
+        dropdown.wait_for(state="visible", timeout=5000)
         assert dropdown.is_visible(), "City suggestion dropdown listbox should appear"
 
         # Verify Tokyo option is visible in suggestions
@@ -120,7 +118,7 @@ def test_ui_city_autosuggest_and_coordinate_resolution():
         # 2. Test another city with keyboard navigation (e.g. Paris)
         city_input.fill("")
         city_input.press_sequentially("Pari", delay=50)
-        page.wait_for_timeout(300)
+        dropdown.wait_for(state="visible", timeout=5000)
         assert dropdown.is_visible(), "Suggestions should appear for Pari"
 
         # Press ArrowDown then Enter

@@ -196,8 +196,8 @@ export const MathematicalEvidenceCard: React.FC<Props> = ({ onNavigate }) => {
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
           <div>
             <div className="flex flex-wrap items-center gap-2 mb-1.5">
-              <span className="px-2 py-0.5 text-xs font-sans font-medium rounded bg-cyan-950 text-cyan-300 border border-cyan-700/60 flex items-center gap-1.5">
-                <ShieldCheck className="w-3 h-3 text-cyan-400" />
+              <span className="px-2.5 py-1 text-xs font-sans font-medium rounded bg-amber-950/80 text-amber-300 border border-amber-800/80 flex items-center gap-1.5">
+                <ShieldCheck className="w-3.5 h-3.5 text-amber-400" />
                 Peer-Grade Empirical Audit
               </span>
               <span className="px-2 py-0.5 text-xs font-sans rounded bg-stone-800 text-stone-300 border border-stone-700">
@@ -206,7 +206,7 @@ export const MathematicalEvidenceCard: React.FC<Props> = ({ onNavigate }) => {
               <span className="px-2 py-0.5 text-xs font-sans rounded bg-stone-800 text-stone-300 border border-stone-700">
                 N=1,000 Monte Carlo Controls
               </span>
-              <span className="px-2 py-0.5 text-xs font-mono rounded bg-emerald-950 text-emerald-300 border border-emerald-800/60 font-semibold">
+              <span className="px-2 py-0.5 text-xs font-mono rounded bg-amber-950/80 text-amber-300 border border-amber-800/80 font-semibold">
                 p &lt; 0.0001
               </span>
             </div>
@@ -216,7 +216,7 @@ export const MathematicalEvidenceCard: React.FC<Props> = ({ onNavigate }) => {
               </h2>
               <ExplainerTrigger id="epistemic_humility_framework" label="Epistemic Humility" variant="badge" />
             </div>
-            <p className="text-xs text-stone-400 mt-0.5 font-sans">
+            <p className="text-xs text-stone-400 mt-0.5 font-sans max-w-2xl">
               A Large-Scale Double-Cohort Statistical Study on Classical Yogas, Gauquelin Diurnal Sectors, and 6-Culture Triangulation.
             </p>
           </div>
@@ -308,37 +308,37 @@ export const MathematicalEvidenceCard: React.FC<Props> = ({ onNavigate }) => {
           </div>
         </div>
 
-        {/* Live Top KPI Scorecard */}
-        <div className="grid grid-cols-2 sm:grid-cols-5 gap-2.5 mt-4">
-          <div className="bg-stone-950 border border-stone-800 rounded-lg p-2.5">
+        {/* Live Top KPI Scorecard (flattened telemetry strip without nested cards) */}
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 pt-3 mt-3 border-t border-stone-800/80">
+          <div className="flex flex-col justify-between py-1 px-1">
             <div className="flex items-center justify-between">
-              <span className="text-xs font-medium text-stone-300">Titan Cohort</span>
+              <span className="text-xs font-medium text-stone-400">Titan Cohort</span>
               <ExplainerTrigger id="rodden_titan_benchmark" size="xs" variant="icon" />
             </div>
-            <span className="text-lg font-mono tabular-nums font-bold text-cyan-300">100 Records</span>
+            <span className="text-base sm:text-lg font-mono tabular-nums font-bold text-amber-300">100 Records</span>
             <span className="text-xs text-stone-400 block mt-0.5">100% Rodden Rating AA/A</span>
           </div>
-          <div className="bg-stone-950 border border-stone-800 rounded-lg p-2.5">
-            <span className="text-xs font-medium text-stone-300 block">Null Baseline</span>
-            <span className="text-lg font-mono tabular-nums font-bold text-stone-200">1,000 Controls</span>
+          <div className="flex flex-col justify-between py-1 px-1">
+            <span className="text-xs font-medium text-stone-400 block">Null Baseline</span>
+            <span className="text-base sm:text-lg font-mono tabular-nums font-bold text-stone-200">1,000 Controls</span>
             <span className="text-xs text-stone-400 block mt-0.5">Epoch 1500 to 2000 Uniform</span>
           </div>
-          <div className="bg-stone-950 border border-stone-800 rounded-lg p-2.5">
-            <span className="text-xs font-medium text-stone-300 block">Domain Concordance</span>
-            <span className="text-lg font-mono tabular-nums font-bold text-emerald-400">68.2%</span>
-            <span className="text-xs font-sans text-emerald-400 block mt-0.5 font-medium">Exceeds Noise (p &lt; 10⁻⁴)</span>
+          <div className="flex flex-col justify-between py-1 px-1">
+            <span className="text-xs font-medium text-stone-400 block">Domain Concordance</span>
+            <span className="text-base sm:text-lg font-mono tabular-nums font-bold text-amber-300">68.2%</span>
+            <span className="text-xs font-sans text-stone-300 block mt-0.5 font-medium">Exceeds Noise (p &lt; 10⁻⁴)</span>
           </div>
-          <div className="bg-stone-950 border border-stone-800 rounded-lg p-2.5">
+          <div className="flex flex-col justify-between py-1 px-1">
             <div className="flex items-center justify-between">
-              <span className="text-xs font-medium text-stone-300">Divergence Rate</span>
+              <span className="text-xs font-medium text-stone-400">Divergence Rate</span>
               <ExplainerTrigger id="honest_divergence_rate" size="xs" variant="icon" />
             </div>
-            <span className="text-lg font-mono tabular-nums font-bold text-amber-400">31.8%</span>
+            <span className="text-base sm:text-lg font-mono tabular-nums font-bold text-amber-400">31.8%</span>
             <span className="text-xs text-stone-400 block mt-0.5">Honest Disagreements</span>
           </div>
-          <div className="bg-stone-950 border border-stone-800 rounded-lg p-2.5">
-            <span className="text-xs font-medium text-stone-300 block">Orbital Constraint</span>
-            <span className="text-lg font-mono tabular-nums font-bold text-rose-300">28° Mercury</span>
+          <div className="flex flex-col justify-between py-1 px-1">
+            <span className="text-xs font-medium text-stone-400 block">Orbital Constraint</span>
+            <span className="text-base sm:text-lg font-mono tabular-nums font-bold text-rose-300">28° Mercury</span>
             <span className="text-xs text-stone-400 block mt-0.5">29.6% Baseline Debunked</span>
           </div>
         </div>
@@ -376,9 +376,9 @@ export const MathematicalEvidenceCard: React.FC<Props> = ({ onNavigate }) => {
           {/* TAB 1: Hypotheses Scorecard */}
           {activeTab === 'hypotheses' && (
             <div className="space-y-4">
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 bg-stone-950 p-3 rounded-lg border border-stone-800">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3 border-b border-stone-800">
                 <div className="text-xs text-stone-300">
-                  <span className="text-cyan-300 font-semibold">Testing Protocol:</span> Experimental Cohort (100 Historical Titans) vs. Null Model (1,000 Monte Carlo Controls).
+                  <span className="text-amber-300 font-semibold">Testing Protocol:</span> Experimental Cohort (100 Historical Titans) vs. Null Model (1,000 Monte Carlo Controls).
                 </div>
                 <div className="flex flex-wrap items-center gap-1.5 text-xs font-sans">
                   <span className="text-stone-400 mr-1">Filter:</span>
@@ -389,7 +389,7 @@ export const MathematicalEvidenceCard: React.FC<Props> = ({ onNavigate }) => {
                       onClick={() => setHypothesisFilter(cat)}
                       className={`px-2.5 py-1 min-h-[36px] sm:min-h-[28px] rounded-md capitalize cursor-pointer transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 ${
                         hypothesisFilter === cat
-                          ? 'bg-cyan-950 text-cyan-300 border border-cyan-700/80'
+                          ? 'bg-amber-950 text-amber-300 border border-amber-700/80 font-medium'
                           : 'text-stone-400 hover:text-stone-200 border border-stone-800'
                       }`}
                     >
@@ -403,16 +403,16 @@ export const MathematicalEvidenceCard: React.FC<Props> = ({ onNavigate }) => {
                 tabIndex={0}
                 role="region"
                 aria-label="Empirical hypothesis testing results table"
-                className="rounded-lg border border-stone-800 focus:outline-none focus-visible:ring-1 focus-visible:ring-amber-500 overflow-hidden"
+                className="overflow-hidden focus:outline-none focus-visible:ring-1 focus-visible:ring-amber-500"
               >
                 {/* Mobile-first stacked cards (<sm) */}
-                <div className="sm:hidden space-y-2.5 p-2.5 bg-stone-900">
+                <div className="sm:hidden divide-y divide-stone-800/80 p-1">
                   {filteredHypotheses.map((h) => (
-                    <div key={h.id} className="p-3 rounded-lg bg-stone-950 border border-stone-800 space-y-2 text-xs">
+                    <div key={h.id} className="py-3 px-1 space-y-2 text-xs">
                       <div className="flex items-center justify-between">
-                        <span className="font-mono font-bold text-cyan-400">{h.id}</span>
+                        <span className="font-mono font-bold text-amber-400">{h.id}</span>
                         {h.status === 'significant' && (
-                          <span className="px-2 py-0.5 rounded text-xs font-sans font-medium bg-emerald-950 text-emerald-300 border border-emerald-700">
+                          <span className="px-2 py-0.5 rounded text-xs font-sans font-medium bg-amber-950/80 text-amber-300 border border-amber-700">
                             ✓ Extremely Significant
                           </span>
                         )}
@@ -429,14 +429,14 @@ export const MathematicalEvidenceCard: React.FC<Props> = ({ onNavigate }) => {
                       </div>
                       <p className="font-sans text-stone-200 text-xs font-semibold leading-snug">{h.claim}</p>
                       <div className="text-xs text-stone-400">
-                        Cohort: <span className="text-cyan-300">{h.subgroup}</span>
+                        Cohort: <span className="text-stone-300">{h.subgroup}</span>
                       </div>
                       <div className="grid grid-cols-2 gap-1.5 pt-1.5 border-t border-stone-800 text-xs font-sans">
                         <div>Titans: <strong className="text-stone-100 font-mono tabular-nums">{h.observed}</strong></div>
                         <div>Controls: <strong className="text-stone-400 font-mono tabular-nums">{h.baseline}</strong></div>
-                        <div>Odds Ratio: <strong className={`font-mono tabular-nums ${parseFloat(h.oddsRatio) >= 2.0 ? 'text-emerald-400' : 'text-stone-300'}`}>{h.oddsRatio}</strong></div>
+                        <div>Odds Ratio: <strong className={`font-mono tabular-nums ${parseFloat(h.oddsRatio) >= 2.0 ? 'text-amber-300 font-semibold' : 'text-stone-300'}`}>{h.oddsRatio}</strong></div>
                         <div>Z-Score: <strong className="text-stone-300 font-mono tabular-nums">{h.zScore}</strong></div>
-                        <div className="col-span-2">p-value: <strong className={`font-mono tabular-nums ${h.pValue.includes('0.0001') ? 'text-emerald-400' : 'text-stone-400'}`}>{h.pValue}</strong></div>
+                        <div className="col-span-2">p-value: <strong className={`font-mono tabular-nums ${h.pValue.includes('0.0001') ? 'text-amber-300 font-bold' : 'text-stone-400'}`}>{h.pValue}</strong></div>
                       </div>
                     </div>
                   ))}
@@ -444,7 +444,7 @@ export const MathematicalEvidenceCard: React.FC<Props> = ({ onNavigate }) => {
 
                 {/* Desktop tabular view (>=sm) */}
                 <div className="hidden sm:block overflow-x-auto">
-                  <table className="w-full text-left text-xs font-sans border-collapse bg-stone-900">
+                  <table className="w-full text-left text-xs font-sans border-collapse bg-stone-900 border-y border-stone-800">
                     <thead>
                       <tr className="border-b border-stone-800 text-xs font-medium text-stone-400 bg-stone-950">
                         <th className="py-2.5 px-3 sticky left-0 bg-stone-950 z-10 border-r border-stone-800">Test</th>
@@ -461,23 +461,23 @@ export const MathematicalEvidenceCard: React.FC<Props> = ({ onNavigate }) => {
                     <tbody className="divide-y divide-stone-800">
                       {filteredHypotheses.map((h) => (
                         <tr key={h.id} className="hover:bg-stone-800/60 transition-colors">
-                          <td className="py-2.5 px-3 font-mono font-bold text-cyan-400 sticky left-0 bg-stone-900 z-10 border-r border-stone-800">{h.id}</td>
+                          <td className="py-2.5 px-3 font-mono font-bold text-amber-400 sticky left-0 bg-stone-900 z-10 border-r border-stone-800">{h.id}</td>
                           <td className="py-2.5 px-3 font-sans text-stone-200">
                             <span className="font-semibold">{h.claim}</span>
                           </td>
-                          <td className="py-2.5 px-3 text-cyan-300 text-xs whitespace-nowrap">{h.subgroup}</td>
+                          <td className="py-2.5 px-3 text-stone-300 text-xs whitespace-nowrap">{h.subgroup}</td>
                           <td className="py-2.5 px-3 text-right font-mono tabular-nums font-bold text-stone-100">{h.observed}</td>
                           <td className="py-2.5 px-3 text-right font-mono tabular-nums text-stone-400">{h.baseline}</td>
-                          <td className={`py-2.5 px-3 text-right font-mono tabular-nums font-bold ${parseFloat(h.oddsRatio) >= 2.0 ? 'text-emerald-400' : 'text-stone-300'}`}>
+                          <td className={`py-2.5 px-3 text-right font-mono tabular-nums font-bold ${parseFloat(h.oddsRatio) >= 2.0 ? 'text-amber-300 font-semibold' : 'text-stone-300'}`}>
                             {h.oddsRatio}
                           </td>
                           <td className="py-2.5 px-3 text-right font-mono tabular-nums text-stone-300">{h.zScore}</td>
-                          <td className={`py-2.5 px-3 text-right font-mono tabular-nums font-bold ${h.pValue.includes('0.0001') ? 'text-emerald-400' : 'text-stone-400'}`}>
+                          <td className={`py-2.5 px-3 text-right font-mono tabular-nums font-bold ${h.pValue.includes('0.0001') ? 'text-amber-300 font-bold' : 'text-stone-400'}`}>
                             {h.pValue}
                           </td>
                           <td className="py-2.5 px-3 text-center">
                             {h.status === 'significant' && (
-                              <span className="px-2 py-0.5 rounded text-xs font-sans font-medium bg-emerald-950 text-emerald-300 border border-emerald-700 whitespace-nowrap">
+                              <span className="px-2 py-0.5 rounded text-xs font-sans font-medium bg-amber-950/80 text-amber-300 border border-amber-700 whitespace-nowrap">
                                 ✓ Extremely Significant
                               </span>
                             )}
@@ -504,51 +504,51 @@ export const MathematicalEvidenceCard: React.FC<Props> = ({ onNavigate }) => {
           {/* TAB 2: Astronomical De-Biasing Analysis */}
           {activeTab === 'debiasing' && (
             <div className="space-y-4">
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div className="bg-stone-900 p-4 rounded-lg border border-stone-800 space-y-2">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 divide-y md:divide-y-0 md:divide-x divide-stone-800">
+                <div className="space-y-2.5 p-2">
                   <div className="flex items-center gap-2 text-rose-400 font-bold text-sm">
                     <AlertTriangle className="w-4 h-4 shrink-0" />
-                    <h4>1. The Orbital Mechanics Trap</h4>
+                    <h3>1. The Orbital Mechanics Trap</h3>
                   </div>
                   <span className="text-xs font-sans font-medium text-stone-400 block">Budhaditya Yoga (Sun-Mercury Conjunction)</span>
-                  <p className="text-xs text-stone-300 leading-relaxed">
+                  <p className="text-xs text-stone-300 leading-relaxed max-w-prose">
                     Popular astrologers cite Mercury conjunct Sun in Einstein, Jobs, and Obama as “proof of genius.”
                     In celestial reality, Mercury’s maximum elongation from the Sun is only <strong className="text-stone-100 font-mono tabular-nums">28°</strong>. 
                     Therefore, Mercury is geometrically locked to the Sun’s sign <strong className="text-rose-400 font-mono tabular-nums">29.6% of the time</strong> in the general world population.
                   </p>
-                  <div className="bg-stone-950 p-2 rounded text-xs font-sans text-stone-400 border border-stone-800">
+                  <div className="pt-2.5 border-t border-stone-800 text-xs font-sans text-stone-400">
                     Observed in Science Titans: <span className="font-mono tabular-nums text-stone-200">22.2%</span> | Natural Baseline: <span className="font-mono tabular-nums text-stone-200">29.6%</span> → <span className="text-rose-300 font-medium">Texas Sharpshooter Fallacy</span>
                   </div>
                 </div>
 
-                <div className="bg-stone-900 p-4 rounded-lg border border-stone-800 space-y-2">
+                <div className="space-y-2.5 p-2 md:pl-6">
                   <div className="flex items-center gap-2 text-amber-400 font-bold text-sm">
                     <Globe className="w-4 h-4 shrink-0" />
-                    <h4>2. Short Ascension Geometry</h4>
+                    <h3>2. Short Ascension Geometry</h3>
                   </div>
                   <span className="text-xs font-sans font-medium text-stone-400 block">Pisces Ascendant Scarcity</span>
-                  <p className="text-xs text-stone-300 leading-relaxed">
+                  <p className="text-xs text-stone-300 leading-relaxed max-w-prose">
                     Among 100 historical titans, only 1 had a Pisces Ascendant (p = 0.0080).
                     Naive researchers claim Pisces rising people "cannot become famous." 
                     In reality, the 23.4° tilt of the ecliptic causes Pisces to cross the horizon in only <strong className="text-stone-100">~75 mins</strong> (short ascension) vs. <strong className="text-stone-100">~160 mins</strong> for Virgo/Libra in the Northern Hemisphere.
                   </p>
-                  <div className="bg-stone-950 p-2 rounded text-xs font-sans text-stone-400 border border-stone-800">
+                  <div className="pt-2.5 border-t border-stone-800 text-xs font-sans text-stone-400">
                     Spherical Geometry effect, not metaphysical fate.
                   </div>
                 </div>
 
-                <div className="bg-stone-900 p-4 rounded-lg border border-stone-800 space-y-2">
-                  <div className="flex items-center gap-2 text-cyan-400 font-bold text-sm">
+                <div className="space-y-2.5 p-2 md:pl-6">
+                  <div className="flex items-center gap-2 text-amber-400 font-bold text-sm">
                     <Compass className="w-4 h-4 shrink-0" />
-                    <h4>3. Dusthana Lord Probability</h4>
+                    <h3>3. Dusthana Lord Probability</h3>
                   </div>
                   <span className="text-xs font-sans font-medium text-stone-400 block">Viparita Raja Yoga (Crisis to Triumph)</span>
-                  <p className="text-xs text-stone-300 leading-relaxed">
+                  <p className="text-xs text-stone-300 leading-relaxed max-w-prose">
                     Astrologers claim Viparita Raja Yoga (lords of 6, 8, 12 placed in houses 6, 8, 12) is the secret of resilience in titans.
                     Mathematical probability of at least one lord placed in these houses is:
                   </p>
-                  <div className="bg-stone-950 p-2 rounded text-xs font-mono text-cyan-300 text-center border border-stone-800">
-                    P = 1 - (9/12)³ = 1 - 0.4218 = <strong className="text-emerald-400 font-bold tabular-nums">57.8%</strong>
+                  <div className="pt-2.5 border-t border-stone-800 text-xs font-mono text-amber-300 text-center">
+                    P = 1 - (9/12)³ = 1 - 0.4218 = <strong className="text-amber-300 font-bold tabular-nums">57.8%</strong>
                   </div>
                   <p className="text-xs text-stone-400">
                     58% of all human beings naturally have this yoga. Its presence in 61% of titans is completely expected.
@@ -561,30 +561,30 @@ export const MathematicalEvidenceCard: React.FC<Props> = ({ onNavigate }) => {
           {/* TAB 3: Three Mathematical Pillars */}
           {activeTab === 'pillars' && (
             <div className="space-y-4">
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div className="bg-stone-900 p-4 rounded-lg border border-amber-800/60 space-y-3">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 divide-y md:divide-y-0 md:divide-x divide-stone-800">
+                <div className="space-y-3 p-2">
                   <div className="flex items-center justify-between border-b border-stone-800 pb-2">
-                    <span className="text-xs font-sans font-semibold text-cyan-400">Pillar 1</span>
-                    <span className="text-xs font-mono tabular-nums px-2 py-0.5 rounded bg-emerald-950 text-emerald-300 border border-emerald-700">
+                    <span className="text-xs font-sans font-semibold text-amber-400">Pillar 1</span>
+                    <span className="text-xs font-mono tabular-nums px-2 py-0.5 rounded bg-amber-950/80 text-amber-300 border border-amber-700">
                       p &lt; 0.0001
                     </span>
                   </div>
-                  <h4 className="font-bold text-stone-100 text-sm">6-Culture Triangulation</h4>
-                  <p className="text-xs text-stone-300 leading-relaxed">
+                  <h3 className="font-bold text-stone-100 text-sm">6-Culture Triangulation</h3>
+                  <p className="text-xs text-stone-300 leading-relaxed max-w-prose">
                     6 culturally isolated calendars (Sidereal Jyotisha, Tropical Western, BaZi Solar, Zi Wei Lunar, Mayan Tzolk'in, Tibetan Rabjung) evaluate life domains independently.
                   </p>
-                  <div className="space-y-1.5 text-xs font-sans bg-stone-950 p-2.5 rounded border border-stone-800">
+                  <div className="space-y-1.5 text-xs font-sans pt-2 border-t border-stone-800">
                     <div className="flex justify-between">
                       <span className="text-stone-400">D9 Life Purpose:</span>
-                      <strong className="text-emerald-400 font-mono tabular-nums">75.0% Concordance</strong>
+                      <strong className="text-amber-300 font-mono tabular-nums">75.0% Concordance</strong>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-stone-400">D1 Vitality:</span>
-                      <strong className="text-emerald-400 font-mono tabular-nums">72.0% Concordance</strong>
+                      <strong className="text-amber-300 font-mono tabular-nums">72.0% Concordance</strong>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-stone-400">D2 Career/Status:</span>
-                      <strong className="text-emerald-400 font-mono tabular-nums">71.0% Concordance</strong>
+                      <strong className="text-amber-300 font-mono tabular-nums">71.0% Concordance</strong>
                     </div>
                   </div>
                   <p className="text-xs text-stone-400">
@@ -592,21 +592,21 @@ export const MathematicalEvidenceCard: React.FC<Props> = ({ onNavigate }) => {
                   </p>
                 </div>
 
-                <div className="bg-stone-900 p-4 rounded-lg border border-amber-800/60 space-y-3">
+                <div className="space-y-3 p-2 md:pl-6">
                   <div className="flex items-center justify-between border-b border-stone-800 pb-2">
-                    <span className="text-xs font-sans font-semibold text-cyan-400">Pillar 2</span>
+                    <span className="text-xs font-sans font-semibold text-amber-400">Pillar 2</span>
                     <span className="text-xs font-sans font-medium px-2 py-0.5 rounded bg-amber-950 text-amber-300 border border-amber-700">
                       Odds Ratio 2.0x
                     </span>
                   </div>
-                  <h4 className="font-bold text-stone-100 text-sm">Gauquelin Diurnal Sectors</h4>
-                  <p className="text-xs text-stone-300 leading-relaxed">
+                  <h3 className="font-bold text-stone-100 text-sm">Gauquelin Diurnal Sectors</h3>
+                  <p className="text-xs text-stone-300 leading-relaxed max-w-prose">
                     Replication of Michel Gauquelin's 30-year archival study on planetary positions immediately following rise and culmination (Houses 9, 10, 12, 1).
                   </p>
-                  <div className="space-y-1.5 text-xs font-sans bg-stone-950 p-2.5 rounded border border-stone-800">
+                  <div className="space-y-1.5 text-xs font-sans pt-2 border-t border-stone-800">
                     <div className="flex justify-between">
                       <span className="text-stone-400">Saturn in Scientists:</span>
-                      <strong className="text-emerald-400 font-mono tabular-nums">50.0% Observed</strong>
+                      <strong className="text-amber-300 font-mono tabular-nums">50.0% Observed</strong>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-stone-400">Control Baseline:</span>
@@ -614,7 +614,7 @@ export const MathematicalEvidenceCard: React.FC<Props> = ({ onNavigate }) => {
                     </div>
                     <div className="flex justify-between">
                       <span className="text-stone-400">Odds Ratio:</span>
-                      <strong className="text-cyan-300 font-mono tabular-nums">2.00x Enrichment</strong>
+                      <strong className="text-amber-300 font-mono tabular-nums">2.00x Enrichment</strong>
                     </div>
                   </div>
                   <p className="text-xs text-stone-400">
@@ -622,21 +622,21 @@ export const MathematicalEvidenceCard: React.FC<Props> = ({ onNavigate }) => {
                   </p>
                 </div>
 
-                <div className="bg-stone-900 p-4 rounded-lg border border-amber-800/60 space-y-3">
+                <div className="space-y-3 p-2 md:pl-6">
                   <div className="flex items-center justify-between border-b border-stone-800 pb-2">
-                    <span className="text-xs font-sans font-semibold text-cyan-400">Pillar 3</span>
-                    <span className="text-xs font-sans font-medium px-2 py-0.5 rounded bg-cyan-950 text-cyan-300 border border-cyan-700">
+                    <span className="text-xs font-sans font-semibold text-amber-400">Pillar 3</span>
+                    <span className="text-xs font-sans font-medium px-2 py-0.5 rounded bg-amber-950 text-amber-300 border border-amber-700">
                       87.5% Timing Alignment
                     </span>
                   </div>
-                  <h4 className="font-bold text-stone-100 text-sm">Chronological Milestones</h4>
-                  <p className="text-xs text-stone-300 leading-relaxed">
+                  <h3 className="font-bold text-stone-100 text-sm">Chronological Milestones</h3>
+                  <p className="text-xs text-stone-300 leading-relaxed max-w-prose">
                     Synchronization of Vimshottari Mahadashas and Hellenistic Annual Profections with biographical historical events.
                   </p>
-                  <div className="space-y-1.5 text-xs font-sans bg-stone-950 p-2.5 rounded border border-stone-800">
+                  <div className="space-y-1.5 text-xs font-sans pt-2 border-t border-stone-800">
                     <div className="flex justify-between">
                       <span className="text-stone-400">Inflection Points:</span>
-                      <strong className="text-cyan-300 font-mono tabular-nums">87.5% in Kendra Years</strong>
+                      <strong className="text-amber-300 font-mono tabular-nums">87.5% in Kendra Years</strong>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-stone-400">Profection Houses:</span>
@@ -644,7 +644,7 @@ export const MathematicalEvidenceCard: React.FC<Props> = ({ onNavigate }) => {
                     </div>
                     <div className="flex justify-between">
                       <span className="text-stone-400">Turnaround Rate:</span>
-                      <strong className="text-emerald-400 font-medium">High Predictive Density</strong>
+                      <strong className="text-amber-300 font-medium">High Predictive Density</strong>
                     </div>
                   </div>
                   <p className="text-xs text-stone-400">
@@ -662,10 +662,10 @@ export const MathematicalEvidenceCard: React.FC<Props> = ({ onNavigate }) => {
                 tabIndex={0}
                 role="region"
                 aria-label="Competitive moat comparison table"
-                className="rounded-lg border border-stone-800 focus:outline-none focus-visible:ring-1 focus-visible:ring-amber-500 overflow-hidden"
+                className="overflow-hidden focus:outline-none focus-visible:ring-1 focus-visible:ring-amber-500"
               >
                 {/* Mobile-first stacked cards (<sm) */}
-                <div className="sm:hidden space-y-2.5 p-2.5 bg-stone-900">
+                <div className="sm:hidden divide-y divide-stone-800/80 p-1">
                   {[
                     {
                       dim: 'Ontological Stance',
@@ -693,14 +693,14 @@ export const MathematicalEvidenceCard: React.FC<Props> = ({ onNavigate }) => {
                       engine: 'Dual-Engine (SwissEph + NASA JPL DE421 to ≤0.01°)'
                     }
                   ].map((row, i) => (
-                    <div key={i} className="p-3 rounded-lg bg-stone-950 border border-stone-800 space-y-2">
+                    <div key={i} className="py-3 px-1 space-y-2">
                       <div className="font-semibold text-stone-200 text-xs font-sans">{row.dim}</div>
-                      <div className="text-xs p-2 rounded bg-rose-950/20 border border-rose-950/80 text-rose-300">
+                      <div className="text-xs p-2 rounded bg-rose-950/30 text-rose-300">
                         <span className="font-semibold block text-xs text-rose-400 font-sans mb-0.5">Consumer Apps:</span>
                         {row.typical}
                       </div>
-                      <div className="text-xs p-2 rounded bg-emerald-950/20 border border-emerald-950/80 text-emerald-300">
-                        <span className="font-semibold block text-xs text-emerald-400 font-sans mb-0.5">Your Nine-Culture Engine:</span>
+                      <div className="text-xs p-2 rounded bg-amber-950/30 text-amber-300">
+                        <span className="font-semibold block text-xs text-amber-400 font-sans mb-0.5">Your Nine-Culture Engine:</span>
                         {row.engine}
                       </div>
                     </div>
@@ -714,42 +714,42 @@ export const MathematicalEvidenceCard: React.FC<Props> = ({ onNavigate }) => {
                       <tr className="border-b border-stone-800 text-xs font-medium text-stone-400 bg-stone-950">
                         <th className="py-2.5 px-3">Competitive Dimension</th>
                         <th className="py-2.5 px-3 text-rose-400">Typical Consumer Apps (Co-Star, The Pattern)</th>
-                        <th className="py-2.5 px-3 text-cyan-300 font-bold">Your Six-Culture Engine</th>
+                        <th className="py-2.5 px-3 text-amber-300 font-bold">Your Six-Culture Engine</th>
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-stone-800 font-sans text-xs">
                       <tr>
                         <td className="py-2.5 px-3 font-semibold text-stone-200">Ontological Stance</td>
                         <td className="py-2.5 px-3 text-stone-400">Promotes deterministic fortunes & fatalistic claims</td>
-                        <td className="py-2.5 px-3 text-emerald-300 font-semibold">Rejects fatalism; models archetypal cultural typologies</td>
+                        <td className="py-2.5 px-3 text-amber-300 font-semibold">Rejects fatalism; models archetypal cultural typologies</td>
                       </tr>
                       <tr>
                         <td className="py-2.5 px-3 font-semibold text-stone-200">Uncertainty Handling</td>
                         <td className="py-2.5 px-3 text-stone-400">Hides timing uncertainty; invents false precision</td>
-                        <td className="py-2.5 px-3 text-cyan-300">Transparent T±15m uncertainty ensemble audit</td>
+                        <td className="py-2.5 px-3 text-amber-200">Transparent T±15m uncertainty ensemble audit</td>
                       </tr>
                       <tr>
                         <td className="py-2.5 px-3 font-semibold text-stone-200">Cosmological Scope</td>
                         <td className="py-2.5 px-3 text-stone-400">Single-culture dogma (usually Western tropical only)</td>
-                        <td className="py-2.5 px-3 text-cyan-300">Triangulates 6 world cosmologies with divergence rate</td>
+                        <td className="py-2.5 px-3 text-amber-200">Triangulates 6 world cosmologies with divergence rate</td>
                       </tr>
                       <tr>
                         <td className="py-2.5 px-3 font-semibold text-stone-200">Validation Standard</td>
                         <td className="py-2.5 px-3 text-stone-400">Cherry-picked anecdotes & Texas sharpshooter bias</td>
-                        <td className="py-2.5 px-3 text-emerald-300">Benchmarked against 1,000 Monte Carlo controls</td>
+                        <td className="py-2.5 px-3 text-amber-300">Benchmarked against 1,000 Monte Carlo controls</td>
                       </tr>
                       <tr>
                         <td className="py-2.5 px-3 font-semibold text-stone-200">Ephemeris Precision</td>
                         <td className="py-2.5 px-3 text-stone-400">Unverifiable proprietary approximations</td>
-                        <td className="py-2.5 px-3 text-cyan-300">Dual-Engine (SwissEph + NASA JPL DE421 to &le;0.01°)</td>
+                        <td className="py-2.5 px-3 text-amber-200">Dual-Engine (SwissEph + NASA JPL DE421 to &le;0.01°)</td>
                       </tr>
                     </tbody>
                   </table>
                 </div>
               </div>
 
-              <div className="bg-stone-900 p-4 rounded-lg border border-amber-800/40">
-                <h4 className="font-bold text-cyan-300 text-sm mb-1">How to Position Your App to the Public</h4>
+              <div className="pt-4 border-t border-stone-800 space-y-2">
+                <h3 className="font-bold text-amber-300 text-sm mb-1">How to Position Your App to the Public</h3>
                 <ol className="list-decimal list-inside space-y-1.5 text-stone-300 mt-2 text-xs">
                   <li>
                     <strong className="text-stone-100">“The First Mathematically Audited Astrological Engine in History”</strong>: Market as an advanced cultural intelligence platform verified by NASA JPL DE421 and Monte Carlo controls.
@@ -767,35 +767,33 @@ export const MathematicalEvidenceCard: React.FC<Props> = ({ onNavigate }) => {
 
           {/* TAB 5: Launch Operational Checklist */}
           {activeTab === 'checklist' && (
-            <div className="space-y-3">
-              <div className="bg-stone-950 p-4 rounded-lg border border-stone-800 space-y-2.5">
-                <h4 className="text-sm font-bold text-stone-100 flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-400" />
-                  Pre-Launch Operational Verification Matrix
-                </h4>
-                <div className="space-y-2 text-xs font-sans">
-                  {[
-                    { label: '100 Historical Profiles Verified (100% Rodden AA/A)', status: 'PASS', path: 'backend/app/data/personalities_100.json' },
-                    { label: 'Monte Carlo Baseline Calculated (N=1,000 controls)', status: 'PASS', path: 'backend/app/data/mathematical_evidence_stats.json' },
-                    { label: 'Dual-Engine Ephemeris Active (SwissEph + Skyfield JPL DE421)', status: 'PASS', path: 'Δ <= 0.003° verified' },
-                    { label: 'Automated Regression Suites Green', status: 'PASS', path: 'test_engine.py & test_simulation_personalities.py' },
-                    { label: 'Dedicated Corroboration Document UI Complete', status: 'PASS', path: 'ReadingView.tsx & Reading Export' },
-                    { label: 'Mathematical Evidence Integrated into App', status: 'PASS', path: 'MathematicalEvidenceCard.tsx & API' }
-                  ].map((item, idx) => (
-                    <div key={idx} className="flex items-center justify-between p-2 rounded bg-stone-900 border border-stone-800">
-                      <div className="flex items-center gap-2">
-                        <Check className="w-3.5 h-3.5 text-emerald-400" />
-                        <span className="text-stone-200">{item.label}</span>
-                      </div>
-                      <div className="flex items-center gap-2 text-xs">
-                        <span className="text-stone-400 font-mono text-[11px]">{item.path}</span>
-                        <span className="px-1.5 py-0.5 rounded bg-emerald-950 text-emerald-300 font-medium border border-emerald-800">
-                          {item.status}
-                        </span>
-                      </div>
+            <div className="space-y-3 pt-1">
+              <h3 className="text-sm font-bold text-stone-100 flex items-center gap-2 pb-2 border-b border-stone-800">
+                <CheckCircle2 className="w-4 h-4 text-amber-400" />
+                Pre-Launch Operational Verification Matrix
+              </h3>
+              <div className="space-y-2 text-xs font-sans">
+                {[
+                  { label: '100 Historical Profiles Verified (100% Rodden AA/A)', status: 'PASS', path: 'backend/app/data/personalities_100.json' },
+                  { label: 'Monte Carlo Baseline Calculated (N=1,000 controls)', status: 'PASS', path: 'backend/app/data/mathematical_evidence_stats.json' },
+                  { label: 'Dual-Engine Ephemeris Active (SwissEph + Skyfield JPL DE421)', status: 'PASS', path: 'Δ <= 0.003° verified' },
+                  { label: 'Automated Regression Suites Green', status: 'PASS', path: 'test_engine.py & test_simulation_personalities.py' },
+                  { label: 'Dedicated Corroboration Document UI Complete', status: 'PASS', path: 'ReadingView.tsx & Reading Export' },
+                  { label: 'Mathematical Evidence Integrated into App', status: 'PASS', path: 'MathematicalEvidenceCard.tsx & API' }
+                ].map((item, idx) => (
+                  <div key={idx} className="flex items-center justify-between py-2 px-2.5 rounded bg-stone-900/60">
+                    <div className="flex items-center gap-2">
+                      <Check className="w-3.5 h-3.5 text-amber-400" />
+                      <span className="text-stone-200">{item.label}</span>
                     </div>
-                  ))}
-                </div>
+                    <div className="flex items-center gap-2 text-xs">
+                      <span className="text-stone-400 font-mono text-xs">{item.path}</span>
+                      <span className="px-1.5 py-0.5 rounded bg-amber-950/80 text-amber-300 font-medium border border-amber-800">
+                        {item.status}
+                      </span>
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
           )}
@@ -807,15 +805,15 @@ export const MathematicalEvidenceCard: React.FC<Props> = ({ onNavigate }) => {
         <div className="p-6 sm:p-8 space-y-8 bg-stone-950 text-stone-200 font-sans leading-relaxed text-sm max-w-5xl mx-auto">
           {/* Header */}
           <div className="border-b border-stone-800 pb-6 space-y-3">
-            <div className="text-xs font-medium text-cyan-400">
+            <div className="text-xs font-medium text-amber-400">
               Empirical Research Monograph • Published October 2026
             </div>
             <h1 className="text-2xl sm:text-3xl font-extrabold text-stone-100 tracking-tight">
               Mathematical Evidence & Empirical Validation of Astrological Modeling
             </h1>
-            <h3 className="text-base text-stone-400 font-sans">
+            <p className="text-base text-stone-400 font-sans">
               A Large-Scale Statistical Study: 100 Historical Titans vs. 1,000 Monte Carlo Controls
-            </h3>
+            </p>
             <div className="flex flex-wrap items-center gap-3 text-xs font-sans text-stone-400 pt-2">
               <span>Primary Dataset: 100 Titans (Rodden AA/A)</span>
               <span className="w-px h-3 bg-stone-700 hidden sm:inline-block" aria-hidden="true" />
@@ -830,33 +828,33 @@ export const MathematicalEvidenceCard: React.FC<Props> = ({ onNavigate }) => {
             <h2 className="text-lg font-bold text-stone-100 border-b border-stone-800 pb-1 font-sans">
               1. Executive Summary & The Definitive Verdict
             </h2>
-            <p className="text-stone-300">
+            <p className="text-stone-300 max-w-[55ch] text-pretty">
               Before launching any public astrological software, a founder must address an essential question with total intellectual and scientific honesty:
               <em> “Is there mathematical evidence of the genuinity of astrology as a whole, or are we merely observing retrospective confirmation bias?”</em>
             </p>
-            <p className="text-stone-300">
+            <p className="text-stone-300 max-w-[55ch] text-pretty">
               To answer this conclusively, we subjected the complete Six-Culture engine to a double-cohort empirical audit comparing 100 certified historical titans against 1,000 Monte Carlo synthetic random charts.
             </p>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 my-4 font-sans text-xs">
-              <div className="bg-stone-900 p-4 rounded-lg border border-rose-900/60 space-y-2">
+              <div className="p-3.5 space-y-2 border-l-2 border-rose-600/80 bg-stone-900/40">
                 <div className="flex items-center gap-1.5 font-bold text-rose-300 text-sm">
                   <XCircle className="w-4 h-4 text-rose-400 shrink-0" />
                   <span>What Mathematics DISPROVES</span>
                 </div>
-                <ul className="space-y-1 text-stone-300 list-disc list-inside">
+                <ul className="space-y-1 text-stone-300 list-disc list-inside text-pretty">
                   <li>Deterministic Newtonian physical causation</li>
                   <li>1-to-1 career or lifespan guarantees</li>
                   <li>“Special genius” yoga myths (Budhaditya = 29.6% baseline)</li>
                   <li>Single-chart dogmatism and silent rectification</li>
                 </ul>
               </div>
-              <div className="bg-stone-900 p-4 rounded-lg border border-emerald-900/60 space-y-2">
+              <div className="p-3.5 space-y-2 border-l-2 border-emerald-600/80 bg-stone-900/40">
                 <div className="flex items-center gap-1.5 font-bold text-emerald-300 text-sm">
                   <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
                   <span>What Mathematics SUPPORTS</span>
                 </div>
-                <ul className="space-y-1 text-stone-300 list-disc list-inside">
+                <ul className="space-y-1 text-stone-300 list-disc list-inside text-pretty">
                   <li>High-information cultural archetypal typology</li>
                   <li>Measurable archetypal enrichment (OR 1.5 - 2.1x)</li>
                   <li>Multi-culture concordance exceeding noise (p &lt; 0.0001)</li>
@@ -871,7 +869,7 @@ export const MathematicalEvidenceCard: React.FC<Props> = ({ onNavigate }) => {
             <h2 className="text-lg font-bold text-stone-100 border-b border-stone-800 pb-1 font-sans">
               2. Hypothesis Testing: Titans vs. Monte Carlo Controls
             </h2>
-            <p className="text-stone-300">
+            <p className="text-stone-300 max-w-[55ch] text-pretty">
               Every hypothesis was evaluated with two-tailed p-values, Z-scores, and odds ratios comparing observed frequencies against the 1,000 random control distribution.
             </p>
 
@@ -879,22 +877,22 @@ export const MathematicalEvidenceCard: React.FC<Props> = ({ onNavigate }) => {
               tabIndex={0}
               role="region"
               aria-label="Academic statistical evaluation table"
-              className="rounded border border-stone-800 my-3 focus:outline-none focus-visible:ring-1 focus-visible:ring-amber-500 overflow-hidden"
+              className="my-3 focus:outline-none focus-visible:ring-1 focus-visible:ring-amber-500 overflow-hidden"
             >
               {/* Mobile stacked cards (<sm) */}
-              <div className="sm:hidden space-y-2 p-2 bg-stone-900">
+              <div className="sm:hidden divide-y divide-stone-800/80 p-1">
                 {hypotheses.map((h) => (
-                  <div key={h.id} className="p-2.5 rounded bg-stone-950 border border-stone-800 space-y-1.5 text-xs font-sans">
+                  <div key={h.id} className="py-2.5 px-1 space-y-1.5 text-xs font-sans">
                     <div className="flex items-center justify-between">
-                      <span className="font-mono font-bold text-cyan-400">{h.id}</span>
-                      <span className="font-mono text-xs text-cyan-300 font-semibold">{h.pValue}</span>
+                      <span className="font-mono font-bold text-amber-400">{h.id}</span>
+                      <span className="font-mono text-xs text-amber-300 font-semibold">{h.pValue}</span>
                     </div>
                     <p className="text-stone-200 text-xs font-medium">{h.claim}</p>
                     <div className="text-xs text-stone-400">Cohort: {h.subgroup}</div>
                     <div className="grid grid-cols-2 gap-1 pt-1 border-t border-stone-800 text-xs font-sans">
                       <div>Titans: <strong className="font-mono tabular-nums">{h.observed}</strong></div>
                       <div>Controls: <span className="text-stone-400 font-mono tabular-nums">{h.baseline}</span></div>
-                      <div>Odds: <strong className="text-emerald-400 font-mono tabular-nums">{h.oddsRatio}</strong></div>
+                      <div>Odds: <strong className="text-amber-300 font-mono tabular-nums">{h.oddsRatio}</strong></div>
                       <div>Z: <span className="font-mono tabular-nums">{h.zScore}</span></div>
                     </div>
                   </div>
@@ -919,14 +917,14 @@ export const MathematicalEvidenceCard: React.FC<Props> = ({ onNavigate }) => {
                   <tbody className="divide-y divide-stone-800">
                     {hypotheses.map((h) => (
                       <tr key={h.id}>
-                        <td className="p-2 font-mono font-bold text-cyan-400">{h.id}</td>
+                        <td className="p-2 font-mono font-bold text-amber-400">{h.id}</td>
                         <td className="p-2">{h.claim}</td>
                         <td className="p-2 text-stone-400">{h.subgroup}</td>
                         <td className="p-2 text-right font-mono tabular-nums font-bold">{h.observed}</td>
                         <td className="p-2 text-right font-mono tabular-nums text-stone-400">{h.baseline}</td>
-                        <td className="p-2 text-right font-mono tabular-nums text-emerald-400">{h.oddsRatio}</td>
+                        <td className="p-2 text-right font-mono tabular-nums text-amber-300">{h.oddsRatio}</td>
                         <td className="p-2 text-right font-mono tabular-nums">{h.zScore}</td>
-                        <td className="p-2 text-right font-mono tabular-nums font-bold text-cyan-300">{h.pValue}</td>
+                        <td className="p-2 text-right font-mono tabular-nums font-bold text-amber-300">{h.pValue}</td>
                       </tr>
                     ))}
                   </tbody>
@@ -940,25 +938,25 @@ export const MathematicalEvidenceCard: React.FC<Props> = ({ onNavigate }) => {
             <h2 className="text-lg font-bold text-stone-100 border-b border-stone-800 pb-1 font-sans">
               3. The Astronomical De-Biasing Analysis: Exposing Popular Myths
             </h2>
-            <p className="text-stone-300">
+            <p className="text-stone-300 max-w-[55ch] text-pretty">
               One of the primary contributions of this empirical study is identifying why popular astrologers deceive themselves through Texas sharpshooter bias:
             </p>
             <div className="space-y-3 text-xs">
-              <div className="p-3 bg-stone-900 rounded border border-stone-800">
+              <div className="py-2.5 border-b border-stone-800/80 space-y-1">
                 <strong className="text-stone-100 block mb-1">3.1 The Orbital Mechanics Trap (Budhaditya Yoga)</strong>
-                <p className="text-stone-400">
+                <p className="text-stone-400 max-w-[55ch] text-pretty">
                   Because Mercury’s orbit is interior to Earth, its maximum elongation is only 28°. It is physically constrained to share the Sun’s sign in 29.6% of all births. Finding it in geniuses is a natural artifact of solar mechanics, not a supernatural cause of intellect.
                 </p>
               </div>
-              <div className="p-3 bg-stone-900 rounded border border-stone-800">
+              <div className="py-2.5 border-b border-stone-800/80 space-y-1">
                 <strong className="text-stone-100 block mb-1">3.2 The Short Ascension Geometry (Pisces Ascendants)</strong>
-                <p className="text-stone-400">
+                <p className="text-stone-400 max-w-[55ch] text-pretty">
                   The 23.4° ecliptic obliquity causes signs of short ascension (Pisces and Aries) to rise in only ~75 minutes, compared to &gt;160 minutes for signs of long ascension. The scarcity of Pisces ascendants in Northern Hemisphere figures is geometric, not biographical.
                 </p>
               </div>
-              <div className="p-3 bg-stone-900 rounded border border-stone-800">
+              <div className="py-2.5 border-b border-stone-800/80 space-y-1">
                 <strong className="text-stone-100 block mb-1">3.3 The Dusthana Lord Probability (Viparita Raja Yoga)</strong>
-                <p className="text-stone-400">
+                <p className="text-stone-400 max-w-[55ch] text-pretty">
                   The mathematical probability of at least one of the 3 dusthana lords (6, 8, 12) occupying a dusthana house is 1 - (9/12)³ = 57.8%. Over half the human species has this placement by default.
                 </p>
               </div>
@@ -970,10 +968,10 @@ export const MathematicalEvidenceCard: React.FC<Props> = ({ onNavigate }) => {
             <h2 className="text-lg font-bold text-stone-100 border-b border-stone-800 pb-1 font-sans">
               4. Where Genuine Mathematical Evidence Resides: Three Pillars
             </h2>
-            <p className="text-stone-300">
+            <p className="text-stone-300 max-w-[55ch] text-pretty">
               Genuine statistical non-randomness emerges in three rigorous dimensions:
             </p>
-            <ol className="list-decimal list-inside space-y-2 text-xs text-stone-300">
+            <ol className="list-decimal list-inside space-y-2 text-xs text-stone-300 max-w-[55ch] text-pretty">
               <li>
                 <strong className="text-stone-100">Information-Theoretic Triangulation (p &lt; 0.0001)</strong>:
                 Six historically isolated calendars agree 68.2% of the time across 900 domain evaluations on 100 titans, with life purpose (D9) reaching 75.0% concordance (Z = +8.87).
@@ -994,13 +992,13 @@ export const MathematicalEvidenceCard: React.FC<Props> = ({ onNavigate }) => {
             <h2 className="text-lg font-bold text-stone-100 border-b border-stone-800 pb-1 font-sans">
               5. The Commercial & Ethical Moat for Public Launch
             </h2>
-            <p className="text-stone-300">
+            <p className="text-stone-300 max-w-[55ch] text-pretty">
               By transparently publishing divergence metrics (31.8%), time-uncertainty boundaries (T±15m), and orbital baseline odds, your platform establishes an unassailable commercial moat against existing single-culture horoscope applications.
             </p>
 
-            <div className="p-4 bg-cyan-950/20 border border-amber-800/60 rounded-lg text-xs space-y-2">
-              <span className="font-bold text-cyan-300 block text-sm">Conclusion: Launch with Total Intellectual Conviction</span>
-              <p className="text-stone-300">
+            <div className="pt-4 border-t border-amber-800/60 text-xs space-y-2">
+              <span className="font-bold text-amber-300 block text-sm">Conclusion: Launch with Total Intellectual Conviction</span>
+              <p className="text-stone-300 max-w-[55ch] text-pretty">
                 You can launch this application with complete intellectual conviction: you are not selling snake oil or deterministic fortune-telling; you are providing an unprecedented, mathematically audited multi-culture astronomical engine.
               </p>
             </div>
@@ -1019,7 +1017,7 @@ export const MathematicalEvidenceCard: React.FC<Props> = ({ onNavigate }) => {
                 onClick={handleCopy}
                 className="inline-flex items-center gap-1.5 px-3 py-1.5 min-h-[36px] text-xs font-sans font-medium rounded bg-stone-900 hover:bg-stone-800 text-stone-200 border border-stone-800 transition-colors cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
               >
-                {copied ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
+                {copied ? <Check className="w-3.5 h-3.5 text-amber-400" /> : <Copy className="w-3.5 h-3.5" />}
                 <span>{copied ? 'Copied' : 'Copy Source'}</span>
               </button>
               <button
@@ -1052,7 +1050,7 @@ export const MathematicalEvidenceCard: React.FC<Props> = ({ onNavigate }) => {
           <button
             type="button"
             onClick={() => onNavigate('workbench')}
-            className="inline-flex items-center justify-center gap-2 px-4 py-2.5 min-h-[44px] text-xs font-sans font-medium whitespace-nowrap rounded-lg bg-cyan-700 hover:bg-cyan-600 text-white cursor-pointer transition-colors duration-150 border border-cyan-500/80 shadow-xs active:scale-[0.98]"
+            className="inline-flex items-center justify-center gap-2 px-4 py-2.5 min-h-[44px] text-xs font-serif font-semibold whitespace-nowrap rounded-lg bg-amber-600 hover:bg-amber-500 text-stone-950 cursor-pointer transition-colors duration-150 border border-amber-300 shadow-xs active:scale-[0.98]"
           >
             <span className="whitespace-nowrap">Return to Workbench</span>
             <RotateCcw className="w-4 h-4 shrink-0" />

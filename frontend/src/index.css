@@ -479,7 +479,7 @@ aside > div:first-child {
 [data-theme="light"] .text-rose-400\/80,
 [data-theme="light"] .text-rose-300\/80,
 [data-theme="light"] .text-rose-500 {
-  color: #be123c !important;
+  color: #9f1239 !important;
 }
 
 [data-theme="light"] .text-red-300,
@@ -564,12 +564,9 @@ aside > div:first-child {
 }
 
 [data-theme="light"] .bg-rose-950,
-[data-theme="light"] .bg-rose-950\/90,
-[data-theme="light"] .bg-rose-950\/80,
-[data-theme="light"] .bg-rose-950\/60,
-[data-theme="light"] .bg-rose-950\/40 {
+[data-theme="light"] [class*="bg-rose-950"] {
   background-color: #fff1f2 !important;
-  color: #be123c !important;
+  color: #9f1239 !important;
   border-color: #fecdd3 !important;
 }
 

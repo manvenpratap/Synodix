@@ -60,8 +60,8 @@ const CIVILIZATIONS: CivilizationFilter[] = [
     label: 'Western (Hellenistic)',
     tooltip: 'Western (Hellenistic)',
     traditionNavId: 'western',
-    colorClass: 'text-cyan-300',
-    activeBorder: 'border-cyan-500 bg-cyan-950/40',
+    colorClass: 'text-amber-300',
+    activeBorder: 'border-amber-500 bg-amber-950/40',
     keywords: ['western', 'hellenistic', 'ptolemy', 'sect', 'dignity', 'firdaria', 'aspect', 'profection']
   },
   {
@@ -236,7 +236,7 @@ export const FeatureGuideScreen: React.FC<Props> = ({ onNavigate, initialExplain
           <div>
             <div className="flex items-center gap-2">
               <span
-                className={`text-xs font-serif font-medium px-2 py-0.5 rounded border ${activeSection === 'evidence'
+                className={`text-xs font-serif font-medium px-2.5 py-1 rounded-md border ${activeSection === 'evidence'
                     ? 'text-amber-300 bg-amber-950/60 border-amber-800/60'
                     : 'text-amber-300 bg-amber-950/60 border-amber-800/60'
                   }`}
@@ -247,7 +247,7 @@ export const FeatureGuideScreen: React.FC<Props> = ({ onNavigate, initialExplain
                 {activeSection === 'evidence' ? '100 Titans Monte Carlo Benchmark' : '50 Authoritative Topics'}
               </span>
             </div>
-            <h1 className="text-lg sm:text-xl font-serif font-bold text-stone-100 tracking-tight mt-1">
+            <h1 className="text-xl sm:text-2xl font-serif font-bold text-stone-100 tracking-tight mt-1">
               {activeSection === 'evidence'
                 ? 'Empirical Mathematical Evidence & Statistical Validation'
                 : 'Multi-Tradition Astrometric & Cultural Feature Guide'}

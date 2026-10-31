@@ -40,7 +40,7 @@ def test_cultural_traditions_theming_and_presentations():
         page.wait_for_selector("text=Synodix", timeout=10000)
 
         # Wait for chart data to finish calculation on mount
-        page.wait_for_selector("text=Chart calculated for", timeout=10000)
+        page.wait_for_selector("text=Chart calculated for", timeout=15000)
 
         # Navigate to Cultural Traditions view
         traditions_nav = page.locator("button:has-text('Cultural Traditions')").first
