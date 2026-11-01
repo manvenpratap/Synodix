@@ -1,7 +1,7 @@
 # Synodix: Project Context & Working Memory
 
-**Last Updated:** 2026-11-01 20:08:29
-**Version:** 2.36.0  
+**Last Updated:** 2026-11-01 23:18:08
+**Version:** 2.37.0  
 **Stack:** Python 3.12 (FastAPI, Swiss Ephemeris 2.10, Skyfield DE421) + TypeScript / React 19 / Vite / Tailwind CSS v4 / Framer Motion / Capacitor 8 (iOS & Android)  
 **Workspace:** `/Volumes/Study/Projects/Astrology` (symlinked as `/Volumes/Study/Astrology`)  
 **Git Remote:** `https://github.com/manvenpratap/Synodix.git`  
@@ -10,7 +10,24 @@
 
 ## 1. Current Status & Milestone
 
-- **Active Phase**: gpt-taste Full Suite Design Engineering & Cinematic Architecture (Completed)
+- **Active Phase**: gpt-taste Traditions View Evolution: Horizontal Accordion Gallery & Desktop Split-Scroll Pinning (v2.37.0) (Completed)
+- **Traditions View Horizontal Accordion Gallery & Desktop Split-Scroll Pinning (v2.37.0)**:
+  - **Horizontal Accordion Gallery Mode**:
+    - Added desktop & tablet interactive horizontal accordion blades (`layoutMode === 'accordion'`) as a 3rd presentation mode alongside Vertical Carousel Deck and Inspector Matrix.
+    - Features fluid width expansion physics (`flex: isBladeExpanded ? 4 : 1`, duration 500ms), collapsed vertical typography labels with rotated glyph markers, and expanded cultural immersion cards (badge, lineage, native title, quote motto, instrument tag, and direct Inspector link).
+    - Mobile fallback (< md): Horizontal snap-scroll cards (`snap-x snap-mandatory`) with swipe ergonomics.
+  - **Desktop Split-Scroll Pinning in Inspector Matrix**:
+    - Re-architected Inspector view into a 12-column desktop split-scroll grid (`grid grid-cols-1 lg:grid-cols-12 gap-5 items-start`).
+    - *Left Column (4 cols, sticky `top-20`)*: Pinned Cultural Dossier sidebar with live cultural glyph, native title, lineage, philosophical motto, primary astrometric instrument, explainer trigger, and a 9-tradition quick switcher grid for instant tradition jumping without scrolling up.
+    - *Right Column (8 cols, scrolling)*: Unimpeded scrolling surface for high-density visual instruments (Kundali diamond, BaZi pentagram, Hellenistic circular wheel, Zi Wei 4x4 imperial palace matrix, Maya gears, Tibetan Mewa, Persian Almuten, Egyptian decans, Maramataka lunar dial) and harmonic telemetry tables.
+  - **Mode Switcher Navigation**:
+    - Added 3-button segmented control in tradition header: `Carousel Deck`, `Accordion Gallery`, and `Inspector Matrix` with accessible `data-tooltip` and `aria-label` attributes.
+    - Inspector header provides return controls to both Carousel Deck and Accordion Gallery.
+  - **Automated Verification**:
+    - 0 TypeScript errors (`npx tsc --noEmit`).
+    - Clean Vite production build in 609ms (`npm run build`).
+    - Extended `tests/test_06_cultural_themes.py` to assert accordion gallery and split-scroll sidebar presence.
+    - Full 29/29 Playwright regression suite passing in 114s (`./pipeline.sh test --summary`).
 - **gpt-taste Full Suite Design Engineering & Cinematic Architecture (v2.36.0)**:
   - **Deterministic Parameter Implementation (Seed 93)**:
     - *Hero Architecture*: Artistic Asymmetry with `max-w-6xl` container width and live celestial astrolabe instrument offset.

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Layers, Sliders, ArrowLeft, ArrowRight } from 'lucide-react';
+import { Layers, Sliders, ArrowLeft, ArrowRight, Compass } from 'lucide-react';
 import type { ChartResponse } from '../types';
 import { ExplainerTrigger } from './ExplainerTrigger';
 import { TraditionVerticalCarousel, TraditionKey, TRADITION_ORDER } from './TraditionVerticalCarousel';
@@ -255,10 +255,170 @@ const CULTURE_THEMES: Record<string, {
   },
 };
 
+const HorizontalAccordionGallery: React.FC<{
+  activeTab: TraditionKey;
+  onSelectTradition: (trad: TraditionKey) => void;
+  onOpenInspector: (trad: TraditionKey) => void;
+  cultureThemes: typeof CULTURE_THEMES;
+}> = ({ activeTab, onSelectTradition, onOpenInspector, cultureThemes }) => {
+  const [hoveredTradition, setHoveredTradition] = useState<TraditionKey | null>(null);
+  const selectedKey = hoveredTradition || activeTab;
+
+  return (
+    <div className="mt-2 space-y-3">
+      {/* Desktop & Tablet Horizontal Accordion Container (gpt-taste Component Arsenal) */}
+      <div className="hidden md:flex horizontal-accordion-container h-[510px] rounded-2xl p-2.5 bg-stone-950/90 border border-stone-800 shadow-xl overflow-hidden">
+        {TRADITION_ORDER.map((key) => {
+          const theme = cultureThemes[key] || cultureThemes.jyotisha;
+          const isBladeExpanded = selectedKey === key;
+
+          return (
+            <div
+              key={key}
+              onMouseEnter={() => setHoveredTradition(key)}
+              onMouseLeave={() => setHoveredTradition(null)}
+              onClick={() => onSelectTradition(key)}
+              className={`horizontal-accordion-blade ${isBladeExpanded ? 'is-active ring-1 ring-amber-500/40' : 'opacity-75 hover:opacity-100'} cursor-pointer border ${theme.containerBorder} ${theme.containerBg} flex flex-col justify-between p-3.5 transition-all duration-500 select-none overflow-hidden relative shadow-md`}
+              style={{
+                flex: isBladeExpanded ? 4 : 1,
+              }}
+            >
+              {/* Collapsed Vertical Presentation */}
+              {!isBladeExpanded ? (
+                <div className="h-full flex flex-col items-center justify-between py-2">
+                  <span className="w-8 h-8 rounded-full bg-stone-900/80 border border-stone-700 flex items-center justify-center text-xs font-mono font-bold text-amber-300 shadow-xs">
+                    {theme.glyph}
+                  </span>
+                  <div className="[writing-mode:vertical-rl] rotate-180 text-xs font-serif font-semibold text-stone-300 tracking-wider uppercase whitespace-nowrap">
+                    {theme.name}
+                  </div>
+                  <span className="w-2 h-2 rounded-full bg-amber-400/60" />
+                </div>
+              ) : (
+                /* Expanded Presentation with Deep Cultural Immersion */
+                <div className="h-full flex flex-col justify-between overflow-hidden animate-tab-enter">
+                  <div>
+                    {/* Badge & Lineage */}
+                    <div className="flex items-center justify-between border-b border-white/10 pb-2">
+                      <span className={`text-[11px] font-mono px-2 py-0.5 rounded-full font-semibold ${theme.accentBadge}`}>
+                        {theme.shortName || theme.name}
+                      </span>
+                      <span className="text-[10px] font-mono text-stone-400 truncate max-w-[180px]">
+                        {theme.lineage}
+                      </span>
+                    </div>
+
+                    {/* Cultural Identity */}
+                    <div className="mt-3 flex items-center gap-3">
+                      <span className="text-3xl font-mono text-amber-300 select-none shrink-0">
+                        {theme.glyph}
+                      </span>
+                      <div className="min-w-0">
+                        <h3 className="text-lg font-serif font-bold text-stone-100 leading-tight truncate">
+                          {theme.name}
+                        </h3>
+                        <p className="text-xs text-stone-300 font-sans mt-0.5 font-medium truncate">
+                          {theme.nativeTitle}
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* Philosophical Motto Quote */}
+                    <div className="mt-3 p-3 rounded-xl bg-black/40 border border-white/10 text-xs italic text-stone-200 leading-relaxed text-pretty">
+                      &ldquo;{theme.motto}&rdquo;
+                    </div>
+
+                    {/* Instrument Feature Tag */}
+                    <div className="mt-3 p-2.5 rounded-lg bg-stone-900/80 border border-stone-800 space-y-1">
+                      <span className="text-[10px] font-mono text-amber-400 block uppercase tracking-wider">
+                        Astrometric Instrument
+                      </span>
+                      <span className="text-xs font-sans font-semibold text-stone-200 block truncate">
+                        {theme.instrumentName}
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Action Bar */}
+                  <div className="pt-3 border-t border-white/10 flex items-center justify-between gap-2">
+                    <button
+                      type="button"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        onOpenInspector(key);
+                      }}
+                      className="flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg bg-amber-600 hover:bg-amber-500 text-stone-950 font-serif font-semibold text-xs transition-colors shadow-xs"
+                    >
+                      <span>Open Full Inspector</span>
+                      <ArrowRight className="w-3.5 h-3.5" />
+                    </button>
+                  </div>
+                </div>
+              )}
+            </div>
+          );
+        })}
+      </div>
+
+      {/* Mobile Responsive Snap-Scroll Cards (< md) */}
+      <div className="md:hidden flex gap-3 overflow-x-auto pb-3 pt-1 px-1 no-scrollbar snap-x snap-mandatory">
+        {TRADITION_ORDER.map((key) => {
+          const theme = cultureThemes[key] || cultureThemes.jyotisha;
+          const isSelected = activeTab === key;
+
+          return (
+            <div
+              key={key}
+              onClick={() => onSelectTradition(key)}
+              className={`snap-center shrink-0 w-[85vw] max-w-[340px] rounded-xl border p-4 flex flex-col justify-between space-y-3 ${
+                isSelected
+                  ? `${theme.containerBg} ${theme.containerBorder} ring-1 ring-amber-500/50 shadow-md`
+                  : 'bg-stone-900/90 border-stone-800'
+              }`}
+            >
+              <div>
+                <div className="flex items-center justify-between border-b border-white/10 pb-2">
+                  <span className="text-xl font-mono text-amber-300">{theme.glyph}</span>
+                  <span className={`text-[10px] font-mono px-2 py-0.5 rounded-full ${theme.accentBadge}`}>
+                    {theme.shortName || theme.name}
+                  </span>
+                </div>
+                <h3 className="text-base font-serif font-bold text-stone-100 mt-2">
+                  {theme.name}
+                </h3>
+                <p className="text-xs text-stone-300 font-sans mt-0.5">
+                  {theme.nativeTitle}
+                </p>
+                <p className="mt-2.5 text-xs italic text-stone-300 bg-black/40 p-2.5 rounded border border-white/5">
+                  &ldquo;{theme.motto}&rdquo;
+                </p>
+              </div>
+
+              <div className="flex items-center gap-2 pt-2 border-t border-white/10">
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    onOpenInspector(key);
+                  }}
+                  className="w-full inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg bg-amber-600 hover:bg-amber-500 text-stone-950 font-serif font-semibold text-xs"
+                >
+                  <span>Inspect Matrix</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </button>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+};
+
 export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
   const [activeTab, setActiveTab] = useState<TraditionKey>('jyotisha');
   const [chartViewMode, setChartViewMode] = useState<'both' | 'chart' | 'table'>('both');
-  const [layoutMode, setLayoutMode] = useState<'carousel' | 'inspector'>('carousel');
+  const [layoutMode, setLayoutMode] = useState<'carousel' | 'accordion' | 'inspector'>('carousel');
 
   const { jyotisha, bazi, western, ziwei, mayan, tibetan, persian, egyptian, maramataka } = data.traditions;
   const currentTheme = CULTURE_THEMES[activeTab] || CULTURE_THEMES.jyotisha;
@@ -329,6 +489,22 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
             </button>
             <button
               type="button"
+              onClick={() => setLayoutMode('accordion')}
+              className={`flex items-center gap-1.5 px-3 py-1.5 min-h-[44px] sm:min-h-[34px] rounded-md cursor-pointer transition-colors font-serif text-xs ${
+                layoutMode === 'accordion'
+                  ? 'bg-amber-950 text-amber-300 border border-amber-700/80 font-bold'
+                  : 'text-stone-400 hover:text-stone-200'
+              }`}
+              data-tooltip="View traditions as an interactive horizontal accordion gallery"
+              aria-label="Horizontal Accordion Gallery view"
+            >
+              <Compass className="w-3.5 h-3.5 text-amber-400" />
+              <span className="hidden sm:inline">Accordion Gallery</span>
+              <span className="sm:hidden">Gallery</span>
+              <span className="sr-only">Accordion Gallery</span>
+            </button>
+            <button
+              type="button"
               onClick={() => setLayoutMode('inspector')}
               className={`flex items-center gap-1.5 px-3 py-1.5 min-h-[44px] sm:min-h-[34px] rounded-md cursor-pointer transition-colors font-serif text-xs ${
                 layoutMode === 'inspector'
@@ -365,22 +541,44 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
         </div>
       )}
 
-      {/* 2. Full Detailed Inspector Matrix Mode */}
+      {/* 2. Horizontal Accordion Gallery Mode */}
+      {layoutMode === 'accordion' && (
+        <HorizontalAccordionGallery
+          activeTab={activeTab}
+          onSelectTradition={(trad) => setActiveTab(trad)}
+          onOpenInspector={(trad) => {
+            setActiveTab(trad);
+            setLayoutMode('inspector');
+          }}
+          cultureThemes={CULTURE_THEMES}
+        />
+      )}
+
+      {/* 3. Full Detailed Inspector Matrix Mode with Desktop Split-Scroll Pinning */}
       {layoutMode === 'inspector' && (
         <div className="mt-4 space-y-4">
-          {/* Top Bar for Inspector Matrix: Return to Carousel Deck & Tradition Stepper */}
+          {/* Top Bar for Inspector Matrix: Return Controls & Tradition Stepper */}
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-3.5 rounded-xl bg-stone-900/90 border border-stone-800 text-xs shadow-sm">
-            <div className="flex flex-wrap items-center gap-3">
+            <div className="flex flex-wrap items-center gap-2">
               <button
                 type="button"
                 onClick={() => setLayoutMode('carousel')}
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-amber-950 hover:bg-amber-900 text-amber-200 border border-amber-700/80 font-sans font-semibold cursor-pointer transition-colors"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-stone-800 hover:bg-stone-700 text-stone-200 border border-stone-700 font-sans text-xs cursor-pointer transition-colors"
                 data-tooltip="Return to the 3D Vertical Carousel Deck"
               >
-                <ArrowLeft className="w-3.5 h-3.5" />
-                <span>Return to Carousel Deck</span>
+                <Layers className="w-3.5 h-3.5 text-amber-400" />
+                <span>Carousel Deck</span>
               </button>
-              <div className="flex items-center gap-2">
+              <button
+                type="button"
+                onClick={() => setLayoutMode('accordion')}
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-stone-800 hover:bg-stone-700 text-stone-200 border border-stone-700 font-sans text-xs cursor-pointer transition-colors"
+                data-tooltip="Switch to Horizontal Accordion Gallery"
+              >
+                <Compass className="w-3.5 h-3.5 text-amber-400" />
+                <span>Accordion Gallery</span>
+              </button>
+              <div className="flex items-center gap-2 pl-2 border-l border-stone-700/60">
                 <span className="font-mono text-xs font-bold px-1.5 py-0.5 rounded bg-stone-800 text-stone-200">{currentTheme.glyph}</span>
                 <span className="font-serif font-bold text-stone-200">{currentTheme.name}</span>
                 <span className="text-stone-400 font-sans text-xs hidden md:inline">• {currentTheme.nativeTitle}</span>
@@ -421,6 +619,94 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
               </button>
             </div>
           </div>
+
+          {/* Desktop Split-Scroll Layout: 4-col sticky cultural lineage & 8-col scrolling matrix */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-start">
+            {/* Left Column: Pinned Cultural Dossier & Fast Tradition Switcher */}
+            <aside aria-label="Tradition Cultural Dossier and Switcher" className="hidden lg:block lg:col-span-4 sticky top-20 space-y-4">
+              <div className={`p-4 rounded-xl border ${currentTheme.containerBorder} ${currentTheme.containerBg} shadow-lg space-y-3.5`}>
+                <div className="flex items-center justify-between border-b border-white/10 pb-2">
+                  <span className={`text-[11px] font-mono px-2 py-0.5 rounded-full font-semibold ${currentTheme.accentBadge}`}>
+                    {currentTheme.shortName || currentTheme.name}
+                  </span>
+                  <span className="text-2xl font-mono text-amber-300 select-none">
+                    {currentTheme.glyph}
+                  </span>
+                </div>
+
+                <div>
+                  <h3 className="text-lg font-serif font-bold text-stone-100 leading-tight">
+                    {currentTheme.name}
+                  </h3>
+                  <p className="text-xs text-stone-300 font-sans mt-0.5 font-medium">
+                    {currentTheme.nativeTitle}
+                  </p>
+                </div>
+
+                <div className="text-xs font-mono text-stone-300 bg-black/40 p-2.5 rounded-lg border border-white/10 space-y-1">
+                  <span className="text-[10px] text-stone-400 block uppercase tracking-wider font-semibold">
+                    Cultural Lineage & Ephemeris
+                  </span>
+                  <p className="text-[11px] text-stone-200 leading-relaxed font-sans">
+                    {currentTheme.lineage}
+                  </p>
+                </div>
+
+                <div className="p-3 rounded-lg bg-black/40 border border-white/10 text-xs italic text-stone-200 leading-relaxed">
+                  &ldquo;{currentTheme.motto}&rdquo;
+                </div>
+
+                <div className="p-2.5 rounded-lg bg-stone-900/80 border border-stone-800 space-y-1">
+                  <span className="text-[10px] font-mono text-amber-400 block uppercase tracking-wider">
+                    Astrometric Instrument
+                  </span>
+                  <span className="text-xs font-sans font-semibold text-stone-200 block">
+                    {currentTheme.instrumentName}
+                  </span>
+                </div>
+
+                {TRADITION_PRIMARY_EXPLAINER[activeTab] && (
+                  <div className="pt-2 border-t border-white/10">
+                    <ExplainerTrigger
+                      id={TRADITION_PRIMARY_EXPLAINER[activeTab].id}
+                      label={TRADITION_PRIMARY_EXPLAINER[activeTab].label}
+                      variant="button"
+                    />
+                  </div>
+                )}
+              </div>
+
+              {/* Fast 9-Tradition Switcher Grid */}
+              <div className="p-3 rounded-xl bg-stone-900/90 border border-stone-800 space-y-2">
+                <span className="text-[10px] font-mono text-stone-400 uppercase tracking-wider block font-semibold">
+                  Switch Tradition Inspector
+                </span>
+                <div className="grid grid-cols-3 gap-1.5">
+                  {TRADITION_ORDER.map((key) => {
+                    const t = CULTURE_THEMES[key];
+                    const isSelected = activeTab === key;
+                    return (
+                      <button
+                        key={key}
+                        type="button"
+                        onClick={() => setActiveTab(key)}
+                        className={`px-2 py-1.5 rounded-md text-xs font-mono transition-all text-center truncate ${
+                          isSelected
+                            ? 'bg-amber-600 text-stone-950 font-bold shadow-xs'
+                            : 'bg-stone-800/80 hover:bg-stone-700 text-stone-300'
+                        }`}
+                        title={t.name}
+                      >
+                        {t.glyph}
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+            </aside>
+
+            {/* Right Column: Visual Instrument & Detailed Telemetry Tables */}
+            <div className="lg:col-span-8 min-w-0 space-y-4">
       {/* Tab 1: Jyotisha */}
       {activeTab === 'jyotisha' && (
         <div
@@ -1848,6 +2134,8 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
           )}
         </div>
       )}
+            </div>
+          </div>
         </div>
       )}
 

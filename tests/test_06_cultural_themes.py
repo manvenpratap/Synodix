@@ -135,6 +135,30 @@ def test_cultural_traditions_theming_and_presentations():
         page.wait_for_timeout(250)
         assert carousel_deck.is_visible(), "Carousel deck must be visible again after switching back"
 
+        # Verify Horizontal Accordion Gallery (gpt-taste Component Arsenal)
+        accordion_btn = page.locator("button:has-text('Accordion Gallery')").first
+        assert accordion_btn.is_visible(), "Accordion Gallery button must be visible"
+        accordion_btn.click()
+        page.wait_for_timeout(250)
+
+        accordion_container = page.locator(".horizontal-accordion-container")
+        assert accordion_container.is_visible(), "Horizontal accordion container must be visible on desktop"
+        assert check_no_horizontal_overflow(page)
+
+        # Verify Inspector desktop Split-Scroll Pinning & Sidebar
+        inspector_btn = page.locator("button:has-text('Inspector Matrix')").first
+        inspector_btn.click()
+        page.wait_for_timeout(250)
+
+        sticky_sidebar = page.locator("aside[aria-label='Tradition Cultural Dossier and Switcher']")
+        assert sticky_sidebar.is_visible(), "Desktop sticky cultural dossier sidebar must be visible in Inspector"
+        assert check_no_horizontal_overflow(page)
+
+        # Switch back to Carousel Deck mode for screenshot catalog
+        deck_btn = page.locator("button:has-text('Carousel Deck')").first
+        deck_btn.click()
+        page.wait_for_timeout(250)
+
         # Capture key cultural presentation screenshots for verification catalog
         for tid in ["jyotisha", "bazi", "western", "ziwei", "persian"]:
             page.locator(f"button#tradition-tab-{tid}").click()

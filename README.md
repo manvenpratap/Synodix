@@ -110,6 +110,10 @@ Complete documentation is maintained in the [`wiki/`](wiki/) directory:
 
 ### 4. Culturally Authentic Display Presentation Theming & Instruments
 - **9 Distinct Cultural Palettes & Lineage Banners**: Each tradition dynamically renders its authentic cultural color tokens, native scripts/calligraphy (e.g. Sanskrit, Traditional Chinese, Ancient Greek, Arabic, Egyptian Hieroglyphs, Māori), historical lineages, and cosmological mottos.
+- **Three Presentation View Modes**:
+  - **Vertical Carousel Deck**: 3D perspective stacked card carousel with active focal card elevation, keyboard navigation, and stepper controls.
+  - **Horizontal Accordion Gallery**: Desktop/tablet interactive horizontal accordion blades with fluid expansion physics (`flex: 4` on active blade), rotated calligraphy labels, and comprehensive cultural immersion cards.
+  - **Inspector Matrix with Desktop Split-Scroll Pinning**: 12-column desktop layout featuring a sticky 4-column Cultural Dossier sidebar (glyph, lineage, philosophical motto, primary explainer, and 9-tradition quick switcher grid) alongside an 8-column scrolling visual instrument and harmonic telemetry surface.
 - **Universal Display Presentation Switcher**: Instantly toggle between `Comprehensive` (full instrument + data), `Visual Instrument` (focused astrolabe / dial presentation), and `Telemetry Tables` (granular data breakdown).
 - **Culturally Framed Astronomical Visualizers**: 10 interactive SVG wheels and visual instruments framed in museum-grade, culture-accented borders and title bars (Parashari Diamond Kundali, Wu Xing Dynamic Pentagram, Ptolemaic 360° Wheel, Zi Wei Imperial Courtyard, Maya Stele Compass, Lo Shu Magic Square, Abu Ma'shar Almuten Bar Gauge, Ra's Cosmic Barque Star Clock, Oceanic 30-Night Lunar Dial).
 
