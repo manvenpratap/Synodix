@@ -247,10 +247,18 @@ export const FeatureGuideScreen: React.FC<Props> = ({ onNavigate, initialExplain
                 {activeSection === 'evidence' ? '500 Titans Monte Carlo Benchmark' : '50 Authoritative Topics'}
               </span>
             </div>
-            <h1 className="text-xl sm:text-2xl font-serif font-bold text-stone-100 tracking-tight mt-1">
-              {activeSection === 'evidence'
-                ? 'Empirical Mathematical Evidence & Statistical Validation'
-                : 'Multi-Tradition Astrometric & Cultural Feature Guide'}
+            <h1 className="text-xl sm:text-2xl lg:text-3xl font-serif font-bold text-stone-100 tracking-tight mt-1 max-w-4xl">
+              {activeSection === 'evidence' ? (
+                <>
+                  Empirical Mathematical Evidence &amp; Statistical Validation
+                  <span className="inline-block w-12 sm:w-14 h-5 sm:h-6 rounded-full align-middle bg-gradient-to-r from-amber-600 via-amber-500 to-amber-700 border border-amber-400/50 mx-2 shadow-inner inline-flex items-center justify-center text-[10px] text-amber-950 font-mono font-bold">500</span>
+                </>
+              ) : (
+                <>
+                  Multi-Tradition Astrometric &amp; Cultural Feature Guide
+                  <span className="inline-block w-12 sm:w-14 h-5 sm:h-6 rounded-full align-middle bg-gradient-to-r from-amber-600 via-amber-500 to-amber-700 border border-amber-400/50 mx-2 shadow-inner inline-flex items-center justify-center text-[10px] text-amber-950 font-mono font-bold">50</span>
+                </>
+              )}
             </h1>
             <p className="text-xs text-stone-300 font-sans mt-0.5 leading-relaxed max-w-2xl">
               {activeSection === 'evidence'

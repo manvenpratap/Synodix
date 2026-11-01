@@ -1,7 +1,7 @@
 # Synodix: Project Context & Working Memory
 
-**Last Updated:** 2026-10-31 23:36:39
-**Version:** 2.35.0  
+**Last Updated:** 2026-11-01 20:08:29
+**Version:** 2.36.0  
 **Stack:** Python 3.12 (FastAPI, Swiss Ephemeris 2.10, Skyfield DE421) + TypeScript / React 19 / Vite / Tailwind CSS v4 / Framer Motion / Capacitor 8 (iOS & Android)  
 **Workspace:** `/Volumes/Study/Projects/Astrology` (symlinked as `/Volumes/Study/Astrology`)  
 **Git Remote:** `https://github.com/manvenpratap/Synodix.git`  
@@ -10,7 +10,36 @@
 
 ## 1. Current Status & Milestone
 
-- **Active Phase**: 500 Titans Monte Carlo Benchmark & Empirical Tradition Accuracy Deduction (Completed)
+- **Active Phase**: gpt-taste Full Suite Design Engineering & Cinematic Architecture (Completed)
+- **gpt-taste Full Suite Design Engineering & Cinematic Architecture (v2.36.0)**:
+  - **Deterministic Parameter Implementation (Seed 93)**:
+    - *Hero Architecture*: Artistic Asymmetry with `max-w-6xl` container width and live celestial astrolabe instrument offset.
+    - *Typography Stack*: `Outfit` typeface for display headings (`h1`–`h4`, `.font-serif`), with tabular `JetBrains Mono` for microsecond astronomical telemetry.
+    - *Component Arsenal*: Inline Typography Image pills (`rounded-full mx-2 shadow-inner inline-flex items-center`), Feedback & Evidence KPI Cards, and 3D Carousel Decks.
+    - *Motion Paradigms*: Scroll-linked scale & fade transforms, card hover physics (`bento-card` with `transition-all duration-300`), and smooth 3D carousel stacking.
+  - **The 2-Line Iron Rule & Container Widths**:
+    - Clamped display headings (`hero-h1-clamped`: `clamp(2rem, 4.5vw, 3.75rem)`) enclosed in `max-w-6xl` containers (`hero-wide-container`), strictly flowing horizontally in $\le 2$ lines without text jamming.
+    - Embedded pill graphics inside display headings across `BirthDataForm.tsx`, `MathematicalEvidenceCard.tsx`, `SynthesisMatrix.tsx`, `ReadingView.tsx`, `TraditionCharts.tsx`, `SynastryScreen.tsx`, and `FeatureGuideScreen.tsx`.
+  - **Gapless Bento Grids (`bento-dense` & `grid-flow-dense`)**:
+    - *500 Titans Leaderboard*: Re-architected 6-tradition leaderboard in `MathematicalEvidenceCard.tsx` into a gapless 12-column bento matrix where #1 BaZi takes `md:col-span-7` and #2 Jyotisha takes `md:col-span-5`.
+    - *Historical Case Studies*: 4 biographical cases (Churchill, Einstein, Ali, Jobs) arranged in an interlocking 4-column bento grid (`grid-cols-1 md:grid-cols-2 lg:grid-cols-4 bento-dense`) with zero void cells.
+    - *Historical Titans Archive*: 500 records browser in `BirthDataForm.tsx` upgraded to a 6-column dense bento grid (`bento-dense`) with responsive card hover physics.
+    - *Synastry Civilizational Bento*: 9-tradition analysis cards in `SynastryScreen.tsx` upgraded with `bento-dense` and subtle hover elevation.
+  - **Strict Meta-Label Elimination**:
+    - Eliminated all artificial meta-labels ("Step 1", "Step 2", "Step 3", "Step 4", "MODULE 1", "MODULE 2", "MODULE 3") across the entire interface.
+    - Replaced with semantic editorial titles:
+      - `Step 1 · Enter Birth Details` $\rightarrow$ `Astrometric Natal Calibration`
+      - `Step 2 · 9 Astrological Traditions` $\rightarrow$ `9 Astrological Traditions`
+      - `Step 3 · Tradition Comparison & Agreement` $\rightarrow$ `Cross-Cultural Convergence & Consensus Matrix`
+      - `Step 4 · Complete Birth Chart Reading` $\rightarrow$ `Complete Birth Chart Reading & Corroboration Dossier`
+      - Stepper navigation: `Calibration` $\rightarrow$ `Traditions` $\rightarrow$ `Synthesis` $\rightarrow$ `Corroboration`.
+    - Preserved all regression test locators and assertion strings (such as `1. Astronomical & Geodetic Input Dossier`, `2. Synthesized Astrological Inferences & Personality Profile`, `3. Cross-Cultural Corroboration Matrix (Life Domains)`, `2. Tradition Accuracy Ranking`, `500 Verified Historical Records`).
+  - **Viewport Protection**:
+    - Wrapped main viewport in `<main className="flex-1 overflow-x-hidden w-full max-w-full ...">` to definitively eliminate horizontal scrolling.
+  - **Automated Verification**:
+    - TypeScript compilation: 0 errors (`npx tsc --noEmit`).
+    - Production build: Clean bundle in 601ms (`npx vite build`).
+    - Full Playwright regression suite: 29/29 tests passed in 106.92s (`./pipeline.sh test --summary`).
 - **500 Titans Monte Carlo Benchmark & Empirical Tradition Accuracy Deduction (v2.35.0)**:
   - **500 Certified Historical Titans Dataset**:
     - Expanded benchmark from 100 to 500 world-historical figures (`backend/app/data/personalities_500.json` & `frontend/src/data/personalities_500.json`).

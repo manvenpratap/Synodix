@@ -224,8 +224,10 @@ export const MathematicalEvidenceCard: React.FC<Props> = ({ onNavigate }) => {
               </span>
             </div>
             <div className="flex flex-wrap items-center gap-2 mt-1">
-              <h2 className="text-base sm:text-lg font-serif font-bold text-stone-100 tracking-tight">
-                Mathematical Evidence & Empirical Validation of Astrological Modeling
+              <h2 className="text-xl sm:text-2xl lg:text-3xl font-serif font-bold text-stone-100 tracking-tight max-w-4xl">
+                Mathematical Evidence &amp; Empirical
+                <span className="inline-block w-12 sm:w-16 h-5 sm:h-6 rounded-full align-middle bg-gradient-to-r from-amber-600 via-amber-500 to-amber-700 border border-amber-400/50 mx-2 shadow-inner inline-flex items-center justify-center text-[10px] text-amber-950 font-mono font-bold">500</span>
+                Validation
               </h2>
               <ExplainerTrigger id="epistemic_humility_framework" label="Epistemic Humility" variant="badge" />
             </div>
@@ -321,9 +323,9 @@ export const MathematicalEvidenceCard: React.FC<Props> = ({ onNavigate }) => {
           </div>
         </div>
 
-        {/* Live Top KPI Scorecard (flattened telemetry strip without nested cards) */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 pt-3 mt-3 border-t border-stone-800/80">
-          <div className="flex flex-col justify-between py-1 px-1">
+        {/* Live Top KPI Scorecard (gpt-taste Gapless Bento Strip) */}
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 pt-3 mt-3 border-t border-stone-800/80 bento-dense">
+          <div className="bento-card flex flex-col justify-between py-2 px-2.5 rounded-lg bg-stone-950/60 border border-stone-850 hover:border-amber-700/50">
             <div className="flex items-center justify-between">
               <span className="text-xs font-medium text-stone-400">Titan Cohort</span>
               <ExplainerTrigger id="rodden_titan_benchmark" size="xs" variant="icon" />
@@ -331,17 +333,17 @@ export const MathematicalEvidenceCard: React.FC<Props> = ({ onNavigate }) => {
             <span className="text-base sm:text-lg font-mono tabular-nums font-bold text-amber-300">500 Records</span>
             <span className="text-xs text-stone-400 block mt-0.5">100% Rodden Rating AA/A</span>
           </div>
-          <div className="flex flex-col justify-between py-1 px-1">
+          <div className="bento-card flex flex-col justify-between py-2 px-2.5 rounded-lg bg-stone-950/60 border border-stone-850 hover:border-amber-700/50">
             <span className="text-xs font-medium text-stone-400 block">Null Baseline</span>
             <span className="text-base sm:text-lg font-mono tabular-nums font-bold text-stone-200">2,500 Controls</span>
             <span className="text-xs text-stone-400 block mt-0.5">Epoch 1500 to 2000 Uniform</span>
           </div>
-          <div className="flex flex-col justify-between py-1 px-1">
+          <div className="bento-card flex flex-col justify-between py-2 px-2.5 rounded-lg bg-stone-950/60 border border-stone-850 hover:border-amber-700/50">
             <span className="text-xs font-medium text-stone-400 block">Domain Concordance</span>
             <span className="text-base sm:text-lg font-mono tabular-nums font-bold text-amber-300">68.0%</span>
             <span className="text-xs font-sans text-stone-300 block mt-0.5 font-medium">Exceeds Noise (p &lt; 10⁻⁴)</span>
           </div>
-          <div className="flex flex-col justify-between py-1 px-1">
+          <div className="bento-card flex flex-col justify-between py-2 px-2.5 rounded-lg bg-stone-950/60 border border-stone-850 hover:border-amber-700/50">
             <div className="flex items-center justify-between">
               <span className="text-xs font-medium text-stone-400">Divergence Rate</span>
               <ExplainerTrigger id="honest_divergence_rate" size="xs" variant="icon" />
@@ -349,7 +351,7 @@ export const MathematicalEvidenceCard: React.FC<Props> = ({ onNavigate }) => {
             <span className="text-base sm:text-lg font-mono tabular-nums font-bold text-amber-400">32.0%</span>
             <span className="text-xs text-stone-400 block mt-0.5">Honest Disagreements</span>
           </div>
-          <div className="flex flex-col justify-between py-1 px-1">
+          <div className="bento-card flex flex-col justify-between py-2 px-2.5 rounded-lg bg-stone-950/60 border border-stone-850 hover:border-amber-700/50 col-span-2 md:col-span-1">
             <span className="text-xs font-medium text-stone-400 block">Top Accurate System</span>
             <span className="text-base sm:text-lg font-mono tabular-nums font-bold text-amber-300">BaZi &amp; Jyotisha</span>
             <span className="text-xs text-stone-400 block mt-0.5">64.6 &amp; 60.9 Composite Scores</span>
@@ -534,33 +536,33 @@ export const MathematicalEvidenceCard: React.FC<Props> = ({ onNavigate }) => {
                   </span>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-1">
-                  <div className="p-3 rounded-lg bg-stone-950/80 border border-amber-800/40 space-y-1.5">
+                <div className="grid grid-cols-1 md:grid-cols-12 gap-4 pt-1 bento-dense">
+                  <div className="md:col-span-7 bento-card p-4 rounded-xl bg-stone-950/90 border border-amber-800/60 shadow-md space-y-2">
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-2">
                         <span className="text-base font-bold text-amber-300 font-serif">#1 BaZi (Four Pillars)</span>
-                        <span className="px-1.5 py-0.5 text-[10px] font-mono rounded bg-amber-950 text-amber-300 border border-amber-800">
+                        <span className="px-1.5 py-0.5 text-[10px] font-mono rounded bg-amber-950 text-amber-300 border border-amber-800 font-bold">
                           Score: 64.6
                         </span>
                       </div>
-                      <span className="text-xs text-stone-400 font-mono">Robustness: 88.0%</span>
+                      <span className="text-xs text-amber-400/90 font-mono font-semibold">Robustness: 88.0%</span>
                     </div>
-                    <p className="text-xs text-stone-300 leading-relaxed">
+                    <p className="text-xs text-stone-300 leading-relaxed text-pretty">
                       <strong>Highest Time-Invariance &amp; Career Trajectory Mapping:</strong> 75% of the BaZi chart (Year, Month, Day) is 100% invariant to birth hour errors within the calendar day. The 10-Year Luck Pillars (<em>Da Yun</em>) exhibit the strongest empirical correlation with multi-decade historical rise and fall cycles.
                     </p>
                   </div>
 
-                  <div className="p-3 rounded-lg bg-stone-950/80 border border-amber-800/40 space-y-1.5">
+                  <div className="md:col-span-5 bento-card p-4 rounded-xl bg-stone-950/90 border border-amber-800/60 shadow-md space-y-2">
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-2">
                         <span className="text-base font-bold text-amber-300 font-serif">#2 Jyotisha (Vedic Sidereal)</span>
-                        <span className="px-1.5 py-0.5 text-[10px] font-mono rounded bg-amber-950 text-amber-300 border border-amber-800">
+                        <span className="px-1.5 py-0.5 text-[10px] font-mono rounded bg-amber-950 text-amber-300 border border-amber-800 font-bold">
                           Score: 60.9
                         </span>
                       </div>
-                      <span className="text-xs text-stone-400 font-mono">Timing Precision: 84.0%</span>
+                      <span className="text-xs text-amber-400/90 font-mono font-semibold">Timing: 84.0%</span>
                     </div>
-                    <p className="text-xs text-stone-300 leading-relaxed">
+                    <p className="text-xs text-stone-300 leading-relaxed text-pretty">
                       <strong>Highest Acute Event-Timing Resolution:</strong> The nested <em>Vimshottari Dasha</em> system achieves 84.0% timing accuracy for specific biographical inflection points (e.g. Churchill PM 1940, Einstein 1905, Ali 1964), though it requires sub-15-minute birth accuracy due to Navamsha (D9) sensitivity.
                     </p>
                   </div>
@@ -669,15 +671,15 @@ export const MathematicalEvidenceCard: React.FC<Props> = ({ onNavigate }) => {
                   </span>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3.5 bento-dense">
                   {/* Case 1: Churchill */}
-                  <div className="p-3.5 rounded-lg bg-stone-900 border border-stone-800 space-y-2">
+                  <div className="bento-card p-3.5 rounded-xl bg-stone-900/90 border border-stone-800 hover:border-amber-600/70 hover:shadow-md transition-all duration-300 space-y-2">
                     <div className="flex items-center justify-between border-b border-stone-800/80 pb-2">
                       <div>
                         <span className="font-serif font-bold text-stone-100 text-sm">Winston Churchill</span>
                         <span className="text-xs text-stone-400 block">Nov 30, 1874, 01:30 GMT • Rodden AA</span>
                       </div>
-                      <span className="px-2 py-0.5 text-xs font-mono rounded bg-amber-950 text-amber-300 border border-amber-800">
+                      <span className="px-2 py-0.5 text-xs font-mono rounded bg-amber-950 text-amber-300 border border-amber-800 shrink-0">
                         May 10, 1940
                       </span>
                     </div>
@@ -685,39 +687,39 @@ export const MathematicalEvidenceCard: React.FC<Props> = ({ onNavigate }) => {
                       <strong>Historical Event:</strong> Appointed UK Prime Minister at age 65 during the collapse of France, leading Allied wartime resistance.
                     </p>
                     <div className="text-xs space-y-1 font-mono text-stone-400 bg-stone-950 p-2 rounded border border-stone-800/60">
-                      <div>• <span className="text-amber-300">Vedic Dasha:</span> Rahu-Jupiter (Rahu in 10th Kendra of sovereign governance; Jupiter in 7th Kendra aspecting 1st Lagna).</div>
-                      <div>• <span className="text-amber-300">BaZi Da Yun:</span> Gui Hai (Water Pig) luck pillar amplifying his Yin Wood Day Master to peak endurance.</div>
+                      <div>• <span className="text-amber-300">Vedic Dasha:</span> Rahu-Jupiter (Rahu in 10th Kendra of governance; Jupiter in 7th Kendra aspecting 1st Lagna).</div>
+                      <div>• <span className="text-amber-300">BaZi Da Yun:</span> Gui Hai (Water Pig) luck pillar amplifying Yin Wood Day Master.</div>
                     </div>
                   </div>
 
                   {/* Case 2: Einstein */}
-                  <div className="p-3.5 rounded-lg bg-stone-900 border border-stone-800 space-y-2">
+                  <div className="bento-card p-3.5 rounded-xl bg-stone-900/90 border border-stone-800 hover:border-amber-600/70 hover:shadow-md transition-all duration-300 space-y-2">
                     <div className="flex items-center justify-between border-b border-stone-800/80 pb-2">
                       <div>
                         <span className="font-serif font-bold text-stone-100 text-sm">Albert Einstein</span>
                         <span className="text-xs text-stone-400 block">Mar 14, 1879, 11:30 LMT • Rodden AA</span>
                       </div>
-                      <span className="px-2 py-0.5 text-xs font-mono rounded bg-amber-950 text-amber-300 border border-amber-800">
+                      <span className="px-2 py-0.5 text-xs font-mono rounded bg-amber-950 text-amber-300 border border-amber-800 shrink-0">
                         1905 Annus Mirabilis
                       </span>
                     </div>
                     <p className="text-xs text-stone-300">
-                      <strong>Historical Event:</strong> Published 4 revolutionary papers (Special Relativity, Photoelectric Effect, Brownian Motion, Mass-Energy Equivalence) at age 26.
+                      <strong>Historical Event:</strong> Published 4 revolutionary papers (Special Relativity, Photoelectric Effect, Brownian Motion, Mass-Energy) at age 26.
                     </p>
                     <div className="text-xs space-y-1 font-mono text-stone-400 bg-stone-950 p-2 rounded border border-stone-800/60">
                       <div>• <span className="text-amber-300">Vedic Dasha:</span> Mercury-Venus (Gemini Lagna lord Mercury conjunct exalted Venus in 10th Kendra Pisces).</div>
-                      <div>• <span className="text-amber-300">BaZi Da Yun:</span> Jia Wu (Wood Horse) pillar igniting his Yin Metal Day Master with creative fire.</div>
+                      <div>• <span className="text-amber-300">BaZi Da Yun:</span> Jia Wu (Wood Horse) pillar igniting Yin Metal Day Master with fire.</div>
                     </div>
                   </div>
 
                   {/* Case 3: Muhammad Ali */}
-                  <div className="p-3.5 rounded-lg bg-stone-900 border border-stone-800 space-y-2">
+                  <div className="bento-card p-3.5 rounded-xl bg-stone-900/90 border border-stone-800 hover:border-amber-600/70 hover:shadow-md transition-all duration-300 space-y-2">
                     <div className="flex items-center justify-between border-b border-stone-800/80 pb-2">
                       <div>
                         <span className="font-serif font-bold text-stone-100 text-sm">Muhammad Ali</span>
                         <span className="text-xs text-stone-400 block">Jan 17, 1942, 18:35 CST • Rodden AA</span>
                       </div>
-                      <span className="px-2 py-0.5 text-xs font-mono rounded bg-amber-950 text-amber-300 border border-amber-800">
+                      <span className="px-2 py-0.5 text-xs font-mono rounded bg-amber-950 text-amber-300 border border-amber-800 shrink-0">
                         Feb 25, 1964
                       </span>
                     </div>
@@ -725,19 +727,19 @@ export const MathematicalEvidenceCard: React.FC<Props> = ({ onNavigate }) => {
                       <strong>Historical Event:</strong> Defeated Sonny Liston by TKO in Round 7 to win World Heavyweight Championship at age 22.
                     </p>
                     <div className="text-xs space-y-1 font-mono text-stone-400 bg-stone-950 p-2 rounded border border-stone-800/60">
-                      <div>• <span className="text-amber-300">Vedic Dasha:</span> Jupiter-Mercury (Exalted Jupiter in 11th Labha house of triumph aspecting Mars in 8th house).</div>
-                      <div>• <span className="text-amber-300">BaZi Da Yun:</span> Xin Si (Metal Snake) pillar bringing razor martial precision and indestructible speed.</div>
+                      <div>• <span className="text-amber-300">Vedic Dasha:</span> Jupiter-Mercury (Exalted Jupiter in 11th Labha house aspecting Mars in 8th house).</div>
+                      <div>• <span className="text-amber-300">BaZi Da Yun:</span> Xin Si (Metal Snake) pillar bringing martial precision and speed.</div>
                     </div>
                   </div>
 
                   {/* Case 4: Steve Jobs */}
-                  <div className="p-3.5 rounded-lg bg-stone-900 border border-stone-800 space-y-2">
+                  <div className="bento-card p-3.5 rounded-xl bg-stone-900/90 border border-stone-800 hover:border-amber-600/70 hover:shadow-md transition-all duration-300 space-y-2">
                     <div className="flex items-center justify-between border-b border-stone-800/80 pb-2">
                       <div>
                         <span className="font-serif font-bold text-stone-100 text-sm">Steve Jobs</span>
                         <span className="text-xs text-stone-400 block">Feb 24, 1955, 19:15 PST • Rodden AA</span>
                       </div>
-                      <span className="px-2 py-0.5 text-xs font-mono rounded bg-amber-950 text-amber-300 border border-amber-800">
+                      <span className="px-2 py-0.5 text-xs font-mono rounded bg-amber-950 text-amber-300 border border-amber-800 shrink-0">
                         1976 &amp; 1997
                       </span>
                     </div>
@@ -745,8 +747,8 @@ export const MathematicalEvidenceCard: React.FC<Props> = ({ onNavigate }) => {
                       <strong>Historical Events:</strong> Co-founded Apple Computer on April 1, 1976 (age 21); returned as Apple CEO in Sept 1997 to pioneer the modern era.
                     </p>
                     <div className="text-xs space-y-1 font-mono text-stone-400 bg-stone-950 p-2 rounded border border-stone-800/60">
-                      <div>• <span className="text-amber-300">Vedic Dasha:</span> 1976 in Mercury-Jupiter; 1997 return in Venus-Sun (Venus in 5th house of product design).</div>
-                      <div>• <span className="text-amber-300">BaZi Da Yun:</span> Bing Chen (Fire Dragon) generating extraordinary consumer product intuition.</div>
+                      <div>• <span className="text-amber-300">Vedic Dasha:</span> 1976 in Mercury-Jupiter; 1997 return in Venus-Sun (Venus in 5th house).</div>
+                      <div>• <span className="text-amber-300">BaZi Da Yun:</span> Bing Chen (Fire Dragon) generating consumer product intuition.</div>
                     </div>
                   </div>
                 </div>

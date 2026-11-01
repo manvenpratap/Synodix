@@ -268,8 +268,9 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
       {/* Screen 2 Header Bar: Title + Display Presentation Switcher + View Mode Toggle */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1.5 pb-1 sm:pb-1.5 border-b border-white/10">
         <div className="hidden sm:block min-w-0">
-          <h2 className="text-sm sm:text-base font-serif font-semibold text-stone-100 flex items-center gap-2 whitespace-nowrap">
-            <span>Step 2 · 9 Astrological Traditions</span>
+          <h2 className="text-xl sm:text-2xl font-serif font-bold text-stone-100 flex items-center gap-2 whitespace-nowrap tracking-tight">
+            <span>9 Astrological Traditions</span>
+            <span className="inline-block w-12 sm:w-14 h-5 sm:h-6 rounded-full align-middle bg-gradient-to-r from-amber-600 via-amber-500 to-amber-700 border border-amber-400/50 mx-1 shadow-inner inline-flex items-center justify-center text-[10px] text-amber-950 font-mono font-bold">9-Sys</span>
             <span className="text-[11px] font-mono font-medium px-1.5 py-0.5 rounded bg-stone-800/80 text-amber-300 border border-stone-700/60 hidden sm:inline-block">9 Traditions</span>
           </h2>
           <p className="text-xs text-stone-400 mt-0.5 font-sans hidden sm:block truncate">
@@ -1859,14 +1860,14 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
             className="inline-flex items-center justify-center gap-2 px-4 py-2 min-h-[44px] text-xs font-sans rounded-lg bg-stone-900 hover:bg-stone-800 text-stone-300 border border-stone-800 cursor-pointer transition-colors active:scale-[0.98] whitespace-nowrap"
           >
             <ArrowLeft className="w-3.5 h-3.5 shrink-0" aria-hidden="true" />
-            <span className="whitespace-nowrap">Back to Input (Step 1)<span className="sr-only"> Back to Workbench</span></span>
+            <span className="whitespace-nowrap">Back to Natal Calibration<span className="sr-only"> Back to Workbench</span></span>
           </button>
           <button
             type="button"
             onClick={() => onNavigate('synthesis')}
             className="inline-flex items-center justify-center gap-2 px-4 py-2 min-h-[44px] text-xs font-serif rounded-lg bg-amber-600 hover:bg-amber-500 text-stone-950 font-semibold cursor-pointer transition-colors duration-150 border border-amber-300 shadow-xs active:scale-[0.98] whitespace-nowrap"
           >
-            <span className="whitespace-nowrap">Proceed to Synthesis (Step 3)<span className="sr-only"> Explore Cross-Cultural Synthesis Matrix</span></span>
+            <span className="whitespace-nowrap">Proceed to Domain Synthesis<span className="sr-only"> Explore Cross-Cultural Synthesis Matrix</span></span>
             <ArrowRight className="w-3.5 h-3.5 shrink-0" aria-hidden="true" />
           </button>
         </div>

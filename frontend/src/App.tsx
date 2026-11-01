@@ -958,7 +958,7 @@ function AppContent() {
                   </span>
                   <div className="relative z-10 text-left min-w-0">
                     <span className="hidden sm:block text-[11px] text-amber-500/80 font-mono leading-none">
-                      {['Step 1', 'Step 2', 'Step 3', 'Step 4'][idx]}
+                      {['Calibration', 'Traditions', 'Synthesis', 'Corroboration'][idx]}
                     </span>
                     <span className="truncate text-xs font-serif font-medium block">
                       {s.label}
@@ -985,9 +985,9 @@ function AppContent() {
 
         {/* Main Content Viewport */}
         <main
-          className={`flex-1 ${
-            currentScreen === 'traditions' ? 'p-2 sm:p-3 lg:p-3' : 'p-4 sm:p-6 lg:p-8'
-          } w-full mx-auto pb-[calc(6.5rem+env(safe-area-inset-bottom,0px))] md:pb-8 ${
+          className={`flex-1 overflow-x-hidden w-full max-w-full ${
+            currentScreen === 'traditions' ? 'p-2 sm:p-3 lg:p-4' : 'p-4 sm:p-6 lg:p-8'
+          } mx-auto pb-[calc(6.5rem+env(safe-area-inset-bottom,0px))] md:pb-8 ${
             currentScreen === 'guide' || currentScreen === 'evidence' ? 'max-w-full lg:px-8' : 'max-w-7xl'
           }`}
         >
@@ -1276,19 +1276,19 @@ function AppContent() {
             </div>
             <div className="py-4 space-y-2.5 text-xs font-mono text-stone-300">
               <div className="flex items-center justify-between py-1 border-b border-stone-900">
-                <span className="font-sans">Step 1 · Birth Input &amp; Profiles</span>
+                <span className="font-sans">Natal Calibration &amp; Profiles</span>
                 <kbd className="px-1.5 py-0.5 rounded bg-stone-900 border border-stone-800 text-amber-300 font-bold">1</kbd>
               </div>
               <div className="flex items-center justify-between py-1 border-b border-stone-900">
-                <span className="font-sans">Step 2 · 9 Astrological Traditions</span>
+                <span className="font-sans">9 Astrological Traditions</span>
                 <kbd className="px-1.5 py-0.5 rounded bg-stone-900 border border-stone-800 text-amber-300 font-bold">2</kbd>
               </div>
               <div className="flex items-center justify-between py-1 border-b border-stone-900">
-                <span className="font-sans">Step 3 · Tradition Comparison</span>
+                <span className="font-sans">Tradition Comparison &amp; Accord</span>
                 <kbd className="px-1.5 py-0.5 rounded bg-stone-900 border border-stone-800 text-amber-300 font-bold">3</kbd>
               </div>
               <div className="flex items-center justify-between py-1 border-b border-stone-900">
-                <span className="font-sans">Step 4 · Complete Reading</span>
+                <span className="font-sans">Complete Astrometric Dossier</span>
                 <kbd className="px-1.5 py-0.5 rounded bg-stone-900 border border-stone-800 text-amber-300 font-bold">4</kbd>
               </div>
               <div className="flex items-center justify-between py-1 border-b border-stone-900">

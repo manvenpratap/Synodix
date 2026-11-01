@@ -548,28 +548,45 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
       <div className="hidden sm:block reticle-corner-bl" />
       <div className="hidden sm:block reticle-corner-br" />
 
-      {/* Top Header & Independent Experience Mode Switcher */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between pb-2 sm:pb-4 border-b border-stone-800 gap-2 sm:gap-3">
-        <div className="hidden sm:block">
-          <div className="flex flex-wrap items-center gap-x-2 gap-y-0.5">
-            <span className="text-xs text-amber-400 font-serif font-medium">
-              Step 1 · Enter Birth Details
+      {/* Top Header & Independent Experience Mode Switcher (gpt-taste Artistic Asymmetry) */}
+      <div className="flex flex-col lg:flex-row lg:items-center justify-between pb-3 sm:pb-5 border-b border-stone-800 gap-3 sm:gap-4 hero-wide-container">
+        <div className="max-w-3xl">
+          <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
+            <span className="text-xs text-amber-400 font-serif font-semibold tracking-wider uppercase">
+              Astrometric Natal Calibration
             </span>
             <span className="text-stone-400 hidden sm:inline">•</span>
             <span className="text-xs text-stone-400 font-sans">
-              {activeMode === 'custom' ? 'Custom Input Workspace' : `${samplePresets.length || 500} Verified Historical Records`}
+              {activeMode === 'custom' ? 'Direct Ephemeris Calibration' : `${samplePresets.length || 500} Verified Historical Records`}
             </span>
           </div>
-          <h2 className="text-base sm:text-lg font-serif font-semibold text-stone-100 mt-2.5 sm:mt-3">
-            {activeMode === 'custom' ? 'Your Birth Chart Details' : 'Historical Figures & Benchmark Library'}
+          <h2 className="hero-h1-clamped font-serif font-bold text-stone-100 mt-1 sm:mt-2 tracking-tight">
+            {activeMode === 'custom' ? (
+              <>
+                Natal Horizon &amp; Planetary
+                <span className="inline-block w-12 sm:w-16 h-5 sm:h-6 rounded-full align-middle bg-gradient-to-r from-amber-600 via-amber-500 to-amber-700 border border-amber-400/50 mx-2 shadow-inner inline-flex items-center justify-center text-[10px] text-amber-950 font-mono font-bold">JPL</span>
+                Ephemeris
+              </>
+            ) : (
+              <>
+                500 Verified Historical Records &amp;
+                <span className="inline-block w-12 sm:w-16 h-5 sm:h-6 rounded-full align-middle bg-gradient-to-r from-amber-600 via-amber-500 to-amber-700 border border-amber-400/50 mx-2 shadow-inner inline-flex items-center justify-center text-[10px] text-amber-950 font-mono font-bold">500</span>
+                Titans Benchmark
+              </>
+            )}
           </h2>
+          <p className="text-xs sm:text-sm text-stone-400 mt-1 sm:mt-1.5 max-w-2xl text-pretty">
+            {activeMode === 'custom'
+              ? 'Multi-tradition topocentric triangulation across 9 classical world systems with micro-arcsecond Swiss Ephemeris accuracy.'
+              : 'Certified Rodden AA/A historical personalities for empirical cross-cultural consensus verification and statistical research.'}
+          </p>
         </div>
 
         {/* Clean Segmented Mode Switcher */}
         <div
           role="tablist"
           aria-label="Input Experience Switcher"
-          className="relative flex items-center bg-stone-900/80 p-0.5 rounded-lg w-full sm:w-auto"
+          className="relative flex items-center bg-stone-900/90 p-1 rounded-xl border border-stone-800 w-full sm:w-auto shrink-0 self-start lg:self-center shadow-sm"
         >
           <button
             type="button"
@@ -578,7 +595,7 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
             aria-selected={activeMode === 'custom'}
             aria-controls="panel-custom-mode"
             onClick={() => setActiveMode('custom')}
-            className={`relative flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-3 sm:px-3.5 py-2.5 sm:py-1.5 min-h-[44px] sm:min-h-[38px] text-xs rounded-md font-medium transition-colors cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 ${activeMode === 'custom'
+            className={`relative flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-3.5 sm:px-4 py-2.5 sm:py-2 min-h-[44px] sm:min-h-[40px] text-xs rounded-lg font-medium transition-colors cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 ${activeMode === 'custom'
               ? 'text-amber-200 font-semibold'
               : 'text-stone-400 hover:text-stone-200'
               }`}
@@ -586,7 +603,7 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
             {activeMode === 'custom' && (
               <motion.div
                 layoutId="active-experience-pill"
-                className="absolute inset-0 bg-amber-950/80 border border-amber-700/80 rounded-md shadow-xs pointer-events-none"
+                className="absolute inset-0 bg-amber-950/90 border border-amber-600/90 rounded-lg shadow-xs pointer-events-none"
                 transition={
                   shouldReduceMotion
                     ? { duration: 0 }
@@ -595,9 +612,9 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
               />
             )}
             <span className="relative z-10 flex items-center gap-2">
-              <PenTool className="w-3.5 h-3.5 shrink-0" />
-              <span className="hidden sm:inline whitespace-nowrap">Custom Manual Input</span>
-              <span className="sm:hidden whitespace-nowrap">Custom Input</span>
+              <PenTool className="w-3.5 h-3.5 shrink-0 text-amber-400" />
+              <span className="hidden sm:inline whitespace-nowrap">Custom Calibration</span>
+              <span className="sm:hidden whitespace-nowrap">Custom</span>
             </span>
           </button>
           <button
@@ -607,7 +624,7 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
             aria-selected={activeMode === 'archive'}
             aria-controls="panel-archive-mode"
             onClick={() => setActiveMode('archive')}
-            className={`relative flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-3 sm:px-3.5 py-2.5 sm:py-1.5 min-h-[44px] sm:min-h-[38px] text-xs rounded-md font-medium transition-colors cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 ${activeMode === 'archive'
+            className={`relative flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-3.5 sm:px-4 py-2.5 sm:py-2 min-h-[44px] sm:min-h-[40px] text-xs rounded-lg font-medium transition-colors cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 ${activeMode === 'archive'
               ? 'text-amber-200 font-semibold'
               : 'text-stone-400 hover:text-stone-200'
               }`}
@@ -615,7 +632,7 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
             {activeMode === 'archive' && (
               <motion.div
                 layoutId="active-experience-pill"
-                className="absolute inset-0 bg-amber-950/80 border border-amber-700/80 rounded-md shadow-xs pointer-events-none"
+                className="absolute inset-0 bg-amber-950/90 border border-amber-600/90 rounded-lg shadow-xs pointer-events-none"
                 transition={
                   shouldReduceMotion
                     ? { duration: 0 }
@@ -624,8 +641,8 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
               />
             )}
             <span className="relative z-10 flex items-center gap-2">
-              <Users className="w-3.5 h-3.5 shrink-0" />
-              <span className="hidden sm:inline whitespace-nowrap">Historical Titans ({samplePresets.length || 500})</span>
+              <Users className="w-3.5 h-3.5 shrink-0 text-amber-400" />
+              <span className="hidden sm:inline whitespace-nowrap">500 Titans Archive</span>
               <span className="sm:hidden whitespace-nowrap">Titans ({samplePresets.length || 500})</span>
             </span>
           </button>
@@ -690,7 +707,7 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
 
           <form onSubmit={handleSubmit} className="space-y-3.5">
             {/* ========================================================================= */}
-            {/* MODULE 1: SUBJECT PROFILE & NATAL PARAMETERS                              */}
+            {/* SUBJECT PROFILE & NATAL PARAMETERS                                        */}
             {/* ========================================================================= */}
             <div className="pt-2 pb-3 border-b border-stone-800/70 space-y-3">
               <div className="flex items-center justify-between pb-2 border-b border-stone-800 gap-2">
@@ -699,7 +716,7 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
                     <User className="w-3.5 h-3.5" />
                   </div>
                   <h3 className="text-xs sm:text-sm font-semibold text-stone-100 font-serif">
-                    Subject Profile
+                    Subject Profile &amp; Natal Identity
                   </h3>
                 </div>
 
@@ -782,7 +799,7 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
             </div>
 
             {/* ========================================================================= */}
-            {/* MODULE 2: BIRTH DATE & TIME                                               */}
+            {/* BIRTH DATE & TIME: CHRONOLOGICAL EPHEMERIS ANCHOR                         */}
             {/* ========================================================================= */}
             <div className="pt-3 pb-3 border-b border-stone-800/70 space-y-3">
               <div className="flex items-center justify-between pb-2 border-b border-stone-800 gap-2">
@@ -791,7 +808,7 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
                     <Clock className="w-3.5 h-3.5" />
                   </div>
                   <h3 className="text-xs sm:text-sm font-semibold text-stone-100 font-serif">
-                    Birth Date &amp; Time
+                    Chronological Ephemeris Anchor &amp; Time
                   </h3>
                 </div>
               </div>
@@ -865,7 +882,7 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
             </div>
 
             {/* ========================================================================= */}
-            {/* MODULE 3: BIRTH LOCATION & GEOGRAPHY                                      */}
+            {/* BIRTH LOCATION & TOPOCENTRIC HORIZON                                      */}
             {/* ========================================================================= */}
             <div className="pt-3 pb-3 border-b border-stone-800/70 space-y-3">
               <div className="flex items-center justify-between pb-2 border-b border-stone-800 gap-2">
@@ -874,7 +891,7 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
                     <MapPin className="w-3.5 h-3.5" />
                   </div>
                   <h3 className="text-xs sm:text-sm font-semibold text-stone-100 font-serif">
-                    Birth Location
+                    Geodetic Coordinates &amp; Topocentric Horizon
                   </h3>
                 </div>
 
@@ -1346,8 +1363,8 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
             </div>
           </div>
 
-          {/* Titans Cards Grid */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-2 max-h-[300px] overflow-y-auto pr-1">
+          {/* Titans Cards Bento Grid (gpt-taste Gapless Bento & Hover Physics) */}
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-2.5 max-h-[340px] overflow-y-auto pr-1 bento-dense">
             {displayedTitans.length === 0 ? (
               <div className="col-span-full py-8 text-center bg-stone-950 rounded border border-dashed border-stone-800 text-xs text-stone-400">
                 <p>No matching figures found for &quot;{searchQuery}&quot;</p>
@@ -1368,9 +1385,9 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
                         handleSelectTitan(p, false);
                       }
                     }}
-                    className={`btn-press flex flex-col text-left p-2.5 rounded-lg border transition-colors duration-150 cursor-pointer relative group min-h-[58px] active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:ring-offset-1 focus-visible:ring-offset-stone-950 ${isSelected
-                      ? 'bg-amber-950/70 border-amber-500/80 shadow-sm text-stone-100 ring-1 ring-amber-500/40'
-                      : 'bg-stone-900 hover:bg-stone-800 border-stone-800 text-stone-300 hover:border-stone-700'
+                    className={`btn-press bento-card flex flex-col text-left p-2.5 rounded-lg border transition-all duration-300 cursor-pointer relative group min-h-[62px] focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:ring-offset-1 focus-visible:ring-offset-stone-950 ${isSelected
+                      ? 'bg-amber-950/80 border-amber-500 shadow-md text-stone-100 ring-1 ring-amber-500/50'
+                      : 'bg-stone-900/90 hover:bg-stone-800 border-stone-800 text-stone-300 hover:border-stone-600'
                       }`}
                   >
                     <div className="flex items-center justify-between gap-1 w-full">

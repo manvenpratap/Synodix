@@ -245,9 +245,11 @@ export const SynastryScreen: React.FC<Props> = ({
               </span>
               <ExplainerTrigger id="synastry_conjunctions" variant="badge" />
             </div>
-            <h1 className="text-xl sm:text-2xl font-serif font-bold text-stone-100 flex items-center gap-2.5">
+            <h1 className="text-xl sm:text-2xl lg:text-3xl font-serif font-bold text-stone-100 flex items-center gap-2.5 max-w-4xl tracking-tight">
               <HeartHandshake className="w-6 h-6 text-amber-400 shrink-0" />
-              <span>Synastry &amp; Composite Charts across 9 Traditions</span>
+              <span>Synastry &amp; Composite Charts</span>
+              <span className="inline-block w-12 sm:w-14 h-5 sm:h-6 rounded-full align-middle bg-gradient-to-r from-amber-600 via-amber-500 to-amber-700 border border-amber-400/50 mx-1 shadow-inner inline-flex items-center justify-center text-[10px] text-amber-950 font-mono font-bold">Dual</span>
+              <span>across 9 Traditions</span>
             </h1>
             <p className="text-xs text-stone-400 mt-1 max-w-[55ch] text-pretty leading-relaxed">
               Compare two birth charts across all 9 civilizational systems: astronomical inter-aspects, circular midpoint composite entity, authentic 36-point Vedic Ashtakoota Milan, BaZi Wu Xing balances, and esoteric decanic/lunar affinities.
@@ -654,11 +656,11 @@ export const SynastryScreen: React.FC<Props> = ({
                 <span>Civilizational Relationship Matrices:</span>
                 <span>All 9 traditions computed independently</span>
               </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 bento-dense">
                 {Object.values(synastryReport.traditionAnalyses).map((trad) => (
                   <div
                     key={trad.traditionId}
-                    className="bg-stone-900/90 rounded-xl p-4 border border-stone-800 hover:border-amber-900/60 transition-colors shadow-md flex flex-col justify-between space-y-3"
+                    className="bento-card bg-stone-900/90 rounded-xl p-4 border border-stone-800 hover:border-amber-700/60 hover:shadow-md transition-all duration-300 flex flex-col justify-between space-y-3"
                   >
                     <div>
                       <div className="flex items-center justify-between border-b border-stone-800 pb-2">

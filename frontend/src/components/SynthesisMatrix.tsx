@@ -54,19 +54,20 @@ export const SynthesisMatrix: React.FC<Props> = ({ synthesis, onNavigate }) => {
       <div className="reticle-corner-bl" />
       <div className="reticle-corner-br" />
 
-      {/* Header & Divergence Metric */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between pb-3.5 border-b border-stone-800 gap-3">
-        <div>
-          <span className="text-xs text-amber-400 font-serif font-medium block">
-            Step 3 · Tradition Comparison &amp; Agreement
+      {/* Header & Divergence Metric (gpt-taste Artistic Asymmetry & Wide H1) */}
+      <div className="flex flex-col md:flex-row md:items-center justify-between pb-4 border-b border-stone-800 gap-3.5 hero-wide-container">
+        <div className="max-w-3xl">
+          <span className="text-xs text-amber-400 font-serif font-semibold tracking-wider uppercase block">
+            Cross-Cultural Convergence &amp; Consensus Matrix
           </span>
-          <div className="flex flex-wrap items-center gap-2 mt-0.5">
-            <h2 className="text-base font-serif font-semibold text-stone-100">
+          <div className="flex flex-wrap items-center gap-2 mt-1">
+            <h2 className="text-xl sm:text-2xl lg:text-3xl font-serif font-bold text-stone-100 tracking-tight">
               Where Traditions Agree vs Differ
+              <span className="inline-block w-12 sm:w-14 h-5 sm:h-6 rounded-full align-middle bg-gradient-to-r from-amber-600 via-amber-500 to-amber-700 border border-amber-400/50 mx-2 shadow-inner inline-flex items-center justify-center text-[10px] text-amber-950 font-mono font-bold">9-Sys</span>
             </h2>
             <ExplainerTrigger id="three_cluster_consensus" label="How We Compare" variant="badge" />
           </div>
-          <p className="text-xs text-stone-400 mt-0.5 hidden sm:block max-w-[65ch] text-pretty">
+          <p className="text-xs sm:text-sm text-stone-400 mt-1 hidden sm:block max-w-[65ch] text-pretty">
             Comparing Vedic (Indian), Western (Hellenistic), and Chinese (BaZi) traditions. Maya &amp; Tibetan traditions provide additional symbolic layers.
           </p>
         </div>
@@ -426,14 +427,14 @@ export const SynthesisMatrix: React.FC<Props> = ({ synthesis, onNavigate }) => {
             className="inline-flex items-center justify-center gap-2 px-4 py-2.5 min-h-[44px] text-xs font-medium rounded-lg bg-stone-900 hover:bg-stone-800 disabled:opacity-50 disabled:cursor-not-allowed text-stone-300 border border-stone-800 cursor-pointer transition-colors active:scale-[0.98] whitespace-nowrap"
           >
             <ArrowLeft className="w-3.5 h-3.5" aria-hidden="true" />
-            <span className="whitespace-nowrap">Back to Traditions (Step 2)</span>
+            <span className="whitespace-nowrap">Back to Cultural Traditions</span>
           </button>
           <button
             type="button"
             onClick={() => onNavigate('dossier')}
             className="inline-flex items-center justify-center gap-2 px-4 py-2.5 min-h-[44px] text-xs font-serif font-semibold rounded-lg bg-amber-600 hover:bg-amber-500 disabled:opacity-50 disabled:cursor-not-allowed text-stone-950 cursor-pointer transition-colors duration-150 border border-amber-300 shadow-xs active:scale-[0.98] whitespace-nowrap"
           >
-            <span className="whitespace-nowrap">Proceed to Reading (Step 4)<span className="sr-only"> Read Full Corroboration Dossier</span></span>
+            <span className="whitespace-nowrap">Proceed to Corroboration Reading<span className="sr-only"> Read Full Corroboration Dossier</span></span>
             <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" />
           </button>
         </div>

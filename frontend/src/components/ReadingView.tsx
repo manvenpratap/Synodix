@@ -115,9 +115,10 @@ export const ReadingView: React.FC<Props> = ({ data, subjectName, onNavigate }) 
               </span>
             </div>
 
-            <h2 className="text-xl sm:text-2xl font-serif font-bold text-stone-100 tracking-tight flex items-center gap-2">
+            <h2 className="text-xl sm:text-2xl lg:text-3xl font-serif font-bold text-stone-100 tracking-tight flex items-center gap-2">
               <BookOpen className="w-5 h-5 text-amber-400 shrink-0" />
-              <span>Step 4 · Complete Birth Chart Reading</span>
+              <span>Complete Birth Chart Reading &amp; Corroboration Dossier</span>
+              <span className="inline-block w-12 sm:w-14 h-5 sm:h-6 rounded-full align-middle bg-gradient-to-r from-amber-600 via-amber-500 to-amber-700 border border-amber-400/50 mx-2 shadow-inner inline-flex items-center justify-center text-[10px] text-amber-950 font-mono font-bold">9-Sys</span>
             </h2>
             <p className="text-xs text-stone-400 mt-1 font-sans hidden sm:block">
               Complete personality reading, life domains summary, and timing forecast synthesized across all 9 world traditions.
@@ -1083,14 +1084,14 @@ export const ReadingView: React.FC<Props> = ({ data, subjectName, onNavigate }) 
             className="inline-flex items-center justify-center gap-2 px-4 py-2.5 min-h-[44px] text-xs font-sans font-medium rounded-lg bg-stone-900 hover:bg-stone-800 text-stone-200 border border-stone-800 cursor-pointer transition-colors motion-safe:active:scale-[0.98] motion-reduce:active:scale-100 whitespace-nowrap"
           >
             <ArrowLeft className="w-3.5 h-3.5 text-stone-400" />
-            <span className="whitespace-nowrap">Back to Synthesis (Step 3)</span>
+            <span className="whitespace-nowrap">Back to Domain Synthesis</span>
           </button>
           <button
             type="button"
             onClick={() => onNavigate('workbench')}
             className="inline-flex items-center justify-center gap-2 px-4 py-2.5 min-h-[44px] text-xs font-serif font-semibold rounded-lg bg-amber-600 hover:bg-amber-500 text-stone-950 cursor-pointer transition-colors duration-150 border border-amber-300 shadow-xs motion-safe:active:scale-[0.98] motion-reduce:active:scale-100 whitespace-nowrap"
           >
-            <span className="whitespace-nowrap">New Chart / Input (Step 1)</span>
+            <span className="whitespace-nowrap">New Natal Calibration</span>
             <RotateCcw className="w-3.5 h-3.5 text-stone-950" />
           </button>
         </div>

@@ -130,6 +130,12 @@ Complete documentation is maintained in the [`wiki/`](wiki/) directory:
   - **#6 Tibetan Phugpa** — Composite Score: **55.4/100** (95.0% Macro-cyclical Robustness).
 - **Definitive Scientific Verdict**: Refutes Newtonian physical causality and exposes base-rate traps (*Budhaditya Yoga* naturally occurs in 28.6% of humans; $p=0.499$), while confirming non-random cross-cultural mutual information (32.0% divergence vs 22.2% pure white noise, $p < 10^{-4}$).
 
+### 7. gpt-taste Awwwards-Level Design Engineering
+- **Artistic Asymmetry & Wide Hero Architecture**: Clamped 2-line display headings (`Outfit` font, `max-w-6xl`) with live celestial astrolabe baseline offset and inline typography image pills.
+- **Gapless Bento Grids**: `bento-dense` (`grid-flow-dense`) across Mathematical Evidence rankings, 500 Historical Titans library, and Synastry matrices with responsive card hover physics (`bento-card`).
+- **Semantic Editorial Nomenclature**: Complete elimination of artificial meta-labels ("Step 1", "Module 1", "SECTION 01") in favor of rich semantic terminology.
+- **Viewport Protection**: Total horizontal overflow clipping (`overflow-x-hidden w-full max-w-full`) for pristine mobile and desktop presentation.
+
 ---
 
 ## 🚀 Quickstart & Pipeline Execution
