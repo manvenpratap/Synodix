@@ -1,7 +1,7 @@
 # Synodix: Project Context & Working Memory
 
-**Last Updated:** 2026-11-01 23:18:08
-**Version:** 2.37.0  
+**Last Updated:** 2026-11-01 23:30:06
+**Version:** 2.38.0  
 **Stack:** Python 3.12 (FastAPI, Swiss Ephemeris 2.10, Skyfield DE421) + TypeScript / React 19 / Vite / Tailwind CSS v4 / Framer Motion / Capacitor 8 (iOS & Android)  
 **Workspace:** `/Volumes/Study/Projects/Astrology` (symlinked as `/Volumes/Study/Astrology`)  
 **Git Remote:** `https://github.com/manvenpratap/Synodix.git`  
@@ -10,7 +10,28 @@
 
 ## 1. Current Status & Milestone
 
-- **Active Phase**: gpt-taste Traditions View Evolution: Horizontal Accordion Gallery & Desktop Split-Scroll Pinning (v2.37.0) (Completed)
+- **Active Phase**: gpt-taste 4-Screen Full Elevation (FeatureGuideScreen, ReadingView, VerificationCard, SynastryScreen) (v2.38.0) (Completed)
+- **gpt-taste 4-Screen Full Elevation (v2.38.0)**:
+  - **FeatureGuideScreen (50-Topic Astrometric Codex & Encyclopedia)**:
+    - Re-architected with wide container architecture (`max-w-6xl`) and 2-line clamped H1 (`hero-h1-clamped`).
+    - Sticky scroll pinning on the right-side master reading canvas (`lg:sticky lg:top-20`) so deep-dive topics remain pinned alongside the left sub-navigation sidebar.
+    - Upgraded 50 topic items with interactive `bento-card` hover elevation physics and fluid focus states.
+  - **ReadingView (Complete Birth Chart Reading & Corroboration Dossier)**:
+    - Upgraded document hero with wide clamped typography (`hero-h1-clamped`) and inline pill visual token.
+    - Transformed Chapter 1 (Astronomical & Geodetic Input Dossier) into a gapless 3-column bento grid (`grid-cols-1 md:grid-cols-3 bento-dense`).
+    - Upgraded Chapter 2 (Synthesized Inferences) 3-column Analytical Triad (Cognitive, Vocational, Relational) into interactive `bento-card` components.
+    - Elevated Chapter 3 (Corroboration Matrix) and Chapter 4 (Tradition Accuracy Ranking) with dense bento layout.
+  - **VerificationCard (Dual-Engine Astronomical Verification)**:
+    - Eliminated artificial meta-label ("Section 3 ·") in favor of authoritative editorial title ("Dual-Engine Astronomical Verification & Mathematical Invariants").
+    - Upgraded H2 heading with inline astrometric badge (`<0.01°`).
+    - Transformed 4 invariant checklist cards into a gapless 4-column bento grid (`grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 bento-dense`) with card hover physics.
+  - **SynastryScreen (Cross-Subject Astrometric Triangulation)**:
+    - Upgraded header enclosure with wide clamped typography (`hero-h1-clamped`), inline duality badge, and full horizontal viewport protection (`overflow-x-hidden`).
+    - Enhanced 9 civilizational relationship matrix cards with gapless bento grid (`bento-dense`) and interactive hover scaling.
+  - **Automated Verification**:
+    - 0 TypeScript errors (`npx tsc --noEmit`).
+    - Clean Vite production build in 576ms (`npm run build`).
+    - Full 29/29 Playwright regression suite passing in 114.86s (`./pipeline.sh test --summary`).
 - **Traditions View Horizontal Accordion Gallery & Desktop Split-Scroll Pinning (v2.37.0)**:
   - **Horizontal Accordion Gallery Mode**:
     - Added desktop & tablet interactive horizontal accordion blades (`layoutMode === 'accordion'`) as a 3rd presentation mode alongside Vertical Carousel Deck and Inspector Matrix.

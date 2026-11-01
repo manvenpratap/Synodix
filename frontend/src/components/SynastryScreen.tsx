@@ -228,8 +228,8 @@ export const SynastryScreen: React.FC<Props> = ({
   }, [synastryReport, aspectFilter]);
 
   return (
-    <div className="space-y-6">
-      {/* 1. Header Enclosure */}
+    <div className="space-y-6 w-full max-w-full overflow-x-hidden">
+      {/* 1. Header Enclosure (gpt-taste Hero Architecture) */}
       <div className="machined-bezel p-4 sm:p-6 rounded-2xl shadow-xl relative">
         <div className="reticle-corner-tl" />
         <div className="reticle-corner-tr" />
@@ -245,7 +245,7 @@ export const SynastryScreen: React.FC<Props> = ({
               </span>
               <ExplainerTrigger id="synastry_conjunctions" variant="badge" />
             </div>
-            <h1 className="text-xl sm:text-2xl lg:text-3xl font-serif font-bold text-stone-100 flex items-center gap-2.5 max-w-4xl tracking-tight">
+            <h1 className="hero-h1-clamped font-serif font-bold text-stone-100 flex flex-wrap items-center gap-2 max-w-5xl tracking-tight">
               <HeartHandshake className="w-6 h-6 text-amber-400 shrink-0" />
               <span>Synastry &amp; Composite Charts</span>
               <span className="inline-block w-12 sm:w-14 h-5 sm:h-6 rounded-full align-middle bg-gradient-to-r from-amber-600 via-amber-500 to-amber-700 border border-amber-400/50 mx-1 shadow-inner inline-flex items-center justify-center text-[10px] text-amber-950 font-mono font-bold">Dual</span>

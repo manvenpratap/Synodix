@@ -13,11 +13,12 @@ export const VerificationCard: React.FC<Props> = ({ report }) => {
       <div className="flex flex-col md:flex-row md:items-center justify-between pb-3.5 border-b border-stone-800 gap-3">
         <div>
           <span className="text-xs text-amber-400 font-medium block">
-            Section 3 · Dual-Engine Astronomical Verification &amp; Invariants
+            Dual-Engine Astronomical Verification &amp; Mathematical Invariants
           </span>
           <div className="flex flex-wrap items-center gap-2 mt-0.5">
-            <h2 className="text-base font-semibold text-stone-100">
-              Swiss Ephemeris (pyswisseph) vs NASA/JPL DE421 (Skyfield)
+            <h2 className="text-lg sm:text-xl font-serif font-bold text-stone-100 flex items-center gap-2">
+              <span>Swiss Ephemeris (pyswisseph) vs NASA/JPL DE421 (Skyfield)</span>
+              <span className="inline-block w-12 sm:w-14 h-5 sm:h-6 rounded-full align-middle bg-gradient-to-r from-amber-600 via-amber-500 to-amber-700 border border-amber-400/50 mx-2 shadow-inner inline-flex items-center justify-center text-[10px] text-amber-950 font-mono font-bold">&lt;0.01°</span>
             </h2>
             <ExplainerTrigger id="dual_engine_validation" label="Dual Engine Math" />
           </div>
@@ -32,12 +33,12 @@ export const VerificationCard: React.FC<Props> = ({ report }) => {
         </div>
       </div>
 
-      {/* Invariants Checklist Bar */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+      {/* Invariants Checklist Bar (gpt-taste Bento Grid) */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5 bento-dense">
         {report.invariants.map((inv, idx) => (
           <div
             key={idx}
-            className="bg-stone-900/90 p-3.5 rounded-xl border border-stone-800 flex flex-col justify-between hover:border-amber-700/80 hover:-translate-y-0.5 transition-colors motion-safe:transition-transform motion-reduce:transition-none duration-150 cursor-pointer shadow-xs"
+            className="bento-card bg-stone-900/90 p-4 rounded-xl border border-stone-800 flex flex-col justify-between hover:border-amber-700/80 transition-all duration-300 cursor-pointer shadow-xs"
           >
             <div>
               <div className="flex items-center justify-between">

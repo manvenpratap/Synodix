@@ -222,18 +222,18 @@ export const FeatureGuideScreen: React.FC<Props> = ({ onNavigate, initialExplain
   const activeCivObj = CIVILIZATIONS.find((c) => c.id === activeCivilization);
 
   return (
-    <div className="w-full max-w-full space-y-6 motion-safe:animate-screen-enter motion-reduce:animate-none">
-      {/* Top Banner & Knowledge Base Headline */}
-      <div className="flex flex-col lg:flex-row lg:items-center justify-between p-4 sm:p-5 rounded-2xl bg-stone-900 border border-stone-800 shadow-md gap-4">
-        <div className="flex items-start gap-3.5">
-          <div className="w-10 h-10 rounded-xl bg-amber-950/90 border border-amber-800 flex items-center justify-center text-amber-300 shrink-0 shadow-xs">
+    <div className="w-full max-w-full overflow-x-hidden space-y-6 motion-safe:animate-screen-enter motion-reduce:animate-none">
+      {/* Top Banner & Knowledge Base Headline (gpt-taste Hero Architecture) */}
+      <div className="flex flex-col lg:flex-row lg:items-center justify-between p-5 sm:p-6 rounded-2xl bg-stone-900 border border-stone-800 shadow-md gap-4">
+        <div className="flex items-start gap-4 max-w-5xl">
+          <div className="w-11 h-11 rounded-xl bg-amber-950/90 border border-amber-800 flex items-center justify-center text-amber-300 shrink-0 shadow-xs">
             {activeSection === 'evidence' ? (
               <FlaskConical className="w-5 h-5 text-amber-400" />
             ) : (
               <BookOpen className="w-5 h-5 text-amber-300" />
             )}
           </div>
-          <div>
+          <div className="min-w-0">
             <div className="flex items-center gap-2">
               <span
                 className={`text-xs font-serif font-medium px-2.5 py-1 rounded-md border ${activeSection === 'evidence'
@@ -247,7 +247,7 @@ export const FeatureGuideScreen: React.FC<Props> = ({ onNavigate, initialExplain
                 {activeSection === 'evidence' ? '500 Titans Monte Carlo Benchmark' : '50 Authoritative Topics'}
               </span>
             </div>
-            <h1 className="text-xl sm:text-2xl lg:text-3xl font-serif font-bold text-stone-100 tracking-tight mt-1 max-w-4xl">
+            <h1 className="hero-h1-clamped font-serif font-bold text-stone-100 tracking-tight mt-1 max-w-5xl leading-tight">
               {activeSection === 'evidence' ? (
                 <>
                   Empirical Mathematical Evidence &amp; Statistical Validation
@@ -260,7 +260,7 @@ export const FeatureGuideScreen: React.FC<Props> = ({ onNavigate, initialExplain
                 </>
               )}
             </h1>
-            <p className="text-xs text-stone-300 font-sans mt-0.5 leading-relaxed max-w-2xl">
+            <p className="text-xs text-stone-300 font-sans mt-1 leading-relaxed max-w-3xl text-pretty">
               {activeSection === 'evidence'
                 ? 'Peer-reviewed style statistical whitepaper, double-blind permutation null controls, and rigorous p-value benchmarks.'
                 : 'Exhaustive documentation of celestial mechanics, ancient calibration lineages, mathematical formulas, and triangulation invariants.'}
@@ -489,9 +489,9 @@ export const FeatureGuideScreen: React.FC<Props> = ({ onNavigate, initialExplain
                         key={item.id}
                         type="button"
                         onClick={() => setSelectedExplainerId(item.id)}
-                        className={`w-full text-left p-2 rounded-lg transition-colors duration-150 cursor-pointer flex items-center justify-between gap-2 ${isSelected
-                            ? 'bg-stone-900 border border-amber-500/70 text-amber-200 shadow-sm'
-                            : 'hover:bg-stone-900 text-stone-300 border border-transparent'
+                        className={`w-full text-left p-2.5 rounded-lg transition-all duration-200 cursor-pointer flex items-center justify-between gap-2 select-none ${isSelected
+                            ? 'bg-stone-900 border border-amber-500/80 text-amber-200 shadow-md ring-1 ring-amber-500/30'
+                            : 'hover:bg-stone-900/80 text-stone-300 border border-transparent hover:border-stone-800'
                           }`}
                       >
                         <div className="min-w-0">
@@ -520,7 +520,7 @@ export const FeatureGuideScreen: React.FC<Props> = ({ onNavigate, initialExplain
           {/* ========================================================================= */}
           <section
             aria-label="Explainer Content"
-            className="lg:col-span-8 xl:col-span-9 space-y-5"
+            className="lg:col-span-8 xl:col-span-9 space-y-5 lg:sticky lg:top-20"
           >
             {/* Header Card with Meta Badges */}
             <div className="p-5 sm:p-6 rounded-2xl bg-stone-900 border border-stone-800 shadow-sm space-y-3.5">

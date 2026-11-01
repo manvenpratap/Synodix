@@ -115,8 +115,8 @@ export const ReadingView: React.FC<Props> = ({ data, subjectName, onNavigate }) 
               </span>
             </div>
 
-            <h2 className="text-xl sm:text-2xl lg:text-3xl font-serif font-bold text-stone-100 tracking-tight flex items-center gap-2">
-              <BookOpen className="w-5 h-5 text-amber-400 shrink-0" />
+            <h2 className="hero-h1-clamped font-serif font-bold text-stone-100 tracking-tight flex flex-wrap items-center gap-2 max-w-5xl">
+              <BookOpen className="w-6 h-6 text-amber-400 shrink-0" />
               <span>Complete Birth Chart Reading &amp; Corroboration Dossier</span>
               <span className="inline-block w-12 sm:w-14 h-5 sm:h-6 rounded-full align-middle bg-gradient-to-r from-amber-600 via-amber-500 to-amber-700 border border-amber-400/50 mx-2 shadow-inner inline-flex items-center justify-center text-[10px] text-amber-950 font-mono font-bold">9-Sys</span>
             </h2>
@@ -285,8 +285,8 @@ export const ReadingView: React.FC<Props> = ({ data, subjectName, onNavigate }) 
               </span>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs font-sans">
-              <div className="bg-stone-950 p-3 rounded border border-stone-800">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-3.5 bento-dense text-xs font-sans">
+              <div className="bento-card bg-stone-950 p-3.5 rounded-xl border border-stone-800 shadow-xs">
                 <span className="text-stone-400 text-xs font-medium block mb-1">Subject & Civil Coordinates</span>
                 <div className="space-y-1 text-stone-300">
                   <div>Subject: <strong className="text-amber-300 font-sans">{inferences.subject_name}</strong></div>
@@ -298,7 +298,7 @@ export const ReadingView: React.FC<Props> = ({ data, subjectName, onNavigate }) 
                 </div>
               </div>
 
-              <div className="bg-stone-950 p-3 rounded border border-stone-800">
+              <div className="bento-card bg-stone-950 p-3.5 rounded-xl border border-stone-800 shadow-xs">
                 <div className="flex items-center justify-between mb-1">
                   <span className="text-stone-400 text-xs font-medium">True Astronomical Solar Times</span>
                   <ExplainerTrigger id="time_normalization_eot" size="xs" variant="icon" />
@@ -311,7 +311,7 @@ export const ReadingView: React.FC<Props> = ({ data, subjectName, onNavigate }) 
                 </div>
               </div>
 
-              <div className="bg-stone-950 p-3 rounded border border-stone-800">
+              <div className="bento-card bg-stone-950 p-3.5 rounded-xl border border-stone-800 shadow-xs">
                 <div className="flex items-center justify-between mb-1">
                   <span className="text-stone-400 text-xs font-medium">Boundary Proximity & Sensitivity</span>
                   <ExplainerTrigger id="cusp_proximity_audit" size="xs" variant="icon" />
@@ -539,10 +539,10 @@ export const ReadingView: React.FC<Props> = ({ data, subjectName, onNavigate }) 
               </div>
             </div>
 
-            {/* 3-Column Analytical Triad */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-3.5 pt-1">
+            {/* 3-Column Analytical Triad (gpt-taste Bento Grid) */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-3.5 pt-1 bento-dense">
               {/* Column 1: Cognitive Wiring */}
-              <div className="bg-stone-950 p-4 rounded-lg border border-stone-800 space-y-3 flex flex-col">
+              <div className="bento-card bg-stone-950 p-4 rounded-xl border border-stone-800 space-y-3 flex flex-col shadow-xs">
                 <div className="flex items-center gap-2 border-b border-stone-800 pb-2">
                   <Cpu className="w-4 h-4 text-amber-400 shrink-0" />
                   <h4 className="text-xs font-semibold text-stone-100 font-sans">
@@ -570,7 +570,7 @@ export const ReadingView: React.FC<Props> = ({ data, subjectName, onNavigate }) 
               </div>
 
               {/* Column 2: Vocation & Executive Ambition */}
-              <div className="bg-stone-950 p-4 rounded-lg border border-stone-800 space-y-3 flex flex-col">
+              <div className="bento-card bg-stone-950 p-4 rounded-xl border border-stone-800 space-y-3 flex flex-col shadow-xs">
                 <div className="flex items-center gap-2 border-b border-stone-800 pb-2">
                   <Briefcase className="w-4 h-4 text-amber-400 shrink-0" />
                   <h4 className="text-xs font-semibold text-stone-100 font-sans">
@@ -598,7 +598,7 @@ export const ReadingView: React.FC<Props> = ({ data, subjectName, onNavigate }) 
               </div>
 
               {/* Column 3: Relational Dynamics & Karmic Evolution */}
-              <div className="bg-stone-950 p-4 rounded-lg border border-stone-800 space-y-3 flex flex-col">
+              <div className="bento-card bg-stone-950 p-4 rounded-xl border border-stone-800 space-y-3 flex flex-col shadow-xs">
                 <div className="flex items-center gap-2 border-b border-stone-800 pb-2">
                   <Heart className="w-4 h-4 text-rose-400 shrink-0" />
                   <h4 className="text-xs font-semibold text-stone-100 font-sans">
