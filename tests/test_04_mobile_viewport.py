@@ -189,7 +189,7 @@ def test_mobile_viewport_and_touch_targets():
                 assert h_box is not None and h_box["height"] >= 44, f"Mobile accordion header height {h_box['height']} < 44px on {vp['name']}"
 
                 # Active panel should have astrometric instrument and open inspector CTA
-                inspector_cta = page.locator("button:has-text('Open Full')").first
+                inspector_cta = page.locator("button:has-text('Open Full'):visible").first
                 assert inspector_cta.is_visible(), f"Open Full Inspector CTA should be visible in expanded accordion on {vp['name']}"
                 cta_box = inspector_cta.bounding_box()
                 assert cta_box is not None and cta_box["height"] >= 44, f"Accordion CTA height {cta_box['height']} < 44px on {vp['name']}"

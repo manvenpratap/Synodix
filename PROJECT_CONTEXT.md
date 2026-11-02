@@ -1,7 +1,7 @@
 # Synodix: Project Context & Working Memory
 
-**Last Updated:** 2026-11-02 09:17:43
-**Version:** 2.41.0  
+**Last Updated:** 2026-11-02 10:03:31
+**Version:** 2.42.0  
 **Stack:** Python 3.12 (FastAPI, Swiss Ephemeris 2.10, Skyfield DE421) + TypeScript / React 19 / Vite / Tailwind CSS v4 / Framer Motion / Capacitor 8 (iOS & Android)  
 **Workspace:** `/Volumes/Study/Projects/Astrology` (symlinked as `/Volumes/Study/Astrology`)  
 **Git Remote:** `https://github.com/manvenpratap/Synodix.git`  
@@ -10,7 +10,22 @@
 
 ## 1. Current Status & Milestone
 
-- **Active Phase**: Mobile Vertical Accordion Codex for Traditions Gallery (v2.41.0) (Completed)
+- **Active Phase**: High-Contrast Accordion Gallery & Viewport Isolation Hardening (v2.42.0) (Completed)
+- **High-Contrast Accordion Gallery & Viewport Isolation Hardening (v2.42.0)**:
+  - **Root Cause Resolution for Barely Visible Vertical Bars**:
+    - *Breakpoint & Specificity Leaking*: `.horizontal-accordion-container` in `index.css` had un-scoped `display: flex;` overriding `hidden md:flex`, forcing squashed 9-column horizontal blades onto narrow viewports (< 1024px) where text collapsed into single-letter columns.
+    - *Light Mode Attribute Substring Clashing*: Global `[data-theme="light"] [class*="text-amber-"]` rule set text color to `#78350f` (dark brown), matching elements with `hover:text-amber-200` and rendering near-black text on dark blade containers.
+    - *Serif Stroke Degradation on 90° Rotation*: Rotated serif fonts (`font-serif`) suffered acute stroke loss and blur against dark gradients.
+  - **Architectural Fixes**:
+    - **Strict Viewport Isolation**: Scoped `.horizontal-accordion-container` to `@media (min-width: 1024px)` with explicit `@media (max-width: 1023px) { display: none !important; }`. Mobile & tablet screens now exclusively render the full-width Vertical Accordion Codex with zero blade squashing.
+    - **High-Contrast Rotated Typography**: Replaced rotated serif with crisp `font-sans font-bold tracking-widest uppercase text-stone-100` with subtle text-shadows, guaranteeing $\ge 12:1$ contrast ratio in dark mode (`#ffffff`) and light mode (`#0f172a`).
+    - **Theme-Aware Blade Styling**: Added dedicated light-mode and dark-mode styles in `index.css` for `.horizontal-accordion-container`, `.horizontal-accordion-blade`, badges, motto boxes, and telemetry cells.
+    - **Expanded Desktop Blade Metrics**: Added 3 live astrometric readings directly into the expanded desktop horizontal blade alongside cultural lineage and instrument badges.
+  - **Automated Verification**:
+    - Visual inspection and multi-viewport Playwright screenshots verified at 662px (mobile/tablet), 1280px light mode, and 1280px dark mode.
+    - 0 TypeScript compilation errors (`npx tsc --noEmit`).
+    - Clean Vite production build (`npm run build`).
+    - Full 29/29 Playwright regression suite passing (`./pipeline.sh test --summary`).
 - **Mobile Vertical Accordion Codex for Traditions Gallery (v2.41.0)**:
   - **Mobile Elevation of Gallery View (`TraditionCharts.tsx`)**:
     - Replaced the horizontal swipe text cards (`md:hidden flex gap-3 overflow-x-auto`) with an interactive, high-value **Mobile Vertical Accordion Codex**.

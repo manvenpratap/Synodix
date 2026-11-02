@@ -1224,29 +1224,161 @@ h1, h2, h3, h4 {
   }
 }
 
-/* Horizontal Accordion Blades */
-.horizontal-accordion-container {
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-  height: 520px;
-  gap: 0.75rem;
-  overflow: hidden;
+/* Horizontal Accordion Blades (Desktop only >= 1024px) */
+@media (max-width: 1023px) {
+  .horizontal-accordion-container {
+    display: none !important;
+  }
 }
 
-.horizontal-accordion-blade {
-  flex: 1;
-  min-width: 64px;
-  height: 100%;
-  transition: flex 650ms cubic-bezier(0.16, 1, 0.3, 1), transform 500ms ease;
-  overflow: hidden;
-  position: relative;
-  border-radius: 1rem;
+@media (min-width: 1024px) {
+  .horizontal-accordion-container {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 520px;
+    gap: 0.75rem;
+    overflow: hidden;
+  }
+
+  .horizontal-accordion-blade {
+    flex: 1;
+    min-width: 56px;
+    height: 100%;
+    transition: flex 650ms cubic-bezier(0.16, 1, 0.3, 1), transform 500ms ease;
+    overflow: hidden;
+    position: relative;
+    border-radius: 1rem;
+  }
+
+  .horizontal-accordion-blade.is-active,
+  .horizontal-accordion-blade:hover {
+    flex: 4;
+    min-width: 380px;
+  }
 }
 
-.horizontal-accordion-blade.is-active,
-.horizontal-accordion-blade:hover {
-  flex: 3.5;
+/* High-Contrast Legibility for Accordion Vertical Bars (Dark Mode Default) */
+.horizontal-accordion-blade .rotate-180 {
+  color: #f8fafc !important;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.85);
+  font-weight: 700 !important;
+  letter-spacing: 0.12em !important;
+}
+
+.horizontal-accordion-blade:hover .rotate-180 {
+  color: #fde047 !important;
+}
+
+/* Light Theme Styling for Horizontal Accordion Gallery */
+[data-theme="light"] .horizontal-accordion-container {
+  background-color: #f8fafc !important;
+  border-color: #cbd5e1 !important;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08) !important;
+}
+
+[data-theme="light"] .horizontal-accordion-blade {
+  background: #ffffff !important;
+  border-color: #cbd5e1 !important;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05) !important;
+}
+
+[data-theme="light"] .horizontal-accordion-blade.is-active {
+  border-color: #f59e0b !important;
+  box-shadow: 0 10px 25px -5px rgba(245, 158, 11, 0.15) !important;
+}
+
+/* Collapsed Blade in Light Theme: Crisp Dark Slate Text */
+[data-theme="light"] .horizontal-accordion-blade .rotate-180 {
+  color: #0f172a !important;
+  text-shadow: none !important;
+  font-weight: 800 !important;
+}
+
+[data-theme="light"] .horizontal-accordion-blade:hover .rotate-180 {
+  color: #b45309 !important;
+}
+
+[data-theme="light"] .horizontal-accordion-blade .w-9.h-9,
+[data-theme="light"] .horizontal-accordion-blade .w-8.h-8 {
+  background-color: #fef3c7 !important;
+  border-color: #f59e0b !important;
+  color: #92400e !important;
+}
+
+/* Expanded Blade Content in Light Theme */
+[data-theme="light"] .horizontal-accordion-blade h3 {
+  color: #0f172a !important;
+}
+
+[data-theme="light"] .horizontal-accordion-blade .text-amber-300\/90,
+[data-theme="light"] .horizontal-accordion-blade .text-amber-400 {
+  color: #b45309 !important;
+}
+
+[data-theme="light"] .horizontal-accordion-blade .text-stone-300,
+[data-theme="light"] .horizontal-accordion-blade .text-stone-400 {
+  color: #475569 !important;
+}
+
+[data-theme="light"] .horizontal-accordion-blade .bg-black\/60,
+[data-theme="light"] .horizontal-accordion-blade .bg-black\/40 {
+  background-color: #f1f5f9 !important;
+  border-color: #e2e8f0 !important;
+  color: #1e293b !important;
+}
+
+[data-theme="light"] .horizontal-accordion-blade .bg-stone-950\/80,
+[data-theme="light"] .horizontal-accordion-blade .bg-stone-900\/90 {
+  background-color: #f8fafc !important;
+  border-color: #e2e8f0 !important;
+}
+
+/* Mobile & Tablet Vertical Accordion Codex in Light Theme */
+[data-theme="light"] .lg\:hidden .rounded-xl.border {
+  background-color: #ffffff !important;
+  border-color: #cbd5e1 !important;
+}
+
+[data-theme="light"] .lg\:hidden .rounded-xl.border button[id^="mobile-accordion-header-"] {
+  color: #0f172a !important;
+}
+
+[data-theme="light"] .lg\:hidden .rounded-xl.border h3,
+[data-theme="light"] .lg\:hidden .rounded-xl.border span.text-stone-100 {
+  color: #0f172a !important;
+}
+
+[data-theme="light"] .lg\:hidden .rounded-xl.border p.text-stone-400 {
+  color: #475569 !important;
+}
+
+[data-theme="light"] .lg\:hidden .rounded-xl.border .text-stone-400 {
+  color: #475569 !important;
+}
+
+[data-theme="light"] .lg\:hidden .rounded-xl.border .text-stone-300 {
+  color: #334155 !important;
+}
+
+[data-theme="light"] .lg\:hidden .rounded-xl.border .bg-black\/40 {
+  background-color: #f1f5f9 !important;
+  border-color: #e2e8f0 !important;
+  color: #1e293b !important;
+}
+
+[data-theme="light"] .lg\:hidden .rounded-xl.border .bg-stone-950\/70,
+[data-theme="light"] .lg\:hidden .rounded-xl.border .bg-stone-950\/80 {
+  background-color: #f8fafc !important;
+  border-color: #e2e8f0 !important;
+}
+
+[data-theme="light"] .lg\:hidden .rounded-xl.border strong.text-amber-300 {
+  color: #b45309 !important;
+}
+
+[data-theme="light"] .lg\:hidden .rounded-xl.border .text-amber-400 {
+  color: #b45309 !important;
 }
 
 /* gpt-taste Card Stacking Physics */

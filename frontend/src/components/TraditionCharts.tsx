@@ -369,8 +369,8 @@ const HorizontalAccordionGallery: React.FC<{
 
   return (
     <div className="mt-2 space-y-3">
-      {/* Desktop & Tablet Horizontal Accordion Container (gpt-taste Component Arsenal) */}
-      <div className="hidden md:flex horizontal-accordion-container h-[510px] rounded-2xl p-2.5 bg-stone-950/90 border border-stone-800 shadow-xl overflow-hidden">
+      {/* Desktop Horizontal Accordion Container (>= lg: 1024px) */}
+      <div className="hidden lg:flex horizontal-accordion-container h-[520px] rounded-2xl p-2.5 bg-stone-950/95 border border-stone-800 shadow-xl overflow-hidden">
         {TRADITION_ORDER.map((key) => {
           const theme = cultureThemes[key] || cultureThemes.jyotisha;
           const isBladeExpanded = selectedKey === key;
@@ -381,79 +381,99 @@ const HorizontalAccordionGallery: React.FC<{
               onMouseEnter={() => setHoveredTradition(key)}
               onMouseLeave={() => setHoveredTradition(null)}
               onClick={() => onSelectTradition(key)}
-              className={`horizontal-accordion-blade ${isBladeExpanded ? 'is-active ring-1 ring-amber-500/40' : 'opacity-75 hover:opacity-100'} cursor-pointer border ${theme.containerBorder} ${theme.containerBg} flex flex-col justify-between p-3.5 transition-all duration-500 select-none overflow-hidden relative shadow-md`}
+              className={`horizontal-accordion-blade ${isBladeExpanded ? 'is-active ring-1 ring-amber-500/50 shadow-lg' : 'opacity-95 hover:opacity-100'} cursor-pointer border ${theme.containerBorder} ${theme.containerBg} flex flex-col justify-between p-3.5 transition-all duration-500 select-none overflow-hidden relative shadow-md`}
               style={{
                 flex: isBladeExpanded ? 4 : 1,
               }}
             >
-              {/* Collapsed Vertical Presentation */}
+              {/* Collapsed Vertical Presentation (High-Contrast, Crisp Typography) */}
               {!isBladeExpanded ? (
-                <div className="h-full flex flex-col items-center justify-between py-2">
-                  <span className="w-8 h-8 rounded-full bg-stone-900/80 border border-stone-700 flex items-center justify-center text-xs font-mono font-bold text-amber-300 shadow-xs">
+                <div className="h-full flex flex-col items-center justify-between py-2 group">
+                  <span className="w-9 h-9 rounded-xl bg-stone-900 border border-amber-400/40 flex items-center justify-center text-xs font-mono font-bold text-amber-300 shadow-md ring-1 ring-amber-500/20">
                     {theme.glyph}
                   </span>
-                  <div className="[writing-mode:vertical-rl] rotate-180 text-xs font-serif font-semibold text-stone-300 tracking-wider uppercase whitespace-nowrap">
+                  <div className="[writing-mode:vertical-rl] rotate-180 text-xs font-sans font-bold text-stone-100 group-hover:text-amber-200 tracking-widest uppercase whitespace-nowrap drop-shadow-sm transition-colors">
                     {theme.name}
                   </div>
-                  <span className="w-2 h-2 rounded-full bg-amber-400/60" />
+                  <span className="w-2.5 h-2.5 rounded-full bg-amber-400 shadow-[0_0_8px_rgba(251,191,36,0.6)]" />
                 </div>
               ) : (
                 /* Expanded Presentation with Deep Cultural Immersion */
-                <div className="h-full flex flex-col justify-between overflow-hidden animate-tab-enter">
-                  <div>
+                <div className="h-full flex flex-col justify-between overflow-hidden animate-tab-enter min-w-[340px]">
+                  <div className="space-y-2.5">
                     {/* Badge & Lineage */}
                     <div className="flex items-center justify-between border-b border-white/10 pb-2">
-                      <span className={`text-[11px] font-mono px-2 py-0.5 rounded-full font-semibold ${theme.accentBadge}`}>
+                      <span className={`text-[11px] font-mono px-2.5 py-0.5 rounded-full font-bold shadow-xs ${theme.accentBadge}`}>
                         {theme.shortName || theme.name}
                       </span>
-                      <span className="text-[10px] font-mono text-stone-400 truncate max-w-[180px]">
+                      <span className="text-[11px] font-mono text-stone-300 truncate max-w-[220px]">
                         {theme.lineage}
                       </span>
                     </div>
 
                     {/* Cultural Identity */}
-                    <div className="mt-3 flex items-center gap-3">
-                      <span className="text-3xl font-mono text-amber-300 select-none shrink-0">
+                    <div className="flex items-center gap-3">
+                      <span className="w-10 h-10 rounded-xl bg-stone-900 border border-amber-400/40 text-amber-300 font-mono font-bold text-sm flex items-center justify-center shadow-inner shrink-0">
                         {theme.glyph}
                       </span>
                       <div className="min-w-0">
-                        <h3 className="text-lg font-serif font-bold text-stone-100 leading-tight truncate">
+                        <h3 className="text-xl font-serif font-bold text-stone-100 leading-tight truncate">
                           {theme.name}
                         </h3>
-                        <p className="text-xs text-stone-300 font-sans mt-0.5 font-medium truncate">
+                        <p className="text-xs text-amber-300/90 font-sans mt-0.5 font-medium truncate">
                           {theme.nativeTitle}
                         </p>
                       </div>
                     </div>
 
                     {/* Philosophical Motto Quote */}
-                    <div className="mt-3 p-3 rounded-xl bg-black/40 border border-white/10 text-xs italic text-stone-200 leading-relaxed text-pretty">
+                    <div className="p-3 rounded-xl bg-black/60 border border-white/15 text-xs italic text-stone-200 leading-relaxed text-pretty shadow-inner">
                       &ldquo;{theme.motto}&rdquo;
                     </div>
 
+                    {/* 3 Live Astrometric Key Readings */}
+                    <div className="grid grid-cols-3 gap-1.5 p-2 rounded-lg bg-stone-950/80 border border-stone-800">
+                      {getTraditionKeyMetrics(key).map((m, idx) => (
+                        <div key={idx} className="min-w-0 text-center px-1">
+                          <span className="text-[10px] text-stone-400 block font-medium uppercase tracking-wider truncate">
+                            {m.label}
+                          </span>
+                          <strong className="text-[11px] font-mono font-bold text-amber-300 block truncate mt-0.5">
+                            {m.value}
+                          </strong>
+                        </div>
+                      ))}
+                    </div>
+
                     {/* Instrument Feature Tag */}
-                    <div className="mt-3 p-2.5 rounded-lg bg-stone-900/80 border border-stone-800 space-y-1">
-                      <span className="text-[10px] font-mono text-amber-400 block uppercase tracking-wider">
-                        Astrometric Instrument
-                      </span>
-                      <span className="text-xs font-sans font-semibold text-stone-200 block truncate">
-                        {theme.instrumentName}
+                    <div className="p-2 rounded-lg bg-stone-900/90 border border-stone-800 flex items-center justify-between">
+                      <div className="min-w-0">
+                        <span className="text-[10px] font-mono text-amber-400 block uppercase tracking-wider">
+                          Astrometric Instrument
+                        </span>
+                        <span className="text-xs font-sans font-semibold text-stone-200 block truncate">
+                          {theme.instrumentName}
+                        </span>
+                      </div>
+                      <span className="text-[10px] font-mono text-stone-400 px-2 py-0.5 rounded bg-stone-950 border border-stone-800 shrink-0">
+                        JPL DE421
                       </span>
                     </div>
                   </div>
 
                   {/* Action Bar */}
-                  <div className="pt-3 border-t border-white/10 flex items-center justify-between gap-2">
+                  <div className="pt-2 border-t border-white/10 flex items-center justify-between gap-2 mt-auto">
                     <button
                       type="button"
                       onClick={(e) => {
                         e.stopPropagation();
+                        triggerHaptic('medium');
                         onOpenInspector(key);
                       }}
-                      className="flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg bg-amber-600 hover:bg-amber-500 text-stone-950 font-serif font-semibold text-xs transition-colors shadow-xs"
+                      className="w-full min-h-[44px] inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg bg-amber-600 hover:bg-amber-500 active:bg-amber-700 text-stone-950 font-serif font-bold text-xs tracking-wide transition-colors shadow-md cursor-pointer"
                     >
-                      <span>Open Full Inspector</span>
-                      <ArrowRight className="w-3.5 h-3.5" />
+                      <span>Open Full {theme.shortName || theme.name} Inspector</span>
+                      <ArrowRight className="w-4 h-4" />
                     </button>
                   </div>
                 </div>
@@ -463,8 +483,8 @@ const HorizontalAccordionGallery: React.FC<{
         })}
       </div>
 
-      {/* Mobile Responsive Vertical Accordion (< md) */}
-      <div className="md:hidden flex flex-col gap-2.5 pt-1 px-0.5">
+      {/* Mobile & Tablet Vertical Accordion (< lg: 1024px) */}
+      <div className="lg:hidden flex flex-col gap-2.5 pt-1 px-0.5">
         {TRADITION_ORDER.map((key) => {
           const theme = cultureThemes[key] || cultureThemes.jyotisha;
           const isExpanded = expandedMobileKey === key;
