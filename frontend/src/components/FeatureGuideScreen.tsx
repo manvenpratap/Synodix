@@ -52,7 +52,7 @@ const CIVILIZATIONS: CivilizationFilter[] = [
     traditionNavId: 'jyotisha',
     colorClass: 'text-amber-300',
     activeBorder: 'border-amber-500 bg-amber-950/40',
-    keywords: ['vedic', 'jyotisha', 'nakshatra', 'd9', 'navamsha', 'lahiri', 'dasha', 'yoga', 'ayanamsha']
+    keywords: ['vedic', 'jyotisha', 'nakshatra', 'navamsha', 'lahiri', 'dasha', 'ayanamsha', 'ashtakavarga', 'parashara']
   },
   {
     id: 'western',
@@ -62,7 +62,7 @@ const CIVILIZATIONS: CivilizationFilter[] = [
     traditionNavId: 'western',
     colorClass: 'text-amber-300',
     activeBorder: 'border-amber-500 bg-amber-950/40',
-    keywords: ['western', 'hellenistic', 'ptolemy', 'sect', 'dignity', 'firdaria', 'aspect', 'profection']
+    keywords: ['western', 'hellenistic', 'ptolemy', 'sect', 'profection', 'hermetic lot', 'ptolemaic']
   },
   {
     id: 'bazi',
@@ -72,7 +72,7 @@ const CIVILIZATIONS: CivilizationFilter[] = [
     traditionNavId: 'bazi',
     colorClass: 'text-rose-300',
     activeBorder: 'border-rose-500 bg-rose-950/40',
-    keywords: ['bazi', 'four pillars', 'wu xing', 'day master', 'jie qi', 'stems', 'branches', 'ten gods']
+    keywords: ['bazi', 'four pillars', 'wu xing', 'day master', 'jie qi', 'ten gods', 'shi shen']
   },
   {
     id: 'ziwei',
@@ -82,7 +82,7 @@ const CIVILIZATIONS: CivilizationFilter[] = [
     traditionNavId: 'ziwei',
     colorClass: 'text-amber-300',
     activeBorder: 'border-amber-500 bg-amber-950/40',
-    keywords: ['zi wei', 'purple star', 'palace', 'emperor', 'tian fu', 'si hua', 'lunar calendar']
+    keywords: ['zi wei', 'purple star', 'tian fu', 'si hua', 'polar horoscopy', 'chen tuan']
   },
   {
     id: 'mayan',
@@ -92,7 +92,7 @@ const CIVILIZATIONS: CivilizationFilter[] = [
     traditionNavId: 'mayan',
     colorClass: 'text-emerald-300',
     activeBorder: 'border-emerald-500 bg-emerald-950/40',
-    keywords: ['maya', 'tzolk', 'haab', 'kiche', 'nawal', 'calendar round', 'trecena']
+    keywords: ['maya', 'tzolk', 'haab', 'nawal', 'calendar round', 'trecena', 'long count', 'baktun']
   },
   {
     id: 'tibetan',
@@ -102,7 +102,7 @@ const CIVILIZATIONS: CivilizationFilter[] = [
     traditionNavId: 'tibetan',
     colorClass: 'text-amber-400',
     activeBorder: 'border-amber-500 bg-amber-950/40',
-    keywords: ['tibetan', 'phugpa', 'mewa', 'parkha', 'lo shu', 'element-animal', 'rabjung']
+    keywords: ['tibetan', 'phugpa', 'mewa', 'parkha', 'lo shu', 'rabjung', 'lungta', 'sog']
   },
   {
     id: 'persian',
@@ -112,7 +112,7 @@ const CIVILIZATIONS: CivilizationFilter[] = [
     traditionNavId: 'persian',
     colorClass: 'text-teal-300',
     activeBorder: 'border-teal-500 bg-teal-950/40',
-    keywords: ['persian', 'almuten', 'ilm al-nujum', 'abu ma', 'dignity', 'firdaria', 'house of wisdom']
+    keywords: ['persian', 'almuten', 'ilm al-nujum', 'abu ma', 'firdaria', 'house of wisdom']
   },
   {
     id: 'egyptian',
@@ -122,7 +122,7 @@ const CIVILIZATIONS: CivilizationFilter[] = [
     traditionNavId: 'egyptian',
     colorClass: 'text-yellow-300',
     activeBorder: 'border-yellow-500 bg-yellow-950/40',
-    keywords: ['egyptian', 'decan', 'sothic', 'sirius', 'dendera', 'star clock', '360']
+    keywords: ['egyptian', 'decan', 'sothic', 'sirius', 'dendera', 'senenmut']
   },
   {
     id: 'maramataka',
@@ -132,7 +132,7 @@ const CIVILIZATIONS: CivilizationFilter[] = [
     traditionNavId: 'maramataka',
     colorClass: 'text-emerald-400',
     activeBorder: 'border-emerald-500 bg-emerald-950/40',
-    keywords: ['māori', 'maori', 'maramataka', 'lunar night', 'moon phase', 'oceanic', 'tangaroa', 'mutuwhenua']
+    keywords: ['māori', 'maori', 'maramataka', 'lunar night', 'tangaroa', 'mutuwhenua', 'mauri', 'whiro']
   }
 ];
 
@@ -369,6 +369,9 @@ export const FeatureGuideScreen: React.FC<Props> = ({ onNavigate, initialExplain
                   return (
                     <button
                       key={civ.id}
+                      id={`civ-btn-${civ.code}`}
+                      data-civ-code={civ.code}
+                      data-civ-id={civ.id}
                       type="button"
                       onClick={() => handleCivilizationClick(civ.id)}
                       data-tooltip={civ.tooltip}
@@ -442,7 +445,7 @@ export const FeatureGuideScreen: React.FC<Props> = ({ onNavigate, initialExplain
                       }`}
                   >
                     <span>All Knowledge Domains</span>
-                    <span className="text-xs font-mono text-stone-400">50</span>
+                    <span className="text-xs font-mono text-stone-400">{allExplainers.length}</span>
                   </button>
 
                   {EXPLAINER_CATEGORIES.map((cat) => {
@@ -487,6 +490,8 @@ export const FeatureGuideScreen: React.FC<Props> = ({ onNavigate, initialExplain
                     return (
                       <button
                         key={item.id}
+                        id={`explainer-item-${item.id}`}
+                        data-explainer-item={item.id}
                         type="button"
                         onClick={() => {
                           setSelectedExplainerId(item.id);

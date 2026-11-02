@@ -1,7 +1,7 @@
 # Synodix: Project Context & Working Memory
 
-**Last Updated:** 2026-11-02 10:03:31
-**Version:** 2.42.0  
+**Last Updated:** 2026-11-02 10:20:06
+**Version:** 2.43.0  
 **Stack:** Python 3.12 (FastAPI, Swiss Ephemeris 2.10, Skyfield DE421) + TypeScript / React 19 / Vite / Tailwind CSS v4 / Framer Motion / Capacitor 8 (iOS & Android)  
 **Workspace:** `/Volumes/Study/Projects/Astrology` (symlinked as `/Volumes/Study/Astrology`)  
 **Git Remote:** `https://github.com/manvenpratap/Synodix.git`  
@@ -10,7 +10,28 @@
 
 ## 1. Current Status & Milestone
 
-- **Active Phase**: High-Contrast Accordion Gallery & Viewport Isolation Hardening (v2.42.0) (Completed)
+- **Active Phase**: Astrometric Knowledge Base 50-Topic Codex Expansion & Filtering Hardening (v2.43.0) (Completed)
+- **Astrometric Knowledge Base 50-Topic Codex Expansion & Filtering Hardening (v2.43.0)**:
+  - **Complete 50-Topic Authoritative Knowledge Base (`featureExplainers.ts`)**:
+    - Expanded the Astrometric Knowledge Base from 27 to exactly 50 comprehensive, mathematically rigorous, culturally authentic astrometric topics.
+    - Each topic contains: unique `id`, `title`, `subtitle`, `category`, `culturalTradition`, `shortSummary`, `astronomicalFormula`, `howItWorks` (3-4 step pipeline), `whyItMatters`, and `historicalLineage`.
+    - **Inventory Breakdown across 6 Knowledge Domains & 9 Cultural Traditions**:
+      - **Astrometric Core (7)**: `time_normalization_eot`, `utc_instant_julian_day`, `cusp_proximity_audit`, `dual_engine_validation`, `delta_t_earth_deceleration`, `topocentric_parallax_correction`, `atmospheric_refraction_apparent`.
+      - **Vedic Astrometry (8)**: `lahiri_ayanamsha`, `lagna_divisional_subdivisions`, `nakshatras_108_padas`, `gandanta_zones`, `graha_yuddha`, `vimshottari_dasha`, `ashtakavarga_benefic_matrix`, `raja_dhana_yogas`.
+      - **Chinese Metaphysics (9)**: `bazi_four_pillars`, `bazi_day_master`, `wu_xing_pentagram`, `bazi_branch_interactions`, `ten_gods_shi_shen`, `solar_jie_qi_terms`, `ziwei_palaces_stars`, `ziwei_four_transformations`, `ziwei_major_stars_lineage`.
+      - **Hellenistic & Persian (9)**: `western_sect`, `essential_dignities_score`, `antiscia_contra_antiscia`, `hermetic_lots_fortune_spirit`, `annual_profections_timelords`, `ptolemaic_aspects_orbs`, `almuten_figuris`, `firdaria_periods`, `abu_mashar_accidental_dignity`.
+      - **Indigenous & Oceanic Cosmologies (9)**: `egyptian_decan_clock`, `dendera_36_decanal_gates`, `maya_calendar_round`, `maya_tzolkin_nawales`, `maya_long_count_great_cycle`, `tibetan_mewa_parkha`, `tibetan_five_personal_forces`, `maramataka_lunar_dial`, `maramataka_tidal_mauri_phases`.
+      - **Consensus & Triangulation (4)**: `three_cluster_consensus`, `honest_divergence_rate`, `cross_tradition_synastry_matrix`, `nine_life_domains_architecture`.
+      - **Statistical Evidence & Validation (4)**: `rodden_titan_benchmark`, `epistemic_humility_framework`, `gauquelin_mars_empirical_audit`, `permutation_monte_carlo_testing`.
+  - **Civilizational Filter Hardening (`FeatureGuideScreen.tsx`)**:
+    - Eliminated substring false-positive collisions across the 9 cultural tradition buttons (`JYOT`, `HELL`, `BAZI`, `ZIWEI`, `MAYA`, `TIBET`, `PERS`, `EGYPT`, `MARA`).
+    - Added dedicated test attributes (`id={`civ-btn-${civ.code}`}` and `data-civ-code={civ.code}`) and `id={`explainer-item-${item.id}`}` for 100% reliable accessibility, automated test targeting, and mobile touch navigation.
+    - Dynamically bound total topic counts and domain badges to `allExplainers.length` (50).
+  - **Automated Verification**:
+    - Playwright test verified: exactly 50 topics render in DOM; search functionality tested (`ashtakavarga`, `dendera`); each of the 9 civilization filter buttons tested with clean filtering; topic deep inspection verified (formula, execution pipeline, and historical treatises); zero console errors.
+    - 0 TypeScript compilation errors (`npx tsc --noEmit`).
+    - Clean Vite production build (`npm run build`).
+    - Full 29/29 regression test suite passing (`./pipeline.sh test --summary`).
 - **High-Contrast Accordion Gallery & Viewport Isolation Hardening (v2.42.0)**:
   - **Root Cause Resolution for Barely Visible Vertical Bars**:
     - *Breakpoint & Specificity Leaking*: `.horizontal-accordion-container` in `index.css` had un-scoped `display: flex;` overriding `hidden md:flex`, forcing squashed 9-column horizontal blades onto narrow viewports (< 1024px) where text collapsed into single-letter columns.
