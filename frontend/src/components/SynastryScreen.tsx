@@ -389,7 +389,8 @@ export const SynastryScreen: React.FC<Props> = ({
                     value={customA.name}
                     onChange={(e) => setCustomA({ ...customA, name: e.target.value })}
                     placeholder="Partner A Full Name"
-                    className="w-full px-2.5 py-1.5 text-xs rounded bg-stone-900 border border-stone-800 text-stone-200"
+                    enterKeyHint="next"
+                    className="w-full min-h-[44px] px-2.5 py-2 text-xs rounded bg-stone-900 border border-stone-800 text-stone-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
                   />
                 </div>
                 <div className="grid grid-cols-2 gap-2">
@@ -397,31 +398,33 @@ export const SynastryScreen: React.FC<Props> = ({
                     type="date"
                     value={customA.birth_date}
                     onChange={(e) => setCustomA({ ...customA, birth_date: e.target.value })}
-                    className="w-full px-2 py-1 text-xs rounded bg-stone-900 border border-stone-800 text-stone-200"
+                    className="w-full min-h-[44px] px-2 py-2 text-xs rounded bg-stone-900 border border-stone-800 text-stone-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
                   />
                   <input
                     type="time"
                     value={customA.birth_time}
                     onChange={(e) => setCustomA({ ...customA, birth_time: e.target.value })}
-                    className="w-full px-2 py-1 text-xs rounded bg-stone-900 border border-stone-800 text-stone-200"
+                    className="w-full min-h-[44px] px-2 py-2 text-xs rounded bg-stone-900 border border-stone-800 text-stone-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
                   />
                 </div>
                 <div className="grid grid-cols-2 gap-2">
                   <input
                     type="number"
+                    inputMode="decimal"
                     step="0.0001"
                     value={customA.latitude}
                     onChange={(e) => setCustomA({ ...customA, latitude: Number(e.target.value) })}
                     placeholder="Lat (e.g. 40.7128)"
-                    className="w-full px-2 py-1 text-xs rounded bg-stone-900 border border-stone-800 text-stone-200"
+                    className="w-full min-h-[44px] px-2 py-2 text-xs rounded bg-stone-900 border border-stone-800 text-stone-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
                   />
                   <input
                     type="number"
+                    inputMode="decimal"
                     step="0.0001"
                     value={customA.longitude}
                     onChange={(e) => setCustomA({ ...customA, longitude: Number(e.target.value) })}
                     placeholder="Lon (e.g. -74.0060)"
-                    className="w-full px-2 py-1 text-xs rounded bg-stone-900 border border-stone-800 text-stone-200"
+                    className="w-full min-h-[44px] px-2 py-2 text-xs rounded bg-stone-900 border border-stone-800 text-stone-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
                   />
                 </div>
                 <button
@@ -433,7 +436,7 @@ export const SynastryScreen: React.FC<Props> = ({
                     setPartnerAName(customA.name || 'Custom Subject A');
                     setIsLoading(false);
                   }}
-                  className="w-full py-1.5 rounded bg-amber-700 hover:bg-amber-600 text-stone-950 font-serif font-semibold text-xs cursor-pointer"
+                  className="w-full min-h-[44px] py-2.5 rounded bg-amber-700 hover:bg-amber-600 active:bg-amber-800 text-stone-950 font-serif font-semibold text-xs cursor-pointer transition-colors shadow-xs"
                 >
                   Recalculate Partner A
                 </button>
@@ -525,7 +528,8 @@ export const SynastryScreen: React.FC<Props> = ({
                     value={customB.name}
                     onChange={(e) => setCustomB({ ...customB, name: e.target.value })}
                     placeholder="Partner B Full Name"
-                    className="w-full px-2.5 py-1.5 text-xs rounded bg-stone-900 border border-stone-800 text-stone-200"
+                    enterKeyHint="next"
+                    className="w-full min-h-[44px] px-2.5 py-2 text-xs rounded bg-stone-900 border border-stone-800 text-stone-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
                   />
                 </div>
                 <div className="grid grid-cols-2 gap-2">
@@ -533,31 +537,33 @@ export const SynastryScreen: React.FC<Props> = ({
                     type="date"
                     value={customB.birth_date}
                     onChange={(e) => setCustomB({ ...customB, birth_date: e.target.value })}
-                    className="w-full px-2 py-1 text-xs rounded bg-stone-900 border border-stone-800 text-stone-200"
+                    className="w-full min-h-[44px] px-2 py-2 text-xs rounded bg-stone-900 border border-stone-800 text-stone-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
                   />
                   <input
                     type="time"
                     value={customB.birth_time}
                     onChange={(e) => setCustomB({ ...customB, birth_time: e.target.value })}
-                    className="w-full px-2 py-1 text-xs rounded bg-stone-900 border border-stone-800 text-stone-200"
+                    className="w-full min-h-[44px] px-2 py-2 text-xs rounded bg-stone-900 border border-stone-800 text-stone-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
                   />
                 </div>
                 <div className="grid grid-cols-2 gap-2">
                   <input
                     type="number"
+                    inputMode="decimal"
                     step="0.0001"
                     value={customB.latitude}
                     onChange={(e) => setCustomB({ ...customB, latitude: Number(e.target.value) })}
                     placeholder="Lat (e.g. 51.5074)"
-                    className="w-full px-2 py-1 text-xs rounded bg-stone-900 border border-stone-800 text-stone-200"
+                    className="w-full min-h-[44px] px-2 py-2 text-xs rounded bg-stone-900 border border-stone-800 text-stone-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
                   />
                   <input
                     type="number"
+                    inputMode="decimal"
                     step="0.0001"
                     value={customB.longitude}
                     onChange={(e) => setCustomB({ ...customB, longitude: Number(e.target.value) })}
                     placeholder="Lon (e.g. -0.1278)"
-                    className="w-full px-2 py-1 text-xs rounded bg-stone-900 border border-stone-800 text-stone-200"
+                    className="w-full min-h-[44px] px-2 py-2 text-xs rounded bg-stone-900 border border-stone-800 text-stone-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
                   />
                 </div>
                 <button
@@ -569,7 +575,7 @@ export const SynastryScreen: React.FC<Props> = ({
                     setPartnerBName(customB.name || 'Custom Subject B');
                     setIsLoading(false);
                   }}
-                  className="w-full py-1.5 rounded bg-amber-700 hover:bg-amber-600 text-stone-950 font-serif font-semibold text-xs cursor-pointer"
+                  className="w-full min-h-[44px] py-2.5 rounded bg-amber-700 hover:bg-amber-600 active:bg-amber-800 text-stone-950 font-serif font-semibold text-xs cursor-pointer transition-colors shadow-xs"
                 >
                   Recalculate Partner B
                 </button>

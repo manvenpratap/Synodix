@@ -1,7 +1,7 @@
 # Synodix: Project Context & Working Memory
 
-**Last Updated:** 2026-11-03 00:59:03
-**Version:** 2.48.0  
+**Last Updated:** 2026-11-03 01:11:32
+**Version:** 2.49.0  
 **Stack:** Python 3.12 (FastAPI, Swiss Ephemeris 2.10, Skyfield DE421) + TypeScript / React 19 / Vite / Tailwind CSS v4 / Framer Motion / Capacitor 8 (iOS & Android)  
 **Workspace:** `/Volumes/Study/Projects/Astrology` (symlinked as `/Volumes/Study/Astrology`)  
 **Git Remote:** `https://github.com/manvenpratap/Synodix.git`  
@@ -10,7 +10,24 @@
 
 ## 1. Current Status & Milestone
 
-- **Active Phase**: Mobile-Native Minimalist UI & Traditions Gallery Viewport Refinement (v2.48.0) (Completed)
+- **Active Phase**: Mobile-Native Comprehensive Page Scan & Touch Ergonomics Hardening (v2.49.0) (Completed)
+- **Mobile-Native Comprehensive Page Scan & Touch Ergonomics Hardening (v2.49.0)**:
+  - **Full-Application Page Scan Against `/mobile-native` Hard Rules**:
+    - Audited every screen, drawer, modal, and input component against the 11 mobile-native invariants.
+  - **Zero Input Zoom Guarantee (§4)**:
+    - Scoped `input, select, textarea { font-size: 16px !important; }` under `@media (pointer: coarse)` in `index.css` to prevent iOS Safari auto-zoom drift on focus.
+    - Set explicit `inputMode="decimal"` on all numerical coordinates across Workbench, Synastry, and Verification.
+    - Enforced `enterKeyHint="search"`, `autoCapitalize="none"`, `autoCorrect="off"`, and `spellCheck="false"` on all search inputs (`BirthDataForm`, `FeatureGuideScreen`, `FeatureExplainerModal`).
+  - **Inner Scroll Containment & Anti-Rubber-Banding (§6)**:
+    - Added global `.overflow-y-auto, .overflow-x-auto, .overflow-auto { overscroll-behavior: contain; }` in `index.css` preventing scroll chaining from lists, sheets, and tables to the page root.
+    - Added `overscroll-contain` on the 500 Titans bento list in `BirthDataForm.tsx`.
+  - **Touch Target Ergonomics & Tap Delay Elimination (§5)**:
+    - Upgraded all custom Synastry inputs and recalculate action buttons to $\ge 44\text{px}$ touch targets (`min-h-[44px]`).
+    - Added min-heights and touch-target padding to category filter chips and topic selectors across Feature Guide and Feature Explainer Modal.
+  - **Automated Verification**:
+    - Full 29/29 regression test suite passing in 116.64s (`./pipeline.sh test --summary`).
+    - 0 TypeScript compilation errors (`npx tsc --noEmit`).
+    - Clean Vite production build (`npm run build`).
 - **Mobile-Native Minimalist UI & Traditions Gallery Viewport Refinement (v2.48.0)**:
   - **Traditions Gallery View Elimination on Mobile**:
     - Addressed user feedback regarding squashed vertical bars and unreadable rotated text on mobile phone viewports.

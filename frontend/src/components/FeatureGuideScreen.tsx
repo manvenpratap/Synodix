@@ -412,21 +412,25 @@ export const FeatureGuideScreen: React.FC<Props> = ({ onNavigate, initialExplain
               {/* Search Input */}
               <div className="relative">
                 <input
-                  type="text"
+                  type="search"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder="Search formulas, concepts..."
-                  className="w-full bg-stone-900 border border-stone-800 rounded-lg pl-8 pr-8 py-2 text-xs font-sans text-stone-100 placeholder:text-stone-500 focus:outline-none focus:border-amber-500 focus-visible:ring-2 focus-visible:ring-amber-400"
+                  enterKeyHint="search"
+                  autoCapitalize="none"
+                  autoCorrect="off"
+                  spellCheck="false"
+                  className="w-full min-h-[44px] bg-stone-900 border border-stone-800 rounded-lg pl-8 pr-10 py-2.5 text-xs font-sans text-stone-100 placeholder:text-stone-500 focus:outline-none focus:border-amber-500 focus-visible:ring-2 focus-visible:ring-amber-400"
                 />
                 <Search className="w-3.5 h-3.5 text-stone-400 absolute left-2.5 top-1/2 -translate-y-1/2 pointer-events-none" />
                 {searchQuery && (
                   <button
                     type="button"
                     onClick={() => setSearchQuery('')}
-                    className="absolute right-2 top-1/2 -translate-y-1/2 text-stone-400 hover:text-white"
+                    className="absolute right-1 top-1/2 -translate-y-1/2 text-stone-400 hover:text-white min-w-[44px] min-h-[44px] flex items-center justify-center cursor-pointer rounded"
                     aria-label="Clear search"
                   >
-                    <X className="w-3 h-3" />
+                    <X className="w-3.5 h-3.5" />
                   </button>
                 )}
               </div>

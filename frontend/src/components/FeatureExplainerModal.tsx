@@ -242,12 +242,15 @@ export const FeatureExplainerModal: React.FC = () => {
                 <div className="relative flex-1">
                   <Search className="w-4 h-4 text-stone-400 absolute left-3 top-1/2 -translate-y-1/2" />
                   <input
-                    type="text"
+                    type="search"
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     placeholder="Search explainers (e.g., Ayanamsha, Day Master, Sect, Decans, Mewa, Consensus)..."
                     enterKeyHint="search"
-                    className="w-full bg-stone-900 border border-stone-800 rounded-lg pl-9 pr-3 py-2 text-xs text-stone-200 font-sans placeholder:text-stone-500 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500"
+                    autoCapitalize="none"
+                    autoCorrect="off"
+                    spellCheck="false"
+                    className="w-full min-h-[44px] bg-stone-900 border border-stone-800 rounded-lg pl-9 pr-3 py-2 text-xs text-stone-200 font-sans placeholder:text-stone-500 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500"
                   />
                   {searchQuery && (
                     <button
@@ -265,7 +268,7 @@ export const FeatureExplainerModal: React.FC = () => {
                 <select
                   value={selectedCategory}
                   onChange={(e) => setSelectedCategory(e.target.value)}
-                  className="bg-stone-900 border border-stone-800 rounded-lg px-3 py-2 text-xs text-stone-300 font-sans focus:outline-none focus:border-amber-500 focus-visible:ring-2 focus-visible:ring-amber-400 cursor-pointer"
+                  className="min-h-[44px] bg-stone-900 border border-stone-800 rounded-lg px-3 py-2 text-xs text-stone-300 font-sans focus:outline-none focus:border-amber-500 focus-visible:ring-2 focus-visible:ring-amber-400 cursor-pointer"
                 >
                   <option value="all">All Categories ({Object.keys(FEATURE_EXPLAINERS).length})</option>
                   {EXPLAINER_CATEGORIES.map((c) => (

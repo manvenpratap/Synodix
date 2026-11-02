@@ -24,6 +24,13 @@ html {
   overscroll-behavior: none;
 }
 
+/* Prevent scroll chaining on inner scrollables (§6 Feeling Native) */
+.overflow-y-auto,
+.overflow-x-auto,
+.overflow-auto {
+  overscroll-behavior: contain;
+}
+
 body {
   overflow-x: clip;
   overflow-y: visible;
@@ -2086,11 +2093,7 @@ textarea {
 }
 
 @media (pointer: coarse) {
-  input[type="text"],
-  input[type="number"],
-  input[type="date"],
-  input[type="time"],
-  input[type="search"],
+  input,
   select,
   textarea {
     font-size: 16px !important;

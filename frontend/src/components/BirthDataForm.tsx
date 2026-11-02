@@ -1355,13 +1355,16 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
                 <Search className="w-4 h-4 text-stone-400 shrink-0" />
                 <input
                   id="personality_search"
-                  type="text"
+                  type="search"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder="Search by name, discovery, or city (e.g. Einstein, Jordan, Kahlo, Curie, London)..."
                   aria-label={`Search ${samplePresets.length || 500} historical figures by name, field, or city`}
                   enterKeyHint="search"
-                  className="w-full bg-transparent text-xs text-stone-200 placeholder-stone-500 focus:outline-none font-sans py-1"
+                  autoCapitalize="none"
+                  autoCorrect="off"
+                  spellCheck="false"
+                  className="w-full bg-transparent text-xs text-stone-200 placeholder-stone-500 focus:outline-none font-sans py-2 min-h-[44px]"
                 />
                 {searchQuery && (
                   <button
@@ -1381,7 +1384,7 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
           </div>
 
           {/* Titans Cards Bento Grid (gpt-taste Gapless Bento & Hover Physics) */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-2.5 max-h-[340px] overflow-y-auto pr-1 bento-dense">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-2.5 max-h-[340px] overflow-y-auto overscroll-contain pr-1 bento-dense">
             {displayedTitans.length === 0 ? (
               <div className="col-span-full py-8 text-center bg-stone-950 rounded border border-dashed border-stone-800 text-xs text-stone-400">
                 <p>No matching figures found for &quot;{searchQuery}&quot;</p>
