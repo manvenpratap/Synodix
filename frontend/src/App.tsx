@@ -62,22 +62,32 @@ interface NavItem {
   srText?: string;
   shortLabel?: string;
   badge?: string;
+  stepNumber?: string;
+  shortcutKey?: string;
+  chapter: 'journey' | 'empirical';
   description: string;
   icon: React.ComponentType<{ className?: string }>;
 }
 
 const NAV_ITEMS: NavItem[] = [
+  // Chapter 1: Astrometric Journey (Sequential Core Pipeline)
   {
     id: 'workbench',
     label: 'Workbench & Vault',
     shortLabel: 'Input',
-    description: 'Enter birth details, load saved profiles, or pick historical figures',
+    stepNumber: '01',
+    shortcutKey: '1',
+    chapter: 'journey',
+    description: 'Astronomical parameters & birth coordinates',
     icon: Sliders
   },
   {
     id: 'traditions',
     label: 'Cultural Traditions',
     shortLabel: 'Traditions',
+    stepNumber: '02',
+    shortcutKey: '2',
+    chapter: 'journey',
     badge: '9 Traditions',
     description: 'Explore your chart across 9 global astrological traditions',
     icon: Compass
@@ -86,6 +96,10 @@ const NAV_ITEMS: NavItem[] = [
     id: 'synthesis',
     label: 'Synthesis Matrix',
     shortLabel: 'Synthesis',
+    stepNumber: '03',
+    shortcutKey: '3',
+    chapter: 'journey',
+    badge: 'Consensus',
     description: 'Compare where traditions agree and where their methods differ',
     icon: Layers
   },
@@ -94,13 +108,20 @@ const NAV_ITEMS: NavItem[] = [
     label: 'Birth Chart Reading',
     srText: 'Corroboration Dossier',
     shortLabel: 'Reading',
+    stepNumber: '04',
+    shortcutKey: '4',
+    chapter: 'journey',
+    badge: 'Corroboration',
     description: 'Complete personality reading, life domains summary, and timeline',
     icon: FileText
   },
+  // Chapter 2: Comparative & Empirical Science
   {
     id: 'synastry',
     label: 'Relational Synastry',
     shortLabel: 'Synastry',
+    shortcutKey: 'S',
+    chapter: 'empirical',
     badge: 'Dual-Chart',
     description: 'Compare two charts for relationship harmony and compatibility',
     icon: HeartHandshake
@@ -109,6 +130,8 @@ const NAV_ITEMS: NavItem[] = [
     id: 'verification',
     label: 'Astronomical Audit',
     shortLabel: 'Audit',
+    shortcutKey: 'A',
+    chapter: 'empirical',
     badge: 'JPL DE421',
     description: 'Compare calculations directly against NASA Skyfield DE421',
     icon: ShieldCheck
@@ -117,6 +140,8 @@ const NAV_ITEMS: NavItem[] = [
     id: 'evidence',
     label: 'Mathematical Evidence',
     shortLabel: 'Evidence',
+    shortcutKey: 'E',
+    chapter: 'empirical',
     badge: '500 Titans',
     description: 'Scientific statistical research testing against random controls',
     icon: FlaskConical
@@ -125,6 +150,8 @@ const NAV_ITEMS: NavItem[] = [
     id: 'guide',
     label: 'Feature Guide',
     shortLabel: 'Guide',
+    shortcutKey: 'G',
+    chapter: 'empirical',
     badge: '50 Topics',
     description: 'Clear plain-language explanations of all chart terms and traditions',
     icon: BookOpen
@@ -146,6 +173,7 @@ function AppContent() {
   const [chartData, setChartData] = useState<ChartResponse | null>(null);
   const [activeSubjectName, setActiveSubjectName] = useState<string>(() => getPrimaryProfile()?.name || 'Steve Jobs');
   const [activeSubjectDate, setActiveSubjectDate] = useState<string>(() => getPrimaryProfile()?.birth_date || '1955-02-24');
+  const [activeSubjectCity, setActiveSubjectCity] = useState<string>(() => getPrimaryProfile()?.city_name || 'San Francisco');
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const [presets, setPresets] = useState<Preset[]>(FALLBACK_PRESETS);
@@ -255,6 +283,9 @@ function AppContent() {
       setActiveSubjectName(subjectName);
     }
     setActiveSubjectDate(input.birth_date);
+    if (input.city_name) {
+      setActiveSubjectCity(input.city_name);
+    }
 
     // 1. Check if this request corresponds to one of the 100 bundled historical titans
     const matchingTitan = (presets.length ? presets : FALLBACK_PRESETS).find(
@@ -390,8 +421,8 @@ function AppContent() {
     <div className="min-h-[100dvh] w-full max-w-full celestial-observatory-canvas text-stone-200 flex flex-col md:flex-row antialiased">
       {/* 1. Desktop Fixed Sidebar Navigation (>=md) */}
       <aside className="hidden md:flex flex-col w-64 lg:w-72 sidebar-canvas border-r border-stone-800 shrink-0 h-[100dvh] sticky top-0 overflow-y-auto overflow-x-hidden select-none z-40 scrollbar-thin">
-        {/* Brand Logo & Header */}
-        <div className="p-4 border-b border-stone-800/80 relative overflow-hidden shrink-0">
+        {/* Brand Logo & Header — Guaranteed >=65px height for test invariant */}
+        <div className="p-4 min-h-[72px] border-b border-stone-800/80 relative overflow-hidden shrink-0 flex items-center justify-between">
           <div className="flex items-center gap-3">
             {/* Nonagon Armilla Geometric Logo Mark with slow orbital spin ring */}
             <div className="relative w-10 h-10 rounded-xl bg-gradient-to-br from-stone-900 to-stone-950 border border-amber-800/80 flex items-center justify-center shrink-0 shadow-md ring-1 ring-amber-500/20 group">
@@ -404,9 +435,9 @@ function AppContent() {
                 <circle cx="20" cy="20" r="2.5" fill="#f59e0b" />
               </svg>
             </div>
-            <div>
+            <div className="min-w-0">
               <div className="flex items-center gap-1.5">
-                <span className="font-serif font-bold text-stone-100 text-sm">
+                <span className="font-serif font-bold text-stone-100 text-sm tracking-wide">
                   Synodix
                 </span>
                 <span className="px-1.5 py-0.2 rounded text-[11px] font-mono bg-amber-950/80 text-amber-300 border border-amber-800/80 font-medium">
@@ -414,208 +445,339 @@ function AppContent() {
                 </span>
               </div>
               <p className="text-xs text-stone-400 font-serif mt-0.5 flex items-center gap-1.5">
-                <span className="w-1.5 h-1.5 rounded-full bg-amber-400 inline-block"></span>
+                <span className="w-1.5 h-1.5 rounded-full bg-amber-400 inline-block animate-pulse"></span>
                 Astrometric Observatory
               </p>
             </div>
           </div>
         </div>
 
-        {/* Active Subject Context Header — Integrated Astrometric Profile */}
-        <div className="px-4 py-3 border-b border-stone-800/80 flex flex-col gap-1.5 relative overflow-hidden group shrink-0">
+        {/* Active Subject Context Wafer — Precision Telemetry Card */}
+        <div className="px-3.5 py-3 border-b border-stone-800/80 flex flex-col gap-2 relative overflow-hidden group shrink-0 bg-stone-950/40">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-serif font-medium text-amber-400/90 flex items-center gap-1.5">
-              <User className="w-3 h-3 text-amber-400" />
-              Active Chart Profile
-              <span className="sr-only">Subject Dossier</span>
-            </span>
-            <span className="text-xs font-mono text-amber-300/90 font-medium">
-              Active
-            </span>
-          </div>
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={`${activeSubjectName}-${activeSubjectDate}`}
-              initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 4 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: shouldReduceMotion ? 0 : -4 }}
-              transition={{ duration: shouldReduceMotion ? 0.08 : 0.18, ease: [0.16, 1, 0.3, 1] }}
-              className="flex items-baseline justify-between"
+            <div className="flex items-center gap-2 min-w-0">
+              <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-amber-950 to-stone-900 border border-amber-700/60 flex items-center justify-center text-amber-300 text-xs font-serif font-bold shrink-0 shadow-xs ring-1 ring-amber-500/20">
+                {activeSubjectName.split(' ').map((n) => n[0]).join('').slice(0, 2).toUpperCase() || 'SX'}
+              </div>
+              <div className="min-w-0">
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={`${activeSubjectName}-${activeSubjectDate}`}
+                    initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 3 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: shouldReduceMotion ? 0 : -3 }}
+                    transition={{ duration: shouldReduceMotion ? 0.08 : 0.16 }}
+                  >
+                    <div className="text-xs font-serif font-semibold text-stone-100 truncate tracking-wide">
+                      {activeSubjectName}
+                    </div>
+                    <div className="text-[11px] font-mono text-stone-400 tabular-nums truncate">
+                      {activeSubjectDate} • {activeSubjectCity || 'San Francisco'}
+                    </div>
+                  </motion.div>
+                </AnimatePresence>
+              </div>
+            </div>
+            <button
+              type="button"
+              onClick={() => navigateTo('workbench')}
+              className="p-1.5 rounded-lg text-stone-400 hover:text-amber-300 hover:bg-stone-900 border border-transparent hover:border-stone-800 transition-colors cursor-pointer shrink-0"
+              data-tooltip="Edit birth coordinates or load profile in Workbench"
+              aria-label="Edit birth coordinates"
             >
-              <span className="text-xs font-serif font-semibold text-stone-100 truncate tracking-wide">
-                {activeSubjectName}
-              </span>
-              <span className="text-[11px] font-mono text-stone-400 tabular-nums">
-                {activeSubjectDate}
-              </span>
-            </motion.div>
-          </AnimatePresence>
+              <Sliders className="w-3.5 h-3.5" />
+            </button>
+          </div>
+
+          {/* Triangulation Telemetry (Consensus & Divergence Dial) */}
           {chartData && (
-            <div className="pt-1.5 border-t border-stone-800/80 text-[11px] font-mono flex flex-col gap-1">
-              <div className="flex items-center justify-between text-stone-400">
+            <div className="p-2.5 rounded-xl bg-stone-900/70 border border-stone-800/80 text-[11px] font-mono space-y-1.5">
+              <div className="flex items-center justify-between">
+                <span className="flex items-center gap-1.5 text-stone-300 font-serif text-xs">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 inline-block animate-pulse"></span>
+                  <span>Consensus:</span>
+                </span>
+                <span className="font-semibold text-emerald-400">
+                  {Math.max(0, 100 - chartData.synthesis.divergence_metrics.divergence_rate_percent)}%
+                </span>
+              </div>
+              {/* Dual-Tone Harmonic Micro Bar */}
+              <div className="w-full h-1.5 bg-stone-800 rounded-full overflow-hidden flex">
+                <div
+                  className="h-full bg-gradient-to-r from-emerald-500 to-amber-400 transition-all duration-300"
+                  style={{ width: `${Math.max(8, 100 - chartData.synthesis.divergence_metrics.divergence_rate_percent)}%` }}
+                  title={`${100 - chartData.synthesis.divergence_metrics.divergence_rate_percent}% Multi-Tradition Agreement`}
+                />
+                <div
+                  className="h-full bg-gradient-to-r from-rose-500/80 to-rose-600 transition-all duration-300"
+                  style={{ width: `${chartData.synthesis.divergence_metrics.divergence_rate_percent}%` }}
+                  title={`${chartData.synthesis.divergence_metrics.divergence_rate_percent}% Honest Divergence`}
+                />
+              </div>
+              <div className="flex items-center justify-between text-[10px] text-stone-400 pt-0.5">
                 <span className="flex items-center gap-1">
                   <span>Divergence:</span>
                   <ExplainerTrigger id="divergence_rate_calculation" variant="icon" size="xs" />
                 </span>
-                <span className={`font-semibold ${
+                <span className={`font-medium ${
                   chartData.synthesis.divergence_metrics.divergence_rate_percent > 40
                     ? 'text-rose-400'
-                    : 'text-amber-400'
+                    : 'text-amber-400/90'
                 }`}>
                   {chartData.synthesis.divergence_metrics.divergence_rate_percent}%
                 </span>
-              </div>
-              {/* Divergence Mini Gauge Bar */}
-              <div className="w-full h-1 bg-stone-800 rounded-full overflow-hidden">
-                <div
-                  className={`h-full rounded-full ${
-                    chartData.synthesis.divergence_metrics.divergence_rate_percent > 40
-                      ? 'bg-rose-500'
-                      : 'bg-amber-400'
-                  }`}
-                  style={{ width: `${Math.min(100, Math.max(8, 100 - chartData.synthesis.divergence_metrics.divergence_rate_percent))}%` }}
-                />
               </div>
             </div>
           )}
         </div>
 
-        {/* Navigation Screen Links */}
-        <nav aria-label="Workspace Screens" className="p-3 space-y-1 shrink-0">
-          <span className="px-2 text-xs font-serif font-medium text-stone-400 block mb-1.5">
-            Workspace Screens
-          </span>
+        {/* Structured Navigation Chapters */}
+        <div className="flex-1 overflow-y-auto overscroll-contain py-2 divide-y divide-stone-800/60">
+          {/* Chapter I: Primary Astrometric Journey */}
+          <nav aria-label="Astrometric Journey" className="px-3 py-2 space-y-1">
+            <div className="flex items-center justify-between px-2 mb-1.5">
+              <span className="text-[11px] font-serif font-semibold tracking-wider uppercase text-amber-400/90">
+                Astrometric Journey
+              </span>
+              <span className="text-[10px] font-mono text-stone-500">I • 4 Steps</span>
+            </div>
 
-          {NAV_ITEMS.map((item) => {
-            const isActive = currentScreen === item.id;
-            const Icon = item.icon;
-            return (
-              <button
-                key={item.id}
-                type="button"
-                onClick={() => navigateTo(item.id)}
-                aria-current={isActive ? 'page' : undefined}
-                className={`w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-left transition-colors duration-150 cursor-pointer group relative focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:ring-offset-1 focus-visible:ring-offset-stone-950 ${
-                  isActive
-                    ? 'bg-stone-900 text-amber-200 font-medium border border-amber-600/70 shadow-xs ring-1 ring-amber-500/20 translate-x-0.5'
-                    : 'text-stone-300 hover:text-stone-100 hover:bg-stone-900/80 border border-transparent hover:border-stone-800'
-                }`}
-              >
-                <div className="flex items-center gap-2.5 min-w-0">
-                  <div className={`w-7 h-7 rounded-lg flex items-center justify-center shrink-0 transition-colors ${
-                    isActive ? 'bg-amber-950/80 border border-amber-700/60 text-amber-400' : 'bg-stone-900 border border-stone-800 text-stone-400 group-hover:text-stone-200 group-hover:border-stone-700'
-                  }`}>
-                    <Icon className="w-3.5 h-3.5" />
-                  </div>
-                  <div className="truncate">
-                    <span className="text-xs block font-serif truncate font-medium">
-                      {item.label}
-                      {item.srText && <span className="sr-only"> {item.srText}</span>}
-                    </span>
-                    <span className="text-[11px] text-stone-400 block truncate font-sans">
-                      {item.description}
-                    </span>
-                  </div>
-                </div>
-
-                {item.badge && (
-                  <span className={`px-1.5 py-0.5 rounded text-[11px] font-mono shrink-0 ml-1 ${
+            {NAV_ITEMS.filter((item) => item.chapter === 'journey').map((item) => {
+              const isActive = currentScreen === item.id;
+              const Icon = item.icon;
+              return (
+                <button
+                  key={item.id}
+                  type="button"
+                  onClick={() => navigateTo(item.id)}
+                  aria-current={isActive ? 'page' : undefined}
+                  className={`w-full flex items-center justify-between px-3 py-2 rounded-xl text-left transition-all duration-150 cursor-pointer group relative focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:ring-offset-1 focus-visible:ring-offset-stone-950 ${
                     isActive
-                      ? 'bg-amber-950 text-amber-300 border border-amber-700 font-semibold shadow-xs'
-                      : 'bg-stone-900 text-stone-400 border border-stone-800'
-                  }`}>
-                    {item.badge}
-                  </span>
-                )}
-              </button>
-            );
-          })}
-        </nav>
+                      ? 'bg-gradient-to-r from-amber-950/70 via-stone-900/80 to-stone-950/60 text-amber-200 font-medium border border-amber-600/70 shadow-xs ring-1 ring-amber-500/20 translate-x-1'
+                      : 'text-stone-300 hover:text-stone-100 hover:bg-stone-900/80 border border-transparent hover:border-stone-800 hover:translate-x-0.5'
+                  }`}
+                >
+                  {/* Glowing active notch indicator */}
+                  {isActive && (
+                    <div className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-5 rounded-r-full bg-amber-400 shadow-[0_0_8px_rgba(245,158,11,0.6)]" />
+                  )}
 
-        {/* Calibration Inset Box (Renaissance Observatory Style) */}
+                  <div className="flex items-center gap-2.5 min-w-0">
+                    <div className={`w-7 h-7 rounded-lg flex items-center justify-center shrink-0 transition-colors ${
+                      isActive
+                        ? 'bg-amber-950/90 border border-amber-600/70 text-amber-300 shadow-xs'
+                        : 'bg-stone-900 border border-stone-800 text-stone-400 group-hover:text-amber-200 group-hover:border-stone-700'
+                    }`}>
+                      <Icon className="w-3.5 h-3.5" />
+                    </div>
+                    <div className="truncate">
+                      <span className="text-xs block font-serif truncate font-medium">
+                        {item.label}
+                        {item.srText && <span className="sr-only"> {item.srText}</span>}
+                      </span>
+                      <span className="text-[11px] text-stone-400 block truncate font-sans">
+                        {item.description}
+                      </span>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center gap-1.5 shrink-0 ml-1">
+                    {item.badge ? (
+                      <span className={`px-1.5 py-0.5 rounded text-[11px] font-mono ${
+                        isActive
+                          ? 'bg-amber-950 text-amber-300 border border-amber-700 font-semibold'
+                          : 'bg-stone-900 text-stone-400 border border-stone-800'
+                      }`}>
+                        {item.badge}
+                      </span>
+                    ) : (
+                      <span className="text-[11px] font-mono text-stone-500 px-1 py-0.5 rounded bg-stone-900/80 border border-stone-800">
+                        {item.stepNumber}
+                      </span>
+                    )}
+                  </div>
+                </button>
+              );
+            })}
+          </nav>
+
+          {/* Chapter II: Comparative & Empirical Science */}
+          <nav aria-label="Comparative & Empirical Science" className="px-3 py-2 space-y-1">
+            <div className="flex items-center justify-between px-2 mb-1.5">
+              <span className="text-[11px] font-serif font-semibold tracking-wider uppercase text-stone-400">
+                Comparative & Empirical
+              </span>
+              <span className="text-[10px] font-mono text-stone-500">II • Science</span>
+            </div>
+
+            {NAV_ITEMS.filter((item) => item.chapter === 'empirical').map((item) => {
+              const isActive = currentScreen === item.id;
+              const Icon = item.icon;
+              return (
+                <button
+                  key={item.id}
+                  type="button"
+                  onClick={() => navigateTo(item.id)}
+                  aria-current={isActive ? 'page' : undefined}
+                  className={`w-full flex items-center justify-between px-3 py-2 rounded-xl text-left transition-all duration-150 cursor-pointer group relative focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:ring-offset-1 focus-visible:ring-offset-stone-950 ${
+                    isActive
+                      ? 'bg-gradient-to-r from-amber-950/70 via-stone-900/80 to-stone-950/60 text-amber-200 font-medium border border-amber-600/70 shadow-xs ring-1 ring-amber-500/20 translate-x-1'
+                      : 'text-stone-300 hover:text-stone-100 hover:bg-stone-900/80 border border-transparent hover:border-stone-800 hover:translate-x-0.5'
+                  }`}
+                >
+                  {/* Glowing active notch indicator */}
+                  {isActive && (
+                    <div className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-5 rounded-r-full bg-amber-400 shadow-[0_0_8px_rgba(245,158,11,0.6)]" />
+                  )}
+
+                  <div className="flex items-center gap-2.5 min-w-0">
+                    <div className={`w-7 h-7 rounded-lg flex items-center justify-center shrink-0 transition-colors ${
+                      isActive
+                        ? 'bg-amber-950/90 border border-amber-600/70 text-amber-300 shadow-xs'
+                        : 'bg-stone-900 border border-stone-800 text-stone-400 group-hover:text-amber-200 group-hover:border-stone-700'
+                    }`}>
+                      <Icon className="w-3.5 h-3.5" />
+                    </div>
+                    <div className="truncate">
+                      <span className="text-xs block font-serif truncate font-medium">
+                        {item.label}
+                        {item.srText && <span className="sr-only"> {item.srText}</span>}
+                      </span>
+                      <span className="text-[11px] text-stone-400 block truncate font-sans">
+                        {item.description}
+                      </span>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center gap-1.5 shrink-0 ml-1">
+                    {item.badge && (
+                      <span className={`px-1.5 py-0.5 rounded text-[11px] font-mono ${
+                        isActive
+                          ? 'bg-amber-950 text-amber-300 border border-amber-700 font-semibold'
+                          : 'bg-stone-900 text-stone-400 border border-stone-800'
+                      }`}>
+                        {item.badge}
+                      </span>
+                    )}
+                  </div>
+                </button>
+              );
+            })}
+          </nav>
+        </div>
+
+        {/* Calibration Inset Box (Astrometric Status Capsule) */}
         {chartData && (
-          <div className="px-4 py-2.5 border-t border-stone-800/80 font-mono text-[11px] space-y-1 text-stone-400 shrink-0">
-            <div className="flex items-center justify-between text-stone-300 font-medium mb-1">
-              <span className="font-serif text-xs font-semibold text-stone-200">Astrometric Calibration</span>
+          <div className="mx-3 my-2 p-2.5 rounded-xl bg-stone-950/80 border border-stone-800/80 font-mono text-[11px] space-y-1 text-stone-400 shrink-0 shadow-xs">
+            <div className="flex items-center justify-between text-stone-300 font-medium pb-1 border-b border-stone-800/80">
+              <span className="font-serif text-xs font-semibold text-amber-300/90 uppercase tracking-wider flex items-center gap-1.5">
+                <span className="w-1.5 h-1.5 rounded-full bg-amber-400 inline-block animate-pulse"></span>
+                Astrometric Calibration
+              </span>
               <ExplainerTrigger id="time_normalization_eot" variant="icon" size="xs" />
             </div>
-            <div className="flex justify-between"><span>Epoch:</span> <span className="text-stone-200">J2000.0</span></div>
-            <div className="flex justify-between"><span>Julian Day:</span> <span className="text-amber-300">{chartData.astronomical_base?.julian_day_ut?.toFixed(2) || '2451545.00'}</span></div>
-            <div className="flex justify-between"><span>Topocentric:</span> <span className="text-stone-300 font-mono">IAU 2000B</span></div>
+            <div className="flex justify-between items-center text-[11px]">
+              <span className="text-stone-400">Epoch:</span>
+              <span className="text-stone-200 font-medium">J2000.0</span>
+            </div>
+            <div className="flex justify-between items-center text-[11px]">
+              <span className="text-stone-400">Julian Day:</span>
+              <span className="text-amber-300 font-medium">{chartData.astronomical_base?.julian_day_ut?.toFixed(2) || '2451545.00'}</span>
+            </div>
+            <div className="flex justify-between items-center text-[11px]">
+              <span className="text-stone-400">Topocentric:</span>
+              <span className="text-stone-300 font-mono">IAU 2000B</span>
+            </div>
           </div>
         )}
 
-        {/* Sidebar Footer with Engine Diagnostics */}
-        <div className="px-4 py-3 border-t border-stone-800/80 text-[11px] font-mono space-y-2 shrink-0">
+        {/* Sidebar Footer with Engine Diagnostics & Tactile Controls */}
+        <div className="px-3.5 py-3 border-t border-stone-800/80 text-[11px] font-mono space-y-2 shrink-0 bg-stone-950/30">
           <div className="flex items-center justify-between text-stone-400">
             <span className="flex items-center gap-1.5">
-              <span className="w-1.5 h-1.5 rounded-full bg-amber-400 inline-block"></span>
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 inline-block animate-pulse"></span>
               NASA JPL DE421
             </span>
             <span className="text-amber-400 font-semibold">VERIFIED</span>
           </div>
-          <div className="flex items-center justify-between text-stone-400">
-            <span>Client Vault:</span>
-            <span className="text-amber-400">Zero-Cloud / Private</span>
+
+          {/* Theme Segmented Switcher */}
+          <div className="flex items-center justify-between pt-1 border-t border-stone-800/80">
+            <span className="text-stone-400 font-serif text-xs">Theme</span>
+            <div className="flex items-center p-0.5 rounded-lg bg-stone-900 border border-stone-800">
+              <button
+                type="button"
+                onClick={() => theme !== 'dark' && toggleTheme()}
+                className={`px-2 py-1 rounded text-[11px] flex items-center gap-1 transition-colors cursor-pointer ${
+                  theme === 'dark'
+                    ? 'bg-amber-950 text-amber-300 font-medium border border-amber-800 shadow-xs'
+                    : 'text-stone-400 hover:text-stone-200'
+                }`}
+                aria-label="Switch to Deep Space Theme"
+                data-tooltip="Deep Space Dark Theme"
+              >
+                <Moon className="w-3 h-3 text-amber-300" />
+                <span>Space</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => theme !== 'light' && toggleTheme()}
+                className={`px-2 py-1 rounded text-[11px] flex items-center gap-1 transition-colors cursor-pointer ${
+                  theme === 'light'
+                    ? 'bg-amber-100 text-amber-900 font-medium border border-amber-300 shadow-xs'
+                    : 'text-stone-400 hover:text-stone-200'
+                }`}
+                aria-label="Switch to Solar Day Theme"
+                data-tooltip="Solar Day Light Theme"
+              >
+                <Sun className="w-3 h-3 text-amber-400" />
+                <span>Solar</span>
+              </button>
+            </div>
           </div>
-          <div className="flex items-center justify-between text-stone-400 pt-1 border-t border-stone-800">
-            <span>Theme:</span>
-            <button
-              type="button"
-              onClick={toggleTheme}
-              className="flex items-center gap-1 text-[11px] font-mono text-amber-400 hover:text-amber-300 cursor-pointer"
-              data-tooltip={theme === 'dark' ? 'Switch to Solar Day Theme' : 'Switch to Deep Space Theme'}
-              aria-label={theme === 'dark' ? 'Switch to Solar Day Theme' : 'Switch to Deep Space Theme'}
-            >
-              {theme === 'dark' ? (
-                <>
-                  <Sun className="w-3 h-3 text-amber-400" />
-                  <span>Solar Day</span>
-                </>
-              ) : (
-                <>
-                  <Moon className="w-3 h-3 text-amber-300" />
-                  <span>Deep Space</span>
-                </>
-              )}
-            </button>
-          </div>
-          <div className="flex items-center justify-between text-stone-400 pt-1 border-t border-stone-800">
-            <span>Server:</span>
+
+          {/* Server Config & Keyboard Shortcuts */}
+          <div className="flex items-center justify-between pt-1 border-t border-stone-800/80">
             <button
               type="button"
               onClick={() => setIsServerModalOpen(true)}
-              className="flex items-center gap-1 text-[11px] font-mono text-amber-400 hover:text-amber-300 cursor-pointer"
+              className="flex items-center gap-1 text-[11px] font-mono text-stone-400 hover:text-amber-300 transition-colors cursor-pointer"
               data-tooltip="Configure backend API server address"
               aria-label="Server Settings"
             >
               <Server className="w-3 h-3 text-amber-400" />
-              <span>{getApiBaseUrl() ? 'Custom' : 'Direct'}</span>
+              <span>{getApiBaseUrl() ? 'Custom API' : 'Direct API'}</span>
             </button>
-          </div>
-          <div className="text-xs font-mono text-stone-400 pt-1 text-center font-serif">
-            SwissEph 2.10 • Global Civilizations
+            <button
+              type="button"
+              onClick={() => setIsShortcutsModalOpen(true)}
+              className="px-2 py-0.5 rounded bg-stone-900 border border-stone-800 text-[11px] font-mono text-stone-400 hover:text-amber-300 hover:border-amber-700/60 transition-colors cursor-pointer"
+              data-tooltip="View keyboard accelerators (?)"
+              aria-label="Keyboard Shortcuts"
+            >
+              [?] Keys
+            </button>
           </div>
         </div>
       </aside>
 
       {/* 2. Mobile Drawer Navigation Overlay (<md) */}
       {isMobileSidebarOpen && (
-        <div className="fixed inset-0 z-[60] md:hidden bg-black/80 flex overscroll-contain">
+        <div className="fixed inset-0 z-[60] md:hidden bg-black/80 flex overscroll-contain backdrop-blur-xs">
           <div
             id="mobile-navigation-drawer"
             role="dialog"
             aria-modal="true"
             aria-label="Navigation Drawer"
-            className="w-72 bg-stone-950 h-full flex flex-col border-r border-stone-800 p-4 shadow-2xl pt-[max(1rem,env(safe-area-inset-top,0px))] pb-[max(1rem,env(safe-area-inset-bottom,0px))]"
+            className="w-80 max-w-[85vw] bg-stone-950 h-full flex flex-col border-r border-stone-800 p-4 shadow-2xl pt-[max(1rem,env(safe-area-inset-top,0px))] pb-[max(1rem,env(safe-area-inset-bottom,0px))]"
           >
-            <div className="flex items-center justify-between pb-3 border-b border-stone-800">
-              <div className="flex items-center gap-2">
-                <div className="w-7 h-7 rounded bg-amber-950 border border-amber-800 flex items-center justify-center font-bold text-xs text-amber-300 font-mono">
+            <div className="flex items-center justify-between pb-3 border-b border-stone-800 min-h-[48px]">
+              <div className="flex items-center gap-2.5">
+                <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-stone-900 to-stone-950 border border-amber-800/80 flex items-center justify-center font-bold text-xs text-amber-300 font-mono shadow-xs">
                   SX
                 </div>
                 <div className="flex items-center gap-1.5">
-                  <span className="font-serif font-bold text-stone-100 text-sm">Synodix</span>
+                  <span className="font-serif font-bold text-stone-100 text-sm tracking-wide">Synodix</span>
                   <span className="px-1.5 py-0.2 rounded text-[11px] font-mono bg-amber-950 text-amber-300 border border-amber-800 font-medium">
                     {APP_VERSION_LABEL}
                   </span>
@@ -624,7 +786,7 @@ function AppContent() {
               <button
                 type="button"
                 onClick={() => setIsMobileSidebarOpen(false)}
-                className="min-w-[44px] min-h-[44px] flex items-center justify-center -mr-2 text-stone-400 hover:text-stone-100 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 rounded"
+                className="min-w-[44px] min-h-[44px] flex items-center justify-center -mr-2 text-stone-400 hover:text-stone-100 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 rounded-lg"
                 aria-label="Close navigation"
                 data-tooltip="Close navigation drawer"
               >
@@ -632,98 +794,166 @@ function AppContent() {
               </button>
             </div>
 
-            {/* Mobile Theme Switcher */}
-            <div className="flex items-center justify-between px-1 py-2.5 my-1 border-b border-stone-800">
-              <span className="text-xs font-serif text-stone-400 font-medium">Theme</span>
-              <button
-                type="button"
-                onClick={toggleTheme}
-                className="inline-flex items-center gap-1.5 px-2.5 py-1 text-xs rounded border border-stone-800 bg-stone-900 text-stone-300 cursor-pointer"
-                data-tooltip={theme === 'dark' ? 'Switch to Solar Day Theme' : 'Switch to Deep Space Theme'}
-                aria-label={theme === 'dark' ? 'Switch to Solar Day Theme' : 'Switch to Deep Space Theme'}
-              >
-                {theme === 'dark' ? (
-                  <>
-                    <Sun className="w-3.5 h-3.5 text-amber-400" />
-                    <span>Solar Day</span>
-                  </>
-                ) : (
-                  <>
-                    <Moon className="w-3.5 h-3.5 text-amber-300" />
-                    <span>Deep Space</span>
-                  </>
-                )}
-              </button>
-            </div>
-
-            {/* Mobile Server Config */}
-            <div className="flex items-center justify-between px-1 py-2.5 my-1 border-b border-stone-800">
-              <span className="text-xs font-serif text-stone-400 font-medium">Server</span>
-              <button
-                type="button"
-                onClick={() => setIsServerModalOpen(true)}
-                className="inline-flex items-center gap-1.5 px-2.5 py-1 text-xs rounded border border-stone-800 bg-stone-900 text-stone-300 cursor-pointer"
-                data-tooltip="Configure backend API server URL"
-                aria-label="Server Settings"
-              >
-                <Server className="w-3.5 h-3.5 text-amber-400" />
-                <span>Configure</span>
-              </button>
-            </div>
-
-            {/* Mobile Feature Guide Trigger */}
-            <div className="pt-2">
-              <button
-                type="button"
-                onClick={() => {
-                  setIsMobileSidebarOpen(false);
-                  openGlossary();
-                }}
-                className="w-full flex items-center justify-between px-3 py-2 rounded-lg bg-stone-900 hover:bg-stone-850 text-amber-300 border border-amber-800/60 font-serif text-xs transition-colors cursor-pointer"
-              >
-                <div className="flex items-center gap-2">
-                  <BookOpen className="w-4 h-4 text-amber-400" />
-                  <span>Feature Guide & Glossary</span>
+            {/* Mobile Active Subject Card */}
+            <div className="p-3 my-2 rounded-xl bg-stone-900/60 border border-stone-800/80 flex items-center justify-between">
+              <div className="flex items-center gap-2.5 min-w-0">
+                <div className="w-7 h-7 rounded-lg bg-amber-950 border border-amber-700/60 flex items-center justify-center text-amber-300 text-xs font-serif font-bold shrink-0">
+                  {activeSubjectName.split(' ').map((n) => n[0]).join('').slice(0, 2).toUpperCase() || 'SX'}
                 </div>
-                <ChevronRight className="w-3.5 h-3.5 text-amber-400" />
+                <div className="min-w-0">
+                  <span className="text-xs font-serif font-semibold text-stone-100 block truncate">
+                    {activeSubjectName}
+                  </span>
+                  <span className="text-[11px] font-mono text-stone-400 block truncate">
+                    {activeSubjectDate} • {activeSubjectCity || 'San Francisco'}
+                  </span>
+                </div>
+              </div>
+              <button
+                type="button"
+                onClick={() => navigateTo('workbench')}
+                className="min-w-[44px] min-h-[44px] flex items-center justify-center text-stone-400 hover:text-amber-300 cursor-pointer"
+                aria-label="Edit birth coordinates in Workbench"
+                data-tooltip="Edit birth coordinates"
+              >
+                <Sliders className="w-4 h-4" />
               </button>
             </div>
 
-            <nav aria-label="Mobile Drawer Screens" className="flex-1 py-4 space-y-1 overflow-y-auto">
-              {NAV_ITEMS.map((item) => {
-                const isActive = currentScreen === item.id;
-                const Icon = item.icon;
-                return (
-                  <button
-                    key={item.id}
-                    type="button"
-                    onClick={() => navigateTo(item.id)}
-                    aria-current={isActive ? 'page' : undefined}
-                    className={`w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-left transition-colors duration-150 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 ${
-                      isActive
-                        ? 'bg-stone-900 text-amber-200 font-semibold border border-amber-800'
-                        : 'text-stone-300 hover:bg-stone-900'
-                    }`}
-                  >
-                    <div className="flex items-center gap-2.5">
-                      <Icon className={`w-4 h-4 ${isActive ? 'text-amber-400' : 'text-stone-400'}`} />
-                      <span className="text-xs font-serif">
-                        {item.label}
-                        {item.srText && <span className="sr-only"> {item.srText}</span>}
-                      </span>
-                    </div>
-                    {item.badge && (
-                      <span className="text-[11px] font-mono px-1 rounded bg-stone-900 text-amber-300 border border-stone-800">
-                        {item.badge}
-                      </span>
-                    )}
-                  </button>
-                );
-              })}
-            </nav>
+            {/* Navigation Chapters in Mobile Drawer */}
+            <div className="flex-1 overflow-y-auto overscroll-contain py-1 space-y-3">
+              {/* Chapter I: Astrometric Journey */}
+              <div>
+                <div className="flex items-center justify-between px-1 mb-1">
+                  <span className="text-[11px] font-serif font-semibold tracking-wider uppercase text-amber-400/90">
+                    Astrometric Journey
+                  </span>
+                  <span className="text-[10px] font-mono text-stone-500">I • 4 Steps</span>
+                </div>
+                <div className="space-y-1">
+                  {NAV_ITEMS.filter((item) => item.chapter === 'journey').map((item) => {
+                    const isActive = currentScreen === item.id;
+                    const Icon = item.icon;
+                    return (
+                      <button
+                        key={item.id}
+                        type="button"
+                        onClick={() => navigateTo(item.id)}
+                        aria-current={isActive ? 'page' : undefined}
+                        className={`w-full flex items-center justify-between px-3 py-2.5 min-h-[44px] rounded-xl text-left transition-colors duration-150 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 ${
+                          isActive
+                            ? 'bg-amber-950/70 text-amber-200 font-semibold border border-amber-600/70 shadow-xs ring-1 ring-amber-500/20'
+                            : 'text-stone-300 hover:bg-stone-900 border border-transparent'
+                        }`}
+                      >
+                        <div className="flex items-center gap-2.5">
+                          <Icon className={`w-4 h-4 ${isActive ? 'text-amber-400' : 'text-stone-400'}`} />
+                          <span className="text-xs font-serif">
+                            {item.label}
+                            {item.srText && <span className="sr-only"> {item.srText}</span>}
+                          </span>
+                        </div>
+                        {item.badge ? (
+                          <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-stone-900 text-amber-300 border border-stone-800">
+                            {item.badge}
+                          </span>
+                        ) : (
+                          <span className="text-[10px] font-mono text-stone-500 px-1.5 py-0.5 rounded bg-stone-900/80 border border-stone-800">
+                            {item.stepNumber}
+                          </span>
+                        )}
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
 
-            <div className="pt-3 border-t border-stone-800 text-[11px] font-mono text-stone-400 font-serif">
-              NASA JPL DE421 • Multi-Tradition
+              {/* Chapter II: Comparative & Empirical Science */}
+              <div>
+                <div className="flex items-center justify-between px-1 mb-1">
+                  <span className="text-[11px] font-serif font-semibold tracking-wider uppercase text-stone-400">
+                    Comparative & Empirical
+                  </span>
+                  <span className="text-[10px] font-mono text-stone-500">II • Science</span>
+                </div>
+                <div className="space-y-1">
+                  {NAV_ITEMS.filter((item) => item.chapter === 'empirical').map((item) => {
+                    const isActive = currentScreen === item.id;
+                    const Icon = item.icon;
+                    return (
+                      <button
+                        key={item.id}
+                        type="button"
+                        onClick={() => navigateTo(item.id)}
+                        aria-current={isActive ? 'page' : undefined}
+                        className={`w-full flex items-center justify-between px-3 py-2.5 min-h-[44px] rounded-xl text-left transition-colors duration-150 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 ${
+                          isActive
+                            ? 'bg-amber-950/70 text-amber-200 font-semibold border border-amber-600/70 shadow-xs ring-1 ring-amber-500/20'
+                            : 'text-stone-300 hover:bg-stone-900 border border-transparent'
+                        }`}
+                      >
+                        <div className="flex items-center gap-2.5">
+                          <Icon className={`w-4 h-4 ${isActive ? 'text-amber-400' : 'text-stone-400'}`} />
+                          <span className="text-xs font-serif">
+                            {item.label}
+                            {item.srText && <span className="sr-only"> {item.srText}</span>}
+                          </span>
+                        </div>
+                        {item.badge && (
+                          <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-stone-900 text-amber-300 border border-stone-800">
+                            {item.badge}
+                          </span>
+                        )}
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+            </div>
+
+            {/* Mobile Controls & Status Footer */}
+            <div className="pt-3 border-t border-stone-800 space-y-2">
+              <div className="flex items-center justify-between text-xs">
+                <span className="font-serif text-stone-400">Theme</span>
+                <div className="flex items-center p-0.5 rounded-lg bg-stone-900 border border-stone-800">
+                  <button
+                    type="button"
+                    onClick={() => theme !== 'dark' && toggleTheme()}
+                    className={`min-h-[44px] sm:min-h-[34px] px-3 py-1.5 rounded-md text-xs flex items-center gap-1.5 cursor-pointer ${
+                      theme === 'dark' ? 'bg-amber-950 text-amber-300 font-medium border border-amber-800' : 'text-stone-400'
+                    }`}
+                    aria-label="Switch to Deep Space Theme"
+                  >
+                    <Moon className="w-3.5 h-3.5 text-amber-300" />
+                    <span>Space</span>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => theme !== 'light' && toggleTheme()}
+                    className={`min-h-[44px] sm:min-h-[34px] px-3 py-1.5 rounded-md text-xs flex items-center gap-1.5 cursor-pointer ${
+                      theme === 'light' ? 'bg-amber-100 text-amber-900 font-medium border border-amber-300' : 'text-stone-400'
+                    }`}
+                    aria-label="Switch to Solar Day Theme"
+                  >
+                    <Sun className="w-3.5 h-3.5 text-amber-400" />
+                    <span>Solar</span>
+                  </button>
+                </div>
+              </div>
+
+              <div className="flex items-center justify-between text-[11px] font-mono text-stone-400 pt-1 border-t border-stone-800/80">
+                <span className="flex items-center gap-1.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 inline-block animate-pulse"></span>
+                  NASA JPL DE421
+                </span>
+                <button
+                  type="button"
+                  onClick={() => setIsServerModalOpen(true)}
+                  className="text-amber-400 hover:underline min-h-[44px] flex items-center"
+                >
+                  Configure API
+                </button>
+              </div>
             </div>
           </div>
           <div className="flex-1" onClick={() => setIsMobileSidebarOpen(false)} />

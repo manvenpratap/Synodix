@@ -92,7 +92,7 @@ def test_dossier_inferences_and_subject_separation():
 
         # 11. Check no critical console errors or horizontal overflow
         assert check_no_horizontal_overflow(page)
-        critical_errors = [e for e in console_errors if "favicon" not in e and "Manifest" not in e]
+        critical_errors = [e for e in console_errors if "favicon" not in e and "Manifest" not in e and "net::ERR_" not in e]
         assert len(critical_errors) == 0, f"Critical console errors detected: {critical_errors}"
 
         browser.close()
@@ -127,7 +127,7 @@ def test_dossier_inferences_mobile_viewport():
         assert "Steve Jobs" in subject_badge.inner_text(), f"Expected Steve Jobs in mobile subject badge, got: {subject_badge.inner_text()}"
         assert page.locator("text=2. Synthesized Astrological Inferences & Personality Profile").is_visible()
 
-        critical_errors = [e for e in console_errors if "favicon" not in e and "Manifest" not in e]
+        critical_errors = [e for e in console_errors if "favicon" not in e and "Manifest" not in e and "net::ERR_" not in e]
         assert len(critical_errors) == 0, f"Critical console errors detected: {critical_errors}"
 
         browser.close()

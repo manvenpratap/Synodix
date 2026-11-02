@@ -1802,6 +1802,41 @@ html[data-theme="light"] {
   border-color: #e7e0d3 !important;
 }
 
+/* Sidebar Light Mode Precision Contrast */
+[data-theme="light"] .sidebar-canvas button[aria-current="page"] {
+  background: #fef3c7 !important;
+  border-color: #d97706 !important;
+}
+
+[data-theme="light"] .sidebar-canvas button[aria-current="page"] .font-serif {
+  color: #78350f !important;
+}
+
+[data-theme="light"] .sidebar-canvas .bg-stone-950\/40,
+[data-theme="light"] .sidebar-canvas .bg-stone-950\/80,
+[data-theme="light"] .sidebar-canvas .bg-stone-950\/30 {
+  background-color: #f7f3eb !important;
+  border-color: #e7e0d3 !important;
+}
+
+[data-theme="light"] .sidebar-canvas .bg-stone-900\/70,
+[data-theme="light"] .sidebar-canvas .bg-stone-900\/80 {
+  background-color: #f0eae1 !important;
+  border-color: #ded5c5 !important;
+}
+
+[data-theme="light"] .sidebar-canvas .text-stone-100 {
+  color: #1c1917 !important;
+}
+
+[data-theme="light"] .sidebar-canvas .text-stone-300 {
+  color: #292524 !important;
+}
+
+[data-theme="light"] .sidebar-canvas .text-stone-400 {
+  color: #57534e !important;
+}
+
 [data-theme="light"] .from-\[\#0e1422\],
 [data-theme="light"] .to-\[\#0a0d16\],
 [data-theme="light"] .from-\[\#090e17\],

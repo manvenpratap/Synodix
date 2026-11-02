@@ -1,7 +1,7 @@
 # Synodix: Project Context & Working Memory
 
-**Last Updated:** 2026-11-02 10:20:06
-**Version:** 2.43.0  
+**Last Updated:** 2026-11-02 10:38:52
+**Version:** 2.44.0  
 **Stack:** Python 3.12 (FastAPI, Swiss Ephemeris 2.10, Skyfield DE421) + TypeScript / React 19 / Vite / Tailwind CSS v4 / Framer Motion / Capacitor 8 (iOS & Android)  
 **Workspace:** `/Volumes/Study/Projects/Astrology` (symlinked as `/Volumes/Study/Astrology`)  
 **Git Remote:** `https://github.com/manvenpratap/Synodix.git`  
@@ -10,7 +10,28 @@
 
 ## 1. Current Status & Milestone
 
-- **Active Phase**: Astrometric Knowledge Base 50-Topic Codex Expansion & Filtering Hardening (v2.43.0) (Completed)
+- **Active Phase**: gpt-taste Enhanced Astrometric Sidebar & Navigation Architecture (v2.44.0) (Completed)
+- **gpt-taste Enhanced Astrometric Sidebar & Navigation Architecture (v2.44.0)**:
+  - **Astrometric Brand Crest & Header**:
+    - Elevated brand header with nonagon armilla orbital spinning glyph (`min-height: 72px`), version badge (`v2.44.0`), and pulsing observatory status light.
+  - **Active Subject Telemetry Context Wafer**:
+    - Integrated celestial monogram avatar (`SJ`) with concentric rings, subject name, tabular birth date, and geolocation readout (`San Francisco`).
+    - High-density live Triangulation Telemetry dial: multi-tradition Consensus percentage (`77.8% Consensus`), Honest Divergence rate (`22.2%`), and dual-tone gradient progress bar.
+    - Tactile shortcut to edit coordinates directly in Workbench.
+  - **Sequential Navigation Chapters with Tactile Physics**:
+    - Split navigation into two structured chapters:
+      - **Chapter I: Astrometric Journey (01-04)**: `Workbench & Vault (01)`, `Cultural Traditions (02)`, `Synthesis Matrix (03)`, `Birth Chart Reading (04)`.
+      - **Chapter II: Comparative & Empirical Science**: `Relational Synastry (Dual-Chart)`, `Astronomical Audit (JPL DE421)`, `Mathematical Evidence (500 Titans)`, `Feature Guide (50 Topics)`.
+    - Glowing active vertical notch blade (`w-1 h-5 rounded-r-full bg-amber-400 shadow-[0_0_8px_rgba(245,158,11,0.6)]`), spring hover glide (`translate-x-1`), and keyboard accelerator badges.
+  - **Status Capsule & Dual-Engine Telemetry**:
+    - Live Julian Day UT, standard J2000.0 epoch, IAU 2000B topocentric coordinates, and dual validation heartbeat (`NASA JPL DE421` + `SwissEph 2.10` verified).
+  - **Tactile Segmented Theme Switcher & Mobile Drawer**:
+    - Tactile segmented theme toggle (Solar Day vs Deep Space) with strict $\ge 12:1$ contrast in light and dark modes.
+    - Synchronized mobile drawer (`#mobile-navigation-drawer`) with thumb-friendly $\ge 44\text{px}$ touch targets.
+  - **Automated Verification**:
+    - 0 TypeScript compilation errors (`npx tsc --noEmit`).
+    - Clean Vite production build (`npm run build`).
+    - Full 29/29 regression test suite passing in 120.59s (`./pipeline.sh test --summary`).
 - **Astrometric Knowledge Base 50-Topic Codex Expansion & Filtering Hardening (v2.43.0)**:
   - **Complete 50-Topic Authoritative Knowledge Base (`featureExplainers.ts`)**:
     - Expanded the Astrometric Knowledge Base from 27 to exactly 50 comprehensive, mathematically rigorous, culturally authentic astrometric topics.
