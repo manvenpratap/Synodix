@@ -616,23 +616,41 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
   const currentTheme = CULTURE_THEMES[activeTab] || CULTURE_THEMES.jyotisha;
 
   return (
-    <div className="p-1 sm:p-2 relative transition-colors duration-300 overflow-hidden">
-      {/* Screen 2 Header Bar: Title + Display Presentation Switcher + View Mode Toggle */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1.5 pb-1 sm:pb-1.5 border-b border-white/10">
-        <div className="hidden sm:block min-w-0">
-          <h2 className="text-xl sm:text-2xl font-serif font-bold text-stone-100 flex items-center gap-2 whitespace-nowrap tracking-tight">
-            <span>9 Astrological Traditions</span>
-            <span className="inline-block w-12 sm:w-14 h-5 sm:h-6 rounded-full align-middle bg-gradient-to-r from-amber-600 via-amber-500 to-amber-700 border border-amber-400/50 mx-1 shadow-inner inline-flex items-center justify-center text-[10px] text-amber-950 font-mono font-bold">9-Sys</span>
-            <span className="text-[11px] font-mono font-medium px-1.5 py-0.5 rounded bg-stone-800/80 text-amber-300 border border-stone-700/60 hidden sm:inline-block">9 Traditions</span>
-          </h2>
-          <p className="text-xs text-stone-400 mt-0.5 font-sans hidden sm:block truncate">
-            Explore your planetary placements and visual charts across 9 world traditions
-          </p>
+    <div className="p-1 sm:p-2 relative transition-colors duration-300 overflow-hidden space-y-4 sm:space-y-5">
+      {/* Screen 2 Top Hero Pedestal (gpt-taste Cinematic Architecture) */}
+      <div className="p-4 sm:p-6 rounded-2xl bg-stone-900 border border-stone-800 shadow-md flex flex-col lg:flex-row lg:items-center justify-between gap-4 hero-wide-container">
+        <div className="flex items-start gap-3.5 max-w-4xl">
+          <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-amber-950/90 border border-amber-800 flex items-center justify-center text-amber-300 shrink-0 shadow-xs ring-1 ring-amber-500/20">
+            <Compass className="w-5 h-5 text-amber-400" />
+          </div>
+          <div className="min-w-0">
+            <div className="flex flex-wrap items-center gap-2 mb-1">
+              <span className="text-xs text-amber-400 font-serif font-semibold tracking-wider uppercase">
+                Comparative Astrometry
+              </span>
+              <span className="text-stone-400 hidden sm:inline">•</span>
+              <span className="text-xs text-stone-400 font-sans hidden sm:inline">
+                9 Global Civilizational Worldviews
+              </span>
+              <span className="text-[11px] font-mono px-2 py-0.5 rounded-full bg-amber-950/80 text-amber-300 border border-amber-800/80 font-medium">
+                Multi-Tradition
+              </span>
+            </div>
+            <h2 className="hero-h1-clamped font-serif font-bold text-stone-100 tracking-tight flex flex-wrap items-center gap-2">
+              <span>9 Astrological Traditions</span>
+              <span className="inline-block w-12 sm:w-14 h-5 sm:h-6 rounded-full align-middle bg-gradient-to-r from-amber-600 via-amber-500 to-amber-700 border border-amber-400/50 mx-1 shadow-inner inline-flex items-center justify-center text-[10px] text-amber-950 font-mono font-bold">9-Sys</span>
+              <span className="text-stone-300 hidden sm:inline">&amp; Cosmologies</span>
+            </h2>
+            <p className="text-xs sm:text-sm text-stone-400 mt-1 max-w-2xl leading-relaxed text-pretty">
+              Explore your natal chart across 9 distinct celestial systems—from Vedic sidereal nakshatras and Hellenistic planetary sect to BaZi solar terms and Maya sacred trecenas.
+            </p>
+          </div>
         </div>
 
-        <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between sm:justify-end gap-2 w-full sm:w-auto shrink-0">
+        {/* Display Presentation Switcher & View Mode Controls Toolbar */}
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between sm:justify-end gap-2 w-full lg:w-auto shrink-0 pt-2 lg:pt-0 border-t lg:border-t-0 border-stone-800/80">
           {/* Display Presentation Switcher: Comprehensive / Visual Instrument / Telemetry Tables */}
-          <div className="flex items-center justify-center sm:justify-start gap-1 p-0.5 rounded-lg bg-stone-900 text-xs font-mono shrink-0">
+          <div className="flex items-center justify-center sm:justify-start gap-1 p-0.5 rounded-lg bg-stone-950 border border-stone-800 text-xs font-mono shrink-0">
             {(['both', 'chart', 'table'] as const).map((mode) => {
               const isModeActive = chartViewMode === mode;
               const labels = {
@@ -665,7 +683,7 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
           </div>
 
           {/* View Mode Toggle: Vertical Carousel vs Full Inspector */}
-          <div className="flex items-center justify-center sm:justify-start gap-1 p-0.5 rounded-lg bg-stone-900 text-xs font-mono shrink-0">
+          <div className="flex items-center justify-center sm:justify-start gap-1 p-0.5 rounded-lg bg-stone-950 border border-stone-800 text-xs font-mono shrink-0">
             <button
               type="button"
               onClick={() => {

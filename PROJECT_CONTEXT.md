@@ -1,7 +1,7 @@
 # Synodix: Project Context & Working Memory
 
-**Last Updated:** 2026-11-02 10:38:52
-**Version:** 2.44.0  
+**Last Updated:** 2026-11-02 22:58:56
+**Version:** 2.45.0  
 **Stack:** Python 3.12 (FastAPI, Swiss Ephemeris 2.10, Skyfield DE421) + TypeScript / React 19 / Vite / Tailwind CSS v4 / Framer Motion / Capacitor 8 (iOS & Android)  
 **Workspace:** `/Volumes/Study/Projects/Astrology` (symlinked as `/Volumes/Study/Astrology`)  
 **Git Remote:** `https://github.com/manvenpratap/Synodix.git`  
@@ -10,7 +10,20 @@
 
 ## 1. Current Status & Milestone
 
-- **Active Phase**: gpt-taste Enhanced Astrometric Sidebar & Navigation Architecture (v2.44.0) (Completed)
+- **Active Phase**: gpt-taste Universal Module Hero Architecture & Mobile Parity (v2.45.0) (Completed)
+- **gpt-taste Universal Module Hero Architecture & Mobile Parity (v2.45.0)**:
+  - **Comprehensive Hero Coverage Across All Modules**:
+    - Identified and resolved missing hero blocks in `TraditionCharts.tsx`, `VerificationCard.tsx`, and `SynthesisMatrix.tsx`.
+    - **Cultural Traditions (`TraditionCharts.tsx`)**: Replaced hidden-on-mobile title (`hidden sm:block`) and cramped 1-line desktop toolbar with an authoritative `gpt-taste` hero pedestal (`hero-wide-container`). Features a Compass armillary glyph in glowing amber container, clamped 2-line H2 (`hero-h1-clamped`), `9-Sys` inline gradient pill, multi-tradition subtitle, and seamlessly integrated display mode switchers (`both`/`chart`/`table`) and view mode toggles (`carousel`/`accordion`/`inspector`).
+    - **Astronomical Audit (`VerificationCard.tsx`)**: Elevated from an unstyled sub-card into a cinematic laboratory hero pedestal. Features a `ShieldCheck` emblem in glowing container, clamped H2 (`hero-h1-clamped`), `<0.01°` precision pill, live PASS badge, and parity telemetry summary box (Max Delta & Confidence).
+    - **Synthesis Matrix (`SynthesisMatrix.tsx`)**: Upgraded to a full `gpt-taste` hero card with `Layers` multi-cluster consensus emblem, clamped H2, `9-Sys` pill, cross-cultural convergence subtitle visible on both mobile and desktop, and integrated divergence stats.
+  - **Mobile Parity Guarantee**:
+    - Eliminated all viewport-hiding anti-patterns (`hidden sm:block`) on module titles, ensuring rich, legible heroes on mobile (375px/390px) as well as desktop (1440px).
+  - **Automated Verification**:
+    - Playwright test verified: All 8 screens render authoritative hero sections with zero missing titles, verified on desktop (1440x900) and mobile (390x844).
+    - 0 TypeScript compilation errors (`npx tsc --noEmit`).
+    - Clean Vite production build (`npm run build`).
+    - Full 29/29 regression test suite passing in 136.46s (`./pipeline.sh test --summary`).
 - **gpt-taste Enhanced Astrometric Sidebar & Navigation Architecture (v2.44.0)**:
   - **Astrometric Brand Crest & Header**:
     - Elevated brand header with nonagon armilla orbital spinning glyph (`min-height: 72px`), version badge (`v2.44.0`), and pulsing observatory status light.

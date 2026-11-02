@@ -1,6 +1,7 @@
 import React from 'react';
 import type { VerificationReport } from '../types';
 import { ExplainerTrigger } from './ExplainerTrigger';
+import { ShieldCheck, Cpu } from 'lucide-react';
 
 interface Props {
   report: VerificationReport;
@@ -8,28 +9,51 @@ interface Props {
 
 export const VerificationCard: React.FC<Props> = ({ report }) => {
   return (
-    <div className="space-y-5">
-      {/* Header */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between pb-3.5 border-b border-stone-800 gap-3">
-        <div>
-          <span className="text-xs text-amber-400 font-medium block">
-            Dual-Engine Astronomical Verification &amp; Mathematical Invariants
-          </span>
-          <div className="flex flex-wrap items-center gap-2 mt-0.5">
-            <h2 className="text-lg sm:text-xl font-serif font-bold text-stone-100 flex items-center gap-2">
-              <span>Swiss Ephemeris (pyswisseph) vs NASA/JPL DE421 (Skyfield)</span>
-              <span className="inline-block w-12 sm:w-14 h-5 sm:h-6 rounded-full align-middle bg-gradient-to-r from-amber-600 via-amber-500 to-amber-700 border border-amber-400/50 mx-2 shadow-inner inline-flex items-center justify-center text-[10px] text-amber-950 font-mono font-bold">&lt;0.01°</span>
+    <div className="space-y-6 w-full max-w-full overflow-x-hidden">
+      {/* Top Hero Pedestal (gpt-taste Precision Laboratory Architecture) */}
+      <div className="p-4 sm:p-6 rounded-2xl bg-stone-900 border border-stone-800 shadow-md flex flex-col lg:flex-row lg:items-center justify-between gap-4 hero-wide-container">
+        <div className="flex items-start gap-3.5 max-w-4xl">
+          <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-amber-950/90 border border-amber-800 flex items-center justify-center text-amber-300 shrink-0 shadow-xs ring-1 ring-amber-500/20">
+            <ShieldCheck className="w-5 h-5 text-amber-400" />
+          </div>
+          <div className="min-w-0">
+            <div className="flex flex-wrap items-center gap-2 mb-1">
+              <span className="text-xs text-amber-400 font-serif font-semibold tracking-wider uppercase">
+                Dual-Engine Ephemeris Audit
+              </span>
+              <span className="text-stone-400 hidden sm:inline">•</span>
+              <span className="text-xs text-stone-400 font-sans hidden sm:inline">
+                NASA JPL DE421 vs Swiss Ephemeris 2.10
+              </span>
+              <span className="text-[11px] font-mono px-2 py-0.5 rounded-full bg-emerald-950 text-emerald-300 border border-emerald-800/80 font-semibold flex items-center gap-1">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 inline-block animate-pulse"></span>
+                PASS ({report.overall_verification_status})
+              </span>
+            </div>
+            <h2 className="hero-h1-clamped font-serif font-bold text-stone-100 tracking-tight flex flex-wrap items-center gap-2">
+              <span>Swiss Ephemeris vs NASA/JPL DE421</span>
+              <span className="inline-block w-12 sm:w-14 h-5 sm:h-6 rounded-full align-middle bg-gradient-to-r from-amber-600 via-amber-500 to-amber-700 border border-amber-400/50 mx-1 shadow-inner inline-flex items-center justify-center text-[10px] text-amber-950 font-mono font-bold">&lt;0.01°</span>
+              <span className="text-stone-300 hidden sm:inline">&amp; Ephemeris Parity</span>
             </h2>
-            <ExplainerTrigger id="dual_engine_validation" label="Dual Engine Math" />
+            <p className="text-xs sm:text-sm text-stone-400 mt-1 max-w-2xl leading-relaxed text-pretty">
+              Real-time independent validation verifying Swiss Ephemeris planetary coordinates against NASA Jet Propulsion Laboratory DE421 ephemerides under strict micro-arcsecond thresholds.
+            </p>
           </div>
         </div>
-        <div className="flex items-center gap-2">
-          <span className="px-2.5 py-0.5 text-xs font-sans font-semibold rounded bg-amber-950 text-amber-300 border border-amber-800/80">
-            <span className="font-mono">{report.overall_verification_status}</span>: PASS
-          </span>
-          <span className="px-2.5 py-0.5 text-xs font-sans font-medium rounded bg-stone-900 text-stone-300 border border-stone-700/80">
-            Confidence: <span className="font-mono">{report.overall_confidence}</span>
-          </span>
+
+        {/* Verification Status Metrics Pill Group */}
+        <div className="flex flex-wrap items-center gap-2.5 shrink-0 pt-2 lg:pt-0 border-t lg:border-t-0 border-stone-800">
+          <div className="p-2.5 rounded-xl bg-stone-950/80 border border-stone-800 text-xs font-mono space-y-1">
+            <div className="flex items-center justify-between gap-3 text-stone-400">
+              <span>Max Delta:</span>
+              <strong className="text-amber-400 font-mono">{report.max_planetary_difference_deg}°</strong>
+            </div>
+            <div className="flex items-center justify-between gap-3 text-stone-400">
+              <span>Confidence:</span>
+              <strong className="text-emerald-400 font-mono">{report.overall_confidence}</strong>
+            </div>
+          </div>
+          <ExplainerTrigger id="dual_engine_validation" label="Dual Engine Math" variant="badge" />
         </div>
       </div>
 

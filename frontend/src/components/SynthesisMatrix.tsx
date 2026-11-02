@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ArrowLeft, ArrowRight, ChevronDown } from 'lucide-react';
+import { ArrowLeft, ArrowRight, ChevronDown, Layers } from 'lucide-react';
 import type { Synthesis } from '../types';
 import { DomainConsensusRadar } from './ChartWheelVisualizer';
 import { ExplainerTrigger } from './ExplainerTrigger';
@@ -55,42 +55,56 @@ export const SynthesisMatrix: React.FC<Props> = ({ synthesis, onNavigate }) => {
       <div className="reticle-corner-br" />
 
       {/* Header & Divergence Metric (gpt-taste Artistic Asymmetry & Wide H1) */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between pb-4 border-b border-stone-800 gap-3.5 hero-wide-container">
-        <div className="max-w-3xl">
-          <span className="text-xs text-amber-400 font-serif font-semibold tracking-wider uppercase block">
-            Cross-Cultural Convergence &amp; Consensus Matrix
-          </span>
-          <div className="flex flex-wrap items-center gap-2 mt-1">
-            <h2 className="text-xl sm:text-2xl lg:text-3xl font-serif font-bold text-stone-100 tracking-tight">
-              Where Traditions Agree vs Differ
-              <span className="inline-block w-12 sm:w-14 h-5 sm:h-6 rounded-full align-middle bg-gradient-to-r from-amber-600 via-amber-500 to-amber-700 border border-amber-400/50 mx-2 shadow-inner inline-flex items-center justify-center text-[10px] text-amber-950 font-mono font-bold">9-Sys</span>
-            </h2>
-            <ExplainerTrigger id="three_cluster_consensus" label="How We Compare" variant="badge" />
+      <div className="flex flex-col lg:flex-row lg:items-center justify-between pb-4 sm:pb-5 border-b border-stone-800 gap-4 hero-wide-container">
+        <div className="flex items-start gap-3.5 max-w-4xl">
+          <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-amber-950/90 border border-amber-800 flex items-center justify-center text-amber-300 shrink-0 shadow-xs ring-1 ring-amber-500/20">
+            <Layers className="w-5 h-5 text-amber-400" />
           </div>
-          <p className="text-xs sm:text-sm text-stone-400 mt-1 hidden sm:block max-w-[65ch] text-pretty">
-            Comparing Vedic (Indian), Western (Hellenistic), and Chinese (BaZi) traditions. Maya &amp; Tibetan traditions provide additional symbolic layers.
-          </p>
+          <div className="min-w-0">
+            <div className="flex flex-wrap items-center gap-2 mb-1">
+              <span className="text-xs text-amber-400 font-serif font-semibold tracking-wider uppercase">
+                Cross-Cultural Convergence
+              </span>
+              <span className="text-stone-400 hidden sm:inline">•</span>
+              <span className="text-xs text-stone-400 font-sans hidden sm:inline">
+                Triangulation &amp; Divergence Matrix
+              </span>
+              <span className="text-[11px] font-mono px-2 py-0.5 rounded-full bg-amber-950/80 text-amber-300 border border-amber-800/80 font-medium">
+                Consensus
+              </span>
+            </div>
+            <h2 className="hero-h1-clamped font-serif font-bold text-stone-100 tracking-tight flex flex-wrap items-center gap-2">
+              <span>Where Traditions Agree vs Differ</span>
+              <span className="inline-block w-12 sm:w-14 h-5 sm:h-6 rounded-full align-middle bg-gradient-to-r from-amber-600 via-amber-500 to-amber-700 border border-amber-400/50 mx-1 shadow-inner inline-flex items-center justify-center text-[10px] text-amber-950 font-mono font-bold">9-Sys</span>
+            </h2>
+            <p className="text-xs sm:text-sm text-stone-400 mt-1 max-w-2xl leading-relaxed text-pretty">
+              Systematic comparison across 9 life domains—quantifying where Vedic, Hellenistic, and BaZi systems independently corroborate, and where unique cultural frameworks diverge.
+            </p>
+          </div>
         </div>
 
-        {/* Divergence Metric Badge */}
-        <div className="flex items-center gap-3 px-3 py-1.5 border-l border-stone-800/80">
-          <div className="text-right">
-            <div className="flex items-center justify-end gap-1.5">
-              <span className="text-xs text-stone-300 font-medium block">
-                Traditions Differ
+        {/* Divergence Metric Badge & Explainer */}
+        <div className="flex flex-wrap items-center gap-3 shrink-0 pt-2 lg:pt-0 border-t lg:border-t-0 border-stone-800">
+          <div className="flex items-center gap-3 p-2.5 rounded-xl bg-stone-900/80 border border-stone-800">
+            <div className="text-right">
+              <div className="flex items-center justify-end gap-1.5">
+                <span className="text-xs text-stone-300 font-medium block">
+                  Divergence
+                </span>
+                <ExplainerTrigger id="honest_divergence_rate" size="xs" variant="icon" />
+              </div>
+              <span className="text-sm font-mono font-bold text-rose-400 tabular-nums">
+                {metrics.divergence_rate_percent}%
               </span>
-              <ExplainerTrigger id="honest_divergence_rate" size="xs" variant="icon" />
             </div>
-            <span className="text-sm font-mono font-bold text-rose-400 tabular-nums">
-              {metrics.divergence_rate_percent}%
-            </span>
+            <div className="h-6 w-px bg-stone-800"></div>
+            <div className="text-xs text-stone-400 space-y-0.5 font-sans">
+              <div>Strong: <strong className="text-amber-300 font-mono">{metrics.strong_domains}</strong></div>
+              <div>Moderate: <strong className="text-stone-300 font-mono">{metrics.moderate_domains}</strong></div>
+              <div>Divergent: <strong className="text-rose-400 font-mono">{metrics.divergent_domains}</strong></div>
+            </div>
           </div>
-          <div className="h-6 w-px bg-stone-800"></div>
-          <div className="text-xs text-stone-400 space-y-0.5 font-sans">
-            <div>High Agreement: <strong className="text-amber-300 font-mono">{metrics.strong_domains}</strong></div>
-            <div>Moderate: <strong className="text-stone-300 font-mono">{metrics.moderate_domains}</strong></div>
-            <div>Different: <strong className="text-rose-400 font-mono">{metrics.divergent_domains}</strong></div>
-          </div>
+          <ExplainerTrigger id="three_cluster_consensus" label="How We Compare" variant="badge" />
         </div>
       </div>
 
