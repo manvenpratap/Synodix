@@ -244,10 +244,10 @@ export const SynastryScreen: React.FC<Props> = ({
 
             <div className="min-w-0">
               <div className="flex flex-wrap items-center gap-2 mb-1">
-                <span className="text-xs text-amber-400 font-serif font-semibold tracking-wider uppercase">
-                  Relational Astrometry
+                <span className="text-xs text-amber-400 font-serif font-semibold">
+                  Relational astrometry
                 </span>
-                <span className="text-stone-400 hidden sm:inline">•</span>
+                <span className="text-stone-600 hidden sm:inline" aria-hidden="true">/</span>
                 <span className="text-xs text-stone-400 font-sans hidden sm:inline">
                   Inter-Chart Resonance &amp; Composite Matrix
                 </span>
@@ -672,7 +672,7 @@ export const SynastryScreen: React.FC<Props> = ({
                 {Object.values(synastryReport.traditionAnalyses).map((trad) => (
                   <div
                     key={trad.traditionId}
-                    className="bento-card bg-stone-900/90 rounded-xl p-4 border border-stone-800 hover:border-amber-700/60 hover:shadow-md transition-all duration-300 flex flex-col justify-between space-y-3"
+                    className="bento-card bg-stone-900/90 rounded-xl p-4 border border-stone-800 hover:border-amber-700/60 hover:shadow-md transition-colors duration-200 flex flex-col justify-between space-y-3"
                   >
                     <div>
                       <div className="flex items-center justify-between border-b border-stone-800 pb-2">

@@ -381,7 +381,7 @@ const HorizontalAccordionGallery: React.FC<{
               onMouseEnter={() => setHoveredTradition(key)}
               onMouseLeave={() => setHoveredTradition(null)}
               onClick={() => onSelectTradition(key)}
-              className={`horizontal-accordion-blade ${isBladeExpanded ? 'is-active ring-1 ring-amber-500/50 shadow-lg' : 'opacity-95 hover:opacity-100'} cursor-pointer border ${theme.containerBorder} ${theme.containerBg} flex flex-col justify-between p-3.5 transition-all duration-500 select-none overflow-hidden relative shadow-md`}
+              className={`horizontal-accordion-blade ${isBladeExpanded ? 'is-active ring-1 ring-amber-500/50 shadow-lg' : 'opacity-95 hover:opacity-100'} cursor-pointer border ${theme.containerBorder} ${theme.containerBg} flex flex-col justify-between p-3.5 transition-[flex,transform] duration-500 select-none overflow-hidden relative shadow-md`}
               style={{
                 flex: isBladeExpanded ? 4 : 1,
               }}
@@ -392,10 +392,10 @@ const HorizontalAccordionGallery: React.FC<{
                   <span className="w-9 h-9 rounded-xl bg-stone-900 border border-amber-400/40 flex items-center justify-center text-xs font-mono font-bold text-amber-300 shadow-md ring-1 ring-amber-500/20">
                     {theme.glyph}
                   </span>
-                  <div className="[writing-mode:vertical-rl] rotate-180 text-xs font-sans font-bold text-stone-100 group-hover:text-amber-200 tracking-widest uppercase whitespace-nowrap drop-shadow-sm transition-colors">
+                  <div className="[writing-mode:vertical-rl] rotate-180 text-xs font-sans font-bold text-stone-100 group-hover:text-amber-200 whitespace-nowrap drop-shadow-sm transition-colors">
                     {theme.name}
                   </div>
-                  <span className="w-2.5 h-2.5 rounded-full bg-amber-400 shadow-[0_0_8px_rgba(251,191,36,0.6)]" />
+                  <span className="w-2.5 h-2.5 rounded-full bg-amber-400 shadow-sm shadow-amber-500/50" />
                 </div>
               ) : (
                 /* Expanded Presentation with Deep Cultural Immersion */
@@ -435,7 +435,7 @@ const HorizontalAccordionGallery: React.FC<{
                     <div className="grid grid-cols-3 gap-1.5 p-2 rounded-lg bg-stone-950/80 border border-stone-800">
                       {getTraditionKeyMetrics(key).map((m, idx) => (
                         <div key={idx} className="min-w-0 text-center px-1">
-                          <span className="text-[10px] text-stone-400 block font-medium uppercase tracking-wider truncate">
+                          <span className="text-[10px] text-stone-400 block font-medium truncate">
                             {m.label}
                           </span>
                           <strong className="text-[11px] font-mono font-bold text-amber-300 block truncate mt-0.5">
@@ -448,7 +448,7 @@ const HorizontalAccordionGallery: React.FC<{
                     {/* Instrument Feature Tag */}
                     <div className="p-2 rounded-lg bg-stone-900/90 border border-stone-800 flex items-center justify-between">
                       <div className="min-w-0">
-                        <span className="text-[10px] font-mono text-amber-400 block uppercase tracking-wider">
+                        <span className="text-[10px] font-mono text-amber-400 block font-medium">
                           Astrometric Instrument
                         </span>
                         <span className="text-xs font-sans font-semibold text-stone-200 block truncate">
@@ -493,7 +493,7 @@ const HorizontalAccordionGallery: React.FC<{
           return (
             <div
               key={key}
-              className={`rounded-xl border transition-all duration-200 overflow-hidden ${
+              className={`rounded-xl border transition-colors duration-200 overflow-hidden ${
                 isExpanded
                   ? `${theme.containerBg} ${theme.containerBorder} ring-1 ring-amber-500/40 shadow-lg`
                   : 'bg-stone-900/80 border-stone-800 hover:border-stone-700'
@@ -560,7 +560,7 @@ const HorizontalAccordionGallery: React.FC<{
                   <div className="grid grid-cols-3 gap-1.5 p-2 rounded-lg bg-stone-950/70 border border-stone-800/80">
                     {metrics.map((m, idx) => (
                       <div key={idx} className="min-w-0 text-center px-1">
-                        <span className="text-[10px] text-stone-400 block font-medium uppercase tracking-wider truncate">
+                        <span className="text-[10px] text-stone-400 block font-medium truncate">
                           {m.label}
                         </span>
                         <strong className="text-[11px] font-mono font-bold text-amber-300 block truncate mt-0.5">
@@ -625,10 +625,10 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
           </div>
           <div className="min-w-0">
             <div className="flex flex-wrap items-center gap-2 mb-1">
-              <span className="text-xs text-amber-400 font-serif font-semibold tracking-wider uppercase">
-                Comparative Astrometry
+              <span className="text-xs text-amber-400 font-serif font-semibold">
+                Comparative astrometry
               </span>
-              <span className="text-stone-400 hidden sm:inline">•</span>
+              <span className="text-stone-600 hidden sm:inline" aria-hidden="true">/</span>
               <span className="text-xs text-stone-400 font-sans hidden sm:inline">
                 9 Global Civilizational Worldviews
               </span>
@@ -642,7 +642,7 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
               <span className="text-stone-300 hidden sm:inline">&amp; Cosmologies</span>
             </h1>
             <p className="text-xs sm:text-sm text-stone-400 mt-1 max-w-2xl sm:max-w-3xl leading-relaxed text-pretty font-sans">
-              Explore your natal chart across 9 distinct celestial systems—from Vedic sidereal nakshatras and Hellenistic planetary sect to BaZi solar terms and Maya sacred trecenas.
+              Explore your natal chart across 9 distinct celestial systems: from Vedic sidereal nakshatras and Hellenistic planetary sect to BaZi solar terms and Maya sacred trecenas.
             </p>
           </div>
         </div>
@@ -858,7 +858,7 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
                     triggerHaptic('light');
                     setActiveTab(key);
                   }}
-                  className={`px-3 py-2 min-h-[44px] rounded-lg text-xs font-mono shrink-0 transition-all flex items-center gap-1.5 cursor-pointer snap-start ${
+                  className={`px-3 py-2 min-h-[44px] rounded-lg text-xs font-mono shrink-0 transition-colors flex items-center gap-1.5 cursor-pointer snap-start ${
                     isSelected
                       ? 'bg-amber-600 text-stone-950 font-bold shadow-xs'
                       : 'bg-stone-900 border border-stone-800 text-stone-300 hover:text-white'
@@ -897,8 +897,8 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
                 </div>
 
                 <div className="text-xs font-mono text-stone-300 bg-black/40 p-2.5 rounded-lg border border-white/10 space-y-1">
-                  <span className="text-[10px] text-stone-400 block uppercase tracking-wider font-semibold">
-                    Cultural Lineage & Ephemeris
+                  <span className="text-[10px] text-stone-400 block font-semibold">
+                    Cultural Lineage &amp; Ephemeris
                   </span>
                   <p className="text-[11px] text-stone-200 leading-relaxed font-sans">
                     {currentTheme.lineage}
@@ -910,7 +910,7 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
                 </div>
 
                 <div className="p-2.5 rounded-lg bg-stone-900/80 border border-stone-800 space-y-1">
-                  <span className="text-[10px] font-mono text-amber-400 block uppercase tracking-wider">
+                  <span className="text-[10px] font-mono text-amber-400 block font-medium">
                     Astrometric Instrument
                   </span>
                   <span className="text-xs font-sans font-semibold text-stone-200 block">
@@ -931,7 +931,7 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
 
               {/* Fast 9-Tradition Switcher Grid */}
               <div className="p-3 rounded-xl bg-stone-900/90 border border-stone-800 space-y-2">
-                <span className="text-[10px] font-mono text-stone-400 uppercase tracking-wider block font-semibold">
+                <span className="text-[10px] font-mono text-stone-400 block font-semibold">
                   Switch Tradition Inspector
                 </span>
                 <div className="grid grid-cols-3 gap-1.5">
@@ -943,7 +943,7 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
                         key={key}
                         type="button"
                         onClick={() => setActiveTab(key)}
-                        className={`px-2 py-1.5 rounded-md text-xs font-mono transition-all text-center truncate ${
+                        className={`px-2 py-1.5 rounded-md text-xs font-mono transition-colors text-center truncate ${
                           isSelected
                             ? 'bg-amber-600 text-stone-950 font-bold shadow-xs'
                             : 'bg-stone-800/80 hover:bg-stone-700 text-stone-300'

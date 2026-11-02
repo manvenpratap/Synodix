@@ -1,7 +1,7 @@
 # Synodix: Project Context & Working Memory
 
-**Last Updated:** 2026-11-02 23:37:28
-**Version:** 2.46.0  
+**Last Updated:** 2026-11-02 23:54:20
+**Version:** 2.47.0  
 **Stack:** Python 3.12 (FastAPI, Swiss Ephemeris 2.10, Skyfield DE421) + TypeScript / React 19 / Vite / Tailwind CSS v4 / Framer Motion / Capacitor 8 (iOS & Android)  
 **Workspace:** `/Volumes/Study/Projects/Astrology` (symlinked as `/Volumes/Study/Astrology`)  
 **Git Remote:** `https://github.com/manvenpratap/Synodix.git`  
@@ -10,7 +10,22 @@
 
 ## 1. Current Status & Milestone
 
-- **Active Phase**: Impeccable Critique & Universal Module Hero Standardization (v2.46.0) (Completed)
+- **Active Phase**: Hallmark Sloplint Floor Compliance & Editorial Typography Polish (v2.47.0) (Completed)
+- **Hallmark Sloplint Floor Compliance & Editorial Typography Polish (v2.47.0)**:
+  - **Exhaustive Hallmark Floor & Gate Audit**:
+    - Ran Hallmark `sloplint.mjs` against all 7 hero components (`BirthDataForm`, `TraditionCharts`, `SynthesisMatrix`, `ReadingView`, `SynastryScreen`, `VerificationCard`, `FeatureGuideScreen`).
+    - Identified and eradicated 25 initial violations across Gate 67 (tracked-caps label / uppercase shouting reflex), Gate 19 (AI-generated em-dash punctuation tells), Gate 10a (unscoped `transition-all` on layout containers), Gate 48 (color literals in class strings), and Gate 63 (template middle-dot separators).
+  - **Editorial Typography Elevation**:
+    - **Gate 67 (Tracked Caps Ban)**: Replaced artificial uppercase tracking with editorial sentence case in the serif heading face (`font-serif font-semibold text-xs text-amber-400`) across all 8 module kickers.
+    - **Gate 63 (Template Punctuation)**: Replaced artificial middle-dot bullet separators (`•`) with editorial subtle slash dividers (`/` with `aria-hidden="true"`).
+    - **Gate 19 (Copy Tells)**: Eliminated all AI-pattern em-dashes (`—`) in module subtitles and motto bands, replacing them with natural punctuation (colons, commas, or periods).
+    - **Gate 10a (Composite Transitions)**: Replaced all catch-all `transition-all` declarations on cards, blades, and buttons with composite-safe `transition-colors duration-200` or `transition-[flex,transform]`.
+    - **Gate 48 (Token Consistency)**: Replaced literal hex/rgba shadows (`shadow-[0_0_8px_rgba(251,191,36,0.6)]`) with tokenized Tailwind classes (`shadow-sm shadow-amber-500/50`).
+  - **Automated Verification**:
+    - `node sloplint.mjs --scope app --tier floor`: **CLEAN (0 FAIL, 0 REFLEX, 0 WARN across all 7 files)**.
+    - 0 TypeScript compilation errors (`npx tsc --noEmit`).
+    - Clean Vite production build (`npm run build`).
+    - Full 29/29 regression test suite passing in 116.16s (`./pipeline.sh test --summary`).
 - **Impeccable Critique & Universal Module Hero Standardization (v2.46.0)**:
   - **Exhaustive Impeccable Design Critique across All 8 Screens**:
     - Dispatched isolated parallel subagents for Assessment A (Design Review: Nielsen 10 Usability Heuristics scored at 35.8/40 · 89.5% · Grade A-, cognitive load, emotional journey, typographic hierarchy) and Assessment B (Detector & Layout Inspector: DOM bounding box telemetry across 1440px desktop and 390px mobile viewports).

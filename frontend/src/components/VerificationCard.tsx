@@ -18,10 +18,10 @@ export const VerificationCard: React.FC<Props> = ({ report }) => {
           </div>
           <div className="min-w-0">
             <div className="flex flex-wrap items-center gap-2 mb-1">
-              <span className="text-xs text-amber-400 font-serif font-semibold tracking-wider uppercase">
-                Dual-Engine Ephemeris Audit
+              <span className="text-xs text-amber-400 font-serif font-semibold">
+                Dual-engine ephemeris audit
               </span>
-              <span className="text-stone-400 hidden sm:inline">•</span>
+              <span className="text-stone-600 hidden sm:inline" aria-hidden="true">/</span>
               <span className="text-xs text-stone-400 font-sans hidden sm:inline">
                 NASA JPL DE421 vs Swiss Ephemeris 2.10
               </span>
@@ -62,7 +62,7 @@ export const VerificationCard: React.FC<Props> = ({ report }) => {
         {report.invariants.map((inv, idx) => (
           <div
             key={idx}
-            className="bento-card bg-stone-900/90 p-4 rounded-xl border border-stone-800 flex flex-col justify-between hover:border-amber-700/80 transition-all duration-300 cursor-pointer shadow-xs"
+            className="bento-card bg-stone-900/90 p-4 rounded-xl border border-stone-800 flex flex-col justify-between hover:border-amber-700/80 transition-colors duration-200 cursor-pointer shadow-xs"
           >
             <div>
               <div className="flex items-center justify-between">

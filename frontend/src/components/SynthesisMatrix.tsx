@@ -62,10 +62,10 @@ export const SynthesisMatrix: React.FC<Props> = ({ synthesis, onNavigate }) => {
           </div>
           <div className="min-w-0">
             <div className="flex flex-wrap items-center gap-2 mb-1">
-              <span className="text-xs text-amber-400 font-serif font-semibold tracking-wider uppercase">
-                Cross-Cultural Convergence
+              <span className="text-xs text-amber-400 font-serif font-semibold">
+                Cross-cultural convergence
               </span>
-              <span className="text-stone-400 hidden sm:inline">•</span>
+              <span className="text-stone-600 hidden sm:inline" aria-hidden="true">/</span>
               <span className="text-xs text-stone-400 font-sans hidden sm:inline">
                 Triangulation &amp; Divergence Matrix
               </span>
@@ -78,7 +78,7 @@ export const SynthesisMatrix: React.FC<Props> = ({ synthesis, onNavigate }) => {
               <span className="inline-block w-12 sm:w-14 h-5 sm:h-6 rounded-full align-middle bg-gradient-to-r from-amber-600 via-amber-500 to-amber-700 border border-amber-400/50 mx-1.5 shadow-inner inline-flex items-center justify-center text-[10px] text-amber-950 font-mono font-bold">9-Sys</span>
             </h1>
             <p className="text-xs sm:text-sm text-stone-400 mt-1 max-w-2xl sm:max-w-3xl leading-relaxed text-pretty font-sans">
-              Systematic comparison across 9 life domains—quantifying where Vedic, Hellenistic, and BaZi systems independently corroborate, and where unique cultural frameworks diverge.
+              Systematic comparison across 9 life domains, quantifying where Vedic, Hellenistic, and BaZi systems independently corroborate, and where unique cultural frameworks diverge.
             </p>
           </div>
         </div>

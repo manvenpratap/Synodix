@@ -235,10 +235,10 @@ export const FeatureGuideScreen: React.FC<Props> = ({ onNavigate, initialExplain
           </div>
           <div className="min-w-0">
             <div className="flex flex-wrap items-center gap-2 mb-1">
-              <span className="text-xs text-amber-400 font-serif font-semibold tracking-wider uppercase">
-                {activeSection === 'evidence' ? 'Empirical Science' : 'Astrometric Codex'}
+              <span className="text-xs text-amber-400 font-serif font-semibold">
+                {activeSection === 'evidence' ? 'Empirical science' : 'Astrometric codex'}
               </span>
-              <span className="text-stone-400 hidden sm:inline">•</span>
+              <span className="text-stone-600 hidden sm:inline" aria-hidden="true">/</span>
               <span className="text-xs text-stone-400 font-sans hidden sm:inline">
                 {activeSection === 'evidence' ? '500 Titans Monte Carlo Benchmark' : '50 Astrometric Knowledge Topics'}
               </span>
@@ -499,7 +499,7 @@ export const FeatureGuideScreen: React.FC<Props> = ({ onNavigate, initialExplain
                             if (el) el.scrollIntoView({ behavior: 'smooth' });
                           }
                         }}
-                        className={`w-full text-left p-2.5 min-h-[44px] rounded-lg transition-all duration-200 cursor-pointer flex items-center justify-between gap-2 select-none ${isSelected
+                        className={`w-full text-left p-2.5 min-h-[44px] rounded-lg transition-colors duration-150 cursor-pointer flex items-center justify-between gap-2 select-none ${isSelected
                             ? 'bg-stone-900 border border-amber-500/80 text-amber-200 shadow-md ring-1 ring-amber-500/30'
                             : 'hover:bg-stone-900/80 text-stone-300 border border-transparent hover:border-stone-800'
                           }`}

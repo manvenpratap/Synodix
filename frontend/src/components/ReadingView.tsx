@@ -105,10 +105,10 @@ export const ReadingView: React.FC<Props> = ({ data, subjectName, onNavigate }) 
 
             <div className="min-w-0">
               <div className="flex flex-wrap items-center gap-2 mb-1">
-                <span className="text-xs text-amber-400 font-serif font-semibold tracking-wider uppercase">
-                  Corroboration Dossier
+                <span className="text-xs text-amber-400 font-serif font-semibold">
+                  Corroboration dossier
                 </span>
-                <span className="text-stone-400 hidden sm:inline">•</span>
+                <span className="text-stone-600 hidden sm:inline" aria-hidden="true">/</span>
                 <span className="text-xs text-stone-400 font-sans hidden sm:inline">
                   Multi-Tradition Synthesis Monograph
                 </span>

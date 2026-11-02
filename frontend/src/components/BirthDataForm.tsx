@@ -561,10 +561,10 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
 
           <div className="min-w-0">
             <div className="flex flex-wrap items-center gap-2 mb-1">
-              <span className="text-xs text-amber-400 font-serif font-semibold tracking-wider uppercase">
-                Astrometric Calibration
+              <span className="text-xs text-amber-400 font-serif font-semibold">
+                Astrometric calibration
               </span>
-              <span className="text-stone-400 hidden sm:inline">•</span>
+              <span className="text-stone-600 hidden sm:inline" aria-hidden="true">/</span>
               <span className="text-xs text-stone-400 font-sans hidden sm:inline">
                 {activeMode === 'custom' ? 'Direct Ephemeris Calibration' : `${samplePresets.length || 500} Verified Historical Records`}
               </span>
@@ -1400,7 +1400,7 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
                         handleSelectTitan(p, false);
                       }
                     }}
-                    className={`btn-press bento-card flex flex-col text-left p-2.5 rounded-lg border transition-all duration-300 cursor-pointer relative group min-h-[62px] focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:ring-offset-1 focus-visible:ring-offset-stone-950 ${isSelected
+                    className={`btn-press bento-card flex flex-col text-left p-2.5 rounded-lg border transition-colors duration-200 cursor-pointer relative group min-h-[62px] focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:ring-offset-1 focus-visible:ring-offset-stone-950 ${isSelected
                       ? 'bg-amber-950/80 border-amber-500 shadow-md text-stone-100 ring-1 ring-amber-500/50'
                       : 'bg-stone-900/90 hover:bg-stone-800 border-stone-800 text-stone-300 hover:border-stone-600'
                       }`}
