@@ -1,7 +1,7 @@
 # Synodix: Project Context & Working Memory
 
-**Last Updated:** 2026-11-02 07:01:58
-**Version:** 2.39.0  
+**Last Updated:** 2026-11-02 08:53:31
+**Version:** 2.40.0  
 **Stack:** Python 3.12 (FastAPI, Swiss Ephemeris 2.10, Skyfield DE421) + TypeScript / React 19 / Vite / Tailwind CSS v4 / Framer Motion / Capacitor 8 (iOS & Android)  
 **Workspace:** `/Volumes/Study/Projects/Astrology` (symlinked as `/Volumes/Study/Astrology`)  
 **Git Remote:** `https://github.com/manvenpratap/Synodix.git`  
@@ -10,7 +10,20 @@
 
 ## 1. Current Status & Milestone
 
-- **Active Phase**: gpt-taste Mobile Viewport & Touch Ergonomics Universal Hardening (v2.39.0) (Completed)
+- **Active Phase**: Mobile Design System & Haptic Feedback Engine Architecture (v2.40.0) (Completed)
+- **Mobile Design System & Haptic Feedback Engine Architecture (v2.40.0)**:
+  - **Mobile Feasibility & Risk Index (MFRI)**: Evaluated at $\mathbf{+5}$ (Safe/Low Risk) under touch-first, offline-capable, and platform-respectful constraints.
+  - **Calibrated Haptic Feedback Engine (`frontend/src/utils/haptics.ts`)**:
+    - Implemented zero-dependency native physical feedback using `navigator.vibrate` with safe fallbacks and zero desktop overhead.
+    - Wired `selection` (8ms subtle tick) into bottom navigation and mode segmented toggles.
+    - Wired `medium` (20ms affirmative tap) into primary calculation CTA (`Calculate All 9 Traditions`) and synastry swap.
+    - Wired `success` ([12ms, 35ms, 18ms] double pulse) into Vault profile saving.
+    - Wired `light` into the mobile 9-tradition quick switcher strip.
+  - **Formalized `MOBILE_DESIGN.md`**: Created authoritative specification covering MFRI scoring, touch target hierarchy ($\ge 44\times 44\text{px}$ / $\ge 48\text{px}$ CTAs), Fitts' law natural thumb zones, haptic pulse patterns, iOS HIG & Android Material 3 invariants, and continuous Playwright mobile test harness.
+  - **Automated Verification**:
+    - 0 TypeScript errors (`npx tsc --noEmit`).
+    - Clean Vite production build in 596ms (`npm run build`).
+    - Full 29/29 Playwright regression suite passing in 114.7s (`./pipeline.sh test --summary`).
 - **gpt-taste Mobile Viewport & Touch Ergonomics Universal Hardening (v2.39.0)**:
   - **Dynamic Mobile Typography Clamping (`.hero-h1-clamped`)**:
     - Calibrated `.hero-h1-clamped` from `clamp(2rem, 4.5vw, 3.75rem)` to `clamp(1.4rem, 4.5vw, 3.75rem)`.

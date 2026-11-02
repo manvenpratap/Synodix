@@ -37,6 +37,7 @@ import { ReadingView } from './components/ReadingView';
 import { FeatureGuideScreen } from './components/FeatureGuideScreen';
 import { SynastryScreen } from './components/SynastryScreen';
 import { getPrimaryProfile } from './utils/vault';
+import { triggerHaptic } from './utils/haptics';
 import { ExplainerProvider } from './context/ExplainerContext';
 import { useExplainer } from './context/useExplainer';
 import { FeatureExplainerModal } from './components/FeatureExplainerModal';
@@ -1135,6 +1136,7 @@ function AppContent() {
               key={item.id}
               type="button"
               onClick={() => {
+                triggerHaptic('selection');
                 if (isMore) {
                   setIsMobileSidebarOpen(true);
                 } else {

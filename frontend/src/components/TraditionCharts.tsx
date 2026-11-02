@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { Layers, Sliders, ArrowLeft, ArrowRight, Compass } from 'lucide-react';
 import type { ChartResponse } from '../types';
 import { ExplainerTrigger } from './ExplainerTrigger';
+import { triggerHaptic } from '../utils/haptics';
 import { TraditionVerticalCarousel, TraditionKey, TRADITION_ORDER } from './TraditionVerticalCarousel';
 import {
   NorthIndianChart,
@@ -452,7 +453,10 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
                 <button
                   key={mode}
                   type="button"
-                  onClick={() => setChartViewMode(mode)}
+                  onClick={() => {
+                    triggerHaptic('selection');
+                    setChartViewMode(mode);
+                  }}
                   className={`relative px-2.5 sm:px-3 py-1.5 min-h-[44px] sm:min-h-[34px] text-xs font-mono rounded-md cursor-pointer transition-colors flex items-center justify-center ${
                     isModeActive
                       ? 'bg-amber-950 text-amber-200 font-bold border border-amber-700/80 shadow-xs'
@@ -473,7 +477,10 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
           <div className="flex items-center justify-center sm:justify-start gap-1 p-0.5 rounded-lg bg-stone-900 text-xs font-mono shrink-0">
             <button
               type="button"
-              onClick={() => setLayoutMode('carousel')}
+              onClick={() => {
+                triggerHaptic('selection');
+                setLayoutMode('carousel');
+              }}
               className={`flex items-center gap-1.5 px-3 py-1.5 min-h-[44px] sm:min-h-[34px] rounded-md cursor-pointer transition-colors font-serif text-xs ${
                 layoutMode === 'carousel'
                   ? 'bg-amber-950 text-amber-300 border border-amber-700/80 font-bold'
@@ -489,7 +496,10 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
             </button>
             <button
               type="button"
-              onClick={() => setLayoutMode('accordion')}
+              onClick={() => {
+                triggerHaptic('selection');
+                setLayoutMode('accordion');
+              }}
               className={`flex items-center gap-1.5 px-3 py-1.5 min-h-[44px] sm:min-h-[34px] rounded-md cursor-pointer transition-colors font-serif text-xs ${
                 layoutMode === 'accordion'
                   ? 'bg-amber-950 text-amber-300 border border-amber-700/80 font-bold'
@@ -505,7 +515,10 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
             </button>
             <button
               type="button"
-              onClick={() => setLayoutMode('inspector')}
+              onClick={() => {
+                triggerHaptic('selection');
+                setLayoutMode('inspector');
+              }}
               className={`flex items-center gap-1.5 px-3 py-1.5 min-h-[44px] sm:min-h-[34px] rounded-md cursor-pointer transition-colors font-serif text-xs ${
                 layoutMode === 'inspector'
                   ? 'bg-amber-950 text-amber-300 border border-amber-700/80 font-bold'
@@ -631,7 +644,10 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
                 <button
                   key={key}
                   type="button"
-                  onClick={() => setActiveTab(key)}
+                  onClick={() => {
+                    triggerHaptic('light');
+                    setActiveTab(key);
+                  }}
                   className={`px-3 py-2 min-h-[44px] rounded-lg text-xs font-mono shrink-0 transition-all flex items-center gap-1.5 cursor-pointer snap-start ${
                     isSelected
                       ? 'bg-amber-600 text-stone-950 font-bold shadow-xs'

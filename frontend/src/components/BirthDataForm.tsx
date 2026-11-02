@@ -25,6 +25,7 @@ import {
   Clock
 } from 'lucide-react';
 import { getSavedProfiles, saveProfile, deleteProfile, UserProfile } from '../utils/vault';
+import { triggerHaptic } from '../utils/haptics';
 import { searchCitySuggestions, determineCoordinates, requestDeviceLocation, reverseGeocode, GeocodeResult } from '../utils/geocoding';
 import { getMatchingCities } from '../data/worldCities';
 
@@ -419,6 +420,7 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
   };
 
   const handleSaveToVault = () => {
+    triggerHaptic('success');
     const name = profileSaveName.trim() || customSubjectName.trim() || formData.city_name || 'My Chart';
     saveProfile({
       name,
@@ -517,6 +519,7 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    triggerHaptic('medium');
     onCompute(formData, customSubjectName.trim() || 'Custom Subject');
   };
 
