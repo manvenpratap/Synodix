@@ -223,44 +223,43 @@ export const FeatureGuideScreen: React.FC<Props> = ({ onNavigate, initialExplain
 
   return (
     <div className="w-full max-w-full overflow-x-hidden space-y-6 motion-safe:animate-screen-enter motion-reduce:animate-none">
-      {/* Top Banner & Knowledge Base Headline (gpt-taste Hero Architecture) */}
-      <div className="flex flex-col lg:flex-row lg:items-center justify-between p-5 sm:p-6 rounded-2xl bg-stone-900 border border-stone-800 shadow-md gap-4">
-        <div className="flex items-start gap-4 max-w-5xl">
-          <div className="w-11 h-11 rounded-xl bg-amber-950/90 border border-amber-800 flex items-center justify-center text-amber-300 shrink-0 shadow-xs">
+      {/* Top Banner & Knowledge Base Headline (Universal Hero Token Standard) */}
+      <div className="flex flex-col xl:flex-row xl:items-center justify-between p-4 sm:p-6 rounded-2xl bg-stone-900 border border-stone-800 shadow-md gap-4 hero-wide-container">
+        <div className="flex items-start gap-3.5 min-w-0 flex-1">
+          <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-amber-950/90 border border-amber-800 flex items-center justify-center text-amber-300 shrink-0 shadow-xs ring-1 ring-amber-500/20">
             {activeSection === 'evidence' ? (
               <FlaskConical className="w-5 h-5 text-amber-400" />
             ) : (
-              <BookOpen className="w-5 h-5 text-amber-300" />
+              <BookOpen className="w-5 h-5 text-amber-400" />
             )}
           </div>
           <div className="min-w-0">
-            <div className="flex items-center gap-2">
-              <span
-                className={`text-xs font-serif font-medium px-2.5 py-1 rounded-md border ${activeSection === 'evidence'
-                    ? 'text-amber-300 bg-amber-950/60 border-amber-800/60'
-                    : 'text-amber-300 bg-amber-950/60 border-amber-800/60'
-                  }`}
-              >
-                {activeSection === 'evidence' ? 'Empirical Statistical Validation' : 'Astrometric Knowledge Base'}
+            <div className="flex flex-wrap items-center gap-2 mb-1">
+              <span className="text-xs text-amber-400 font-serif font-semibold tracking-wider uppercase">
+                {activeSection === 'evidence' ? 'Empirical Science' : 'Astrometric Codex'}
               </span>
+              <span className="text-stone-400 hidden sm:inline">•</span>
               <span className="text-xs text-stone-400 font-sans hidden sm:inline">
-                {activeSection === 'evidence' ? '500 Titans Monte Carlo Benchmark' : '50 Authoritative Topics'}
+                {activeSection === 'evidence' ? '500 Titans Monte Carlo Benchmark' : '50 Astrometric Knowledge Topics'}
+              </span>
+              <span className="text-[11px] font-mono px-2 py-0.5 rounded-full bg-amber-950/80 text-amber-300 border border-amber-800/80 font-medium">
+                {activeSection === 'evidence' ? 'p < 0.001' : '50 Topics'}
               </span>
             </div>
-            <h1 className="hero-h1-clamped font-serif font-bold text-stone-100 tracking-tight mt-1 max-w-5xl leading-tight">
+            <h1 className="hero-h1-clamped font-serif font-bold text-stone-100 tracking-tight flex flex-wrap items-center gap-2">
               {activeSection === 'evidence' ? (
                 <>
-                  Empirical Mathematical Evidence &amp; Statistical Validation
-                  <span className="inline-block w-12 sm:w-14 h-5 sm:h-6 rounded-full align-middle bg-gradient-to-r from-amber-600 via-amber-500 to-amber-700 border border-amber-400/50 mx-2 shadow-inner inline-flex items-center justify-center text-[10px] text-amber-950 font-mono font-bold">500</span>
+                  <span>Empirical Mathematical Evidence &amp; Statistical Validation</span>
+                  <span className="inline-block w-12 sm:w-14 h-5 sm:h-6 rounded-full align-middle bg-gradient-to-r from-amber-600 via-amber-500 to-amber-700 border border-amber-400/50 mx-1.5 shadow-inner inline-flex items-center justify-center text-[10px] text-amber-950 font-mono font-bold">500</span>
                 </>
               ) : (
                 <>
-                  Multi-Tradition Astrometric &amp; Cultural Feature Guide
-                  <span className="inline-block w-12 sm:w-14 h-5 sm:h-6 rounded-full align-middle bg-gradient-to-r from-amber-600 via-amber-500 to-amber-700 border border-amber-400/50 mx-2 shadow-inner inline-flex items-center justify-center text-[10px] text-amber-950 font-mono font-bold">50</span>
+                  <span>Multi-Tradition Astrometric &amp; Cultural Feature Guide</span>
+                  <span className="inline-block w-12 sm:w-14 h-5 sm:h-6 rounded-full align-middle bg-gradient-to-r from-amber-600 via-amber-500 to-amber-700 border border-amber-400/50 mx-1.5 shadow-inner inline-flex items-center justify-center text-[10px] text-amber-950 font-mono font-bold">50</span>
                 </>
               )}
             </h1>
-            <p className="text-xs text-stone-300 font-sans mt-1 leading-relaxed max-w-3xl text-pretty">
+            <p className="text-xs sm:text-sm text-stone-400 mt-1 max-w-2xl sm:max-w-3xl leading-relaxed text-pretty font-sans">
               {activeSection === 'evidence'
                 ? 'Peer-reviewed style statistical whitepaper, double-blind permutation null controls, and rigorous p-value benchmarks.'
                 : 'Exhaustive documentation of celestial mechanics, ancient calibration lineages, mathematical formulas, and triangulation invariants.'}
@@ -269,7 +268,7 @@ export const FeatureGuideScreen: React.FC<Props> = ({ onNavigate, initialExplain
         </div>
 
         {/* Section Switcher & Global Action Anchors */}
-        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 shrink-0 pt-2 xl:pt-0 border-t xl:border-t-0 border-stone-800/80">
           {/* Dual-Section Switcher Pill */}
           <div
             role="tablist"
@@ -281,7 +280,7 @@ export const FeatureGuideScreen: React.FC<Props> = ({ onNavigate, initialExplain
               role="tab"
               aria-selected={activeSection === 'topics'}
               onClick={() => setActiveSection('topics')}
-              className={`flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-serif font-medium transition-colors duration-150 cursor-pointer min-h-[34px] ${activeSection === 'topics'
+              className={`flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-serif font-medium transition-colors duration-150 cursor-pointer min-h-[44px] sm:min-h-[36px] ${activeSection === 'topics'
                   ? 'bg-stone-900 text-amber-300 border border-amber-700/80 font-semibold shadow-xs'
                   : 'text-stone-400 hover:text-stone-200'
                 }`}
@@ -294,7 +293,7 @@ export const FeatureGuideScreen: React.FC<Props> = ({ onNavigate, initialExplain
               role="tab"
               aria-selected={activeSection === 'evidence'}
               onClick={() => setActiveSection('evidence')}
-              className={`flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-serif font-medium transition-colors duration-150 cursor-pointer min-h-[34px] ${activeSection === 'evidence'
+              className={`flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-serif font-medium transition-colors duration-150 cursor-pointer min-h-[44px] sm:min-h-[36px] ${activeSection === 'evidence'
                   ? 'bg-stone-900 text-amber-300 border border-amber-700/80 font-semibold shadow-xs'
                   : 'text-stone-400 hover:text-stone-200'
                 }`}
@@ -309,7 +308,7 @@ export const FeatureGuideScreen: React.FC<Props> = ({ onNavigate, initialExplain
             <button
               type="button"
               onClick={() => onNavigate('traditions')}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 min-h-[36px] text-xs font-serif font-medium rounded-lg bg-stone-900 hover:bg-stone-850 text-amber-300 hover:text-amber-200 border border-amber-800/60 transition-colors cursor-pointer"
+              className="inline-flex items-center justify-center gap-1.5 px-3 py-1.5 min-h-[44px] sm:min-h-[36px] min-w-[44px] text-xs font-serif font-medium rounded-lg bg-stone-900 hover:bg-stone-850 text-amber-300 hover:text-amber-200 border border-amber-800/60 transition-colors cursor-pointer"
             >
               <Compass className="w-3.5 h-3.5 text-amber-400" />
               <span className="hidden sm:inline">Traditions</span>
@@ -317,7 +316,7 @@ export const FeatureGuideScreen: React.FC<Props> = ({ onNavigate, initialExplain
             <button
               type="button"
               onClick={() => onNavigate('workbench')}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 min-h-[36px] text-xs font-serif font-medium rounded-lg bg-stone-900 hover:bg-stone-850 text-stone-300 hover:text-white border border-stone-800 transition-colors cursor-pointer"
+              className="inline-flex items-center justify-center gap-1.5 px-3 py-1.5 min-h-[44px] sm:min-h-[36px] min-w-[44px] text-xs font-serif font-medium rounded-lg bg-stone-900 hover:bg-stone-850 text-stone-300 hover:text-white border border-stone-800 transition-colors cursor-pointer"
             >
               <Sliders className="w-3.5 h-3.5 text-stone-400" />
               <span className="hidden sm:inline">Workbench</span>

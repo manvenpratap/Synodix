@@ -95,38 +95,41 @@ export const ReadingView: React.FC<Props> = ({ data, subjectName, onNavigate }) 
       <div className="reticle-corner-bl" />
       <div className="reticle-corner-br" />
 
-      {/* ==================== 1. DOCUMENT TOP BANNER & ACTION BAR ==================== */}
-      <div className="bg-stone-900 border-b border-stone-800 p-5 sm:p-6">
+      {/* ==================== 1. DOCUMENT TOP BANNER & ACTION BAR (Universal Hero Token Standard) ==================== */}
+      <div className="bg-stone-900 border-b border-stone-800 p-4 sm:p-6 hero-wide-container">
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
-          <div>
-            <div className="flex flex-wrap items-center gap-2 mb-1.5">
-              <span className="px-2 py-0.5 rounded bg-emerald-950 text-emerald-300 border border-emerald-800/60 text-xs font-medium flex items-center gap-1">
-                <ShieldCheck className="w-3 h-3 text-emerald-400" />
-                Verified Multi-Tradition Reading
-                <span className="sr-only">Audited Epistemological Document</span>
-              </span>
-              <span className="w-px h-3 bg-stone-700 hidden sm:inline-block" aria-hidden="true" />
-              <span className="text-xs text-amber-400 font-sans">
-                Standard v2.0
-              </span>
-              <span className="w-px h-3 bg-stone-700 hidden sm:inline-block" aria-hidden="true" />
-              <span className="text-xs text-stone-400 font-sans">
-                9 Traditions Corroborated
-              </span>
+          <div className="flex items-start gap-3.5 max-w-4xl">
+            <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-amber-950/90 border border-amber-800 flex items-center justify-center text-amber-300 shrink-0 shadow-xs ring-1 ring-amber-500/20">
+              <BookOpen className="w-5 h-5 text-amber-400" />
             </div>
 
-            <h2 className="hero-h1-clamped font-serif font-bold text-stone-100 tracking-tight flex flex-wrap items-center gap-2 max-w-5xl">
-              <BookOpen className="w-6 h-6 text-amber-400 shrink-0" />
-              <span>Complete Birth Chart Reading &amp; Corroboration Dossier</span>
-              <span className="inline-block w-12 sm:w-14 h-5 sm:h-6 rounded-full align-middle bg-gradient-to-r from-amber-600 via-amber-500 to-amber-700 border border-amber-400/50 mx-2 shadow-inner inline-flex items-center justify-center text-[10px] text-amber-950 font-mono font-bold">9-Sys</span>
-            </h2>
-            <p className="text-xs text-stone-400 mt-1 font-sans hidden sm:block">
-              Complete personality reading, life domains summary, and timing forecast synthesized across all 9 world traditions.
-            </p>
+            <div className="min-w-0">
+              <div className="flex flex-wrap items-center gap-2 mb-1">
+                <span className="text-xs text-amber-400 font-serif font-semibold tracking-wider uppercase">
+                  Corroboration Dossier
+                </span>
+                <span className="text-stone-400 hidden sm:inline">•</span>
+                <span className="text-xs text-stone-400 font-sans hidden sm:inline">
+                  Multi-Tradition Synthesis Monograph
+                </span>
+                <span className="text-[11px] font-mono px-2 py-0.5 rounded-full bg-amber-950/80 text-amber-300 border border-amber-800/80 font-medium">
+                  Verified Reading
+                  <span className="sr-only">Audited Epistemological Document</span>
+                </span>
+              </div>
+
+              <h1 className="hero-h1-clamped font-serif font-bold text-stone-100 tracking-tight flex flex-wrap items-center gap-2">
+                <span>Complete Birth Chart Reading &amp; Corroboration Dossier</span>
+                <span className="inline-block w-12 sm:w-14 h-5 sm:h-6 rounded-full align-middle bg-gradient-to-r from-amber-600 via-amber-500 to-amber-700 border border-amber-400/50 mx-1.5 shadow-inner inline-flex items-center justify-center text-[10px] text-amber-950 font-mono font-bold">9-Sys</span>
+              </h1>
+              <p className="text-xs sm:text-sm text-stone-400 mt-1 max-w-2xl sm:max-w-3xl leading-relaxed text-pretty font-sans">
+                Complete personality reading, life domains summary, and timing forecast synthesized across all 9 world traditions.
+              </p>
+            </div>
           </div>
 
           {/* Action Toolbar */}
-          <div className="flex flex-wrap items-center gap-2">
+          <div className="flex flex-wrap items-center gap-2 shrink-0 pt-2 lg:pt-0 border-t lg:border-t-0 border-stone-800/80">
             {/* View Mode Toggle */}
             <div className="bg-stone-950 p-0.5 rounded-lg border border-stone-800 flex items-center">
               <button

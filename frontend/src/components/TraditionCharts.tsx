@@ -617,9 +617,9 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
 
   return (
     <div className="p-1 sm:p-2 relative transition-colors duration-300 overflow-hidden space-y-4 sm:space-y-5">
-      {/* Screen 2 Top Hero Pedestal (gpt-taste Cinematic Architecture) */}
-      <div className="p-4 sm:p-6 rounded-2xl bg-stone-900 border border-stone-800 shadow-md flex flex-col lg:flex-row lg:items-center justify-between gap-4 hero-wide-container">
-        <div className="flex items-start gap-3.5 max-w-4xl">
+      {/* Screen 2 Top Hero Pedestal (Universal Hero Token Standard) */}
+      <div className="p-4 sm:p-6 rounded-2xl bg-stone-900 border border-stone-800 shadow-md flex flex-col xl:flex-row xl:items-center justify-between gap-4 hero-wide-container">
+        <div className="flex items-start gap-3.5 min-w-0 flex-1">
           <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-amber-950/90 border border-amber-800 flex items-center justify-center text-amber-300 shrink-0 shadow-xs ring-1 ring-amber-500/20">
             <Compass className="w-5 h-5 text-amber-400" />
           </div>
@@ -636,19 +636,19 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
                 Multi-Tradition
               </span>
             </div>
-            <h2 className="hero-h1-clamped font-serif font-bold text-stone-100 tracking-tight flex flex-wrap items-center gap-2">
+            <h1 className="hero-h1-clamped font-serif font-bold text-stone-100 tracking-tight flex flex-wrap items-center gap-2">
               <span>9 Astrological Traditions</span>
-              <span className="inline-block w-12 sm:w-14 h-5 sm:h-6 rounded-full align-middle bg-gradient-to-r from-amber-600 via-amber-500 to-amber-700 border border-amber-400/50 mx-1 shadow-inner inline-flex items-center justify-center text-[10px] text-amber-950 font-mono font-bold">9-Sys</span>
+              <span className="inline-block w-12 sm:w-14 h-5 sm:h-6 rounded-full align-middle bg-gradient-to-r from-amber-600 via-amber-500 to-amber-700 border border-amber-400/50 mx-1.5 shadow-inner inline-flex items-center justify-center text-[10px] text-amber-950 font-mono font-bold">9-Sys</span>
               <span className="text-stone-300 hidden sm:inline">&amp; Cosmologies</span>
-            </h2>
-            <p className="text-xs sm:text-sm text-stone-400 mt-1 max-w-2xl leading-relaxed text-pretty">
+            </h1>
+            <p className="text-xs sm:text-sm text-stone-400 mt-1 max-w-2xl sm:max-w-3xl leading-relaxed text-pretty font-sans">
               Explore your natal chart across 9 distinct celestial systems—from Vedic sidereal nakshatras and Hellenistic planetary sect to BaZi solar terms and Maya sacred trecenas.
             </p>
           </div>
         </div>
 
         {/* Display Presentation Switcher & View Mode Controls Toolbar */}
-        <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between sm:justify-end gap-2 w-full lg:w-auto shrink-0 pt-2 lg:pt-0 border-t lg:border-t-0 border-stone-800/80">
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between sm:justify-end gap-2 w-full xl:w-auto shrink-0 pt-2 xl:pt-0 border-t xl:border-t-0 border-stone-800/80">
           {/* Display Presentation Switcher: Comprehensive / Visual Instrument / Telemetry Tables */}
           <div className="flex items-center justify-center sm:justify-start gap-1 p-0.5 rounded-lg bg-stone-950 border border-stone-800 text-xs font-mono shrink-0">
             {(['both', 'chart', 'table'] as const).map((mode) => {

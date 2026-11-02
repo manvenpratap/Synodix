@@ -1,7 +1,7 @@
 # Synodix: Project Context & Working Memory
 
-**Last Updated:** 2026-11-02 22:58:56
-**Version:** 2.45.0  
+**Last Updated:** 2026-11-02 23:37:28
+**Version:** 2.46.0  
 **Stack:** Python 3.12 (FastAPI, Swiss Ephemeris 2.10, Skyfield DE421) + TypeScript / React 19 / Vite / Tailwind CSS v4 / Framer Motion / Capacitor 8 (iOS & Android)  
 **Workspace:** `/Volumes/Study/Projects/Astrology` (symlinked as `/Volumes/Study/Astrology`)  
 **Git Remote:** `https://github.com/manvenpratap/Synodix.git`  
@@ -10,7 +10,23 @@
 
 ## 1. Current Status & Milestone
 
-- **Active Phase**: gpt-taste Universal Module Hero Architecture & Mobile Parity (v2.45.0) (Completed)
+- **Active Phase**: Impeccable Critique & Universal Module Hero Standardization (v2.46.0) (Completed)
+- **Impeccable Critique & Universal Module Hero Standardization (v2.46.0)**:
+  - **Exhaustive Impeccable Design Critique across All 8 Screens**:
+    - Dispatched isolated parallel subagents for Assessment A (Design Review: Nielsen 10 Usability Heuristics scored at 35.8/40 · 89.5% · Grade A-, cognitive load, emotional journey, typographic hierarchy) and Assessment B (Detector & Layout Inspector: DOM bounding box telemetry across 1440px desktop and 390px mobile viewports).
+  - **Single Universal Hero Architecture Deployed Across All 8 Modules**:
+    - **Canonical Outer Container**: `hero-wide-container` applied to all 8 screens (`p-4 sm:p-6 rounded-2xl bg-stone-900 border border-stone-800 shadow-md flex flex-col xl:flex-row xl:items-center justify-between gap-4`).
+    - **Standardized Emblem Pedestal**: Unified `w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-amber-950/90 border border-amber-800 flex items-center justify-center text-amber-300 shrink-0 shadow-xs ring-1 ring-amber-500/20` with `w-5 h-5 text-amber-400` across all 8 modules (`Sliders` in Workbench, `Compass` in Traditions, `Layers` in Synthesis, `BookOpen` in Dossier, `HeartHandshake` in Synastry, `ShieldCheck` in Verification, `FlaskConical` in Evidence, `BookOpen` in Guide). Extracted all inline header icons out of heading text.
+    - **Canonical 3-Part Kicker**: Uppercase serif category (`text-xs text-amber-400 font-serif font-semibold tracking-wider uppercase`) + bullet separator (`•`) + explanatory context (`text-xs text-stone-400 font-sans hidden sm:inline`) + domain badge pill (`text-[11px] font-mono px-2 py-0.5 rounded-full bg-amber-950/80 text-amber-300 border border-amber-800/80 font-medium`).
+    - **Semantic Display Heading**: Standardized `<h1 className="hero-h1-clamped font-serif font-bold text-stone-100 tracking-tight flex flex-wrap items-center gap-2">` across all 8 modules with normalized inline gradient capsule (`w-12 sm:w-14 h-5 sm:h-6 mx-1.5 font-mono text-[10px] text-amber-950 font-bold`).
+    - **Universal Subtitle**: `text-xs sm:text-sm text-stone-400 mt-1 max-w-2xl sm:max-w-3xl leading-relaxed text-pretty font-sans`. Removed `hidden sm:block` in `ReadingView.tsx`, achieving 100% mobile subtitle parity.
+    - **Action & Telemetry Pedestal with Touch Target Invariant**: Added `pt-2 xl:pt-0 border-t xl:border-t-0 border-stone-800/80` for clean mobile visual decoupling; elevated all interactive touch targets (`ExplainerTrigger`, `Swap Roles`, quick nav) to $\ge 44\text{px}$ on mobile (`min-h-[44px]`).
+    - **Desktop Squeeze Elimination**: Transitioned header row flex from `lg:` to `xl:` in `TraditionCharts.tsx` and `FeatureGuideScreen.tsx`, guaranteeing the title column never collapses below 60% viewport width and eliminating 6-line title ballooning on desktop.
+  - **Automated Verification**:
+    - Multi-viewport Playwright verification (`scratch/verify_uniform_heroes.py`): All 8 module heroes validated on 1440x900 desktop and 390x844 mobile with 16 screenshots captured and zero console errors.
+    - 0 TypeScript compilation errors (`npx tsc --noEmit`).
+    - Clean Vite production build (`npm run build`).
+    - Full 29/29 regression test suite passing in 123.55s (`./pipeline.sh test --summary`).
 - **gpt-taste Universal Module Hero Architecture & Mobile Parity (v2.45.0)**:
   - **Comprehensive Hero Coverage Across All Modules**:
     - Identified and resolved missing hero blocks in `TraditionCharts.tsx`, `VerificationCard.tsx`, and `SynthesisMatrix.tsx`.

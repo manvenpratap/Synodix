@@ -22,7 +22,8 @@ import {
   ArrowRight,
   RotateCcw,
   User,
-  Clock
+  Clock,
+  Sliders
 } from 'lucide-react';
 import { getSavedProfiles, saveProfile, deleteProfile, UserProfile } from '../utils/vault';
 import { triggerHaptic } from '../utils/haptics';
@@ -551,45 +552,56 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
       <div className="hidden sm:block reticle-corner-bl" />
       <div className="hidden sm:block reticle-corner-br" />
 
-      {/* Top Header & Independent Experience Mode Switcher (gpt-taste Artistic Asymmetry) */}
-      <div className="flex flex-col lg:flex-row lg:items-center justify-between pb-3 sm:pb-5 border-b border-stone-800 gap-3 sm:gap-4 hero-wide-container">
-        <div className="max-w-3xl">
-          <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
-            <span className="text-xs text-amber-400 font-serif font-semibold tracking-wider uppercase">
-              Astrometric Natal Calibration
-            </span>
-            <span className="text-stone-400 hidden sm:inline">•</span>
-            <span className="text-xs text-stone-400 font-sans">
-              {activeMode === 'custom' ? 'Direct Ephemeris Calibration' : `${samplePresets.length || 500} Verified Historical Records`}
-            </span>
+      {/* Top Header & Independent Experience Mode Switcher (Universal Hero Token Standard) */}
+      <div className="flex flex-col lg:flex-row lg:items-center justify-between pb-3 sm:pb-5 border-b border-stone-800 gap-4 hero-wide-container">
+        <div className="flex items-start gap-3.5 max-w-4xl">
+          <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-amber-950/90 border border-amber-800 flex items-center justify-center text-amber-300 shrink-0 shadow-xs ring-1 ring-amber-500/20">
+            <Sliders className="w-5 h-5 text-amber-400" />
           </div>
-          <h2 className="hero-h1-clamped font-serif font-bold text-stone-100 mt-1 sm:mt-2 tracking-tight">
-            {activeMode === 'custom' ? (
-              <>
-                Natal Horizon &amp; Planetary
-                <span className="inline-block w-12 sm:w-16 h-5 sm:h-6 rounded-full align-middle bg-gradient-to-r from-amber-600 via-amber-500 to-amber-700 border border-amber-400/50 mx-2 shadow-inner inline-flex items-center justify-center text-[10px] text-amber-950 font-mono font-bold">JPL</span>
-                Ephemeris
-              </>
-            ) : (
-              <>
-                500 Verified Historical Records &amp;
-                <span className="inline-block w-12 sm:w-16 h-5 sm:h-6 rounded-full align-middle bg-gradient-to-r from-amber-600 via-amber-500 to-amber-700 border border-amber-400/50 mx-2 shadow-inner inline-flex items-center justify-center text-[10px] text-amber-950 font-mono font-bold">500</span>
-                Titans Benchmark
-              </>
-            )}
-          </h2>
-          <p className="text-xs sm:text-sm text-stone-400 mt-1 sm:mt-1.5 max-w-2xl text-pretty">
-            {activeMode === 'custom'
-              ? 'Multi-tradition topocentric triangulation across 9 classical world systems with micro-arcsecond Swiss Ephemeris accuracy.'
-              : 'Certified Rodden AA/A historical personalities for empirical cross-cultural consensus verification and statistical research.'}
-          </p>
+
+          <div className="min-w-0">
+            <div className="flex flex-wrap items-center gap-2 mb-1">
+              <span className="text-xs text-amber-400 font-serif font-semibold tracking-wider uppercase">
+                Astrometric Calibration
+              </span>
+              <span className="text-stone-400 hidden sm:inline">•</span>
+              <span className="text-xs text-stone-400 font-sans hidden sm:inline">
+                {activeMode === 'custom' ? 'Direct Ephemeris Calibration' : `${samplePresets.length || 500} Verified Historical Records`}
+              </span>
+              <span className="text-[11px] font-mono px-2 py-0.5 rounded-full bg-amber-950/80 text-amber-300 border border-amber-800/80 font-medium">
+                {activeMode === 'custom' ? 'NASA / SwissEph' : 'Rodden AA'}
+              </span>
+            </div>
+
+            <h1 className="hero-h1-clamped font-serif font-bold text-stone-100 tracking-tight flex flex-wrap items-center gap-2">
+              {activeMode === 'custom' ? (
+                <>
+                  <span>Natal Horizon &amp; Planetary</span>
+                  <span className="inline-block w-12 sm:w-14 h-5 sm:h-6 rounded-full align-middle bg-gradient-to-r from-amber-600 via-amber-500 to-amber-700 border border-amber-400/50 mx-1.5 shadow-inner inline-flex items-center justify-center text-[10px] text-amber-950 font-mono font-bold">JPL</span>
+                  <span>Ephemeris</span>
+                </>
+              ) : (
+                <>
+                  <span>500 Verified Historical Records &amp;</span>
+                  <span className="inline-block w-12 sm:w-14 h-5 sm:h-6 rounded-full align-middle bg-gradient-to-r from-amber-600 via-amber-500 to-amber-700 border border-amber-400/50 mx-1.5 shadow-inner inline-flex items-center justify-center text-[10px] text-amber-950 font-mono font-bold">500</span>
+                  <span>Titans Benchmark</span>
+                </>
+              )}
+            </h1>
+
+            <p className="text-xs sm:text-sm text-stone-400 mt-1 max-w-2xl sm:max-w-3xl leading-relaxed text-pretty font-sans">
+              {activeMode === 'custom'
+                ? 'Multi-tradition topocentric triangulation across 9 classical world systems with micro-arcsecond Swiss Ephemeris accuracy.'
+                : 'Certified Rodden AA/A historical personalities for empirical cross-cultural consensus verification and statistical research.'}
+            </p>
+          </div>
         </div>
 
         {/* Clean Segmented Mode Switcher */}
         <div
           role="tablist"
           aria-label="Input Experience Switcher"
-          className="relative flex items-center bg-stone-900/90 p-1 rounded-xl border border-stone-800 w-full sm:w-auto shrink-0 self-start lg:self-center shadow-sm"
+          className="relative flex items-center bg-stone-900/90 p-1 rounded-xl border border-stone-800 w-full sm:w-auto shrink-0 pt-2 lg:pt-1 border-t lg:border-t-0 border-stone-800/80 shadow-sm"
         >
           <button
             type="button"

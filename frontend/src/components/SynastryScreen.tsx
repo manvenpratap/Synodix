@@ -229,38 +229,50 @@ export const SynastryScreen: React.FC<Props> = ({
 
   return (
     <div className="space-y-6 w-full max-w-full overflow-x-hidden">
-      {/* 1. Header Enclosure (gpt-taste Hero Architecture) */}
+      {/* 1. Header Enclosure (Universal Hero Token Standard) */}
       <div className="machined-bezel p-4 sm:p-6 rounded-2xl shadow-xl relative">
         <div className="reticle-corner-tl" />
         <div className="reticle-corner-tr" />
         <div className="reticle-corner-bl" />
         <div className="reticle-corner-br" />
 
-        <div className="flex flex-col md:flex-row md:items-center justify-between pb-4 border-b border-stone-800 gap-3">
-          <div>
-            <div className="flex items-center gap-2 mb-1">
-              <span className="w-2 h-2 rounded-full bg-amber-400 inline-block"></span>
-              <span className="text-xs text-amber-400 font-serif font-medium tracking-wide">
-                Astrometric Conjunction · Inter-Chart Resonance Engine
-              </span>
-              <ExplainerTrigger id="synastry_conjunctions" variant="badge" />
+        <div className="flex flex-col lg:flex-row lg:items-center justify-between pb-4 sm:pb-5 border-b border-stone-800 gap-4 hero-wide-container">
+          <div className="flex items-start gap-3.5 max-w-4xl">
+            <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-amber-950/90 border border-amber-800 flex items-center justify-center text-amber-300 shrink-0 shadow-xs ring-1 ring-amber-500/20">
+              <HeartHandshake className="w-5 h-5 text-amber-400" />
             </div>
-            <h1 className="hero-h1-clamped font-serif font-bold text-stone-100 flex flex-wrap items-center gap-2 max-w-5xl tracking-tight">
-              <HeartHandshake className="w-6 h-6 text-amber-400 shrink-0" />
-              <span>Synastry &amp; Composite Charts</span>
-              <span className="inline-block w-12 sm:w-14 h-5 sm:h-6 rounded-full align-middle bg-gradient-to-r from-amber-600 via-amber-500 to-amber-700 border border-amber-400/50 mx-1 shadow-inner inline-flex items-center justify-center text-[10px] text-amber-950 font-mono font-bold">Dual</span>
-              <span>across 9 Traditions</span>
-            </h1>
-            <p className="text-xs text-stone-400 mt-1 max-w-[55ch] text-pretty leading-relaxed">
-              Compare two birth charts across all 9 civilizational systems: astronomical inter-aspects, circular midpoint composite entity, authentic 36-point Vedic Ashtakoota Milan, BaZi Wu Xing balances, and esoteric decanic/lunar affinities.
-            </p>
+
+            <div className="min-w-0">
+              <div className="flex flex-wrap items-center gap-2 mb-1">
+                <span className="text-xs text-amber-400 font-serif font-semibold tracking-wider uppercase">
+                  Relational Astrometry
+                </span>
+                <span className="text-stone-400 hidden sm:inline">•</span>
+                <span className="text-xs text-stone-400 font-sans hidden sm:inline">
+                  Inter-Chart Resonance &amp; Composite Matrix
+                </span>
+                <span className="text-[11px] font-mono px-2 py-0.5 rounded-full bg-amber-950/80 text-amber-300 border border-amber-800/80 font-medium">
+                  Dual-Chart
+                </span>
+              </div>
+
+              <h1 className="hero-h1-clamped font-serif font-bold text-stone-100 tracking-tight flex flex-wrap items-center gap-2">
+                <span>Synastry &amp; Composite Charts</span>
+                <span className="inline-block w-12 sm:w-14 h-5 sm:h-6 rounded-full align-middle bg-gradient-to-r from-amber-600 via-amber-500 to-amber-700 border border-amber-400/50 mx-1.5 shadow-inner inline-flex items-center justify-center text-[10px] text-amber-950 font-mono font-bold">Dual</span>
+                <span className="text-stone-300 hidden sm:inline">across 9 Traditions</span>
+              </h1>
+              <p className="text-xs sm:text-sm text-stone-400 mt-1 max-w-2xl sm:max-w-3xl leading-relaxed text-pretty font-sans">
+                Compare two birth charts across all 9 civilizational systems: astronomical inter-aspects, circular midpoint composite entity, authentic 36-point Vedic Ashtakoota Milan, BaZi Wu Xing balances, and esoteric decanic/lunar affinities.
+              </p>
+            </div>
           </div>
 
-          <div className="flex items-center gap-2 shrink-0">
+          <div className="flex flex-wrap items-center gap-2.5 shrink-0 pt-2 lg:pt-0 border-t lg:border-t-0 border-stone-800/80">
+            <ExplainerTrigger id="synastry_conjunctions" variant="badge" />
             <button
               type="button"
               onClick={handleSwapPartners}
-              className="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg bg-stone-900 hover:bg-stone-800 border border-amber-900/40 text-stone-300 hover:text-amber-300 text-xs font-serif font-medium cursor-pointer transition-colors shadow-xs"
+              className="inline-flex items-center justify-center gap-1.5 px-3.5 py-2 min-h-[44px] sm:min-h-[36px] rounded-lg bg-stone-900 hover:bg-stone-800 border border-amber-900/40 text-stone-300 hover:text-amber-300 text-xs font-serif font-medium cursor-pointer transition-colors shadow-xs"
               data-tooltip="Swap Partner A and Partner B positions"
               aria-label="Swap Partner A and Partner B"
             >

@@ -54,7 +54,7 @@ export const SynthesisMatrix: React.FC<Props> = ({ synthesis, onNavigate }) => {
       <div className="reticle-corner-bl" />
       <div className="reticle-corner-br" />
 
-      {/* Header & Divergence Metric (gpt-taste Artistic Asymmetry & Wide H1) */}
+      {/* Header & Divergence Metric (Universal Hero Token Standard) */}
       <div className="flex flex-col lg:flex-row lg:items-center justify-between pb-4 sm:pb-5 border-b border-stone-800 gap-4 hero-wide-container">
         <div className="flex items-start gap-3.5 max-w-4xl">
           <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-amber-950/90 border border-amber-800 flex items-center justify-center text-amber-300 shrink-0 shadow-xs ring-1 ring-amber-500/20">
@@ -73,11 +73,11 @@ export const SynthesisMatrix: React.FC<Props> = ({ synthesis, onNavigate }) => {
                 Consensus
               </span>
             </div>
-            <h2 className="hero-h1-clamped font-serif font-bold text-stone-100 tracking-tight flex flex-wrap items-center gap-2">
+            <h1 className="hero-h1-clamped font-serif font-bold text-stone-100 tracking-tight flex flex-wrap items-center gap-2">
               <span>Where Traditions Agree vs Differ</span>
-              <span className="inline-block w-12 sm:w-14 h-5 sm:h-6 rounded-full align-middle bg-gradient-to-r from-amber-600 via-amber-500 to-amber-700 border border-amber-400/50 mx-1 shadow-inner inline-flex items-center justify-center text-[10px] text-amber-950 font-mono font-bold">9-Sys</span>
-            </h2>
-            <p className="text-xs sm:text-sm text-stone-400 mt-1 max-w-2xl leading-relaxed text-pretty">
+              <span className="inline-block w-12 sm:w-14 h-5 sm:h-6 rounded-full align-middle bg-gradient-to-r from-amber-600 via-amber-500 to-amber-700 border border-amber-400/50 mx-1.5 shadow-inner inline-flex items-center justify-center text-[10px] text-amber-950 font-mono font-bold">9-Sys</span>
+            </h1>
+            <p className="text-xs sm:text-sm text-stone-400 mt-1 max-w-2xl sm:max-w-3xl leading-relaxed text-pretty font-sans">
               Systematic comparison across 9 life domains—quantifying where Vedic, Hellenistic, and BaZi systems independently corroborate, and where unique cultural frameworks diverge.
             </p>
           </div>

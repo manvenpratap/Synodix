@@ -10,7 +10,7 @@ interface Props {
 export const VerificationCard: React.FC<Props> = ({ report }) => {
   return (
     <div className="space-y-6 w-full max-w-full overflow-x-hidden">
-      {/* Top Hero Pedestal (gpt-taste Precision Laboratory Architecture) */}
+      {/* Top Hero Pedestal (Universal Hero Token Standard) */}
       <div className="p-4 sm:p-6 rounded-2xl bg-stone-900 border border-stone-800 shadow-md flex flex-col lg:flex-row lg:items-center justify-between gap-4 hero-wide-container">
         <div className="flex items-start gap-3.5 max-w-4xl">
           <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-amber-950/90 border border-amber-800 flex items-center justify-center text-amber-300 shrink-0 shadow-xs ring-1 ring-amber-500/20">
@@ -30,19 +30,19 @@ export const VerificationCard: React.FC<Props> = ({ report }) => {
                 PASS ({report.overall_verification_status})
               </span>
             </div>
-            <h2 className="hero-h1-clamped font-serif font-bold text-stone-100 tracking-tight flex flex-wrap items-center gap-2">
+            <h1 className="hero-h1-clamped font-serif font-bold text-stone-100 tracking-tight flex flex-wrap items-center gap-2">
               <span>Swiss Ephemeris vs NASA/JPL DE421</span>
-              <span className="inline-block w-12 sm:w-14 h-5 sm:h-6 rounded-full align-middle bg-gradient-to-r from-amber-600 via-amber-500 to-amber-700 border border-amber-400/50 mx-1 shadow-inner inline-flex items-center justify-center text-[10px] text-amber-950 font-mono font-bold">&lt;0.01°</span>
+              <span className="inline-block w-12 sm:w-14 h-5 sm:h-6 rounded-full align-middle bg-gradient-to-r from-amber-600 via-amber-500 to-amber-700 border border-amber-400/50 mx-1.5 shadow-inner inline-flex items-center justify-center text-[10px] text-amber-950 font-mono font-bold">&lt;0.01°</span>
               <span className="text-stone-300 hidden sm:inline">&amp; Ephemeris Parity</span>
-            </h2>
-            <p className="text-xs sm:text-sm text-stone-400 mt-1 max-w-2xl leading-relaxed text-pretty">
+            </h1>
+            <p className="text-xs sm:text-sm text-stone-400 mt-1 max-w-2xl sm:max-w-3xl leading-relaxed text-pretty font-sans">
               Real-time independent validation verifying Swiss Ephemeris planetary coordinates against NASA Jet Propulsion Laboratory DE421 ephemerides under strict micro-arcsecond thresholds.
             </p>
           </div>
         </div>
 
         {/* Verification Status Metrics Pill Group */}
-        <div className="flex flex-wrap items-center gap-2.5 shrink-0 pt-2 lg:pt-0 border-t lg:border-t-0 border-stone-800">
+        <div className="flex flex-wrap items-center gap-2.5 shrink-0 pt-2 lg:pt-0 border-t lg:border-t-0 border-stone-800/80">
           <div className="p-2.5 rounded-xl bg-stone-950/80 border border-stone-800 text-xs font-mono space-y-1">
             <div className="flex items-center justify-between gap-3 text-stone-400">
               <span>Max Delta:</span>
