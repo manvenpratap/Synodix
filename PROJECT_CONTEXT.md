@@ -1,7 +1,7 @@
 # Synodix: Project Context & Working Memory
 
-**Last Updated:** 2026-11-01 23:30:06
-**Version:** 2.38.0  
+**Last Updated:** 2026-11-02 07:01:58
+**Version:** 2.39.0  
 **Stack:** Python 3.12 (FastAPI, Swiss Ephemeris 2.10, Skyfield DE421) + TypeScript / React 19 / Vite / Tailwind CSS v4 / Framer Motion / Capacitor 8 (iOS & Android)  
 **Workspace:** `/Volumes/Study/Projects/Astrology` (symlinked as `/Volumes/Study/Astrology`)  
 **Git Remote:** `https://github.com/manvenpratap/Synodix.git`  
@@ -10,7 +10,26 @@
 
 ## 1. Current Status & Milestone
 
-- **Active Phase**: gpt-taste 4-Screen Full Elevation (FeatureGuideScreen, ReadingView, VerificationCard, SynastryScreen) (v2.38.0) (Completed)
+- **Active Phase**: gpt-taste Mobile Viewport & Touch Ergonomics Universal Hardening (v2.39.0) (Completed)
+- **gpt-taste Mobile Viewport & Touch Ergonomics Universal Hardening (v2.39.0)**:
+  - **Dynamic Mobile Typography Clamping (`.hero-h1-clamped`)**:
+    - Calibrated `.hero-h1-clamped` from `clamp(2rem, 4.5vw, 3.75rem)` to `clamp(1.4rem, 4.5vw, 3.75rem)`.
+    - Guarantees that on narrow viewports (375px iPhone SE / 390px iPhone 14), display headings scale down to 22.4px and strictly flow in $\le 2$ lines without word-breaking or horizontal crowding.
+  - **Traditions View Mobile Enhancements (`TraditionCharts.tsx`)**:
+    - *Segmented Control Stacking*: Presentation toggle (`All`/`Visual`/`Tables`) and layout toggle (`Deck`/`Gallery`/`Matrix`) now flex-wrap and stack cleanly on mobile (`flex flex-col sm:flex-row gap-2`) with zero edge clipping.
+    - *Inspector Mobile Top Bar*: Compact return buttons (`Deck`/`Gallery`) with `min-h-[44px]` touch targets.
+    - *Mobile 9-Tradition Quick Switcher*: Added a horizontal swipe strip (`lg:hidden snap-x snap-mandatory`) directly under the Inspector header with min 44px buttons, enabling immediate jumping to any tradition without cycling Prev/Next.
+  - **Feature Guide Screen Mobile Ergonomics (`FeatureGuideScreen.tsx`)**:
+    - Civilizational filter buttons (`JYOT`, `HELL`, etc.) and knowledge domain buttons upgraded to `min-h-[44px] sm:min-h-[34px]`.
+    - Added automatic smooth scrolling to `#explainer-content-canvas` on mobile when a topic is selected.
+  - **Synastry Screen Mobile Ergonomics (`SynastryScreen.tsx`)**:
+    - Partner A and Partner B mode selector buttons (`Active`, `Titan Presets`, `Custom`) upgraded to `min-h-[44px] sm:min-h-[28px]`.
+    - Custom coordinate input fields optimized for touch targets.
+  - **Automated Verification**:
+    - Expanded `tests/test_04_mobile_viewport.py` to assert mobile presentation mode switching (`Deck`/`Gallery`/`Matrix`), Synastry, Feature Guide, and Verification Suite on both iPhone SE (375x667) and iPhone 14 (390x844).
+    - 0 TypeScript errors (`npx tsc --noEmit`).
+    - Clean Vite production build in 573ms (`npm run build`).
+    - Full 29/29 Playwright regression suite passing in 113.99s (`./pipeline.sh test --summary`).
 - **gpt-taste 4-Screen Full Elevation (v2.38.0)**:
   - **FeatureGuideScreen (50-Topic Astrometric Codex & Encyclopedia)**:
     - Re-architected with wide container architecture (`max-w-6xl`) and 2-line clamped H1 (`hero-h1-clamped`).

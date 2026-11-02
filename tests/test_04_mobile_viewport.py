@@ -168,7 +168,46 @@ def test_mobile_viewport_and_touch_targets():
             modal_close.click()
             page.wait_for_timeout(300)
 
-            # 12. Check zero critical console errors
+            # 12. Test Cultural Traditions View Modes on Mobile
+            page.evaluate("() => { const b = document.querySelector(\"nav[aria-label='Mobile Navigation'] button[aria-label='Traditions']\"); if (b) b.click(); }")
+            page.wait_for_timeout(400)
+            assert check_no_horizontal_overflow(page), f"Traditions (Carousel) should have zero overflow on {vp['name']}"
+
+            # Switch to Accordion Gallery on mobile
+            gallery_btn = page.locator("button:has-text('Gallery')").first
+            if gallery_btn.is_visible():
+                gallery_btn.click()
+                page.wait_for_timeout(300)
+                assert check_no_horizontal_overflow(page), f"Traditions (Accordion Gallery) should have zero overflow on {vp['name']}"
+
+            # Switch to Inspector Matrix on mobile
+            matrix_btn = page.locator("button:has-text('Matrix')").first
+            if matrix_btn.is_visible():
+                matrix_btn.click()
+                page.wait_for_timeout(300)
+                assert check_no_horizontal_overflow(page), f"Traditions (Inspector Matrix) should have zero overflow on {vp['name']}"
+                # Assert mobile quick switcher is accessible
+                mobile_trad_btn = page.locator("button[aria-label*='Switch to']").first
+                assert mobile_trad_btn.is_visible(), f"Mobile tradition quick switcher should be visible on {vp['name']}"
+
+            # 13. Test Synastry Screen on Mobile
+            page.evaluate("() => { const b = document.querySelector(\"nav[aria-label='Mobile Navigation'] button[aria-label='Synastry']\"); if (b) b.click(); }")
+            page.wait_for_timeout(500)
+            assert check_no_horizontal_overflow(page), f"Synastry screen should have zero overflow on {vp['name']}"
+            synastry_h1 = page.locator("h1:has-text('Synastry')").first
+            assert synastry_h1.is_visible(), f"Synastry header should be visible on {vp['name']}"
+
+            # 14. Test Feature Guide Screen on Mobile
+            page.evaluate("() => window.dispatchEvent(new KeyboardEvent('keydown', { key: 'g' }))")
+            page.wait_for_timeout(500)
+            assert check_no_horizontal_overflow(page), f"Feature Guide screen should have zero overflow on {vp['name']}"
+
+            # 15. Test Astronomical Verification Suite on Mobile
+            page.evaluate("() => window.dispatchEvent(new KeyboardEvent('keydown', { key: 'a' }))")
+            page.wait_for_timeout(500)
+            assert check_no_horizontal_overflow(page), f"Verification screen should have zero overflow on {vp['name']}"
+
+            # 16. Check zero critical console errors
             assert_no_critical_errors(page)
 
             context.close()

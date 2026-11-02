@@ -283,12 +283,12 @@ export const SynastryScreen: React.FC<Props> = ({
                   Partner A · Primary Subject
                 </h2>
               </div>
-              <div className="flex flex-wrap items-center gap-1 text-[11px] font-mono">
+              <div className="flex flex-wrap items-center gap-1.5 text-[11px] font-mono">
                 {currentChart && (
                   <button
                     type="button"
                     onClick={() => setPartnerAMode('active')}
-                    className={`px-2 py-0.5 rounded cursor-pointer transition-colors ${
+                    className={`px-3 py-1.5 min-h-[44px] sm:min-h-[28px] rounded cursor-pointer transition-colors flex items-center justify-center ${
                       partnerAMode === 'active'
                         ? 'bg-amber-950 text-amber-300 border border-amber-700/60 font-semibold'
                         : 'text-stone-400 hover:text-stone-200'
@@ -301,7 +301,7 @@ export const SynastryScreen: React.FC<Props> = ({
                 <button
                   type="button"
                   onClick={() => setPartnerAMode('preset')}
-                  className={`px-2 py-0.5 rounded cursor-pointer transition-colors ${
+                  className={`px-3 py-1.5 min-h-[44px] sm:min-h-[28px] rounded cursor-pointer transition-colors flex items-center justify-center ${
                     partnerAMode === 'preset'
                       ? 'bg-amber-950 text-amber-300 border border-amber-700/60 font-semibold'
                       : 'text-stone-400 hover:text-stone-200'
@@ -313,7 +313,7 @@ export const SynastryScreen: React.FC<Props> = ({
                 <button
                   type="button"
                   onClick={() => setPartnerAMode('custom')}
-                  className={`px-2 py-0.5 rounded cursor-pointer transition-colors ${
+                  className={`px-3 py-1.5 min-h-[44px] sm:min-h-[28px] rounded cursor-pointer transition-colors flex items-center justify-center ${
                     partnerAMode === 'custom'
                       ? 'bg-amber-950 text-amber-300 border border-amber-700/60 font-semibold'
                       : 'text-stone-400 hover:text-stone-200'
@@ -449,11 +449,11 @@ export const SynastryScreen: React.FC<Props> = ({
                   Partner B · Comparative Subject
                 </h2>
               </div>
-              <div className="flex flex-wrap items-center gap-1 text-[11px] font-mono">
+              <div className="flex flex-wrap items-center gap-1.5 text-[11px] font-mono">
                 <button
                   type="button"
                   onClick={() => setPartnerBMode('preset')}
-                  className={`px-2 py-0.5 rounded cursor-pointer transition-colors ${
+                  className={`px-3 py-1.5 min-h-[44px] sm:min-h-[28px] rounded cursor-pointer transition-colors flex items-center justify-center ${
                     partnerBMode === 'preset'
                       ? 'bg-amber-950 text-amber-300 border border-amber-700/60 font-semibold'
                       : 'text-stone-400 hover:text-stone-200'
@@ -465,7 +465,7 @@ export const SynastryScreen: React.FC<Props> = ({
                 <button
                   type="button"
                   onClick={() => setPartnerBMode('custom')}
-                  className={`px-2 py-0.5 rounded cursor-pointer transition-colors ${
+                  className={`px-3 py-1.5 min-h-[44px] sm:min-h-[28px] rounded cursor-pointer transition-colors flex items-center justify-center ${
                     partnerBMode === 'custom'
                       ? 'bg-amber-950 text-amber-300 border border-amber-700/60 font-semibold'
                       : 'text-stone-400 hover:text-stone-200'

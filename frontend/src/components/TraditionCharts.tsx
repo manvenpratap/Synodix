@@ -438,9 +438,9 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
           </p>
         </div>
 
-        <div className="flex items-center justify-between sm:justify-end gap-1.5 sm:gap-2 w-full sm:w-auto shrink-0">
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between sm:justify-end gap-2 w-full sm:w-auto shrink-0">
           {/* Display Presentation Switcher: Comprehensive / Visual Instrument / Telemetry Tables */}
-          <div className="flex items-center gap-1 p-0.5 rounded-lg bg-stone-900 text-xs font-mono shrink-0">
+          <div className="flex items-center justify-center sm:justify-start gap-1 p-0.5 rounded-lg bg-stone-900 text-xs font-mono shrink-0">
             {(['both', 'chart', 'table'] as const).map((mode) => {
               const isModeActive = chartViewMode === mode;
               const labels = {
@@ -470,7 +470,7 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
           </div>
 
           {/* View Mode Toggle: Vertical Carousel vs Full Inspector */}
-          <div className="flex items-center gap-1 p-0.5 rounded-lg bg-stone-900 text-xs font-mono shrink-0">
+          <div className="flex items-center justify-center sm:justify-start gap-1 p-0.5 rounded-lg bg-stone-900 text-xs font-mono shrink-0">
             <button
               type="button"
               onClick={() => setLayoutMode('carousel')}
@@ -563,20 +563,22 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
               <button
                 type="button"
                 onClick={() => setLayoutMode('carousel')}
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-stone-800 hover:bg-stone-700 text-stone-200 border border-stone-700 font-sans text-xs cursor-pointer transition-colors"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 min-h-[44px] sm:min-h-[32px] rounded-lg bg-stone-800 hover:bg-stone-700 text-stone-200 border border-stone-700 font-sans text-xs cursor-pointer transition-colors"
                 data-tooltip="Return to the 3D Vertical Carousel Deck"
               >
                 <Layers className="w-3.5 h-3.5 text-amber-400" />
-                <span>Carousel Deck</span>
+                <span className="hidden sm:inline">Carousel Deck</span>
+                <span className="sm:hidden">Deck</span>
               </button>
               <button
                 type="button"
                 onClick={() => setLayoutMode('accordion')}
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-stone-800 hover:bg-stone-700 text-stone-200 border border-stone-700 font-sans text-xs cursor-pointer transition-colors"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 min-h-[44px] sm:min-h-[32px] rounded-lg bg-stone-800 hover:bg-stone-700 text-stone-200 border border-stone-700 font-sans text-xs cursor-pointer transition-colors"
                 data-tooltip="Switch to Horizontal Accordion Gallery"
               >
                 <Compass className="w-3.5 h-3.5 text-amber-400" />
-                <span>Accordion Gallery</span>
+                <span className="hidden sm:inline">Accordion Gallery</span>
+                <span className="sm:hidden">Gallery</span>
               </button>
               <div className="flex items-center gap-2 pl-2 border-l border-stone-700/60">
                 <span className="font-mono text-xs font-bold px-1.5 py-0.5 rounded bg-stone-800 text-stone-200">{currentTheme.glyph}</span>
@@ -618,6 +620,31 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
                 <ArrowRight className="w-3.5 h-3.5" />
               </button>
             </div>
+          </div>
+
+          {/* Mobile Fast 9-Tradition Switcher (< lg) */}
+          <div className="lg:hidden flex items-center gap-1.5 overflow-x-auto pb-1.5 pt-0.5 no-scrollbar snap-x snap-mandatory">
+            {TRADITION_ORDER.map((key) => {
+              const t = CULTURE_THEMES[key];
+              const isSelected = activeTab === key;
+              return (
+                <button
+                  key={key}
+                  type="button"
+                  onClick={() => setActiveTab(key)}
+                  className={`px-3 py-2 min-h-[44px] rounded-lg text-xs font-mono shrink-0 transition-all flex items-center gap-1.5 cursor-pointer snap-start ${
+                    isSelected
+                      ? 'bg-amber-600 text-stone-950 font-bold shadow-xs'
+                      : 'bg-stone-900 border border-stone-800 text-stone-300 hover:text-white'
+                  }`}
+                  aria-pressed={isSelected}
+                  aria-label={`Switch to ${t.name}`}
+                >
+                  <span className="font-bold">{t.glyph}</span>
+                  <span className="font-serif">{t.shortName || t.name}</span>
+                </button>
+              );
+            })}
           </div>
 
           {/* Desktop Split-Scroll Layout: 4-col sticky cultural lineage & 8-col scrolling matrix */}

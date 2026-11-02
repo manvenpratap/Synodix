@@ -374,7 +374,7 @@ export const FeatureGuideScreen: React.FC<Props> = ({ onNavigate, initialExplain
                       data-tooltip={civ.tooltip}
                       aria-label={`Filter by ${civ.label}`}
                       aria-pressed={isSelected}
-                      className={`px-1.5 py-1.5 rounded-lg border text-xs font-medium flex items-center justify-center transition-colors duration-150 cursor-pointer min-w-0 ${isSelected
+                      className={`px-2 py-2 min-h-[44px] sm:min-h-[34px] rounded-lg border text-xs font-medium flex items-center justify-center transition-colors duration-150 cursor-pointer min-w-0 ${isSelected
                           ? 'bg-amber-950/80 border-amber-500 text-amber-200 shadow-sm ring-1 ring-amber-400'
                           : 'bg-stone-900 border-stone-800 text-stone-300 hover:text-stone-100 hover:border-stone-700 hover:bg-stone-850'
                         }`}
@@ -436,7 +436,7 @@ export const FeatureGuideScreen: React.FC<Props> = ({ onNavigate, initialExplain
                   <button
                     type="button"
                     onClick={() => setSelectedCategory('all')}
-                    className={`w-full text-left px-2.5 py-1.5 rounded-md text-xs font-sans transition-colors flex items-center justify-between cursor-pointer ${selectedCategory === 'all'
+                    className={`w-full text-left px-3 py-2 sm:py-1.5 min-h-[44px] sm:min-h-[34px] rounded-md text-xs font-sans transition-colors flex items-center justify-between cursor-pointer ${selectedCategory === 'all'
                         ? 'bg-amber-950/80 text-amber-300 font-semibold border border-amber-800/80'
                         : 'text-stone-400 hover:text-stone-200 hover:bg-stone-900'
                       }`}
@@ -453,7 +453,7 @@ export const FeatureGuideScreen: React.FC<Props> = ({ onNavigate, initialExplain
                         key={cat.name}
                         type="button"
                         onClick={() => setSelectedCategory(cat.name)}
-                        className={`w-full text-left px-2.5 py-1.5 rounded-md text-xs font-sans transition-colors flex items-center justify-between cursor-pointer ${isSelected
+                        className={`w-full text-left px-3 py-2 sm:py-1.5 min-h-[44px] sm:min-h-[34px] rounded-md text-xs font-sans transition-colors flex items-center justify-between cursor-pointer ${isSelected
                             ? 'bg-amber-950/80 text-amber-300 font-semibold border border-amber-800/80'
                             : 'text-stone-400 hover:text-stone-200 hover:bg-stone-900'
                           }`}
@@ -488,8 +488,14 @@ export const FeatureGuideScreen: React.FC<Props> = ({ onNavigate, initialExplain
                       <button
                         key={item.id}
                         type="button"
-                        onClick={() => setSelectedExplainerId(item.id)}
-                        className={`w-full text-left p-2.5 rounded-lg transition-all duration-200 cursor-pointer flex items-center justify-between gap-2 select-none ${isSelected
+                        onClick={() => {
+                          setSelectedExplainerId(item.id);
+                          if (typeof window !== 'undefined' && window.innerWidth < 1024) {
+                            const el = document.getElementById('explainer-content-canvas');
+                            if (el) el.scrollIntoView({ behavior: 'smooth' });
+                          }
+                        }}
+                        className={`w-full text-left p-2.5 min-h-[44px] rounded-lg transition-all duration-200 cursor-pointer flex items-center justify-between gap-2 select-none ${isSelected
                             ? 'bg-stone-900 border border-amber-500/80 text-amber-200 shadow-md ring-1 ring-amber-500/30'
                             : 'hover:bg-stone-900/80 text-stone-300 border border-transparent hover:border-stone-800'
                           }`}
@@ -519,6 +525,7 @@ export const FeatureGuideScreen: React.FC<Props> = ({ onNavigate, initialExplain
           {/* RIGHT MASTER READING CANVAS: Detailed Explainer Master Document           */}
           {/* ========================================================================= */}
           <section
+            id="explainer-content-canvas"
             aria-label="Explainer Content"
             className="lg:col-span-8 xl:col-span-9 space-y-5 lg:sticky lg:top-20"
           >
