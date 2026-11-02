@@ -246,20 +246,22 @@ export const FeatureGuideScreen: React.FC<Props> = ({ onNavigate, initialExplain
                 {activeSection === 'evidence' ? 'p < 0.001' : '50 Topics'}
               </span>
             </div>
-            <h1 className="hero-h1-clamped font-serif font-bold text-stone-100 tracking-tight flex flex-wrap items-center gap-2">
+            <h1 className="hero-h1-clamped font-serif font-bold text-stone-100 tracking-tight flex flex-wrap items-center gap-1.5 sm:gap-2">
               {activeSection === 'evidence' ? (
                 <>
-                  <span>Empirical Mathematical Evidence &amp; Statistical Validation</span>
-                  <span className="inline-block w-12 sm:w-14 h-5 sm:h-6 rounded-full align-middle bg-gradient-to-r from-amber-600 via-amber-500 to-amber-700 border border-amber-400/50 mx-1.5 shadow-inner inline-flex items-center justify-center text-[10px] text-amber-950 font-mono font-bold">500</span>
+                  <span className="sm:hidden">Mathematical Evidence</span>
+                  <span className="hidden sm:inline">Empirical Mathematical Evidence &amp; Statistical Validation</span>
+                  <span className="inline-block w-10 sm:w-14 h-5 sm:h-6 rounded-full align-middle bg-gradient-to-r from-amber-600 via-amber-500 to-amber-700 border border-amber-400/50 mx-1 sm:mx-1.5 shadow-inner inline-flex items-center justify-center text-[10px] text-amber-950 font-mono font-bold">500</span>
                 </>
               ) : (
                 <>
-                  <span>Multi-Tradition Astrometric &amp; Cultural Feature Guide</span>
-                  <span className="inline-block w-12 sm:w-14 h-5 sm:h-6 rounded-full align-middle bg-gradient-to-r from-amber-600 via-amber-500 to-amber-700 border border-amber-400/50 mx-1.5 shadow-inner inline-flex items-center justify-center text-[10px] text-amber-950 font-mono font-bold">50</span>
+                  <span className="sm:hidden">Astrometric Codex</span>
+                  <span className="hidden sm:inline">Multi-Tradition Astrometric &amp; Cultural Feature Guide</span>
+                  <span className="inline-block w-10 sm:w-14 h-5 sm:h-6 rounded-full align-middle bg-gradient-to-r from-amber-600 via-amber-500 to-amber-700 border border-amber-400/50 mx-1 sm:mx-1.5 shadow-inner inline-flex items-center justify-center text-[10px] text-amber-950 font-mono font-bold">50</span>
                 </>
               )}
             </h1>
-            <p className="text-xs sm:text-sm text-stone-400 mt-1 max-w-2xl sm:max-w-3xl leading-relaxed text-pretty font-sans">
+            <p className="text-xs sm:text-sm text-stone-400 mt-1 max-w-2xl sm:max-w-3xl leading-relaxed text-pretty font-sans hidden sm:block">
               {activeSection === 'evidence'
                 ? 'Peer-reviewed style statistical whitepaper, double-blind permutation null controls, and rigorous p-value benchmarks.'
                 : 'Exhaustive documentation of celestial mechanics, ancient calibration lineages, mathematical formulas, and triangulation invariants.'}

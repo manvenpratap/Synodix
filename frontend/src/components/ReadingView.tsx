@@ -37,6 +37,7 @@ export const ReadingView: React.FC<Props> = ({ data, subjectName, onNavigate }) 
   const [domainFilter, setDomainFilter] = useState<'all' | 'consensus' | 'divergent'>('all');
   const [expandedDomainId, setExpandedDomainId] = useState<string | null>(null);
   const [copied, setCopied] = useState<boolean>(false);
+  const [showTechnicalSolar, setShowTechnicalSolar] = useState<boolean>(false);
 
   const inferences = getAstrologicalInferences(data, subjectName);
   const markdownText = data.synthesis.final_reading_markdown;
@@ -118,43 +119,46 @@ export const ReadingView: React.FC<Props> = ({ data, subjectName, onNavigate }) 
                 </span>
               </div>
 
-              <h1 className="hero-h1-clamped font-serif font-bold text-stone-100 tracking-tight flex flex-wrap items-center gap-2">
-                <span>Complete Birth Chart Reading &amp; Corroboration Dossier</span>
-                <span className="inline-block w-12 sm:w-14 h-5 sm:h-6 rounded-full align-middle bg-gradient-to-r from-amber-600 via-amber-500 to-amber-700 border border-amber-400/50 mx-1.5 shadow-inner inline-flex items-center justify-center text-[10px] text-amber-950 font-mono font-bold">9-Sys</span>
+              <h1 className="hero-h1-clamped font-serif font-bold text-stone-100 tracking-tight flex flex-wrap items-center gap-1.5 sm:gap-2">
+                <span className="sm:hidden">Birth Chart Reading</span>
+                <span className="hidden sm:inline">Complete Birth Chart Reading &amp; Corroboration Dossier</span>
+                <span className="inline-block w-10 sm:w-14 h-5 sm:h-6 rounded-full align-middle bg-gradient-to-r from-amber-600 via-amber-500 to-amber-700 border border-amber-400/50 mx-1 sm:mx-1.5 shadow-inner inline-flex items-center justify-center text-[10px] text-amber-950 font-mono font-bold">9-Sys</span>
               </h1>
-              <p className="text-xs sm:text-sm text-stone-400 mt-1 max-w-2xl sm:max-w-3xl leading-relaxed text-pretty font-sans">
+              <p className="text-xs sm:text-sm text-stone-400 mt-1 max-w-2xl sm:max-w-3xl leading-relaxed text-pretty font-sans hidden sm:block">
                 Complete personality reading, life domains summary, and timing forecast synthesized across all 9 world traditions.
               </p>
             </div>
           </div>
 
           {/* Action Toolbar */}
-          <div className="flex flex-wrap items-center gap-2 shrink-0 pt-2 lg:pt-0 border-t lg:border-t-0 border-stone-800/80">
+          <div className="flex flex-row items-center justify-between gap-1.5 shrink-0 pt-2 lg:pt-0 border-t lg:border-t-0 border-stone-800/80 w-full lg:w-auto">
             {/* View Mode Toggle */}
             <div className="bg-stone-950 p-0.5 rounded-lg border border-stone-800 flex items-center">
               <button
                 type="button"
                 onClick={() => setViewMode('interactive')}
-                className={`px-3 py-2 sm:py-1.5 min-h-[44px] sm:min-h-[36px] rounded text-xs font-medium flex items-center gap-1.5 transition-colors cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 ${
+                className={`px-2.5 sm:px-3 py-1.5 min-h-[44px] sm:min-h-[36px] rounded text-xs font-medium flex items-center gap-1.5 transition-colors cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 ${
                   viewMode === 'interactive'
                     ? 'bg-amber-950 text-amber-200 border border-amber-700/80 shadow-xs'
                     : 'text-stone-400 hover:text-stone-200'
                 }`}
               >
                 <Eye className="w-3.5 h-3.5" />
-                <span>Interactive View</span>
+                <span className="hidden sm:inline">Interactive View</span>
+                <span className="sm:hidden">Interactive</span>
               </button>
               <button
                 type="button"
                 onClick={() => setViewMode('markdown')}
-                className={`px-3 py-2 sm:py-1.5 min-h-[44px] sm:min-h-[36px] rounded text-xs font-medium flex items-center gap-1.5 transition-colors cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 ${
+                className={`px-2.5 sm:px-3 py-1.5 min-h-[44px] sm:min-h-[36px] rounded text-xs font-medium flex items-center gap-1.5 transition-colors cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 ${
                   viewMode === 'markdown'
                     ? 'bg-amber-950 text-amber-200 border border-amber-700/80 shadow-xs'
                     : 'text-stone-400 hover:text-stone-200'
                 }`}
               >
                 <Code className="w-3.5 h-3.5" />
-                <span>Text / Markdown</span>
+                <span className="hidden sm:inline">Text / Markdown</span>
+                <span className="sm:hidden">Markdown</span>
               </button>
             </div>
 
@@ -162,7 +166,7 @@ export const ReadingView: React.FC<Props> = ({ data, subjectName, onNavigate }) 
             <button
               type="button"
               onClick={handleCopy}
-              className={`px-3 py-2 min-h-[44px] sm:min-h-[38px] text-xs font-sans rounded bg-stone-800 hover:bg-stone-700 border transition-colors duration-150 cursor-pointer flex items-center gap-1.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 active:scale-95 ${
+              className={`px-3 py-1.5 min-h-[44px] sm:min-h-[38px] text-xs font-sans rounded bg-stone-800 hover:bg-stone-700 border transition-colors duration-150 cursor-pointer flex items-center gap-1.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 active:scale-95 ${
                 copied
                   ? 'border-emerald-500 text-emerald-300 bg-emerald-950/40 shadow-xs'
                   : 'text-stone-300 border-stone-700'
@@ -176,7 +180,7 @@ export const ReadingView: React.FC<Props> = ({ data, subjectName, onNavigate }) 
             <button
               type="button"
               onClick={handleDownloadMarkdown}
-              className="px-3 py-2 min-h-[44px] sm:min-h-[38px] text-xs font-sans rounded bg-stone-800 hover:bg-stone-700 text-stone-300 border border-stone-700 transition-colors cursor-pointer flex items-center gap-1.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
+              className="hidden sm:inline-flex px-3 py-2 min-h-[44px] sm:min-h-[38px] text-xs font-sans rounded bg-stone-800 hover:bg-stone-700 text-stone-300 border border-stone-700 transition-colors cursor-pointer items-center gap-1.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
               data-tooltip="Download Markdown Document (.md)"
               aria-label="Download Markdown Document (.md)"
             >
@@ -186,7 +190,7 @@ export const ReadingView: React.FC<Props> = ({ data, subjectName, onNavigate }) 
             <button
               type="button"
               onClick={handleDownloadJSON}
-              className="px-3 py-2 min-h-[44px] sm:min-h-[38px] text-xs font-sans rounded bg-stone-800 hover:bg-stone-700 text-stone-300 border border-stone-700 transition-colors cursor-pointer flex items-center gap-1.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
+              className="hidden sm:inline-flex px-3 py-2 min-h-[44px] sm:min-h-[38px] text-xs font-sans rounded bg-stone-800 hover:bg-stone-700 text-stone-300 border border-stone-700 transition-colors cursor-pointer items-center gap-1.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
               data-tooltip="Download Raw Master Dataset (.json)"
               aria-label="Download Raw Master Dataset (.json)"
             >
@@ -196,7 +200,7 @@ export const ReadingView: React.FC<Props> = ({ data, subjectName, onNavigate }) 
             <button
               type="button"
               onClick={handlePrint}
-              className="px-3 py-2 min-h-[44px] sm:min-h-[38px] text-xs font-sans rounded bg-stone-800 hover:bg-stone-700 text-stone-300 border border-stone-700 transition-colors cursor-pointer flex items-center gap-1.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
+              className="hidden sm:inline-flex px-3 py-2 min-h-[44px] sm:min-h-[38px] text-xs font-sans rounded bg-stone-800 hover:bg-stone-700 text-stone-300 border border-stone-700 transition-colors cursor-pointer items-center gap-1.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
               data-tooltip="Print or Save PDF"
               aria-label="Print or Save PDF"
             >
@@ -207,7 +211,7 @@ export const ReadingView: React.FC<Props> = ({ data, subjectName, onNavigate }) 
         </div>
 
         {/* Document Metadata Badges */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2 mt-4 pt-4 border-t border-stone-800 text-[11px] font-sans">
+        <div className="grid grid-cols-3 sm:grid-cols-3 lg:grid-cols-6 gap-1.5 sm:gap-2 mt-2.5 sm:mt-4 pt-2.5 sm:pt-4 border-t border-stone-800 text-[10px] sm:text-[11px] font-sans">
           <div className="bg-stone-950 px-2.5 py-1.5 rounded border border-stone-800 min-w-0">
             <span className="text-stone-400 text-[10px] font-medium flex items-center gap-1">
               <User className="w-2.5 h-2.5 text-amber-400 shrink-0" />
@@ -301,7 +305,7 @@ export const ReadingView: React.FC<Props> = ({ data, subjectName, onNavigate }) 
                 </div>
               </div>
 
-              <div className="bento-card bg-stone-950 p-3.5 rounded-xl border border-stone-800 shadow-xs">
+              <div className={`bento-card bg-stone-950 p-3.5 rounded-xl border border-stone-800 shadow-xs ${showTechnicalSolar ? 'block' : 'hidden md:block'}`}>
                 <div className="flex items-center justify-between mb-1">
                   <span className="text-stone-400 text-xs font-medium">True Astronomical Solar Times</span>
                   <ExplainerTrigger id="time_normalization_eot" size="xs" variant="icon" />
@@ -314,7 +318,7 @@ export const ReadingView: React.FC<Props> = ({ data, subjectName, onNavigate }) 
                 </div>
               </div>
 
-              <div className="bento-card bg-stone-950 p-3.5 rounded-xl border border-stone-800 shadow-xs">
+              <div className={`bento-card bg-stone-950 p-3.5 rounded-xl border border-stone-800 shadow-xs ${showTechnicalSolar ? 'block' : 'hidden md:block'}`}>
                 <div className="flex items-center justify-between mb-1">
                   <span className="text-stone-400 text-xs font-medium">Boundary Proximity & Sensitivity</span>
                   <ExplainerTrigger id="cusp_proximity_audit" size="xs" variant="icon" />
@@ -342,6 +346,17 @@ export const ReadingView: React.FC<Props> = ({ data, subjectName, onNavigate }) 
                   </div>
                 </div>
               </div>
+            </div>
+
+            <div className="md:hidden pt-0.5">
+              <button
+                type="button"
+                onClick={() => setShowTechnicalSolar((prev) => !prev)}
+                className="w-full min-h-[44px] px-3 py-2 text-xs font-mono text-stone-300 hover:text-amber-300 bg-stone-950/80 rounded-lg border border-stone-800 flex items-center justify-between transition-colors cursor-pointer"
+              >
+                <span>{showTechnicalSolar ? 'Hide Solar & Geodetic Benchmarks' : 'Show Solar Times & Geodetic Benchmarks'}</span>
+                <ChevronDown className={`w-3.5 h-3.5 text-amber-400 transition-transform ${showTechnicalSolar ? 'rotate-180' : ''}`} />
+              </button>
             </div>
           </section>
 

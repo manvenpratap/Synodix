@@ -1210,6 +1210,13 @@ h1, h2, h3, h4 {
   max-width: 64rem;
 }
 
+@media (max-width: 639px) {
+  .hero-h1-clamped {
+    font-size: 1.2rem !important;
+    line-height: 1.25 !important;
+  }
+}
+
 /* gpt-taste Artistic Asymmetry baseline offset */
 .artistic-asymmetry-grid {
   display: grid;

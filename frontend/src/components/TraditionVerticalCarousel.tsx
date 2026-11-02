@@ -201,8 +201,8 @@ export const TraditionVerticalCarousel: React.FC<Props> = ({
   // Clean high-density telemetry cell without nested card border tells
   const renderTile = (label: string, value: React.ReactNode, colorClass = 'text-amber-300') => (
     <div className="min-w-0 py-0.5">
-      <span className="text-[11px] text-stone-400 block font-medium leading-tight truncate">{label}</span>
-      <strong className={`${colorClass} font-bold block truncate text-xs font-mono`}>{value}</strong>
+      <span className="text-[10px] sm:text-[11px] text-stone-400 block font-medium leading-tight truncate">{label}</span>
+      <strong className={`${colorClass} font-bold block truncate text-[11px] sm:text-xs font-mono`}>{value}</strong>
     </div>
   );
 
@@ -480,7 +480,7 @@ export const TraditionVerticalCarousel: React.FC<Props> = ({
                         mass: 0.85,
                       }
                 }
-                className={`${isCenter ? 'relative' : 'absolute inset-0 cursor-pointer'} w-full h-[470px] sm:h-[480px] lg:h-[405px] flex flex-col justify-between rounded-2xl border p-2 sm:p-3 transition-colors ${
+                className={`${isCenter ? 'relative' : 'absolute inset-0 cursor-pointer'} w-full h-[425px] sm:h-[460px] lg:h-[405px] flex flex-col justify-between rounded-2xl border p-2 sm:p-3 transition-colors ${
                   isCenter
                     ? `${theme.containerBg} ${theme.containerBorder} backdrop-blur-md cursor-grab active:cursor-grabbing ring-1 ring-amber-500/30 touch-pan-y`
                     : 'bg-stone-950/95 border-stone-800 hover:border-amber-500/40'

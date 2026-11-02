@@ -573,23 +573,25 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
               </span>
             </div>
 
-            <h1 className="hero-h1-clamped font-serif font-bold text-stone-100 tracking-tight flex flex-wrap items-center gap-2">
+            <h1 className="hero-h1-clamped font-serif font-bold text-stone-100 tracking-tight flex flex-wrap items-center gap-1.5 sm:gap-2">
               {activeMode === 'custom' ? (
                 <>
-                  <span>Natal Horizon &amp; Planetary</span>
-                  <span className="inline-block w-12 sm:w-14 h-5 sm:h-6 rounded-full align-middle bg-gradient-to-r from-amber-600 via-amber-500 to-amber-700 border border-amber-400/50 mx-1.5 shadow-inner inline-flex items-center justify-center text-[10px] text-amber-950 font-mono font-bold">JPL</span>
-                  <span>Ephemeris</span>
+                  <span className="sm:hidden">Natal Horizon</span>
+                  <span className="hidden sm:inline">Natal Horizon &amp; Planetary</span>
+                  <span className="inline-block w-10 sm:w-14 h-5 sm:h-6 rounded-full align-middle bg-gradient-to-r from-amber-600 via-amber-500 to-amber-700 border border-amber-400/50 mx-1 sm:mx-1.5 shadow-inner inline-flex items-center justify-center text-[10px] text-amber-950 font-mono font-bold">JPL</span>
+                  <span className="hidden sm:inline">Ephemeris</span>
                 </>
               ) : (
                 <>
-                  <span>500 Verified Historical Records &amp;</span>
-                  <span className="inline-block w-12 sm:w-14 h-5 sm:h-6 rounded-full align-middle bg-gradient-to-r from-amber-600 via-amber-500 to-amber-700 border border-amber-400/50 mx-1.5 shadow-inner inline-flex items-center justify-center text-[10px] text-amber-950 font-mono font-bold">500</span>
-                  <span>Titans Benchmark</span>
+                  <span className="sm:hidden">500 Benchmark Titans</span>
+                  <span className="hidden sm:inline">500 Verified Historical Records &amp;</span>
+                  <span className="inline-block w-10 sm:w-14 h-5 sm:h-6 rounded-full align-middle bg-gradient-to-r from-amber-600 via-amber-500 to-amber-700 border border-amber-400/50 mx-1 sm:mx-1.5 shadow-inner inline-flex items-center justify-center text-[10px] text-amber-950 font-mono font-bold">500</span>
+                  <span className="hidden sm:inline">Titans Benchmark</span>
                 </>
               )}
             </h1>
 
-            <p className="text-xs sm:text-sm text-stone-400 mt-1 max-w-2xl sm:max-w-3xl leading-relaxed text-pretty font-sans">
+            <p className="text-xs sm:text-sm text-stone-400 mt-1 max-w-2xl sm:max-w-3xl leading-relaxed text-pretty font-sans hidden sm:block">
               {activeMode === 'custom'
                 ? 'Multi-tradition topocentric triangulation across 9 classical world systems with micro-arcsecond Swiss Ephemeris accuracy.'
                 : 'Certified Rodden AA/A historical personalities for empirical cross-cultural consensus verification and statistical research.'}

@@ -73,19 +73,31 @@ export const SynthesisMatrix: React.FC<Props> = ({ synthesis, onNavigate }) => {
                 Consensus
               </span>
             </div>
-            <h1 className="hero-h1-clamped font-serif font-bold text-stone-100 tracking-tight flex flex-wrap items-center gap-2">
-              <span>Where Traditions Agree vs Differ</span>
-              <span className="inline-block w-12 sm:w-14 h-5 sm:h-6 rounded-full align-middle bg-gradient-to-r from-amber-600 via-amber-500 to-amber-700 border border-amber-400/50 mx-1.5 shadow-inner inline-flex items-center justify-center text-[10px] text-amber-950 font-mono font-bold">9-Sys</span>
+            <h1 className="hero-h1-clamped font-serif font-bold text-stone-100 tracking-tight flex flex-wrap items-center gap-1.5 sm:gap-2">
+              <span className="sm:hidden">Synthesis Matrix</span>
+              <span className="hidden sm:inline">Where Traditions Agree vs Differ</span>
+              <span className="inline-block w-10 sm:w-14 h-5 sm:h-6 rounded-full align-middle bg-gradient-to-r from-amber-600 via-amber-500 to-amber-700 border border-amber-400/50 mx-1 sm:mx-1.5 shadow-inner inline-flex items-center justify-center text-[10px] text-amber-950 font-mono font-bold">9-Sys</span>
             </h1>
-            <p className="text-xs sm:text-sm text-stone-400 mt-1 max-w-2xl sm:max-w-3xl leading-relaxed text-pretty font-sans">
+            <p className="text-xs sm:text-sm text-stone-400 mt-1 max-w-2xl sm:max-w-3xl leading-relaxed text-pretty font-sans hidden sm:block">
               Systematic comparison across 9 life domains, quantifying where Vedic, Hellenistic, and BaZi systems independently corroborate, and where unique cultural frameworks diverge.
             </p>
           </div>
         </div>
 
         {/* Divergence Metric Badge & Explainer */}
-        <div className="flex flex-wrap items-center gap-3 shrink-0 pt-2 lg:pt-0 border-t lg:border-t-0 border-stone-800">
-          <div className="flex items-center gap-3 p-2.5 rounded-xl bg-stone-900/80 border border-stone-800">
+        <div className="flex flex-row items-center justify-between gap-2 shrink-0 pt-2 lg:pt-0 border-t lg:border-t-0 border-stone-800/80 w-full lg:w-auto">
+          {/* Mobile sleek wafer */}
+          <div className="sm:hidden flex items-center justify-between gap-3 w-full p-2 rounded-lg bg-stone-950 border border-stone-800 text-xs font-mono">
+            <div className="flex items-center gap-2">
+              <span className="text-stone-400">Divergence:</span>
+              <strong className="text-rose-400 font-bold">{metrics.divergence_rate_percent}%</strong>
+              <span className="text-stone-600 text-[11px]">({metrics.divergent_domains} div)</span>
+            </div>
+            <ExplainerTrigger id="three_cluster_consensus" label="Compare" variant="badge" />
+          </div>
+
+          {/* Desktop full detailed card */}
+          <div className="hidden sm:flex items-center gap-3 p-2.5 rounded-xl bg-stone-900/80 border border-stone-800">
             <div className="text-right">
               <div className="flex items-center justify-end gap-1.5">
                 <span className="text-xs text-stone-300 font-medium block">
@@ -104,7 +116,9 @@ export const SynthesisMatrix: React.FC<Props> = ({ synthesis, onNavigate }) => {
               <div>Divergent: <strong className="text-rose-400 font-mono">{metrics.divergent_domains}</strong></div>
             </div>
           </div>
-          <ExplainerTrigger id="three_cluster_consensus" label="How We Compare" variant="badge" />
+          <div className="hidden sm:block">
+            <ExplainerTrigger id="three_cluster_consensus" label="How We Compare" variant="badge" />
+          </div>
         </div>
       </div>
 
@@ -148,7 +162,7 @@ export const SynthesisMatrix: React.FC<Props> = ({ synthesis, onNavigate }) => {
         </div>
 
         {/* Filter Segmented Buttons */}
-        <div className="flex flex-wrap items-center gap-1.5 pb-1 lg:pb-0" role="group" aria-label="Filter domains">
+        <div className="flex overflow-x-auto no-scrollbar items-center gap-1.5 pb-1 lg:pb-0" role="group" aria-label="Filter domains">
           <button
             type="button"
             aria-pressed={filterMode === 'all'}

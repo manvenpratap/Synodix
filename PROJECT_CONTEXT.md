@@ -1,7 +1,7 @@
 # Synodix: Project Context & Working Memory
 
-**Last Updated:** 2026-11-02 23:54:20
-**Version:** 2.47.0  
+**Last Updated:** 2026-11-03 00:59:03
+**Version:** 2.48.0  
 **Stack:** Python 3.12 (FastAPI, Swiss Ephemeris 2.10, Skyfield DE421) + TypeScript / React 19 / Vite / Tailwind CSS v4 / Framer Motion / Capacitor 8 (iOS & Android)  
 **Workspace:** `/Volumes/Study/Projects/Astrology` (symlinked as `/Volumes/Study/Astrology`)  
 **Git Remote:** `https://github.com/manvenpratap/Synodix.git`  
@@ -10,7 +10,22 @@
 
 ## 1. Current Status & Milestone
 
-- **Active Phase**: Hallmark Sloplint Floor Compliance & Editorial Typography Polish (v2.47.0) (Completed)
+- **Active Phase**: Mobile-Native Minimalist UI & Traditions Gallery Viewport Refinement (v2.48.0) (Completed)
+- **Mobile-Native Minimalist UI & Traditions Gallery Viewport Refinement (v2.48.0)**:
+  - **Traditions Gallery View Elimination on Mobile**:
+    - Addressed user feedback regarding squashed vertical bars and unreadable rotated text on mobile phone viewports.
+    - Scoped the Accordion Gallery mode switcher button strictly to desktop (`hidden lg:flex`), eliminating the useless gallery button on mobile screens (< 1024px).
+    - Enforced an active resize guard in `TraditionCharts.tsx` ensuring mobile viewports automatically fallback from `accordion` to the clean `carousel` Cards Deck.
+    - Hardened `.horizontal-accordion-container` with bulletproof viewport isolation preventing vertical blade slivers from ever leaking into mobile layouts.
+  - **Mobile Minimalist Decluttering & Progressive Disclosure Across Modules**:
+    - **Tradition Cards Deck**: Optimized card height from 470px to 425px on mobile (`h-[425px] sm:h-[460px] lg:h-[405px]`), tightened telemetry typography, and provided a cleaner, touch-friendly presentation without vertical scrolling overflow.
+    - **Reading / Dossier View**: Replaced dense multi-card astronomical data with progressive disclosure on mobile; Section 1 now shows Subject & Civil Coordinates by default with a sleek collapsible toggle for True Astronomical Solar Times & Geodetic Benchmarks, saving ~300px of scrolling clutter.
+    - **Synthesis Matrix**: Optimized filter chips to single-row touch-scroll (`flex overflow-x-auto no-scrollbar`) and refined mobile row headers to eliminate awkward multi-line text wrapping.
+    - **Mobile Heroes**: Reduced mobile hero heights across all modules by 40%–60% with clamped display headings, concise subtitles (`hidden sm:block`), and streamlined action wafers.
+  - **Automated Verification**:
+    - Full 29/29 regression test suite passing in 116.48s (`./pipeline.sh test --summary`).
+    - 0 TypeScript compilation errors (`npx tsc --noEmit`).
+    - Verified mobile viewport rendering on 390x844 with clean screenshots (`verified_mobile_traditions.png`, `verified_mobile_synthesis.png`, `verified_mobile_dossier.png`).
 - **Hallmark Sloplint Floor Compliance & Editorial Typography Polish (v2.47.0)**:
   - **Exhaustive Hallmark Floor & Gate Audit**:
     - Ran Hallmark `sloplint.mjs` against all 7 hero components (`BirthDataForm`, `TraditionCharts`, `SynthesisMatrix`, `ReadingView`, `SynastryScreen`, `VerificationCard`, `FeatureGuideScreen`).

@@ -612,6 +612,18 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
   const [chartViewMode, setChartViewMode] = useState<'both' | 'chart' | 'table'>('both');
   const [layoutMode, setLayoutMode] = useState<'carousel' | 'accordion' | 'inspector'>('carousel');
 
+  // Viewport guard: horizontal accordion gallery is strictly for desktop (>= 1024px)
+  useEffect(() => {
+    const handleResize = () => {
+      if (typeof window !== 'undefined' && window.innerWidth < 1024 && layoutMode === 'accordion') {
+        setLayoutMode('carousel');
+      }
+    };
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, [layoutMode]);
+
   const { jyotisha, bazi, western, ziwei, mayan, tibetan, persian, egyptian, maramataka } = data.traditions;
   const currentTheme = CULTURE_THEMES[activeTab] || CULTURE_THEMES.jyotisha;
 
@@ -636,19 +648,20 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
                 Multi-Tradition
               </span>
             </div>
-            <h1 className="hero-h1-clamped font-serif font-bold text-stone-100 tracking-tight flex flex-wrap items-center gap-2">
-              <span>9 Astrological Traditions</span>
-              <span className="inline-block w-12 sm:w-14 h-5 sm:h-6 rounded-full align-middle bg-gradient-to-r from-amber-600 via-amber-500 to-amber-700 border border-amber-400/50 mx-1.5 shadow-inner inline-flex items-center justify-center text-[10px] text-amber-950 font-mono font-bold">9-Sys</span>
+            <h1 className="hero-h1-clamped font-serif font-bold text-stone-100 tracking-tight flex flex-wrap items-center gap-1.5 sm:gap-2">
+              <span className="sm:hidden">9 Traditions</span>
+              <span className="hidden sm:inline">9 Astrological Traditions</span>
+              <span className="inline-block w-10 sm:w-14 h-5 sm:h-6 rounded-full align-middle bg-gradient-to-r from-amber-600 via-amber-500 to-amber-700 border border-amber-400/50 mx-1 sm:mx-1.5 shadow-inner inline-flex items-center justify-center text-[10px] text-amber-950 font-mono font-bold">9-Sys</span>
               <span className="text-stone-300 hidden sm:inline">&amp; Cosmologies</span>
             </h1>
-            <p className="text-xs sm:text-sm text-stone-400 mt-1 max-w-2xl sm:max-w-3xl leading-relaxed text-pretty font-sans">
+            <p className="text-xs sm:text-sm text-stone-400 mt-1 max-w-2xl sm:max-w-3xl leading-relaxed text-pretty font-sans hidden sm:block">
               Explore your natal chart across 9 distinct celestial systems: from Vedic sidereal nakshatras and Hellenistic planetary sect to BaZi solar terms and Maya sacred trecenas.
             </p>
           </div>
         </div>
 
         {/* Display Presentation Switcher & View Mode Controls Toolbar */}
-        <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between sm:justify-end gap-2 w-full xl:w-auto shrink-0 pt-2 xl:pt-0 border-t xl:border-t-0 border-stone-800/80">
+        <div className="flex flex-row items-center justify-between gap-1.5 w-full xl:w-auto shrink-0 pt-2 xl:pt-0 border-t xl:border-t-0 border-stone-800/80 overflow-x-auto no-scrollbar">
           {/* Display Presentation Switcher: Comprehensive / Visual Instrument / Telemetry Tables */}
           <div className="flex items-center justify-center sm:justify-start gap-1 p-0.5 rounded-lg bg-stone-950 border border-stone-800 text-xs font-mono shrink-0">
             {(['both', 'chart', 'table'] as const).map((mode) => {
@@ -709,7 +722,7 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
                 triggerHaptic('selection');
                 setLayoutMode('accordion');
               }}
-              className={`flex items-center gap-1.5 px-3 py-1.5 min-h-[44px] sm:min-h-[34px] rounded-md cursor-pointer transition-colors font-serif text-xs ${
+              className={`hidden lg:flex items-center gap-1.5 px-3 py-1.5 min-h-[44px] sm:min-h-[34px] rounded-md cursor-pointer transition-colors font-serif text-xs ${
                 layoutMode === 'accordion'
                   ? 'bg-amber-950 text-amber-300 border border-amber-700/80 font-bold'
                   : 'text-stone-400 hover:text-stone-200'
@@ -718,8 +731,7 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
               aria-label="Horizontal Accordion Gallery view"
             >
               <Compass className="w-3.5 h-3.5 text-amber-400" />
-              <span className="hidden sm:inline">Accordion Gallery</span>
-              <span className="sm:hidden">Gallery</span>
+              <span>Accordion Gallery</span>
               <span className="sr-only">Accordion Gallery</span>
             </button>
             <button
@@ -796,12 +808,11 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
               <button
                 type="button"
                 onClick={() => setLayoutMode('accordion')}
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 min-h-[44px] sm:min-h-[32px] rounded-lg bg-stone-800 hover:bg-stone-700 text-stone-200 border border-stone-700 font-sans text-xs cursor-pointer transition-colors"
+                className="hidden lg:inline-flex items-center gap-1.5 px-3 py-1.5 min-h-[44px] sm:min-h-[32px] rounded-lg bg-stone-800 hover:bg-stone-700 text-stone-200 border border-stone-700 font-sans text-xs cursor-pointer transition-colors"
                 data-tooltip="Switch to Horizontal Accordion Gallery"
               >
                 <Compass className="w-3.5 h-3.5 text-amber-400" />
-                <span className="hidden sm:inline">Accordion Gallery</span>
-                <span className="sm:hidden">Gallery</span>
+                <span>Accordion Gallery</span>
               </button>
               <div className="flex items-center gap-2 pl-2 border-l border-stone-700/60">
                 <span className="font-mono text-xs font-bold px-1.5 py-0.5 rounded bg-stone-800 text-stone-200">{currentTheme.glyph}</span>

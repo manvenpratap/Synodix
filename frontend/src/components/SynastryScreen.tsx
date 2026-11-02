@@ -256,18 +256,19 @@ export const SynastryScreen: React.FC<Props> = ({
                 </span>
               </div>
 
-              <h1 className="hero-h1-clamped font-serif font-bold text-stone-100 tracking-tight flex flex-wrap items-center gap-2">
-                <span>Synastry &amp; Composite Charts</span>
-                <span className="inline-block w-12 sm:w-14 h-5 sm:h-6 rounded-full align-middle bg-gradient-to-r from-amber-600 via-amber-500 to-amber-700 border border-amber-400/50 mx-1.5 shadow-inner inline-flex items-center justify-center text-[10px] text-amber-950 font-mono font-bold">Dual</span>
+              <h1 className="hero-h1-clamped font-serif font-bold text-stone-100 tracking-tight flex flex-wrap items-center gap-1.5 sm:gap-2">
+                <span className="sm:hidden">Synastry &amp; Composite</span>
+                <span className="hidden sm:inline">Synastry &amp; Composite Charts</span>
+                <span className="inline-block w-10 sm:w-14 h-5 sm:h-6 rounded-full align-middle bg-gradient-to-r from-amber-600 via-amber-500 to-amber-700 border border-amber-400/50 mx-1 sm:mx-1.5 shadow-inner inline-flex items-center justify-center text-[10px] text-amber-950 font-mono font-bold">Dual</span>
                 <span className="text-stone-300 hidden sm:inline">across 9 Traditions</span>
               </h1>
-              <p className="text-xs sm:text-sm text-stone-400 mt-1 max-w-2xl sm:max-w-3xl leading-relaxed text-pretty font-sans">
+              <p className="text-xs sm:text-sm text-stone-400 mt-1 max-w-2xl sm:max-w-3xl leading-relaxed text-pretty font-sans hidden sm:block">
                 Compare two birth charts across all 9 civilizational systems: astronomical inter-aspects, circular midpoint composite entity, authentic 36-point Vedic Ashtakoota Milan, BaZi Wu Xing balances, and esoteric decanic/lunar affinities.
               </p>
             </div>
           </div>
 
-          <div className="flex flex-wrap items-center gap-2.5 shrink-0 pt-2 lg:pt-0 border-t lg:border-t-0 border-stone-800/80">
+          <div className="flex flex-row items-center justify-between gap-2 shrink-0 pt-2 lg:pt-0 border-t lg:border-t-0 border-stone-800/80 w-full lg:w-auto">
             <ExplainerTrigger id="synastry_conjunctions" variant="badge" />
             <button
               type="button"
