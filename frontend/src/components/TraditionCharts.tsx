@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Layers, Sliders, ArrowLeft, ArrowRight, Compass } from 'lucide-react';
+import { Layers, Sliders, ArrowLeft, ArrowRight, Compass, ChevronDown, ChevronUp } from 'lucide-react';
 import type { ChartResponse } from '../types';
 import { ExplainerTrigger } from './ExplainerTrigger';
 import { triggerHaptic } from '../utils/haptics';
@@ -257,13 +257,115 @@ const CULTURE_THEMES: Record<string, {
 };
 
 const HorizontalAccordionGallery: React.FC<{
+  data: ChartResponse;
   activeTab: TraditionKey;
   onSelectTradition: (trad: TraditionKey) => void;
   onOpenInspector: (trad: TraditionKey) => void;
   cultureThemes: typeof CULTURE_THEMES;
-}> = ({ activeTab, onSelectTradition, onOpenInspector, cultureThemes }) => {
+}> = ({ data, activeTab, onSelectTradition, onOpenInspector, cultureThemes }) => {
   const [hoveredTradition, setHoveredTradition] = useState<TraditionKey | null>(null);
+  const [expandedMobileKey, setExpandedMobileKey] = useState<TraditionKey | null>(activeTab);
   const selectedKey = hoveredTradition || activeTab;
+
+  useEffect(() => {
+    if (activeTab) {
+      setExpandedMobileKey(activeTab);
+    }
+  }, [activeTab]);
+
+  const toggleMobileItem = (key: TraditionKey) => {
+    triggerHaptic('selection');
+    setExpandedMobileKey((prev) => (prev === key ? null : key));
+    onSelectTradition(key);
+  };
+
+  const renderTraditionInstrument = (key: TraditionKey) => {
+    const { jyotisha, bazi, western, ziwei, mayan, tibetan, persian, egyptian, maramataka } = data.traditions;
+    switch (key) {
+      case 'jyotisha':
+        return jyotisha ? <NorthIndianChart jyotisha={jyotisha} compact /> : null;
+      case 'bazi':
+        return bazi ? <BaZiElementPentagram bazi={bazi} compact /> : null;
+      case 'western':
+        return western ? <WesternCircularWheel western={western} compact /> : null;
+      case 'ziwei':
+        return ziwei ? <ZiWeiPalaceGrid ziwei={ziwei} compact /> : null;
+      case 'mayan':
+        return mayan ? <MayaCalendarCompass mayan={mayan} compact /> : null;
+      case 'tibetan':
+        return tibetan ? <TibetanMewaGrid tibetan={tibetan} compact /> : null;
+      case 'persian':
+        return persian ? <AlmutenDignityBarChart persian={persian} compact /> : null;
+      case 'egyptian':
+        return egyptian ? <EgyptianDecanStarClock egyptian={egyptian} compact /> : null;
+      case 'maramataka':
+        return maramataka ? <MaramatakaLunarDial maramataka={maramataka} compact /> : null;
+      default:
+        return null;
+    }
+  };
+
+  const getTraditionKeyMetrics = (key: TraditionKey): Array<{ label: string; value: string }> => {
+    const { jyotisha, bazi, western, ziwei, mayan, tibetan, persian, egyptian, maramataka } = data.traditions;
+    switch (key) {
+      case 'jyotisha':
+        return [
+          { label: 'Lagna', value: `${jyotisha?.lagna?.sign || 'Aries'} (${jyotisha?.lagna?.degree?.toFixed(1) || '0.0'}°)` },
+          { label: 'Nakshatra', value: `${jyotisha?.lagna?.nakshatra?.name || 'Ashwini'} P${jyotisha?.lagna?.nakshatra?.pada || 1}` },
+          { label: 'Ayanamsha', value: `${data.astronomical_base?.ayanamsha?.degrees?.toFixed(2) || '24.1'}° Lahiri` },
+        ];
+      case 'bazi':
+        return [
+          { label: 'Day Master', value: `${bazi?.day_master?.stem || 'Jia'} (${bazi?.day_master?.element || 'Wood'})` },
+          { label: 'Solar Term', value: bazi?.solar_term || 'Equinox' },
+          { label: 'Dominant Qi', value: bazi?.dominant_element || 'Balanced' },
+        ];
+      case 'western':
+        return [
+          { label: 'Ascendant', value: `${western?.ascendant?.sign || 'Leo'} (${western?.ascendant?.degree?.toFixed(1) || '0.0'}°)` },
+          { label: 'Sect', value: western?.sect?.is_day_chart ? 'Diurnal' : 'Nocturnal' },
+          { label: 'Fortune Lot', value: western?.lots?.lot_of_fortune?.sign ? `${western.lots.lot_of_fortune.sign} H${western.lots.lot_of_fortune.house}` : 'H1' },
+        ];
+      case 'ziwei':
+        return [
+          { label: 'Ming Palace', value: `${ziwei?.ming_palace_branch || 'Zi'} Palace` },
+          { label: 'Bureau', value: ziwei?.five_elements_bureau?.name || 'Water 2' },
+          { label: 'Shen Palace', value: `${ziwei?.shen_palace_branch || 'Wu'} Palace` },
+        ];
+      case 'mayan':
+        return [
+          { label: 'Tzolk’in', value: mayan?.tzolkin?.formatted || '8 Chuwen' },
+          { label: 'Haab’', value: mayan?.haab?.formatted || '14 Pop' },
+          { label: 'Long Count', value: mayan?.long_count?.formatted || '13.0.11.12.9' },
+        ];
+      case 'tibetan':
+        return [
+          { label: 'Rabjung', value: tibetan?.rabjung_cycle?.element_gender_animal || 'Iron Dragon' },
+          { label: 'Mewa', value: tibetan?.mewa?.formatted || 'Mewa 9 Red' },
+          { label: 'Parkha', value: tibetan?.parkha?.name ? `${tibetan.parkha.name} (${tibetan.parkha.element})` : 'Li (Fire)' },
+        ];
+      case 'persian':
+        return [
+          { label: 'Almuten Victor', value: `${persian?.almuten_figuris?.victor || 'Jupiter'} (+${persian?.almuten_figuris?.victor_score || 38})` },
+          { label: 'Sect', value: persian?.sect?.sect_name || 'Diurnal Sect' },
+          { label: 'Day Ruler', value: persian?.sect?.day_ruler || 'Sun' },
+        ];
+      case 'egyptian':
+        return [
+          { label: 'Hour Ruler', value: egyptian?.chronocrator_watch?.hour_ruler_chronocrator || 'Horus' },
+          { label: 'Sothic Season', value: egyptian?.sothic_civil_cycle?.season || 'Akhet' },
+          { label: 'Temporal Hour', value: `Hour ${egyptian?.chronocrator_watch?.temporal_hour_number || 1}` },
+        ];
+      case 'maramataka':
+        return [
+          { label: 'Lunar Night', value: maramataka?.lunar_night?.name ? `#${maramataka.lunar_night.number} ${maramataka.lunar_night.name}` : 'Rakaunui' },
+          { label: 'Mauri Vitality', value: maramataka?.lunar_night?.vitality_index || 'High Mauri' },
+          { label: 'Illumination', value: `${maramataka?.lunar_night?.illumination_percent || 100}%` },
+        ];
+      default:
+        return [];
+    }
+  };
 
   return (
     <div className="mt-2 space-y-3">
@@ -361,53 +463,122 @@ const HorizontalAccordionGallery: React.FC<{
         })}
       </div>
 
-      {/* Mobile Responsive Snap-Scroll Cards (< md) */}
-      <div className="md:hidden flex gap-3 overflow-x-auto pb-3 pt-1 px-1 no-scrollbar snap-x snap-mandatory">
+      {/* Mobile Responsive Vertical Accordion (< md) */}
+      <div className="md:hidden flex flex-col gap-2.5 pt-1 px-0.5">
         {TRADITION_ORDER.map((key) => {
           const theme = cultureThemes[key] || cultureThemes.jyotisha;
-          const isSelected = activeTab === key;
+          const isExpanded = expandedMobileKey === key;
+          const metrics = isExpanded ? getTraditionKeyMetrics(key) : [];
 
           return (
             <div
               key={key}
-              onClick={() => onSelectTradition(key)}
-              className={`snap-center shrink-0 w-[85vw] max-w-[340px] rounded-xl border p-4 flex flex-col justify-between space-y-3 ${
-                isSelected
-                  ? `${theme.containerBg} ${theme.containerBorder} ring-1 ring-amber-500/50 shadow-md`
-                  : 'bg-stone-900/90 border-stone-800'
+              className={`rounded-xl border transition-all duration-200 overflow-hidden ${
+                isExpanded
+                  ? `${theme.containerBg} ${theme.containerBorder} ring-1 ring-amber-500/40 shadow-lg`
+                  : 'bg-stone-900/80 border-stone-800 hover:border-stone-700'
               }`}
             >
-              <div>
-                <div className="flex items-center justify-between border-b border-white/10 pb-2">
-                  <span className="text-xl font-mono text-amber-300">{theme.glyph}</span>
-                  <span className={`text-[10px] font-mono px-2 py-0.5 rounded-full ${theme.accentBadge}`}>
-                    {theme.shortName || theme.name}
+              {/* Accordion Header / Touch Strip (min 48px touch target) */}
+              <button
+                type="button"
+                onClick={() => toggleMobileItem(key)}
+                className="w-full min-h-[48px] px-3.5 py-2.5 flex items-center justify-between text-left cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
+                aria-expanded={isExpanded}
+                aria-controls={`mobile-accordion-panel-${key}`}
+                id={`mobile-accordion-header-${key}`}
+              >
+                <div className="flex items-center gap-3 min-w-0 pr-2">
+                  <span className="w-8 h-8 rounded-lg bg-stone-950/80 border border-stone-700/80 flex items-center justify-center text-xs font-mono font-bold text-amber-300 shrink-0 shadow-inner">
+                    {theme.glyph}
+                  </span>
+                  <div className="min-w-0">
+                    <div className="flex items-center gap-2">
+                      <span className="text-sm font-serif font-bold text-stone-100 truncate">
+                        {theme.name}
+                      </span>
+                      <span className={`text-[10px] font-mono px-1.5 py-0.5 rounded-full shrink-0 font-medium ${theme.accentBadge}`}>
+                        {theme.shortName || theme.name}
+                      </span>
+                    </div>
+                    <p className="text-[11px] text-stone-400 font-sans truncate">
+                      {theme.nativeTitle}
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-2 shrink-0">
+                  <span className="w-6 h-6 rounded-full bg-stone-950/60 border border-stone-800 flex items-center justify-center text-stone-400">
+                    {isExpanded ? (
+                      <ChevronUp className="w-3.5 h-3.5 text-amber-400" />
+                    ) : (
+                      <ChevronDown className="w-3.5 h-3.5 text-stone-400" />
+                    )}
                   </span>
                 </div>
-                <h3 className="text-base font-serif font-bold text-stone-100 mt-2">
-                  {theme.name}
-                </h3>
-                <p className="text-xs text-stone-300 font-sans mt-0.5">
-                  {theme.nativeTitle}
-                </p>
-                <p className="mt-2.5 text-xs italic text-stone-300 bg-black/40 p-2.5 rounded border border-white/5">
-                  &ldquo;{theme.motto}&rdquo;
-                </p>
-              </div>
+              </button>
 
-              <div className="flex items-center gap-2 pt-2 border-t border-white/10">
-                <button
-                  type="button"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    onOpenInspector(key);
-                  }}
-                  className="w-full inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg bg-amber-600 hover:bg-amber-500 text-stone-950 font-serif font-semibold text-xs"
+              {/* Accordion Expanded Content */}
+              {isExpanded && (
+                <div
+                  id={`mobile-accordion-panel-${key}`}
+                  role="region"
+                  aria-labelledby={`mobile-accordion-header-${key}`}
+                  className="px-3.5 pb-3.5 pt-1 border-t border-white/10 space-y-3 animate-tab-enter"
                 >
-                  <span>Inspect Matrix</span>
-                  <ArrowRight className="w-3.5 h-3.5" />
-                </button>
-              </div>
+                  {/* Cultural Lineage & Philosophical Motto */}
+                  <div className="space-y-1.5">
+                    <div className="text-[11px] font-mono text-stone-400 leading-tight">
+                      {theme.lineage}
+                    </div>
+                    <div className="p-2.5 rounded-lg bg-black/40 border border-white/10 text-xs italic text-stone-300 leading-relaxed">
+                      &ldquo;{theme.motto}&rdquo;
+                    </div>
+                  </div>
+
+                  {/* 3 Live Astrometric Key Readings */}
+                  <div className="grid grid-cols-3 gap-1.5 p-2 rounded-lg bg-stone-950/70 border border-stone-800/80">
+                    {metrics.map((m, idx) => (
+                      <div key={idx} className="min-w-0 text-center px-1">
+                        <span className="text-[10px] text-stone-400 block font-medium uppercase tracking-wider truncate">
+                          {m.label}
+                        </span>
+                        <strong className="text-[11px] font-mono font-bold text-amber-300 block truncate mt-0.5">
+                          {m.value}
+                        </strong>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Live Astrometric Visual Instrument */}
+                  <div className="rounded-xl p-2.5 bg-stone-950/80 border border-stone-800/80 flex flex-col items-center">
+                    <div className="w-full flex items-center justify-between pb-1.5 mb-1.5 border-b border-white/10">
+                      <span className="text-[11px] font-mono text-amber-400 font-semibold truncate">
+                        {theme.instrumentName}
+                      </span>
+                      <span className="text-[10px] font-mono text-stone-400 shrink-0">
+                        Live Engine
+                      </span>
+                    </div>
+                    <div className="w-full flex items-center justify-center py-1">
+                      {renderTraditionInstrument(key)}
+                    </div>
+                  </div>
+
+                  {/* Primary Action Button (min 44px touch target) */}
+                  <button
+                    type="button"
+                    onClick={() => {
+                      triggerHaptic('medium');
+                      onOpenInspector(key);
+                    }}
+                    className="w-full min-h-[44px] inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg bg-amber-600 hover:bg-amber-500 active:bg-amber-700 text-stone-950 font-serif font-bold text-xs tracking-wide transition-colors shadow-md cursor-pointer"
+                  >
+                    <span>Open Full {theme.shortName || theme.name} Inspector</span>
+                    <ArrowRight className="w-4 h-4" />
+                  </button>
+                </div>
+              )}
             </div>
           );
         })}
@@ -557,6 +728,7 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
       {/* 2. Horizontal Accordion Gallery Mode */}
       {layoutMode === 'accordion' && (
         <HorizontalAccordionGallery
+          data={data}
           activeTab={activeTab}
           onSelectTradition={(trad) => setActiveTab(trad)}
           onOpenInspector={(trad) => {

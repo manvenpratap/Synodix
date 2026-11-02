@@ -1,7 +1,7 @@
 # Synodix: Project Context & Working Memory
 
-**Last Updated:** 2026-11-02 08:53:31
-**Version:** 2.40.0  
+**Last Updated:** 2026-11-02 09:17:43
+**Version:** 2.41.0  
 **Stack:** Python 3.12 (FastAPI, Swiss Ephemeris 2.10, Skyfield DE421) + TypeScript / React 19 / Vite / Tailwind CSS v4 / Framer Motion / Capacitor 8 (iOS & Android)  
 **Workspace:** `/Volumes/Study/Projects/Astrology` (symlinked as `/Volumes/Study/Astrology`)  
 **Git Remote:** `https://github.com/manvenpratap/Synodix.git`  
@@ -10,7 +10,22 @@
 
 ## 1. Current Status & Milestone
 
-- **Active Phase**: Mobile Design System & Haptic Feedback Engine Architecture (v2.40.0) (Completed)
+- **Active Phase**: Mobile Vertical Accordion Codex for Traditions Gallery (v2.41.0) (Completed)
+- **Mobile Vertical Accordion Codex for Traditions Gallery (v2.41.0)**:
+  - **Mobile Elevation of Gallery View (`TraditionCharts.tsx`)**:
+    - Replaced the horizontal swipe text cards (`md:hidden flex gap-3 overflow-x-auto`) with an interactive, high-value **Mobile Vertical Accordion Codex**.
+    - **Collapsed Touch Strip**: $\ge 48\text{px}$ touch target with tradition glyph badge, English name, native script title, and dynamic Chevron toggle indicator.
+    - **Expanded Codex Card**:
+      - Cultural identity, lineage lineage attribution, and philosophical motto quote.
+      - **3 Live Astrometric Key Readings**: Tradition-specific telemetry (e.g. Jyotisha Lagna & Nakshatra, BaZi Day Master & Solar Term, Hellenistic Ascendant & Sect, Zi Wei Ming & Shen Palaces, Maya Tzolk'in & Haab', Tibetan Rabjung & Mewa, Persian Almuten Victor, Egyptian Hour Chronocrator, Māori Lunar Night & Mauri Vitality).
+      - **Authentic Live Visual Instrument**: Direct rendering of the real responsive visual instrument for each tradition (`NorthIndianChart`, `WesternCircularWheel`, `BaZiElementPentagram`, `ZiWeiPalaceGrid`, `MayaCalendarCompass`, `TibetanMewaGrid`, `AlmutenDignityBarChart`, `EgyptianDecanStarClock`, `MaramatakaLunarDial`).
+      - **Primary Action CTA**: $\ge 44\text{px}$ touch target button (`Open Full {Tradition} Inspector`) with affirmative haptic response (`triggerHaptic('medium')`).
+  - **Preserved Desktop Experience**: Desktop horizontal accordion gallery (`hidden md:flex horizontal-accordion-container` with 9 interactive blades) remains 100% intact and unchanged.
+  - **Automated Verification**:
+    - Expanded `tests/test_04_mobile_viewport.py` to assert mobile vertical accordion header touch targets ($\ge 44\text{px}$), all 9 tradition headers, visual instruments, and inspector CTA visibility on both iPhone SE and iPhone 14.
+    - 0 TypeScript compilation errors (`npx tsc --noEmit`).
+    - Clean Vite production build (`npm run build`).
+    - Full 29/29 Playwright regression suite passing (`./pipeline.sh test --summary`).
 - **Mobile Design System & Haptic Feedback Engine Architecture (v2.40.0)**:
   - **Mobile Feasibility & Risk Index (MFRI)**: Evaluated at $\mathbf{+5}$ (Safe/Low Risk) under touch-first, offline-capable, and platform-respectful constraints.
   - **Calibrated Haptic Feedback Engine (`frontend/src/utils/haptics.ts`)**:

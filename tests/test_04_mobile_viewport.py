@@ -177,8 +177,22 @@ def test_mobile_viewport_and_touch_targets():
             gallery_btn = page.locator("button:has-text('Gallery')").first
             if gallery_btn.is_visible():
                 gallery_btn.click()
-                page.wait_for_timeout(300)
+                page.wait_for_timeout(350)
                 assert check_no_horizontal_overflow(page), f"Traditions (Accordion Gallery) should have zero overflow on {vp['name']}"
+
+                # Verify Mobile Vertical Accordion elements
+                accordion_headers = page.locator("button[id^='mobile-accordion-header-']")
+                assert accordion_headers.count() == 9, f"Expected 9 mobile accordion tradition headers, found {accordion_headers.count()}"
+
+                # Header touch targets must be >= 44px
+                h_box = accordion_headers.first.bounding_box()
+                assert h_box is not None and h_box["height"] >= 44, f"Mobile accordion header height {h_box['height']} < 44px on {vp['name']}"
+
+                # Active panel should have astrometric instrument and open inspector CTA
+                inspector_cta = page.locator("button:has-text('Open Full')").first
+                assert inspector_cta.is_visible(), f"Open Full Inspector CTA should be visible in expanded accordion on {vp['name']}"
+                cta_box = inspector_cta.bounding_box()
+                assert cta_box is not None and cta_box["height"] >= 44, f"Accordion CTA height {cta_box['height']} < 44px on {vp['name']}"
 
             # Switch to Inspector Matrix on mobile
             matrix_btn = page.locator("button:has-text('Matrix')").first
