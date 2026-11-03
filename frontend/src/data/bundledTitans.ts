@@ -1,16 +1,15 @@
-import type { ChartResponse } from '../types';
+import type { ChartResponse, Preset } from '../types';
+import TITANS_500_DATA from './personalities_500.json';
 
-let cachedTitans: Record<string, ChartResponse> | null = null;
+export const TITANS_500_PRESETS = TITANS_500_DATA as unknown as Preset[];
+
+let cached: Record<string, ChartResponse> | null = null;
 
 export async function getBundledTitanChart(id: string): Promise<ChartResponse | null> {
   try {
-    if (!cachedTitans) {
-      const module = await import('./bundledTitans.json');
-      cachedTitans = module.default as unknown as Record<string, ChartResponse>;
-    }
-    return cachedTitans[id] || null;
-  } catch (err) {
-    console.warn('Failed to load bundled titan chart:', err);
+    if (!cached) cached = (await import('./bundledTitans.json')).default as unknown as Record<string, ChartResponse>;
+    return cached[id] || null;
+  } catch {
     return null;
   }
 }

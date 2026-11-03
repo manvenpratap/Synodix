@@ -21,8 +21,7 @@ import {
   Scale
 } from 'lucide-react';
 import type { ChartResponse, BirthInput, Preset } from '../types';
-import TITANS_500_DATA from '../data/personalities_500.json';
-import { getBundledTitanChart } from '../data/bundledTitans';
+import { getBundledTitanChart, TITANS_500_PRESETS as ALL_PRESETS } from '../data/bundledTitans';
 import { calculateChartLocally } from '../engine';
 import { generateSynastryReport } from '../engine/synastry';
 import { ExplainerTrigger } from './ExplainerTrigger';
@@ -33,7 +32,6 @@ interface Props {
   onNavigate?: (screen: any) => void;
 }
 
-const ALL_PRESETS: Preset[] = TITANS_500_DATA as unknown as Preset[];
 
 export const SynastryScreen: React.FC<Props> = ({
   currentChart,

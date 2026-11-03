@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
-import { useExplainer } from '../context/useExplainer';
+import { useExplainer } from '../context/ExplainerContext';
 import {
   FEATURE_EXPLAINERS,
   EXPLAINER_CATEGORIES,

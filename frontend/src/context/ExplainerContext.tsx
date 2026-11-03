@@ -1,6 +1,23 @@
-import React, { useState, useCallback, useMemo } from 'react';
+import React, { createContext, useContext, useState, useCallback, useMemo } from 'react';
 import { FEATURE_EXPLAINERS, type FeatureExplainer } from '../data/featureExplainers';
-import { ExplainerContext } from './explainerContextDef';
+
+export interface ExplainerContextType {
+  activeExplainer: FeatureExplainer | null;
+  isGlossaryOpen: boolean;
+  openExplainer: (id: string) => void;
+  openGlossary: () => void;
+  closeExplainer: () => void;
+}
+
+export const ExplainerContext = createContext<ExplainerContextType | undefined>(undefined);
+
+export function useExplainer(): ExplainerContextType {
+  const context = useContext(ExplainerContext);
+  if (!context) {
+    throw new Error('useExplainer must be used within an ExplainerProvider');
+  }
+  return context;
+}
 
 export const ExplainerProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [activeExplainer, setActiveExplainer] = useState<FeatureExplainer | null>(null);

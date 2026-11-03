@@ -1,7 +1,7 @@
 # Synodix: Project Context & Working Memory
 
-**Last Updated:** 2026-11-03 01:11:32
-**Version:** 2.49.0  
+**Last Updated:** 2026-11-03 08:03:44
+**Version:** 2.50.0  
 **Stack:** Python 3.12 (FastAPI, Swiss Ephemeris 2.10, Skyfield DE421) + TypeScript / React 19 / Vite / Tailwind CSS v4 / Framer Motion / Capacitor 8 (iOS & Android)  
 **Workspace:** `/Volumes/Study/Projects/Astrology` (symlinked as `/Volumes/Study/Astrology`)  
 **Git Remote:** `https://github.com/manvenpratap/Synodix.git`  
@@ -10,7 +10,24 @@
 
 ## 1. Current Status & Milestone
 
-- **Active Phase**: Mobile-Native Comprehensive Page Scan & Touch Ergonomics Hardening (v2.49.0) (Completed)
+- **Active Phase**: Ponytail Full-Audit Execution & Dead Code Eradication (v2.50.0) (Completed)
+- **Ponytail Full-Audit Execution & Dead Code Eradication (v2.50.0)**:
+  - **Dead Code & Asset Eradication (-1,845 Lines)**:
+    - Deleted `frontend/src/data/personalities_100.json` (1,779 lines, completely dead and unreferenced).
+    - Deleted unused boilerplate starter stylesheet `frontend/src/App.css` and template SVGs `frontend/src/assets/react.svg` and `frontend/src/assets/vite.svg`.
+    - Deleted redundant 3-file Context sprawl files `frontend/src/context/useExplainer.ts` and `frontend/src/context/explainerContextDef.ts`.
+  - **Context Co-Location**:
+    - Consolidated `ExplainerContextType`, `ExplainerContext`, `useExplainer`, and `ExplainerProvider` into a single, cohesive file: `frontend/src/context/ExplainerContext.tsx`.
+    - Updated all consumer imports (`App.tsx`, `ExplainerTrigger.tsx`, `FeatureExplainerModal.tsx`, `FeatureGuideScreen.tsx`) cleanly.
+  - **Shared Titans Dataset Reuse**:
+    - Exported `TITANS_500_PRESETS` from `frontend/src/data/bundledTitans.ts`.
+    - Replaced duplicate JSON imports and inline mappings across `App.tsx` and `SynastryScreen.tsx` with the single shared source of truth.
+  - **Lazy Lookup Compression**:
+    - Streamlined `getBundledTitanChart` from 16 lines to 10 lines while strictly maintaining dynamic chunk code-splitting (`await import('./bundledTitans.json')`) for the 9.2MB pre-computed chart dataset.
+  - **Automated Verification**:
+    - 0 TypeScript compilation errors (`npx tsc --noEmit`).
+    - Clean Vite production build in 602ms (`npm run build`).
+    - Full 29/29 regression test suite passing (`./pipeline.sh test --summary`).
 - **Mobile-Native Comprehensive Page Scan & Touch Ergonomics Hardening (v2.49.0)**:
   - **Full-Application Page Scan Against `/mobile-native` Hard Rules**:
     - Audited every screen, drawer, modal, and input component against the 11 mobile-native invariants.

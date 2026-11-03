@@ -1,5 +1,5 @@
 import React from 'react';
-import { useExplainer } from '../context/useExplainer';
+import { useExplainer } from '../context/ExplainerContext';
 import { HelpCircle, Info } from 'lucide-react';
 
 interface Props {

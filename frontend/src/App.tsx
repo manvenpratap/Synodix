@@ -25,9 +25,8 @@ import {
   Cpu
 } from 'lucide-react';
 import { apiUrl, getApiBaseUrl, setApiBaseUrl, DEFAULT_DEV_API_URL } from './utils/api';
-import { getBundledTitanChart } from './data/bundledTitans';
+import { getBundledTitanChart, TITANS_500_PRESETS as FALLBACK_PRESETS } from './data/bundledTitans';
 import { calculateChartLocally } from './engine';
-import TITANS_500_DATA from './data/personalities_500.json';
 import { BirthDataForm } from './components/BirthDataForm';
 import { InputAuditCard } from './components/InputAuditCard';
 import { VerificationCard } from './components/VerificationCard';
@@ -38,13 +37,11 @@ import { FeatureGuideScreen } from './components/FeatureGuideScreen';
 import { SynastryScreen } from './components/SynastryScreen';
 import { getPrimaryProfile } from './utils/vault';
 import { triggerHaptic } from './utils/haptics';
-import { ExplainerProvider } from './context/ExplainerContext';
-import { useExplainer } from './context/useExplainer';
+import { ExplainerProvider, useExplainer } from './context/ExplainerContext';
 import { FeatureExplainerModal } from './components/FeatureExplainerModal';
 import { ExplainerTrigger } from './components/ExplainerTrigger';
 import { APP_VERSION_LABEL } from './version';
 
-const FALLBACK_PRESETS: Preset[] = TITANS_500_DATA as unknown as Preset[];
 
 export type AppScreen =
   | 'workbench'

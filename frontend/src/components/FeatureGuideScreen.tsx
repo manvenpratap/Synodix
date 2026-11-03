@@ -22,7 +22,7 @@ import {
   EXPLAINER_CATEGORIES,
   FeatureExplainer
 } from '../data/featureExplainers';
-import { useExplainer } from '../context/useExplainer';
+import { useExplainer } from '../context/ExplainerContext';
 import { MathematicalEvidenceCard } from './MathematicalEvidenceCard';
 import type { AppScreen } from '../App';
 
