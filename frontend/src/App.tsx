@@ -319,6 +319,7 @@ function AppContent() {
         setEngineSource('swisseph');
         setChartData(data);
         setIsLoading(false);
+        triggerHaptic('success');
         return;
       }
     } catch {
@@ -330,8 +331,10 @@ function AppContent() {
       const localData = await calculateChartLocally(input);
       setEngineSource('local_ts');
       setChartData(localData);
+      triggerHaptic('success');
     } catch (err: any) {
       setError(err.message || 'An unexpected error occurred during local calculation');
+      triggerHaptic('error');
     } finally {
       setIsLoading(false);
     }

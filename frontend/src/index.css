@@ -2163,6 +2163,25 @@ textarea {
   min-width: 44px;
 }
 
+.touch-target-48 {
+  min-height: 48px;
+  min-width: 48px;
+}
+
+/* Touch Target Spacing Guard (8px minimum separation per touch-psychology.md) */
+.touch-gap-8 {
+  gap: 8px;
+}
+
+/* Mobile Safe Area Inset Helpers */
+.safe-pb {
+  padding-bottom: max(0.75rem, env(safe-area-inset-bottom, 0px));
+}
+
+.safe-pt {
+  padding-top: max(0.75rem, env(safe-area-inset-top, 0px));
+}
+
 /* 5. Reduced Motion Override (Accessibility & WCAG 2.2 AA) */
 @media (prefers-reduced-motion: reduce) {
   *,
