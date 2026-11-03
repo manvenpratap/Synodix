@@ -1197,7 +1197,43 @@ export const MathematicalEvidenceCard: React.FC<Props> = ({ onNavigate }) => {
               To empirically resolve which traditional system produces the highest predictive accuracy and robustness, each was benchmarked across 500 certified historical biographies and 2,500 random controls on Sensitivity (30%), Specificity (20%), Historical Timing Accuracy (30%), and Time-Uncertainty Robustness (20%):
             </p>
 
-            <div className="overflow-x-auto my-3 border border-stone-800 rounded bg-stone-900">
+            {/* Mobile Card Deck (<sm) */}
+            <div className="sm:hidden space-y-2.5 my-3">
+              {(statsData?.tradition_rankings || []).map((t: any, idx: number) => (
+                <div key={t.tradition} className="p-3 rounded-xl bg-stone-900 border border-stone-800 space-y-2">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <span className="font-mono font-bold text-amber-400">#{idx + 1}</span>
+                      <strong className="font-serif text-stone-100 text-sm">{t.tradition}</strong>
+                    </div>
+                    <span className="px-2 py-0.5 rounded text-xs font-mono font-bold bg-amber-950 text-amber-300 border border-amber-800">
+                      {t.composite_historical_accuracy_score}/100
+                    </span>
+                  </div>
+                  <div className="grid grid-cols-2 gap-2 text-xs font-mono text-stone-300 pt-1.5 border-t border-stone-800/60">
+                    <div>
+                      <span className="text-stone-400 block text-[10px]">Sensitivity:</span>
+                      <span>{t.empirical_sensitivity}%</span>
+                    </div>
+                    <div>
+                      <span className="text-stone-400 block text-[10px]">Specificity:</span>
+                      <span>{t.empirical_specificity}%</span>
+                    </div>
+                    <div>
+                      <span className="text-stone-400 block text-[10px]">Timing Acc:</span>
+                      <span className="text-amber-300 font-semibold">{t.historical_timing_accuracy}%</span>
+                    </div>
+                    <div>
+                      <span className="text-stone-400 block text-[10px]">Robustness:</span>
+                      <span>{t.time_uncertainty_robustness}%</span>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Desktop Table View (>=sm) */}
+            <div className="hidden sm:block overflow-x-auto my-3 border border-stone-800 rounded bg-stone-900">
               <table className="w-full text-left text-xs font-sans">
                 <thead>
                   <tr className="border-b border-stone-800 text-stone-400 bg-stone-950">
@@ -1339,7 +1375,7 @@ export const MathematicalEvidenceCard: React.FC<Props> = ({ onNavigate }) => {
               </button>
             </div>
           </div>
-          <pre className="p-4 rounded-lg bg-stone-950 border border-stone-800 text-stone-300 font-mono text-xs overflow-x-auto whitespace-pre-wrap leading-relaxed max-h-[700px] select-all">
+          <pre className="p-4 rounded-lg bg-stone-950 border border-stone-800 text-stone-300 font-mono text-xs overflow-x-hidden break-words break-all whitespace-pre-wrap leading-relaxed max-h-[700px] select-all">
             {reportMarkdown}
           </pre>
         </div>

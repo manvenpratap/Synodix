@@ -195,8 +195,8 @@ export const FeatureExplainerModal: React.FC = () => {
                     </div>
                     <span className="text-xs font-sans text-stone-400">Deterministic JPL / Ephemeris Code</span>
                   </div>
-                  <div className="p-3 rounded-lg bg-stone-900 border border-stone-800 font-mono text-xs text-amber-200 overflow-x-auto selection:bg-amber-900 selection:text-white">
-                    <code>{activeExplainer.astronomicalFormula}</code>
+                  <div className="p-3 rounded-lg bg-stone-900 border border-stone-800 font-mono text-xs text-amber-200 overflow-hidden selection:bg-amber-900 selection:text-white">
+                    <code className="block break-words whitespace-pre-wrap">{activeExplainer.astronomicalFormula}</code>
                   </div>
                 </div>
               )}

@@ -161,8 +161,8 @@ export const SynthesisMatrix: React.FC<Props> = ({ synthesis, onNavigate }) => {
           </div>
         </div>
 
-        {/* Filter Segmented Buttons */}
-        <div className="flex overflow-x-auto no-scrollbar items-center gap-1.5 pb-1 lg:pb-0" role="group" aria-label="Filter domains">
+        {/* Filter Segmented Buttons — Clean 2x2 grid on mobile, flex on desktop */}
+        <div className="grid grid-cols-2 sm:flex sm:flex-wrap items-center gap-1.5 pb-1 lg:pb-0 w-full lg:w-auto" role="group" aria-label="Filter domains">
           <button
             type="button"
             aria-pressed={filterMode === 'all'}

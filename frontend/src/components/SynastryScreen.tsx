@@ -624,8 +624,8 @@ export const SynastryScreen: React.FC<Props> = ({
         )}
       </div>
 
-      {/* 4. Sub-Navigation Tabs */}
-      <div className="flex items-center gap-1.5 overflow-x-auto pb-1 border-b border-stone-800 select-none">
+      {/* 4. Sub-Navigation Tabs — Non-scrolling grid on mobile, flex on desktop */}
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:flex lg:items-center gap-1.5 pb-2 border-b border-stone-800 select-none">
         {[
           { id: 'traditions', label: '9 Traditions Bento', icon: Compass, badge: '9 Systems' },
           { id: 'aspects', label: 'Inter-Chart Aspects', icon: Orbit, badge: `${synastryReport?.synastryAspects.length || 0} Aspects` },
@@ -848,8 +848,24 @@ export const SynastryScreen: React.FC<Props> = ({
                 </div>
               </div>
 
-              {/* Composite Planetary Placements Table */}
-              <div className="overflow-x-auto rounded-xl border border-stone-800 bg-stone-900/90 shadow-md">
+              {/* Composite Planetary Placements — Mobile Stacked Cards (<sm) */}
+              <div className="sm:hidden space-y-2">
+                {Object.values(synastryReport.compositeChart.planets).map((p) => (
+                  <div key={p.name} className="p-3 rounded-xl bg-stone-900 border border-stone-800 space-y-1.5">
+                    <div className="flex items-center justify-between">
+                      <span className="font-serif font-bold text-stone-100 text-sm">{p.name}</span>
+                      <span className="text-amber-400 font-mono font-semibold text-xs">{p.sign} {p.sign_degree}°</span>
+                    </div>
+                    <div className="flex items-center justify-between text-xs font-mono text-stone-400 pt-1 border-t border-stone-800/60">
+                      <span>House {p.house}</span>
+                      <span>Long: {p.longitude}°</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Composite Planetary Placements Table — Desktop (>=sm) */}
+              <div className="hidden sm:block overflow-x-auto rounded-xl border border-stone-800 bg-stone-900/90 shadow-md">
                 <table className="w-full text-xs font-mono text-left">
                   <thead className="bg-stone-950 text-stone-400 border-b border-stone-800 text-[11px]">
                     <tr>
@@ -946,8 +962,38 @@ export const SynastryScreen: React.FC<Props> = ({
                 </div>
               </div>
 
-              {/* Ashtakoota 8 Kutas Breakdown Table */}
-              <div className="overflow-x-auto rounded-xl border border-stone-800 bg-stone-900/90 shadow-md">
+              {/* Ashtakoota 8 Kutas — Mobile Stacked Cards (<sm) */}
+              <div className="sm:hidden space-y-2.5">
+                {synastryReport.ashtakoota.kutas.map((k) => (
+                  <div key={k.name} className="p-3 rounded-xl bg-stone-900 border border-stone-800 space-y-2">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <strong className="text-stone-100 font-serif text-sm">{k.name}</strong>
+                        <span className="text-xs font-mono text-stone-400 ml-1.5">({k.sanskrit})</span>
+                      </div>
+                      <span className={`px-2 py-0.5 rounded text-xs font-mono font-semibold ${
+                        k.obtainedScore === k.maxScore
+                          ? 'bg-amber-950 text-amber-300 border border-amber-800'
+                          : k.obtainedScore > 0
+                          ? 'bg-amber-950/60 text-amber-200 border border-amber-800/60'
+                          : 'bg-rose-950 text-rose-300 border border-rose-800'
+                      }`}>
+                        {k.obtainedScore}/{k.maxScore} • {k.verdict}
+                      </span>
+                    </div>
+                    <div className="text-xs text-stone-300 font-sans leading-relaxed">
+                      {k.interpretation}
+                    </div>
+                    <div className="flex items-center justify-between text-xs font-mono pt-1.5 border-t border-stone-800/60 text-stone-400">
+                      <span>{synastryReport.partnerAName}: <strong className="text-amber-400">{k.partnerAAttribute}</strong></span>
+                      <span>{synastryReport.partnerBName}: <strong className="text-stone-200">{k.partnerBAttribute}</strong></span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Ashtakoota 8 Kutas Breakdown Table — Desktop (>=sm) */}
+              <div className="hidden sm:block overflow-x-auto rounded-xl border border-stone-800 bg-stone-900/90 shadow-md">
                 <table className="w-full text-xs text-left">
                   <thead className="bg-stone-950 text-stone-400 border-b border-stone-800 text-xs font-mono">
                     <tr>

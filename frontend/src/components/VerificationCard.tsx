@@ -118,11 +118,40 @@ export const VerificationCard: React.FC<Props> = ({ report }) => {
           </span>
         </div>
 
+        {/* Mobile Planetary Diff Cards (<sm) */}
+        <div className="sm:hidden space-y-2">
+          {report.dual_engine_diffs.map((diff) => (
+            <div key={diff.body} className="p-3 rounded-xl bg-stone-900 border border-stone-800 space-y-1.5">
+              <div className="flex items-center justify-between">
+                <span className="font-serif font-bold text-stone-100 text-sm">{diff.body}</span>
+                <span className="px-2 py-0.5 rounded text-[11px] font-mono font-semibold bg-amber-950 text-amber-300 border border-amber-800/80">
+                  PASS
+                </span>
+              </div>
+              <div className="grid grid-cols-2 gap-2 text-xs font-mono pt-1 border-t border-stone-800/60 text-stone-300">
+                <div>
+                  <span className="text-stone-400 block text-[10px]">SwissEph:</span>
+                  <span>{diff.primary_value_deg?.toFixed(4)}°</span>
+                </div>
+                <div>
+                  <span className="text-stone-400 block text-[10px]">Skyfield JPL:</span>
+                  <span>{diff.validator_value_deg?.toFixed(4)}°</span>
+                </div>
+              </div>
+              <div className="flex items-center justify-between text-xs font-mono pt-1 text-stone-400">
+                <span>Delta: <strong className="text-amber-400">{diff.difference_deg?.toFixed(6)}°</strong></span>
+                <span>({diff.difference_arcsec?.toFixed(2)}″)</span>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Desktop tabular view (>=sm) */}
         <div
           tabIndex={0}
           role="region"
           aria-label="Dual-Engine Ephemeris Cross-Validation Table"
-          className="overflow-x-auto rounded-xl border border-stone-800 bg-stone-900/90 shadow-md focus:outline-none focus-visible:ring-1 focus-visible:ring-amber-500"
+          className="hidden sm:block overflow-x-auto rounded-xl border border-stone-800 bg-stone-900/90 shadow-md focus:outline-none focus-visible:ring-1 focus-visible:ring-amber-500"
         >
           <table className="w-full text-left text-xs border-collapse">
             <thead>

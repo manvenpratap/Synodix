@@ -661,7 +661,7 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
         </div>
 
         {/* Display Presentation Switcher & View Mode Controls Toolbar */}
-        <div className="flex flex-row items-center justify-between gap-1.5 w-full xl:w-auto shrink-0 pt-2 xl:pt-0 border-t xl:border-t-0 border-stone-800/80 overflow-x-auto no-scrollbar">
+        <div className="flex flex-wrap sm:flex-nowrap items-center justify-between gap-1.5 w-full xl:w-auto shrink-0 pt-2 xl:pt-0 border-t xl:border-t-0 border-stone-800/80">
           {/* Display Presentation Switcher: Comprehensive / Visual Instrument / Telemetry Tables */}
           <div className="flex items-center justify-center sm:justify-start gap-1 p-0.5 rounded-lg bg-stone-950 border border-stone-800 text-xs font-mono shrink-0">
             {(['both', 'chart', 'table'] as const).map((mode) => {
@@ -856,8 +856,8 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
             </div>
           </div>
 
-          {/* Mobile Fast 9-Tradition Switcher (< lg) */}
-          <div className="lg:hidden flex items-center gap-1.5 overflow-x-auto pb-1.5 pt-0.5 no-scrollbar snap-x snap-mandatory">
+          {/* Mobile Fast 9-Tradition Switcher (< lg) — Non-scrolling 3x3 Grid */}
+          <div className="lg:hidden grid grid-cols-3 gap-1.5 pb-2 pt-0.5" role="tablist" aria-label="Tradition Switcher">
             {TRADITION_ORDER.map((key) => {
               const t = CULTURE_THEMES[key];
               const isSelected = activeTab === key;
@@ -869,7 +869,7 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
                     triggerHaptic('light');
                     setActiveTab(key);
                   }}
-                  className={`px-3 py-2 min-h-[44px] rounded-lg text-xs font-mono shrink-0 transition-colors flex items-center gap-1.5 cursor-pointer snap-start ${
+                  className={`px-1.5 py-2 min-h-[44px] rounded-lg text-xs font-mono transition-colors flex items-center justify-center gap-1 cursor-pointer text-center ${
                     isSelected
                       ? 'bg-amber-600 text-stone-950 font-bold shadow-xs'
                       : 'bg-stone-900 border border-stone-800 text-stone-300 hover:text-white'
@@ -877,8 +877,8 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
                   aria-pressed={isSelected}
                   aria-label={`Switch to ${t.name}`}
                 >
-                  <span className="font-bold">{t.glyph}</span>
-                  <span className="font-serif">{t.shortName || t.name}</span>
+                  <span className="font-bold text-xs shrink-0">{t.glyph}</span>
+                  <span className="font-serif truncate text-[11px]">{t.shortName || t.name}</span>
                 </button>
               );
             })}

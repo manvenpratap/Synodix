@@ -605,12 +605,12 @@ export const FeatureGuideScreen: React.FC<Props> = ({ onNavigate, initialExplain
                   </h3>
                 </div>
 
-                {/* Formula Display Box */}
-                <div className="p-3.5 sm:p-4 rounded-xl bg-stone-900/70 border border-amber-800/60 text-xs sm:text-sm text-amber-200/95 overflow-x-auto select-all">
+                {/* Formula Display Box — Text wrap with zero horizontal overflow */}
+                <div className="p-3.5 sm:p-4 rounded-xl bg-stone-900/70 border border-amber-800/60 text-xs sm:text-sm text-amber-200/95 overflow-hidden select-all">
                   <span className="text-xs text-stone-400 block mb-1 font-serif font-medium">
                     Governing Formula / Mathematical Invariant
                   </span>
-                  <code className="font-mono block">{currentExplainer.astronomicalFormula}</code>
+                  <code className="font-mono block break-words whitespace-pre-wrap">{currentExplainer.astronomicalFormula}</code>
                 </div>
 
                 {/* Step-by-Step Breakdown */}

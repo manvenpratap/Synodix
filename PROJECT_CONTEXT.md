@@ -1,7 +1,7 @@
 # Synodix: Project Context & Working Memory
 
-**Last Updated:** 2026-11-03 08:31:12
-**Version:** 2.52.0  
+**Last Updated:** 2026-11-03 08:42:41
+**Version:** 2.53.0  
 **Stack:** Python 3.12 (FastAPI, Swiss Ephemeris 2.10, Skyfield DE421) + TypeScript / React 19 / Vite / Tailwind CSS v4 / Framer Motion / Capacitor 8 (iOS & Android)  
 **Workspace:** `/Volumes/Study/Projects/Astrology` (symlinked as `/Volumes/Study/Astrology`)  
 **Git Remote:** `https://github.com/manvenpratap/Synodix.git`  
@@ -10,7 +10,21 @@
 
 ## 1. Current Status & Milestone
 
-- **Active Phase**: Mobile Design System & Touch Psychology Alignment (v2.52.0) (Completed)
+- **Active Phase**: Mobile Horizontal Side-Scrolling Eradication & Native Layout Hardening (v2.53.0) (Completed)
+- **Mobile Horizontal Side-Scrolling Eradication & Native Layout Hardening (v2.53.0)**:
+  - **Complete Elimination of Side-Scrolling Across Modules**:
+    - **Traditions Switcher (`TraditionCharts.tsx`)**: Replaced horizontal scroll strip with a symmetrical 3x3 mobile grid (`grid grid-cols-3 gap-1.5`) displaying all 9 traditions with their native glyphs and $\ge 44\text{px}$ touch targets without horizontal drag.
+    - **Tradition Deck Header (`TraditionVerticalCarousel.tsx`)**: Replaced cramped 250px side-scrolling text strip with compact, native dot indicators with animated active wafer.
+    - **Synthesis Matrix Filters (`SynthesisMatrix.tsx`)**: Replaced horizontal scrolling pill list with an aligned 2x2 touch grid (`grid grid-cols-2 sm:flex gap-1.5`) fitting mobile viewports symmetrically.
+    - **Synastry Navigation & Tables (`SynastryScreen.tsx`)**: Converted 5-tab side-scrolling strip to a clean non-scrolling grid (`grid grid-cols-2 sm:grid-cols-3 gap-1.5`); provided native mobile card decks (`sm:hidden`) for Composite Planets and Ashtakoota Kutas, preserving desktop tables (`hidden sm:block`).
+    - **Astronomical Verification (`VerificationCard.tsx`)**: Provided mobile stacked card deck for planetary diffs, eliminating side-scrolling on phone viewports.
+    - **Mathematical Evidence (`MathematicalEvidenceCard.tsx`)**: Provided mobile stacked ranking cards for 500 Titans benchmarks; added word-wrapping on formula/markdown pre blocks.
+  - **Global Viewport Mechanics (`index.css`)**:
+    - Enforced `max-width: 100vw; overflow-x: clip;` across `html`, `body`, and `#root` to prevent any lateral drift or side-scrolling gestures.
+  - **Automated Verification**:
+    - 0 TypeScript compilation errors (`npx tsc --noEmit`).
+    - Clean Vite production build in 631ms (`npm run build`).
+    - Full 29/29 regression test suite passing in 126.15s (`./pipeline.sh test --summary`).
 - **Mobile Design System & Touch Psychology Alignment (v2.52.0)**:
   - **Fitts' Law & Thumb Zone Ergonomics (touch-psychology.md)**:
     - Primary calculation trigger anchored in the natural thumb arc with full-width mobile hit area and `min-h-[48px]`.

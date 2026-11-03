@@ -326,8 +326,8 @@ export const TraditionVerticalCarousel: React.FC<Props> = ({
           <span className="text-stone-400 hidden sm:inline">• 9 Traditions</span>
         </div>
 
-        {/* Mobile-only thumb-friendly tradition selector pill strip */}
-        <div className="flex md:hidden items-center gap-1.5 overflow-x-auto py-1 px-1 no-scrollbar touch-manipulation max-w-[250px]">
+        {/* Mobile-only compact dot indicators (no horizontal scroll) */}
+        <div className="flex md:hidden items-center justify-center gap-1.5 py-1 px-1 touch-manipulation" role="tablist" aria-label="Tradition card indicators">
           {TRADITION_ORDER.map((key, idx) => {
             const theme = cultureThemes[key];
             const isSelected = activeIndex === idx;
@@ -337,14 +337,14 @@ export const TraditionVerticalCarousel: React.FC<Props> = ({
                 data-mobile-dot={key}
                 type="button"
                 onClick={() => goToIndex(idx)}
-                aria-label={`Jump to ${theme?.name || key}`}
-                className={`px-2.5 py-1 min-h-[36px] rounded-full text-xs font-serif font-medium whitespace-nowrap transition-colors cursor-pointer touch-manipulation shrink-0 ${
-                  isSelected
-                    ? 'bg-amber-400 text-stone-950 font-bold shadow-xs'
-                    : 'bg-stone-900 text-stone-300 border border-stone-800 hover:text-white'
-                }`}
+                aria-label={`Jump to ${theme?.name || key} (${idx + 1}/9)`}
+                className="transition-all duration-150 rounded-full cursor-pointer flex items-center justify-center p-1 min-h-[32px] min-w-[20px]"
               >
-                <span>{theme?.shortName || theme?.name?.split(' ')[0] || key}</span>
+                <span className={`block rounded-full transition-all duration-150 ${
+                  isSelected
+                    ? 'w-4 h-2 bg-amber-400 shadow-xs'
+                    : 'w-2 h-2 bg-stone-700 hover:bg-stone-500'
+                }`} />
               </button>
             );
           })}
