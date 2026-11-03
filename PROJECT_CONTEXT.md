@@ -1,7 +1,7 @@
 # Synodix: Project Context & Working Memory
 
-**Last Updated:** 2026-11-03 08:42:41
-**Version:** 2.53.0  
+**Last Updated:** 2026-11-03 10:43:00
+**Version:** 2.54.0  
 **Stack:** Python 3.12 (FastAPI, Swiss Ephemeris 2.10, Skyfield DE421) + TypeScript / React 19 / Vite / Tailwind CSS v4 / Framer Motion / Capacitor 8 (iOS & Android)  
 **Workspace:** `/Volumes/Study/Projects/Astrology` (symlinked as `/Volumes/Study/Astrology`)  
 **Git Remote:** `https://github.com/manvenpratap/Synodix.git`  
@@ -10,21 +10,19 @@
 
 ## 1. Current Status & Milestone
 
-- **Active Phase**: Mobile Horizontal Side-Scrolling Eradication & Native Layout Hardening (v2.53.0) (Completed)
-- **Mobile Horizontal Side-Scrolling Eradication & Native Layout Hardening (v2.53.0)**:
-  - **Complete Elimination of Side-Scrolling Across Modules**:
-    - **Traditions Switcher (`TraditionCharts.tsx`)**: Replaced horizontal scroll strip with a symmetrical 3x3 mobile grid (`grid grid-cols-3 gap-1.5`) displaying all 9 traditions with their native glyphs and $\ge 44\text{px}$ touch targets without horizontal drag.
-    - **Tradition Deck Header (`TraditionVerticalCarousel.tsx`)**: Replaced cramped 250px side-scrolling text strip with compact, native dot indicators with animated active wafer.
-    - **Synthesis Matrix Filters (`SynthesisMatrix.tsx`)**: Replaced horizontal scrolling pill list with an aligned 2x2 touch grid (`grid grid-cols-2 sm:flex gap-1.5`) fitting mobile viewports symmetrically.
-    - **Synastry Navigation & Tables (`SynastryScreen.tsx`)**: Converted 5-tab side-scrolling strip to a clean non-scrolling grid (`grid grid-cols-2 sm:grid-cols-3 gap-1.5`); provided native mobile card decks (`sm:hidden`) for Composite Planets and Ashtakoota Kutas, preserving desktop tables (`hidden sm:block`).
-    - **Astronomical Verification (`VerificationCard.tsx`)**: Provided mobile stacked card deck for planetary diffs, eliminating side-scrolling on phone viewports.
-    - **Mathematical Evidence (`MathematicalEvidenceCard.tsx`)**: Provided mobile stacked ranking cards for 500 Titans benchmarks; added word-wrapping on formula/markdown pre blocks.
-  - **Global Viewport Mechanics (`index.css`)**:
-    - Enforced `max-width: 100vw; overflow-x: clip;` across `html`, `body`, and `#root` to prevent any lateral drift or side-scrolling gestures.
+- **Active Phase**: Empirical Astrometric Research Paper & Formal Mathematical Synthesis (v2.54.0) (Completed)
+- **Empirical Astrometric Research Paper & Formal Mathematical Synthesis (v2.54.0)**:
+  - **Comprehensive PhD-Level Academic Monograph (`mathematical_evidence_astrology_report.md`)**:
+    - **Physical Causality Refutation**: Rigorous mathematical derivations comparing Newtonian gravitational force and tidal strain gradient tensors ($T_{ij} \propto G M / r^3$) between the attending physician and planet Jupiter, proving ambient delivery room noise exceeds planetary tidal gradients by a factor of $6.43 \times 10^{10}$.
+    - **Base-Rate Fallacy Formalization**: Calculated Mercury's maximum geocentric elongation $\epsilon_{\max} = \arcsin(r/R) \approx 27.8^\circ$, proving that *Budhaditya Yoga* (Sun-Mercury conjunction) is an orbital necessity appearing in $28.56\%$ of all human births, disproving historical claims of intrinsic genius causality ($OR = 0.86$, $p = 0.4992$).
+    - **Shannon Mutual Information Formulation**: Modeled 6-tradition consensus as an ensemble estimator across 9 life domains; proved that the observed $31.8\%$ divergence rate deviates from uncoordinated white noise ($22.2\%$) at $Z = +15.45$ ($p < 10^{-35}$).
+    - **Tradition Accuracy Leaderboard & MCDA**: Benchmarked traditions via Multi-Criteria Decision Analysis ($35\%$ Sensitivity, $25\%$ Specificity, $25\%$ Timing Accuracy, $15\%$ Time-Uncertainty Robustness), establishing Chinese BaZi as the #1 macro career prediction science ($64.6/100$, $F_1 = 0.540$) and Vedic Jyotisha as the #1 acute event-timing science ($60.9/100$, $F_1 = 0.527$).
+    - **Rich Vector Visualizations & Diagrams**: Embedded 7 native Mermaid vector charts (experimental architecture, orbital elongation distribution, inter-tradition divergence pie, benchmark dimensions, time-uncertainty decay curve, historical case study sequence diagram, epistemic demarcation spectrum) and ASCII forest plots.
+    - **Forensic Historical Case Studies**: Detailed biographical-astrological timing cross-examinations for Winston Churchill (1940 premiership), Albert Einstein (1905 *Annus Mirabilis*), Muhammad Ali (1964 Liston victory), and Steve Jobs (1985 Apple exile).
   - **Automated Verification**:
     - 0 TypeScript compilation errors (`npx tsc --noEmit`).
-    - Clean Vite production build in 631ms (`npm run build`).
-    - Full 29/29 regression test suite passing in 126.15s (`./pipeline.sh test --summary`).
+    - Clean Vite production build in 580ms (`npm run build`).
+    - Full 29/29 regression test suite passing in 127.14s (`./pipeline.sh test --summary`).
 - **Mobile Design System & Touch Psychology Alignment (v2.52.0)**:
   - **Fitts' Law & Thumb Zone Ergonomics (touch-psychology.md)**:
     - Primary calculation trigger anchored in the natural thumb arc with full-width mobile hit area and `min-h-[48px]`.
