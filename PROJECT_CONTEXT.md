@@ -1,7 +1,7 @@
 # Synodix: Project Context & Working Memory
 
-**Last Updated:** 2026-11-03 08:03:44
-**Version:** 2.50.0  
+**Last Updated:** 2026-11-03 08:22:02
+**Version:** 2.51.0  
 **Stack:** Python 3.12 (FastAPI, Swiss Ephemeris 2.10, Skyfield DE421) + TypeScript / React 19 / Vite / Tailwind CSS v4 / Framer Motion / Capacitor 8 (iOS & Android)  
 **Workspace:** `/Volumes/Study/Projects/Astrology` (symlinked as `/Volumes/Study/Astrology`)  
 **Git Remote:** `https://github.com/manvenpratap/Synodix.git`  
@@ -10,7 +10,22 @@
 
 ## 1. Current Status & Milestone
 
-- **Active Phase**: Ponytail Full-Audit Execution & Dead Code Eradication (v2.50.0) (Completed)
+- **Active Phase**: Apple Fluid Interface Design & Motion System Alignment (v2.51.0) (Completed)
+- **Apple Fluid Interface Design & Motion System Alignment (v2.51.0)**:
+  - **Fluid Response & Tactile Compression (§1, §10)**:
+    - Enforced instant micro-compression feedback on press (`active:scale-[0.975]` with 80ms cubic-bezier transition) across all interactive elements (`button`, `[role="button"]`, `[role="tab"]`), respecting `prefers-reduced-motion`.
+  - **Critically Damped Springs & Spatial Consistency (§3, §4, §7)**:
+    - Converted screen transitions and modal presentations to Apple's critically damped spring physics (`type: 'spring', damping: 28, stiffness: 280, mass: 0.7`).
+    - Enforced symmetric ingress/egress trajectories: mobile navigation drawer slides in from the left and dismisses to the left (`x: -100%`); feature explainers and dialogs emerge and dismiss along consistent physical axes.
+  - **Translucent Acrylic Materials & Depth Hierarchy (§12)**:
+    - Upgraded top header bar to frosted acrylic (`backdrop-filter: blur(20px) saturate(180%)`) with hairline border edge lighting (`.apple-hairline-t`, `.apple-hairline-b`).
+    - Standardized modal and drawer backdrops with `.apple-scrim` (`backdrop-filter: blur(16px) saturate(180%)` with high-contrast accessibility fallback under `prefers-reduced-transparency`).
+  - **Interactive Modals Wrapped in AnimatePresence**:
+    - Replaced abrupt DOM mount/unmount for Server Connection Modal and Keyboard Accelerators Modal with fluid spring-animated overlays, outside-click dismissal, and escape key containment.
+  - **Automated Verification**:
+    - 0 TypeScript compilation errors (`npx tsc --noEmit`).
+    - Clean Vite production build in 614ms (`npm run build`).
+    - Full 29/29 regression test suite passing in 123.58s (`./pipeline.sh test --summary`).
 - **Ponytail Full-Audit Execution & Dead Code Eradication (v2.50.0)**:
   - **Dead Code & Asset Eradication (-1,845 Lines)**:
     - Deleted `frontend/src/data/personalities_100.json` (1,779 lines, completely dead and unreferenced).

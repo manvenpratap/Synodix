@@ -63,16 +63,20 @@ export const FeatureExplainerModal: React.FC = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.15 }}
-          className="fixed inset-0 z-[70] flex items-end sm:items-center justify-center p-0 sm:p-6 bg-stone-950/80 backdrop-blur-sm overscroll-contain pt-[max(0.75rem,env(safe-area-inset-top,0px))] pb-0 sm:pb-[max(0.75rem,env(safe-area-inset-bottom,0px))]"
+          transition={{ duration: 0.18 }}
+          className="fixed inset-0 z-[70] flex items-end sm:items-center justify-center p-0 sm:p-6 apple-scrim overscroll-contain pt-[max(0.75rem,env(safe-area-inset-top,0px))] pb-0 sm:pb-[max(0.75rem,env(safe-area-inset-bottom,0px))]"
           onClick={closeExplainer}
         >
           <motion.div
             initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: shouldReduceMotion ? 0 : 20 }}
-            transition={{ duration: 0.18, ease: [0.16, 1, 0.3, 1] }}
-            className="bg-stone-950 border-t sm:border border-stone-800 ring-1 ring-white/10 text-stone-200 rounded-t-3xl sm:rounded-2xl w-full max-w-3xl max-h-[88vh] sm:max-h-[90vh] flex flex-col overflow-hidden relative shadow-2xl pb-[max(0.75rem,env(safe-area-inset-bottom,0px))]"
+            transition={
+              shouldReduceMotion
+                ? { duration: 0.1 }
+                : { type: 'spring', damping: 28, stiffness: 300, mass: 0.8 }
+            }
+            className="bg-stone-950 border-t sm:border border-stone-800 apple-hairline-t text-stone-200 rounded-t-3xl sm:rounded-2xl w-full max-w-3xl max-h-[88vh] sm:max-h-[90vh] flex flex-col overflow-hidden relative shadow-2xl pb-[max(0.75rem,env(safe-area-inset-bottom,0px))]"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Native Mobile Bottom Sheet Grab Indicator */}

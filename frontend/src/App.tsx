@@ -759,15 +759,28 @@ function AppContent() {
       </aside>
 
       {/* 2. Mobile Drawer Navigation Overlay (<md) */}
-      {isMobileSidebarOpen && (
-        <div className="fixed inset-0 z-[60] md:hidden bg-black/80 flex overscroll-contain backdrop-blur-xs">
-          <div
-            id="mobile-navigation-drawer"
-            role="dialog"
-            aria-modal="true"
-            aria-label="Navigation Drawer"
-            className="w-80 max-w-[85vw] bg-stone-950 h-full flex flex-col border-r border-stone-800 p-4 shadow-2xl pt-[max(1rem,env(safe-area-inset-top,0px))] pb-[max(1rem,env(safe-area-inset-bottom,0px))]"
+      <AnimatePresence>
+        {isMobileSidebarOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="fixed inset-0 z-[60] md:hidden apple-scrim flex overscroll-contain"
+            onClick={() => setIsMobileSidebarOpen(false)}
           >
+            <motion.div
+              id="mobile-navigation-drawer"
+              role="dialog"
+              aria-modal="true"
+              aria-label="Navigation Drawer"
+              initial={{ x: shouldReduceMotion ? 0 : '-100%' }}
+              animate={{ x: 0 }}
+              exit={{ x: shouldReduceMotion ? 0 : '-100%' }}
+              transition={{ type: 'spring', damping: 28, stiffness: 300, mass: 0.8 }}
+              className="w-80 max-w-[85vw] bg-stone-950 h-full flex flex-col border-r border-stone-800 p-4 shadow-2xl pt-[max(1rem,env(safe-area-inset-top,0px))] pb-[max(1rem,env(safe-area-inset-bottom,0px))] apple-hairline-t"
+              onClick={(e) => e.stopPropagation()}
+            >
             <div className="flex items-center justify-between pb-3 border-b border-stone-800 min-h-[48px]">
               <div className="flex items-center gap-2.5">
                 <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-stone-900 to-stone-950 border border-amber-800/80 flex items-center justify-center font-bold text-xs text-amber-300 font-mono shadow-xs">
@@ -952,10 +965,11 @@ function AppContent() {
                 </button>
               </div>
             </div>
-          </div>
+          </motion.div>
           <div className="flex-1" onClick={() => setIsMobileSidebarOpen(false)} />
-        </div>
+        </motion.div>
       )}
+    </AnimatePresence>
 
       {/* 3. Main Workspace Area */}
       <div className="flex-1 flex flex-col min-w-0 w-full max-w-full">
@@ -1228,9 +1242,13 @@ function AppContent() {
 
           <motion.div
             key={currentScreen}
-            initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 4 }}
+            initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 6 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: shouldReduceMotion ? 0.08 : 0.15, ease: [0.16, 1, 0.3, 1] }}
+            transition={
+              shouldReduceMotion
+                ? { duration: 0.08 }
+                : { type: 'spring', damping: 28, stiffness: 280, mass: 0.7 }
+            }
           >
               {/* SCREEN 1: Workbench & Profile Vault */}
               {currentScreen === 'workbench' && (
@@ -1390,104 +1408,141 @@ function AppContent() {
         })}
       </nav>
       {/* 5. Server Connection Modal (for Sideloaded Mobile Devices & Remote Hosts) */}
-      {isServerModalOpen && (
-        <div className="fixed inset-0 z-50 bg-black/80 flex items-center justify-center p-4 overscroll-contain">
-          <div className="w-full max-w-md bg-stone-950 border border-stone-800 rounded-xl p-5 shadow-2xl animate-screen-enter">
-            <div className="flex items-center justify-between pb-3 border-b border-stone-800">
-              <div className="flex items-center gap-2">
-                <Server className="w-4 h-4 text-amber-400" />
-                <h3 className="text-sm font-serif font-semibold text-stone-100">API Server Connection</h3>
-              </div>
-              <button
-                type="button"
-                onClick={() => setIsServerModalOpen(false)}
-                className="min-w-[44px] min-h-[44px] flex items-center justify-center -mr-2 text-stone-400 hover:text-stone-100 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 rounded"
-                aria-label="Close server dialog"
-                data-tooltip="Close server dialog"
-              >
-                <X className="w-5 h-5" />
-              </button>
-            </div>
-
-            <div className="py-4 space-y-3">
-              <p className="text-xs text-stone-300 leading-relaxed font-sans">
-                When running on a physical sideloaded iOS or Android device, specify the host IP or domain of your running Synodix backend daemon.
-              </p>
-
-              <div>
-                <label className="block text-xs font-sans text-stone-300 mb-1 font-medium">
-                  Backend Host URL
-                </label>
-                <input
-                  type="text"
-                  value={serverUrlInput}
-                  onChange={(e) => setServerUrlInput(e.target.value)}
-                  placeholder="e.g. http://192.168.1.11:8000"
-                  className="w-full px-3 py-2 text-xs font-mono rounded bg-stone-900 border border-stone-800 text-stone-100 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500"
-                />
-                <div className="flex items-center justify-between mt-1.5 text-[11px] text-stone-400 font-sans">
-                  <span>Local Wi-Fi: <code className="text-amber-400 font-mono">http://192.168.1.11:8000</code></span>
-                  <button
-                    type="button"
-                    onClick={() => setServerUrlInput(DEFAULT_DEV_API_URL)}
-                    className="text-amber-400 hover:underline cursor-pointer"
-                  >
-                    Set Local Wi-Fi
-                  </button>
+      <AnimatePresence>
+        {isServerModalOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.18 }}
+            className="fixed inset-0 z-50 apple-scrim flex items-center justify-center p-4 overscroll-contain"
+            onClick={() => setIsServerModalOpen(false)}
+          >
+            <motion.div
+              role="dialog"
+              aria-modal="true"
+              aria-label="Server Connection Configuration"
+              initial={{ opacity: 0, scale: shouldReduceMotion ? 1 : 0.95, y: shouldReduceMotion ? 0 : 8 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: shouldReduceMotion ? 1 : 0.95, y: shouldReduceMotion ? 0 : 8 }}
+              transition={{ type: 'spring', damping: 26, stiffness: 320 }}
+              className="w-full max-w-md bg-stone-950 border border-stone-800 rounded-xl p-5 shadow-2xl apple-hairline-t"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="flex items-center justify-between pb-3 border-b border-stone-800">
+                <div className="flex items-center gap-2">
+                  <Server className="w-4 h-4 text-amber-400" />
+                  <h3 className="text-sm font-serif font-semibold text-stone-100">API Server Connection</h3>
                 </div>
-              </div>
-
-              {testStatus !== 'idle' && (
-                <div
-                  className={`p-2.5 rounded text-xs font-mono flex items-center gap-2 ${
-                    testStatus === 'testing'
-                      ? 'bg-amber-950/40 text-amber-300 border border-amber-800'
-                      : testStatus === 'success'
-                      ? 'bg-emerald-950/40 text-emerald-300 border border-emerald-800'
-                      : 'bg-rose-950/40 text-rose-300 border border-rose-800'
-                  }`}
-                >
-                  {testStatus === 'testing' && <span className="w-2 h-2 rounded-full bg-amber-400 animate-ping" />}
-                  {testStatus === 'success' && <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 shrink-0" />}
-                  {testStatus === 'error' && <AlertCircle className="w-3.5 h-3.5 text-rose-400 shrink-0" />}
-                  <span className="break-all">{testMessage}</span>
-                </div>
-              )}
-            </div>
-
-            <div className="pt-3 border-t border-stone-800 flex items-center justify-between gap-2">
-              <button
-                type="button"
-                onClick={() => testServerConnection(serverUrlInput)}
-                className="px-3 py-2 min-h-[44px] rounded bg-stone-900 hover:bg-stone-850 border border-stone-800 text-stone-300 text-xs font-medium cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
-              >
-                Test Ping
-              </button>
-              <div className="flex items-center gap-2">
                 <button
                   type="button"
                   onClick={() => setIsServerModalOpen(false)}
-                  className="px-3 py-2 min-h-[44px] rounded text-stone-400 hover:text-stone-200 text-xs cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-stone-400"
+                  className="min-w-[44px] min-h-[44px] flex items-center justify-center -mr-2 text-stone-400 hover:text-stone-100 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 rounded"
+                  aria-label="Close server dialog"
+                  data-tooltip="Close server dialog"
                 >
-                  Cancel
-                </button>
-                <button
-                  type="button"
-                  onClick={saveServerUrl}
-                  className="px-4 py-2 min-h-[44px] rounded bg-amber-700 hover:bg-amber-600 text-stone-950 text-xs font-bold cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:ring-offset-1 focus-visible:ring-offset-stone-950"
-                >
-                  Save & Apply
+                  <X className="w-5 h-5" />
                 </button>
               </div>
-            </div>
-          </div>
-        </div>
-      )}
+
+              <div className="py-4 space-y-3">
+                <p className="text-xs text-stone-300 leading-relaxed font-sans">
+                  When running on a physical sideloaded iOS or Android device, specify the host IP or domain of your running Synodix backend daemon.
+                </p>
+
+                <div>
+                  <label className="block text-xs font-sans text-stone-300 mb-1 font-medium">
+                    Backend Host URL
+                  </label>
+                  <input
+                    type="text"
+                    value={serverUrlInput}
+                    onChange={(e) => setServerUrlInput(e.target.value)}
+                    placeholder="e.g. http://192.168.1.11:8000"
+                    className="w-full px-3 py-2 text-xs font-mono rounded bg-stone-900 border border-stone-800 text-stone-100 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500"
+                  />
+                  <div className="flex items-center justify-between mt-1.5 text-[11px] text-stone-400 font-sans">
+                    <span>Local Wi-Fi: <code className="text-amber-400 font-mono">http://192.168.1.11:8000</code></span>
+                    <button
+                      type="button"
+                      onClick={() => setServerUrlInput(DEFAULT_DEV_API_URL)}
+                      className="text-amber-400 hover:underline cursor-pointer"
+                    >
+                      Set Local Wi-Fi
+                    </button>
+                  </div>
+                </div>
+
+                {testStatus !== 'idle' && (
+                  <div
+                    className={`p-2.5 rounded text-xs font-mono flex items-center gap-2 ${
+                      testStatus === 'testing'
+                        ? 'bg-amber-950/40 text-amber-300 border border-amber-800'
+                        : testStatus === 'success'
+                        ? 'bg-emerald-950/40 text-emerald-300 border border-emerald-800'
+                        : 'bg-rose-950/40 text-rose-300 border border-rose-800'
+                    }`}
+                  >
+                    {testStatus === 'testing' && <span className="w-2 h-2 rounded-full bg-amber-400 animate-ping" />}
+                    {testStatus === 'success' && <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 shrink-0" />}
+                    {testStatus === 'error' && <AlertCircle className="w-3.5 h-3.5 text-rose-400 shrink-0" />}
+                    <span className="break-all">{testMessage}</span>
+                  </div>
+                )}
+              </div>
+
+              <div className="pt-3 border-t border-stone-800 flex items-center justify-between gap-2">
+                <button
+                  type="button"
+                  onClick={() => testServerConnection(serverUrlInput)}
+                  className="px-3 py-2 min-h-[44px] rounded bg-stone-900 hover:bg-stone-850 border border-stone-800 text-stone-300 text-xs font-medium cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
+                >
+                  Test Ping
+                </button>
+                <div className="flex items-center gap-2">
+                  <button
+                    type="button"
+                    onClick={() => setIsServerModalOpen(false)}
+                    className="px-3 py-2 min-h-[44px] rounded text-stone-400 hover:text-stone-200 text-xs cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-stone-400"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="button"
+                    onClick={saveServerUrl}
+                    className="px-4 py-2 min-h-[44px] rounded bg-amber-700 hover:bg-amber-600 text-stone-950 text-xs font-bold cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:ring-offset-1 focus-visible:ring-offset-stone-950"
+                  >
+                    Save & Apply
+                  </button>
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* 6. Keyboard Shortcuts Modal */}
-      {isShortcutsModalOpen && (
-        <div className="fixed inset-0 z-50 bg-black/80 flex items-center justify-center p-4 overscroll-contain">
-          <div className="w-full max-w-md bg-stone-950 border border-stone-800 rounded-xl p-5 shadow-2xl animate-screen-enter">
+      <AnimatePresence>
+        {isShortcutsModalOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.18 }}
+            className="fixed inset-0 z-50 apple-scrim flex items-center justify-center p-4 overscroll-contain"
+            onClick={() => setIsShortcutsModalOpen(false)}
+          >
+            <motion.div
+              role="dialog"
+              aria-modal="true"
+              aria-label="Observatory Keyboard Accelerators"
+              initial={{ opacity: 0, scale: shouldReduceMotion ? 1 : 0.95, y: shouldReduceMotion ? 0 : 8 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: shouldReduceMotion ? 1 : 0.95, y: shouldReduceMotion ? 0 : 8 }}
+              transition={{ type: 'spring', damping: 26, stiffness: 320 }}
+              className="w-full max-w-md bg-stone-950 border border-stone-800 rounded-xl p-5 shadow-2xl apple-hairline-t"
+              onClick={(e) => e.stopPropagation()}
+            >
             <div className="flex items-center justify-between pb-3 border-b border-stone-800">
               <div className="flex items-center gap-2">
                 <span className="font-mono text-xs px-1.5 py-0.5 rounded bg-amber-950 text-amber-300 border border-amber-800 font-bold">⌘</span>
@@ -1548,9 +1603,10 @@ function AppContent() {
             <div className="pt-2 border-t border-stone-800 text-[11px] text-stone-400 font-sans">
               Accelerators are globally active when focus is not inside input fields.
             </div>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       )}
+    </AnimatePresence>
     </div>
   );
 }

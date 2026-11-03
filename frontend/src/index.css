@@ -1889,12 +1889,17 @@ html[data-theme="light"] {
 }
 
 .header-canvas {
-  background-color: rgba(18, 16, 14, 0.94);
+  background-color: rgba(18, 16, 14, 0.85);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 [data-theme="light"] .header-canvas {
-  background-color: rgba(255, 253, 250, 0.96) !important;
-  border-color: #e7e0d3 !important;
+  background-color: rgba(255, 253, 250, 0.88) !important;
+  backdrop-filter: blur(20px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important;
 }
 
 /* Optical Telemetry Reticles */
@@ -2106,6 +2111,42 @@ textarea {
 
 .btn-press:active {
   transform: scale(0.97);
+}
+
+/* =========================================================================
+   APPLE FLUID TACTILE RESPONSE (§1 Response — Kill Latency & §10 Feel)
+   Instant micro-compression feedback on press; smooth release
+   ========================================================================= */
+@media (prefers-reduced-motion: no-preference) {
+  button:not(:disabled):active,
+  [role="button"]:not([aria-disabled="true"]):active,
+  [role="tab"]:not([aria-disabled="true"]):active {
+    transform: scale(0.975);
+    transition: transform 80ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+}
+
+/* Apple Materials & Hairline Edge Lighting (§12 Materials & Depth) */
+.apple-scrim {
+  background-color: rgba(0, 0, 0, 0.72);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+}
+
+.apple-hairline-t {
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.apple-hairline-b {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+[data-theme="light"] .apple-hairline-t {
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="light"] .apple-hairline-b {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
 }
 
 /* Touch-friendly ergonomics & horizontal pill scrollbar hiding */
