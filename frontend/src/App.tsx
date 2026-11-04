@@ -22,7 +22,8 @@ import {
   AlertCircle,
   BookOpen,
   HeartHandshake,
-  Cpu
+  Cpu,
+  Sparkles
 } from 'lucide-react';
 import { apiUrl, getApiBaseUrl, setApiBaseUrl, DEFAULT_DEV_API_URL } from './utils/api';
 import { getBundledTitanChart, TITANS_500_PRESETS as FALLBACK_PRESETS } from './data/bundledTitans';
@@ -98,7 +99,7 @@ const NAV_ITEMS: NavItem[] = [
     chapter: 'journey',
     badge: 'Consensus',
     description: 'Compare where traditions agree and where their methods differ',
-    icon: Layers
+    icon: Sparkles
   },
   {
     id: 'dossier',
@@ -993,12 +994,12 @@ function AppContent() {
             </button>
 
             {/* Screen Title */}
-            <div className="flex items-center gap-1.5 sm:gap-2 min-w-0">
-              <h1 className="text-lg sm:text-2xl font-serif font-bold tracking-tight text-stone-100 flex items-center gap-2 min-w-0">
+            <div className="flex items-center gap-1.5 sm:gap-2 min-w-0 shrink">
+              <h1 className="text-base sm:text-2xl font-serif font-bold tracking-tight text-stone-100 flex items-center gap-2 min-w-0 shrink">
                 <span className="hidden sm:inline truncate">
                   {NAV_ITEMS.find((n) => n.id === currentScreen)?.label || (currentScreen === 'guide' ? 'Feature Guide' : '')}
                 </span>
-                <span className="sm:hidden truncate max-w-[220px] tracking-normal" aria-hidden="true">
+                <span className="sm:hidden truncate max-w-[120px] tracking-normal" aria-hidden="true">
                   {NAV_ITEMS.find((n) => n.id === currentScreen)?.shortLabel || NAV_ITEMS.find((n) => n.id === currentScreen)?.label || (currentScreen === 'guide' ? 'Guide' : '')}
                 </span>
               </h1>
@@ -1007,7 +1008,7 @@ function AppContent() {
                 <button
                   type="button"
                   onClick={() => navigateTo('workbench')}
-                  className="md:hidden flex items-center gap-1.5 px-3 py-1.5 min-h-[44px] rounded-full bg-stone-900 border border-amber-800/60 text-xs font-serif text-amber-300 truncate max-w-[150px] cursor-pointer shrink-0"
+                  className="md:hidden flex items-center gap-1.5 px-2.5 py-1 min-h-[38px] rounded-full bg-stone-900 border border-amber-800/60 text-xs font-serif text-amber-300 truncate max-w-[120px] sm:max-w-[150px] cursor-pointer shrink min-w-0"
                   data-tooltip="Switch active subject"
                   aria-label={`Subject: ${activeSubjectName}. Tap to switch.`}
                 >
@@ -1358,12 +1359,12 @@ function AppContent() {
       {/* 4. Mobile Bottom Navigation Bar (<md) */}
       <nav
         aria-label="Mobile Navigation"
-        className="md:hidden fixed bottom-0 left-0 right-0 z-50 mobile-nav-canvas px-1 py-1 pb-[max(0.75rem,env(safe-area-inset-bottom,0px))] flex items-center justify-around text-[11px] font-mono font-medium tracking-tight shadow-2xl"
+        className="md:hidden fixed bottom-0 left-0 right-0 z-50 mobile-nav-canvas px-1 py-1 pb-[max(0.75rem,env(safe-area-inset-bottom,0px))] flex items-center justify-around text-[10px] font-sans font-medium tracking-tight shadow-2xl"
       >
         {[
           { id: 'workbench', label: 'Input', icon: Sliders },
           { id: 'traditions', label: 'Traditions', icon: Compass },
-          { id: 'synthesis', label: 'Synthesis', icon: Layers },
+          { id: 'synthesis', label: 'Synthesis', icon: Sparkles },
           { id: 'dossier', label: 'Reading', ariaLabel: 'Dossier', srText: 'Dossier', icon: FileText },
           { id: 'synastry', label: 'Synastry', icon: HeartHandshake },
           {
@@ -1393,17 +1394,17 @@ function AppContent() {
               }}
               aria-label={('ariaLabel' in item && item.ariaLabel) ? item.ariaLabel : item.label}
               aria-current={isActive ? 'page' : undefined}
-              className={`relative flex-1 min-w-0 flex flex-col items-center justify-center p-1 min-h-[48px] rounded-lg transition-[background-color,border-color,color,transform] motion-safe:active:scale-[0.97] motion-reduce:active:scale-100 duration-150 ease-out cursor-pointer touch-manipulation focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 ${
+              className={`relative flex-1 min-w-0 overflow-hidden flex flex-col items-center justify-center p-1 min-h-[48px] rounded-lg transition-[background-color,border-color,color,transform] motion-safe:active:scale-[0.97] motion-reduce:active:scale-100 duration-150 ease-out cursor-pointer touch-manipulation focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 ${
                 isActive
-                  ? 'text-amber-400 font-bold bg-stone-900 border border-amber-700/60 shadow-xs'
+                  ? 'text-amber-400 font-semibold bg-stone-900 border border-amber-700/60 shadow-xs'
                   : 'text-stone-400 hover:text-stone-200 hover:bg-stone-900'
               }`}
             >
               {isActive && (
-                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-6 h-0.5 bg-amber-400 rounded-full" />
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-5 h-0.5 bg-amber-400 rounded-full" />
               )}
-              <Icon className={`w-4.5 h-4.5 mb-0.5 ${isActive ? 'text-amber-400' : 'text-stone-400'}`} />
-              <span className="mt-0.5 text-[11px] leading-tight font-medium tracking-tight whitespace-nowrap w-full text-center px-0.5">
+              <Icon className={`w-4.5 h-4.5 mb-0.5 shrink-0 ${isActive ? 'text-amber-400' : 'text-stone-400'}`} />
+              <span className="mt-0.5 text-[10px] leading-tight font-medium tracking-tight truncate w-full text-center px-0.5 block">
                 {item.label}
               </span>
             </button>

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ArrowLeft, ArrowRight, ChevronDown, Layers } from 'lucide-react';
+import { ArrowLeft, ArrowRight, ChevronDown, Sparkles } from 'lucide-react';
 import type { Synthesis } from '../types';
 import { DomainConsensusRadar } from './ChartWheelVisualizer';
 import { ExplainerTrigger } from './ExplainerTrigger';
@@ -58,7 +58,7 @@ export const SynthesisMatrix: React.FC<Props> = ({ synthesis, onNavigate }) => {
       <div className="flex flex-col lg:flex-row lg:items-center justify-between pb-4 sm:pb-5 border-b border-stone-800 gap-4 hero-wide-container">
         <div className="flex items-start gap-3.5 max-w-4xl">
           <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-amber-950/90 border border-amber-800 flex items-center justify-center text-amber-300 shrink-0 shadow-xs ring-1 ring-amber-500/20">
-            <Layers className="w-5 h-5 text-amber-400" />
+            <Sparkles className="w-5 h-5 text-amber-400" />
           </div>
           <div className="min-w-0">
             <div className="flex flex-wrap items-center gap-2 mb-1">
