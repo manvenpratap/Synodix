@@ -59,6 +59,7 @@ import math
 
 _data_file = os.path.join(os.path.dirname(__file__), "data", "personalities_100.json")
 _data_file_500 = os.path.join(os.path.dirname(__file__), "data", "personalities_500.json")
+_data_file_1000 = os.path.join(os.path.dirname(__file__), "data", "personalities_1000.json")
 
 if os.path.exists(_data_file):
     with open(_data_file, "r", encoding="utf-8") as _f:
@@ -66,11 +67,20 @@ if os.path.exists(_data_file):
 else:
     SAMPLE_PRESETS = []
 
+if os.path.exists(_data_file_1000):
+    with open(_data_file_1000, "r", encoding="utf-8") as _f:
+        SAMPLE_PRESETS_1000 = json.load(_f)
+elif os.path.exists(_data_file_500):
+    with open(_data_file_500, "r", encoding="utf-8") as _f:
+        SAMPLE_PRESETS_1000 = json.load(_f)
+else:
+    SAMPLE_PRESETS_1000 = SAMPLE_PRESETS
+
 if os.path.exists(_data_file_500):
     with open(_data_file_500, "r", encoding="utf-8") as _f:
         SAMPLE_PRESETS_500 = json.load(_f)
 else:
-    SAMPLE_PRESETS_500 = SAMPLE_PRESETS
+    SAMPLE_PRESETS_500 = SAMPLE_PRESETS_1000
 
 @app.get("/api/health")
 def health_check():
@@ -80,14 +90,15 @@ def health_check():
         "engine_version": "2.0.0",
         "primary_astronomy": "Swiss Ephemeris (pyswisseph)",
         "independent_validator": "Skyfield (JPL DE421)",
-        "total_sample_profiles": len(SAMPLE_PRESETS_500),
+        "total_sample_profiles": len(SAMPLE_PRESETS_1000),
+        "total_sample_profiles_1000": len(SAMPLE_PRESETS_1000),
         "total_sample_profiles_500": len(SAMPLE_PRESETS_500),
         "total_sample_profiles_100": len(SAMPLE_PRESETS),
     }
 
 @app.get("/api/sample-charts")
 def get_sample_charts(category: Optional[str] = None, cohort: Optional[int] = None):
-    source = SAMPLE_PRESETS if cohort == 100 else SAMPLE_PRESETS_500
+    source = SAMPLE_PRESETS if cohort == 100 else (SAMPLE_PRESETS_500 if cohort == 500 else SAMPLE_PRESETS_1000)
     if category and category != "all":
         return [p for p in source if p.get("category") == category]
     return source
@@ -97,6 +108,12 @@ def get_sample_charts_500(category: Optional[str] = None):
     if category and category != "all":
         return [p for p in SAMPLE_PRESETS_500 if p.get("category") == category]
     return SAMPLE_PRESETS_500
+
+@app.get("/api/sample-charts-1000")
+def get_sample_charts_1000(category: Optional[str] = None):
+    if category and category != "all":
+        return [p for p in SAMPLE_PRESETS_1000 if p.get("category") == category]
+    return SAMPLE_PRESETS_1000
 
 # Curated global cities for backend geocoding lookup
 _COMMON_CITIES = [

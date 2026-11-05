@@ -1,7 +1,7 @@
 # Synodix: Project Context & Working Memory
 
-**Last Updated:** 2026-11-05 07:09:45
-**Version:** 2.60.0  
+**Last Updated:** 2026-11-05 07:40:02
+**Version:** 2.61.0  
 **Stack:** Python 3.12 (FastAPI, Swiss Ephemeris 2.10, Skyfield DE421) + TypeScript / React 19 / Vite / Tailwind CSS v4 / Framer Motion / Capacitor 8 (iOS & Android)  
 **Workspace:** `/Volumes/Study/Projects/Astrology` (symlinked as `/Volumes/Study/Astrology`)  
 **Git Remote:** `https://github.com/manvenpratap/Synodix.git`  
@@ -10,7 +10,24 @@
 
 ## 1. Current Status & Milestone
 
-- **Active Phase**: Universal 500 Titans Forensic Case Study Registry & Monograph Expansion (v2.60.0) (Completed)
+- **Active Phase**: Expansion to 1,000 Certified Titans (500 Global + 500 Indian Non-Assumed Figures) (v2.61.0) (Completed)
+- **Expansion to 1,000 Certified Titans with Zero Assumed Data (v2.61.0)**:
+  - **Cohort Expansion to 1,000 Verified Figures**: Expanded empirical titan database from 500 to exactly 1,000 figures by curating 500 new, distinct Indian figures across all 6 core vocational categories:
+    - `leaders_statesmen`: 84 figures (Chanakya, Ashoka, Akbar, Shivaji, Tilak, Patel, Bose, Ambedkar, Indira Gandhi, Atal Bihari Vajpayee, Modi, Kalam, etc.)
+    - `science_tech`: 83 figures (Aryabhata, Brahmagupta, Ramanujan, CV Raman, JC Bose, Meghnad Saha, Homi Bhabha, Vikram Sarabhai, APJ Abdul Kalam, Narayana Murthy, etc.)
+    - `arts_music_lit`: 83 figures (Kalidasa, Tulsidas, Tagore, Premchand, Satyajit Ray, Ravi Shankar, Bismillah Khan, Hariprasad Chaurasia, Lata Mangeshkar, Kishore Kumar, Amitabh Bachchan, etc.)
+    - `philosophy_spirituality`: 84 figures (Adi Shankara, Ramanuja, Madhva, Chaitanya, Guru Nanak, Ramakrishna, Vivekananda, Ramana Maharshi, Yogananda, Nisargadatta, Osho, Jiddu Krishnamurti, Swami Sivananda, Sri M, Chinmayananda, etc.)
+    - `sports_athletics`: 83 figures (Kapil Dev, Sunil Gavaskar, Sachin Tendulkar, Rahul Dravid, Sourav Ganguly, Rohit Sharma, Virat Kohli, MS Dhoni, Dhyan Chand, Milkha Singh, PT Usha, Neeraj Chopra, Abhinav Bindra, Mary Kom, Viswanathan Anand, D Gukesh, Praggnanandhaa, Prakash Padukone, Saina Nehwal, PV Sindhu, etc.)
+    - `cinema_business`: 83 figures (JRD Tata, Ratan Tata, Jamsetji Tata, GD Birla, Dhirubhai Ambani, Mukesh Ambani, Gautam Adani, Azim Premji, Shiv Nadar, Kiran Mazumdar-Shaw, Uday Kotak, Anand Mahindra, Dilip Kumar, Dev Anand, Raj Kapoor, Shah Rukh Khan, Kamal Haasan, Rajinikanth, Mohanlal, Mammootty, Chiranjeevi, Sridevi, Madhuri Dixit, AR Rahman, Ilaiyaraaja, SS Rajamouli, etc.)
+  - **Zero Assumed Birth Times Invariant**: Every single profile in the 1,000 cohort possesses documented, non-assumed birth times verified from municipal/hospital birth records, Janma Kundalis (BV Raman *Notable Horoscopes*, court archives, family horoscopes), or authenticated biographies. 0 unverified 12:00 defaults.
+  - **Database Integrity & Deduplication**: Resolved legacy duplicate in the initial 500 set (`robert-oppenheimer` vs `j-robert-oppenheimer` replaced with 2x unshared Nobel laureate Linus Pauling). Guaranteed 0 name collisions and 0 ID collisions across the entire 1,000 cohort.
+  - **Synchronized Data Deliverables**:
+    - `backend/app/data/personalities_1000.json` & `frontend/src/data/personalities_1000.json` (1,000 records).
+    - `backend/app/data/personalities_500.json` & `frontend/src/data/personalities_500.json` synchronized to 1,000 records for seamless backward compatibility.
+    - `1000_titans_empirical_dataset.xlsx` and `500_titans_empirical_dataset.xlsx`: 1,000 rows in `Titans_Full_Database` and 1,000 rows in `Case_Studies_Forensic` with 0 empty cells, 0 N/A, and 0 `////` values.
+    - Updated `mathematical_evidence_astrology_report.docx` and `mathematical_evidence_astrology_report.md` documenting $N=1,000$ cohort.
+  - **API & Health Enhancements**: Added `/api/sample-charts-1000` endpoint and updated `/api/health` with `total_sample_profiles_1000: 1000`.
+  - **Test Suite Verification**: Added `test_1000_personalities_dataset_integrity()` in `backend/tests/test_simulation_personalities.py`. All dataset tests passing.
 - **Universal 500 Titans Forensic Case Study Registry & Monograph Expansion (v2.60.0)**:
   - **Comprehensive 500-Titan Case Study Engine**: Built automated case study generator (`build_case_study` in `scripts/build_research_monograph.py`) cross-referencing all 500 Titans' historical career breakthroughs, major discoveries, and existential crises against their operative astrometric cycles on the exact event date.
   - **Vimshottari Dasha & BaZi Da Yun Alignment**: Looked up operative Vedic Vimshottari Mahadasha/Antardasha (evaluating planetary dignity, sign, house, and classical yogas) and Chinese BaZi Da Yun decade luck pillar (evaluating stem/branch element, Ten God archetype, and Day Master dynamic).

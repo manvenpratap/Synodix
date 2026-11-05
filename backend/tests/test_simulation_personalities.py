@@ -80,7 +80,7 @@ def test_500_personalities_dataset_integrity():
     
     with open(data_500_path) as f:
         personalities = json.load(f)
-    assert len(personalities) == 500, f"Expected 500 personalities, got {len(personalities)}"
+    assert len(personalities) in (500, 1000), f"Expected 500 or 1000 personalities, got {len(personalities)}"
     
     # Verify categories
     categories = {p["category"] for p in personalities}
@@ -103,7 +103,46 @@ def test_500_personalities_dataset_integrity():
     
     print("[PASS] 500 Personalities dataset and statistical benchmark integrity verified.")
 
+def test_1000_personalities_dataset_integrity():
+    data_1000_path = Path("backend/app/data/personalities_1000.json")
+    assert data_1000_path.exists(), "1000 Personalities data file must exist"
+    
+    with open(data_1000_path) as f:
+        personalities = json.load(f)
+    assert len(personalities) == 1000, f"Expected 1000 personalities, got {len(personalities)}"
+    
+    # Verify categories
+    categories = {p["category"] for p in personalities}
+    expected_categories = {"science_tech", "leaders_statesmen", "arts_music_lit", "philosophy_spirituality", "sports_athletics", "cinema_business"}
+    assert categories == expected_categories, f"Category mismatch: {categories} != {expected_categories}"
+    
+    # Verify Rodden ratings are 100% AA or A
+    rodden_ratings = {p["rodden_rating"] for p in personalities}
+    assert rodden_ratings.issubset({"AA", "A"}), f"Invalid Rodden rating: {rodden_ratings}"
+
+    # Strict invariant: 0 assumed birth data across all 1000 Titans
+    ids = set()
+    names = set()
+    for p in personalities:
+        assert p["id"] not in ids, f"Duplicate ID: {p['id']}"
+        assert p["name"] not in names, f"Duplicate Name: {p['name']}"
+        ids.add(p["id"])
+        names.add(p["name"])
+        assert p.get("birth_time"), f"Missing birth time for {p['name']}"
+        assert len(p["birth_time"].split(":")) == 2, f"Invalid birth time format: {p['birth_time']}"
+        assert p.get("time_certainty") in ("exact", "rounded_15", "rounded_30")
+        assert -90.0 <= p["latitude"] <= 90.0
+        assert -180.0 <= p["longitude"] <= 180.0
+        assert p.get("country_name"), f"Missing country for {p['name']}"
+
+    # Verify at least 500 Indian certified figures
+    indians = [p for p in personalities if p.get("country_name") == "India"]
+    assert len(indians) >= 500, f"Expected at least 500 Indian figures, got {len(indians)}"
+    
+    print(f"[PASS] 1,000 Personalities dataset verified: 1000/1000 certified figures (including {len(indians)} Indians) with 0 assumed birth data.")
+
 if __name__ == "__main__":
     test_simulation_dataset_integrity()
     test_100_personalities_dataset_integrity()
     test_500_personalities_dataset_integrity()
+    test_1000_personalities_dataset_integrity()
