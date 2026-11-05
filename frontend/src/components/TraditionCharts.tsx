@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Layers, Sliders, ArrowLeft, ArrowRight, Compass, ChevronDown, ChevronUp } from 'lucide-react';
+import { Layers, Sliders, ArrowLeft, ArrowRight, Compass, ChevronDown, ChevronUp, Columns3 } from 'lucide-react';
 import type { ChartResponse } from '../types';
 import { ExplainerTrigger } from './ExplainerTrigger';
 import { triggerHaptic } from '../utils/haptics';
@@ -630,129 +630,137 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
   return (
     <div className="p-1 sm:p-2 relative transition-colors duration-300 overflow-hidden space-y-4 sm:space-y-5">
       {/* Screen 2 Top Hero Pedestal (Universal Hero Token Standard) */}
-      <div className="p-4 sm:p-6 rounded-2xl bg-stone-900 border border-stone-800 shadow-md flex flex-col xl:flex-row xl:items-center justify-between gap-4 hero-wide-container">
-        <div className="flex items-start gap-3.5 min-w-0 flex-1">
+      <div className="p-3.5 sm:p-5 rounded-2xl bg-stone-900 border border-stone-800 shadow-md space-y-3 hero-wide-container">
+        {/* Top Header Row */}
+        <div className="flex items-start gap-3 min-w-0">
           <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-amber-950/90 border border-amber-800 flex items-center justify-center text-amber-300 shrink-0 shadow-xs ring-1 ring-amber-500/20">
             <Compass className="w-5 h-5 text-amber-400" />
           </div>
-          <div className="min-w-0">
-            <div className="flex flex-wrap items-center gap-2 mb-1">
+          <div className="min-w-0 flex-1">
+            <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 mb-0.5">
               <span className="text-xs text-amber-400 font-serif font-semibold">
                 Comparative astrometry
               </span>
               <span className="text-stone-600 hidden sm:inline" aria-hidden="true">/</span>
               <span className="text-xs text-stone-400 font-sans hidden sm:inline">
-                9 Global Civilizational Worldviews
+                9 Civilizational Worldviews
               </span>
-              <span className="text-[11px] font-mono px-2 py-0.5 rounded-full bg-amber-950/80 text-amber-300 border border-amber-800/80 font-medium">
+              <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-amber-950/80 text-amber-300 border border-amber-800/80 font-medium">
                 Multi-Tradition
               </span>
             </div>
-            <h1 className="hero-h1-clamped font-serif font-bold text-stone-100 tracking-tight flex flex-wrap items-center gap-1.5 sm:gap-2">
+            <h1 className="hero-h1-clamped font-serif font-bold text-stone-100 tracking-tight flex flex-wrap items-center gap-2">
               <span className="sm:hidden">9 Traditions</span>
-              <span className="hidden sm:inline">9 Astrological Traditions</span>
-              <span className="inline-block w-10 sm:w-14 h-5 sm:h-6 rounded-full align-middle bg-gradient-to-r from-amber-600 via-amber-500 to-amber-700 border border-amber-400/50 mx-1 sm:mx-1.5 shadow-inner inline-flex items-center justify-center text-[10px] text-amber-950 font-mono font-bold">9-Sys</span>
-              <span className="text-stone-300 hidden sm:inline">&amp; Cosmologies</span>
+              <span className="hidden sm:inline">9 Astrological Traditions &amp; Cosmologies</span>
+              <span className="inline-flex items-center justify-center px-2 py-0.5 rounded-full bg-gradient-to-r from-amber-600 via-amber-500 to-amber-700 border border-amber-400/50 shadow-inner text-[10px] text-amber-950 font-mono font-bold">
+                9-Sys
+              </span>
             </h1>
-            <p className="text-xs sm:text-sm text-stone-400 mt-1 max-w-2xl sm:max-w-3xl leading-relaxed text-pretty font-sans hidden sm:block">
+            <p className="text-xs text-stone-400 mt-1 max-w-3xl leading-relaxed font-sans hidden sm:block">
               Explore your natal chart across 9 distinct celestial systems: from Vedic sidereal nakshatras and Hellenistic planetary sect to BaZi solar terms and Maya sacred trecenas.
             </p>
           </div>
         </div>
 
-        {/* Display Presentation Switcher & View Mode Controls Toolbar */}
-        <div className="flex flex-wrap sm:flex-nowrap items-center justify-between gap-1.5 w-full xl:w-auto shrink-0 pt-2 xl:pt-0 border-t xl:border-t-0 border-stone-800/80">
-          {/* Display Presentation Switcher: Comprehensive / Visual Instrument / Telemetry Tables */}
-          <div className="flex items-center justify-center sm:justify-start gap-1 p-0.5 rounded-lg bg-stone-950 border border-stone-800 text-xs font-mono shrink-0">
-            {(['both', 'chart', 'table'] as const).map((mode) => {
-              const isModeActive = chartViewMode === mode;
-              const labels = {
-                both: { full: 'Complete View', short: 'All', sr: 'Comprehensive' },
-                chart: { full: 'Visual Chart', short: 'Visual', sr: 'Visual Instrument' },
-                table: { full: 'Detailed Tables', short: 'Tables', sr: 'Telemetry Tables' },
-              };
-              return (
-                <button
-                  key={mode}
-                  type="button"
-                  onClick={() => {
-                    triggerHaptic('selection');
-                    setChartViewMode(mode);
-                  }}
-                  className={`relative px-2.5 sm:px-3 py-1.5 min-h-[44px] sm:min-h-[34px] text-xs font-mono rounded-md cursor-pointer transition-colors flex items-center justify-center ${
-                    isModeActive
-                      ? 'bg-amber-950 text-amber-200 font-bold border border-amber-700/80 shadow-xs'
-                      : 'text-stone-400 hover:text-stone-200'
-                  }`}
-                  aria-pressed={isModeActive}
-                  data-tooltip={`Switch presentation to ${labels[mode].full}`}
-                >
-                  <span className="hidden sm:inline">{labels[mode].full}</span>
-                  <span className="sm:hidden">{labels[mode].short}</span>
-                  <span className="sr-only"> {labels[mode].sr}</span>
-                </button>
-              );
-            })}
+        {/* Dedicated Controls Toolbar Row */}
+        <div className="flex flex-wrap items-center justify-between gap-2 pt-2 border-t border-stone-800/80">
+          {/* Display Presentation Depth Switcher */}
+          <div className="flex items-center gap-1.5 shrink-0">
+            <span className="text-[10px] font-mono text-stone-500 font-semibold uppercase tracking-wider hidden sm:inline">Depth:</span>
+            <div className="flex items-center gap-0.5 p-0.5 rounded-lg bg-stone-950 border border-stone-800 text-[11px] font-mono shrink-0">
+              {(['both', 'chart', 'table'] as const).map((mode) => {
+                const isModeActive = chartViewMode === mode;
+                const labels = {
+                  both: { full: 'Complete View', short: 'All', sr: 'Comprehensive' },
+                  chart: { full: 'Visual Chart', short: 'Visual', sr: 'Visual Instrument' },
+                  table: { full: 'Detailed Tables', short: 'Tables', sr: 'Telemetry Tables' },
+                };
+                return (
+                  <button
+                    key={mode}
+                    type="button"
+                    onClick={() => {
+                      triggerHaptic('selection');
+                      setChartViewMode(mode);
+                    }}
+                    className={`relative px-2 sm:px-2.5 py-1 min-h-[44px] sm:min-h-[28px] text-[11px] font-mono rounded-md cursor-pointer transition-colors flex items-center justify-center ${
+                      isModeActive
+                        ? 'bg-amber-950 text-amber-200 font-bold border border-amber-700/80 shadow-xs'
+                        : 'text-stone-400 hover:text-stone-200'
+                    }`}
+                    aria-pressed={isModeActive}
+                    data-tooltip={`Switch presentation to ${labels[mode].full}`}
+                  >
+                    <span className="hidden sm:inline">{labels[mode].full}</span>
+                    <span className="sm:hidden">{labels[mode].short}</span>
+                    <span className="sr-only"> {labels[mode].sr}</span>
+                  </button>
+                );
+              })}
+            </div>
           </div>
 
-          {/* View Mode Toggle: Vertical Carousel vs Full Inspector */}
-          <div className="flex items-center justify-center sm:justify-start gap-1 p-0.5 rounded-lg bg-stone-950 border border-stone-800 text-xs font-mono shrink-0">
-            <button
-              type="button"
-              onClick={() => {
-                triggerHaptic('selection');
-                setLayoutMode('carousel');
-              }}
-              className={`flex items-center gap-1.5 px-3 py-1.5 min-h-[44px] sm:min-h-[34px] rounded-md cursor-pointer transition-colors font-serif text-xs ${
-                layoutMode === 'carousel'
-                  ? 'bg-amber-950 text-amber-300 border border-amber-700/80 font-bold'
-                  : 'text-stone-400 hover:text-stone-200'
-              }`}
-              data-tooltip="View traditions as an animated 3D vertical carousel deck"
-              aria-label="Vertical Carousel Deck view"
-            >
-              <Layers className="w-3.5 h-3.5 text-amber-400" />
-              <span className="hidden sm:inline">Carousel Deck</span>
-              <span className="sm:hidden">Deck</span>
-              <span className="sr-only">Carousel Deck</span>
-            </button>
-            <button
-              type="button"
-              onClick={() => {
-                triggerHaptic('selection');
-                setLayoutMode('accordion');
-              }}
-              className={`hidden lg:flex items-center gap-1.5 px-3 py-1.5 min-h-[44px] sm:min-h-[34px] rounded-md cursor-pointer transition-colors font-serif text-xs ${
-                layoutMode === 'accordion'
-                  ? 'bg-amber-950 text-amber-300 border border-amber-700/80 font-bold'
-                  : 'text-stone-400 hover:text-stone-200'
-              }`}
-              data-tooltip="View traditions as an interactive horizontal accordion gallery"
-              aria-label="Horizontal Accordion Gallery view"
-            >
-              <Compass className="w-3.5 h-3.5 text-amber-400" />
-              <span>Accordion Gallery</span>
-              <span className="sr-only">Accordion Gallery</span>
-            </button>
-            <button
-              type="button"
-              onClick={() => {
-                triggerHaptic('selection');
-                setLayoutMode('inspector');
-              }}
-              className={`flex items-center gap-1.5 px-3 py-1.5 min-h-[44px] sm:min-h-[34px] rounded-md cursor-pointer transition-colors font-serif text-xs ${
-                layoutMode === 'inspector'
-                  ? 'bg-amber-950 text-amber-300 border border-amber-700/80 font-bold'
-                  : 'text-stone-400 hover:text-stone-200'
-              }`}
-              data-tooltip="View detailed telemetry inspector and analytical tables"
-              aria-label="Detailed Inspector view"
-            >
-              <Sliders className="w-3.5 h-3.5" />
-              <span className="hidden sm:inline">Inspector Matrix</span>
-              <span className="sm:hidden">Matrix</span>
-              <span className="sr-only">Inspector Matrix</span>
-            </button>
+          {/* View Mode Switcher */}
+          <div className="flex items-center gap-1.5 shrink-0">
+            <span className="text-[10px] font-mono text-stone-500 font-semibold uppercase tracking-wider hidden sm:inline">Mode:</span>
+            <div className="flex items-center gap-0.5 p-0.5 rounded-lg bg-stone-950 border border-stone-800 text-[11px] font-mono shrink-0">
+              <button
+                type="button"
+                onClick={() => {
+                  triggerHaptic('selection');
+                  setLayoutMode('carousel');
+                }}
+                className={`flex items-center gap-1 px-2 sm:px-2.5 py-1 min-h-[44px] sm:min-h-[28px] rounded-md cursor-pointer transition-colors font-serif text-[11px] ${
+                  layoutMode === 'carousel'
+                    ? 'bg-amber-950 text-amber-300 border border-amber-700/80 font-bold'
+                    : 'text-stone-400 hover:text-stone-200'
+                }`}
+                data-tooltip="View traditions as an animated 3D vertical carousel deck"
+                aria-label="Vertical Carousel Deck view"
+              >
+                <Layers className="w-3.5 h-3.5 text-amber-400" />
+                <span className="hidden sm:inline">Carousel Deck</span>
+                <span className="sm:hidden">Deck</span>
+                <span className="sr-only">Carousel Deck</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  triggerHaptic('selection');
+                  setLayoutMode('accordion');
+                }}
+                className={`hidden lg:flex items-center gap-1 px-2 sm:px-2.5 py-1 min-h-[44px] sm:min-h-[28px] rounded-md cursor-pointer transition-colors font-serif text-[11px] ${
+                  layoutMode === 'accordion'
+                    ? 'bg-amber-950 text-amber-300 border border-amber-700/80 font-bold'
+                    : 'text-stone-400 hover:text-stone-200'
+                }`}
+                data-tooltip="View traditions as an interactive horizontal accordion gallery"
+                aria-label="Horizontal Accordion Gallery view"
+              >
+                <Columns3 className="w-3.5 h-3.5 text-amber-400" />
+                <span>Accordion Gallery</span>
+                <span className="sr-only">Accordion Gallery</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  triggerHaptic('selection');
+                  setLayoutMode('inspector');
+                }}
+                className={`flex items-center gap-1 px-2 sm:px-2.5 py-1 min-h-[44px] sm:min-h-[28px] rounded-md cursor-pointer transition-colors font-serif text-[11px] ${
+                  layoutMode === 'inspector'
+                    ? 'bg-amber-950 text-amber-300 border border-amber-700/80 font-bold'
+                    : 'text-stone-400 hover:text-stone-200'
+                }`}
+                data-tooltip="View detailed telemetry inspector and analytical tables"
+                aria-label="Detailed Inspector view"
+              >
+                <Sliders className="w-3.5 h-3.5" />
+                <span className="hidden sm:inline">Inspector Matrix</span>
+                <span className="sm:hidden">Matrix</span>
+                <span className="sr-only">Inspector Matrix</span>
+              </button>
+            </div>
           </div>
         </div>
       </div>

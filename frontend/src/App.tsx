@@ -1203,8 +1203,8 @@ function AppContent() {
                     {s.step}
                   </span>
                   <div className="relative z-10 text-left min-w-0">
-                    <span className="hidden sm:block text-[11px] text-amber-500/80 font-mono leading-none">
-                      {['Calibration', 'Traditions', 'Synthesis', 'Corroboration'][idx]}
+                    <span className="hidden sm:block text-[10px] text-amber-500/80 font-mono leading-none tracking-wide">
+                      {['01 · Calibration', '02 · Worldviews', '03 · Convergence', '04 · Dossier'][idx]}
                     </span>
                     <span className="truncate text-xs font-serif font-medium block">
                       {s.label}

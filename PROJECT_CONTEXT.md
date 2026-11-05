@@ -1,7 +1,7 @@
 # Synodix: Project Context & Working Memory
 
-**Last Updated:** 2026-11-04 20:30:00
-**Version:** 2.56.0  
+**Last Updated:** 2026-11-05 06:15:00
+**Version:** 2.57.0  
 **Stack:** Python 3.12 (FastAPI, Swiss Ephemeris 2.10, Skyfield DE421) + TypeScript / React 19 / Vite / Tailwind CSS v4 / Framer Motion / Capacitor 8 (iOS & Android)  
 **Workspace:** `/Volumes/Study/Projects/Astrology` (symlinked as `/Volumes/Study/Astrology`)  
 **Git Remote:** `https://github.com/manvenpratap/Synodix.git`  
@@ -10,7 +10,17 @@
 
 ## 1. Current Status & Milestone
 
-- **Active Phase**: Mobile Navigation Bar Layout & Icon Collision Elimination (v2.56.0) (Completed)
+- **Active Phase**: Cultural Traditions Hero Pedestal & Journey Stepper UX Architecture (v2.57.0) (Completed)
+- **Cultural Traditions Hero Pedestal & Journey Stepper UX Architecture (v2.57.0)**:
+  - **Eliminated 5-Line Heading Collision**: Restructured `TraditionCharts.tsx` hero card from an awkward side-by-side flex layout (which forced the title to wrap after every word beside floating toolbars) into a structured 2-row agency layout. Title, icon, and breadcrumbs occupy the full-width top row, while presentation depth (`Complete View` / `Visual Chart` / `Detailed Tables`) and layout switcher (`Carousel Deck` / `Accordion Gallery` / `Inspector Matrix`) sit neatly on a dedicated control toolbar strip below with explicit `Depth:` and `Mode:` section labels.
+  - **Calibrated Proportional Typography**: Replaced the unbounded `clamp(1.4rem, 4.5vw, 3.75rem)` in `.hero-h1-clamped` with an agency-grade `clamp(1.25rem, 2.2vw, 2.25rem)` (20px–36px). The heading `"9 Astrological Traditions & Cosmologies [9-Sys]"` now renders on a single balanced line across all desktop resolutions.
+  - **Above-the-Fold Content Visibility**: Reduced hero container height from 306px+ down to ~180px–200px, immediately exposing the 3D carousel deck and interactive tradition instruments without requiring users to scroll.
+  - **Deduplicated Epistemic Stepper Labels**: Replaced repetitive journey stepper descriptions (`Traditions Traditions`, `Synthesis Synthesis`) with structured stage indicators (`01 · Calibration`, `02 · Worldviews`, `03 · Convergence`, `04 · Dossier`).
+  - **Semantic Iconography**: Updated Accordion Gallery view toggle from `Compass` to `Columns3` for clean semantic clarity alongside `Layers` and `Sliders`.
+  - **Automated Verification**:
+    - Zero critical errors across all screens.
+    - Playwright mobile and desktop viewport suites passing.
+    - Smoke tests passing in 0.69s (`./pipeline.sh test --smoke`).
 - **Mobile Navigation Bar Layout & Icon Collision Elimination (v2.56.0)**:
   - **Single-Unit Synthesis Icon**: Replaced `Layers` (which rendered 3 overlapping rhombuses that users perceived as overlapping/glitched icons) with `Sparkles` across `NAV_ITEMS`, the mobile bottom navigation bar, and the `SynthesisMatrix` card header.
   - **Zero-Overflow Mobile Typography**: Updated mobile navigation typography to `text-[10px] font-sans font-medium tracking-tight`, replacing wide monospace glyphs and `whitespace-nowrap` with `truncate block w-full text-center px-0.5`. Completely eliminated text clipping and adjacent button collisions across all mobile viewports (320px–488px).
