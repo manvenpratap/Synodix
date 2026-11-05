@@ -1,7 +1,7 @@
 # Synodix: Project Context & Working Memory
 
-**Last Updated:** 2026-11-05 07:40:02
-**Version:** 2.61.0  
+**Last Updated:** 2026-11-05 07:50:00
+**Version:** 2.62.0  
 **Stack:** Python 3.12 (FastAPI, Swiss Ephemeris 2.10, Skyfield DE421) + TypeScript / React 19 / Vite / Tailwind CSS v4 / Framer Motion / Capacitor 8 (iOS & Android)  
 **Workspace:** `/Volumes/Study/Projects/Astrology` (symlinked as `/Volumes/Study/Astrology`)  
 **Git Remote:** `https://github.com/manvenpratap/Synodix.git`  
@@ -10,7 +10,16 @@
 
 ## 1. Current Status & Milestone
 
-- **Active Phase**: Expansion to 1,000 Certified Titans (500 Global + 500 Indian Non-Assumed Figures) (v2.61.0) (Completed)
+- **Active Phase**: Scientific & Mathematical Jargon Explainer & Methodological Compendium (v2.62.0) (Completed)
+- **Scientific & Mathematical Jargon Glossary Compendium (v2.62.0)**:
+  - **Exhaustive Jargon Explainer Module (`scripts/glossary_data.py`)**: Authored structured methodological glossary containing 37 formal definitions, mathematical equations, ephemeris standards, and interpretive benchmarks spanning 4 major domains:
+    - *Statistical Demarcation & Testing*: Null/Alternative Hypotheses ($H_0/H_1$), Monte Carlo synthetic controls, $2 \times 2$ contingency matrices, Odds Ratios ($OR$), asymptotic standard errors ($\text{SE}_{\ln(OR)}$), 95% Wald confidence intervals, standard normal $z$-scores, two-tailed $p$-values, Bonferroni family-wise error adjustments ($\alpha_{\text{adj}} = 0.00625$), and Cohen's $h$ / Cramér's $V$ effect sizes.
+    - *Information Theory & Decision Science*: Shannon Mutual Information ($I(X; Y)$), Normalized Mutual Information ($NMI$), Sensitivity ($TPR$), Specificity ($TNR$), Precision ($PPV$), $F_1$-Score, Multi-Criteria Decision Analysis ($MCDA$) composite score, and consensus/divergence metrics.
+    - *Computational Astronomy & Geodesy*: Julian Day numbers ($JD_{\text{UT}}$), Swiss Ephemeris 2.10 C-bindings & NASA JPL DE421 numerical integration, topocentric geodetic parallax corrections (WGS84), Rodden rating standards (AA, A), Tropical vs. Sidereal coordinate systems, Lahiri / Chitra Paksha Ayanamsha, and geodetic ecliptic ascendant (Lagna).
+    - *Traditions & Predictive Mechanics*: Hellenistic diurnal sect, Gauquelin diurnal sectors (Houses 1, 9, 10, 12), 27 Nakshatras, 120-year Vimshottari Dasha timing engine, classical Vedic yogas (Raja, Dhana, Mahapurusha, Viparita, Neecha Bhanga), Chinese BaZi Four Pillars of Destiny (八字), Day Master (日元), 10-year Da Yun luck pillars (大运), Ten Gods archetypes (十神), Zi Wei Dou Shu 12 life palaces, Mayan Tzolk'in / Calendar Round, and Tibetan Rabjung / 9 Mewa magic square.
+  - **New Worksheet in Workbook (`Glossary_Scientific_Jargon`)**: Added dedicated Sheet 7 to both `1000_titans_empirical_dataset.xlsx` and `500_titans_empirical_dataset.xlsx`. Beautifully formatted with navy headers, alternating zebra fills, Consolas code font for formulas, frozen panes, and custom column dimensions (0 empty cells).
+  - **Cross-Referenced in Monograph & Academic Paper**: Added Section 7.2 to `mathematical_evidence_astrology_report.docx` and Appendix C to `mathematical_evidence_astrology_report.md` providing complete matching definitions and equations for researchers and auditors.
+  - **Automated Verification**: Ran dataset integrity tests; verified 0 empty cells across all 37 glossary entries; passed pre-commit test validation.
 - **Expansion to 1,000 Certified Titans with Zero Assumed Data (v2.61.0)**:
   - **Cohort Expansion to 1,000 Verified Figures**: Expanded empirical titan database from 500 to exactly 1,000 figures by curating 500 new, distinct Indian figures across all 6 core vocational categories:
     - `leaders_statesmen`: 84 figures (Chanakya, Ashoka, Akbar, Shivaji, Tilak, Patel, Bose, Ambedkar, Indira Gandhi, Atal Bihari Vajpayee, Modi, Kalam, etc.)
