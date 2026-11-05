@@ -1,7 +1,7 @@
 # Synodix: Project Context & Working Memory
 
-**Last Updated:** 2026-11-05 09:16:14
-**Version:** 2.65.0  
+**Last Updated:** 2026-11-05 09:51:57
+**Version:** 2.66.0  
 **Stack:** Python 3.12 (FastAPI, Swiss Ephemeris 2.10, Skyfield DE421) + TypeScript / React 19 / Vite / Tailwind CSS v4 / Framer Motion / Capacitor 8 (iOS & Android)  
 **Workspace:** `/Volumes/Study/Projects/Astrology` (symlinked as `/Volumes/Study/Astrology`)  
 **Git Remote:** `https://github.com/manvenpratap/Synodix.git`  
@@ -10,7 +10,15 @@
 
 ## 1. Current Status & Milestone
 
-- **Active Phase**: Sleek Sidebar Navigation Redesign & Zero-Truncation Architecture (v2.65.0) (Completed)
+- **Active Phase**: Mobile Essential UI & Progressive Disclosure Architecture (v2.66.0) (Completed)
+- **Mobile Essential UI & Progressive Disclosure Architecture (v2.66.0)**:
+  - **Super Clean Mobile Viewport**: Streamlined the mobile interface across all 4 primary stages (`Workbench`, `Traditions`, `Synthesis`, `Reading/Dossier`) to feature essential visual instruments and primary inputs on first paint without cognitive overload.
+  - **Screen 1 (Workbench & Vault)**: Compacted input fields to essential items (Name, Date, Time side-by-side, City with GPS auto-geocoding). Secondary parameters (Gender/Cycle direction, Birth time accuracy, Country, high-precision decimal Latitude & Longitude) are cleanly tucked behind an accessible progressive disclosure accordion (`[⚙️ Advanced Coordinates & Precision (Optional) v]`).
+  - **Screen 2 (Cultural Traditions)**: Centered the Live Astrometric Visual Instruments (Kundali, Wheel, Element Pentagram, Palaces) and 3 Key Placements front-and-center upon expansion. Lineage treatises and philosophical motto quotes are neatly folded into a clean tap-to-expand disclosure (`[Classical Lineage & Philosophy Context v]`).
+  - **Screen 3 (Synthesis Matrix)**: Domain Consensus Radar Matrix is prominently displayed on mobile first paint with a sleek "Consensus Takeaways" summary card (Synchronized vs Divergent counts). The dense 9-domain comparative breakdown table and filter buttons are progressively disclosed via `[View All 9 Domain Comparisons v]`.
+  - **Screen 4 (Birth Chart Reading & Dossier)**: Elevated the Archetype Spotlight, Circular Harmony Gauge, and core executive narrative takeaway to the immediate mobile view. Secondary dense scientific dossiers (Astronomical Telemetry, 5 Foundational Planetary Anchors & Analytical Triads, 9-Domain Matrix, Quad-System Timing Periods, and Dual-Engine Verification Proofs) are organized behind clean, non-intrusive collapsible section triggers.
+  - **Zero Desktop Regressions**: All desktop views (`sm:`, `md:`, `lg:`) remain 100% full-fledged, expanded, and byte-for-byte identical to previous releases. Verified with Playwright desktop (1280x850) and mobile (390x844).
+  - **Automated Verification**: Verified 0 critical console errors; verified `test_04_mobile_viewport.py`, `test_09_dossier_inferences.py`, and full test suite; verified clean build in 615ms.
 - **Sleek Sidebar Navigation Redesign & Zero-Truncation Architecture (v2.65.0)**:
   - **Eliminated Severe Text Truncation**: Redesigned all 8 navigation buttons in both Chapter I (`Astrometric Journey`) and Chapter II (`Comparative & Empirical Science`) so that full labels ("Workbench & Vault", "Cultural Traditions", "Synthesis Matrix", "Birth Chart Reading", "Relational Synastry", "Astronomical Audit", "Mathematical Evidence", "Feature Guide") render without truncation.
   - **Concise Contextual Subtitles & Compact Badges**: Replaced bulky wide badges (such as 13-character `Corroboration` and 12-character `9 Traditions`) with compact tags (`01`–`04`, `9-Sys`, `Consensus`, `Dossier`, `Dual`, `DE421`, `1,000`, `Guide`) aligned with the title row, giving descriptions full-width breathing room.

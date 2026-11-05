@@ -23,7 +23,9 @@ import {
   ArrowLeft,
   ArrowRight,
   RotateCcw,
-  ChevronDown
+  ChevronDown,
+  Sparkles,
+  Sliders
 } from 'lucide-react';
 
 interface Props {
@@ -38,6 +40,12 @@ export const ReadingView: React.FC<Props> = ({ data, subjectName, onNavigate }) 
   const [expandedDomainId, setExpandedDomainId] = useState<string | null>(null);
   const [copied, setCopied] = useState<boolean>(false);
   const [showTechnicalSolar, setShowTechnicalSolar] = useState<boolean>(false);
+  const [showFullNarrative, setShowFullNarrative] = useState<boolean>(false);
+  const [showMobileFoundations, setShowMobileFoundations] = useState<boolean>(false);
+  const [showMobileSection3, setShowMobileSection3] = useState<boolean>(false);
+  const [showMobileSection4, setShowMobileSection4] = useState<boolean>(false);
+  const [showMobileSection5, setShowMobileSection5] = useState<boolean>(false);
+  const [showMobileSection6, setShowMobileSection6] = useState<boolean>(false);
 
   const inferences = getAstrologicalInferences(data, subjectName);
   const markdownText = data.synthesis.final_reading_markdown;
@@ -474,171 +482,214 @@ export const ReadingView: React.FC<Props> = ({ data, subjectName, onNavigate }) 
                 </div>
               </div>
 
-              {/* Narrative Summary Paragraphs */}
+              {/* Narrative Summary Paragraphs (Essential Executive Takeaway on Mobile) */}
               <div className="mt-3.5 space-y-2.5 text-xs sm:text-[13px] text-stone-300 leading-relaxed font-sans">
-                {inferences.summary_narrative.split('\n\n').map((paragraph, idx) => (
-                  <p key={idx} className="text-stone-200">
-                    {paragraph}
-                  </p>
-                ))}
+                {(() => {
+                  const paragraphs = inferences.summary_narrative.split('\n\n');
+                  return (
+                    <>
+                      <p className="text-stone-200">{paragraphs[0]}</p>
+                      {paragraphs.length > 1 && (
+                        <>
+                          <div className={`${showFullNarrative ? 'block' : 'hidden'} sm:block space-y-2.5 pt-1`}>
+                            {paragraphs.slice(1).map((paragraph, idx) => (
+                              <p key={idx} className="text-stone-200">
+                                {paragraph}
+                              </p>
+                            ))}
+                          </div>
+                          <button
+                            type="button"
+                            onClick={() => setShowFullNarrative(!showFullNarrative)}
+                            className="sm:hidden text-xs text-amber-400 hover:text-amber-300 font-mono flex items-center gap-1 py-1 cursor-pointer"
+                            aria-expanded={showFullNarrative}
+                          >
+                            <span>{showFullNarrative ? 'Show Less' : 'Read Full Synthesis Narrative'}</span>
+                            <ChevronDown className={`w-3.5 h-3.5 text-amber-400 transition-transform ${showFullNarrative ? 'rotate-180' : ''}`} />
+                          </button>
+                        </>
+                      )}
+                    </>
+                  );
+                })()}
               </div>
             </div>
 
-            {/* Five Civilizational Foundations */}
-            <div className="space-y-2">
-              <span className="text-xs font-sans font-medium text-stone-400 block">
-                Foundational Planetary Anchors Across Traditions
-              </span>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-2.5 text-xs font-sans">
-                {/* Vedic */}
-                <div className="bg-stone-950 p-3 rounded-lg border border-stone-800 space-y-1.5 flex flex-col justify-between">
-                  <div>
-                    <div className="flex items-center justify-between mb-1">
-                      <span className="text-xs font-semibold text-amber-400">Vedic Jyotisha</span>
-                      <span className="text-xs font-mono px-1.5 py-0.5 rounded bg-amber-950/60 text-amber-300 border border-amber-800/40">D1 / D9</span>
-                    </div>
-                    <p className="text-xs text-stone-300 font-sans leading-relaxed">
-                      {inferences.core_archetype.civilizational_pillars.vedic_core}
-                    </p>
-                  </div>
+            {/* Mobile Progressive Disclosure for Foundations & Triads */}
+            <div className="md:hidden pt-1">
+              <button
+                type="button"
+                onClick={() => setShowMobileFoundations(!showMobileFoundations)}
+                className="w-full min-h-[44px] px-3.5 py-2.5 rounded-xl bg-stone-950 border border-stone-800 text-xs font-sans text-stone-300 flex items-center justify-between transition-colors hover:border-amber-600/50 cursor-pointer"
+                aria-expanded={showMobileFoundations}
+              >
+                <div className="flex items-center gap-2">
+                  <Sparkles className="w-3.5 h-3.5 text-amber-400" />
+                  <span className="font-medium text-stone-200">
+                    {showMobileFoundations ? 'Hide 5 Anchors & Analytical Triads' : '5 Civilizational Anchors & Analytical Triads'}
+                  </span>
                 </div>
-
-                {/* Western */}
-                <div className="bg-stone-950 p-3 rounded-lg border border-stone-800 space-y-1.5 flex flex-col justify-between">
-                  <div>
-                    <div className="flex items-center justify-between mb-1">
-                      <span className="text-xs font-semibold text-blue-400">Hellenistic Western</span>
-                      <span className="text-xs font-sans px-1.5 py-0.5 rounded bg-blue-950/60 text-blue-300 border border-blue-800/40">Tropical</span>
-                    </div>
-                    <p className="text-xs text-stone-300 font-sans leading-relaxed">
-                      {inferences.core_archetype.civilizational_pillars.western_core}
-                    </p>
-                  </div>
-                </div>
-
-                {/* BaZi */}
-                <div className="bg-stone-950 p-3 rounded-lg border border-stone-800 space-y-1.5 flex flex-col justify-between">
-                  <div>
-                    <div className="flex items-center justify-between mb-1">
-                      <span className="text-xs font-semibold text-emerald-400">BaZi Four Pillars</span>
-                      <span className="text-xs font-sans px-1.5 py-0.5 rounded bg-emerald-950/60 text-emerald-300 border border-emerald-800/40">Wu Xing</span>
-                    </div>
-                    <p className="text-xs text-stone-300 font-sans leading-relaxed">
-                      {inferences.core_archetype.civilizational_pillars.bazi_core}
-                    </p>
-                  </div>
-                </div>
-
-                {/* Zi Wei */}
-                <div className="bg-stone-950 p-3 rounded-lg border border-stone-800 space-y-1.5 flex flex-col justify-between">
-                  <div>
-                    <div className="flex items-center justify-between mb-1">
-                      <span className="text-xs font-semibold text-amber-400">Zi Wei Dou Shu</span>
-                      <span className="text-xs font-sans px-1.5 py-0.5 rounded bg-stone-900 text-amber-300 border border-amber-800/60 font-serif">Polar Stars</span>
-                    </div>
-                    <p className="text-xs text-stone-300 font-sans leading-relaxed">
-                      {inferences.core_archetype.civilizational_pillars.ziwei_core}
-                    </p>
-                  </div>
-                </div>
-
-                {/* Persian Almuten */}
-                <div className="bg-stone-950 p-3 rounded-lg border border-stone-800 space-y-1.5 flex flex-col justify-between sm:col-span-2 lg:col-span-1">
-                  <div>
-                    <div className="flex items-center justify-between mb-1">
-                      <span className="text-xs font-semibold text-teal-400">Persian Almuten</span>
-                      <span className="text-xs font-sans px-1.5 py-0.5 rounded bg-teal-950/60 text-teal-300 border border-teal-800/40">Ibn Ezra</span>
-                    </div>
-                    <p className="text-xs text-stone-300 font-sans leading-relaxed">
-                      {inferences.core_archetype.civilizational_pillars.persian_almuten}
-                    </p>
-                  </div>
-                </div>
-              </div>
+                <ChevronDown className={`w-3.5 h-3.5 text-amber-400 transition-transform duration-200 ${showMobileFoundations ? 'rotate-180' : ''}`} />
+              </button>
             </div>
 
-            {/* 3-Column Analytical Triad (gpt-taste Bento Grid) */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-3.5 pt-1 bento-dense">
-              {/* Column 1: Cognitive Wiring */}
-              <div className="bento-card bg-stone-950 p-4 rounded-xl border border-stone-800 space-y-3 flex flex-col shadow-xs">
-                <div className="flex items-center gap-2 border-b border-stone-800 pb-2">
-                  <Cpu className="w-4 h-4 text-amber-400 shrink-0" />
-                  <h4 className="text-xs font-semibold text-stone-100 font-sans">
-                    Cognitive Architecture
-                  </h4>
-                </div>
-                <div className="space-y-2 text-xs text-stone-300 flex-1 font-sans">
-                  <div>
-                    <span className="text-xs font-medium text-stone-400 block">Mental Style</span>
-                    <p className="text-stone-200 mt-0.5">{inferences.cognitive_inferences.mental_style}</p>
+            <div className={`${showMobileFoundations ? 'block' : 'hidden'} md:block space-y-4`}>
+              {/* Five Civilizational Foundations */}
+              <div className="space-y-2">
+                <span className="text-xs font-sans font-medium text-stone-400 block">
+                  Foundational Planetary Anchors Across Traditions
+                </span>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-2.5 text-xs font-sans">
+                  {/* Vedic */}
+                  <div className="bg-stone-950 p-3 rounded-lg border border-stone-800 space-y-1.5 flex flex-col justify-between">
+                    <div>
+                      <div className="flex items-center justify-between mb-1">
+                        <span className="text-xs font-semibold text-amber-400">Vedic Jyotisha</span>
+                        <span className="text-xs font-mono px-1.5 py-0.5 rounded bg-amber-950/60 text-amber-300 border border-amber-800/40">D1 / D9</span>
+                      </div>
+                      <p className="text-xs text-stone-300 font-sans leading-relaxed">
+                        {inferences.core_archetype.civilizational_pillars.vedic_core}
+                      </p>
+                    </div>
                   </div>
-                  <div>
-                    <span className="text-xs font-medium text-stone-400 block">Intellectual Strengths</span>
-                    <ul className="list-disc list-inside mt-1 space-y-1 text-stone-300 text-xs">
-                      {inferences.cognitive_inferences.intellectual_strengths.map((str, idx) => (
-                        <li key={idx} className="leading-snug">{str}</li>
-                      ))}
-                    </ul>
+
+                  {/* Western */}
+                  <div className="bg-stone-950 p-3 rounded-lg border border-stone-800 space-y-1.5 flex flex-col justify-between">
+                    <div>
+                      <div className="flex items-center justify-between mb-1">
+                        <span className="text-xs font-semibold text-blue-400">Hellenistic Western</span>
+                        <span className="text-xs font-sans px-1.5 py-0.5 rounded bg-blue-950/60 text-blue-300 border border-blue-800/40">Tropical</span>
+                      </div>
+                      <p className="text-xs text-stone-300 font-sans leading-relaxed">
+                        {inferences.core_archetype.civilizational_pillars.western_core}
+                      </p>
+                    </div>
                   </div>
-                  <div className="pt-1 border-t border-stone-800">
-                    <span className="text-xs font-medium text-stone-400 block">Rhetorical Style</span>
-                    <p className="text-stone-300 text-xs mt-0.5">{inferences.cognitive_inferences.communication_vector}</p>
+
+                  {/* BaZi */}
+                  <div className="bg-stone-950 p-3 rounded-lg border border-stone-800 space-y-1.5 flex flex-col justify-between">
+                    <div>
+                      <div className="flex items-center justify-between mb-1">
+                        <span className="text-xs font-semibold text-emerald-400">BaZi Four Pillars</span>
+                        <span className="text-xs font-sans px-1.5 py-0.5 rounded bg-emerald-950/60 text-emerald-300 border border-emerald-800/40">Wu Xing</span>
+                      </div>
+                      <p className="text-xs text-stone-300 font-sans leading-relaxed">
+                        {inferences.core_archetype.civilizational_pillars.bazi_core}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Zi Wei */}
+                  <div className="bg-stone-950 p-3 rounded-lg border border-stone-800 space-y-1.5 flex flex-col justify-between">
+                    <div>
+                      <div className="flex items-center justify-between mb-1">
+                        <span className="text-xs font-semibold text-amber-400">Zi Wei Dou Shu</span>
+                        <span className="text-xs font-sans px-1.5 py-0.5 rounded bg-stone-900 text-amber-300 border border-amber-800/60 font-serif">Polar Stars</span>
+                      </div>
+                      <p className="text-xs text-stone-300 font-sans leading-relaxed">
+                        {inferences.core_archetype.civilizational_pillars.ziwei_core}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Persian Almuten */}
+                  <div className="bg-stone-950 p-3 rounded-lg border border-stone-800 space-y-1.5 flex flex-col justify-between sm:col-span-2 lg:col-span-1">
+                    <div>
+                      <div className="flex items-center justify-between mb-1">
+                        <span className="text-xs font-semibold text-teal-400">Persian Almuten</span>
+                        <span className="text-xs font-sans px-1.5 py-0.5 rounded bg-teal-950/60 text-teal-300 border border-teal-800/40">Ibn Ezra</span>
+                      </div>
+                      <p className="text-xs text-stone-300 font-sans leading-relaxed">
+                        {inferences.core_archetype.civilizational_pillars.persian_almuten}
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
 
-              {/* Column 2: Vocation & Executive Ambition */}
-              <div className="bento-card bg-stone-950 p-4 rounded-xl border border-stone-800 space-y-3 flex flex-col shadow-xs">
-                <div className="flex items-center gap-2 border-b border-stone-800 pb-2">
-                  <Briefcase className="w-4 h-4 text-amber-400 shrink-0" />
-                  <h4 className="text-xs font-semibold text-stone-100 font-sans">
-                    Vocation & Executive Drive
-                  </h4>
+              {/* 3-Column Analytical Triad (gpt-taste Bento Grid) */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-3.5 pt-1 bento-dense">
+                {/* Column 1: Cognitive Wiring */}
+                <div className="bento-card bg-stone-950 p-4 rounded-xl border border-stone-800 space-y-3 flex flex-col shadow-xs">
+                  <div className="flex items-center gap-2 border-b border-stone-800 pb-2">
+                    <Cpu className="w-4 h-4 text-amber-400 shrink-0" />
+                    <h4 className="text-xs font-semibold text-stone-100 font-sans">
+                      Cognitive Architecture
+                    </h4>
+                  </div>
+                  <div className="space-y-2 text-xs text-stone-300 flex-1 font-sans">
+                    <div>
+                      <span className="text-xs font-medium text-stone-400 block">Mental Style</span>
+                      <p className="text-stone-200 mt-0.5">{inferences.cognitive_inferences.mental_style}</p>
+                    </div>
+                    <div>
+                      <span className="text-xs font-medium text-stone-400 block">Intellectual Strengths</span>
+                      <ul className="list-disc list-inside mt-1 space-y-1 text-stone-300 text-xs">
+                        {inferences.cognitive_inferences.intellectual_strengths.map((str, idx) => (
+                          <li key={idx} className="leading-snug">{str}</li>
+                        ))}
+                      </ul>
+                    </div>
+                    <div className="pt-1 border-t border-stone-800">
+                      <span className="text-xs font-medium text-stone-400 block">Rhetorical Style</span>
+                      <p className="text-stone-300 text-xs mt-0.5">{inferences.cognitive_inferences.communication_vector}</p>
+                    </div>
+                  </div>
                 </div>
-                <div className="space-y-2 text-xs text-stone-300 flex-1 font-sans">
-                  <div>
-                    <span className="text-xs font-medium text-stone-400 block">Career Vector</span>
-                    <p className="text-stone-200 mt-0.5">{inferences.vocational_inferences.career_vector}</p>
-                  </div>
-                  <div>
-                    <span className="text-xs font-medium text-stone-400 block">Leadership Posture</span>
-                    <p className="text-stone-300 mt-0.5">{inferences.vocational_inferences.leadership_style}</p>
-                  </div>
-                  <div className="pt-1 border-t border-stone-800">
-                    <span className="text-xs font-medium text-stone-400 block">Primary Ambitions</span>
-                    <ul className="list-disc list-inside mt-1 space-y-1 text-stone-300 text-xs">
-                      {inferences.vocational_inferences.key_drives.map((drv, idx) => (
-                        <li key={idx} className="leading-snug">{drv}</li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-              </div>
 
-              {/* Column 3: Relational Dynamics & Karmic Evolution */}
-              <div className="bento-card bg-stone-950 p-4 rounded-xl border border-stone-800 space-y-3 flex flex-col shadow-xs">
-                <div className="flex items-center gap-2 border-b border-stone-800 pb-2">
-                  <Heart className="w-4 h-4 text-rose-400 shrink-0" />
-                  <h4 className="text-xs font-semibold text-stone-100 font-sans">
-                    Relational & Karmic Blueprint
-                  </h4>
+                {/* Column 2: Vocation & Executive Ambition */}
+                <div className="bento-card bg-stone-950 p-4 rounded-xl border border-stone-800 space-y-3 flex flex-col shadow-xs">
+                  <div className="flex items-center gap-2 border-b border-stone-800 pb-2">
+                    <Briefcase className="w-4 h-4 text-amber-400 shrink-0" />
+                    <h4 className="text-xs font-semibold text-stone-100 font-sans">
+                      Vocation & Executive Drive
+                    </h4>
+                  </div>
+                  <div className="space-y-2 text-xs text-stone-300 flex-1 font-sans">
+                    <div>
+                      <span className="text-xs font-medium text-stone-400 block">Career Vector</span>
+                      <p className="text-stone-200 mt-0.5">{inferences.vocational_inferences.career_vector}</p>
+                    </div>
+                    <div>
+                      <span className="text-xs font-medium text-stone-400 block">Leadership Posture</span>
+                      <p className="text-stone-300 mt-0.5">{inferences.vocational_inferences.leadership_style}</p>
+                    </div>
+                    <div className="pt-1 border-t border-stone-800">
+                      <span className="text-xs font-medium text-stone-400 block">Primary Ambitions</span>
+                      <ul className="list-disc list-inside mt-1 space-y-1 text-stone-300 text-xs">
+                        {inferences.vocational_inferences.key_drives.map((drv, idx) => (
+                          <li key={idx} className="leading-snug">{drv}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
                 </div>
-                <div className="space-y-2 text-xs text-stone-300 flex-1 font-sans">
-                  <div>
-                    <span className="text-xs font-medium text-stone-400 block">Emotional Temperament</span>
-                    <p className="text-stone-200 mt-0.5">{inferences.relational_inferences.emotional_temperament}</p>
+
+                {/* Column 3: Relational Dynamics & Karmic Evolution */}
+                <div className="bento-card bg-stone-950 p-4 rounded-xl border border-stone-800 space-y-3 flex flex-col shadow-xs">
+                  <div className="flex items-center gap-2 border-b border-stone-800 pb-2">
+                    <Heart className="w-4 h-4 text-rose-400 shrink-0" />
+                    <h4 className="text-xs font-semibold text-stone-100 font-sans">
+                      Relational & Karmic Blueprint
+                    </h4>
                   </div>
-                  <div>
-                    <span className="text-xs font-medium text-stone-400 block">Relational Dynamics</span>
-                    <p className="text-stone-300 mt-0.5">{inferences.relational_inferences.relational_dynamics}</p>
-                  </div>
-                  <div className="pt-1 border-t border-stone-800">
-                    <span className="text-xs font-medium text-stone-400 block">Growth Edges & Blind Spots</span>
-                    <ul className="list-disc list-inside mt-1 space-y-1 text-amber-300/90 text-xs">
-                      {inferences.karmic_inferences.growth_edges.map((edge, idx) => (
-                        <li key={idx} className="leading-snug">{edge}</li>
-                      ))}
-                    </ul>
+                  <div className="space-y-2 text-xs text-stone-300 flex-1 font-sans">
+                    <div>
+                      <span className="text-xs font-medium text-stone-400 block">Emotional Temperament</span>
+                      <p className="text-stone-200 mt-0.5">{inferences.relational_inferences.emotional_temperament}</p>
+                    </div>
+                    <div>
+                      <span className="text-xs font-medium text-stone-400 block">Relational Dynamics</span>
+                      <p className="text-stone-300 mt-0.5">{inferences.relational_inferences.relational_dynamics}</p>
+                    </div>
+                    <div className="pt-1 border-t border-stone-800">
+                      <span className="text-xs font-medium text-stone-400 block">Growth Edges & Blind Spots</span>
+                      <ul className="list-disc list-inside mt-1 space-y-1 text-amber-300/90 text-xs">
+                        {inferences.karmic_inferences.growth_edges.map((edge, idx) => (
+                          <li key={idx} className="leading-snug">{edge}</li>
+                        ))}
+                      </ul>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -678,7 +729,27 @@ export const ReadingView: React.FC<Props> = ({ data, subjectName, onNavigate }) 
                 <ExplainerTrigger id="three_cluster_consensus" label="Consensus Protocol" variant="badge" />
                 <ExplainerTrigger id="honest_divergence_rate" label="Divergence Metric" variant="badge" />
               </div>
+            </div>
 
+            {/* Mobile Progressive Disclosure for Section 3 Domains */}
+            <div className="md:hidden">
+              <button
+                type="button"
+                onClick={() => setShowMobileSection3(!showMobileSection3)}
+                className="w-full min-h-[44px] px-3.5 py-2.5 rounded-xl bg-stone-950 border border-stone-800 text-xs font-sans text-stone-300 flex items-center justify-between transition-colors hover:border-amber-600/50 cursor-pointer"
+                aria-expanded={showMobileSection3}
+              >
+                <div className="flex items-center gap-2">
+                  <Sliders className="w-3.5 h-3.5 text-amber-400" />
+                  <span className="font-medium text-stone-200">
+                    {showMobileSection3 ? 'Hide Life Domains Matrix' : `View 9 Life Domains Breakdown (${filteredDomains.length})`}
+                  </span>
+                </div>
+                <ChevronDown className={`w-3.5 h-3.5 text-amber-400 transition-transform duration-200 ${showMobileSection3 ? 'rotate-180' : ''}`} />
+              </button>
+            </div>
+
+            <div className={`${showMobileSection3 ? 'block' : 'hidden'} md:block space-y-4`}>
               {/* Filter Pills */}
               <div className="flex items-center gap-1.5 font-sans text-xs flex-wrap">
                 <span className="text-xs text-stone-400 font-medium mr-1">Filter:</span>
@@ -716,10 +787,9 @@ export const ReadingView: React.FC<Props> = ({ data, subjectName, onNavigate }) 
                   Divergent Only ({synthesis.divergence_metrics.divergent_domains})
                 </button>
               </div>
-            </div>
 
-            {/* Domains Grid / Accordion */}
-            <div className="space-y-3">
+              {/* Domains Grid / Accordion */}
+              <div className="space-y-3">
               {filteredDomains.map((dom) => {
                 const isExpanded = expandedDomainId === dom.domain_id;
                 const isDivergent = dom.grade === 'DIVERGENT';
@@ -887,6 +957,7 @@ export const ReadingView: React.FC<Props> = ({ data, subjectName, onNavigate }) 
                 );
               })}
             </div>
+            </div>
           </section>
 
           {/* Section 4: Chronological Timing Synchronization */}
@@ -903,88 +974,108 @@ export const ReadingView: React.FC<Props> = ({ data, subjectName, onNavigate }) 
               </span>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 text-xs font-sans">
-              <div className="bg-stone-950 p-3 rounded border border-stone-800">
-                <span className="text-stone-400 text-xs block font-medium">Vimshottari Dasha</span>
-                <span className="text-sm font-bold text-amber-300 block mt-1 font-sans">
-                  {chronology.jyotisha_vimshottari.active_mahadasha || 'Active Period'}
-                  {chronology.jyotisha_vimshottari.active_antardasha && (
-                    <span className="text-amber-300/80 font-normal text-xs"> / {chronology.jyotisha_vimshottari.active_antardasha}</span>
-                  )}
-                </span>
-                <span className="text-xs text-stone-400 block mt-0.5 font-sans">
-                  Span: <span className="font-mono">{chronology.jyotisha_vimshottari.span || 'Current'}</span>
-                </span>
-                <span className="text-xs text-stone-400 block mt-1 font-sans">
-                  Focus: {chronology.jyotisha_vimshottari.activated_domain}
-                </span>
-              </div>
-
-              <div className="bg-stone-950 p-3 rounded border border-stone-800">
-                <span className="text-stone-400 text-xs block font-medium">BaZi Da Yun Pillar</span>
-                <span className="text-sm font-bold text-amber-300 block mt-1 font-sans">
-                  {chronology.bazi_da_yun.active_pillar || 'Pillar'}
-                </span>
-                <span className="text-xs text-stone-400 block mt-0.5 font-sans">
-                  Ten God: {chronology.bazi_da_yun.ten_god || 'Direct Officer'}
-                </span>
-                {chronology.bazi_da_yun.current_liu_nian ? (
-                  <span className="text-xs text-emerald-400/90 block mt-1 font-mono">
-                    Annual: {chronology.bazi_da_yun.current_liu_nian.year} {chronology.bazi_da_yun.current_liu_nian.pillar} ({chronology.bazi_da_yun.current_liu_nian.ten_god})
+            {/* Mobile Progressive Disclosure for Section 4 Timing */}
+            <div className="md:hidden">
+              <button
+                type="button"
+                onClick={() => setShowMobileSection4(!showMobileSection4)}
+                className="w-full min-h-[44px] px-3.5 py-2.5 rounded-xl bg-stone-950 border border-stone-800 text-xs font-sans text-stone-300 flex items-center justify-between transition-colors hover:border-amber-600/50 cursor-pointer"
+                aria-expanded={showMobileSection4}
+              >
+                <div className="flex items-center gap-2">
+                  <Clock className="w-3.5 h-3.5 text-amber-400" />
+                  <span className="font-medium text-stone-200">
+                    {showMobileSection4 ? 'Hide Chronological Timing Periods' : 'View Quad-System Chronological Periods'}
                   </span>
-                ) : (
-                  <span className="text-xs text-stone-400 block mt-1 font-sans">
-                    Start Age: {chronology.bazi_da_yun.start_age || 'Active'}
-                  </span>
-                )}
-              </div>
-
-              <div className="bg-stone-950 p-3 rounded border border-stone-800">
-                <span className="text-stone-400 text-xs block font-medium">Hellenistic Profection</span>
-                <span className="text-sm font-bold text-amber-300 block mt-1 font-sans">
-                  House {chronology.western_profection.activated_house}
-                </span>
-                <span className="text-xs text-stone-400 block mt-0.5 font-sans">
-                  Lord of Year: {chronology.western_profection.lord_of_year}
-                </span>
-                {chronology.western_profection.active_transits_summary && chronology.western_profection.active_transits_summary.length > 0 ? (
-                  <span className="text-xs text-blue-300/80 block mt-1 truncate font-sans" title={chronology.western_profection.active_transits_summary[0]}>
-                    Transit: <span className="font-mono">{chronology.western_profection.active_transits_summary[0]}</span>
-                  </span>
-                ) : (
-                  <span className="text-xs text-stone-400 block mt-1 font-sans">
-                    Domain: {chronology.western_profection.activated_domain}
-                  </span>
-                )}
-              </div>
-
-              <div className="bg-stone-950 p-3 rounded border border-stone-800">
-                <span className="text-stone-400 text-xs block font-medium">
-                  {chronology.persian_firdaria ? "Zi Wei & Firdaria" : "Zi Wei Da Xian (Decade)"}
-                </span>
-                <span className="text-sm font-bold text-amber-300 block mt-1 font-sans">
-                  {chronology.ziwei_da_xian.active_palace || 'Palace'}
-                </span>
-                <span className="text-xs text-stone-400 block mt-0.5 font-sans">
-                  Decadal Span: <span className="font-mono">{chronology.ziwei_da_xian.age_span || 'Active'}</span>
-                </span>
-                {chronology.persian_firdaria ? (
-                  <span className="text-xs text-amber-300/90 block mt-1 font-sans">
-                    Firdaria: <span className="font-mono">{chronology.persian_firdaria.active_ruler} ({chronology.persian_firdaria.years_span})</span>
-                  </span>
-                ) : (
-                  <span className="text-xs text-stone-400 block mt-1 font-sans">
-                    10-Year Major Palace Shift
-                  </span>
-                )}
-              </div>
+                </div>
+                <ChevronDown className={`w-3.5 h-3.5 text-amber-400 transition-transform duration-200 ${showMobileSection4 ? 'rotate-180' : ''}`} />
+              </button>
             </div>
 
-            <div className="p-3 rounded bg-stone-950 border border-stone-800 text-xs text-stone-300 font-sans leading-relaxed">
-              <strong className="text-amber-300 font-sans text-xs font-semibold block mb-1">
-                Convergence Assessment:
-              </strong>
-              {chronology.convergence_status}
+            <div className={`${showMobileSection4 ? 'block' : 'hidden'} md:block space-y-3`}>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 text-xs font-sans">
+                <div className="bg-stone-950 p-3 rounded border border-stone-800">
+                  <span className="text-stone-400 text-xs block font-medium">Vimshottari Dasha</span>
+                  <span className="text-sm font-bold text-amber-300 block mt-1 font-sans">
+                    {chronology.jyotisha_vimshottari.active_mahadasha || 'Active Period'}
+                    {chronology.jyotisha_vimshottari.active_antardasha && (
+                      <span className="text-amber-300/80 font-normal text-xs"> / {chronology.jyotisha_vimshottari.active_antardasha}</span>
+                    )}
+                  </span>
+                  <span className="text-xs text-stone-400 block mt-0.5 font-sans">
+                    Span: <span className="font-mono">{chronology.jyotisha_vimshottari.span || 'Current'}</span>
+                  </span>
+                  <span className="text-xs text-stone-400 block mt-1 font-sans">
+                    Focus: {chronology.jyotisha_vimshottari.activated_domain}
+                  </span>
+                </div>
+
+                <div className="bg-stone-950 p-3 rounded border border-stone-800">
+                  <span className="text-stone-400 text-xs block font-medium">BaZi Da Yun Pillar</span>
+                  <span className="text-sm font-bold text-amber-300 block mt-1 font-sans">
+                    {chronology.bazi_da_yun.active_pillar || 'Pillar'}
+                  </span>
+                  <span className="text-xs text-stone-400 block mt-0.5 font-sans">
+                    Ten God: {chronology.bazi_da_yun.ten_god || 'Direct Officer'}
+                  </span>
+                  {chronology.bazi_da_yun.current_liu_nian ? (
+                    <span className="text-xs text-emerald-400/90 block mt-1 font-mono">
+                      Annual: {chronology.bazi_da_yun.current_liu_nian.year} {chronology.bazi_da_yun.current_liu_nian.pillar} ({chronology.bazi_da_yun.current_liu_nian.ten_god})
+                    </span>
+                  ) : (
+                    <span className="text-xs text-stone-400 block mt-1 font-sans">
+                      Start Age: {chronology.bazi_da_yun.start_age || 'Active'}
+                    </span>
+                  )}
+                </div>
+
+                <div className="bg-stone-950 p-3 rounded border border-stone-800">
+                  <span className="text-stone-400 text-xs block font-medium">Hellenistic Profection</span>
+                  <span className="text-sm font-bold text-amber-300 block mt-1 font-sans">
+                    House {chronology.western_profection.activated_house}
+                  </span>
+                  <span className="text-xs text-stone-400 block mt-0.5 font-sans">
+                    Lord of Year: {chronology.western_profection.lord_of_year}
+                  </span>
+                  {chronology.western_profection.active_transits_summary && chronology.western_profection.active_transits_summary.length > 0 ? (
+                    <span className="text-xs text-blue-300/80 block mt-1 truncate font-sans" title={chronology.western_profection.active_transits_summary[0]}>
+                      Transit: <span className="font-mono">{chronology.western_profection.active_transits_summary[0]}</span>
+                    </span>
+                  ) : (
+                    <span className="text-xs text-stone-400 block mt-1 font-sans">
+                      Domain: {chronology.western_profection.activated_domain}
+                    </span>
+                  )}
+                </div>
+
+                <div className="bg-stone-950 p-3 rounded border border-stone-800">
+                  <span className="text-stone-400 text-xs block font-medium">
+                    {chronology.persian_firdaria ? "Zi Wei & Firdaria" : "Zi Wei Da Xian (Decade)"}
+                  </span>
+                  <span className="text-sm font-bold text-amber-300 block mt-1 font-sans">
+                    {chronology.ziwei_da_xian.active_palace || 'Palace'}
+                  </span>
+                  <span className="text-xs text-stone-400 block mt-0.5 font-sans">
+                    Decadal Span: <span className="font-mono">{chronology.ziwei_da_xian.age_span || 'Active'}</span>
+                  </span>
+                  {chronology.persian_firdaria ? (
+                    <span className="text-xs text-amber-300/90 block mt-1 font-sans">
+                      Firdaria: <span className="font-mono">{chronology.persian_firdaria.active_ruler} ({chronology.persian_firdaria.years_span})</span>
+                    </span>
+                  ) : (
+                    <span className="text-xs text-stone-400 block mt-1 font-sans">
+                      10-Year Major Palace Shift
+                    </span>
+                  )}
+                </div>
+              </div>
+
+              <div className="p-3 rounded bg-stone-950 border border-stone-800 text-xs text-stone-300 font-sans leading-relaxed">
+                <strong className="text-amber-300 font-sans text-xs font-semibold block mb-1">
+                  Convergence Assessment:
+                </strong>
+                {chronology.convergence_status}
+              </div>
             </div>
           </section>
 
@@ -1003,24 +1094,44 @@ export const ReadingView: React.FC<Props> = ({ data, subjectName, onNavigate }) 
               </span>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 text-xs font-sans">
-              {synthesis.temperament_axes.map((ax) => (
-                <div key={ax.axis_id} className="bg-stone-950 p-3 rounded border border-stone-800 space-y-1.5">
-                  <div className="flex items-center justify-between">
-                    <span className="font-semibold text-stone-100 text-xs font-sans">{ax.name}</span>
-                    <span className="text-xs font-mono text-amber-400 px-1.5 py-0.5 rounded bg-amber-950/60 border border-amber-800/60">
-                      {ax.axis_id}
-                    </span>
-                  </div>
-                  <p className="text-stone-400 text-xs font-sans">
-                    {ax.expression}
-                  </p>
-                  <div className="pt-1.5 border-t border-stone-800 text-xs font-sans space-y-0.5 text-stone-400">
-                    <div>Base: <span className="text-stone-300 font-mono">{ax.computed_base}</span></div>
-                    <div>Overlay: <span className="text-amber-300/90 font-mono">{ax.symbolic_overlay}</span></div>
-                  </div>
+            {/* Mobile Progressive Disclosure for Section 5 */}
+            <div className="md:hidden">
+              <button
+                type="button"
+                onClick={() => setShowMobileSection5(!showMobileSection5)}
+                className="w-full min-h-[44px] px-3.5 py-2.5 rounded-xl bg-stone-950 border border-stone-800 text-xs font-sans text-stone-300 flex items-center justify-between transition-colors hover:border-amber-600/50 cursor-pointer"
+                aria-expanded={showMobileSection5}
+              >
+                <div className="flex items-center gap-2">
+                  <BookOpen className="w-3.5 h-3.5 text-amber-400" />
+                  <span className="font-medium text-stone-200">
+                    {showMobileSection5 ? 'Hide Temperament Overlays' : 'View Maya & Tibetan Temperament Overlays'}
+                  </span>
                 </div>
-              ))}
+                <ChevronDown className={`w-3.5 h-3.5 text-amber-400 transition-transform duration-200 ${showMobileSection5 ? 'rotate-180' : ''}`} />
+              </button>
+            </div>
+
+            <div className={`${showMobileSection5 ? 'block' : 'hidden'} md:block space-y-3`}>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 text-xs font-sans">
+                {synthesis.temperament_axes.map((ax) => (
+                  <div key={ax.axis_id} className="bg-stone-950 p-3 rounded border border-stone-800 space-y-1.5">
+                    <div className="flex items-center justify-between">
+                      <span className="font-semibold text-stone-100 text-xs font-sans">{ax.name}</span>
+                      <span className="text-xs font-mono text-amber-400 px-1.5 py-0.5 rounded bg-amber-950/60 border border-amber-800/60">
+                        {ax.axis_id}
+                      </span>
+                    </div>
+                    <p className="text-stone-400 text-xs font-sans">
+                      {ax.expression}
+                    </p>
+                    <div className="pt-1.5 border-t border-stone-800 text-xs font-sans space-y-0.5 text-stone-400">
+                      <div>Base: <span className="text-stone-300 font-mono">{ax.computed_base}</span></div>
+                      <div>Overlay: <span className="text-amber-300/90 font-mono">{ax.symbolic_overlay}</span></div>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
           </section>
 
@@ -1039,37 +1150,57 @@ export const ReadingView: React.FC<Props> = ({ data, subjectName, onNavigate }) 
               </span>
             </div>
 
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 text-xs font-sans">
-              <div className="bg-stone-950 p-2.5 rounded border border-emerald-900/40 flex items-center justify-between">
-                <div>
-                  <span className="text-stone-400 text-xs block font-medium">Rahu / Ketu Invariant</span>
-                  <span className="text-xs font-semibold text-emerald-400 font-sans">Exact 180° Nodal Axis</span>
+            {/* Mobile Progressive Disclosure for Section 6 */}
+            <div className="md:hidden">
+              <button
+                type="button"
+                onClick={() => setShowMobileSection6(!showMobileSection6)}
+                className="w-full min-h-[44px] px-3.5 py-2.5 rounded-xl bg-stone-950 border border-stone-800 text-xs font-sans text-stone-300 flex items-center justify-between transition-colors hover:border-amber-600/50 cursor-pointer"
+                aria-expanded={showMobileSection6}
+              >
+                <div className="flex items-center gap-2">
+                  <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
+                  <span className="font-medium text-stone-200">
+                    {showMobileSection6 ? 'Hide Verification Proofs' : 'View Dual-Engine Astronomical Verification Proofs'}
+                  </span>
                 </div>
-                <Check className="w-4 h-4 text-emerald-400" />
-              </div>
+                <ChevronDown className={`w-3.5 h-3.5 text-amber-400 transition-transform duration-200 ${showMobileSection6 ? 'rotate-180' : ''}`} />
+              </button>
+            </div>
 
-              <div className="bg-stone-950 p-2.5 rounded border border-emerald-900/40 flex items-center justify-between">
-                <div>
-                  <span className="text-stone-400 text-xs block font-medium">Vimshottari Cycle</span>
-                  <span className="text-xs font-semibold text-emerald-400 font-sans">Exact 120-Year Sum</span>
+            <div className={`${showMobileSection6 ? 'block' : 'hidden'} md:block space-y-3`}>
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 text-xs font-sans">
+                <div className="bg-stone-950 p-2.5 rounded border border-emerald-900/40 flex items-center justify-between">
+                  <div>
+                    <span className="text-stone-400 text-xs block font-medium">Rahu / Ketu Invariant</span>
+                    <span className="text-xs font-semibold text-emerald-400 font-sans">Exact 180° Nodal Axis</span>
+                  </div>
+                  <Check className="w-4 h-4 text-emerald-400" />
                 </div>
-                <Check className="w-4 h-4 text-emerald-400" />
-              </div>
 
-              <div className="bg-stone-950 p-2.5 rounded border border-emerald-900/40 flex items-center justify-between">
-                <div>
-                  <span className="text-stone-400 text-xs block font-medium">Zi Wei Palaces</span>
-                  <span className="text-xs font-semibold text-emerald-400 font-sans">12 Unique Branches</span>
+                <div className="bg-stone-950 p-2.5 rounded border border-emerald-900/40 flex items-center justify-between">
+                  <div>
+                    <span className="text-stone-400 text-xs block font-medium">Vimshottari Cycle</span>
+                    <span className="text-xs font-semibold text-emerald-400 font-sans">Exact 120-Year Sum</span>
+                  </div>
+                  <Check className="w-4 h-4 text-emerald-400" />
                 </div>
-                <Check className="w-4 h-4 text-emerald-400" />
-              </div>
 
-              <div className="bg-stone-950 p-2.5 rounded border border-emerald-900/40 flex items-center justify-between">
-                <div>
-                  <span className="text-stone-400 text-xs block font-medium">Maya Long Count</span>
-                  <span className="text-xs font-semibold text-emerald-400 font-sans">Exact Round-Trip</span>
+                <div className="bg-stone-950 p-2.5 rounded border border-emerald-900/40 flex items-center justify-between">
+                  <div>
+                    <span className="text-stone-400 text-xs block font-medium">Zi Wei Palaces</span>
+                    <span className="text-xs font-semibold text-emerald-400 font-sans">12 Unique Branches</span>
+                  </div>
+                  <Check className="w-4 h-4 text-emerald-400" />
                 </div>
-                <Check className="w-4 h-4 text-emerald-400" />
+
+                <div className="bg-stone-950 p-2.5 rounded border border-emerald-900/40 flex items-center justify-between">
+                  <div>
+                    <span className="text-stone-400 text-xs block font-medium">Maya Long Count</span>
+                    <span className="text-xs font-semibold text-emerald-400 font-sans">Exact Round-Trip</span>
+                  </div>
+                  <Check className="w-4 h-4 text-emerald-400" />
+                </div>
               </div>
             </div>
           </section>

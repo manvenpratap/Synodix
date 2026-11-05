@@ -138,6 +138,12 @@ def test_mobile_viewport_and_touch_targets():
                 expand_btn.click()
                 page.wait_for_timeout(350)
             
+            # Ensure chart calculation is triggered and settled
+            calc_trigger = page.locator("button[type='submit']").first
+            if calc_trigger.is_visible():
+                calc_trigger.click()
+                page.wait_for_timeout(800)
+
             # Navigate via Journey Stepper to Traditions
             page.wait_for_function("() => Array.from(document.querySelectorAll('button')).some(b => b.innerText.includes('Traditions') && b.innerText.includes('2'))", timeout=5000)
             page.evaluate("() => { const b = document.querySelectorAll(\"button\"); for (const el of b) { if (el.innerText.includes('Traditions') && el.innerText.includes('2')) { el.click(); break; } } }")

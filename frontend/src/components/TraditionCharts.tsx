@@ -265,6 +265,7 @@ const HorizontalAccordionGallery: React.FC<{
 }> = ({ data, activeTab, onSelectTradition, onOpenInspector, cultureThemes }) => {
   const [hoveredTradition, setHoveredTradition] = useState<TraditionKey | null>(null);
   const [expandedMobileKey, setExpandedMobileKey] = useState<TraditionKey | null>(activeTab);
+  const [showLineageMap, setShowLineageMap] = useState<Record<string, boolean>>({});
   const selectedKey = hoveredTradition || activeTab;
 
   useEffect(() => {
@@ -546,16 +547,6 @@ const HorizontalAccordionGallery: React.FC<{
                   aria-labelledby={`mobile-accordion-header-${key}`}
                   className="px-3.5 pb-3.5 pt-1 border-t border-white/10 space-y-3 animate-tab-enter"
                 >
-                  {/* Cultural Lineage & Philosophical Motto */}
-                  <div className="space-y-1.5">
-                    <div className="text-[11px] font-mono text-stone-400 leading-tight">
-                      {theme.lineage}
-                    </div>
-                    <div className="p-2.5 rounded-lg bg-black/40 border border-white/10 text-xs italic text-stone-300 leading-relaxed">
-                      &ldquo;{theme.motto}&rdquo;
-                    </div>
-                  </div>
-
                   {/* 3 Live Astrometric Key Readings */}
                   <div className="grid grid-cols-3 gap-1.5 p-2 rounded-lg bg-stone-950/70 border border-stone-800/80">
                     {metrics.map((m, idx) => (
@@ -597,6 +588,29 @@ const HorizontalAccordionGallery: React.FC<{
                     <span>Open Full {theme.shortName || theme.name} Inspector</span>
                     <ArrowRight className="w-4 h-4" />
                   </button>
+
+                  {/* Classical Lineage & Philosophical Motto (Progressive Disclosure on Mobile) */}
+                  <div className="pt-1 border-t border-white/10">
+                    <button
+                      type="button"
+                      onClick={() => setShowLineageMap((prev) => ({ ...prev, [key]: !prev[key] }))}
+                      className="w-full text-left py-1.5 min-h-[44px] text-[11px] font-mono text-amber-400/90 hover:text-amber-300 flex items-center justify-between cursor-pointer"
+                      aria-expanded={!!showLineageMap[key]}
+                    >
+                      <span>{showLineageMap[key] ? 'Hide Classical Lineage & Philosophy' : 'Classical Lineage & Philosophy Context'}</span>
+                      <ChevronDown className={`w-3.5 h-3.5 text-amber-400 transition-transform ${showLineageMap[key] ? 'rotate-180' : ''}`} />
+                    </button>
+                    {showLineageMap[key] && (
+                      <div className="space-y-1.5 pt-1 animate-tab-enter">
+                        <div className="text-[11px] font-mono text-stone-400 leading-tight">
+                          {theme.lineage}
+                        </div>
+                        <div className="p-2.5 rounded-lg bg-black/40 border border-white/10 text-xs italic text-stone-300 leading-relaxed">
+                          &ldquo;{theme.motto}&rdquo;
+                        </div>
+                      </div>
+                    )}
+                  </div>
                 </div>
               )}
             </div>

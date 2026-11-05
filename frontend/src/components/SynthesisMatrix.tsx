@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ArrowLeft, ArrowRight, ChevronDown, Sparkles } from 'lucide-react';
+import { ArrowLeft, ArrowRight, ChevronDown, Sparkles, Sliders } from 'lucide-react';
 import type { Synthesis } from '../types';
 import { DomainConsensusRadar } from './ChartWheelVisualizer';
 import { ExplainerTrigger } from './ExplainerTrigger';
@@ -12,6 +12,7 @@ interface Props {
 export const SynthesisMatrix: React.FC<Props> = ({ synthesis, onNavigate }) => {
   const [expandedDomain, setExpandedDomain] = useState<string | null>(null);
   const [filterMode, setFilterMode] = useState<'all' | 'high' | 'divergent'>('all');
+  const [isMobileDomainsOpen, setIsMobileDomainsOpen] = useState<boolean>(false);
   const metrics = synthesis.divergence_metrics;
   const allDomains = Object.values(synthesis.domain_results);
   const totalDomainCount = allDomains.length;
@@ -125,8 +126,44 @@ export const SynthesisMatrix: React.FC<Props> = ({ synthesis, onNavigate }) => {
       {/* Domain Consensus Radar Matrix */}
       <DomainConsensusRadar synthesis={synthesis} />
 
-      {/* Stitch-Inspired Global Consensus & Signal Control Strip */}
-      <div className="pt-3.5 pb-3 border-b border-stone-800/80 flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+      {/* Mobile Essential Summary & Progressive Disclosure Toggle */}
+      <div className="sm:hidden space-y-3">
+        <div className="p-3.5 rounded-xl bg-stone-900 border border-stone-800 space-y-2.5">
+          <div className="flex items-center justify-between">
+            <span className="text-xs font-serif font-bold text-stone-200">Consensus Takeaways</span>
+            <span className="text-xs font-mono font-bold text-amber-300">{consensusPercent}% Accord</span>
+          </div>
+          <div className="grid grid-cols-2 gap-2 text-xs">
+            <div className="p-2 rounded-lg bg-stone-950 border border-stone-800">
+              <span className="text-[10px] text-stone-400 block font-sans">Synchronized</span>
+              <strong className="text-amber-300 font-mono text-sm">{metrics.strong_domains + metrics.moderate_domains}</strong>
+              <span className="text-[10px] text-stone-500 font-sans block">/ {totalDomainCount} domains</span>
+            </div>
+            <div className="p-2 rounded-lg bg-stone-950 border border-stone-800">
+              <span className="text-[10px] text-stone-400 block font-sans">Divergent</span>
+              <strong className="text-rose-400 font-mono text-sm">{metrics.divergent_domains}</strong>
+              <span className="text-[10px] text-stone-500 font-sans block">/ {totalDomainCount} domains</span>
+            </div>
+          </div>
+        </div>
+
+        <button
+          type="button"
+          onClick={() => setIsMobileDomainsOpen(!isMobileDomainsOpen)}
+          className="w-full min-h-[44px] px-3.5 py-2.5 rounded-xl bg-stone-900 border border-stone-800 text-xs font-mono text-stone-200 flex items-center justify-between transition-colors hover:border-amber-600/50 cursor-pointer"
+          aria-expanded={isMobileDomainsOpen}
+        >
+          <div className="flex items-center gap-2">
+            <Sliders className="w-3.5 h-3.5 text-amber-400" />
+            <span>{isMobileDomainsOpen ? 'Hide 9-Domain Comparative Breakdown' : `View All 9 Domain Comparisons (${totalDomainCount})`}</span>
+          </div>
+          <ChevronDown className={`w-3.5 h-3.5 text-amber-400 transition-transform duration-200 ${isMobileDomainsOpen ? 'rotate-180' : ''}`} />
+        </button>
+      </div>
+
+      <div className={`${isMobileDomainsOpen ? 'block' : 'hidden'} sm:block space-y-5`}>
+        {/* Stitch-Inspired Global Consensus & Signal Control Strip */}
+        <div className="pt-3.5 pb-3 border-b border-stone-800/80 flex flex-col lg:flex-row lg:items-center justify-between gap-4">
         <div className="flex flex-wrap items-center gap-4">
           <div className="flex items-center gap-3">
             <div className="w-12 h-12 flex flex-col items-center justify-center font-mono border-r border-stone-800/80 pr-2">
@@ -444,6 +481,7 @@ export const SynthesisMatrix: React.FC<Props> = ({ synthesis, onNavigate }) => {
         <div className="mt-3 pt-2 pb-1 border-t border-stone-800 text-xs font-sans text-amber-300 max-w-[55ch] text-pretty">
           {synthesis.chronology.convergence_status}
         </div>
+      </div>
       </div>
 
       {/* Mobile & Tablet Journey Navigation Bar */}

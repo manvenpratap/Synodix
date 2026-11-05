@@ -2,5 +2,5 @@
  * Authoritative single source of truth for the application version.
  * Kept in sync with PROJECT_CONTEXT.md milestones and package releases.
  */
-export const APP_VERSION = '2.65.0';
-export const APP_VERSION_LABEL = 'v2.65.0';
+export const APP_VERSION = '2.66.0';
+export const APP_VERSION_LABEL = 'v2.66.0';

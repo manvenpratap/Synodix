@@ -23,7 +23,8 @@ import {
   RotateCcw,
   User,
   Clock,
-  Sliders
+  Sliders,
+  ChevronDown
 } from 'lucide-react';
 import { getSavedProfiles, saveProfile, deleteProfile, UserProfile } from '../utils/vault';
 import { triggerHaptic } from '../utils/haptics';
@@ -202,6 +203,7 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
     gender: 'male',
   });
   const [customSubjectName, setCustomSubjectName] = useState<string>('Custom Subject');
+  const [isMobileAdvancedOpen, setIsMobileAdvancedOpen] = useState<boolean>(false);
 
   // Titan Archive State
   const [selectedTitanId, setSelectedTitanId] = useState<string>('steve-jobs');
@@ -805,7 +807,7 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
                 </div>
 
                 {/* Gender / Natal Cycle Polarity */}
-                <div className="md:col-span-5">
+                <div className={`${isMobileAdvancedOpen ? 'block' : 'hidden'} sm:block md:col-span-5`}>
                   <div className="flex items-center justify-between mb-1">
                     <label
                       htmlFor="gender"
@@ -848,7 +850,7 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+              <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-3">
                 {/* Date of Birth */}
                 <div>
                   <label
@@ -889,7 +891,7 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
                 </div>
 
                 {/* Time Certainty / Record Quality */}
-                <div>
+                <div className={`${isMobileAdvancedOpen ? 'col-span-2 sm:col-span-1' : 'hidden'} sm:block`}>
                   <label
                     htmlFor="time_certainty"
                     className="block text-xs font-sans font-medium text-stone-300 mb-1"
@@ -1064,7 +1066,7 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
                 </div>
 
                 {/* Country */}
-                <div>
+                <div className={`${isMobileAdvancedOpen ? 'block' : 'hidden'} sm:block`}>
                   <label
                     htmlFor="country_name"
                     className="block text-xs font-sans font-medium text-stone-300 mb-1"
@@ -1088,7 +1090,7 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
               </div>
 
               {/* High-Precision WGS-84 Decimal Coordinates Panel */}
-              <div className="pt-3 border-t border-stone-800/70 space-y-3">
+              <div className={`${isMobileAdvancedOpen ? 'block' : 'hidden'} sm:block pt-3 border-t border-stone-800/70 space-y-3`}>
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1.5 pb-2 border-b border-stone-800">
                   <div className="flex items-center gap-1.5">
                     <Compass className="w-3.5 h-3.5 text-amber-400" />
@@ -1213,6 +1215,27 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
                     </div>
                   </div>
                 </div>
+              </div>
+
+              {/* Mobile Progressive Disclosure Accordion Trigger */}
+              <div className="sm:hidden pt-1">
+                <button
+                  type="button"
+                  onClick={() => {
+                    triggerHaptic('selection');
+                    setIsMobileAdvancedOpen(!isMobileAdvancedOpen);
+                  }}
+                  className="w-full min-h-[44px] px-3.5 py-2.5 rounded-xl bg-stone-900 border border-stone-800 text-xs font-sans text-stone-300 flex items-center justify-between transition-colors hover:border-amber-600/50 cursor-pointer"
+                  aria-expanded={isMobileAdvancedOpen}
+                >
+                  <div className="flex items-center gap-2">
+                    <Sliders className="w-3.5 h-3.5 text-amber-400" />
+                    <span className="font-medium text-stone-200">
+                      {isMobileAdvancedOpen ? 'Hide Advanced Calibration' : 'Advanced Coordinates & Precision (Optional)'}
+                    </span>
+                  </div>
+                  <ChevronDown className={`w-3.5 h-3.5 text-amber-400 transition-transform duration-200 ${isMobileAdvancedOpen ? 'rotate-180' : ''}`} />
+                </button>
               </div>
             </div>
 
