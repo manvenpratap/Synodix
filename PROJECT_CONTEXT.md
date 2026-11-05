@@ -1,7 +1,7 @@
 # Synodix: Project Context & Working Memory
 
-**Last Updated:** 2026-11-05 06:35:00
-**Version:** 2.58.0  
+**Last Updated:** 2026-11-05 06:51:04
+**Version:** 2.59.0  
 **Stack:** Python 3.12 (FastAPI, Swiss Ephemeris 2.10, Skyfield DE421) + TypeScript / React 19 / Vite / Tailwind CSS v4 / Framer Motion / Capacitor 8 (iOS & Android)  
 **Workspace:** `/Volumes/Study/Projects/Astrology` (symlinked as `/Volumes/Study/Astrology`)  
 **Git Remote:** `https://github.com/manvenpratap/Synodix.git`  
@@ -10,7 +10,11 @@
 
 ## 1. Current Status & Milestone
 
-- **Active Phase**: 500 Titans Supporting Dataset Field Extraction & Zero-N/A Invariant (v2.58.0) (Completed)
+- **Active Phase**: BaZi Four Pillars Data Population & 500 Titans Supporting Dataset Invariant (v2.59.0) (Completed)
+- **BaZi Four Pillars Data Population & 500 Titans Supporting Dataset Invariant (v2.59.0)**:
+  - **BaZi Four Pillars Key Extraction**: Fixed extraction logic in `scripts/build_research_monograph.py` (which previously queried nonexistent top-level keys `year_pillar`, `month_pillar`, `day_pillar`, and `hour_pillar`, resulting in `" /  /  / "` across all 500 rows). Properly extracted heavenly stems and earthly branches from `bz['pillars']` for Year, Month, Day, and Hour (`bz_p['year']['stem'] + bz_p['year']['branch']`), outputting canonical Chinese BaZi notation (e.g., `己卯 / 丁卯 / 丙申 / 甲午` for Albert Einstein, `壬午 / 壬子 / 庚戌 / 丁丑` for Isaac Newton).
+  - **Dataset & Monograph Regeneration**: Regenerated `backend/app/data/500_titans_empirical_dataset.xlsx` and `backend/app/data/mathematical_evidence_astrology_report.docx`.
+  - **Zero-Anomaly & Zero-N/A Invariant**: Verified all 14,500 cells (500 rows × 29 columns) across `Titans_Full_Database` and all 6 worksheets. 0 empty cells, 0 `" /  /  / "` strings, and 0 `"N/A"` occurrences.
 - **500 Titans Supporting Dataset Field Extraction & Zero-N/A Invariant (v2.58.0)**:
   - **Mayan Tzolk'in & Calendar Round Extraction**: Fixed key lookup in `scripts/build_research_monograph.py` (which previously queried nonexistent `kin_number` and `solar_seal.name` keys resulting in 500 `Kin N/A (N/A)` cells). Added dialect-tolerant normalization in `backend/app/traditions/mayan.py` for convertdate variations (e.g. `Imix`/`Imix'`, `Ix`/`Hix`). All 500 Titans now display complete formatted Tzolk'in day signs, archetype symbols, and Calendar Rounds (e.g., `11 Ajaw (Sun / Lord) · 11 Ajaw 13 Pax`).
   - **Tibetan Rabjung Cycle & Mewa Extraction**: Fixed nested dictionary lookup (`tb['rabjung_cycle']` and `tb['mewa']`), replacing 500 `N/A / N/A` cells with the complete Rabjung element, gender, animal, and Mewa magic square (e.g., `Earth Female Hare (Mewa: 7 Red)`).

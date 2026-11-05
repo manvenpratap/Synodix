@@ -407,7 +407,12 @@ def generate_excel_dataset():
         yogas_list = ", ".join([y_item["name"] for y_item in jy.get("yogas", [])]) if jy.get("yogas") else "None Detected"
 
         # BaZi
-        bazi_pillars = f"{bz.get('year_pillar','')} / {bz.get('month_pillar','')} / {bz.get('day_pillar','')} / {bz.get('hour_pillar','')}"
+        bz_p = bz.get("pillars", {})
+        y_p = f"{bz_p.get('year', {}).get('stem', '')}{bz_p.get('year', {}).get('branch', '')}"
+        m_p = f"{bz_p.get('month', {}).get('stem', '')}{bz_p.get('month', {}).get('branch', '')}"
+        d_p = f"{bz_p.get('day', {}).get('stem', '')}{bz_p.get('day', {}).get('branch', '')}"
+        h_p = f"{bz_p.get('hour', {}).get('stem', '')}{bz_p.get('hour', {}).get('branch', '')}" if bz_p.get('hour', {}).get('available') else "—"
+        bazi_pillars = f"{y_p} / {m_p} / {d_p} / {h_p}"
         dm = bz.get("day_master", {})
         dm_str = f"{dm.get('stem','')} {dm.get('element','')} ({dm.get('polarity','')})"
 
