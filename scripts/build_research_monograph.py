@@ -404,7 +404,7 @@ def generate_excel_dataset():
         # Jyotisha
         vedic_lagna = jy.get("lagna", {}).get("sign", "N/A") if has_time else "N/A"
         moon_nak = jy.get("grahas", {}).get("Moon", {}).get("nakshatra", {}).get("name", "N/A")
-        yogas_list = ", ".join([y_item["name"] for y_item in jy.get("yogas", [])]) if jy.get("yogas") else "None"
+        yogas_list = ", ".join([y_item["name"] for y_item in jy.get("yogas", [])]) if jy.get("yogas") else "None Detected"
 
         # BaZi
         bazi_pillars = f"{bz.get('year_pillar','')} / {bz.get('month_pillar','')} / {bz.get('day_pillar','')} / {bz.get('hour_pillar','')}"
@@ -414,12 +414,14 @@ def generate_excel_dataset():
         # ZiWei
         zw_ming = zw.get("ming_palace_branch", "N/A")
 
-        # Mayan
+        # Mayan (Tzolk'in day sign, symbol & Calendar Round)
         tz = my.get("tzolkin", {})
-        my_str = f"Kin {tz.get('kin_number', 'N/A')} ({tz.get('solar_seal', {}).get('name', 'N/A')})"
+        my_str = f"{tz.get('formatted', '')} ({tz.get('symbol', '')}) · {my.get('calendar_round', '')}"
 
-        # Tibetan
-        tb_str = f"{tb.get('animal', 'N/A')} / {tb.get('element', 'N/A')}"
+        # Tibetan (Rabjung element/gender/animal & Mewa square)
+        rab = tb.get("rabjung_cycle", {})
+        mew = tb.get("mewa", {})
+        tb_str = f"{rab.get('element_gender_animal', '')} (Mewa: {mew.get('formatted', '')})"
 
         row_vals = [
             idx, t["id"], t["name"], t["category"], t.get("tag", ""),
@@ -515,7 +517,7 @@ def generate_excel_dataset():
         ["H5", "Malavya Yoga Enriched in Great Artists", "Arts", 83, 6, 7.23, 8.76, -0.0579, 0.87, 0.39, 1.96, -0.49, 0.6217, "Not Significant", "Null Model Upheld (OR 0.87x)"],
         ["H6", "D2 Career Consensus Enriched in Titans", "All Titans", 500, 64, 12.80, 13.40, -0.0178, 0.95, 0.71, 1.26, -0.42, 0.6748, "Not Significant", "Null Model Upheld (OR 0.95x)"],
         ["H7", "Viparita Raja Yoga Adversity Inversion", "All Titans", 500, 289, 57.80, 56.96, +0.0162, 1.03, 0.85, 1.26, +0.38, 0.7044, "Not Significant", "Baseline Combinatorial Expectation ~57%"],
-        ["H8", "Cross-Cultural Information Concordance", "4500 Votes", 4500, "—", 31.80, 22.22, +0.2150, "N/A", "N/A", "N/A", +15.45, "< 10⁻³⁵", "Significant", "✅ Structured Non-Random Mutual Information"]
+        ["H8", "Cross-Cultural Information Concordance", "4500 Votes", 4500, "—", 31.80, 22.22, +0.2150, "— (MI Metric)", "—", "—", +15.45, "< 10⁻³⁵", "Significant", "✅ Structured Non-Random Mutual Information"]
     ]
 
     for r_idx, row in enumerate(h_data, start=4):

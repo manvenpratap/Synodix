@@ -1,7 +1,7 @@
 # Synodix: Project Context & Working Memory
 
-**Last Updated:** 2026-11-05 06:15:00
-**Version:** 2.57.0  
+**Last Updated:** 2026-11-05 06:35:00
+**Version:** 2.58.0  
 **Stack:** Python 3.12 (FastAPI, Swiss Ephemeris 2.10, Skyfield DE421) + TypeScript / React 19 / Vite / Tailwind CSS v4 / Framer Motion / Capacitor 8 (iOS & Android)  
 **Workspace:** `/Volumes/Study/Projects/Astrology` (symlinked as `/Volumes/Study/Astrology`)  
 **Git Remote:** `https://github.com/manvenpratap/Synodix.git`  
@@ -10,7 +10,13 @@
 
 ## 1. Current Status & Milestone
 
-- **Active Phase**: Cultural Traditions Hero Pedestal & Journey Stepper UX Architecture (v2.57.0) (Completed)
+- **Active Phase**: 500 Titans Supporting Dataset Field Extraction & Zero-N/A Invariant (v2.58.0) (Completed)
+- **500 Titans Supporting Dataset Field Extraction & Zero-N/A Invariant (v2.58.0)**:
+  - **Mayan Tzolk'in & Calendar Round Extraction**: Fixed key lookup in `scripts/build_research_monograph.py` (which previously queried nonexistent `kin_number` and `solar_seal.name` keys resulting in 500 `Kin N/A (N/A)` cells). Added dialect-tolerant normalization in `backend/app/traditions/mayan.py` for convertdate variations (e.g. `Imix`/`Imix'`, `Ix`/`Hix`). All 500 Titans now display complete formatted Tzolk'in day signs, archetype symbols, and Calendar Rounds (e.g., `11 Ajaw (Sun / Lord) · 11 Ajaw 13 Pax`).
+  - **Tibetan Rabjung Cycle & Mewa Extraction**: Fixed nested dictionary lookup (`tb['rabjung_cycle']` and `tb['mewa']`), replacing 500 `N/A / N/A` cells with the complete Rabjung element, gender, animal, and Mewa magic square (e.g., `Earth Female Hare (Mewa: 7 Red)`).
+  - **Vedic Yogas Formatting**: Formatted instances where no classical major yogas formed as `"None Detected"` instead of literal `"None"`.
+  - **H8 Mutual Information Alignment**: Replaced placeholder `"N/A"` in the Odds Ratio and 95% CI columns for H8 with `"— (MI Metric)"`, reflecting that Shannon mutual information concordance is an information-theoretic test ($Z = +15.45$, $p < 10^{-35}$).
+  - **Complete Verification**: 0 N/A or empty values across all 29 columns and 500 data rows in `Titans_Full_Database`, and across all 6 worksheets of `500_titans_empirical_dataset.xlsx`.
 - **Cultural Traditions Hero Pedestal & Journey Stepper UX Architecture (v2.57.0)**:
   - **Eliminated 5-Line Heading Collision**: Restructured `TraditionCharts.tsx` hero card from an awkward side-by-side flex layout (which forced the title to wrap after every word beside floating toolbars) into a structured 2-row agency layout. Title, icon, and breadcrumbs occupy the full-width top row, while presentation depth (`Complete View` / `Visual Chart` / `Detailed Tables`) and layout switcher (`Carousel Deck` / `Accordion Gallery` / `Inspector Matrix`) sit neatly on a dedicated control toolbar strip below with explicit `Depth:` and `Mode:` section labels.
   - **Calibrated Proportional Typography**: Replaced the unbounded `clamp(1.4rem, 4.5vw, 3.75rem)` in `.hero-h1-clamped` with an agency-grade `clamp(1.25rem, 2.2vw, 2.25rem)` (20px–36px). The heading `"9 Astrological Traditions & Cosmologies [9-Sys]"` now renders on a single balanced line across all desktop resolutions.

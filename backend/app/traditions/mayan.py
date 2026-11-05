@@ -46,8 +46,12 @@ def compute_mayan_chart(year: int, month: int, day: int) -> Dict[str, Any]:
     tz_num, tz_name = mayan.lc_to_tzolkin(*lc)
     hb_num, hb_month = mayan.lc_to_haab(*lc)
 
-    # Find Tzolk'in sign archetype details
-    tz_detail = next((item for item in TZOLKIN_SIGNS if item[0] == tz_name), (tz_name, "", ""))
+    # Find Tzolk'in sign archetype details (robust matching against convertdate dialect variations e.g. Ix/Hix, Imix/Imix')
+    tz_clean = tz_name.replace("'", "").lower()
+    tz_detail = next(
+        (item for item in TZOLKIN_SIGNS if item[0].replace("'", "").lower() in [tz_clean, 'h' + tz_clean] or tz_clean in [item[0].replace("'", "").lower(), item[0].replace("'", "").lower().replace('h', '')]),
+        (tz_name, "", "")
+    )
 
     # 3. Calendar Round string
     calendar_round = f"{tz_num} {tz_name} {hb_num} {hb_month}"
