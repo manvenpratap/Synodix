@@ -1,7 +1,7 @@
 # Synodix: Project Context & Working Memory
 
-**Last Updated:** 2026-11-05 09:01:17
-**Version:** 2.64.0  
+**Last Updated:** 2026-11-05 09:16:14
+**Version:** 2.65.0  
 **Stack:** Python 3.12 (FastAPI, Swiss Ephemeris 2.10, Skyfield DE421) + TypeScript / React 19 / Vite / Tailwind CSS v4 / Framer Motion / Capacitor 8 (iOS & Android)  
 **Workspace:** `/Volumes/Study/Projects/Astrology` (symlinked as `/Volumes/Study/Astrology`)  
 **Git Remote:** `https://github.com/manvenpratap/Synodix.git`  
@@ -10,7 +10,13 @@
 
 ## 1. Current Status & Milestone
 
-- **Active Phase**: Astrometric Celestial Astrolabe Light Mode Theme Calibration (v2.64.0) (Completed)
+- **Active Phase**: Sleek Sidebar Navigation Redesign & Zero-Truncation Architecture (v2.65.0) (Completed)
+- **Sleek Sidebar Navigation Redesign & Zero-Truncation Architecture (v2.65.0)**:
+  - **Eliminated Severe Text Truncation**: Redesigned all 8 navigation buttons in both Chapter I (`Astrometric Journey`) and Chapter II (`Comparative & Empirical Science`) so that full labels ("Workbench & Vault", "Cultural Traditions", "Synthesis Matrix", "Birth Chart Reading", "Relational Synastry", "Astronomical Audit", "Mathematical Evidence", "Feature Guide") render without truncation.
+  - **Concise Contextual Subtitles & Compact Badges**: Replaced bulky wide badges (such as 13-character `Corroboration` and 12-character `9 Traditions`) with compact tags (`01`–`04`, `9-Sys`, `Consensus`, `Dossier`, `Dual`, `DE421`, `1,000`, `Guide`) aligned with the title row, giving descriptions full-width breathing room.
+  - **Resolved Overlap / Cutoff Defect**: Restructured `aside` from a double-scrolling container into a fixed header/footer frame with an independent scrollable middle container (`flex-1 min-h-0 overflow-y-auto overflow-x-hidden`). Moved the `Astrometric Calibration` card inside the scrollable list, ensuring "Astronomical Audit" and all science tools are never obscured or clipped by the calibration widget.
+  - **Sleek Integrated Subject Profile Wafer**: Consolidated the previously bulky, double-nested 180px profile card into an agency-grade 65px telemetry wafer with subject initials avatar, name, birth coordinates, and an integrated dual-tone micro consensus progress bar.
+  - **Automated Verification**: Verified zero console errors; verified `test_10_impeccable_quality_audit.py`, `test_04_mobile_viewport.py`, `test_03_theme_toggle.py`, `test_09_dossier_inferences.py`, and `test_06_cultural_themes.py` pass; verified clean build in 607ms.
 - **Astrometric Celestial Astrolabe Light Mode Theme Calibration (v2.64.0)**:
   - **Dual-Mode Theme Calibration for Astrolabe**: Solved low-contrast visibility issue where the circular astrolabe dial in `BirthDataForm.tsx` rendered as an opaque `#0c0a09` pitch-black circle with near-invisible `#44403c` and `#292524` strokes in Light Mode (`data-theme="light"`).
   - **Dynamic Astrolabe Palette**:

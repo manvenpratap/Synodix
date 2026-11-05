@@ -1884,10 +1884,31 @@ html[data-theme="light"] {
   color: #78350f !important;
 }
 
+[data-theme="light"] .sidebar-canvas button[aria-current="page"] .text-stone-400 {
+  color: #92400e !important;
+}
+
+[data-theme="light"] .sidebar-canvas button[aria-current="page"] .bg-amber-950 {
+  background-color: #fde68a !important;
+  border-color: #d97706 !important;
+  color: #78350f !important;
+}
+
+[data-theme="light"] .sidebar-canvas button:not([aria-current="page"]):hover {
+  background-color: #f4ede2 !important;
+  border-color: #ded5c5 !important;
+}
+
+[data-theme="light"] .sidebar-canvas .text-amber-500\/90,
+[data-theme="light"] .sidebar-canvas .text-amber-400\/90 {
+  color: #b45309 !important;
+}
+
+[data-theme="light"] .sidebar-canvas .bg-stone-950\/20,
+[data-theme="light"] .sidebar-canvas .bg-stone-950\/30,
 [data-theme="light"] .sidebar-canvas .bg-stone-950\/40,
-[data-theme="light"] .sidebar-canvas .bg-stone-950\/80,
-[data-theme="light"] .sidebar-canvas .bg-stone-950\/30 {
-  background-color: #f7f3eb !important;
+[data-theme="light"] .sidebar-canvas .bg-stone-950\/80 {
+  background-color: #fbf7f0 !important;
   border-color: #e7e0d3 !important;
 }
 
