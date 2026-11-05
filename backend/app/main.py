@@ -414,12 +414,22 @@ def get_mathematical_evidence():
     if os.path.exists(report_file):
         with open(report_file, "r", encoding="utf-8") as f:
             report_md = f.read()
+    from scripts.glossary_data import GLOSSARY_ENTRIES
     return {
-        "title": stats.get("title", "500 Titans Monte Carlo Benchmark & Empirical Deductive Study"),
-        "cohort_titans": stats.get("cohort_titans", 500),
-        "cohort_controls": stats.get("cohort_controls", 2500),
+        "title": stats.get("title", "1,000 Titans Monte Carlo Benchmark & Empirical Deductive Study"),
+        "cohort_titans": stats.get("cohort_titans", 1000),
+        "cohort_controls": stats.get("cohort_controls", 5000),
         "stats": stats,
-        "report_markdown": report_md
+        "report_markdown": report_md,
+        "glossary": GLOSSARY_ENTRIES
+    }
+
+@app.get("/api/glossary")
+def get_glossary_endpoint():
+    from scripts.glossary_data import GLOSSARY_ENTRIES
+    return {
+        "total": len(GLOSSARY_ENTRIES),
+        "entries": GLOSSARY_ENTRIES
     }
 
 @app.get("/api/mathematical-evidence/report")

@@ -1,7 +1,7 @@
 # Synodix: Project Context & Working Memory
 
-**Last Updated:** 2026-11-05 07:50:00
-**Version:** 2.62.0  
+**Last Updated:** 2026-11-05 08:48:16
+**Version:** 2.63.0  
 **Stack:** Python 3.12 (FastAPI, Swiss Ephemeris 2.10, Skyfield DE421) + TypeScript / React 19 / Vite / Tailwind CSS v4 / Framer Motion / Capacitor 8 (iOS & Android)  
 **Workspace:** `/Volumes/Study/Projects/Astrology` (symlinked as `/Volumes/Study/Astrology`)  
 **Git Remote:** `https://github.com/manvenpratap/Synodix.git`  
@@ -10,7 +10,16 @@
 
 ## 1. Current Status & Milestone
 
-- **Active Phase**: Scientific & Mathematical Jargon Explainer & Methodological Compendium (v2.62.0) (Completed)
+- **Active Phase**: App Data Synchronization & Interactive Jargon Explorer Integration (v2.63.0) (Completed)
+- **App Data Synchronization & Interactive Jargon Explorer (v2.63.0)**:
+  - **Interactive In-App Jargon Explorer**: Integrated an interactive 7th tab (`Scientific Jargon Explainer (37)`) directly into `MathematicalEvidenceCard.tsx`. Features real-time search across terms, equations, definitions, and domain filters (`All`, `Statistical Testing`, `Information Theory`, `Computational Astronomy`, `Traditions & Mechanics`) with responsive cards showcasing code-formatted formulas, theoretical definitions, and dataset role notes.
+  - **Synchronized App Data Modules**:
+    - Created `frontend/src/data/glossaryData.ts` exporting typed `GLOSSARY_ENTRIES` for 0ms instant offline lookup.
+    - Updated `frontend/src/data/mathematicalEvidenceData.ts` with 1,000 Titans and 5,000 controls benchmark metrics.
+    - Updated `backend/app/data/mathematical_evidence_stats.json` with `cohort_titans: 1000`, `cohort_controls: 5000`, and embedded 37 glossary records.
+    - Updated API endpoints `/api/mathematical-evidence` and added `/api/glossary` returning the full 37-entry dictionary.
+    - Refreshed all KPI cards and operational checklists in the frontend UI to display `1,000 Records (100% Rodden AA/A, 0 Assumed Data)` and `5,000 Controls`.
+  - **Pre-commit & Regression Verification**: Verified all 29 tests pass; verified clean build in 597ms; verified `/api/glossary` and `/api/health`.
 - **Scientific & Mathematical Jargon Glossary Compendium (v2.62.0)**:
   - **Exhaustive Jargon Explainer Module (`scripts/glossary_data.py`)**: Authored structured methodological glossary containing 37 formal definitions, mathematical equations, ephemeris standards, and interpretive benchmarks spanning 4 major domains:
     - *Statistical Demarcation & Testing*: Null/Alternative Hypotheses ($H_0/H_1$), Monte Carlo synthetic controls, $2 \times 2$ contingency matrices, Odds Ratios ($OR$), asymptotic standard errors ($\text{SE}_{\ln(OR)}$), 95% Wald confidence intervals, standard normal $z$-scores, two-tailed $p$-values, Bonferroni family-wise error adjustments ($\alpha_{\text{adj}} = 0.00625$), and Cohen's $h$ / Cramér's $V$ effect sizes.

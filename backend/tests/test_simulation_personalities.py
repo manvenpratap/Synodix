@@ -96,8 +96,8 @@ def test_500_personalities_dataset_integrity():
     assert stats_path.exists(), "Mathematical evidence stats file must exist"
     with open(stats_path) as f:
         stats = json.load(f)
-    assert stats["cohort_titans"] == 500
-    assert stats["cohort_controls"] == 2500
+    assert stats["cohort_titans"] in (500, 1000)
+    assert stats["cohort_controls"] in (2500, 5000)
     assert len(stats["tradition_rankings"]) == 6
     assert stats["tradition_rankings"][0]["tradition"] == "BaZi (Four Pillars of Destiny)"
     
@@ -119,6 +119,15 @@ def test_1000_personalities_dataset_integrity():
     # Verify Rodden ratings are 100% AA or A
     rodden_ratings = {p["rodden_rating"] for p in personalities}
     assert rodden_ratings.issubset({"AA", "A"}), f"Invalid Rodden rating: {rodden_ratings}"
+
+    # Verify stats file has 1000 cohort & glossary
+    stats_path = Path("backend/app/data/mathematical_evidence_stats.json")
+    with open(stats_path) as f:
+        stats = json.load(f)
+    assert stats["cohort_titans"] == 1000
+    assert stats["cohort_controls"] == 5000
+    assert stats.get("glossary_count") == 37
+    assert len(stats.get("glossary", [])) == 37
 
     # Strict invariant: 0 assumed birth data across all 1000 Titans
     ids = set()
