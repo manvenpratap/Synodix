@@ -542,7 +542,7 @@ To guarantee radical scientific transparency and eliminate data opacity, the com
 3. **`Category_Analytics`**: Domain breakdowns across Science & Tech ($N=87$), Statesmen ($N=83$), Arts ($N=83$), Philosophy ($N=83$), Athletics ($N=82$), and Cinema/Business ($N=82$).
 4. **`Hypothesis_Testing_Data`**: Unabridged $2 \times 2$ contingency tables ($a, b, c, d$), variance derivations, odds ratios, confidence intervals, $Z$-scores, and $p$-values for $H_1 - H_8$.
 5. **`Tradition_Rankings`**: Multi-Criteria Decision Analysis (MCDA) matrix with normalized weights, sensitivity, specificity, timing accuracy, robustness, $F_1$ scores, and composite scores.
-6. **`Case_Studies_Forensic`**: Chronological milestone tracking for Churchill, Einstein, Ali, and Jobs.
+6. **`Case_Studies_Forensic`**: Exhaustive chronological astrometric cross-examination of all 500 Titans, tracking operational Vedic Vimshottari Mahadasha/Antardashas and Chinese BaZi Da Yun luck pillars during verified career milestones and acute crises ($N=500$).
 
 ### 8.2 Representative Cross-Section of the 500 Titans Database
 

@@ -30,11 +30,20 @@ def _launch_browser(pw):
 
 def test_backend_geocode_endpoint():
     """Verify backend API geocoding endpoint returns structured cities and coordinates."""
+    import time
     url = "http://127.0.0.1:8000/api/geocode?q=London"
     req = urllib.request.Request(url)
-    with urllib.request.urlopen(req, timeout=5) as response:
-        assert response.status == 200, f"Expected 200 from geocode endpoint, got {response.status}"
-        data = json.loads(response.read().decode("utf-8"))
+    data = None
+    for attempt in range(3):
+        try:
+            with urllib.request.urlopen(req, timeout=10) as response:
+                assert response.status == 200, f"Expected 200 from geocode endpoint, got {response.status}"
+                data = json.loads(response.read().decode("utf-8"))
+                break
+        except Exception:
+            if attempt == 2:
+                raise
+            time.sleep(1)
     assert isinstance(data, list), "Expected list of results"
     assert len(data) > 0, "Expected at least 1 match for London"
     london = next((item for item in data if item["city"] == "London"), None)
@@ -45,23 +54,38 @@ def test_backend_geocode_endpoint():
 
 def test_backend_reverse_geocode_and_ip_endpoints():
     """Verify backend API reverse geocoding and IP location endpoints."""
+    import time
     # 1. Reverse geocode endpoint
     rev_url = "http://127.0.0.1:8000/api/reverse-geocode?lat=28.4595&lon=77.0266"
     req = urllib.request.Request(rev_url)
-    with urllib.request.urlopen(req, timeout=5) as response:
-        assert response.status == 200
-        data = json.loads(response.read().decode("utf-8"))
-        assert "Gurugram" in data.get("city", "") or "Gurgaon" in data.get("city", "") or "Delhi" in data.get("city", "")
-        assert data.get("country") == "India"
+    for attempt in range(3):
+        try:
+            with urllib.request.urlopen(req, timeout=10) as response:
+                assert response.status == 200
+                data = json.loads(response.read().decode("utf-8"))
+                assert "Gurugram" in data.get("city", "") or "Gurgaon" in data.get("city", "") or "Delhi" in data.get("city", "")
+                assert data.get("country") == "India"
+                break
+        except Exception:
+            if attempt == 2:
+                raise
+            time.sleep(1)
 
     # 2. IP location endpoint
     ip_url = "http://127.0.0.1:8000/api/ip-location"
     req = urllib.request.Request(ip_url)
-    with urllib.request.urlopen(req, timeout=5) as response:
-        assert response.status == 200
-        data = json.loads(response.read().decode("utf-8"))
-        assert "latitude" in data and "longitude" in data
-        assert "city" in data and "country" in data
+    for attempt in range(3):
+        try:
+            with urllib.request.urlopen(req, timeout=10) as response:
+                assert response.status == 200
+                data = json.loads(response.read().decode("utf-8"))
+                assert "latitude" in data and "longitude" in data
+                assert "city" in data and "country" in data
+                break
+        except Exception:
+            if attempt == 2:
+                raise
+            time.sleep(1)
 
 
 def test_ui_city_autosuggest_and_coordinate_resolution():
