@@ -240,7 +240,7 @@ export const FeatureGuideScreen: React.FC<Props> = ({ onNavigate, initialExplain
               </span>
               <span className="text-stone-600 hidden sm:inline" aria-hidden="true">/</span>
               <span className="text-xs text-stone-400 font-sans hidden sm:inline">
-                {activeSection === 'evidence' ? '500 Titans Monte Carlo Benchmark' : '50 Astrometric Knowledge Topics'}
+                {activeSection === 'evidence' ? '1,000 Titans Monte Carlo Benchmark' : '50 Astrometric Knowledge Topics'}
               </span>
               <span className="text-[11px] font-mono px-2 py-0.5 rounded-full bg-amber-950/80 text-amber-300 border border-amber-800/80 font-medium">
                 {activeSection === 'evidence' ? 'p < 0.001' : '50 Topics'}

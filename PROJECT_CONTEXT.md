@@ -1,7 +1,7 @@
 # Synodix: Project Context & Working Memory
 
-**Last Updated:** 2026-11-05 08:48:16
-**Version:** 2.63.0  
+**Last Updated:** 2026-11-05 09:01:17
+**Version:** 2.64.0  
 **Stack:** Python 3.12 (FastAPI, Swiss Ephemeris 2.10, Skyfield DE421) + TypeScript / React 19 / Vite / Tailwind CSS v4 / Framer Motion / Capacitor 8 (iOS & Android)  
 **Workspace:** `/Volumes/Study/Projects/Astrology` (symlinked as `/Volumes/Study/Astrology`)  
 **Git Remote:** `https://github.com/manvenpratap/Synodix.git`  
@@ -10,7 +10,15 @@
 
 ## 1. Current Status & Milestone
 
-- **Active Phase**: App Data Synchronization & Interactive Jargon Explorer Integration (v2.63.0) (Completed)
+- **Active Phase**: Astrometric Celestial Astrolabe Light Mode Theme Calibration (v2.64.0) (Completed)
+- **Astrometric Celestial Astrolabe Light Mode Theme Calibration (v2.64.0)**:
+  - **Dual-Mode Theme Calibration for Astrolabe**: Solved low-contrast visibility issue where the circular astrolabe dial in `BirthDataForm.tsx` rendered as an opaque `#0c0a09` pitch-black circle with near-invisible `#44403c` and `#292524` strokes in Light Mode (`data-theme="light"`).
+  - **Dynamic Astrolabe Palette**:
+    - *Light Mode*: Luminous warm ivory/alabaster parchment face (`#fffbeb`), rich burnished antique bronze bezel (`#b45309`), golden minute/degree track (`#d97706`), crisp slate crosshairs (`#cbd5e1`), warm amber coordinate orbit (`#fcd34d`), and dark readable cardinal typography (N: `#b45309`, E/S/W: `#57534e`). Solar pointer defined with `#d97706` ray and `#78350f` ring; Lunar pointer with `#64748b` dashed ray and `#475569` ring.
+    - *Dark Mode*: Deep obsidian umber face (`#0c0a09`), glowing gold bezel (`#92400e`), amber degree track (`#d97706`), visible charcoal crosshairs (`#57534e`), and glowing amber cardinal marks (`#fbbf24`).
+  - **High-Contrast Text Hierarchy**: Updated coordinates and location typography to high-contrast `text-stone-900 dark:text-amber-100` and `text-stone-600 dark:text-stone-400`, preventing washed-out yellow text against white backgrounds.
+  - **Dynamic Titans Archive Label**: Updated button label to dynamically display `1,000 Titans Archive` based on the loaded cohort size.
+  - **Visual & Console Verification**: Captured and verified screenshots in both light and dark modes with 0 console errors and clean build in 607ms.
 - **App Data Synchronization & Interactive Jargon Explorer (v2.63.0)**:
   - **Interactive In-App Jargon Explorer**: Integrated an interactive 7th tab (`Scientific Jargon Explainer (37)`) directly into `MathematicalEvidenceCard.tsx`. Features real-time search across terms, equations, definitions, and domain filters (`All`, `Statistical Testing`, `Information Theory`, `Computational Astronomy`, `Traditions & Mechanics`) with responsive cards showcasing code-formatted formulas, theoretical definitions, and dataset role notes.
   - **Synchronized App Data Modules**:

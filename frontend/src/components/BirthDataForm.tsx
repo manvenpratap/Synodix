@@ -105,62 +105,78 @@ const AstrometricCelestialCompass: React.FC<{
   return (
     <div className="p-3 border-b border-stone-800/80 flex items-center justify-between gap-3 overflow-hidden">
       <div className="flex items-center gap-3 min-w-0">
-        <div className="relative w-16 h-16 sm:w-20 sm:h-20 shrink-0 flex items-center justify-center">
+        <div className="relative w-16 h-16 sm:w-20 sm:h-20 shrink-0 flex items-center justify-center rounded-full bg-amber-50/50 dark:bg-stone-950/80 p-0.5 border border-amber-200/80 dark:border-stone-800 shadow-xs">
           <svg viewBox="0 0 110 110" className="w-full h-full select-none" aria-hidden="true">
             {/* Outer brass ring */}
-            <circle cx="55" cy="55" r="52" fill="#0c0a09" stroke="#78350f" strokeWidth="1.5" />
-            <circle cx="55" cy="55" r="48" fill="none" stroke="#d97706" strokeWidth="0.8" strokeDasharray="2 3" opacity="0.6" />
+            <circle
+              cx="55"
+              cy="55"
+              r="52"
+              className="astrolabe-dial-face"
+              strokeWidth="1.75"
+            />
+            {/* Degree & minute graduation track */}
+            <circle
+              cx="55"
+              cy="55"
+              r="48"
+              fill="none"
+              className="astrolabe-dial-track"
+              strokeWidth="0.9"
+              strokeDasharray="2 3"
+            />
 
             {/* Cardinal crosshairs */}
-            <line x1="55" y1="7" x2="55" y2="103" stroke="#44403c" strokeWidth="0.8" strokeDasharray="3 3" />
-            <line x1="7" y1="55" x2="103" y2="55" stroke="#44403c" strokeWidth="0.8" strokeDasharray="3 3" />
+            <line x1="55" y1="7" x2="55" y2="103" className="astrolabe-crosshair" strokeWidth="0.8" strokeDasharray="3 3" />
+            <line x1="7" y1="55" x2="103" y2="55" className="astrolabe-crosshair" strokeWidth="0.8" strokeDasharray="3 3" />
 
-            {/* Inner coordinate orbit */}
-            <circle cx="55" cy="55" r="30" fill="none" stroke="#292524" strokeWidth="1" />
-            <circle cx="55" cy="55" r="16" fill="#1c1917" stroke="#78350f" strokeWidth="1" />
+            {/* Inner coordinate orbit & hub */}
+            <circle cx="55" cy="55" r="30" fill="none" className="astrolabe-orbit" strokeWidth="1" />
+            <circle cx="55" cy="55" r="16" className="astrolabe-inner-disk" strokeWidth="1" />
 
             {/* Cardinal marks */}
-            <text x="55" y="14" textAnchor="middle" fill="#d97706" fontSize="6.5" fontFamily="sans-serif" fontWeight="bold">N</text>
-            <text x="98" y="57" textAnchor="middle" fill="#78716c" fontSize="6" fontFamily="sans-serif">E</text>
-            <text x="55" y="100" textAnchor="middle" fill="#78716c" fontSize="6" fontFamily="sans-serif">S</text>
-            <text x="12" y="57" textAnchor="middle" fill="#78716c" fontSize="6" fontFamily="sans-serif">W</text>
+            <text x="55" y="14" textAnchor="middle" className="astrolabe-cardinal-n" fontSize="6.5" fontFamily="sans-serif" fontWeight="bold">N</text>
+            <text x="98" y="57" textAnchor="middle" className="astrolabe-cardinal-other" fontSize="6" fontFamily="sans-serif" fontWeight="bold">E</text>
+            <text x="55" y="100" textAnchor="middle" className="astrolabe-cardinal-other" fontSize="6" fontFamily="sans-serif" fontWeight="bold">S</text>
+            <text x="12" y="57" textAnchor="middle" className="astrolabe-cardinal-other" fontSize="6" fontFamily="sans-serif" fontWeight="bold">W</text>
 
             {/* Solar Ray Pointer */}
-            <line x1="55" y1="55" x2={sunX} y2={sunY} stroke="#f59e0b" strokeWidth="1.5" opacity="0.85" />
-            <circle cx={sunX} cy={sunY} r="4" fill="#f59e0b" stroke="#fef3c7" strokeWidth="1" />
+            <line x1="55" y1="55" x2={sunX} y2={sunY} stroke="#d97706" strokeWidth="1.75" opacity="0.9" />
+            <circle cx={sunX} cy={sunY} r="4.2" fill="#f59e0b" stroke="#78350f" strokeWidth="1" />
             <text x={sunX} y={sunY + 2} textAnchor="middle" fill="#451a03" fontSize="5.5" fontWeight="bold">☉</text>
 
             {/* Lunar Pointer */}
-            <line x1="55" y1="55" x2={moonX} y2={moonY} stroke="#94a3b8" strokeWidth="1" strokeDasharray="2 2" opacity="0.75" />
-            <circle cx={moonX} cy={moonY} r="3" fill="#e2e8f0" stroke="#64748b" strokeWidth="0.8" />
+            <line x1="55" y1="55" x2={moonX} y2={moonY} stroke="#64748b" strokeWidth="1.2" strokeDasharray="2 2" opacity="0.85" />
+            <circle cx={moonX} cy={moonY} r="3.2" fill="#e2e8f0" stroke="#475569" strokeWidth="0.9" />
             <text x={moonX} y={moonY + 1.8} textAnchor="middle" fill="#0f172a" fontSize="4.5" fontWeight="bold">☽</text>
 
             {/* Center Reticle Core */}
-            <circle cx="55" cy="55" r="2.5" fill="#f59e0b" />
+            <circle cx="55" cy="55" r="3" className="fill-amber-600 dark:fill-amber-500" />
+            <circle cx="55" cy="55" r="1.2" className="fill-amber-100 dark:fill-amber-200" />
           </svg>
         </div>
 
         <div className="min-w-0 space-y-0.5">
           <div className="flex items-center gap-1.5 flex-wrap">
-            <span className="px-2 py-0.5 rounded text-[11px] font-mono font-bold bg-amber-950 text-amber-300 border border-amber-800/80">
+            <span className="px-2 py-0.5 rounded text-[11px] font-mono font-bold bg-amber-100 dark:bg-amber-950 text-amber-900 dark:text-amber-300 border border-amber-300 dark:border-amber-800/80">
               Sun in {currentZodiac.sign} {degInSign}°
             </span>
           </div>
-          <div className="text-xs font-serif font-semibold text-amber-200 dark:text-amber-100 truncate">
+          <div className="text-xs font-serif font-bold text-stone-900 dark:text-amber-100 truncate">
             {cityName ? `${cityName}, ${countryName}` : 'Custom Coordinates'}
           </div>
-          <div className="text-[11px] font-mono text-stone-400 truncate">
+          <div className="text-[11px] font-mono text-stone-600 dark:text-stone-400 truncate">
             {latStr}, {lonStr} • {birthDate} {birthTime}
           </div>
         </div>
       </div>
 
       <div className="hidden sm:flex flex-col items-end shrink-0 text-right pr-1">
-        <span className="text-[11px] font-mono text-amber-300 flex items-center gap-1">
-          <span className="w-1.5 h-1.5 rounded-full bg-amber-400 inline-block" />
+        <span className="text-[11px] font-mono text-amber-800 dark:text-amber-300 flex items-center gap-1 font-semibold">
+          <span className="w-1.5 h-1.5 rounded-full bg-amber-600 dark:bg-amber-400 inline-block" />
           Live Sky Astrolabe
         </span>
-        <span className="text-[11px] font-sans text-stone-400">
+        <span className="text-[11px] font-sans text-stone-600 dark:text-stone-400">
           SwissEph &amp; JPL DE421
         </span>
       </div>
@@ -659,7 +675,9 @@ export const BirthDataForm: React.FC<Props> = ({ onCompute, isLoading, samplePre
             )}
             <span className="relative z-10 flex items-center gap-2">
               <Users className="w-3.5 h-3.5 shrink-0 text-amber-400" />
-              <span className="hidden sm:inline whitespace-nowrap">500 Titans Archive</span>
+              <span className="hidden sm:inline whitespace-nowrap">
+                {samplePresets.length >= 1000 ? '1,000 Titans Archive' : `${samplePresets.length || 500} Titans Archive`}
+              </span>
               <span className="sm:hidden whitespace-nowrap">Titans ({samplePresets.length || 500})</span>
             </span>
           </button>

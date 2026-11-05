@@ -1036,6 +1036,60 @@ aside > div:first-child {
   stroke: #0284c7 !important;
 }
 
+/* Astrometric Celestial Astrolabe Dial - Precision Dual Mode Theme Calibration */
+.astrolabe-dial-face {
+  fill: #0c0a09;
+  stroke: #92400e;
+  transition: fill 0.3s ease, stroke 0.3s ease;
+}
+.astrolabe-dial-track {
+  stroke: #d97706;
+  opacity: 0.7;
+}
+.astrolabe-crosshair {
+  stroke: #57534e;
+  opacity: 0.8;
+}
+.astrolabe-orbit {
+  stroke: #44403c;
+}
+.astrolabe-inner-disk {
+  fill: #1c1917;
+  stroke: #78350f;
+}
+.astrolabe-cardinal-n {
+  fill: #fbbf24;
+}
+.astrolabe-cardinal-other {
+  fill: #a8a29e;
+}
+
+[data-theme="light"] .astrolabe-dial-face {
+  fill: #fffbeb !important;
+  stroke: #b45309 !important;
+}
+[data-theme="light"] .astrolabe-dial-track {
+  stroke: #d97706 !important;
+  opacity: 0.85 !important;
+}
+[data-theme="light"] .astrolabe-crosshair {
+  stroke: #cbd5e1 !important;
+  opacity: 0.9 !important;
+}
+[data-theme="light"] .astrolabe-orbit {
+  stroke: #fcd34d !important;
+}
+[data-theme="light"] .astrolabe-inner-disk {
+  fill: #fef3c7 !important;
+  stroke: #b45309 !important;
+}
+[data-theme="light"] .astrolabe-cardinal-n {
+  fill: #b45309 !important;
+}
+[data-theme="light"] .astrolabe-cardinal-other {
+  fill: #57534e !important;
+}
+
 /* Callout Banners in Light Mode */
 [data-theme="light"] .bg-\[\#140e0a\] {
   background-color: #fffbeb !important;

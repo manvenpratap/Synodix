@@ -355,7 +355,7 @@ export const SynastryScreen: React.FC<Props> = ({
             {partnerAMode === 'preset' && (
               <div className="space-y-2">
                 <label className="block text-xs font-mono text-stone-400">
-                  Select Benchmark Personality (500 Titans):
+                  Select Benchmark Personality ({ALL_PRESETS.length >= 1000 ? '1,000' : ALL_PRESETS.length} Titans):
                 </label>
                 <select
                   value={partnerAPresetId}
@@ -494,7 +494,7 @@ export const SynastryScreen: React.FC<Props> = ({
             {partnerBMode === 'preset' && (
               <div className="space-y-2">
                 <label className="block text-xs font-mono text-stone-400">
-                  Select Benchmark Personality (500 Titans):
+                  Select Benchmark Personality ({ALL_PRESETS.length >= 1000 ? '1,000' : ALL_PRESETS.length} Titans):
                 </label>
                 <select
                   value={partnerBPresetId}
