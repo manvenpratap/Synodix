@@ -76,7 +76,7 @@ const NAV_ITEMS: NavItem[] = [
     stepNumber: '01',
     shortcutKey: '1',
     chapter: 'journey',
-    description: 'Parameters & birth coordinates',
+    description: 'Birth coordinates & time',
     icon: Sliders
   },
   {
@@ -87,7 +87,7 @@ const NAV_ITEMS: NavItem[] = [
     shortcutKey: '2',
     chapter: 'journey',
     badge: '9-Sys',
-    description: '9 global astrological systems',
+    description: '9 classical world systems',
     icon: Compass
   },
   {
@@ -98,7 +98,7 @@ const NAV_ITEMS: NavItem[] = [
     shortcutKey: '3',
     chapter: 'journey',
     badge: 'Consensus',
-    description: 'Multi-system convergence & divergence',
+    description: 'Cross-tradition consensus',
     icon: Sparkles
   },
   {
@@ -110,7 +110,7 @@ const NAV_ITEMS: NavItem[] = [
     shortcutKey: '4',
     chapter: 'journey',
     badge: 'Dossier',
-    description: 'Synthesized personality & timeline',
+    description: 'Full persona dossier',
     icon: FileText
   },
   // Chapter 2: Comparative & Empirical Science
@@ -121,7 +121,7 @@ const NAV_ITEMS: NavItem[] = [
     shortcutKey: 'S',
     chapter: 'empirical',
     badge: 'Dual',
-    description: 'Dual-chart relational harmony',
+    description: 'Dual-chart comparison',
     icon: HeartHandshake
   },
   {
@@ -131,7 +131,7 @@ const NAV_ITEMS: NavItem[] = [
     shortcutKey: 'A',
     chapter: 'empirical',
     badge: 'DE421',
-    description: 'Direct NASA Skyfield comparison',
+    description: 'NASA DE421 verification',
     icon: ShieldCheck
   },
   {
@@ -141,7 +141,7 @@ const NAV_ITEMS: NavItem[] = [
     shortcutKey: 'E',
     chapter: 'empirical',
     badge: '1,000',
-    description: '1,000 Titans empirical test',
+    description: '1,000 Titans validation',
     icon: FlaskConical
   },
   {
@@ -151,7 +151,7 @@ const NAV_ITEMS: NavItem[] = [
     shortcutKey: 'G',
     chapter: 'empirical',
     badge: 'Guide',
-    description: 'Knowledge guide & jargon glossary',
+    description: 'Methodology & jargon guide',
     icon: BookOpen
   }
 ];
@@ -457,7 +457,7 @@ function AppContent() {
         <div className="px-3.5 py-2.5 border-b border-stone-800/80 flex flex-col gap-2 relative overflow-hidden group shrink-0 bg-stone-950/30">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2.5 min-w-0">
-              <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-amber-950 to-stone-900 border border-amber-700/60 flex items-center justify-center text-amber-300 text-xs font-serif font-bold shrink-0 shadow-xs ring-1 ring-amber-500/20">
+              <div className="w-7 h-7 rounded-lg bg-amber-100 text-amber-900 border border-amber-300 dark:bg-gradient-to-br dark:from-amber-950 dark:to-stone-900 dark:border-amber-700/60 dark:text-amber-300 flex items-center justify-center text-xs font-serif font-bold shrink-0 shadow-xs ring-1 ring-amber-500/20">
                 {activeSubjectName.split(' ').map((n) => n[0]).join('').slice(0, 2).toUpperCase() || 'SX'}
               </div>
               <div className="min-w-0 flex-1">
@@ -550,7 +550,7 @@ function AppContent() {
                   className={`w-full flex items-center justify-between px-2.5 py-2 rounded-xl text-left transition-all duration-150 cursor-pointer group relative focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:ring-offset-1 focus-visible:ring-offset-stone-950 ${
                     isActive
                       ? 'bg-gradient-to-r from-amber-950/70 via-stone-900/80 to-stone-950/60 text-amber-200 font-medium border border-amber-600/70 shadow-xs ring-1 ring-amber-500/20 translate-x-0.5'
-                      : 'text-stone-300 hover:text-stone-100 hover:bg-stone-900/80 border border-transparent hover:border-stone-800'
+                      : 'text-stone-300 hover:text-stone-100 hover:bg-stone-900/70 border border-transparent'
                   }`}
                 >
                   {/* Glowing active notch indicator */}
@@ -562,7 +562,7 @@ function AppContent() {
                     <div className={`w-7 h-7 rounded-lg flex items-center justify-center shrink-0 transition-colors ${
                       isActive
                         ? 'bg-amber-950/90 border border-amber-600/70 text-amber-300 shadow-xs'
-                        : 'bg-stone-900 border border-stone-800 text-stone-400 group-hover:text-amber-200 group-hover:border-stone-700'
+                        : 'bg-stone-900/60 border border-stone-800/80 text-stone-400 group-hover:text-amber-200 group-hover:border-stone-700'
                     }`}>
                       <Icon className="w-3.5 h-3.5" />
                     </div>
@@ -622,19 +622,19 @@ function AppContent() {
                   className={`w-full flex items-center justify-between px-2.5 py-2 rounded-xl text-left transition-all duration-150 cursor-pointer group relative focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:ring-offset-1 focus-visible:ring-offset-stone-950 ${
                     isActive
                       ? 'bg-gradient-to-r from-amber-950/70 via-stone-900/80 to-stone-950/60 text-amber-200 font-medium border border-amber-600/70 shadow-xs ring-1 ring-amber-500/20 translate-x-0.5'
-                      : 'text-stone-300 hover:text-stone-100 hover:bg-stone-900/80 border border-transparent hover:border-stone-800'
+                      : 'text-stone-300 hover:text-stone-100 hover:bg-stone-900/70 border border-transparent'
                   }`}
                 >
                   {/* Glowing active notch indicator */}
                   {isActive && (
-                    <div className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-5 rounded-r-full bg-amber-400 shadow-[0_0_8px_rgba(245,158,11,0.6)]" />
+                    <div className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-5 rounded-r-full bg-amber-500 dark:bg-amber-400 shadow-[0_0_8px_rgba(245,158,11,0.6)]" />
                   )}
 
                   <div className="flex items-center gap-2.5 min-w-0 flex-1 pr-1.5">
                     <div className={`w-7 h-7 rounded-lg flex items-center justify-center shrink-0 transition-colors ${
                       isActive
                         ? 'bg-amber-950/90 border border-amber-600/70 text-amber-300 shadow-xs'
-                        : 'bg-stone-900 border border-stone-800 text-stone-400 group-hover:text-amber-200 group-hover:border-stone-700'
+                        : 'bg-stone-900/60 border border-stone-800/80 text-stone-400 group-hover:text-amber-200 group-hover:border-stone-700'
                     }`}>
                       <Icon className="w-3.5 h-3.5" />
                     </div>
@@ -667,94 +667,97 @@ function AppContent() {
 
           {/* Calibration Capsule (Inside Scrollable List: Guaranteed Never Obscured) */}
           {chartData && (
-            <div className="p-2.5 rounded-xl bg-stone-950/80 border border-stone-800/80 font-mono text-[11px] space-y-1 text-stone-400 shadow-xs">
-              <div className="flex items-center justify-between text-stone-300 font-medium pb-1 border-b border-stone-800/80">
-                <span className="font-serif text-xs font-semibold text-amber-300/90 uppercase tracking-wider flex items-center gap-1.5">
-                  <span className="w-1.5 h-1.5 rounded-full bg-amber-400 inline-block animate-pulse"></span>
+            <div className="p-2.5 rounded-xl bg-stone-100/70 dark:bg-stone-950/80 border border-stone-200/90 dark:border-stone-800/80 font-mono text-[11px] space-y-1 text-stone-600 dark:text-stone-400 shadow-xs">
+              <div className="flex items-center justify-between text-stone-700 dark:text-stone-300 font-medium pb-1 border-b border-stone-200 dark:border-stone-800/80">
+                <span className="font-serif text-xs font-semibold text-amber-700 dark:text-amber-300/90 uppercase tracking-wider flex items-center gap-1.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-amber-500 dark:bg-amber-400 inline-block animate-pulse"></span>
                   Astrometric Calibration
                 </span>
                 <ExplainerTrigger id="time_normalization_eot" variant="icon" size="xs" />
               </div>
               <div className="flex justify-between items-center text-[10.5px]">
-                <span className="text-stone-400">Epoch:</span>
-                <span className="text-stone-200 font-medium">J2000.0</span>
+                <span className="text-stone-500 dark:text-stone-400">Epoch:</span>
+                <span className="text-stone-800 dark:text-stone-200 font-medium">J2000.0</span>
               </div>
               <div className="flex justify-between items-center text-[10.5px]">
-                <span className="text-stone-400">Julian Day:</span>
-                <span className="text-amber-300 font-medium">{chartData.astronomical_base?.julian_day_ut?.toFixed(2) || '2451545.00'}</span>
+                <span className="text-stone-500 dark:text-stone-400">Julian Day:</span>
+                <span className="text-amber-700 dark:text-amber-300 font-medium">{chartData.astronomical_base?.julian_day_ut?.toFixed(2) || '2451545.00'}</span>
               </div>
               <div className="flex justify-between items-center text-[10.5px]">
-                <span className="text-stone-400">Topocentric:</span>
-                <span className="text-stone-300 font-mono">IAU 2000B</span>
+                <span className="text-stone-500 dark:text-stone-400">Topocentric:</span>
+                <span className="text-stone-700 dark:text-stone-300 font-mono">IAU 2000B</span>
               </div>
             </div>
           )}
         </div>
 
-        {/* Sleek Pinned Sidebar Footer with Engine Diagnostics & Tactile Controls */}
+        {/* Sleek Pinned Sidebar Footer with Organized Telemetry & Utilities */}
         <div className="px-3.5 py-2.5 border-t border-stone-800/80 text-[11px] font-mono space-y-2 shrink-0 bg-stone-950/40">
+          {/* Row 1: Engine Diagnostics */}
           <div className="flex items-center justify-between text-stone-400">
-            <span className="flex items-center gap-1.5">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 inline-block animate-pulse"></span>
-              NASA JPL DE421
+            <span className="flex items-center gap-1.5 text-xs">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 inline-block animate-pulse shrink-0"></span>
+              <span className="text-stone-400 font-medium whitespace-nowrap">NASA JPL DE421</span>
             </span>
-            <span className="text-amber-400 font-semibold tracking-wide">VERIFIED</span>
+            <span className="text-amber-400 font-semibold tracking-wide text-[10px] px-1.5 py-0.2 rounded bg-amber-950/60 border border-amber-800/60">
+              VERIFIED
+            </span>
           </div>
 
-          {/* Theme Segmented Switcher & Quick Action Pills */}
-          <div className="flex items-center justify-between pt-1 border-t border-stone-800/80">
-            <div className="flex items-center p-0.5 rounded-lg bg-stone-900 border border-stone-800">
-              <button
-                type="button"
-                onClick={() => theme !== 'dark' && toggleTheme()}
-                className={`px-2 py-0.5 rounded text-[11px] flex items-center gap-1 transition-colors cursor-pointer ${
-                  theme === 'dark'
-                    ? 'bg-amber-950 text-amber-300 font-medium border border-amber-800 shadow-xs'
-                    : 'text-stone-400 hover:text-stone-200'
-                }`}
-                aria-label="Switch to Deep Space Theme"
-                data-tooltip="Deep Space Dark Theme"
-              >
-                <Moon className="w-3 h-3 text-amber-300" />
-                <span>Space</span>
-              </button>
-              <button
-                type="button"
-                onClick={() => theme !== 'light' && toggleTheme()}
-                className={`px-2 py-0.5 rounded text-[11px] flex items-center gap-1 transition-colors cursor-pointer ${
-                  theme === 'light'
-                    ? 'bg-amber-100 text-amber-900 font-medium border border-amber-300 shadow-xs'
-                    : 'text-stone-400 hover:text-stone-200'
-                }`}
-                aria-label="Switch to Solar Day Theme"
-                data-tooltip="Solar Day Light Theme"
-              >
-                <Sun className="w-3 h-3 text-amber-400" />
-                <span>Solar</span>
-              </button>
-            </div>
+          {/* Row 2: Full-Width 2-Segment Theme Switcher */}
+          <div className="grid grid-cols-2 p-0.5 rounded-lg bg-stone-900 border border-stone-800">
+            <button
+              type="button"
+              onClick={() => theme !== 'dark' && toggleTheme()}
+              className={`w-full py-1.5 rounded-md text-[11px] font-sans font-medium flex items-center justify-center gap-1.5 transition-colors cursor-pointer ${
+                theme === 'dark'
+                  ? 'bg-amber-950 text-amber-300 font-semibold border border-amber-800/90 shadow-xs'
+                  : 'text-stone-400 hover:text-stone-200'
+              }`}
+              aria-label="Switch to Deep Space Theme"
+              data-tooltip="Deep Space Dark Theme"
+            >
+              <Moon className="w-3.5 h-3.5 text-amber-300" />
+              <span>Space</span>
+            </button>
+            <button
+              type="button"
+              onClick={() => theme !== 'light' && toggleTheme()}
+              className={`w-full py-1.5 rounded-md text-[11px] font-sans font-medium flex items-center justify-center gap-1.5 transition-colors cursor-pointer ${
+                theme === 'light'
+                  ? 'bg-amber-100 text-amber-900 font-bold border border-amber-300 shadow-xs'
+                  : 'text-stone-400 hover:text-stone-200'
+              }`}
+              aria-label="Switch to Solar Day Theme"
+              data-tooltip="Solar Day Light Theme"
+            >
+              <Sun className="w-3.5 h-3.5 text-amber-400" />
+              <span>Solar</span>
+            </button>
+          </div>
 
-            <div className="flex items-center gap-1.5">
-              <button
-                type="button"
-                onClick={() => setIsServerModalOpen(true)}
-                className="flex items-center gap-1 text-[11px] font-mono text-stone-400 hover:text-amber-300 transition-colors cursor-pointer"
-                data-tooltip="Configure backend API server address"
-                aria-label="Server Settings"
-              >
-                <Server className="w-3 h-3 text-amber-400" />
-                <span>{getApiBaseUrl() ? 'Custom API' : 'Direct API'}</span>
-              </button>
-              <button
-                type="button"
-                onClick={() => setIsShortcutsModalOpen(true)}
-                className="px-2 py-0.5 rounded bg-stone-900 border border-stone-800 text-[11px] font-mono text-stone-400 hover:text-amber-300 hover:border-amber-700/60 transition-colors cursor-pointer"
-                data-tooltip="View keyboard accelerators (?)"
-                aria-label="Keyboard Shortcuts"
-              >
-                [?] Keys
-              </button>
-            </div>
+          {/* Row 3: Fast Utility Triggers */}
+          <div className="flex items-center justify-between pt-1 border-t border-stone-800/60 text-[11px]">
+            <button
+              type="button"
+              onClick={() => setIsServerModalOpen(true)}
+              className="flex items-center gap-1.5 text-stone-400 hover:text-amber-300 transition-colors p-0.5 cursor-pointer text-[11px]"
+              data-tooltip="Configure backend API server address"
+              aria-label="Server Settings"
+            >
+              <Server className="w-3 h-3 text-amber-400" />
+              <span>{getApiBaseUrl() ? 'Custom API' : 'Direct API'}</span>
+            </button>
+            <button
+              type="button"
+              onClick={() => setIsShortcutsModalOpen(true)}
+              className="flex items-center gap-1 text-stone-400 hover:text-amber-300 transition-colors p-0.5 cursor-pointer text-[11px]"
+              data-tooltip="View keyboard accelerators (?)"
+              aria-label="Keyboard Shortcuts"
+            >
+              <span className="px-1 py-0.2 rounded bg-stone-900 border border-stone-800 text-[10px]">?</span>
+              <span>Shortcuts</span>
+            </button>
           </div>
         </div>
       </aside>
@@ -853,23 +856,27 @@ function AppContent() {
                         aria-current={isActive ? 'page' : undefined}
                         className={`w-full flex items-center justify-between px-3 py-2.5 min-h-[44px] rounded-xl text-left transition-colors duration-150 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 ${
                           isActive
-                            ? 'bg-amber-950/70 text-amber-200 font-semibold border border-amber-600/70 shadow-xs ring-1 ring-amber-500/20'
-                            : 'text-stone-300 hover:bg-stone-900 border border-transparent'
+                            ? 'bg-amber-100 text-amber-950 font-bold border border-amber-300 shadow-xs dark:bg-amber-950/70 dark:text-amber-200 dark:border-amber-600/70 dark:ring-1 dark:ring-amber-500/20'
+                            : 'text-stone-700 dark:text-stone-300 hover:bg-stone-100 dark:hover:bg-stone-900 border border-transparent'
                         }`}
                       >
                         <div className="flex items-center gap-2.5">
-                          <Icon className={`w-4 h-4 ${isActive ? 'text-amber-400' : 'text-stone-400'}`} />
+                          <Icon className={`w-4 h-4 ${isActive ? 'text-amber-600 dark:text-amber-400' : 'text-stone-500 dark:text-stone-400'}`} />
                           <span className="text-xs font-serif">
                             {item.label}
                             {item.srText && <span className="sr-only"> {item.srText}</span>}
                           </span>
                         </div>
                         {item.badge ? (
-                          <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-stone-900 text-amber-300 border border-stone-800">
+                          <span className={`text-[10px] font-mono px-1.5 py-0.5 rounded ${
+                            isActive
+                              ? 'bg-amber-200/80 text-amber-950 border border-amber-400 font-bold dark:bg-amber-950 dark:text-amber-300 dark:border-amber-700'
+                              : 'bg-stone-100 text-stone-600 border border-stone-200 dark:bg-stone-900 dark:text-amber-300 dark:border-stone-800'
+                          }`}>
                             {item.badge}
                           </span>
                         ) : (
-                          <span className="text-[10px] font-mono text-stone-500 px-1.5 py-0.5 rounded bg-stone-900/80 border border-stone-800">
+                          <span className="text-[10px] font-mono text-stone-500 px-1.5 py-0.5 rounded bg-stone-100 dark:bg-stone-900/80 border border-stone-200 dark:border-stone-800">
                             {item.stepNumber}
                           </span>
                         )}
@@ -899,19 +906,23 @@ function AppContent() {
                         aria-current={isActive ? 'page' : undefined}
                         className={`w-full flex items-center justify-between px-3 py-2.5 min-h-[44px] rounded-xl text-left transition-colors duration-150 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 ${
                           isActive
-                            ? 'bg-amber-950/70 text-amber-200 font-semibold border border-amber-600/70 shadow-xs ring-1 ring-amber-500/20'
-                            : 'text-stone-300 hover:bg-stone-900 border border-transparent'
+                            ? 'bg-amber-100 text-amber-950 font-bold border border-amber-300 shadow-xs dark:bg-amber-950/70 dark:text-amber-200 dark:border-amber-600/70 dark:ring-1 dark:ring-amber-500/20'
+                            : 'text-stone-700 dark:text-stone-300 hover:bg-stone-100 dark:hover:bg-stone-900 border border-transparent'
                         }`}
                       >
                         <div className="flex items-center gap-2.5">
-                          <Icon className={`w-4 h-4 ${isActive ? 'text-amber-400' : 'text-stone-400'}`} />
+                          <Icon className={`w-4 h-4 ${isActive ? 'text-amber-600 dark:text-amber-400' : 'text-stone-500 dark:text-stone-400'}`} />
                           <span className="text-xs font-serif">
                             {item.label}
                             {item.srText && <span className="sr-only"> {item.srText}</span>}
                           </span>
                         </div>
                         {item.badge && (
-                          <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-stone-900 text-amber-300 border border-stone-800">
+                          <span className={`text-[10px] font-mono px-1.5 py-0.5 rounded ${
+                            isActive
+                              ? 'bg-amber-200/80 text-amber-950 border border-amber-400 font-bold dark:bg-amber-950 dark:text-amber-300 dark:border-amber-700'
+                              : 'bg-stone-100 text-stone-600 border border-stone-200 dark:bg-stone-900 dark:text-amber-300 dark:border-stone-800'
+                          }`}>
                             {item.badge}
                           </span>
                         )}
@@ -1401,7 +1412,7 @@ function AppContent() {
                 <div className="absolute top-0 left-1/2 -translate-x-1/2 w-5 h-0.5 bg-amber-400 rounded-full" />
               )}
               <Icon className={`w-4.5 h-4.5 mb-0.5 shrink-0 ${isActive ? 'text-amber-400' : 'text-stone-400'}`} />
-              <span className="mt-0.5 text-[10px] leading-tight font-medium tracking-tight truncate w-full text-center px-0.5 block">
+              <span className="mt-0.5 text-[11px] leading-tight font-sans font-medium tracking-tight truncate w-full text-center px-0.5 block">
                 {item.label}
               </span>
             </button>

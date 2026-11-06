@@ -1,7 +1,7 @@
 # Synodix: Project Context & Working Memory
 
-**Last Updated:** 2026-11-05 09:51:57
-**Version:** 2.66.0  
+**Last Updated:** 2026-11-06 07:13:12
+**Version:** 2.67.0  
 **Stack:** Python 3.12 (FastAPI, Swiss Ephemeris 2.10, Skyfield DE421) + TypeScript / React 19 / Vite / Tailwind CSS v4 / Framer Motion / Capacitor 8 (iOS & Android)  
 **Workspace:** `/Volumes/Study/Projects/Astrology` (symlinked as `/Volumes/Study/Astrology`)  
 **Git Remote:** `https://github.com/manvenpratap/Synodix.git`  
@@ -10,7 +10,20 @@
 
 ## 1. Current Status & Milestone
 
-- **Active Phase**: Mobile Essential UI & Progressive Disclosure Architecture (v2.66.0) (Completed)
+- **Active Phase**: Sleek Sidebar Architecture & Mobile UX Polish (v2.67.0) (Completed)
+- **Sleek Sidebar Architecture & Mobile UX Polish (v2.67.0)**:
+  - **Zero Subtitle Truncation**: Re-architected all 8 navigation descriptions into concise, punchy subtitles (e.g. `Birth coordinates & time`, `Cross-tradition consensus`, `Full persona dossier`, `Dual-chart comparison`, `NASA DE421 verification`, `Methodology & jargon guide`). Guaranteed 0 ellipses, 0 text truncation across desktop resolutions.
+  - **Sleek 3-Tier Footer Architecture**: Replaced the cramped single-line footer with a structured 3-tier hierarchy:
+    - *Row 1*: Engine diagnostics (`NASA JPL DE421` with pulsing green micro-LED and `VERIFIED` status badge) on a single un-wrapped line.
+    - *Row 2*: Full-width 2-column segmented Theme switch (`Space` and `Solar`) with prominent, accessible, balanced touch/click targets.
+    - *Row 3*: Fast utility triggers (`Direct API` with Server icon and keyboard `? Shortcuts` trigger) with ample breathing room.
+  - **Solar Light-Mode Theme Polish**: Calibrated subject avatar wafer in Light Mode with warm luminous solar gold styling (`bg-amber-100 text-amber-900 border-amber-300`) preventing dark muddy circle artifacts.
+  - **Mobile Touch Target & Typography Invariants**:
+    - Fixed mobile bottom navigation text size from `10px` to `11px font-sans font-medium` to comply with WCAG and test invariants.
+    - Upgraded mobile Tradition carousel dot buttons to `min-h-[44px] min-w-[28px]` touch targets.
+    - Upgraded secondary action buttons (`Detailed Tables`, `Read Full Synthesis Narrative`) with `min-h-[44px]` touch targets.
+    - Fixed active drawer item contrast in light mode with dual-theme classes (`bg-amber-100 text-amber-950 font-bold border-amber-300 dark:bg-amber-950/70 dark:text-amber-200`).
+  - **Automated Verification**: All 29 test suites passing (100% green); smoke tests passing in 0.71s; verified 0 console errors; verified clean production build.
 - **Mobile Essential UI & Progressive Disclosure Architecture (v2.66.0)**:
   - **Super Clean Mobile Viewport**: Streamlined the mobile interface across all 4 primary stages (`Workbench`, `Traditions`, `Synthesis`, `Reading/Dossier`) to feature essential visual instruments and primary inputs on first paint without cognitive overload.
   - **Screen 1 (Workbench & Vault)**: Compacted input fields to essential items (Name, Date, Time side-by-side, City with GPS auto-geocoding). Secondary parameters (Gender/Cycle direction, Birth time accuracy, Country, high-precision decimal Latitude & Longitude) are cleanly tucked behind an accessible progressive disclosure accordion (`[⚙️ Advanced Coordinates & Precision (Optional) v]`).

@@ -501,7 +501,7 @@ export const ReadingView: React.FC<Props> = ({ data, subjectName, onNavigate }) 
                           <button
                             type="button"
                             onClick={() => setShowFullNarrative(!showFullNarrative)}
-                            className="sm:hidden text-xs text-amber-400 hover:text-amber-300 font-mono flex items-center gap-1 py-1 cursor-pointer"
+                            className="sm:hidden text-xs text-amber-400 hover:text-amber-300 font-mono flex items-center gap-1 py-1 min-h-[44px] cursor-pointer"
                             aria-expanded={showFullNarrative}
                           >
                             <span>{showFullNarrative ? 'Show Less' : 'Read Full Synthesis Narrative'}</span>

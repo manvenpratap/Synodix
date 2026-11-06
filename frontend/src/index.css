@@ -407,8 +407,8 @@ aside > div:first-child {
 
 [data-theme="light"] aside.sidebar-canvas,
 [data-theme="light"] .sidebar-canvas {
-  background-color: #fafbfd !important;
-  border-color: #e2e8f0 !important;
+  background-color: #fffdfa !important;
+  border-color: #e7e0d3 !important;
 }
 
 /* Borders */

@@ -338,7 +338,7 @@ export const TraditionVerticalCarousel: React.FC<Props> = ({
                 type="button"
                 onClick={() => goToIndex(idx)}
                 aria-label={`Jump to ${theme?.name || key} (${idx + 1}/9)`}
-                className="transition-all duration-150 rounded-full cursor-pointer flex items-center justify-center p-1 min-h-[32px] min-w-[20px]"
+                className="transition-all duration-150 rounded-full cursor-pointer flex items-center justify-center p-1 min-h-[44px] min-w-[28px]"
               >
                 <span className={`block rounded-full transition-all duration-150 ${
                   isSelected
@@ -582,7 +582,7 @@ export const TraditionVerticalCarousel: React.FC<Props> = ({
                           e.stopPropagation();
                           onOpenInspector(key);
                         }}
-                        className="inline-flex items-center justify-center gap-1 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-lg bg-amber-950 hover:bg-amber-900/80 text-amber-200 border border-amber-700/80 text-xs font-sans font-semibold transition-[background-color,border-color,transform] motion-safe:active:scale-[0.97] motion-reduce:active:scale-100 duration-150 ease-out cursor-pointer shadow-xs whitespace-nowrap shrink-0"
+                        className="inline-flex items-center justify-center gap-1 px-2.5 sm:px-3 py-1 sm:py-1.5 min-h-[44px] rounded-lg bg-amber-950 hover:bg-amber-900/80 text-amber-200 border border-amber-700/80 text-xs font-sans font-semibold transition-[background-color,border-color,transform] motion-safe:active:scale-[0.97] motion-reduce:active:scale-100 duration-150 ease-out cursor-pointer shadow-xs whitespace-nowrap shrink-0"
                         data-tooltip={`Open full detailed tables and analysis for ${theme?.name || key}`}
                         aria-label={`Inspect full telemetry and tables for ${theme?.name || key}`}
                       >
