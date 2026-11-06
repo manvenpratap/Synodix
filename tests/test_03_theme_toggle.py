@@ -45,7 +45,7 @@ def test_theme_toggle_persistence():
             localStorage.setItem('synodix_theme', 'light');
         }""")
         page.reload(wait_until="domcontentloaded")
-        page.wait_for_timeout(300)
+        page.wait_for_function("() => document.documentElement.getAttribute('data-theme') === 'light'", timeout=5000)
 
         theme_attr = page.evaluate("() => document.documentElement.getAttribute('data-theme')")
         assert theme_attr == "light"
@@ -58,7 +58,7 @@ def test_theme_toggle_persistence():
         dark_toggle = page.locator("header button[data-tooltip*='Deep Space']").first
         if dark_toggle.is_visible():
             dark_toggle.click()
-            page.wait_for_timeout(300)
+            page.wait_for_function("() => document.documentElement.getAttribute('data-theme') === 'dark'", timeout=5000)
             assert page.evaluate("() => document.documentElement.getAttribute('data-theme')") == "dark"
 
         browser.close()

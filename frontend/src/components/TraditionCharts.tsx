@@ -697,7 +697,7 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
                       triggerHaptic('selection');
                       setChartViewMode(mode);
                     }}
-                    className={`relative px-2 sm:px-2.5 py-1 min-h-[44px] sm:min-h-[28px] text-[11px] font-mono rounded-md cursor-pointer transition-colors flex items-center justify-center ${
+                    className={`relative px-2 sm:px-2.5 py-1 min-h-[44px] min-w-[44px] sm:min-w-0 sm:min-h-[28px] text-[11px] font-mono rounded-md cursor-pointer transition-colors flex items-center justify-center ${
                       isModeActive
                         ? 'bg-amber-950 text-amber-200 font-bold border border-amber-700/80 shadow-xs'
                         : 'text-stone-400 hover:text-stone-200'
@@ -724,7 +724,7 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
                   triggerHaptic('selection');
                   setLayoutMode('carousel');
                 }}
-                className={`flex items-center gap-1 px-2 sm:px-2.5 py-1 min-h-[44px] sm:min-h-[28px] rounded-md cursor-pointer transition-colors font-serif text-[11px] ${
+                className={`flex items-center gap-1 px-2 sm:px-2.5 py-1 min-h-[44px] min-w-[44px] sm:min-w-0 sm:min-h-[28px] rounded-md cursor-pointer transition-colors font-serif text-[11px] justify-center ${
                   layoutMode === 'carousel'
                     ? 'bg-amber-950 text-amber-300 border border-amber-700/80 font-bold'
                     : 'text-stone-400 hover:text-stone-200'
@@ -761,7 +761,7 @@ export const TraditionCharts: React.FC<Props> = ({ data, onNavigate }) => {
                   triggerHaptic('selection');
                   setLayoutMode('inspector');
                 }}
-                className={`flex items-center gap-1 px-2 sm:px-2.5 py-1 min-h-[44px] sm:min-h-[28px] rounded-md cursor-pointer transition-colors font-serif text-[11px] ${
+                className={`flex items-center gap-1 px-2 sm:px-2.5 py-1 min-h-[44px] min-w-[44px] sm:min-w-0 sm:min-h-[28px] rounded-md cursor-pointer transition-colors font-serif text-[11px] justify-center ${
                   layoutMode === 'inspector'
                     ? 'bg-amber-950 text-amber-300 border border-amber-700/80 font-bold'
                     : 'text-stone-400 hover:text-stone-200'

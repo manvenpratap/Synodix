@@ -1,7 +1,7 @@
 # Synodix: Project Context & Working Memory
 
-**Last Updated:** 2026-11-06 07:13:12
-**Version:** 2.67.0  
+**Last Updated:** 2026-11-06 07:32:25
+**Version:** 2.68.0  
 **Stack:** Python 3.12 (FastAPI, Swiss Ephemeris 2.10, Skyfield DE421) + TypeScript / React 19 / Vite / Tailwind CSS v4 / Framer Motion / Capacitor 8 (iOS & Android)  
 **Workspace:** `/Volumes/Study/Projects/Astrology` (symlinked as `/Volumes/Study/Astrology`)  
 **Git Remote:** `https://github.com/manvenpratap/Synodix.git`  
@@ -10,7 +10,21 @@
 
 ## 1. Current Status & Milestone
 
-- **Active Phase**: Sleek Sidebar Architecture & Mobile UX Polish (v2.67.0) (Completed)
+- **Active Phase**: Mobile Design Deep Review & Ergonomic Polish (v2.68.0) (Completed)
+- **Mobile Design Deep Review & Ergonomic Polish (v2.68.0)**:
+  - **Touch Target Invariants (Fitts' Law >= 44x44px)**:
+    - *Active Subject Header Chip*: Upgraded mobile chip in `App.tsx` from `min-h-[38px]` to `min-h-[44px]` with `touch-manipulation` and active states.
+    - *Segmented Presentation Depth Switcher*: Added `min-w-[44px] min-h-[44px]` touch targets to the `All`, `Visual`, and `Tables` buttons in `TraditionCharts.tsx`, ensuring comfortable single-tap activation on compact viewports (iPhone SE 375px).
+    - *View Mode Switcher Buttons*: Upgraded `Deck` and `Matrix` switches in `TraditionCharts.tsx` with `min-w-[44px] min-h-[44px]` touch bounds.
+    - *ExplainerTrigger Micro-Buttons*: Upgraded both `badge` and `button` variants in `ExplainerTrigger.tsx` with `min-w-[44px] min-h-[44px] touch-manipulation` so all contextual scientific explainers are effortless to tap on phones.
+  - **Zero Telemetry Truncation on Mobile Astrolabe**:
+    - Re-architected ephemeris coordinates and timestamp layout in `BirthDataForm.tsx`: split single cramped line into a responsive 2-line stacked badge on mobile (`latStr, lonStr` on line 1, `birthDate birthTime` on line 2), eliminating the `1...` truncation while preserving the inline dot-separated desktop layout (`sm:inline`).
+  - **Desktop Invariant Preservation**:
+    - Guaranteed byte-for-byte fidelity of all desktop features, wide bento layouts, full multi-column views, and sidebar telemetry.
+  - **Automated Verification**:
+    - Multi-viewport Playwright verification (`iPhone_SE` 375x667, `iPhone_14` 390x844, `Pixel_7` 412x915).
+    - Zero horizontal overflow confirmed (`hasOverflow: false`).
+    - All 29 test suites passing (100% green); smoke tests passing in 0.70s; verified 0 console errors.
 - **Sleek Sidebar Architecture & Mobile UX Polish (v2.67.0)**:
   - **Zero Subtitle Truncation**: Re-architected all 8 navigation descriptions into concise, punchy subtitles (e.g. `Birth coordinates & time`, `Cross-tradition consensus`, `Full persona dossier`, `Dual-chart comparison`, `NASA DE421 verification`, `Methodology & jargon guide`). Guaranteed 0 ellipses, 0 text truncation across desktop resolutions.
   - **Sleek 3-Tier Footer Architecture**: Replaced the cramped single-line footer with a structured 3-tier hierarchy:

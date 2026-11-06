@@ -166,8 +166,10 @@ const AstrometricCelestialCompass: React.FC<{
           <div className="text-xs font-serif font-bold text-stone-900 dark:text-amber-100 truncate">
             {cityName ? `${cityName}, ${countryName}` : 'Custom Coordinates'}
           </div>
-          <div className="text-[11px] font-mono text-stone-600 dark:text-stone-400 truncate">
-            {latStr}, {lonStr} • {birthDate} {birthTime}
+          <div className="text-[11px] font-mono text-stone-600 dark:text-stone-400 leading-tight">
+            <span className="block sm:inline truncate">{latStr}, {lonStr}</span>
+            <span className="hidden sm:inline text-stone-400 dark:text-stone-600 mx-1">•</span>
+            <span className="block sm:inline truncate">{birthDate} {birthTime}</span>
           </div>
         </div>
       </div>

@@ -1016,7 +1016,7 @@ function AppContent() {
                 <button
                   type="button"
                   onClick={() => navigateTo('workbench')}
-                  className="md:hidden flex items-center gap-1.5 px-2.5 py-1 min-h-[38px] rounded-full bg-stone-900 border border-amber-800/60 text-xs font-serif text-amber-300 truncate max-w-[120px] sm:max-w-[150px] cursor-pointer shrink min-w-0"
+                  className="md:hidden flex items-center gap-1.5 px-3 py-1.5 min-h-[44px] rounded-full bg-stone-900 border border-amber-800/60 text-xs font-serif text-amber-300 truncate max-w-[130px] sm:max-w-[160px] cursor-pointer shrink min-w-0 touch-manipulation transition-colors hover:border-amber-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
                   data-tooltip="Switch active subject"
                   aria-label={`Subject: ${activeSubjectName}. Tap to switch.`}
                 >

@@ -155,9 +155,11 @@ def test_mobile_viewport_and_touch_targets():
             synth_cta.click()
             page.wait_for_timeout(400)
             
-            # Active subject chip in header should be visible on mobile
+            # Active subject chip in header should be visible on mobile and meet >= 44px touch target
             subj_chip = page.locator("button[aria-label*='Subject:']").first
             assert subj_chip.is_visible(), f"Active subject chip should be visible on mobile {vp['name']}"
+            s_box = subj_chip.bounding_box()
+            assert s_box is not None and s_box["height"] >= 44, f"Subject chip height {s_box['height']} < 44px on {vp['name']}"
 
             # 11. Test Feature Explainer Modal touch targets
             guide_btn = page.locator("button[aria-label='Browse Feature Explainers & Astrometric Glossary']").first
