@@ -360,7 +360,7 @@ export const SynastryScreen: React.FC<Props> = ({
                 <select
                   value={partnerAPresetId}
                   onChange={(e) => setPartnerAPresetId(e.target.value)}
-                  className="w-full px-3 py-2 text-xs font-serif rounded bg-stone-900 border border-stone-800 text-stone-200 focus:outline-none focus:border-amber-500 cursor-pointer"
+                  className="w-full px-3 py-2.5 sm:py-2 min-h-[44px] text-xs font-serif rounded bg-stone-900 border border-stone-800 text-stone-200 focus:outline-none focus:border-amber-500 cursor-pointer"
                   data-tooltip="Select Partner A preset"
                 >
                   {ALL_PRESETS.map((p) => (
@@ -499,7 +499,7 @@ export const SynastryScreen: React.FC<Props> = ({
                 <select
                   value={partnerBPresetId}
                   onChange={(e) => setPartnerBPresetId(e.target.value)}
-                  className="w-full px-3 py-2 text-xs font-serif rounded bg-stone-900 border border-stone-800 text-stone-200 focus:outline-none focus:border-amber-500 cursor-pointer"
+                  className="w-full px-3 py-2.5 sm:py-2 min-h-[44px] text-xs font-serif rounded bg-stone-900 border border-stone-800 text-stone-200 focus:outline-none focus:border-amber-500 cursor-pointer"
                   data-tooltip="Select Partner B preset"
                 >
                   {ALL_PRESETS.map((p) => (
